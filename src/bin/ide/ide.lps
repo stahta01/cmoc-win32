@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="9"/>
+    <BuildModes Active="Default"/>
+    <Units Count="43">
+      <Unit0>
+        <Filename Value="ide.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2"/>
+        <CursorPos X="38" Y="19"/>
+        <UsageCount Value="51"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="unitcmocide.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormCmocIDE"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="UnitCmocIDE"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="20"/>
+        <CursorPos X="99" Y="27"/>
+        <UsageCount Value="51"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="ucmocide.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UCmocIDE"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="16"/>
+        <CursorPos X="14" Y="22"/>
+        <UsageCount Value="44"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="unitcmocidesynedit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormCmocIDESynEdit"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="UnitCmocIDESynEdit"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="24" Y="22"/>
+        <UsageCount Value="42"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="..\shared\ucmocutils.pas"/>
+        <UnitName Value="UCmocUtils"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="51"/>
+        <CursorPos X="20" Y="63"/>
+        <UsageCount Value="26"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="..\shared\ucmocparser.pas"/>
+        <UnitName Value="UCmocParser"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="21"/>
+        <CursorPos X="14" Y="33"/>
+        <UsageCount Value="20"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="..\..\..\LazHelpers\usyneditfinddialog.pas"/>
+        <UnitName Value="USynEditFindDialog"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="111"/>
+        <CursorPos X="19" Y="119"/>
+        <UsageCount Value="48"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="ucmocide.inc"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos Y="9"/>
+        <UsageCount Value="24"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="C:\lazarus\lcl\graphics.pp"/>
+        <UnitName Value="Graphics"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="56"/>
+        <CursorPos X="16" Y="68"/>
+        <UsageCount Value="11"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="C:\lazarus\lcl\dialogs.pp"/>
+        <UnitName Value="Dialogs"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="415"/>
+        <CursorPos X="19" Y="426"/>
+        <UsageCount Value="12"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="C:\lazarus\components\synedit\synedittypes.pp"/>
+        <UnitName Value="SynEditTypes"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="74"/>
+        <CursorPos X="38" Y="85"/>
+        <UsageCount Value="11"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="..\..\..\LazHelpers\usynedit.pas"/>
+        <UnitName Value="USynEdit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="27"/>
+        <CursorPos X="25" Y="218"/>
+        <UsageCount Value="12"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="..\..\..\LazHelpers\uformsynedit.pas"/>
+        <ComponentName Value="FormSynEdit"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="242"/>
+        <CursorPos Y="103"/>
+        <UsageCount Value="11"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\rtl-objpas\src\inc\strutils.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="46"/>
+        <CursorPos X="10" Y="57"/>
+        <UsageCount Value="10"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="C:\lazarus\lcl\include\finddialog.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="57"/>
+        <CursorPos X="43" Y="68"/>
+        <UsageCount Value="10"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="C:\lazarus\components\synedit\synedit.pp"/>
+        <UnitName Value="SynEdit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="7048"/>
+        <CursorPos X="3" Y="7050"/>
+        <UsageCount Value="10"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="..\..\..\LazHelpers\ustream.pas"/>
+        <UnitName Value="UStream"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="82" Y="29"/>
+        <UsageCount Value="10"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="..\..\..\LazHelpers\ustrings.pas"/>
+        <UnitName Value="UStrings"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="47"/>
+        <CursorPos Y="57"/>
+        <UsageCount Value="10"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\fcl-base\src\streamio.pp"/>
+        <UnitName Value="StreamIO"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="23" Y="25"/>
+        <UsageCount Value="10"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="..\..\..\LazHelpers\uformmessages.pas"/>
+        <UnitName Value="UFormMessages"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="89"/>
+        <CursorPos X="13" Y="104"/>
+        <UsageCount Value="10"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="..\..\..\LazHelpers\uprocess.pas"/>
+        <UnitName Value="UProcess"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="38"/>
+        <CursorPos Y="54"/>
+        <UsageCount Value="11"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="C:\lazarus\components\mouseandkeyinput\keyinputintf.pas"/>
+        <UnitName Value="KeyInputIntf"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="22"/>
+        <UsageCount Value="10"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="C:\lazarus\components\mouseandkeyinput\lazmouseandkeyinput.pas"/>
+        <UnitName Value="LazMouseAndKeyInput"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="16" Y="10"/>
+        <UsageCount Value="10"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="C:\lazarus\components\mouseandkeyinput\mouseandkeyinput.pas"/>
+        <UnitName Value="MouseAndKeyInput"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="38"/>
+        <CursorPos X="3" Y="41"/>
+        <UsageCount Value="10"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\classes\classesh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="97"/>
+        <CursorPos X="44" Y="102"/>
+        <UsageCount Value="10"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="C:\lazarus\lcl\forms.pp"/>
+        <UnitName Value="Forms"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="640"/>
+        <CursorPos X="33" Y="650"/>
+        <UsageCount Value="10"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="C:\lazarus\lcl\controls.pp"/>
+        <UnitName Value="Controls"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1494"/>
+        <CursorPos X="23" Y="1505"/>
+        <UsageCount Value="10"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="..\..\..\LazHelpers\lazhelpers.inc"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\sysutils\osutilsh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3"/>
+        <CursorPos X="31" Y="15"/>
+        <UsageCount Value="10"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="..\..\..\LazHelpers\uapplication.pas"/>
+        <UnitName Value="UApplication"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="38"/>
+        <CursorPos X="2" Y="40"/>
+        <UsageCount Value="11"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="C:\lazarus\components\synedit\syneditmiscclasses.pp"/>
+        <UnitName Value="SynEditMiscClasses"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="84"/>
+        <CursorPos X="33" Y="96"/>
+        <UsageCount Value="10"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="..\..\..\LazHelpers\umemo.pas"/>
+        <UnitName Value="UMemo"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="17"/>
+        <CursorPos X="46" Y="33"/>
+        <UsageCount Value="20"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="C:\lazarus\lcl\include\control.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="566"/>
+        <CursorPos X="3" Y="578"/>
+        <UsageCount Value="10"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="..\rtl\libvectrex\vectrex.asm.i"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3"/>
+        <CursorPos X="12" Y="231"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="..\..\..\..\LazHelpers\usynedit.pas"/>
+        <UnitName Value="USynEdit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="98"/>
+        <CursorPos X="44" Y="107"/>
+        <UsageCount Value="10"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="..\..\..\..\cc65\include\geos\gsys.h"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="6" Y="13"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="C:\Program Files\Borland\CBuilder5\Include\Vcl\svcmgr.hpp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="168"/>
+        <CursorPos X="48" Y="176"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="C:\Program Files\Borland\CBuilder5\Include\edkdebug.h"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="588"/>
+        <CursorPos X="29" Y="600"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="..\shared\usyneditfinddialog.pas"/>
+        <UnitName Value="USynEditFindDialog"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="17"/>
+        <CursorPos X="29" Y="35"/>
+        <UsageCount Value="10"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="..\shared\usynedit.pas"/>
+        <UnitName Value="USynEdit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="5"/>
+        <CursorPos X="69" Y="30"/>
+        <UsageCount Value="10"/>
+      </Unit39>
+      <Unit40>
+        <Filename Value="..\shared\ucmocsyneditfinddialog.pas"/>
+        <UnitName Value="UCmocSynEditFindDialog"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="17"/>
+        <CursorPos X="22" Y="22"/>
+        <UsageCount Value="10"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="..\shared\ucmocsynedit.pas"/>
+        <UnitName Value="UCmocSynEdit"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="30" Y="8"/>
+        <UsageCount Value="10"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="ucmocidesynedit.pas"/>
+        <UnitName Value="UCmocIDESynEdit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="22"/>
+        <UsageCount Value="10"/>
+      </Unit42>
+    </Units>
+    <JumpHistory Count="21" HistoryIndex="20">
+      <Position1>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="472" Column="41" TopLine="455"/>
+      </Position1>
+      <Position2>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="169" Column="89" TopLine="163"/>
+      </Position2>
+      <Position3>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="145" Column="41" TopLine="132"/>
+      </Position3>
+      <Position4>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="31" Column="63" TopLine="19"/>
+      </Position4>
+      <Position5>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="514" Column="70" TopLine="502"/>
+      </Position5>
+      <Position6>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="181" Column="20" TopLine="161"/>
+      </Position6>
+      <Position7>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="276" Column="11" TopLine="264"/>
+      </Position7>
+      <Position8>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="406" Column="15" TopLine="395"/>
+      </Position8>
+      <Position9>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="416" Column="15" TopLine="404"/>
+      </Position9>
+      <Position10>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="445" Column="13" TopLine="433"/>
+      </Position10>
+      <Position11>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="488" Column="11" TopLine="476"/>
+      </Position11>
+      <Position12>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="516" Column="21" TopLine="504"/>
+      </Position12>
+      <Position13>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="454" Column="59" TopLine="449"/>
+      </Position13>
+      <Position14>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="528" Column="60" TopLine="508"/>
+      </Position14>
+      <Position15>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="517" Column="69" TopLine="506"/>
+      </Position15>
+      <Position16>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="554" Column="100" TopLine="543"/>
+      </Position16>
+      <Position17>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="460" Column="6" TopLine="457"/>
+      </Position17>
+      <Position18>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="465" Column="10" TopLine="457"/>
+      </Position18>
+      <Position19>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="31" Column="64" TopLine="19"/>
+      </Position19>
+      <Position20>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="25" Column="9" TopLine="19"/>
+      </Position20>
+      <Position21>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="31" Column="46" TopLine="20"/>
+      </Position21>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>
