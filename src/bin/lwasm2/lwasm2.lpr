@@ -83,7 +83,7 @@ begin
     end;
   except
     on LException: Exception do begin
-      WriteLn(StdErr, LException.Message);
+      WriteLn(StdErr, 'Error: Exception ', OCmoc.DosToUnix(QuotedStr(ParamStr(0))));
       ExitCode := LException.HelpContext;
     end;
   end;
