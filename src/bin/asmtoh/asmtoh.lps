@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="9"/>
+    <BuildModes Active="Default"/>
+    <Units Count="20">
+      <Unit0>
+        <Filename Value="asmtoh.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="142"/>
+        <CursorPos X="20" Y="150"/>
+        <UsageCount Value="29"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="..\shared\ucmocutils.pas"/>
+        <UnitName Value="UCmocUtils"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="29"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="..\shared\ustringparser.pas"/>
+        <UnitName Value="UStringParser"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="66"/>
+        <CursorPos X="94" Y="75"/>
+        <UsageCount Value="28"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\equates.lst"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="165"/>
+        <CursorPos X="64" Y="165"/>
+        <UsageCount Value="11"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="..\equates.h"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="621"/>
+        <CursorPos X="12" Y="621"/>
+        <UsageCount Value="11"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="..\..\include\coco\equates.h"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="93" Y="478"/>
+        <UsageCount Value="11"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="..\..\include\coco\cocodefs.h"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\..\include\vectrex\vectrexdefs.h"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\..\include\vectrex.h"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="..\..\..\cc65\include\sys\types.h"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="41"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="..\..\..\cc65\include\tgi\tgi-kernel.h"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="48"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="..\..\..\cc65\include\peekpoke.h"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="28"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="..\rtl\clib\fgetc.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="22" Y="2"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="..\rtl\clib\fputc.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="22" Y="2"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="..\rtl\clib\fputs.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="22" Y="2"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="..\rtl\clib\gotox.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="22" Y="3"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="..\rtl\clib\gotoxy.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="22" Y="3"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="..\rtl\clib\gotoy.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="22" Y="3"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="..\rtl\clib\wherex.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="22" Y="3"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="..\rtl\clib\wherey.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="22" Y="3"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit19>
+    </Units>
+    <JumpHistory Count="25" HistoryIndex="24">
+      <Position1>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="126" Column="7" TopLine="116"/>
+      </Position1>
+      <Position2>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="109" Column="19" TopLine="97"/>
+      </Position2>
+      <Position3>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="43" Column="24" TopLine="31"/>
+      </Position3>
+      <Position4>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="132" Column="5" TopLine="115"/>
+      </Position4>
+      <Position5>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="90" Column="41" TopLine="77"/>
+      </Position5>
+      <Position6>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="21" Column="81" TopLine="14"/>
+      </Position6>
+      <Position7>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="35" Column="36" TopLine="26"/>
+      </Position7>
+      <Position8>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="122" Column="27" TopLine="115"/>
+      </Position8>
+      <Position9>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="104" Column="23" TopLine="92"/>
+      </Position9>
+      <Position10>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="35" Column="34" TopLine="24"/>
+      </Position10>
+      <Position11>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="36" Column="34" TopLine="24"/>
+      </Position11>
+      <Position12>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="45" Column="27" TopLine="33"/>
+      </Position12>
+      <Position13>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="104" Column="23" TopLine="92"/>
+      </Position13>
+      <Position14>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="125" Column="23" TopLine="113"/>
+      </Position14>
+      <Position15>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="126" Column="26" TopLine="114"/>
+      </Position15>
+      <Position16>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="127" Column="26" TopLine="115"/>
+      </Position16>
+      <Position17>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="128" Column="26" TopLine="116"/>
+      </Position17>
+      <Position18>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="130" Column="23" TopLine="118"/>
+      </Position18>
+      <Position19>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="131" Column="26" TopLine="119"/>
+      </Position19>
+      <Position20>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="125" Column="19" TopLine="119"/>
+      </Position20>
+      <Position21>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="108" Column="99" TopLine="96"/>
+      </Position21>
+      <Position22>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="110" Column="30" TopLine="86"/>
+      </Position22>
+      <Position23>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="60" Column="28" TopLine="53"/>
+      </Position23>
+      <Position24>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="9" Column="47" TopLine="4"/>
+      </Position24>
+      <Position25>
+        <Filename Value="asmtoh.lpr"/>
+        <Caret Line="10" Column="9"/>
+      </Position25>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>
