@@ -255,8 +255,10 @@ begin
     'one day you will look as hansom as me', 'frogs are just little boogers with legs',
     'my hair feels like jam donuts', 'squeeze my nose before I get angry',
     'sunshine is clown makeups worst enermy', 'friday I eat chicken. Is it friday?',
-    'one day ill be smarter than I think', 'I want to be your daddy',
-    'give me youre money or Ill sleep with your mum',
+    'one day ill be smarter than I think', 'will you be my daddy',
+    'give me youre money or Ill date your mum', 'fuzzy orange hair is the shizz!',
+    'all the other clowns at clown school kept kicking my bottom',
+    'smell my flower', 'Bobo is my mothers aunty',
     'if it were not for my socks, id look normal');
   Randomize;
   WriteLn('# Coco the clown says ' + LSayings[Random(Length(LSayings))]);

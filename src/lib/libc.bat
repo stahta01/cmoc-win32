@@ -1,4 +1,4 @@
-cmoc2 -Werror -o ..\..\lib\libc.a libc\*.c
+..\..\bin\cmoc2 -Werror -o ..\..\lib\libc.a libc\*.c
 
 del libc\*.o
 del libc\*.asm

@@ -1,7 +1,7 @@
 @echo off
 
 cd libbasic || goto error
-cmoc2 -o ..\..\..\lib\libbasic.a *.c || goto error
+..\..\..\bin\cmoc2 -o ..\..\..\lib\libbasic.a *.c || goto error
 del *.c.i *.o *.asm *.asm.i
 cd ..
 

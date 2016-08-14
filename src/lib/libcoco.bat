@@ -1,4 +1,4 @@
-cmoc2 -o ..\..\lib\libcoco.a libcoco\*.c 
+..\..\bin\cmoc2 -o ..\..\lib\libcoco.a libcoco\*.c 
 
 del libcoco\*.c.i
 del libcoco\*.o
