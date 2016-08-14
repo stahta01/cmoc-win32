@@ -533,15 +533,20 @@ procedure TFormCmocIDE.MenuRunBuildAndRunClick(Sender: TObject);
 begin
   MenuRunBuild.Click;
   WriteLn('// Running emulator');
-  case FTarget of
-    Target_COCO: begin
-      Execute('xroar.exe', ['-machine', 'cocous', '-ram', '64',
-        '-bas', 'bas12.rom', '-extbas', 'extbas11.rom', '-dos', 'disk11.rom', '-kbd-translate',
-        FileNameBin], True);
+  try
+    case FTarget of
+      Target_COCO: begin
+        Execute('xroasr.exe', ['-machine', 'cocous', '-ram', '64',
+          '-bas', 'bas12.rom', '-extbas', 'extbas11.rom', '-dos', 'disk11.rom', '-kbd-translate',
+          FileNameBin], True);
+      end;
+      Target_DRAGON: begin
+        Execute('xroar.exe', ['-machine', 'dragon64', '-kbd-translate', FileNameBin], True);
+      end;
     end;
-    Target_DRAGON: begin
-      Execute('xroar.exe', ['-machine', 'dragon64', '-kbd-translate', FileNameBin], True);
-    end;
+  except
+    WriteLn(StdErr, 'xroar failed to execute');
+    WriteLn('xroar.exe must be in your enviroments search path. (xroar requires target roms to be avaliable)');
   end;
 end;
 
