@@ -1,5 +1,5 @@
-CMOC for Windows
-================
+CMOC Compiler/Editor for Windows
+================================
 
 This is a port of CMOC to Windows. The port was pretty easy todo, but CMOC 
 does not support linking.
@@ -8,7 +8,7 @@ So, I wrote a couple of front ends called lwasm2 & cmoc2, which process
 CMOC's output code.
 
 The result is a fully linkable C compiler for 6809 processors. I currently 
-support the Coco and Dragon machines, but I will be adding/re-adding the 
+support the CoCo and Dragon machines, but I will be adding/re-adding the 
 Vectrex/OS9 platforms in the comming weeks. The Vectrex/OS9 code is still 
 avaliable but im unsure what I have broken.
 
@@ -21,7 +21,7 @@ except the source code.
 There is also a simple CMOC editor (cmocide) which intergrates with cmoc2.exe. 
 Cmocide also provides source formatting via astyle, and emulation via xroar (not included).
 
-Xroar must be downloaded and installed with Coco/Dragon ROM's which, well, you
+Xroar must be downloaded and installed with CoCo/Dragon ROM's which, well, you
 can find for yourself. You must add the path to xroar.exe to your environments
 search path in order for cmocide to find it.
 
