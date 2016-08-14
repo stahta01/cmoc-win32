@@ -18,6 +18,7 @@ InfoBeforeFile=README
 Compression=lzma
 SolidCompression=yes
 WizardImageFile=install.bmp
+SetupIconFile=src\bin\ide\ide.ico
 
 AppId={{809260E7-0DB2-4822-9044-8B044660922D}
 
