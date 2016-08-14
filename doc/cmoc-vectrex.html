@@ -1,0 +1,127 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"></head><body><h1>Using CMOC for Vectrex development</h1>
+
+<p><strong>By Johan Van den Brande</strong></p>
+
+<p><code>johan@vandenbrande.com</code></p>
+
+<h2>Introduction</h2>
+
+<p>CMOC has support for the Vectrex since version 0.1.17. Since version 
+0.1.18 most of the BIOS functions are supported. CMOC can be used to 
+write an application for the Vectrex console without the need for an 
+assembler.</p>
+
+<p>Here's a 'Hello World' example:</p>
+
+<pre><code>#include &lt;vectrex/bios.h&gt;
+
+int main()
+{
+  while(1)
+  {
+    wait_retrace();
+    intensity(0x7f);
+    print_str_c( 0x10, -0x50, "HELLO WORLD!" );
+  }
+  return 0;
+}
+</code></pre>
+
+<p>Which you could compile with:</p>
+
+<pre><code>cmoc --vectrex hello_world.c
+</code></pre>
+
+<h2>ROM header</h2>
+
+<p>A Vectrex cartidge starts with a special header which informs the 
+BIOS a Vectrex cartridge is present. In CMOC we provide the following <code>pragmas</code> to customize the header.</p>
+
+<h3>vx_copyright</h3>
+
+<p>Contains a copyright, mostly the year when the application got made.</p>
+
+<pre><code>// #pragma vx_copyright string
+#pragma vx_copyright "2015"
+</code></pre>
+
+<h3>vx_title_pos</h3>
+
+<p>Where to place the title.</p>
+
+<pre><code>// #pragma vx_title_pos y, x
+#pragma vx_title_pos -100,-100
+</code></pre>
+
+<h3>vx_title_size</h3>
+
+<p>How big is the text, height, width. Notice the negative y value.</p>
+
+<pre><code>// #pragma vx_title_size y, x
+#pragma vx_title_size -8,80
+</code></pre>
+
+<h3>vx_title</h3>
+
+<p>The title text itself. The 'g' stands for a copyright sign. Only 
+uppercase characters are supported, as lowercase characters contain 
+symbols.</p>
+
+<pre><code>// #pragma vx_title string
+#pragma vx_title "g NANOFLITE 2015"
+</code></pre>
+
+<h3>vx_music</h3>
+
+<p>The music played when the console starts up. There are 13 musical pieces available, from vx_music_1 to vx_music_13</p>
+
+<pre><code>// #pragma vx_music address
+#pragma vx_music vx_music_2
+</code></pre>
+
+<h2>BIOS</h2>
+
+<p>The BIOS functions for the Vectrex always have the y coordinate as a 
+first parameter, this is reflected in the C functions. If coordinates 
+are needed, the y-coordinate always comes first.</p>
+
+<p>All the BIOS functions are defined and documented in the file <code>vectrex/bios.h</code>.</p>
+
+<p>As the <code>read_joystick</code> routine messes up the intensity setting, you have to follow this function by a 'intensity(0x7f)' call or similar.</p>
+
+<h2>ROM data</h2>
+
+<p>Most Vectrex cartridges only have ROM and so we need to make sure that we do not consume too much RAM. </p>
+
+<p>We can place our lists of coordinates in ROM by making use of the pragma <code>const_data</code>.</p>
+
+<p>Here's an example where we define a rectangle and a string in ROM.</p>
+
+<pre><code>#pragma const_data start
+char rectangle[8] = {
+    -50,  -50,
+      0,  100,
+   -100,    0,
+      0,  -100 
+};
+char rom_text[] = "HELLO VECTREX";
+#pragma const_data end
+</code></pre>
+
+<p>There can only be one const_data section.</p>
+
+<h2>Emulation</h2>
+
+<p>These are the two emulators that I personally use for development:</p>
+
+<pre><code>* http://www.vectrex.fr/ParaJVE/
+* https://github.com/jhawthorn/vecx
+</code></pre>
+
+<h2>Real hardware</h2>
+
+<p>I use the VecMulti cartridge from Richard Hutchkinson 
+(http://www.vectrex.biz), together with the follwoing command line 
+tools: https://github.com/nanoflite/vecmulti</p>
+</body></html>

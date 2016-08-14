@@ -1,0 +1,425 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title></title>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<pre>
+                       <font color="#0000FF"><strong> Al's FREE-C Runtime Library</strong></font>
+                       
+                                                 <font
+color="#FF0000"><strong>A. Maromaty
+                                                 21-Apr-1998.</strong></font>
+
+
+
+
+   The FREE-C runtime library is an ANSI standard C runtime library for the
+Windows NT and '95 operating systems.
+
+
+   The FREE-C runtime library implements all of the standard C library
+functions without the use of any IBM or Microsoft proprietary code. Most of
+the functions are written in C or assembler where necessary. The source code
+for all functions is available.
+
+
+   The FREE-C runtime library allows the compiler developer to distribute the
+library functions in object form without the need for an IBM or Microsoft
+license agreement. This frees the developer to write runtime code in C with
+the intent of linking the runtime code with the output of a language translator
+or to implement the runtime system as a .DLL without the need for any
+proprietary third party code.
+
+
+  In order to use the FREE-C runtime library, the program MUST be compiled
+with the following C compiler and Assembler:
+
+
+   Microsoft Visual C/C++ version 2.0 or greater
+   Microsoft MASM Version 6.00 or greater
+
+  The program must then be linked with one of the following libraries:
+
+   CLIBW32.LIB    - Static .LIB
+   CLIBW32D.LIB   - Import library for CLIBW32D.DLL
+
+   Steps required:
+
+   1. Create a subdirectory under the root called C
+
+   2. Get the .ZIP file from my site via FTP and place it in this
+      directory (call it &quot;c.zip&quot;).
+
+   3. Unzip it by entering pkunzip -d c.zip
+
+   4. Make sure that your environment is set up to run the Microsoft C/C++
+      Compiler and Microsoft MASM 6.00 or greater, If you don't know how
+      to do this, don't bother going any further, this is NOT for you !
+
+   5. Go into the make directory and run mwin32.bat for to create the
+      static .LIB, or mwin32d.bat to create the .DLL version
+
+   6. This should create the .LIB and or .DLL in the .LIB subdirectory.
+
+   7  Go into the SAMPLES directory and type in cwin32 test. This will
+      compile and link a stupid test program. make sure that it runs. If
+      it does, you have sucessfully created the runtime library.
+
+   <strong>Click Here to download the .zip file </strong><a
+href="ftp://www.k9wk.com/c.zip"><strong>ftp://www.k9wk.com/c.zip</strong></a><strong>
+</strong>
+The FREE-C runtime library implements the following C library functions:
+
+
+      1. File I/O and file manipulation functions:
+
+         Function   ANSI  POSIX  Use
+
+         clearerr                Clears the error indicator for a stream
+         fclose                  Closes a stream
+         fcloseall               Closes all open streams
+         fdopen                  Associates a stream with an open file handle
+         feof                    Tests for end of file on a stream
+         ferror                  Tests for error on a stream
+         fflush                  Flushes a stream
+         fgetc                   Reads a character from a stream
+         fgetchar                Reads a character from stdin
+         fgetpos                 Reads a character from stdin
+         fgets                   Reads a string from a stream
+         fileno                  Gets the file handle associated with a stream
+         flushall                Flushes all streams
+         fopen                   Opens a stream
+         fprintf                 Writes formatted data to a stream
+         fputc                   Writes a character to a stream
+         fputchar                Writes a character to stdout
+         fputs                   Writes a string to a stream
+         fread                   Reads unformatted data from a stream
+         freopen                 Reassigns a FILE pointer to a new file
+         fscanf                  Reads formatted data from a stream
+         fseek                   Moves file position to a given location
+         fsetpos                 Sets the position indicator of a stream
+         _fsopen                 Opens a stream with file sharing
+         ftell                   Gets current file position
+         fwrite                  Writes unformatted data to a stream
+         getc                    Reads a character from a stream
+         getchar                 Reads a character from stdin
+         gets                    Reads a string from stdin
+         printf                  Writes formatted data to stdout
+         putc                    Writes a character to a stream
+         putchar                 Writes a character to stdout
+         puts                    Writes a string to stdout
+         remove                  Deletes a file
+         rename                  Renames a file
+         rewind                  Moves file pointer to beginning of stream
+         scanf                   Reads formatted data from stdin
+         setbuf                  Controls stream buffering
+         setvbuf                 Controls stream buffering and buffer size
+         sprintf                 Writes formatted data to string
+         sscanf                  Reads formatted data from a string
+         tmpfile                 Creates a temporary file
+         tmpnam                  Creates a temporary file name
+         _tmpnam                 Creates a temporary file name string
+         ungetc                  Removes a character from a stream
+         unlink                  Deletes a file
+         vfprintf                Write formatted data to file using va_list
+         vprintf                 Write formatted data to stdout using va_list
+         vsprintf                Write formatted data to string using va_list
+
+      2. Low level I/O functions:
+
+         Function   ANSI  POSIX  Use
+
+         access                  Determines file access permission
+         close                   Closes a file
+         creat                   Creates a file
+         dup                     Duplicates a file handle
+         dup2                    Reassigns a handle to a file
+         eof                     Tests for end of file
+         lseek                   Repositions file pointer to a given location
+         open                    Opens a file
+         read                    Reads data from a file
+         sopen                   Opens a file with sharing
+         tell                    Gets the current file pointer
+         umask                   Sets the default file permission mask
+         write                   Writes data to a file
+
+
+      3. Data conversion functions:
+
+         Function   ANSI  POSIX  Use
+
+         abs                     Absolute value of integer
+         atof                    Converts string to float
+         atoi                    Converts string to int
+         atol                    Converts string to long
+         itoa                    Converts integer to string
+         labs                    Alsolute value of long
+         ltoa                    Converts long to string
+         strtod                  Converts string to double
+         strtol                  Converts string to long
+         strtoul                 Converts string to unsigned long
+         ultoa                   Converts unsigned long to string
+
+
+      4. Memory management functions:
+
+         Function   ANSI  POSIX  Use
+
+         calloc                  Allocate memory block with zero fill
+         free                    Free memory block
+         malloc                  Allocate memory block
+         realloc                 Re-size memory block
+
+      5. Memory manipulation functions:
+
+         Function   ANSI  POSIX  Use
+
+         memccpy                 Copies characters until character or number
+                                 of characters has been copied
+
+         memchr                  Return a pointer to the first occurrence,
+                                 within a specified number of characters
+
+         memcmp                  Compare a specified number of characters
+                                 from two memory locations
+
+         memicmp                 Compare a specified number of characters
+                                 from two memory locations without regard
+                                 to case
+
+         memmove                 Copy a specified number of characters
+                                 from one memory location to another
+
+         memset                  Set a region of memory to a specified
+                                 character
+
+
+      6. String manipulation functions:
+
+         Function   ANSI  POSIX  Use
+
+         strcat                  Concatenate two strings
+
+         strchr                  Find the first occurrence of a given
+                                 character in a string
+
+         strcmp                  Compare two strings
+         strcpy                  Copy one string to another
+
+         strcspn                 Find any one of a set of characters in
+                                 a string
+
+         strdup                  Duplicate a string
+         stricmp                 Compare two strings without regard to case
+         strlen                  Get the length of a string
+         strlwr                  Convert a string to lower case
+
+         strncat                 Concatenate the specified number of characters
+                                 from one string to another
+
+         strncmp                 Compare the specified number of characters
+                                 in two strings
+
+         strncpy                 Copy the specified number of characters from
+                                 one string to another
+
+      6. String manipulation functions (continued):
+
+         Function   ANSI  POSIX  Use
+
+         strnicmp                Compare the specified number of characters
+                                 in two strings without regard to case
+
+         strnset                 Set the specified number of characters in a
+                                 string to a given character
+
+         strpbrk                 Find the first occurrence of a character
+                                 from one string in another
+
+         strrchr                 Find the last occurrence of a character
+                                 in a string
+
+         strrev                  Reverse a string
+
+         strset                  Set all characters in a string to a given
+                                 character
+
+         strspn                  Find the first substring from a given
+                                 character set in a string
+
+         strstr                  Find the first occurrence of a string
+                                 in another string
+
+         strtok                  Find the next token in a string
+         strupr                  Convert a string to upper case
+
+
+      7. Mathematical functions:
+
+         Function   ANSI  POSIX  Use
+
+         acos                    Floating point arc cosine(x)
+         asin                    Floating point arc sine(x)
+         atan                    Floating point arc tangent(x)
+         atan2                   Floating point arc tangent(y/x)
+         ceil                    Floating point ceiling(x)
+         cos                     Floating point cosine(x)
+         cosh                    Floating point hyperbolic cosine(x)
+
+         div                     Divide signed integers giving quotient
+                                 and remainder
+
+         exp                     Floating point exponent(x)
+         fabs                    Floating point absolute value(x)
+         floor                   Floating point floor(x)
+         fmod                    Floating point remainder(x/y)
+
+         frexp                   Split x into normalized fraction and
+                                 power of 2
+
+         ldexp                   The value of x * 2**n
+
+         ldiv                    Divide long integers giving quotient and
+                                 remainder
+
+         log                     Natural log(x)
+         log10                   Log base 10 of x
+         max                     Max of(a, b)
+         max                     Min of(a, b)
+
+         modf                    Split x into integral and fractional
+                                 parts, each with the same sign as x.
+
+         pow                     The value of x**y
+         rand                    Generate a pseudo random number
+         sin                     Floating point sine(x)
+         sinh                    Floating point hyperbolic sine(x)
+         sqrt                    Floating point square root(x)
+         srand                   Set random number seed
+         tan                     Floating point tangent(x)
+         tanh                    Floating point hyperbolic tangent(x)
+
+         uldiv                   Divide unsigned long integers giving quotient
+                                 and remainder
+
+      8. Character class tests and conversion:
+
+         Function   ANSI  POSIX  Use
+
+         isalnum                 Tests for alphanumeric character
+         isalpha                 Tests for alphabetic character
+         isascii                 Tests for ASCII character
+         iscntrl                 Tests for control character
+         isdigit                 Tests for decimal digit
+         isgraph                 Tests for printable character except space
+         islower                 Tests for lower case character
+         isprint                 Tests for printable character
+         ispunct                 Tests for punctuation character
+         isspace                 Tests for whitespace character
+         isupper                 Tests for upper case character
+         isxdigit                Tests for hexadecimal digit
+         isxupper                Tests for upper case hexadecimal digit
+         isxlower                Tests for lower case hexadecimal digit
+         toascii                 Converts character to ASCII code
+         tolower                 Converts character to lower case
+         toupper                 Converts character to upper case
+
+
+      9. Non-local jumps:
+
+         Function   ANSI  POSIX  Use
+
+         setjmp                  Saves stack environment for
+                                 longjmp return
+
+         longjmp                 Perform non-local jump
+
+
+     10. Signals:
+
+         Function   ANSI  POSIX  Use
+
+         raise                   Raise signal
+         signal                  Set signal handler
+
+
+     11. Process management and control:
+
+         Function   ANSI  POSIX  Use
+
+         abort                   Abort the current process
+
+         assert                  Assert that expression in true,
+                                 terminate the process if false
+
+         atexit                  Register a function for execution
+                                 at exit
+
+         exit                    Exit process
+         getenv                  Get a pointer to an environment variable
+         system                  Execute an operating system command
+
+
+     12. Searching and sorting:
+
+         Function   ANSI  POSIX  Use
+
+         bsearch                 Perform a binary search on an array
+         qsort                   Perform a quick sort on an array
+
+
+     13. Time and date functions:
+
+         Function   ANSI  POSIX  Use
+
+         clock                   Returns the processor time since the
+                                 beginning of execution
+
+         time                    Returns the current calendar time
+         difftime                Returns the difference of two times
+         mktime                  Converts the local time to calendar time
+         asctime                 Converts the time to a string
+         ctime                   Converts the calendar time to local time
+         gmtime                  Converts the calendar time to UTC
+         localtime               Converts the calendar time to local time
+
+         _strdate                Converts the current date to a string
+         _strtime                Converts the current time to a string
+
+         strftime                Converts the time and date information
+                                 into a formatted string
+
+         _tzset                  Sets the time zone
+
+     14. Locale specific functions:
+
+         Function   ANSI  POSIX  Use
+
+         setlocale               Sets the locale specific information
+
+         localconv               Return a pointer to a structure that
+                                 describes the current locale
+
+
+     15. Error handling functions:
+
+         Function   ANSI  POSIX  Use
+
+         _doserrno               Return the operating system error number
+         errno                   Return the current error number
+         perror                  Print string and error message to stderr
+         strerror                Get the system defined error message
+
+
+     16. Exception handling:
+
+         The C __try exception handler has been implemented &quot;loosely&quot; !</pre>
+</body>
+</html>
