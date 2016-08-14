@@ -494,7 +494,7 @@ begin
   end;
   Result := FileAge(ADst) < FileAge(ASrc);
   if not Result then begin
-    WriteLn('# ' + QuotedStr(ADst) + ' is unchanged. No processing required');
+    WriteLn(OCmoc.StringQuoted(ADst) + ' is unchanged. # No processing required');
   end;
 end;
 

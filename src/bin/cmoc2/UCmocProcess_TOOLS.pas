@@ -191,7 +191,6 @@ begin
   finally
     DeleteFile(LLibFile);
   end;
-  WriteLn('ORIGIN: $', IntToHex(AOrigin, 4));
   with TMemoryStream.Create do begin
     try
       LoadFromFile(ADst);
@@ -206,6 +205,8 @@ begin
       Free;
     end;
   end;
+  WriteLn('output=', OCmoc.StringQuoted(ADst), ' target=', OCmoc.StringQuoted(ATarget),
+    ' origin=$', IntToHex(AOrigin, 4));
 end;
 
 end.

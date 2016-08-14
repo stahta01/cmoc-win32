@@ -2576,6 +2576,9 @@ object FormCmocIDE: TFormCmocIDE
       'LWASM2'
       'LWLINK'
       'MCPP'
+      'ORIGIN'
+      'OUTPUT'
+      'TARGET'
     )
     Constants.Strings = (
       '__6809__'

@@ -148,6 +148,7 @@ type
   strict private
     class function PathToTemp: TFileName;
   public
+    class function StringQuoted(const A: string): string;
     class function StringToInteger(const A: string): longint;
     class procedure RaiseError(AMessage: string; const AExitCode: integer = -1);
     class procedure RaiseError(AMessage, ADetails: string; const AExitCode: integer = -1);
@@ -179,6 +180,11 @@ type
 
 implementation
 
+class function OCmoc.StringQuoted(const A: string): string;
+begin
+  Result := '"' + A + '"';
+end;
+
 class function OCmoc.StringToInteger(const A: string): longint;
 begin
   if AnsiStartsStr('0x', A) then begin
@@ -196,7 +202,7 @@ end;
 
 class procedure OCmoc.RaiseError(AMessage, ADetails: string; const AExitCode: integer);
 begin
-  RaiseError(AMessage + ' // ' + QuotedStr(ADetails), AExitCode);
+  RaiseError(AMessage + ' // ' + StringQuoted(ADetails), AExitCode);
 end;
 
 class function OCmoc.FileChanged(const ADst, ASrc: TFileName): boolean;
@@ -454,7 +460,7 @@ begin
     if PosSet(AllowDirectorySeparators + [Char_SPC], LParam) = 0 then begin
       LCommandLine += Char_SPC + LParam;
     end else begin
-      LCommandLine += Char_SPC + AnsiQuotedStr(LParam, '"');
+      LCommandLine += Char_SPC + OCmoc.StringQuoted(LParam);
     end;
   end;
   WriteLn(LCommandLine);
