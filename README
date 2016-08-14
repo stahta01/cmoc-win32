@@ -1,0 +1,38 @@
+CMOC for Windows
+================
+
+This is a port of CMOC to Windows. The port is pretty easy todo, but CMOC 
+does not support linking.
+
+So, I wrote a couple of front ends called lwasm2 & cmoc2, which process
+CMOC's output code.
+
+The result is a fully linkable 6809 compiler. I currently support the
+Coco and Dragon platforms, but I will be adding/re-adding the Vectrex/OS9
+platforms in the comming weeks.
+
+You need to place the LWTOOL's Win32 binaries into the bin folder. Namely
+lwasm.exem, lwlink.exe and lwar.exe.
+
+For easy startup, I have created a Win32 installer which includes everything
+except the source code.
+
+There is also a simple CMOC editor (cmocide) which intergrates with cmoc2.exe. 
+Cmocide also provides source formatting via astyle, and emulation via xroar (not included).
+
+Xroar must be downloaded and installed with Coco/Dragon ROM's which, well, you
+can find for yourself. You must add the path to xroar.exe to your environments
+search path in order for cmocide to find it.
+
+To obtain the original source code and more information about CMOC, please
+visit the CMOC homepage.
+
+CMOC - A C-like 6809-targeting cross-compiler
+
+Home page: http://sarrazip.com/dev/cmoc.html
+
+License
+
+    See the file COPYING. Note that it does not apply to the files
+    under src/usim-0.91-cmoc.
+
