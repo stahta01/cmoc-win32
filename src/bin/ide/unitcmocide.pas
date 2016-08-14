@@ -213,11 +213,14 @@ begin
       Add('#include <ctype.h>');
       Add('#include <stdio.h>');
       Add('#include <string.h>');
+      Add('#include <conio.h>');
+      Add(EmptyStr);
+      Add('#include <basic.h>');
       Add(EmptyStr);
       Add('int main(void)');
       Add('{');
       Add(StringOfChar(Char_SPC, FormCmocIDESynEdit.SynEdit.TabWidth) +
-        'puts("WELCOME TO CMOC!");');
+        'puts("WELCOME TO ' + UpperCase(Application.Title) + '!");');
       Add(StringOfChar(Char_SPC, FormCmocIDESynEdit.SynEdit.TabWidth) + 'return 0;');
       Add('}');
     end;
@@ -532,11 +535,11 @@ end;
 procedure TFormCmocIDE.MenuRunBuildAndRunClick(Sender: TObject);
 begin
   MenuRunBuild.Click;
-  WriteLn('// Running emulator');
+  WriteLn('// Running xroar emulator');
   try
     case FTarget of
       Target_COCO: begin
-        Execute('xroasr.exe', ['-machine', 'cocous', '-ram', '64',
+        Execute('xroar.exe', ['-machine', 'cocous', '-ram', '64',
           '-bas', 'bas12.rom', '-extbas', 'extbas11.rom', '-dos', 'disk11.rom', '-kbd-translate',
           FileNameBin], True);
       end;

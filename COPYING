@@ -1,10 +1,8 @@
 The following license applies to all files in this package, except
-the files under src/usim-0.91-cmoc and any other file that is
+the files under src/bin/usim and any other file that is
 explicitly distributed under another license.
 
 -- Pierre Sarrazin
-
-------------------------------------------------------------------------------
 
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
