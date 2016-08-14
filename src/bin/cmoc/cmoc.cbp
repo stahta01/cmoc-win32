@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="cmoc" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option show_notes="0">
+			<notes>
+				<![CDATA[CMOC - A C-like 6809-targeting cross-compiler
+
+Home page: http://sarrazip.com/dev/cmoc.html
+
+License
+
+    See the file COPYING. Note that it does not apply to the files
+    under src/usim-0.91-cmoc.
+
+Installation
+
+    See the file INSTALL. If using the FrankASM 6809 assembler
+    (as6809), it should already have been installed. CMOC can also
+    use LWTOOLS' lwasm. See the home page for details.
+
+Automake
+
+    To do CMOC development, GNU Automake 1.12 or later is required
+    (previous versions generate src/parser.h instead of src/parser.hh).
+]]>
+			</notes>
+		</Option>
+		<Build>
+			<Target title="Release">
+				<Option output="../../../bin/cmoc" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-m32" />
+					<Add option='-DPROGRAM=\&quot;CMOC\&quot;' />
+					<Add option='-DPACKAGE=\&quot;CMOC\&quot;' />
+					<Add option='-DVERSION=\&quot;1.28\&quot;' />
+					<Add option='-DPKGDATADIR=\&quot;PKGDATADIR_IS_UNDEFINED\&quot;' />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-m32" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="src/ASMText.cpp" />
+		<Unit filename="src/ASMText.h" />
+		<Unit filename="src/AssemblerStmt.cpp" />
+		<Unit filename="src/AssemblerStmt.h" />
+		<Unit filename="src/BinaryOpExpr.cpp" />
+		<Unit filename="src/BinaryOpExpr.h" />
+		<Unit filename="src/CastExpr.cpp" />
+		<Unit filename="src/CastExpr.h" />
+		<Unit filename="src/ClassDef.cpp" />
+		<Unit filename="src/ClassDef.h" />
+		<Unit filename="src/CodeStatus.cpp" />
+		<Unit filename="src/CodeStatus.h" />
+		<Unit filename="src/CompoundStmt.h" />
+		<Unit filename="src/ConditionalExpr.cpp" />
+		<Unit filename="src/ConditionalExpr.h" />
+		<Unit filename="src/Declaration.cpp" />
+		<Unit filename="src/Declaration.h" />
+		<Unit filename="src/DeclarationSequence.cpp" />
+		<Unit filename="src/DeclarationSequence.h" />
+		<Unit filename="src/DeclarationSpecifierList.cpp" />
+		<Unit filename="src/DeclarationSpecifierList.h" />
+		<Unit filename="src/Declarator.cpp" />
+		<Unit filename="src/Declarator.h" />
+		<Unit filename="src/ExpressionTypeSetter.cpp" />
+		<Unit filename="src/ExpressionTypeSetter.h" />
+		<Unit filename="src/ForStmt.cpp" />
+		<Unit filename="src/ForStmt.h" />
+		<Unit filename="src/FormalParamList.h" />
+		<Unit filename="src/FormalParameter.cpp" />
+		<Unit filename="src/FormalParameter.h" />
+		<Unit filename="src/FuncAddrExpr.cpp" />
+		<Unit filename="src/FuncAddrExpr.h" />
+		<Unit filename="src/FuncAddrFixer.h" />
+		<Unit filename="src/FunctionCallExpr.cpp" />
+		<Unit filename="src/FunctionCallExpr.h" />
+		<Unit filename="src/FunctionDef.cpp" />
+		<Unit filename="src/FunctionDef.h" />
+		<Unit filename="src/IdentifierExpr.cpp" />
+		<Unit filename="src/IdentifierExpr.h" />
+		<Unit filename="src/IfStmt.cpp" />
+		<Unit filename="src/IfStmt.h" />
+		<Unit filename="src/JumpStmt.cpp" />
+		<Unit filename="src/JumpStmt.h" />
+		<Unit filename="src/LabeledStmt.cpp" />
+		<Unit filename="src/LabeledStmt.h" />
+		<Unit filename="src/ObjectMemberExpr.cpp" />
+		<Unit filename="src/ObjectMemberExpr.h" />
+		<Unit filename="src/Pragma.cpp" />
+		<Unit filename="src/Pragma.h" />
+		<Unit filename="src/Pseudo6809.h" />
+		<Unit filename="src/Scope.cpp" />
+		<Unit filename="src/Scope.h" />
+		<Unit filename="src/ScopeCreator.cpp" />
+		<Unit filename="src/ScopeCreator.h" />
+		<Unit filename="src/SemanticsChecker.h" />
+		<Unit filename="src/StringLiteralExpr.cpp" />
+		<Unit filename="src/StringLiteralExpr.h" />
+		<Unit filename="src/SwitchStmt.cpp" />
+		<Unit filename="src/SwitchStmt.h" />
+		<Unit filename="src/TranslationUnit.cpp" />
+		<Unit filename="src/TranslationUnit.h" />
+		<Unit filename="src/Tree.cpp" />
+		<Unit filename="src/Tree.h" />
+		<Unit filename="src/TreeSequence.cpp" />
+		<Unit filename="src/TreeSequence.h" />
+		<Unit filename="src/TypeDesc.cpp" />
+		<Unit filename="src/TypeDesc.h" />
+		<Unit filename="src/TypeManager.cpp" />
+		<Unit filename="src/TypeManager.h" />
+		<Unit filename="src/UnaryOpExpr.cpp" />
+		<Unit filename="src/UnaryOpExpr.h" />
+		<Unit filename="src/VariableExpr.cpp" />
+		<Unit filename="src/VariableExpr.h" />
+		<Unit filename="src/WhileStmt.cpp" />
+		<Unit filename="src/WhileStmt.h" />
+		<Unit filename="src/WordConstantExpr.cpp" />
+		<Unit filename="src/WordConstantExpr.h" />
+		<Unit filename="src/lexer.cc" />
+		<Unit filename="src/lexer.ll" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/parser.cc" />
+		<Unit filename="src/parser.hh" />
+		<Unit filename="src/parser.yy" />
+		<Unit filename="src/util.cpp" />
+		<Unit filename="src/util.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,2742 @@
+# depslib dependency file v1.0
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\asmtext.cpp
+	"ASMText.h"
+	"Pseudo6809.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	<algorithm>
+	<iomanip>
+	<utility>
+	<stack>
+	<climits>
+	<iostream>
+	<strings.h>
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\asmtext.h
+	"util.h"
+	<stack>
+	<utility>
+	<algorithm>
+	<map>
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\util.h
+	"TypeManager.h"
+	<vector>
+	<list>
+	<set>
+	<map>
+	<algorithm>
+	<iostream>
+	<fstream>
+	<sstream>
+	<stdio.h>
+	<string.h>
+	<stdarg.h>
+	<memory>
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\typemanager.h
+	"TypeDesc.h"
+	<vector>
+	<map>
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\typedesc.h
+	<assert.h>
+	<stdint.h>
+	<iostream>
+	<string>
+	<vector>
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\pseudo6809.h
+	"util.h"
+	<stack>
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\translationunit.h
+	"util.h"
+	"Scope.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\scope.h
+	"Tree.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\tree.h
+	"util.h"
+	"CodeStatus.h"
+	"ASMText.h"
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\codestatus.h
+	"util.h"
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\functiondef.h
+	"FormalParamList.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\formalparamlist.h
+	"TreeSequence.h"
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\treesequence.h
+	"Tree.h"
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\assemblerstmt.cpp
+	"AssemblerStmt.h"
+	"TranslationUnit.h"
+	"SemanticsChecker.h"
+	"ASMText.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\assemblerstmt.h
+	"Declaration.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\declaration.h
+	"Tree.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\semanticschecker.h
+	"FunctionDef.h"
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\binaryopexpr.cpp
+	"BinaryOpExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"IdentifierExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"ClassDef.h"
+	"ObjectMemberExpr.h"
+	<assert.h>
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\binaryopexpr.h
+	"Tree.h"
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\variableexpr.h
+	"Tree.h"
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\wordconstantexpr.h
+	"Tree.h"
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\identifierexpr.h
+	"Tree.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\unaryopexpr.h
+	"Tree.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\castexpr.h
+	"Tree.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\classdef.h
+	"Tree.h"
+	"Declarator.h"
+	"util.h"
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\declarator.h
+	<string>
+	"util.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\objectmemberexpr.h
+	"ClassDef.h"
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\castexpr.cpp
+	"CastExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"IdentifierExpr.h"
+	<assert.h>
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\classdef.cpp
+	"ClassDef.h"
+	"FunctionDef.h"
+	"TranslationUnit.h"
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\codestatus.cpp
+	"CodeStatus.h"
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\conditionalexpr.cpp
+	"ConditionalExpr.h"
+	"TranslationUnit.h"
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\conditionalexpr.h
+	"Tree.h"
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\declaration.cpp
+	"Declaration.h"
+	"TranslationUnit.h"
+	"WordConstantExpr.h"
+	"StringLiteralExpr.h"
+	"ClassDef.h"
+	"TreeSequence.h"
+	"ExpressionTypeSetter.h"
+	"VariableExpr.h"
+	"ScopeCreator.h"
+	"SemanticsChecker.h"
+	"FuncAddrFixer.h"
+	<assert.h>
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\stringliteralexpr.h
+	"Tree.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\expressiontypesetter.h
+	"Tree.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\scopecreator.h
+	"Tree.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\funcaddrfixer.h
+	"FuncAddrExpr.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\funcaddrexpr.h
+	"Tree.h"
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\declarationsequence.cpp
+	"DeclarationSequence.h"
+	"TranslationUnit.h"
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\declarationsequence.h
+	"TreeSequence.h"
+	"Declarator.h"
+	"Declaration.h"
+	"FunctionDef.h"
+	"DeclarationSpecifierList.h"
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\declarationspecifierlist.h
+	"util.h"
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\declarationspecifierlist.cpp
+	"DeclarationSpecifierList.h"
+	"TranslationUnit.h"
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\declarator.cpp
+	"Declarator.h"
+	"Declaration.h"
+	"TreeSequence.h"
+	"StringLiteralExpr.h"
+	"ExpressionTypeSetter.h"
+	"TranslationUnit.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"DeclarationSpecifierList.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\formalparameter.h
+	"Tree.h"
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\expressiontypesetter.cpp
+	"ExpressionTypeSetter.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"ObjectMemberExpr.h"
+	"FunctionCallExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"FuncAddrExpr.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\functioncallexpr.h
+	"Tree.h"
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\formalparameter.cpp
+	"FormalParameter.h"
+	"Declarator.h"
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\forstmt.cpp
+	"ForStmt.h"
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"UnaryOpExpr.h"
+	"BinaryOpExpr.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\forstmt.h
+	"Tree.h"
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\funcaddrexpr.cpp
+	"FuncAddrExpr.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\functioncallexpr.cpp
+	"FunctionCallExpr.h"
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"IdentifierExpr.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"FuncAddrExpr.h"
+	"StringLiteralExpr.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+	"Declaration.h"
+	"ObjectMemberExpr.h"
+	"FormalParameter.h"
+	"UnaryOpExpr.h"
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\functiondef.cpp
+	"FunctionDef.h"
+	"Scope.h"
+	"DeclarationSequence.h"
+	"CompoundStmt.h"
+	"TranslationUnit.h"
+	"StringLiteralExpr.h"
+	"FormalParameter.h"
+	"ForStmt.h"
+	"WhileStmt.h"
+	"VariableExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"FunctionCallExpr.h"
+	"FuncAddrExpr.h"
+	"ObjectMemberExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"JumpStmt.h"
+	"ExpressionTypeSetter.h"
+	"ScopeCreator.h"
+	"AssemblerStmt.h"
+	"SemanticsChecker.h"
+	"FuncAddrFixer.h"
+	"LabeledStmt.h"
+	<assert.h>
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\compoundstmt.h
+	"TreeSequence.h"
+	"Declarator.h"
+	"Declaration.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\whilestmt.h
+	"Tree.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\jumpstmt.h
+	"Tree.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\labeledstmt.h
+	"Declaration.h"
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\identifierexpr.cpp
+	"IdentifierExpr.h"
+	"VariableExpr.h"
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\ifstmt.cpp
+	"IfStmt.h"
+	"TranslationUnit.h"
+	"BinaryOpExpr.h"
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\ifstmt.h
+	"Tree.h"
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\jumpstmt.cpp
+	"JumpStmt.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+	"WordConstantExpr.h"
+	<assert.h>
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\labeledstmt.cpp
+	"LabeledStmt.h"
+	"TranslationUnit.h"
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\lexer.cc
+	<stdio.h>
+	<string.h>
+	<errno.h>
+	<stdlib.h>
+	<inttypes.h>
+	<string.h>
+	<string>
+	"DeclarationSequence.h"
+	"CompoundStmt.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"ClassDef.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"DeclarationSpecifierList.h"
+	"parser.hh"
+	<unistd.h>
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\parser.hh
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\main.cpp
+	"TranslationUnit.h"
+	<string>
+	<iostream>
+	<fstream>
+	<list>
+	<stdlib.h>
+	<stdio.h>
+	<errno.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<unistd.h>
+	<string.h>
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\objectmemberexpr.cpp
+	"ObjectMemberExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"IdentifierExpr.h"
+	"ClassDef.h"
+	<assert.h>
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\parser.cc
+	"DeclarationSequence.h"
+	"WordConstantExpr.h"
+	"IdentifierExpr.h"
+	"VariableExpr.h"
+	"FunctionCallExpr.h"
+	"StringLiteralExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"CompoundStmt.h"
+	"IfStmt.h"
+	"SwitchStmt.h"
+	"LabeledStmt.h"
+	"WhileStmt.h"
+	"ForStmt.h"
+	"JumpStmt.h"
+	"Scope.h"
+	"FunctionDef.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"AssemblerStmt.h"
+	"TranslationUnit.h"
+	"ObjectMemberExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"DeclarationSpecifierList.h"
+	"Pragma.h"
+	<string.h>
+	<time.h>
+	<stddef.h>
+	<libintl.h>
+	<alloca.h>
+	<malloc.h>
+	<stdlib.h>
+	<stdlib.h>
+	<stdio.h>
+
+1469373035 c:\dev\amigae\bin\cmoc\cmoc\src\switchstmt.h
+	"Tree.h"
+	"TreeSequence.h"
+
+1469373033 c:\dev\amigae\bin\cmoc\cmoc\src\pragma.h
+	"Tree.h"
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\pragma.cpp
+	"Pragma.h"
+	<stdlib.h>
+	<stdlib.h>
+	<errno.h>
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\scope.cpp
+	"Scope.h"
+	"TreeSequence.h"
+	"Declaration.h"
+	"TranslationUnit.h"
+	"ClassDef.h"
+	<assert.h>
+	<algorithm>
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\scopecreator.cpp
+	"ScopeCreator.h"
+	"TranslationUnit.h"
+	"CompoundStmt.h"
+	"ForStmt.h"
+	"WhileStmt.h"
+	"DeclarationSequence.h"
+	"VariableExpr.h"
+	"FunctionCallExpr.h"
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\stringliteralexpr.cpp
+	"StringLiteralExpr.h"
+	"TranslationUnit.h"
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\switchstmt.cpp
+	"SwitchStmt.h"
+	"TranslationUnit.h"
+	"BinaryOpExpr.h"
+	"CompoundStmt.h"
+	"LabeledStmt.h"
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\translationunit.cpp
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"DeclarationSequence.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+	"FunctionCallExpr.h"
+	"Scope.h"
+	"StringLiteralExpr.h"
+	"ClassDef.h"
+	"Pragma.h"
+	<assert.h>
+	<errno.h>
+	<fstream>
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\tree.cpp
+	"Tree.h"
+	"TranslationUnit.h"
+	"ClassDef.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"TypeManager.h"
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\treesequence.cpp
+	"TreeSequence.h"
+	"TranslationUnit.h"
+	"CastExpr.h"
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\typedesc.cpp
+	"TypeDesc.h"
+	"util.h"
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\typemanager.cpp
+	"TypeManager.h"
+	"util.h"
+	"Declarator.h"
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\unaryopexpr.cpp
+	"UnaryOpExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"ObjectMemberExpr.h"
+	"BinaryOpExpr.h"
+	"FuncAddrExpr.h"
+	"IdentifierExpr.h"
+	"CastExpr.h"
+	"Declaration.h"
+	<assert.h>
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\util.cpp
+	"util.h"
+	"ClassDef.h"
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"FormalParameter.h"
+	"WordConstantExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"DeclarationSpecifierList.h"
+	<string.h>
+
+1469373035 source:c:\dev\amigae\bin\cmoc\cmoc\src\variableexpr.cpp
+	"VariableExpr.h"
+	"TranslationUnit.h"
+	"Declaration.h"
+	"Scope.h"
+	"FunctionDef.h"
+	"FuncAddrExpr.h"
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\whilestmt.cpp
+	"WhileStmt.h"
+	"TranslationUnit.h"
+	"BinaryOpExpr.h"
+
+1469373033 source:c:\dev\amigae\bin\cmoc\cmoc\src\wordconstantexpr.cpp
+	"WordConstantExpr.h"
+	"TranslationUnit.h"
+
+1465438274 source:c:\dev\cmoc\cmoc\src\asmtext.cpp
+	"ASMText.h"
+	"Pseudo6809.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	<algorithm>
+	<iomanip>
+	<utility>
+	<stack>
+	<climits>
+	<iostream>
+	<strings.h>
+
+1464322982 c:\dev\cmoc\cmoc\src\asmtext.h
+	"util.h"
+	<stack>
+	<utility>
+	<algorithm>
+	<map>
+
+1466471174 c:\dev\cmoc\cmoc\src\util.h
+	"TypeManager.h"
+	<vector>
+	<list>
+	<set>
+	<map>
+	<algorithm>
+	<iostream>
+	<fstream>
+	<sstream>
+	<stdio.h>
+	<string.h>
+	<stdarg.h>
+	<memory>
+
+1466471173 c:\dev\cmoc\cmoc\src\typemanager.h
+	"TypeDesc.h"
+	<vector>
+	<map>
+
+1466471173 c:\dev\cmoc\cmoc\src\typedesc.h
+	<assert.h>
+	<stdint.h>
+	<iostream>
+	<string>
+	<vector>
+
+1462077570 c:\dev\cmoc\cmoc\src\pseudo6809.h
+	"util.h"
+	<stack>
+
+1462506585 c:\dev\cmoc\cmoc\src\translationunit.h
+	"util.h"
+	"Scope.h"
+
+1458867609 c:\dev\cmoc\cmoc\src\scope.h
+	"Tree.h"
+
+1462506175 c:\dev\cmoc\cmoc\src\tree.h
+	"util.h"
+	"CodeStatus.h"
+	"ASMText.h"
+
+1437853408 c:\dev\cmoc\cmoc\src\codestatus.h
+	"util.h"
+
+1466273660 c:\dev\cmoc\cmoc\src\functiondef.h
+	"FormalParamList.h"
+
+1437853408 c:\dev\cmoc\cmoc\src\formalparamlist.h
+	"TreeSequence.h"
+
+1462506176 c:\dev\cmoc\cmoc\src\treesequence.h
+	"Tree.h"
+
+1464322982 source:c:\dev\cmoc\cmoc\src\assemblerstmt.cpp
+	"AssemblerStmt.h"
+	"TranslationUnit.h"
+	"SemanticsChecker.h"
+	"ASMText.h"
+
+1462506174 c:\dev\cmoc\cmoc\src\assemblerstmt.h
+	"Declaration.h"
+
+1467225653 c:\dev\cmoc\cmoc\src\declaration.h
+	"Tree.h"
+
+1467227588 c:\dev\cmoc\cmoc\src\semanticschecker.h
+	"FunctionDef.h"
+
+1467178903 source:c:\dev\cmoc\cmoc\src\binaryopexpr.cpp
+	"BinaryOpExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"IdentifierExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"ClassDef.h"
+	"ObjectMemberExpr.h"
+	<assert.h>
+
+1462506174 c:\dev\cmoc\cmoc\src\binaryopexpr.h
+	"Tree.h"
+
+1462506176 c:\dev\cmoc\cmoc\src\variableexpr.h
+	"Tree.h"
+
+1462506176 c:\dev\cmoc\cmoc\src\wordconstantexpr.h
+	"Tree.h"
+
+1462506175 c:\dev\cmoc\cmoc\src\identifierexpr.h
+	"Tree.h"
+
+1462506176 c:\dev\cmoc\cmoc\src\unaryopexpr.h
+	"Tree.h"
+
+1462506174 c:\dev\cmoc\cmoc\src\castexpr.h
+	"Tree.h"
+
+1447614019 c:\dev\cmoc\cmoc\src\classdef.h
+	"Tree.h"
+	"Declarator.h"
+	"util.h"
+
+1467225654 c:\dev\cmoc\cmoc\src\declarator.h
+	<string>
+	"util.h"
+
+1462506175 c:\dev\cmoc\cmoc\src\objectmemberexpr.h
+	"ClassDef.h"
+
+1462506174 source:c:\dev\cmoc\cmoc\src\castexpr.cpp
+	"CastExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"IdentifierExpr.h"
+	<assert.h>
+
+1447614026 source:c:\dev\cmoc\cmoc\src\classdef.cpp
+	"ClassDef.h"
+	"FunctionDef.h"
+	"TranslationUnit.h"
+
+1437853408 source:c:\dev\cmoc\cmoc\src\codestatus.cpp
+	"CodeStatus.h"
+
+1466483332 source:c:\dev\cmoc\cmoc\src\conditionalexpr.cpp
+	"ConditionalExpr.h"
+	"TranslationUnit.h"
+
+1466483332 c:\dev\cmoc\cmoc\src\conditionalexpr.h
+	"Tree.h"
+
+1467225653 source:c:\dev\cmoc\cmoc\src\declaration.cpp
+	"Declaration.h"
+	"TranslationUnit.h"
+	"WordConstantExpr.h"
+	"StringLiteralExpr.h"
+	"ClassDef.h"
+	"TreeSequence.h"
+	"ExpressionTypeSetter.h"
+	"VariableExpr.h"
+	"ScopeCreator.h"
+	"SemanticsChecker.h"
+	"FuncAddrFixer.h"
+	<assert.h>
+
+1462506175 c:\dev\cmoc\cmoc\src\stringliteralexpr.h
+	"Tree.h"
+
+1466230658 c:\dev\cmoc\cmoc\src\expressiontypesetter.h
+	"Tree.h"
+
+1437853408 c:\dev\cmoc\cmoc\src\scopecreator.h
+	"Tree.h"
+
+1460316233 c:\dev\cmoc\cmoc\src\funcaddrfixer.h
+	"FuncAddrExpr.h"
+
+1462506174 c:\dev\cmoc\cmoc\src\funcaddrexpr.h
+	"Tree.h"
+
+1467225653 source:c:\dev\cmoc\cmoc\src\declarationsequence.cpp
+	"DeclarationSequence.h"
+	"TranslationUnit.h"
+
+1466285803 c:\dev\cmoc\cmoc\src\declarationsequence.h
+	"TreeSequence.h"
+	"Declarator.h"
+	"Declaration.h"
+	"FunctionDef.h"
+	"DeclarationSpecifierList.h"
+
+1467225653 c:\dev\cmoc\cmoc\src\declarationspecifierlist.h
+	"util.h"
+
+1467225653 source:c:\dev\cmoc\cmoc\src\declarationspecifierlist.cpp
+	"DeclarationSpecifierList.h"
+	"TranslationUnit.h"
+
+1467225654 source:c:\dev\cmoc\cmoc\src\declarator.cpp
+	"Declarator.h"
+	"Declaration.h"
+	"TreeSequence.h"
+	"StringLiteralExpr.h"
+	"ExpressionTypeSetter.h"
+	"TranslationUnit.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"DeclarationSpecifierList.h"
+
+1466220051 c:\dev\cmoc\cmoc\src\formalparameter.h
+	"Tree.h"
+
+1467178903 source:c:\dev\cmoc\cmoc\src\expressiontypesetter.cpp
+	"ExpressionTypeSetter.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"ObjectMemberExpr.h"
+	"FunctionCallExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"FuncAddrExpr.h"
+
+1462506174 c:\dev\cmoc\cmoc\src\functioncallexpr.h
+	"Tree.h"
+
+1466220051 source:c:\dev\cmoc\cmoc\src\formalparameter.cpp
+	"FormalParameter.h"
+	"Declarator.h"
+
+1462506174 source:c:\dev\cmoc\cmoc\src\forstmt.cpp
+	"ForStmt.h"
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"UnaryOpExpr.h"
+	"BinaryOpExpr.h"
+
+1462506174 c:\dev\cmoc\cmoc\src\forstmt.h
+	"Tree.h"
+
+1462506174 source:c:\dev\cmoc\cmoc\src\funcaddrexpr.cpp
+	"FuncAddrExpr.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+
+1466230658 source:c:\dev\cmoc\cmoc\src\functioncallexpr.cpp
+	"FunctionCallExpr.h"
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"IdentifierExpr.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"FuncAddrExpr.h"
+	"StringLiteralExpr.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+	"Declaration.h"
+	"ObjectMemberExpr.h"
+	"FormalParameter.h"
+	"UnaryOpExpr.h"
+
+1467227587 source:c:\dev\cmoc\cmoc\src\functiondef.cpp
+	"FunctionDef.h"
+	"Scope.h"
+	"DeclarationSequence.h"
+	"CompoundStmt.h"
+	"TranslationUnit.h"
+	"StringLiteralExpr.h"
+	"FormalParameter.h"
+	"ForStmt.h"
+	"WhileStmt.h"
+	"VariableExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"FunctionCallExpr.h"
+	"FuncAddrExpr.h"
+	"ObjectMemberExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"JumpStmt.h"
+	"ExpressionTypeSetter.h"
+	"ScopeCreator.h"
+	"AssemblerStmt.h"
+	"SemanticsChecker.h"
+	"FuncAddrFixer.h"
+	"LabeledStmt.h"
+	<assert.h>
+
+1437853408 c:\dev\cmoc\cmoc\src\compoundstmt.h
+	"TreeSequence.h"
+	"Declarator.h"
+	"Declaration.h"
+
+1462506176 c:\dev\cmoc\cmoc\src\whilestmt.h
+	"Tree.h"
+
+1466270135 c:\dev\cmoc\cmoc\src\jumpstmt.h
+	"Tree.h"
+
+1466273660 c:\dev\cmoc\cmoc\src\labeledstmt.h
+	"Declaration.h"
+
+1462506174 source:c:\dev\cmoc\cmoc\src\identifierexpr.cpp
+	"IdentifierExpr.h"
+	"VariableExpr.h"
+
+1462506175 source:c:\dev\cmoc\cmoc\src\ifstmt.cpp
+	"IfStmt.h"
+	"TranslationUnit.h"
+	"BinaryOpExpr.h"
+
+1462506175 c:\dev\cmoc\cmoc\src\ifstmt.h
+	"Tree.h"
+
+1467312005 source:c:\dev\cmoc\cmoc\src\jumpstmt.cpp
+	"JumpStmt.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+	"WordConstantExpr.h"
+	<assert.h>
+
+1466273660 source:c:\dev\cmoc\cmoc\src\labeledstmt.cpp
+	"LabeledStmt.h"
+	"TranslationUnit.h"
+
+1467401998 source:c:\dev\cmoc\cmoc\src\lexer.cc
+	<stdio.h>
+	<string.h>
+	<errno.h>
+	<stdlib.h>
+	<inttypes.h>
+	<string.h>
+	<string>
+	"DeclarationSequence.h"
+	"CompoundStmt.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"ClassDef.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"DeclarationSpecifierList.h"
+	"parser.hh"
+	<unistd.h>
+
+1467223081 c:\dev\cmoc\cmoc\src\parser.hh
+
+1465354076 source:c:\dev\cmoc\cmoc\src\objectmemberexpr.cpp
+	"ObjectMemberExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"IdentifierExpr.h"
+	"ClassDef.h"
+	<assert.h>
+
+1467401997 source:c:\dev\cmoc\cmoc\src\parser.cc
+	"DeclarationSequence.h"
+	"WordConstantExpr.h"
+	"IdentifierExpr.h"
+	"VariableExpr.h"
+	"FunctionCallExpr.h"
+	"StringLiteralExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"CompoundStmt.h"
+	"IfStmt.h"
+	"SwitchStmt.h"
+	"LabeledStmt.h"
+	"WhileStmt.h"
+	"ForStmt.h"
+	"JumpStmt.h"
+	"Scope.h"
+	"FunctionDef.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"AssemblerStmt.h"
+	"TranslationUnit.h"
+	"ObjectMemberExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"DeclarationSpecifierList.h"
+	"Pragma.h"
+	<string.h>
+	<time.h>
+	<stddef.h>
+	<libintl.h>
+	<alloca.h>
+	<malloc.h>
+	<stdlib.h>
+	<stdlib.h>
+	<stdio.h>
+
+1466270135 c:\dev\cmoc\cmoc\src\switchstmt.h
+	"Tree.h"
+	"TreeSequence.h"
+
+1458409119 c:\dev\cmoc\cmoc\src\pragma.h
+	"Tree.h"
+
+1458409119 source:c:\dev\cmoc\cmoc\src\pragma.cpp
+	"Pragma.h"
+	<stdlib.h>
+	<stdlib.h>
+	<errno.h>
+
+1458867609 source:c:\dev\cmoc\cmoc\src\scope.cpp
+	"Scope.h"
+	"TreeSequence.h"
+	"Declaration.h"
+	"TranslationUnit.h"
+	"ClassDef.h"
+	<assert.h>
+	<algorithm>
+
+1470105846 source:c:\dev\cmoc\cmoc\src\scopecreator.cpp
+	"ScopeCreator.h"
+	"TranslationUnit.h"
+	"CompoundStmt.h"
+	"ForStmt.h"
+	"WhileStmt.h"
+	"DeclarationSequence.h"
+	"VariableExpr.h"
+	"FunctionCallExpr.h"
+
+1462506175 source:c:\dev\cmoc\cmoc\src\stringliteralexpr.cpp
+	"StringLiteralExpr.h"
+	"TranslationUnit.h"
+
+1466273660 source:c:\dev\cmoc\cmoc\src\switchstmt.cpp
+	"SwitchStmt.h"
+	"TranslationUnit.h"
+	"BinaryOpExpr.h"
+	"CompoundStmt.h"
+	"LabeledStmt.h"
+
+1470102869 source:c:\dev\cmoc\cmoc\src\translationunit.cpp
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"DeclarationSequence.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+	"FunctionCallExpr.h"
+	"Scope.h"
+	"StringLiteralExpr.h"
+	"ClassDef.h"
+	"Pragma.h"
+	<assert.h>
+	<errno.h>
+	<fstream>
+
+1462506175 source:c:\dev\cmoc\cmoc\src\tree.cpp
+	"Tree.h"
+	"TranslationUnit.h"
+	"ClassDef.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"TypeManager.h"
+
+1462506176 source:c:\dev\cmoc\cmoc\src\treesequence.cpp
+	"TreeSequence.h"
+	"TranslationUnit.h"
+	"CastExpr.h"
+
+1466471173 source:c:\dev\cmoc\cmoc\src\typedesc.cpp
+	"TypeDesc.h"
+	"util.h"
+
+1466471173 source:c:\dev\cmoc\cmoc\src\typemanager.cpp
+	"TypeManager.h"
+	"util.h"
+	"Declarator.h"
+
+1462506176 source:c:\dev\cmoc\cmoc\src\unaryopexpr.cpp
+	"UnaryOpExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"ObjectMemberExpr.h"
+	"BinaryOpExpr.h"
+	"FuncAddrExpr.h"
+	"IdentifierExpr.h"
+	"CastExpr.h"
+	"Declaration.h"
+	<assert.h>
+
+1457853618 source:c:\dev\cmoc\cmoc\src\util.cpp
+	"util.h"
+	"ClassDef.h"
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"FormalParameter.h"
+	"WordConstantExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"DeclarationSpecifierList.h"
+	<string.h>
+
+1465354076 source:c:\dev\cmoc\cmoc\src\variableexpr.cpp
+	"VariableExpr.h"
+	"TranslationUnit.h"
+	"Declaration.h"
+	"Scope.h"
+	"FunctionDef.h"
+	"FuncAddrExpr.h"
+
+1462506176 source:c:\dev\cmoc\cmoc\src\whilestmt.cpp
+	"WhileStmt.h"
+	"TranslationUnit.h"
+	"BinaryOpExpr.h"
+
+1462506176 source:c:\dev\cmoc\cmoc\src\wordconstantexpr.cpp
+	"WordConstantExpr.h"
+	"TranslationUnit.h"
+
+1469986183 source:c:\dev\cmoc\cmoc\src\main.cpp
+	"TranslationUnit.h"
+	<string>
+	<iostream>
+	<fstream>
+	<list>
+	<stdlib.h>
+	<stdio.h>
+	<errno.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<unistd.h>
+	<string.h>
+
+1465438274 source:c:\dev\cmoc\src\cmoc\src\asmtext.cpp
+	"ASMText.h"
+	"Pseudo6809.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	<algorithm>
+	<iomanip>
+	<utility>
+	<stack>
+	<climits>
+	<iostream>
+	<strings.h>
+
+1464322982 c:\dev\cmoc\src\cmoc\src\asmtext.h
+	"util.h"
+	<stack>
+	<utility>
+	<algorithm>
+	<map>
+
+1466471174 c:\dev\cmoc\src\cmoc\src\util.h
+	"TypeManager.h"
+	<vector>
+	<list>
+	<set>
+	<map>
+	<algorithm>
+	<iostream>
+	<fstream>
+	<sstream>
+	<stdio.h>
+	<string.h>
+	<stdarg.h>
+	<memory>
+
+1466471173 c:\dev\cmoc\src\cmoc\src\typemanager.h
+	"TypeDesc.h"
+	<vector>
+	<map>
+
+1466471173 c:\dev\cmoc\src\cmoc\src\typedesc.h
+	<assert.h>
+	<stdint.h>
+	<iostream>
+	<string>
+	<vector>
+
+1462077570 c:\dev\cmoc\src\cmoc\src\pseudo6809.h
+	"util.h"
+	<stack>
+
+1462506585 c:\dev\cmoc\src\cmoc\src\translationunit.h
+	"util.h"
+	"Scope.h"
+
+1458867609 c:\dev\cmoc\src\cmoc\src\scope.h
+	"Tree.h"
+
+1462506175 c:\dev\cmoc\src\cmoc\src\tree.h
+	"util.h"
+	"CodeStatus.h"
+	"ASMText.h"
+
+1437853408 c:\dev\cmoc\src\cmoc\src\codestatus.h
+	"util.h"
+
+1466273660 c:\dev\cmoc\src\cmoc\src\functiondef.h
+	"FormalParamList.h"
+
+1437853408 c:\dev\cmoc\src\cmoc\src\formalparamlist.h
+	"TreeSequence.h"
+
+1462506176 c:\dev\cmoc\src\cmoc\src\treesequence.h
+	"Tree.h"
+
+1464322982 source:c:\dev\cmoc\src\cmoc\src\assemblerstmt.cpp
+	"AssemblerStmt.h"
+	"TranslationUnit.h"
+	"SemanticsChecker.h"
+	"ASMText.h"
+
+1462506174 c:\dev\cmoc\src\cmoc\src\assemblerstmt.h
+	"Declaration.h"
+
+1470422340 c:\dev\cmoc\src\cmoc\src\declaration.h
+	"Tree.h"
+
+1467227588 c:\dev\cmoc\src\cmoc\src\semanticschecker.h
+	"FunctionDef.h"
+
+1467178903 source:c:\dev\cmoc\src\cmoc\src\binaryopexpr.cpp
+	"BinaryOpExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"IdentifierExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"ClassDef.h"
+	"ObjectMemberExpr.h"
+	<assert.h>
+
+1462506174 c:\dev\cmoc\src\cmoc\src\binaryopexpr.h
+	"Tree.h"
+
+1462506176 c:\dev\cmoc\src\cmoc\src\variableexpr.h
+	"Tree.h"
+
+1462506176 c:\dev\cmoc\src\cmoc\src\wordconstantexpr.h
+	"Tree.h"
+
+1462506175 c:\dev\cmoc\src\cmoc\src\identifierexpr.h
+	"Tree.h"
+
+1462506176 c:\dev\cmoc\src\cmoc\src\unaryopexpr.h
+	"Tree.h"
+
+1462506174 c:\dev\cmoc\src\cmoc\src\castexpr.h
+	"Tree.h"
+
+1447614019 c:\dev\cmoc\src\cmoc\src\classdef.h
+	"Tree.h"
+	"Declarator.h"
+	"util.h"
+
+1470421010 c:\dev\cmoc\src\cmoc\src\declarator.h
+	<string>
+	"util.h"
+
+1462506175 c:\dev\cmoc\src\cmoc\src\objectmemberexpr.h
+	"ClassDef.h"
+
+1462506174 source:c:\dev\cmoc\src\cmoc\src\castexpr.cpp
+	"CastExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"IdentifierExpr.h"
+	<assert.h>
+
+1447614026 source:c:\dev\cmoc\src\cmoc\src\classdef.cpp
+	"ClassDef.h"
+	"FunctionDef.h"
+	"TranslationUnit.h"
+
+1437853408 source:c:\dev\cmoc\src\cmoc\src\codestatus.cpp
+	"CodeStatus.h"
+
+1466483332 source:c:\dev\cmoc\src\cmoc\src\conditionalexpr.cpp
+	"ConditionalExpr.h"
+	"TranslationUnit.h"
+
+1466483332 c:\dev\cmoc\src\cmoc\src\conditionalexpr.h
+	"Tree.h"
+
+1470422487 source:c:\dev\cmoc\src\cmoc\src\declaration.cpp
+	"Declaration.h"
+	"TranslationUnit.h"
+	"WordConstantExpr.h"
+	"StringLiteralExpr.h"
+	"ClassDef.h"
+	"TreeSequence.h"
+	"ExpressionTypeSetter.h"
+	"VariableExpr.h"
+	"ScopeCreator.h"
+	"SemanticsChecker.h"
+	"FuncAddrFixer.h"
+	<assert.h>
+
+1462506175 c:\dev\cmoc\src\cmoc\src\stringliteralexpr.h
+	"Tree.h"
+
+1466230658 c:\dev\cmoc\src\cmoc\src\expressiontypesetter.h
+	"Tree.h"
+
+1437853408 c:\dev\cmoc\src\cmoc\src\scopecreator.h
+	"Tree.h"
+
+1460316233 c:\dev\cmoc\src\cmoc\src\funcaddrfixer.h
+	"FuncAddrExpr.h"
+
+1462506174 c:\dev\cmoc\src\cmoc\src\funcaddrexpr.h
+	"Tree.h"
+
+1470421048 source:c:\dev\cmoc\src\cmoc\src\declarationsequence.cpp
+	"DeclarationSequence.h"
+	"TranslationUnit.h"
+
+1466285803 c:\dev\cmoc\src\cmoc\src\declarationsequence.h
+	"TreeSequence.h"
+	"Declarator.h"
+	"Declaration.h"
+	"FunctionDef.h"
+	"DeclarationSpecifierList.h"
+
+1467225653 c:\dev\cmoc\src\cmoc\src\declarationspecifierlist.h
+	"util.h"
+
+1467225653 source:c:\dev\cmoc\src\cmoc\src\declarationspecifierlist.cpp
+	"DeclarationSpecifierList.h"
+	"TranslationUnit.h"
+
+1470421199 source:c:\dev\cmoc\src\cmoc\src\declarator.cpp
+	"Declarator.h"
+	"Declaration.h"
+	"TreeSequence.h"
+	"StringLiteralExpr.h"
+	"ExpressionTypeSetter.h"
+	"TranslationUnit.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"DeclarationSpecifierList.h"
+
+1466220051 c:\dev\cmoc\src\cmoc\src\formalparameter.h
+	"Tree.h"
+
+1467178903 source:c:\dev\cmoc\src\cmoc\src\expressiontypesetter.cpp
+	"ExpressionTypeSetter.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"ObjectMemberExpr.h"
+	"FunctionCallExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"FuncAddrExpr.h"
+
+1462506174 c:\dev\cmoc\src\cmoc\src\functioncallexpr.h
+	"Tree.h"
+
+1466220051 source:c:\dev\cmoc\src\cmoc\src\formalparameter.cpp
+	"FormalParameter.h"
+	"Declarator.h"
+
+1462506174 source:c:\dev\cmoc\src\cmoc\src\forstmt.cpp
+	"ForStmt.h"
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"UnaryOpExpr.h"
+	"BinaryOpExpr.h"
+
+1462506174 c:\dev\cmoc\src\cmoc\src\forstmt.h
+	"Tree.h"
+
+1462506174 source:c:\dev\cmoc\src\cmoc\src\funcaddrexpr.cpp
+	"FuncAddrExpr.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+
+1466230658 source:c:\dev\cmoc\src\cmoc\src\functioncallexpr.cpp
+	"FunctionCallExpr.h"
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"IdentifierExpr.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"FuncAddrExpr.h"
+	"StringLiteralExpr.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+	"Declaration.h"
+	"ObjectMemberExpr.h"
+	"FormalParameter.h"
+	"UnaryOpExpr.h"
+
+1470421247 source:c:\dev\cmoc\src\cmoc\src\functiondef.cpp
+	"FunctionDef.h"
+	"Scope.h"
+	"DeclarationSequence.h"
+	"CompoundStmt.h"
+	"TranslationUnit.h"
+	"StringLiteralExpr.h"
+	"FormalParameter.h"
+	"ForStmt.h"
+	"WhileStmt.h"
+	"VariableExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"FunctionCallExpr.h"
+	"FuncAddrExpr.h"
+	"ObjectMemberExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"JumpStmt.h"
+	"ExpressionTypeSetter.h"
+	"ScopeCreator.h"
+	"AssemblerStmt.h"
+	"SemanticsChecker.h"
+	"FuncAddrFixer.h"
+	"LabeledStmt.h"
+	<assert.h>
+
+1437853408 c:\dev\cmoc\src\cmoc\src\compoundstmt.h
+	"TreeSequence.h"
+	"Declarator.h"
+	"Declaration.h"
+
+1462506176 c:\dev\cmoc\src\cmoc\src\whilestmt.h
+	"Tree.h"
+
+1466270135 c:\dev\cmoc\src\cmoc\src\jumpstmt.h
+	"Tree.h"
+
+1466273660 c:\dev\cmoc\src\cmoc\src\labeledstmt.h
+	"Declaration.h"
+
+1462506174 source:c:\dev\cmoc\src\cmoc\src\identifierexpr.cpp
+	"IdentifierExpr.h"
+	"VariableExpr.h"
+
+1462506175 source:c:\dev\cmoc\src\cmoc\src\ifstmt.cpp
+	"IfStmt.h"
+	"TranslationUnit.h"
+	"BinaryOpExpr.h"
+
+1462506175 c:\dev\cmoc\src\cmoc\src\ifstmt.h
+	"Tree.h"
+
+1467312005 source:c:\dev\cmoc\src\cmoc\src\jumpstmt.cpp
+	"JumpStmt.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+	"WordConstantExpr.h"
+	<assert.h>
+
+1466273660 source:c:\dev\cmoc\src\cmoc\src\labeledstmt.cpp
+	"LabeledStmt.h"
+	"TranslationUnit.h"
+
+1467401998 source:c:\dev\cmoc\src\cmoc\src\lexer.cc
+	<stdio.h>
+	<string.h>
+	<errno.h>
+	<stdlib.h>
+	<inttypes.h>
+	<string.h>
+	<string>
+	"DeclarationSequence.h"
+	"CompoundStmt.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"ClassDef.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"DeclarationSpecifierList.h"
+	"parser.hh"
+	<unistd.h>
+
+1467223081 c:\dev\cmoc\src\cmoc\src\parser.hh
+
+1470147317 source:c:\dev\cmoc\src\cmoc\src\main.cpp
+	"TranslationUnit.h"
+	<string>
+	<iostream>
+	<fstream>
+	<list>
+	<stdlib.h>
+	<stdio.h>
+	<errno.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<unistd.h>
+	<string.h>
+
+1465354076 source:c:\dev\cmoc\src\cmoc\src\objectmemberexpr.cpp
+	"ObjectMemberExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"IdentifierExpr.h"
+	"ClassDef.h"
+	<assert.h>
+
+1458409119 source:c:\dev\cmoc\src\cmoc\src\pragma.cpp
+	"Pragma.h"
+	<stdlib.h>
+	<stdlib.h>
+	<errno.h>
+
+1458409119 c:\dev\cmoc\src\cmoc\src\pragma.h
+	"Tree.h"
+
+1458867609 source:c:\dev\cmoc\src\cmoc\src\scope.cpp
+	"Scope.h"
+	"TreeSequence.h"
+	"Declaration.h"
+	"TranslationUnit.h"
+	"ClassDef.h"
+	<assert.h>
+	<algorithm>
+
+1462506175 source:c:\dev\cmoc\src\cmoc\src\stringliteralexpr.cpp
+	"StringLiteralExpr.h"
+	"TranslationUnit.h"
+
+1466273660 source:c:\dev\cmoc\src\cmoc\src\switchstmt.cpp
+	"SwitchStmt.h"
+	"TranslationUnit.h"
+	"BinaryOpExpr.h"
+	"CompoundStmt.h"
+	"LabeledStmt.h"
+
+1466270135 c:\dev\cmoc\src\cmoc\src\switchstmt.h
+	"Tree.h"
+	"TreeSequence.h"
+
+1470443171 source:c:\dev\cmoc\src\cmoc\src\translationunit.cpp
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"DeclarationSequence.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+	"FunctionCallExpr.h"
+	"Scope.h"
+	"StringLiteralExpr.h"
+	"ClassDef.h"
+	"Pragma.h"
+	<assert.h>
+	<errno.h>
+	<fstream>
+
+1462506175 source:c:\dev\cmoc\src\cmoc\src\tree.cpp
+	"Tree.h"
+	"TranslationUnit.h"
+	"ClassDef.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"TypeManager.h"
+
+1462506176 source:c:\dev\cmoc\src\cmoc\src\treesequence.cpp
+	"TreeSequence.h"
+	"TranslationUnit.h"
+	"CastExpr.h"
+
+1466471173 source:c:\dev\cmoc\src\cmoc\src\typedesc.cpp
+	"TypeDesc.h"
+	"util.h"
+
+1466471173 source:c:\dev\cmoc\src\cmoc\src\typemanager.cpp
+	"TypeManager.h"
+	"util.h"
+	"Declarator.h"
+
+1462506176 source:c:\dev\cmoc\src\cmoc\src\unaryopexpr.cpp
+	"UnaryOpExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"ObjectMemberExpr.h"
+	"BinaryOpExpr.h"
+	"FuncAddrExpr.h"
+	"IdentifierExpr.h"
+	"CastExpr.h"
+	"Declaration.h"
+	<assert.h>
+
+1457853618 source:c:\dev\cmoc\src\cmoc\src\util.cpp
+	"util.h"
+	"ClassDef.h"
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"FormalParameter.h"
+	"WordConstantExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"DeclarationSpecifierList.h"
+	<string.h>
+
+1465354076 source:c:\dev\cmoc\src\cmoc\src\variableexpr.cpp
+	"VariableExpr.h"
+	"TranslationUnit.h"
+	"Declaration.h"
+	"Scope.h"
+	"FunctionDef.h"
+	"FuncAddrExpr.h"
+
+1462506176 source:c:\dev\cmoc\src\cmoc\src\whilestmt.cpp
+	"WhileStmt.h"
+	"TranslationUnit.h"
+	"BinaryOpExpr.h"
+
+1462506176 source:c:\dev\cmoc\src\cmoc\src\wordconstantexpr.cpp
+	"WordConstantExpr.h"
+	"TranslationUnit.h"
+
+1470420250 source:c:\dev\cmoc\src\cmoc\src\parser.cc
+	"DeclarationSequence.h"
+	"WordConstantExpr.h"
+	"IdentifierExpr.h"
+	"VariableExpr.h"
+	"FunctionCallExpr.h"
+	"StringLiteralExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"CompoundStmt.h"
+	"IfStmt.h"
+	"SwitchStmt.h"
+	"LabeledStmt.h"
+	"WhileStmt.h"
+	"ForStmt.h"
+	"JumpStmt.h"
+	"Scope.h"
+	"FunctionDef.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"AssemblerStmt.h"
+	"TranslationUnit.h"
+	"ObjectMemberExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"DeclarationSpecifierList.h"
+	"Pragma.h"
+	<string.h>
+	<time.h>
+	<stddef.h>
+	<libintl.h>
+	<alloca.h>
+	<malloc.h>
+	<stdlib.h>
+	<stdlib.h>
+	<stdio.h>
+
+1470419516 source:c:\dev\cmoc\src\cmoc\src\scopecreator.cpp
+	"ScopeCreator.h"
+	"TranslationUnit.h"
+	"CompoundStmt.h"
+	"ForStmt.h"
+	"WhileStmt.h"
+	"DeclarationSequence.h"
+	"VariableExpr.h"
+	"FunctionCallExpr.h"
+
+1465438274 source:c:\dev\cmoc\src\bin\cmoc\src\asmtext.cpp
+	"ASMText.h"
+	"Pseudo6809.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	<algorithm>
+	<iomanip>
+	<utility>
+	<stack>
+	<climits>
+	<iostream>
+	<strings.h>
+
+1464322982 c:\dev\cmoc\src\bin\cmoc\src\asmtext.h
+	"util.h"
+	<stack>
+	<utility>
+	<algorithm>
+	<map>
+
+1466471174 c:\dev\cmoc\src\bin\cmoc\src\util.h
+	"TypeManager.h"
+	<vector>
+	<list>
+	<set>
+	<map>
+	<algorithm>
+	<iostream>
+	<fstream>
+	<sstream>
+	<stdio.h>
+	<string.h>
+	<stdarg.h>
+	<memory>
+
+1466471173 c:\dev\cmoc\src\bin\cmoc\src\typemanager.h
+	"TypeDesc.h"
+	<vector>
+	<map>
+
+1466471173 c:\dev\cmoc\src\bin\cmoc\src\typedesc.h
+	<assert.h>
+	<stdint.h>
+	<iostream>
+	<string>
+	<vector>
+
+1462077570 c:\dev\cmoc\src\bin\cmoc\src\pseudo6809.h
+	"util.h"
+	<stack>
+
+1462506585 c:\dev\cmoc\src\bin\cmoc\src\translationunit.h
+	"util.h"
+	"Scope.h"
+
+1458867609 c:\dev\cmoc\src\bin\cmoc\src\scope.h
+	"Tree.h"
+
+1462506175 c:\dev\cmoc\src\bin\cmoc\src\tree.h
+	"util.h"
+	"CodeStatus.h"
+	"ASMText.h"
+
+1437853408 c:\dev\cmoc\src\bin\cmoc\src\codestatus.h
+	"util.h"
+
+1466273660 c:\dev\cmoc\src\bin\cmoc\src\functiondef.h
+	"FormalParamList.h"
+
+1437853408 c:\dev\cmoc\src\bin\cmoc\src\formalparamlist.h
+	"TreeSequence.h"
+
+1462506176 c:\dev\cmoc\src\bin\cmoc\src\treesequence.h
+	"Tree.h"
+
+1470870131 source:c:\dev\cmoc\src\bin\cmoc\src\assemblerstmt.cpp
+	"AssemblerStmt.h"
+	"TranslationUnit.h"
+	"SemanticsChecker.h"
+	"ASMText.h"
+
+1462506174 c:\dev\cmoc\src\bin\cmoc\src\assemblerstmt.h
+	"Declaration.h"
+
+1470422340 c:\dev\cmoc\src\bin\cmoc\src\declaration.h
+	"Tree.h"
+
+1467227588 c:\dev\cmoc\src\bin\cmoc\src\semanticschecker.h
+	"FunctionDef.h"
+
+1462506174 source:c:\dev\cmoc\src\bin\cmoc\src\castexpr.cpp
+	"CastExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"IdentifierExpr.h"
+	<assert.h>
+
+1462506174 c:\dev\cmoc\src\bin\cmoc\src\castexpr.h
+	"Tree.h"
+
+1462506176 c:\dev\cmoc\src\bin\cmoc\src\variableexpr.h
+	"Tree.h"
+
+1462506176 c:\dev\cmoc\src\bin\cmoc\src\wordconstantexpr.h
+	"Tree.h"
+
+1462506175 c:\dev\cmoc\src\bin\cmoc\src\identifierexpr.h
+	"Tree.h"
+
+1447614026 source:c:\dev\cmoc\src\bin\cmoc\src\classdef.cpp
+	"ClassDef.h"
+	"FunctionDef.h"
+	"TranslationUnit.h"
+
+1447614019 c:\dev\cmoc\src\bin\cmoc\src\classdef.h
+	"Tree.h"
+	"Declarator.h"
+	"util.h"
+
+1470421010 c:\dev\cmoc\src\bin\cmoc\src\declarator.h
+	<string>
+	"util.h"
+
+1437853408 source:c:\dev\cmoc\src\bin\cmoc\src\codestatus.cpp
+	"CodeStatus.h"
+
+1466483332 source:c:\dev\cmoc\src\bin\cmoc\src\conditionalexpr.cpp
+	"ConditionalExpr.h"
+	"TranslationUnit.h"
+
+1466483332 c:\dev\cmoc\src\bin\cmoc\src\conditionalexpr.h
+	"Tree.h"
+
+1470422487 source:c:\dev\cmoc\src\bin\cmoc\src\declaration.cpp
+	"Declaration.h"
+	"TranslationUnit.h"
+	"WordConstantExpr.h"
+	"StringLiteralExpr.h"
+	"ClassDef.h"
+	"TreeSequence.h"
+	"ExpressionTypeSetter.h"
+	"VariableExpr.h"
+	"ScopeCreator.h"
+	"SemanticsChecker.h"
+	"FuncAddrFixer.h"
+	<assert.h>
+
+1462506175 c:\dev\cmoc\src\bin\cmoc\src\stringliteralexpr.h
+	"Tree.h"
+
+1466230658 c:\dev\cmoc\src\bin\cmoc\src\expressiontypesetter.h
+	"Tree.h"
+
+1437853408 c:\dev\cmoc\src\bin\cmoc\src\scopecreator.h
+	"Tree.h"
+
+1460316233 c:\dev\cmoc\src\bin\cmoc\src\funcaddrfixer.h
+	"FuncAddrExpr.h"
+
+1462506174 c:\dev\cmoc\src\bin\cmoc\src\funcaddrexpr.h
+	"Tree.h"
+
+1470421048 source:c:\dev\cmoc\src\bin\cmoc\src\declarationsequence.cpp
+	"DeclarationSequence.h"
+	"TranslationUnit.h"
+
+1466285803 c:\dev\cmoc\src\bin\cmoc\src\declarationsequence.h
+	"TreeSequence.h"
+	"Declarator.h"
+	"Declaration.h"
+	"FunctionDef.h"
+	"DeclarationSpecifierList.h"
+
+1467225653 c:\dev\cmoc\src\bin\cmoc\src\declarationspecifierlist.h
+	"util.h"
+
+1467225653 source:c:\dev\cmoc\src\bin\cmoc\src\declarationspecifierlist.cpp
+	"DeclarationSpecifierList.h"
+	"TranslationUnit.h"
+
+1470421199 source:c:\dev\cmoc\src\bin\cmoc\src\declarator.cpp
+	"Declarator.h"
+	"Declaration.h"
+	"TreeSequence.h"
+	"StringLiteralExpr.h"
+	"ExpressionTypeSetter.h"
+	"TranslationUnit.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"DeclarationSpecifierList.h"
+
+1466220051 c:\dev\cmoc\src\bin\cmoc\src\formalparameter.h
+	"Tree.h"
+
+1467178903 source:c:\dev\cmoc\src\bin\cmoc\src\expressiontypesetter.cpp
+	"ExpressionTypeSetter.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"ObjectMemberExpr.h"
+	"FunctionCallExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"FuncAddrExpr.h"
+
+1462506174 c:\dev\cmoc\src\bin\cmoc\src\binaryopexpr.h
+	"Tree.h"
+
+1462506176 c:\dev\cmoc\src\bin\cmoc\src\unaryopexpr.h
+	"Tree.h"
+
+1462506175 c:\dev\cmoc\src\bin\cmoc\src\objectmemberexpr.h
+	"ClassDef.h"
+
+1462506174 c:\dev\cmoc\src\bin\cmoc\src\functioncallexpr.h
+	"Tree.h"
+
+1466220051 source:c:\dev\cmoc\src\bin\cmoc\src\formalparameter.cpp
+	"FormalParameter.h"
+	"Declarator.h"
+
+1462506174 source:c:\dev\cmoc\src\bin\cmoc\src\forstmt.cpp
+	"ForStmt.h"
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"UnaryOpExpr.h"
+	"BinaryOpExpr.h"
+
+1462506174 c:\dev\cmoc\src\bin\cmoc\src\forstmt.h
+	"Tree.h"
+
+1462506174 source:c:\dev\cmoc\src\bin\cmoc\src\funcaddrexpr.cpp
+	"FuncAddrExpr.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+
+1466230658 source:c:\dev\cmoc\src\bin\cmoc\src\functioncallexpr.cpp
+	"FunctionCallExpr.h"
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"IdentifierExpr.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"FuncAddrExpr.h"
+	"StringLiteralExpr.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+	"Declaration.h"
+	"ObjectMemberExpr.h"
+	"FormalParameter.h"
+	"UnaryOpExpr.h"
+
+1470421247 source:c:\dev\cmoc\src\bin\cmoc\src\functiondef.cpp
+	"FunctionDef.h"
+	"Scope.h"
+	"DeclarationSequence.h"
+	"CompoundStmt.h"
+	"TranslationUnit.h"
+	"StringLiteralExpr.h"
+	"FormalParameter.h"
+	"ForStmt.h"
+	"WhileStmt.h"
+	"VariableExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"FunctionCallExpr.h"
+	"FuncAddrExpr.h"
+	"ObjectMemberExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"JumpStmt.h"
+	"ExpressionTypeSetter.h"
+	"ScopeCreator.h"
+	"AssemblerStmt.h"
+	"SemanticsChecker.h"
+	"FuncAddrFixer.h"
+	"LabeledStmt.h"
+	<assert.h>
+
+1437853408 c:\dev\cmoc\src\bin\cmoc\src\compoundstmt.h
+	"TreeSequence.h"
+	"Declarator.h"
+	"Declaration.h"
+
+1462506176 c:\dev\cmoc\src\bin\cmoc\src\whilestmt.h
+	"Tree.h"
+
+1466270135 c:\dev\cmoc\src\bin\cmoc\src\jumpstmt.h
+	"Tree.h"
+
+1466273660 c:\dev\cmoc\src\bin\cmoc\src\labeledstmt.h
+	"Declaration.h"
+
+1462506174 source:c:\dev\cmoc\src\bin\cmoc\src\identifierexpr.cpp
+	"IdentifierExpr.h"
+	"VariableExpr.h"
+
+1462506175 source:c:\dev\cmoc\src\bin\cmoc\src\ifstmt.cpp
+	"IfStmt.h"
+	"TranslationUnit.h"
+	"BinaryOpExpr.h"
+
+1462506175 c:\dev\cmoc\src\bin\cmoc\src\ifstmt.h
+	"Tree.h"
+
+1467312005 source:c:\dev\cmoc\src\bin\cmoc\src\jumpstmt.cpp
+	"JumpStmt.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+	"WordConstantExpr.h"
+	<assert.h>
+
+1466273660 source:c:\dev\cmoc\src\bin\cmoc\src\labeledstmt.cpp
+	"LabeledStmt.h"
+	"TranslationUnit.h"
+
+1467401998 source:c:\dev\cmoc\src\bin\cmoc\src\lexer.cc
+	<stdio.h>
+	<string.h>
+	<errno.h>
+	<stdlib.h>
+	<inttypes.h>
+	<string.h>
+	<string>
+	"DeclarationSequence.h"
+	"CompoundStmt.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"ClassDef.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"DeclarationSpecifierList.h"
+	"parser.hh"
+	<unistd.h>
+
+1467223081 c:\dev\cmoc\src\bin\cmoc\src\parser.hh
+
+1470147317 source:c:\dev\cmoc\src\bin\cmoc\src\main.cpp
+	"TranslationUnit.h"
+	<string>
+	<iostream>
+	<fstream>
+	<list>
+	<stdlib.h>
+	<stdio.h>
+	<errno.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<unistd.h>
+	<string.h>
+
+1465354076 source:c:\dev\cmoc\src\bin\cmoc\src\objectmemberexpr.cpp
+	"ObjectMemberExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"IdentifierExpr.h"
+	"ClassDef.h"
+	<assert.h>
+
+1470420250 source:c:\dev\cmoc\src\bin\cmoc\src\parser.cc
+	"DeclarationSequence.h"
+	"WordConstantExpr.h"
+	"IdentifierExpr.h"
+	"VariableExpr.h"
+	"FunctionCallExpr.h"
+	"StringLiteralExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"CompoundStmt.h"
+	"IfStmt.h"
+	"SwitchStmt.h"
+	"LabeledStmt.h"
+	"WhileStmt.h"
+	"ForStmt.h"
+	"JumpStmt.h"
+	"Scope.h"
+	"FunctionDef.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"AssemblerStmt.h"
+	"TranslationUnit.h"
+	"ObjectMemberExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"DeclarationSpecifierList.h"
+	"Pragma.h"
+	<string.h>
+	<time.h>
+	<stddef.h>
+	<libintl.h>
+	<alloca.h>
+	<malloc.h>
+	<stdlib.h>
+	<stdlib.h>
+	<stdio.h>
+
+1466270135 c:\dev\cmoc\src\bin\cmoc\src\switchstmt.h
+	"Tree.h"
+	"TreeSequence.h"
+
+1458409119 c:\dev\cmoc\src\bin\cmoc\src\pragma.h
+	"Tree.h"
+
+1458409119 source:c:\dev\cmoc\src\bin\cmoc\src\pragma.cpp
+	"Pragma.h"
+	<stdlib.h>
+	<stdlib.h>
+	<errno.h>
+
+1458867609 source:c:\dev\cmoc\src\bin\cmoc\src\scope.cpp
+	"Scope.h"
+	"TreeSequence.h"
+	"Declaration.h"
+	"TranslationUnit.h"
+	"ClassDef.h"
+	<assert.h>
+	<algorithm>
+
+1470419516 source:c:\dev\cmoc\src\bin\cmoc\src\scopecreator.cpp
+	"ScopeCreator.h"
+	"TranslationUnit.h"
+	"CompoundStmt.h"
+	"ForStmt.h"
+	"WhileStmt.h"
+	"DeclarationSequence.h"
+	"VariableExpr.h"
+	"FunctionCallExpr.h"
+
+1462506175 source:c:\dev\cmoc\src\bin\cmoc\src\stringliteralexpr.cpp
+	"StringLiteralExpr.h"
+	"TranslationUnit.h"
+
+1466273660 source:c:\dev\cmoc\src\bin\cmoc\src\switchstmt.cpp
+	"SwitchStmt.h"
+	"TranslationUnit.h"
+	"BinaryOpExpr.h"
+	"CompoundStmt.h"
+	"LabeledStmt.h"
+
+1470443171 source:c:\dev\cmoc\src\bin\cmoc\src\translationunit.cpp
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"DeclarationSequence.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+	"FunctionCallExpr.h"
+	"Scope.h"
+	"StringLiteralExpr.h"
+	"ClassDef.h"
+	"Pragma.h"
+	<assert.h>
+	<errno.h>
+	<fstream>
+
+1462506175 source:c:\dev\cmoc\src\bin\cmoc\src\tree.cpp
+	"Tree.h"
+	"TranslationUnit.h"
+	"ClassDef.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"TypeManager.h"
+
+1462506176 source:c:\dev\cmoc\src\bin\cmoc\src\treesequence.cpp
+	"TreeSequence.h"
+	"TranslationUnit.h"
+	"CastExpr.h"
+
+1466471173 source:c:\dev\cmoc\src\bin\cmoc\src\typedesc.cpp
+	"TypeDesc.h"
+	"util.h"
+
+1466471173 source:c:\dev\cmoc\src\bin\cmoc\src\typemanager.cpp
+	"TypeManager.h"
+	"util.h"
+	"Declarator.h"
+
+1462506176 source:c:\dev\cmoc\src\bin\cmoc\src\unaryopexpr.cpp
+	"UnaryOpExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"ObjectMemberExpr.h"
+	"BinaryOpExpr.h"
+	"FuncAddrExpr.h"
+	"IdentifierExpr.h"
+	"CastExpr.h"
+	"Declaration.h"
+	<assert.h>
+
+1457853618 source:c:\dev\cmoc\src\bin\cmoc\src\util.cpp
+	"util.h"
+	"ClassDef.h"
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"FormalParameter.h"
+	"WordConstantExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"DeclarationSpecifierList.h"
+	<string.h>
+
+1465354076 source:c:\dev\cmoc\src\bin\cmoc\src\variableexpr.cpp
+	"VariableExpr.h"
+	"TranslationUnit.h"
+	"Declaration.h"
+	"Scope.h"
+	"FunctionDef.h"
+	"FuncAddrExpr.h"
+
+1462506176 source:c:\dev\cmoc\src\bin\cmoc\src\whilestmt.cpp
+	"WhileStmt.h"
+	"TranslationUnit.h"
+	"BinaryOpExpr.h"
+
+1462506176 source:c:\dev\cmoc\src\bin\cmoc\src\wordconstantexpr.cpp
+	"WordConstantExpr.h"
+	"TranslationUnit.h"
+
+1465438274 source:c:\dev\cmoc-win32\src\bin\cmoc\src\asmtext.cpp
+	"ASMText.h"
+	"Pseudo6809.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	<algorithm>
+	<iomanip>
+	<utility>
+	<stack>
+	<climits>
+	<iostream>
+	<strings.h>
+
+1464322982 c:\dev\cmoc-win32\src\bin\cmoc\src\asmtext.h
+	"util.h"
+	<stack>
+	<utility>
+	<algorithm>
+	<map>
+
+1466471174 c:\dev\cmoc-win32\src\bin\cmoc\src\util.h
+	"TypeManager.h"
+	<vector>
+	<list>
+	<set>
+	<map>
+	<algorithm>
+	<iostream>
+	<fstream>
+	<sstream>
+	<stdio.h>
+	<string.h>
+	<stdarg.h>
+	<memory>
+
+1466471173 c:\dev\cmoc-win32\src\bin\cmoc\src\typemanager.h
+	"TypeDesc.h"
+	<vector>
+	<map>
+
+1466471173 c:\dev\cmoc-win32\src\bin\cmoc\src\typedesc.h
+	<assert.h>
+	<stdint.h>
+	<iostream>
+	<string>
+	<vector>
+
+1462077570 c:\dev\cmoc-win32\src\bin\cmoc\src\pseudo6809.h
+	"util.h"
+	<stack>
+
+1462506585 c:\dev\cmoc-win32\src\bin\cmoc\src\translationunit.h
+	"util.h"
+	"Scope.h"
+
+1458867609 c:\dev\cmoc-win32\src\bin\cmoc\src\scope.h
+	"Tree.h"
+
+1462506175 c:\dev\cmoc-win32\src\bin\cmoc\src\tree.h
+	"util.h"
+	"CodeStatus.h"
+	"ASMText.h"
+
+1437853408 c:\dev\cmoc-win32\src\bin\cmoc\src\codestatus.h
+	"util.h"
+
+1466273660 c:\dev\cmoc-win32\src\bin\cmoc\src\functiondef.h
+	"FormalParamList.h"
+
+1437853408 c:\dev\cmoc-win32\src\bin\cmoc\src\formalparamlist.h
+	"TreeSequence.h"
+
+1462506176 c:\dev\cmoc-win32\src\bin\cmoc\src\treesequence.h
+	"Tree.h"
+
+1470870131 source:c:\dev\cmoc-win32\src\bin\cmoc\src\assemblerstmt.cpp
+	"AssemblerStmt.h"
+	"TranslationUnit.h"
+	"SemanticsChecker.h"
+	"ASMText.h"
+
+1462506174 c:\dev\cmoc-win32\src\bin\cmoc\src\assemblerstmt.h
+	"Declaration.h"
+
+1470422340 c:\dev\cmoc-win32\src\bin\cmoc\src\declaration.h
+	"Tree.h"
+
+1467227588 c:\dev\cmoc-win32\src\bin\cmoc\src\semanticschecker.h
+	"FunctionDef.h"
+
+1471076916 source:c:\dev\cmoc-win32\src\bin\cmoc\src\binaryopexpr.cpp
+	"BinaryOpExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"IdentifierExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"ClassDef.h"
+	"ObjectMemberExpr.h"
+	<assert.h>
+
+1462506174 c:\dev\cmoc-win32\src\bin\cmoc\src\binaryopexpr.h
+	"Tree.h"
+
+1462506176 c:\dev\cmoc-win32\src\bin\cmoc\src\variableexpr.h
+	"Tree.h"
+
+1462506176 c:\dev\cmoc-win32\src\bin\cmoc\src\wordconstantexpr.h
+	"Tree.h"
+
+1462506175 c:\dev\cmoc-win32\src\bin\cmoc\src\identifierexpr.h
+	"Tree.h"
+
+1462506176 c:\dev\cmoc-win32\src\bin\cmoc\src\unaryopexpr.h
+	"Tree.h"
+
+1462506174 c:\dev\cmoc-win32\src\bin\cmoc\src\castexpr.h
+	"Tree.h"
+
+1447614019 c:\dev\cmoc-win32\src\bin\cmoc\src\classdef.h
+	"Tree.h"
+	"Declarator.h"
+	"util.h"
+
+1470421010 c:\dev\cmoc-win32\src\bin\cmoc\src\declarator.h
+	<string>
+	"util.h"
+
+1462506175 c:\dev\cmoc-win32\src\bin\cmoc\src\objectmemberexpr.h
+	"ClassDef.h"
+
+1462506174 source:c:\dev\cmoc-win32\src\bin\cmoc\src\castexpr.cpp
+	"CastExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"IdentifierExpr.h"
+	<assert.h>
+
+1447614026 source:c:\dev\cmoc-win32\src\bin\cmoc\src\classdef.cpp
+	"ClassDef.h"
+	"FunctionDef.h"
+	"TranslationUnit.h"
+
+1437853408 source:c:\dev\cmoc-win32\src\bin\cmoc\src\codestatus.cpp
+	"CodeStatus.h"
+
+1466483332 source:c:\dev\cmoc-win32\src\bin\cmoc\src\conditionalexpr.cpp
+	"ConditionalExpr.h"
+	"TranslationUnit.h"
+
+1466483332 c:\dev\cmoc-win32\src\bin\cmoc\src\conditionalexpr.h
+	"Tree.h"
+
+1470422487 source:c:\dev\cmoc-win32\src\bin\cmoc\src\declaration.cpp
+	"Declaration.h"
+	"TranslationUnit.h"
+	"WordConstantExpr.h"
+	"StringLiteralExpr.h"
+	"ClassDef.h"
+	"TreeSequence.h"
+	"ExpressionTypeSetter.h"
+	"VariableExpr.h"
+	"ScopeCreator.h"
+	"SemanticsChecker.h"
+	"FuncAddrFixer.h"
+	<assert.h>
+
+1462506175 c:\dev\cmoc-win32\src\bin\cmoc\src\stringliteralexpr.h
+	"Tree.h"
+
+1466230658 c:\dev\cmoc-win32\src\bin\cmoc\src\expressiontypesetter.h
+	"Tree.h"
+
+1437853408 c:\dev\cmoc-win32\src\bin\cmoc\src\scopecreator.h
+	"Tree.h"
+
+1460316233 c:\dev\cmoc-win32\src\bin\cmoc\src\funcaddrfixer.h
+	"FuncAddrExpr.h"
+
+1462506174 c:\dev\cmoc-win32\src\bin\cmoc\src\funcaddrexpr.h
+	"Tree.h"
+
+1470421048 source:c:\dev\cmoc-win32\src\bin\cmoc\src\declarationsequence.cpp
+	"DeclarationSequence.h"
+	"TranslationUnit.h"
+
+1466285803 c:\dev\cmoc-win32\src\bin\cmoc\src\declarationsequence.h
+	"TreeSequence.h"
+	"Declarator.h"
+	"Declaration.h"
+	"FunctionDef.h"
+	"DeclarationSpecifierList.h"
+
+1467225653 c:\dev\cmoc-win32\src\bin\cmoc\src\declarationspecifierlist.h
+	"util.h"
+
+1467225653 source:c:\dev\cmoc-win32\src\bin\cmoc\src\declarationspecifierlist.cpp
+	"DeclarationSpecifierList.h"
+	"TranslationUnit.h"
+
+1470421199 source:c:\dev\cmoc-win32\src\bin\cmoc\src\declarator.cpp
+	"Declarator.h"
+	"Declaration.h"
+	"TreeSequence.h"
+	"StringLiteralExpr.h"
+	"ExpressionTypeSetter.h"
+	"TranslationUnit.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"DeclarationSpecifierList.h"
+
+1466220051 c:\dev\cmoc-win32\src\bin\cmoc\src\formalparameter.h
+	"Tree.h"
+
+1467178903 source:c:\dev\cmoc-win32\src\bin\cmoc\src\expressiontypesetter.cpp
+	"ExpressionTypeSetter.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"ObjectMemberExpr.h"
+	"FunctionCallExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"FuncAddrExpr.h"
+
+1462506174 c:\dev\cmoc-win32\src\bin\cmoc\src\functioncallexpr.h
+	"Tree.h"
+
+1466220051 source:c:\dev\cmoc-win32\src\bin\cmoc\src\formalparameter.cpp
+	"FormalParameter.h"
+	"Declarator.h"
+
+1462506174 source:c:\dev\cmoc-win32\src\bin\cmoc\src\forstmt.cpp
+	"ForStmt.h"
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"UnaryOpExpr.h"
+	"BinaryOpExpr.h"
+
+1462506174 c:\dev\cmoc-win32\src\bin\cmoc\src\forstmt.h
+	"Tree.h"
+
+1462506174 source:c:\dev\cmoc-win32\src\bin\cmoc\src\funcaddrexpr.cpp
+	"FuncAddrExpr.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+
+1466230658 source:c:\dev\cmoc-win32\src\bin\cmoc\src\functioncallexpr.cpp
+	"FunctionCallExpr.h"
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"IdentifierExpr.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"FuncAddrExpr.h"
+	"StringLiteralExpr.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+	"Declaration.h"
+	"ObjectMemberExpr.h"
+	"FormalParameter.h"
+	"UnaryOpExpr.h"
+
+1470421247 source:c:\dev\cmoc-win32\src\bin\cmoc\src\functiondef.cpp
+	"FunctionDef.h"
+	"Scope.h"
+	"DeclarationSequence.h"
+	"CompoundStmt.h"
+	"TranslationUnit.h"
+	"StringLiteralExpr.h"
+	"FormalParameter.h"
+	"ForStmt.h"
+	"WhileStmt.h"
+	"VariableExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"FunctionCallExpr.h"
+	"FuncAddrExpr.h"
+	"ObjectMemberExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"JumpStmt.h"
+	"ExpressionTypeSetter.h"
+	"ScopeCreator.h"
+	"AssemblerStmt.h"
+	"SemanticsChecker.h"
+	"FuncAddrFixer.h"
+	"LabeledStmt.h"
+	<assert.h>
+
+1437853408 c:\dev\cmoc-win32\src\bin\cmoc\src\compoundstmt.h
+	"TreeSequence.h"
+	"Declarator.h"
+	"Declaration.h"
+
+1462506176 c:\dev\cmoc-win32\src\bin\cmoc\src\whilestmt.h
+	"Tree.h"
+
+1466270135 c:\dev\cmoc-win32\src\bin\cmoc\src\jumpstmt.h
+	"Tree.h"
+
+1466273660 c:\dev\cmoc-win32\src\bin\cmoc\src\labeledstmt.h
+	"Declaration.h"
+
+1462506174 source:c:\dev\cmoc-win32\src\bin\cmoc\src\identifierexpr.cpp
+	"IdentifierExpr.h"
+	"VariableExpr.h"
+
+1462506175 source:c:\dev\cmoc-win32\src\bin\cmoc\src\ifstmt.cpp
+	"IfStmt.h"
+	"TranslationUnit.h"
+	"BinaryOpExpr.h"
+
+1462506175 c:\dev\cmoc-win32\src\bin\cmoc\src\ifstmt.h
+	"Tree.h"
+
+1467312005 source:c:\dev\cmoc-win32\src\bin\cmoc\src\jumpstmt.cpp
+	"JumpStmt.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+	"WordConstantExpr.h"
+	<assert.h>
+
+1466273660 source:c:\dev\cmoc-win32\src\bin\cmoc\src\labeledstmt.cpp
+	"LabeledStmt.h"
+	"TranslationUnit.h"
+
+1467401998 source:c:\dev\cmoc-win32\src\bin\cmoc\src\lexer.cc
+	<stdio.h>
+	<string.h>
+	<errno.h>
+	<stdlib.h>
+	<inttypes.h>
+	<string.h>
+	<string>
+	"DeclarationSequence.h"
+	"CompoundStmt.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"ClassDef.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"DeclarationSpecifierList.h"
+	"parser.hh"
+	<unistd.h>
+
+1467223081 c:\dev\cmoc-win32\src\bin\cmoc\src\parser.hh
+
+1470147317 source:c:\dev\cmoc-win32\src\bin\cmoc\src\main.cpp
+	"TranslationUnit.h"
+	<string>
+	<iostream>
+	<fstream>
+	<list>
+	<stdlib.h>
+	<stdio.h>
+	<errno.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<unistd.h>
+	<string.h>
+
+1465354076 source:c:\dev\cmoc-win32\src\bin\cmoc\src\objectmemberexpr.cpp
+	"ObjectMemberExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"IdentifierExpr.h"
+	"ClassDef.h"
+	<assert.h>
+
+1470420250 source:c:\dev\cmoc-win32\src\bin\cmoc\src\parser.cc
+	"DeclarationSequence.h"
+	"WordConstantExpr.h"
+	"IdentifierExpr.h"
+	"VariableExpr.h"
+	"FunctionCallExpr.h"
+	"StringLiteralExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"CompoundStmt.h"
+	"IfStmt.h"
+	"SwitchStmt.h"
+	"LabeledStmt.h"
+	"WhileStmt.h"
+	"ForStmt.h"
+	"JumpStmt.h"
+	"Scope.h"
+	"FunctionDef.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"AssemblerStmt.h"
+	"TranslationUnit.h"
+	"ObjectMemberExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"DeclarationSpecifierList.h"
+	"Pragma.h"
+	<string.h>
+	<time.h>
+	<stddef.h>
+	<libintl.h>
+	<alloca.h>
+	<malloc.h>
+	<stdlib.h>
+	<stdlib.h>
+	<stdio.h>
+
+1466270135 c:\dev\cmoc-win32\src\bin\cmoc\src\switchstmt.h
+	"Tree.h"
+	"TreeSequence.h"
+
+1458409119 c:\dev\cmoc-win32\src\bin\cmoc\src\pragma.h
+	"Tree.h"
+
+1458409119 source:c:\dev\cmoc-win32\src\bin\cmoc\src\pragma.cpp
+	"Pragma.h"
+	<stdlib.h>
+	<stdlib.h>
+	<errno.h>
+
+1458867609 source:c:\dev\cmoc-win32\src\bin\cmoc\src\scope.cpp
+	"Scope.h"
+	"TreeSequence.h"
+	"Declaration.h"
+	"TranslationUnit.h"
+	"ClassDef.h"
+	<assert.h>
+	<algorithm>
+
+1470419516 source:c:\dev\cmoc-win32\src\bin\cmoc\src\scopecreator.cpp
+	"ScopeCreator.h"
+	"TranslationUnit.h"
+	"CompoundStmt.h"
+	"ForStmt.h"
+	"WhileStmt.h"
+	"DeclarationSequence.h"
+	"VariableExpr.h"
+	"FunctionCallExpr.h"
+
+1462506175 source:c:\dev\cmoc-win32\src\bin\cmoc\src\stringliteralexpr.cpp
+	"StringLiteralExpr.h"
+	"TranslationUnit.h"
+
+1466273660 source:c:\dev\cmoc-win32\src\bin\cmoc\src\switchstmt.cpp
+	"SwitchStmt.h"
+	"TranslationUnit.h"
+	"BinaryOpExpr.h"
+	"CompoundStmt.h"
+	"LabeledStmt.h"
+
+1470443171 source:c:\dev\cmoc-win32\src\bin\cmoc\src\translationunit.cpp
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"DeclarationSequence.h"
+	"FunctionDef.h"
+	"SemanticsChecker.h"
+	"FunctionCallExpr.h"
+	"Scope.h"
+	"StringLiteralExpr.h"
+	"ClassDef.h"
+	"Pragma.h"
+	<assert.h>
+	<errno.h>
+	<fstream>
+
+1462506175 source:c:\dev\cmoc-win32\src\bin\cmoc\src\tree.cpp
+	"Tree.h"
+	"TranslationUnit.h"
+	"ClassDef.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"Declaration.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"TypeManager.h"
+
+1462506176 source:c:\dev\cmoc-win32\src\bin\cmoc\src\treesequence.cpp
+	"TreeSequence.h"
+	"TranslationUnit.h"
+	"CastExpr.h"
+
+1466471173 source:c:\dev\cmoc-win32\src\bin\cmoc\src\typedesc.cpp
+	"TypeDesc.h"
+	"util.h"
+
+1466471173 source:c:\dev\cmoc-win32\src\bin\cmoc\src\typemanager.cpp
+	"TypeManager.h"
+	"util.h"
+	"Declarator.h"
+
+1462506176 source:c:\dev\cmoc-win32\src\bin\cmoc\src\unaryopexpr.cpp
+	"UnaryOpExpr.h"
+	"TranslationUnit.h"
+	"VariableExpr.h"
+	"WordConstantExpr.h"
+	"VariableExpr.h"
+	"ObjectMemberExpr.h"
+	"BinaryOpExpr.h"
+	"FuncAddrExpr.h"
+	"IdentifierExpr.h"
+	"CastExpr.h"
+	"Declaration.h"
+	<assert.h>
+
+1457853618 source:c:\dev\cmoc-win32\src\bin\cmoc\src\util.cpp
+	"util.h"
+	"ClassDef.h"
+	"TranslationUnit.h"
+	"TreeSequence.h"
+	"FormalParameter.h"
+	"WordConstantExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"DeclarationSpecifierList.h"
+	<string.h>
+
+1465354076 source:c:\dev\cmoc-win32\src\bin\cmoc\src\variableexpr.cpp
+	"VariableExpr.h"
+	"TranslationUnit.h"
+	"Declaration.h"
+	"Scope.h"
+	"FunctionDef.h"
+	"FuncAddrExpr.h"
+
+1462506176 source:c:\dev\cmoc-win32\src\bin\cmoc\src\whilestmt.cpp
+	"WhileStmt.h"
+	"TranslationUnit.h"
+	"BinaryOpExpr.h"
+
+1462506176 source:c:\dev\cmoc-win32\src\bin\cmoc\src\wordconstantexpr.cpp
+	"WordConstantExpr.h"
+	"TranslationUnit.h"
+
