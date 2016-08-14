@@ -128,13 +128,14 @@ type
 type
 
   CCmocProcess = class(TProcess)
+  strict private
+    procedure CheckExitCode(const AExitCode: longint);
   public
     constructor Create(AOwner: TComponent); override;
   public
     procedure Execute(const AExecutable: TFileName; const AParams: TStringDynArray;
       const ACurrentDirectory: TFileName); reintroduce;
     procedure Execute(const AExecutable: TFileName; const AParams: TStringDynArray);
-    procedure CheckExitCode;
   end;
 
 var
@@ -143,7 +144,7 @@ var
 
 type
 
-  OCMOC = object
+  OCmoc = object
   strict private
     class function PathToTemp: TFileName;
   public
@@ -178,7 +179,7 @@ type
 
 implementation
 
-class function OCMOC.StringToInteger(const A: string): longint;
+class function OCmoc.StringToInteger(const A: string): longint;
 begin
   if AnsiStartsStr('0x', A) then begin
     Result := StrToInt('$' + Copy(A, 3, MaxInt));
@@ -187,18 +188,18 @@ begin
   end;
 end;
 
-class procedure OCMOC.RaiseError(AMessage: string; const AExitCode: integer);
+class procedure OCmoc.RaiseError(AMessage: string; const AExitCode: integer);
 begin
   WriteLn('Error: ' + AMessage);
   raise EAbort.CreateHelp(AMessage, AExitCode);
 end;
 
-class procedure OCMOC.RaiseError(AMessage, ADetails: string; const AExitCode: integer);
+class procedure OCmoc.RaiseError(AMessage, ADetails: string; const AExitCode: integer);
 begin
-  RaiseError(AMessage + Char_SPC + QuotedStr(ADetails), AExitCode);
+  RaiseError(AMessage + ' // ' + QuotedStr(ADetails), AExitCode);
 end;
 
-class function OCMOC.FileChanged(const ADst, ASrc: TFileName): boolean;
+class function OCmoc.FileChanged(const ADst, ASrc: TFileName): boolean;
 begin
   if not FileExists(ASrc) then begin
     RaiseError('Source file does not exist', ASrc);
@@ -206,13 +207,13 @@ begin
   Result := FileAge(ADst) <= FileAge(ASrc);
 end;
 
-class procedure OCMOC.StringDynArrayAppend(var A: TStringDynArray; const S: string);
+class procedure OCmoc.StringDynArrayAppend(var A: TStringDynArray; const S: string);
 begin
   SetLength(A, Length(A) + 1);
   A[High(A)] := S;
 end;
 
-class procedure OCMOC.StringDynArrayInsert(var A: TStringDynArray; const I: integer;
+class procedure OCmoc.StringDynArrayInsert(var A: TStringDynArray; const I: integer;
   const S: string);
 var
   LIndex: integer;
@@ -224,7 +225,7 @@ begin
   A[I] := S;
 end;
 
-class procedure OCMOC.FileNamesAppend(var A: TStringDynArray; AFileName: string;
+class procedure OCmoc.FileNamesAppend(var A: TStringDynArray; AFileName: string;
   const AMustExist: boolean);
 var
   LFileName: TFileName;
@@ -241,37 +242,37 @@ begin
   StringDynArrayAppend(A, AFileName);
 end;
 
-class function OCMOC.DosToUnix(const A: string): string;
+class function OCmoc.DosToUnix(const A: string): string;
 begin
   Result := AnsiReplaceStr(A, '\', '/');
 end;
 
-class function OCMOC.PathToPackage: TFileName;
+class function OCmoc.PathToPackage: TFileName;
 begin
   Result := DosToUnix(ExtractFilePath(ExcludeTrailingPathDelimiter(ProgramDirectory)));
 end;
 
-class function OCMOC.PathToLib: TFileName;
+class function OCmoc.PathToLib: TFileName;
 begin
   Result := PathToPackage + 'lib/';
 end;
 
-class function OCMOC.PathToSrc: TFileName;
+class function OCmoc.PathToSrc: TFileName;
 begin
   Result := PathToPackage + 'src/';
 end;
 
-class function OCMOC.PathToSrcAsm: TFileName;
+class function OCmoc.PathToSrcAsm: TFileName;
 begin
   Result := PathToSrc + 'asm/';
 end;
 
-class function OCMOC.PathToSrcLib: TFileName;
+class function OCmoc.PathToSrcLib: TFileName;
 begin
   Result := PathToSrc + 'lib/';
 end;
 
-class function OCMOC.PathToInclude: TFileName;
+class function OCmoc.PathToInclude: TFileName;
 begin
   Result := PathToPackage + 'include/';
 end;
@@ -279,7 +280,7 @@ end;
 var
   GPathToTemp: TFileName;
 
-class function OCMOC.PathToTemp: TFileName;
+class function OCmoc.PathToTemp: TFileName;
 begin
   if Length(GPathToTemp) = 0 then begin
     GPathToTemp := DosToUnix(GetTempDir(False));
@@ -287,7 +288,7 @@ begin
   Result := GPathToTemp;
 end;
 
-class function OCMOC.FileNameTool(const ATool: string): TFileName;
+class function OCmoc.FileNameTool(const ATool: string): TFileName;
 begin
   Result := PathToPackage + 'bin/' + ATool + '.exe';
 end;
@@ -295,19 +296,19 @@ end;
 var
   GTempCount: integer;
 
-class function OCMOC.FileNameTemp(const APrefix, APostfix: string): TFileName;
+class function OCmoc.FileNameTemp(const APrefix, APostfix: string): TFileName;
 begin
   Result := PathToTemp + APrefix + ' [' + IntToHex(GetProcessID, 0) + ',' +
     IntToHex(GTempCount, 0) + ']' + APostfix;
   Inc(GTempCount);
 end;
 
-class function OCMOC.FileNameTemp(const APostfix: string): TFileName;
+class function OCmoc.FileNameTemp(const APostfix: string): TFileName;
 begin
   Result := FileNameTemp('cmoctemp', APostfix);
 end;
 
-class function OCMOC.StringToIdent(const A: string): string;
+class function OCmoc.StringToIdent(const A: string): string;
 var
   LIndex: integer;
 begin
@@ -325,22 +326,22 @@ begin
   end;
 end;
 
-class function OCMOC.FileNameToIdent(const A: TFileName): string;
+class function OCmoc.FileNameToIdent(const A: TFileName): string;
 begin
   Result := StringToIdent(UpperCase(ExtractFileName(A)));
 end;
 
-class function OCMOC.FileNameToInitGlobals(const A: TFileName): string;
+class function OCmoc.FileNameToInitGlobals(const A: TFileName): string;
 begin
   Result := Sym_INITGL + '_' + FileNameToIdent(A);
 end;
 
-class function OCMOC.SymbolIsPublic(const A: string): boolean;
+class function OCmoc.SymbolIsPublic(const A: string): boolean;
 begin
   Result := AnsiStartsStr('_', A) and not AnsiStartsStr('___', A);
 end;
 
-class procedure OCMOC.ExtractPragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
+class procedure OCmoc.ExtractPragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
   var ATarget: string);
 var
   LIndex: integer;
@@ -361,7 +362,7 @@ begin
       end;
       case LName of
         'org': begin
-          AOrigin := OCMOC.StringToInteger(LParser.Token);
+          AOrigin := OCmoc.StringToInteger(LParser.Token);
         end;
         'target': begin
           ATarget := LParser.Token;
@@ -380,7 +381,7 @@ begin
   end;
 end;
 
-class procedure OCMOC.ExtractPragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
+class procedure OCmoc.ExtractPragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
   var ATarget: string);
 var
   LDst, LSrc: TStrings;
@@ -460,7 +461,7 @@ begin
   try
     inherited Execute;
   except
-    CheckExitCode;
+    CheckExitCode(-1);
   end;
   Sleep(20);
   while (Running or (Output.NumBytesAvailable > 0)) do begin
@@ -469,7 +470,7 @@ begin
     end;
     Sleep(100);
   end;
-  CheckExitCode;
+  CheckExitCode(ExitCode);
 end;
 
 procedure CCmocProcess.Execute(const AExecutable: TFileName; const AParams: TStringDynArray);
@@ -477,11 +478,10 @@ begin
   Execute(AExecutable, AParams, ExtractFileDir(AExecutable));
 end;
 
-procedure CCmocProcess.CheckExitCode;
+procedure CCmocProcess.CheckExitCode(const AExitCode: longint);
 begin
-  if ExitCode <> 0 then begin
-    raise Exception.CreateFmtHelp('%s failed with exit code %d',
-      [ExtractFileName(Executable), ExitCode], ExitCode);
+  if AExitCode <> 0 then begin
+    OCmoc.RaiseError(Format('Failed with exit code #%d', [AExitCode]), Executable, AExitCode);
   end;
 end;
 

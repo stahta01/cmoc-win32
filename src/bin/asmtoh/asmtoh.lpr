@@ -55,8 +55,8 @@ type
     LLine, LIdent, LComment: string;
     LParser: OAsmParser;
   begin
-    ADst.Add('#ifndef _' + OCMOC.FileNameToIdent(AFileName));
-    ADst.Add('#define _' + OCMOC.FileNameToIdent(AFileName) + LineEnding);
+    ADst.Add('#ifndef _' + OCmoc.FileNameToIdent(AFileName));
+    ADst.Add('#define _' + OCmoc.FileNameToIdent(AFileName) + LineEnding);
 
     for LLine in ASrc do begin
       LParser.SetString('$' + Trim(LLine));
@@ -65,7 +65,7 @@ type
         LParser.IncludeUntil([')']);
         if LParser.NextAndTokenIs(')') and LParser.NextAndTokenIs(':') and
           LParser.Next and LParser.Next then begin
-          LIdent := OCMOC.StringToIdent('_' + UpperCase(LParser.Token));
+          LIdent := OCmoc.StringToIdent('_' + UpperCase(LParser.Token));
           if LParser.Next then begin
             LSize := -1;
             if LParser.SameText('EQU') or LParser.SameText('RMB') then begin
@@ -124,11 +124,11 @@ type
   var
     LTmpFile: TFileName;
   begin
-    LTmpFile := OCMOC.FileNameTemp(ExtractFileName(ASrc), '.lst');
+    LTmpFile := OCmoc.FileNameTemp(ExtractFileName(ASrc), '.lst');
     try
       with CCmocProcess_ASMTOH.Create(nil) do begin
         try
-          Execute(OCMOC.FileNameTool(Tool_LWASM), TStringDynArray.Create('-s',
+          Execute(OCmoc.FileNameTool(Tool_LWASM), TStringDynArray.Create('-s',
             '--depend', '--list=' + LTmpFile, ASrc));
           ProcessFile(ADstPath + ChangeFileExt(ExtractFileName(ASrc), '.h'),
             LTmpFile);
@@ -146,20 +146,20 @@ var
 
 begin
   try
-    LDstPath := OCMOC.PathToInclude + 'coco/';
-    Main(LDstPath, OCMOC.PathToSrcLib + 'libcoco/asm/equates.asm');
-    Main(LDstPath, OCMOC.PathToSrcLib + 'libcoco/asm/cocodefs.asm');
-    Main(LDstPath, OCMOC.PathToSrcLib + 'libcoco/asm/coco3defs.asm');
+    LDstPath := OCmoc.PathToInclude + 'coco/';
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm');
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/cocodefs.asm');
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/coco3defs.asm');
 
-    LDstPath := OCMOC.PathToInclude + 'vectrex/';
-    Main(LDstPath, OCMOC.PathToSrcLib + 'libvectrex/asm/vectrexdefs.asm');
-    Main(LDstPath, OCMOC.PathToSrcLib + 'libvectrex/asm/vectrexbios.asm');
+    LDstPath := OCmoc.PathToInclude + 'vectrex/';
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexdefs.asm');
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexbios.asm');
 
     WriteLn;
     WriteLn('Done');
   except
     on LException: Exception do begin
-      WriteLn(StdErr, LException.Message);
+      WriteLn(StdErr, 'Error: Exception ', OCmoc.DosToUnix(QuotedStr(ParamStr(0))));
       ExitCode := LException.HelpContext;
     end;
   end;

@@ -51,13 +51,13 @@ implementation
 
 procedure CCmocProcess_TOOLS.MCCP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
 begin
-  if OCMOC.FileChanged(ADst, ASrc) then begin
-    OCMOC.StringDynArrayInsert(AParams, 0, Opt_Output2);
-    OCMOC.StringDynArrayInsert(AParams, 1, ADst);
-    OCMOC.StringDynArrayInsert(AParams, 2, Opt_NoLineInfo1);
-    OCMOC.StringDynArrayInsert(AParams, 3, '-a');
-    OCMOC.StringDynArrayAppend(AParams, ASrc);
-    Execute(OCMOC.FileNameTool(Tool_MCPP), AParams);
+  if OCmoc.FileChanged(ADst, ASrc) then begin
+    OCmoc.StringDynArrayInsert(AParams, 0, Opt_Output2);
+    OCmoc.StringDynArrayInsert(AParams, 1, ADst);
+    OCmoc.StringDynArrayInsert(AParams, 2, Opt_NoLineInfo1);
+    OCmoc.StringDynArrayInsert(AParams, 3, '-a');
+    OCmoc.StringDynArrayAppend(AParams, ASrc);
+    Execute(OCmoc.FileNameTool(Tool_MCPP), AParams);
   end;
 end;
 
@@ -66,27 +66,27 @@ var
   LPre: TFileName;
   LParams: TStringDynArray;
 begin
-  if OCMOC.FileChanged(ADst, ASrc) then begin
+  if OCmoc.FileChanged(ADst, ASrc) then begin
     LPre := ASrc + FileExt_I;
 
     MCCP(LPre, ASrc, TStringDynArray.Create(Opt_Define2,
       Def_CMOC_VERSION, Opt_Define2, Def_6809, Opt_Define2, '__' + UpperCase(FTarget) + '__',
       Opt_Define2, 'const=', Opt_Define2, '__fastcall__=', Opt_Define2,
       'long=int', Opt_Define2, 'restrict=', Opt_Include2,
-      OCMOC.DosToUnix(OCMOC.PathToPackage + 'include')));
+      OCmoc.DosToUnix(OCmoc.PathToPackage + 'include')));
 
-    OCMOC.ExtractPragmas(LPre, LPre, FOrigin, FTarget);
+    OCmoc.ExtractPragmas(LPre, LPre, FOrigin, FTarget);
 
     LParams := TStringDynArray.Create(Opt_EmitUncalled1, Opt_DontLink1);
     if AWerror then begin
-      OCMOC.StringDynArrayAppend(LParams, Opt_Werror1);
+      OCmoc.StringDynArrayAppend(LParams, Opt_Werror1);
     end;
     if AVerbose then begin
-      OCMOC.StringDynArrayAppend(LParams, Opt_Verbose1);
+      OCmoc.StringDynArrayAppend(LParams, Opt_Verbose1);
     end;
     //StringDynArrayAppend(LParams, Opt_Optimize0);
-    OCMOC.StringDynArrayAppend(LParams, ExtractFileName(LPre));
-    Execute(OCMOC.FileNameTool(Tool_CMOC), LParams, ExtractFilePath(LPre));
+    OCmoc.StringDynArrayAppend(LParams, ExtractFileName(LPre));
+    Execute(OCmoc.FileNameTool(Tool_CMOC), LParams, ExtractFilePath(LPre));
     DeleteFile(ADst);
     RenameFile(LPre + FileExt_ASM, ADst);
   end;
@@ -99,7 +99,7 @@ var
   LString, LSymbol: string;
   LAsmFile, LMapFile: TStringList;
 begin
-  LTmpFile := OCMOC.FileNameTemp(Sym_INITGL, FileExt_ASM);
+  LTmpFile := OCmoc.FileNameTemp(Sym_INITGL, FileExt_ASM);
   Result := ChangeFileExt(LTmpFile, FileExt_O);
   try
     LMapFile := TStringList.Create;
@@ -138,15 +138,15 @@ end;
 
 procedure CCmocProcess_TOOLS.LWAR(const AMode: string; const ADst: TFileName; ASrc: TFileNames);
 begin
-  OCMOC.StringDynArrayInsert(ASrc, 0, AMode);
-  OCMOC.StringDynArrayInsert(ASrc, 1, ADst);
-  Execute(OCMOC.FileNameTool(Tool_LWAR), ASrc);
+  OCmoc.StringDynArrayInsert(ASrc, 0, AMode);
+  OCmoc.StringDynArrayInsert(ASrc, 1, ADst);
+  Execute(OCmoc.FileNameTool(Tool_LWAR), ASrc);
 end;
 
 procedure CCmocProcess_TOOLS.LWASM(const ADst, ASrc: TFileName; const APreprocess: boolean);
 begin
-  if OCMOC.FileChanged(ADst, ASrc) then begin
-    Execute(OCMOC.FileNameTool(IfThen(APreprocess, Tool_LWASM2, Tool_LWASM)),
+  if OCmoc.FileChanged(ADst, ASrc) then begin
+    Execute(OCmoc.FileNameTool(IfThen(APreprocess, Tool_LWASM2, Tool_LWASM)),
       TStringDynArray.Create(Opt_6809, Opt_Format2, Format_OBJ, Opt_Output2, ADst, ASrc));
   end;
 end;
@@ -155,15 +155,15 @@ procedure CCmocProcess_TOOLS.LWLINK(const ADst, ASrc, AMap: TFileName; const ATa
 var
   LSrcLib: string;
 begin
-  if OCMOC.FileChanged(ADst, ASrc) then begin
+  if OCmoc.FileChanged(ADst, ASrc) then begin
     LSrcLib := Copy(ChangeFileExt(ExtractFileName(ASrc), EmptyStr), 4, MaxInt);
 
-    Execute(OCMOC.FileNameTool(Tool_LWLINK), TStringDynArray.Create(Opt_Output2, ADst, Opt_Format2,
-      Format_DECB, Opt_LibPath2, OCMOC.PathToLib, Opt_LibPath2, ExtractFilePath(ASrc),
+    Execute(OCmoc.FileNameTool(Tool_LWLINK), TStringDynArray.Create(Opt_Output2, ADst, Opt_Format2,
+      Format_DECB, Opt_LibPath2, OCmoc.PathToLib, Opt_LibPath2, ExtractFilePath(ASrc),
       Opt_LibInclude2, LSrcLib, Opt_LibInclude2, ATarget, Opt_LibInclude2,
       '6809', Opt_LibInclude2, 'basic', Opt_LibInclude2, 'c', Opt_ScriptFile2,
-      OCMOC.PathToLib + 'linkscript.txt', Opt_MapFile2, AMap, OCMOC.PathToLib +
-      'program_start.o', OCMOC.PathToLib + 'program_end.o'));
+      OCmoc.PathToLib + 'linkscript.txt', Opt_MapFile2, AMap, OCmoc.PathToLib +
+      'program_start.o', OCmoc.PathToLib + 'program_end.o'));
   end;
 end;
 
@@ -172,10 +172,10 @@ procedure CCmocProcess_TOOLS.LWLINK(const ADst: TFileName; const ASrc: TFileName
 var
   LLibFile, LMapFile, LObjFile: TFileName;
 begin
-  LLibFile := OCMOC.FileNameTemp('libmain', FileExt_A);
+  LLibFile := OCmoc.FileNameTemp('libmain', FileExt_A);
   try
     LWAR(Opt_Create1, LLibFile, ASrc);
-    LMapFile := OCMOC.FileNameTemp('lwlinkmap', '.txt');
+    LMapFile := OCmoc.FileNameTemp('lwlinkmap', '.txt');
     try
       LWLINK(ADst, LLibFile, LMapFile, ATarget);
       LObjFile := LWASM_INITGL(LMapFile);

@@ -143,7 +143,7 @@ begin
     if LParser.Next then begin
       LToken := LParser.Token;
       if LToken[1] = '_' then begin
-        if OCMOC.SymbolIsPublic(LToken) then begin
+        if OCmoc.SymbolIsPublic(LToken) then begin
           AddExport(LToken);
         end;
       end else if SameText(LToken, 'RMB') then begin
@@ -160,7 +160,7 @@ begin
       LParser2.SetString(LParser.Token);
       while LParser2.Next do begin
         LToken := LParser2.Token;
-        if OCMOC.SymbolIsPublic(LToken) and (FExportSymbols.IndexOf(LToken) < 0) then begin
+        if OCmoc.SymbolIsPublic(LToken) and (FExportSymbols.IndexOf(LToken) < 0) then begin
           AddImport(LToken);
         end;
       end;

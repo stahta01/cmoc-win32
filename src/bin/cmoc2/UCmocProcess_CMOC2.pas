@@ -64,16 +64,16 @@ end;
 procedure CCmocProcess_CMOC2.SetOutFile(const AFileName: TFileName);
 begin
   if Length(FOutFile) <> 0 then begin
-    OCMOC.RaiseError('Output file has already been selected', AFileName);
+    OCmoc.RaiseError('Output file has already been selected', AFileName);
   end;
-  FOutFile := OCMOC.DosToUnix(CleanAndExpandFileName(AFileName));
+  FOutFile := OCmoc.DosToUnix(CleanAndExpandFileName(AFileName));
   case ExtractFileExt(AFileName) of
     FileExt_O: begin
       FDontLink := True;
     end;
     FileExt_BIN, FileExt_A: begin
     end else begin
-      OCMOC.RaiseError('Unknown output file type', AFileName);
+      OCmoc.RaiseError('Unknown output file type', AFileName);
     end;
   end;
 end;
@@ -98,12 +98,12 @@ begin
   end else begin
     case ExtractFileExt(AFileName) of
       FileExt_O: begin
-        OCMOC.FileNamesAppend(FObjFiles, AFileName, AMustExist);
+        OCmoc.FileNamesAppend(FObjFiles, AFileName, AMustExist);
       end;
       FileExt_C: begin
-        OCMOC.FileNamesAppend(FSrcFiles, AFileName, AMustExist);
+        OCmoc.FileNamesAppend(FSrcFiles, AFileName, AMustExist);
       end else begin
-        OCMOC.RaiseError('Unknown file type', AFileName);
+        OCmoc.RaiseError('Unknown file type', AFileName);
       end;
     end;
   end;
@@ -121,18 +121,18 @@ begin
       case LParam of
         Opt_Format2, Opt_Target2, Opt_Output2, Opt_Origin2: begin
           if LIndex = ParamCount then begin
-            OCMOC.RaiseError('Option missing value', LParam);
+            OCmoc.RaiseError('Option missing value', LParam);
           end;
           Inc(LIndex);
           LValue := ParamStr(LIndex);
           case LParam of
             Opt_Origin2: begin
-              FOrigin := OCMOC.StringToInteger(LValue);
+              FOrigin := OCmoc.StringToInteger(LValue);
             end;
             Opt_Target2: begin
               FTarget := LValue;
               if not AnsiMatchStr(FTarget, TargetList) then begin
-                OCMOC.RaiseError('Unknown target type', FTarget);
+                OCmoc.RaiseError('Unknown target type', FTarget);
               end;
             end;
             Opt_Output2: begin
@@ -154,7 +154,7 @@ begin
             Opt_DontLink1: begin
               FDontLink := True;
             end else begin
-              OCMOC.RaiseError('Unknown option', LParam);
+              OCmoc.RaiseError('Unknown option', LParam);
             end;
           end;
         end;
@@ -165,7 +165,7 @@ begin
     Inc(LIndex);
   end;
   if (Length(FSrcFiles) = 0) and (Length(FObjFiles) = 0) then begin
-    OCMOC.RaiseError('No input files', 'cmoc2');
+    OCmoc.RaiseError('No input files', 'cmoc2');
   end;
   if Length(FOutFile) = 0 then begin
     SetOutFile('a' + FileExt_BIN);
@@ -176,11 +176,11 @@ procedure CCmocProcess_CMOC2.DoCompile(const ADst, ASrc: TFileName; const AInitG
 var
   LTmp: TFileName;
 begin
-  LTmp := OCMOC.FileNameTemp(FileExt_ASM);
+  LTmp := OCmoc.FileNameTemp(FileExt_ASM);
   try
     CMOC(LTmp, ASrc, FWerror, FVerbose);
     CMOC2(ADst, LTmp, AInitGL);
-    OCMOC.FileNamesAppend(FAsmFiles, ADst, True);
+    OCmoc.FileNamesAppend(FAsmFiles, ADst, True);
   finally
     DeleteFile(LTmp);
   end;
@@ -189,12 +189,12 @@ end;
 procedure CCmocProcess_CMOC2.DoAssemble(const ADst, ASrc: TFileName);
 begin
   LWASM(ADst, ASrc, True);
-  OCMOC.FileNamesAppend(FObjFiles, ADst, True);
+  OCmoc.FileNamesAppend(FObjFiles, ADst, True);
 end;
 
 procedure CCmocProcess_CMOC2.DoCompileAssemble(const AObj, AAsm, ASrc: TFileName);
 begin
-  DoCompile(AAsm, ASrc, OCMOC.FileNameToInitGlobals(AObj));
+  DoCompile(AAsm, ASrc, OCmoc.FileNameToInitGlobals(AObj));
   if not FDontAssemble then begin
     DoAssemble(AObj, AAsm);
   end;
@@ -207,14 +207,14 @@ begin
   case ExtractFileExt(FOutFile) of
     FileExt_ASM: begin
       if Length(FSrcFiles) <> 1 then begin
-        OCMOC.RaiseError('Only one source file can be selected', FOutFile);
+        OCmoc.RaiseError('Only one source file can be selected', FOutFile);
       end;
-      DoCompile(FOutFile, FSrcFiles[0], OCMOC.FileNameToInitGlobals(
+      DoCompile(FOutFile, FSrcFiles[0], OCmoc.FileNameToInitGlobals(
         ChangeFileExt(FOutFile, FileExt_O)));
     end;
     FileExt_O: begin
       if Length(FSrcFiles) <> 1 then begin
-        OCMOC.RaiseError('Only one source file can be selected', FOutFile);
+        OCmoc.RaiseError('Only one source file can be selected', FOutFile);
       end;
       DoCompileAssemble(FOutFile, ChangeFileExt(FSrcFiles[0], FileExt_ASM), FSrcFiles[0]);
     end else begin
@@ -236,7 +236,7 @@ begin
       FileExt_BIN: begin
         LWLINK(FOutFile, FObjFiles, FTarget, FOrigin);
       end else begin
-        OCMOC.RaiseError('Unable to link to file type', FOutFile);
+        OCmoc.RaiseError('Unable to link to file type', FOutFile);
       end;
     end;
   end;

@@ -272,7 +272,7 @@ begin
     MenuFileSaveAs.Click;
   end;
   if not FileExists(FileNameSrc) then begin
-    OCMOC.RaiseError('File does not exist', FileNameSrc);
+    OCmoc.RaiseError('File does not exist', FileNameSrc);
   end;
   Result := FileNameSrc;
 end;
@@ -402,7 +402,7 @@ begin
     if not FileExists(Executable) then begin
       Executable := ExeSearch(AExecutable);
       if not FileExists(Executable) then begin
-        OCMOC.RaiseError('Unable to locate', AExecutable);
+        OCmoc.RaiseError('Unable to locate', AExecutable);
       end;
     end;
     CurrentDirectory := ExtractFileDir(Executable);
@@ -412,7 +412,7 @@ begin
       Execute;
     except
       on LException: Exception do begin
-        OCMOC.RaiseError(Format('%s failed with exit code %d',
+        OCmoc.RaiseError(Format('%s failed with exit code %d',
           [ExtractFileName(Executable), ExitCode]), ExitCode);
       end
     end;
@@ -441,7 +441,7 @@ begin
     end;
     Result := ExitCode;
     if Result <> 0 then begin
-      OCMOC.RaiseError(Format('%s failed with exit code %d',
+      OCmoc.RaiseError(Format('%s failed with exit code %d',
         [ExtractFileName(Executable), ExitCode]), ExitCode);
     end;
   end;
@@ -484,7 +484,7 @@ function TFormCmocIDE.BeginProcess(const ADst, ASrc: TFileName): boolean;
 begin
   MenuFileSave.Click;
   if not FileExists(ASrc) then begin
-    OCMOC.RaiseError('File does not exist', ASrc);
+    OCmoc.RaiseError('File does not exist', ASrc);
   end;
   while SynEditLog.Lines.Count > 500 do begin
     SynEditLog.Lines.Delete(0);
@@ -512,7 +512,7 @@ procedure TFormCmocIDE.MenuRunCompileClick(ASender: TObject);
 begin
   SynEditLog.Clear;
   if BeginProcess(FileNameObj, FileNameSrcExists) then begin
-    OCMOC.ExtractPragmas(nil, FormCmocIDESynEdit.SynEdit.Lines, FOrigin, FTarget);
+    OCmoc.ExtractPragmas(nil, FormCmocIDESynEdit.SynEdit.Lines, FOrigin, FTarget);
     RunTool(Tool_CMOC2, [Opt_DontLink1, Opt_Output2, FileNameObj, Opt_Target2,
       FTarget, Opt_Origin2, IntToStr(FOrigin), FileNameSrc], False);
     EndProcess('Compilation complete');

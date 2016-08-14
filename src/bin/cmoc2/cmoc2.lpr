@@ -27,7 +27,8 @@ uses
   SysUtils,
   UCmocProcess_ASM,
   UCmocProcess_CMOC2,
-  UCmocProcess_TOOLS;
+  UCmocProcess_TOOLS,
+  UCmocUtils;
 
 {$R *.res}
 
@@ -42,7 +43,7 @@ begin
     end;
   except
     on LException: Exception do begin
-      WriteLn(StdErr, LException.Message);
+      WriteLn(StdErr, 'Error: Exception ', OCmoc.DosToUnix(QuotedStr(ParamStr(0))));
       ExitCode := LException.HelpContext;
     end;
   end;
