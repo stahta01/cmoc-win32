@@ -820,6 +820,7 @@
 #ifndef _ikeyim
 #define _ikeyim *((unsigned char*)_IKEYIM)
 #endif
+*/
 
 // PV CURSOR LOCATION
 #ifndef _CURPOS
@@ -829,6 +830,7 @@
 #define _curpos *((unsigned*)_CURPOS)
 #endif
 
+/*
 // PV DUMMY - THESE TWO BYTES ARE ALWAYS ZERO
 #ifndef _ZERO
 #define _ZERO 138
