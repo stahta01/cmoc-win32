@@ -3,7 +3,7 @@
 #define _BASIC_H
 
 #include <cmoc/types.h>
-#include <equates.h>
+#include <dragon/equates.h>
 
 int ABS(int numeric);
 void CLS(byte c);

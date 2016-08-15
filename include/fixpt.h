@@ -7,7 +7,8 @@
 int fxsin(byte x);
 int fxcos(byte x);
 
-#define fxtoi(A) (*(unsigned char*)&(A))
+#define int_hi(A) ((signed char*)&(A))[0]
+#define int_lo(A) ((unsigned char*)&(A))[1]
 
 #endif
 

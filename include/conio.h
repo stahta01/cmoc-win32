@@ -224,6 +224,9 @@ char putch(char c);
 #  define bordercolor(x)        _bordercolor(x)
 #endif
 
+extern unsigned char conio_textcolor;
+extern unsigned char conio_bgcolor;
+extern unsigned char conio_bordercolorcolor;
 
 
 /* End of conio.h */

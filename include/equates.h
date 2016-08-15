@@ -11,7 +11,8 @@
 
 #include <coco/equates.h>
 
-#define JSR_CLRSCR      _JSR($a928)
+#define JSR_CLS         _JSR($a928)
+#define JSR_CLS_B       _JSR($a91c)
 #define JSR_SOUND       _JSR($a951)
 
 #else
@@ -20,7 +21,8 @@
 
 #include <dragon/equates.h>
 
-#define JSR_CLRSCR      _JSR($ba77)
+#define JSR_CLS         _JSR($ba77)
+#define JSR_CLS_B       _JSR($ba79)
 #define JSR_SOUND       _JSR($baa0)
 
 #else

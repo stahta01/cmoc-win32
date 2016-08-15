@@ -464,7 +464,7 @@ begin
     mrYes then begin
     LFileName := GetTempDir(False) + 'astyle.c';
     FormCmocIDESynEdit.SynEdit.Lines.SaveToFile(LFileName);
-    RunTool(Tool_ASTYLE, ['-A8', '-xC90', '-k1', '-w', '-U', '-H', '-j', '-s' +
+    RunTool(Tool_ASTYLE, ['-A8', '-xC100', '-k1', '-w', '-U', '-H', '-j', '-s' +
       IntToStr(FormCmocIDESynEdit.SynEdit.TabWidth),
       LFileName], False);
     with TStringList.Create do begin

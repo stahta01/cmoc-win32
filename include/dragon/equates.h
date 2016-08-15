@@ -240,6 +240,7 @@
 #ifndef _lastpt
 #define _lastpt *((unsigned*)_LASTPT)
 #endif
+*/
 
 // TEMPORARY POINTER
 #ifndef _TEMPTR
@@ -249,6 +250,7 @@
 #define _temptr *((unsigned*)_TEMPTR)
 #endif
 
+/*
 // TEMPORARY DESCRIPTOR STORAGE (STACK SEARCH)
 #ifndef _TMPTR1
 #define _TMPTR1 17
@@ -1786,6 +1788,7 @@
 #ifndef _strbuf
 #define _strbuf ((char*)_STRBUF)
 #endif
+*/
 
 // VIDEO DISPLAY AREA
 #ifndef _VIDRAM
@@ -1795,6 +1798,7 @@
 #define _vidram ((char*)_VIDRAM)
 #endif
 
+/*
 // I/O BUFFER #0
 #ifndef _DBUF0
 #define _DBUF0 1536

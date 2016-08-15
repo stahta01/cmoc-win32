@@ -10,7 +10,7 @@ void DRAWARC(byte x, byte y, int w, int h, int s, int e, byte c)
         for (; s < e; s += 4) {
             x2 = fxsin((byte)s) * w;
             y2 = fxcos((byte)s) * h;
-            DRAWLINE(fxtoi(x1) + x, fxtoi(y1) + y, fxtoi(x2) + x, fxtoi(y2) + y, c);
+            DRAWLINE(int_hi(x1) + x, int_hi(y1) + y, int_hi(x2) + x, int_hi(y2) + y, c);
             x1 = x2;
             y1 = y2;
         }
@@ -18,13 +18,13 @@ void DRAWARC(byte x, byte y, int w, int h, int s, int e, byte c)
         for (; s > e; s -= 4) {
             x2 = fxsin((byte)s) * w;
             y2 = fxcos((byte)s) * h;
-            DRAWLINE(fxtoi(x1) + x, fxtoi(y1) + y, fxtoi(x2) + x, fxtoi(y2) + y, c);
+            DRAWLINE(int_hi(x1) + x, int_hi(y1) + y, int_hi(x2) + x, int_hi(y2) + y, c);
             x1 = x2;
             y1 = y2;
         }
     }
     x2 = fxsin((byte)e) * w;
     y2 = fxcos((byte)e) * h;
-    DRAWLINE(fxtoi(x1) + x, fxtoi(y1) + y, fxtoi(x2) + x, fxtoi(y2) + y, c);
+    DRAWLINE(int_hi(x1) + x, int_hi(y1) + y, int_hi(x2) + x, int_hi(y2) + y, c);
 }
 

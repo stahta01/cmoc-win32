@@ -7,20 +7,13 @@
 
 char putch(char c)
 {
-    switch (c) {
-    case _FORMF:
-        asm {
-            JSR_CLRSCR
-        }
-        break;
-    default:
-        asm {
-            lda c
-            JSR_CHROUT
-        }
+    asm {
+        lda c
+        JSR_CHROUT
     }
     return c;
 }
+
 
 
 

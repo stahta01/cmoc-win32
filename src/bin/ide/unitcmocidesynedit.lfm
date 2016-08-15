@@ -1,17 +1,17 @@
 object FormCmocIDESynEdit: TFormCmocIDESynEdit
-  Left = 258
-  Height = 240
-  Top = 205
-  Width = 320
-  ClientHeight = 240
-  ClientWidth = 320
+  Left = 308
+  Height = 261
+  Top = 225
+  Width = 362
+  ClientHeight = 261
+  ClientWidth = 362
   OnCreate = FormCreate
   LCLVersion = '1.6.0.4'
   inline SynEdit: TSynEdit
     Left = 0
-    Height = 240
+    Height = 261
     Top = 0
-    Width = 320
+    Width = 362
     Align = alClient
     Font.Height = -13
     Font.Name = 'Courier New'
@@ -450,9 +450,10 @@ object FormCmocIDESynEdit: TFormCmocIDESynEdit
     MouseActions = <>
     MouseTextActions = <>
     MouseSelActions = <>
-    Options = [eoAutoIndent, eoBracketHighlight, eoGroupUndo, eoHideRightMargin, eoScrollPastEol, eoShowSpecialChars, eoTabIndent, eoTabsToSpaces, eoTrimTrailingSpaces, eoAltSetsColumnMode]
+    Options = [eoAutoIndent, eoBracketHighlight, eoGroupUndo, eoScrollPastEol, eoShowSpecialChars, eoTabIndent, eoTabsToSpaces, eoTrimTrailingSpaces, eoAltSetsColumnMode]
     MouseOptions = [emAltSetsColumnMode]
     VisibleSpecialChars = [vscTabAtFirst, vscTabAtLast]
+    RightEdge = 100
     SelectedColor.BackPriority = 50
     SelectedColor.ForePriority = 50
     SelectedColor.FramePriority = 50
