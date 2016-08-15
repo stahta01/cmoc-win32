@@ -148,34 +148,34 @@ type
   strict private
     class function PathToTemp: TFileName;
   public
-    class function StringQuoted(const A: string): string;
-    class function StringToInteger(const A: string): longint;
-    class procedure RaiseError(AMessage: string; const AExitCode: integer = -1);
-    class procedure RaiseError(AMessage, ADetails: string; const AExitCode: integer = -1);
-    class procedure StringDynArrayAppend(var A: TStringDynArray; const S: string);
-    class procedure StringDynArrayInsert(var A: TStringDynArray; const I: integer;
-      const S: string);
-    class procedure FileNamesAppend(var A: TStringDynArray; AFileName: TFileName;
-      const AMustExist: boolean);
     class function DosToUnix(const A: string): string;
     class function FileChanged(const ADst, ASrc: TFileName): boolean;
-    class function PathToPackage: TFileName;
-    class function PathToLib: TFileName;
-    class function SymbolIsPublic(const A: string): boolean;
-    class function StringToIdent(const A: string): string;
+    class function FileNameTemp(const APostfix: string): TFileName;
+    class function FileNameTemp(const APrefix, APostfix: string): TFileName;
     class function FileNameToIdent(const A: TFileName): string;
     class function FileNameToInitGlobals(const A: TFileName): string;
+    class function FileNameTool(const ATool: string): TFileName;
+    class function PathToInclude: TFileName;
+    class function PathToLib: TFileName;
+    class function PathToPackage: TFileName;
     class function PathToSrc: TFileName;
     class function PathToSrcAsm: TFileName;
     class function PathToSrcLib: TFileName;
-    class function PathToInclude: TFileName;
-    class function FileNameTool(const ATool: string): TFileName;
-    class function FileNameTemp(const APostfix: string): TFileName;
-    class function FileNameTemp(const APrefix, APostfix: string): TFileName;
-    class procedure ExtractPragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
-      var ATarget: string);
+    class function StringQuoted(const A: string): string;
+    class function StringToIdent(const A: string): string;
+    class function StringToInteger(const A: string): longint;
+    class function SymbolIsPublic(const A: string): boolean;
     class procedure ExtractPragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
       var ATarget: string);
+    class procedure ExtractPragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
+      var ATarget: string);
+    class procedure FileNamesAppend(var A: TStringDynArray; AFileName: TFileName;
+      const AMustExist: boolean);
+    class procedure RaiseError(AMessage, ADetails: string; const AExitCode: integer = -1);
+    class procedure RaiseError(AMessage: string; const AExitCode: integer = -1);
+    class procedure StringDynArrayAppend(var A: TStringDynArray; const S: string);
+    class procedure StringDynArrayInsert(var A: TStringDynArray; const I: integer;
+      const S: string);
   end;
 
 implementation

@@ -51,14 +51,12 @@ implementation
 
 procedure CCmocProcess_TOOLS.MCCP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
 begin
-  if OCmoc.FileChanged(ADst, ASrc) then begin
-    OCmoc.StringDynArrayInsert(AParams, 0, Opt_Output2);
-    OCmoc.StringDynArrayInsert(AParams, 1, ADst);
-    OCmoc.StringDynArrayInsert(AParams, 2, Opt_NoLineInfo1);
-    OCmoc.StringDynArrayInsert(AParams, 3, '-a');
-    OCmoc.StringDynArrayAppend(AParams, ASrc);
-    Execute(OCmoc.FileNameTool(Tool_MCPP), AParams);
-  end;
+  OCmoc.StringDynArrayInsert(AParams, 0, Opt_Output2);
+  OCmoc.StringDynArrayInsert(AParams, 1, ADst);
+  OCmoc.StringDynArrayInsert(AParams, 2, Opt_NoLineInfo1);
+  OCmoc.StringDynArrayInsert(AParams, 3, '-a');
+  OCmoc.StringDynArrayAppend(AParams, ASrc);
+  Execute(OCmoc.FileNameTool(Tool_MCPP), AParams);
 end;
 
 procedure CCmocProcess_TOOLS.CMOC(const ADst, ASrc: TFileName; const AWerror, AVerbose: boolean);
@@ -157,7 +155,6 @@ var
 begin
   if OCmoc.FileChanged(ADst, ASrc) then begin
     LSrcLib := Copy(ChangeFileExt(ExtractFileName(ASrc), EmptyStr), 4, MaxInt);
-
     Execute(OCmoc.FileNameTool(Tool_LWLINK), TStringDynArray.Create(Opt_Output2, ADst, Opt_Format2,
       Format_DECB, Opt_LibPath2, OCmoc.PathToLib, Opt_LibPath2, ExtractFilePath(ASrc),
       Opt_LibInclude2, LSrcLib, Opt_LibInclude2, ATarget, Opt_LibInclude2,

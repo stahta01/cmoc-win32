@@ -514,8 +514,8 @@ end;
 procedure TFormCmocIDE.MenuRunCompileClick(ASender: TObject);
 begin
   SynEditLog.Clear;
+  OCmoc.ExtractPragmas(nil, FormCmocIDESynEdit.SynEdit.Lines, FOrigin, FTarget);
   if BeginProcess(FileNameObj, FileNameSrcExists) then begin
-    OCmoc.ExtractPragmas(nil, FormCmocIDESynEdit.SynEdit.Lines, FOrigin, FTarget);
     RunTool(Tool_CMOC2, [Opt_DontLink1, Opt_Output2, FileNameObj, Opt_Target2,
       FTarget, Opt_Origin2, IntToStr(FOrigin), FileNameSrc], False);
     EndProcess('Compilation complete');
