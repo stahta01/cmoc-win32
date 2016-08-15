@@ -3,10 +3,11 @@
 #define _BASIC_H
 
 #include <cmoc/types.h>
+#include <equates.h>
 
 int ABS(int numeric);
 void CLS(byte c);
-void SOUND(byte tone, byte durration);
+void SOUND(byte tone, byte duration);
 void SET(byte x, byte y, byte c);
 void RESET(byte x, byte y);
 void DRAWLINE(int x1, int y1, int x2, int y2, byte c);

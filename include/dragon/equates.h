@@ -1,6 +1,7 @@
-#ifndef _COCO_EQUATES_H
-#define _COCO_EQUATES_H
+#ifndef _DRAGON_EQUATES_H
+#define _DRAGON_EQUATES_H
 
+/*
 #ifndef _EXBAS
 #define _EXBAS 32768
 #endif
@@ -8,6 +9,7 @@
 #ifndef _BASIC
 #define _BASIC 40960
 #endif
+*/
 
 // BACKSPACE
 #ifndef _BS
@@ -39,6 +41,7 @@
 #define _SPACE 32
 #endif
 
+/*
 // STACK BUFFER ROOM
 #ifndef _STKBUF
 #define _STKBUF 58
@@ -833,6 +836,7 @@
 #ifndef _zero
 #define _zero *((unsigned*)_ZERO)
 #endif
+*/
 
 // TV TONE VALUE FOR SOUND COMMAND
 #ifndef _SNDTON
@@ -850,6 +854,7 @@
 #define _snddur *((unsigned*)_SNDDUR)
 #endif
 
+/*
 // 18      *PV 1200/2400 HERTZ PARTITION
 #ifndef _CMPMID
 #define _CMPMID 143
@@ -1453,10 +1458,13 @@
 #define _frqvec ((char*)_FRQVEC)
 #endif
 
+*/
+
 #ifndef _TIMVAL
 #define _TIMVAL 274
 #endif
 
+/*
 // JUMP ADDRESS FOR BASIC'S USR FUNCTION
 #ifndef _USRJMP
 #define _USRJMP 274
@@ -2474,6 +2482,6 @@
 #ifndef _resetv
 #define _resetv *((unsigned*)_RESETV)
 #endif
-
+*/
 
 #endif

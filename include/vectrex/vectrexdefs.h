@@ -1,5 +1,5 @@
-#ifndef _VECTREXDEFS_H
-#define _VECTREXDEFS_H
+#ifndef _VECTREX_DEFS_H
+#define _VECTREX_DEFS_H
 
 #ifndef _PRINT_STR_D
 #define _PRINT_STR_D 62330

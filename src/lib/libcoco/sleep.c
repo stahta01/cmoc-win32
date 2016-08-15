@@ -1,15 +1,17 @@
 
-#include <coco.h>
+#include <unistd.h>
+#include <equates.h>
 
 // seconds: 0..1092
 
-void sleep(int seconds)
+unsigned sleep(unsigned seconds)
 {
     if (seconds) {
-        unsigned limit = 60 * (unsigned) seconds;
-        setTimer(0);
-        while (getTimer() < limit) {}
+        unsigned limit = seconds * 60;
+        *(unsigned*)_TIMVAL = 0;
+        while (*(unsigned*)_TIMVAL < limit) {}
     }
+    return 0;
 }
 
 

@@ -1,22 +1,22 @@
-#ifndef _COCO3DEFS_H
-#define _COCO3DEFS_H
+#ifndef _COCO3_DEFS_H
+#define _COCO3_DEFS_H
 
-/* 65424 */
+// 65424
 #ifndef _GR_INIT0
 #define _GR_INIT0 65424
 #endif
 
-/* 65425 */
+// 65425
 #ifndef _GR_INIT1
 #define _GR_INIT1 65425
 #endif
 
-/* 65426 */
+// 65426
 #ifndef _GR_IRQENR
 #define _GR_IRQENR 65426
 #endif
 
-/* 65427 */
+// 65427
 #ifndef _GR_FIRQENR
 #define _GR_FIRQENR 65427
 #endif
@@ -29,27 +29,27 @@
 #define _GR_TIMERLSB 65429
 #endif
 
-/* 65432 */
+// 65432
 #ifndef _GR_VMODE
 #define _GR_VMODE 65432
 #endif
 
-/* 65433 */
+// 65433
 #ifndef _GR_VRES
 #define _GR_VRES 65433
 #endif
 
-/* 65434 */
+// 65434
 #ifndef _GR_BRDR
 #define _GR_BRDR 65434
 #endif
 
-/* 65435 */
+// 65435
 #ifndef _GR_DISTO_VBANK
 #define _GR_DISTO_VBANK 65435
 #endif
 
-/* 65436 */
+// 65436
 #ifndef _GR_VSC
 #define _GR_VSC 65436
 #endif
@@ -258,27 +258,27 @@
 #define _GR_PALETTE_COLOR15 65471
 #endif
 
-/* write for ~1mhz CPU */
+// write for ~1mhz CPU
 #ifndef _GR_NORMALCLOCK
 #define _GR_NORMALCLOCK 65496
 #endif
 
-/* write for ~2mhz CPU */
+// write for ~2mhz CPU
 #ifndef _GR_FASTCLOCK
 #define _GR_FASTCLOCK 65497
 #endif
 
-/* write to switch ROMs into memory map */
+// write to switch ROMs into memory map
 #ifndef _GR_ENABLEROM
 #define _GR_ENABLEROM 65502
 #endif
 
-/* write to switch ROMs out of memory map (all-RAM) */
+// write to switch ROMs out of memory map (all-RAM)
 #ifndef _GR_DISABLEROM
 #define _GR_DISABLEROM 65503
 #endif
 
-/* write to switch ROMs out of memory map (all-RAM) */
+// write to switch ROMs out of memory map (all-RAM)
 #ifndef _GR_ALLRAM
 #define _GR_ALLRAM 65503
 #endif

@@ -70,6 +70,10 @@ int system(char* command);
 void uldiv(uldiv_t* result, unsigned long numer, unsigned long denom);
 char* ultoa(unsigned long value, char* string, int radix);
 
+// Deprecated in MINGW but at least they are a defined standard.
+
+void _beep(unsigned char _Frequency, unsigned _Duration);
+
 extern int heap_memory[1]; // INTERNAL USE ONLY
 
 #endif

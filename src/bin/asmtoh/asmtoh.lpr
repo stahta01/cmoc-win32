@@ -36,12 +36,13 @@ type
 
   CCmocProcess_ASMTOH = class(CCmocProcess)
   public
-    procedure ProcessFile(const ADst, ASrc: TStrings; const AFileName: TFileName);
-    procedure ProcessFile(const ADst, ASrc: TFileName);
+    procedure ProcessFile(const ADst, ASrc: TStrings; const AFileName: TFileName;
+      const AHeaderIdent: string);
+    procedure ProcessFile(const ADst, ASrc: TFileName; const AHeaderIdent: string);
   end;
 
   procedure CCmocProcess_ASMTOH.ProcessFile(const ADst, ASrc: TStrings;
-  const AFileName: TFileName);
+  const AFileName: TFileName; const AHeaderIdent: string);
 
     procedure LDefine(const AName, AValue: string);
     begin
@@ -55,8 +56,8 @@ type
     LLine, LIdent, LComment: string;
     LParser: OAsmParser;
   begin
-    ADst.Add('#ifndef _' + OCmoc.FileNameToIdent(AFileName));
-    ADst.Add('#define _' + OCmoc.FileNameToIdent(AFileName) + LineEnding);
+    ADst.Add('#ifndef ' + AHeaderIdent);
+    ADst.Add('#define ' + AHeaderIdent + LineEnding);
 
     for LLine in ASrc do begin
       LParser.SetString('$' + Trim(LLine));
@@ -80,7 +81,7 @@ type
               end;
               LComment := Trim(LParser.Remaining);
               if Length(LComment) > 0 then begin
-                ADst.Add(Format('/* %s */', [TrimSet(LParser.Remaining, [#0..#32, '*', ';'])]));
+                ADst.Add('// ' + TrimSet(LParser.Remaining, [#0..#32, '*', ';']));
               end;
               LDefine(LIdent, IntToStr(LValue));
               if LSize >= 0 then begin
@@ -101,7 +102,8 @@ type
     ADst.Add(LineEnding + '#endif');
   end;
 
-  procedure CCmocProcess_ASMTOH.ProcessFile(const ADst, ASrc: TFileName);
+  procedure CCmocProcess_ASMTOH.ProcessFile(const ADst, ASrc: TFileName;
+  const AHeaderIdent: string);
   var
     LSrc, LDst: TStrings;
   begin
@@ -110,7 +112,7 @@ type
       LSrc.LoadFromFile(ASrc);
       LDst := TStringList.Create;
       try
-        ProcessFile(LDst, LSrc, ADst);
+        ProcessFile(LDst, LSrc, ADst, AHeaderIdent);
         LDst.SaveToFile(ADst);
       finally
         FreeAndNil(LDst);
@@ -120,7 +122,7 @@ type
     end;
   end;
 
-  procedure Main(const ADstPath, ASrc: TFileName);
+  procedure Main(const ADstPath, ASrc: TFileName; const AHeaderIdent: string);
   var
     LTmpFile: TFileName;
   begin
@@ -131,7 +133,7 @@ type
           Execute(OCmoc.FileNameTool(Tool_LWASM), TStringDynArray.Create('-s',
             '--depend', '--list=' + LTmpFile, ASrc));
           ProcessFile(ADstPath + ChangeFileExt(ExtractFileName(ASrc), '.h'),
-            LTmpFile);
+            LTmpFile, AHeaderIdent);
         finally
           Free;
         end;
@@ -147,13 +149,13 @@ var
 begin
   try
     LDstPath := OCmoc.PathToInclude + 'coco/';
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm');
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/cocodefs.asm');
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/coco3defs.asm');
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm', '_COCO_EQUATES_H');
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/cocodefs.asm', '_COCO_DEFS_H');
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/coco3defs.asm', '_COCO3_DEFS_H');
 
     LDstPath := OCmoc.PathToInclude + 'vectrex/';
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexdefs.asm');
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexbios.asm');
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexdefs.asm', '_VECTREX_DEFS_H');
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexbios.asm', '_VECTREX_BIOS_H');
 
     WriteLn;
     WriteLn('Done');
