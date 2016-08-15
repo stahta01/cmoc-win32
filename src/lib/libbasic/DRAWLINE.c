@@ -1,28 +1,28 @@
 
 #include <basic.h>
 #include <stdlib.h>
-#include <fixpt.h>
+#include <windef.h>
 
-void DRAWLINE(int x1, int y1, int x2, int y2, byte c)
+VOID DRAWLINE(INT x1, INT y1, INT x2, INT y2, BYTE c)
 {
     x2 -= x1;
     y2 -= y1;
-    int x = _abs(x2), y = _abs(y2), i = _max(x, y);
+    INT x = _abs(x2), y = _abs(y2), i = _max(x, y);
     if (i) {
-        int_hi(x1) = int_lo(x1);
-        int_hi(y1) = int_lo(y1);
-        int_hi(x2) = int_lo(x2);
-        int_hi(y2) = int_lo(y2);
-        int_lo(x1) = int_lo(y1) = int_lo(x2) = int_lo(y2) = 127;
+        HIBYTE(x1) = LOBYTE(x1);
+        HIBYTE(y1) = LOBYTE(y1);
+        HIBYTE(x2) = LOBYTE(x2);
+        HIBYTE(y2) = LOBYTE(y2);
+        LOBYTE(x1) = LOBYTE(y1) = LOBYTE(x2) = LOBYTE(y2) = 127;
         x2 /= i;
         y2 /= i;
         while (i-- >= 0) {
-            SET(int_hi(x1), int_hi(y1), c);
+            SET(HIBYTE(x1), HIBYTE(y1), c);
             x1 += x2;
             y1 += y2;
         }
     } else {
-        SET((byte)x1, (byte)y1, c);
+        SET((BYTE)x1, (BYTE)y1, c);
     }
 }
 

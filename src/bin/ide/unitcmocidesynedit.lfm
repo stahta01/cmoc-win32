@@ -1271,11 +1271,12 @@ object FormCmocIDESynEdit: TFormCmocIDESynEdit
     CommentAttri.Style = []
     Comments = [csCStyle]
     DetectPreprocessor = True
-    IdentifierAttri.Foreground = 3355443
+    IdentifierAttri.Foreground = clBlack
     IdentifierChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz'
     KeyAttri.Foreground = clNavy
     ConstantAttri.Foreground = clGreen
     ConstantAttri.Style = []
+    DotAttri.Foreground = clRed
     KeyWords.Strings = (
       'ABX'
       'ADCA'
@@ -1350,6 +1351,7 @@ object FormCmocIDESynEdit: TFormCmocIDESynEdit
       'FDB'
       'FOR'
       'GOTO'
+      'HIBYTE'
       'IF'
       'ILLEGAL'
       'INC'
@@ -1387,6 +1389,7 @@ object FormCmocIDESynEdit: TFormCmocIDESynEdit
       'LEAU'
       'LEAX'
       'LEAY'
+      'LOBYTE'
       'LSL'
       'LSLA'
       'LSLB'
@@ -1470,6 +1473,7 @@ object FormCmocIDESynEdit: TFormCmocIDESynEdit
       'USHRT_MAX'
     )
     Objects.Strings = (
+      'BITMAP'
       'BOOL'
       'BYTE'
       'CHAR'
@@ -1482,7 +1486,9 @@ object FormCmocIDESynEdit: TFormCmocIDESynEdit
       'INT16_T'
       'INT8_T'
       'LONG'
+      'PBYTE'
       'PTRDIFF_T'
+      'PWORD'
       'SBOOL'
       'SBYTE'
       'SHORT'

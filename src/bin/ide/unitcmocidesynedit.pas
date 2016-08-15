@@ -27,8 +27,8 @@ interface
 
 uses
   Classes, Controls, Dialogs, FileUtil, Forms, Graphics, Menus,
-  MouseAndKeyInput, StrUtils, SynEdit, SynEditTypes, SynHighlighterAny, SynHighlighterCpp,
-  SysUtils, UCmocSynEditFindDialog;
+  MouseAndKeyInput, StrUtils, SynEdit, SynEditTypes, SynHighlighterAny, SysUtils,
+  UCmocSynEditFindDialog;
 
 type
 

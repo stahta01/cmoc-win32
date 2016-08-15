@@ -2,12 +2,12 @@
 #pragma target coco
 
 #include <basic.h>
-#include <fixpt.h>
+#include <windef.h>
 
-int main(void)
+INT main(VOID)
 {
-    int x, xx = 3, y, yy = 3, i;
-    byte xxx = 0, yyy = 0;
+    INT x, xx = 3, y, yy = 3, i;
+    BYTE xxx = 0, yyy = 0;
 
     CLS(0);
 
@@ -17,18 +17,18 @@ int main(void)
     for (;;) {
         x += xx;
         y += yy;
-        if (int_hi(x) < 0 || int_hi(x) > 63) {
+        if (HIBYTE(x) < 0 || HIBYTE(x) > 63) {
             xx = -xx;
             SOUND(100, 0);
         }
-        if (int_hi(y) < 0 || int_hi(y) > 31) {
+        if (HIBYTE(y) < 0 || HIBYTE(y) > 31) {
             yy = -yy;
             SOUND(200, 0);
         }
-        if (int_hi(x) != xxx || int_hi(y) != yyy) {
+        if (HIBYTE(x) != xxx || HIBYTE(y) != yyy) {
             SET(xxx, yyy, 0);
-            xxx = int_hi(x);
-            yyy = int_hi(y);
+            xxx = HIBYTE(x);
+            yyy = HIBYTE(y);
             SET(xxx, yyy, 6);
         }
     }
