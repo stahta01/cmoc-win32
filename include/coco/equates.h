@@ -139,7 +139,7 @@
 #define _ENDFLG 0
 #endif
 #ifndef _endflg
-#define _endflg *((unsigned char*)_ENDFLG)
+#define _endflg (*(unsigned char*)_ENDFLG)
 #endif
 
 // TERMINATOR FLAG 1
@@ -147,7 +147,7 @@
 #define _CHARAC 1
 #endif
 #ifndef _charac
-#define _charac *((unsigned char*)_CHARAC)
+#define _charac (*(unsigned char*)_CHARAC)
 #endif
 
 // TERMINATOR FLAG 2
@@ -155,7 +155,7 @@
 #define _ENDCHR 2
 #endif
 #ifndef _endchr
-#define _endchr *((unsigned char*)_ENDCHR)
+#define _endchr (*(unsigned char*)_ENDCHR)
 #endif
 
 // SCRATCH VARIABLE
@@ -163,7 +163,7 @@
 #define _TMPLOC 3
 #endif
 #ifndef _tmploc
-#define _tmploc *((unsigned char*)_TMPLOC)
+#define _tmploc (*(unsigned char*)_TMPLOC)
 #endif
 
 // IF COUNTER - HOW MANY IF STATEMENTS IN A LINE
@@ -171,7 +171,7 @@
 #define _IFCTR 4
 #endif
 #ifndef _ifctr
-#define _ifctr *((unsigned char*)_IFCTR)
+#define _ifctr (*(unsigned char*)_IFCTR)
 #endif
 
 // DV* ARRAY FLAG 0=EVALUATE, 1=DIMENSIONING
@@ -179,7 +179,7 @@
 #define _DIMFLG 5
 #endif
 #ifndef _dimflg
-#define _dimflg *((unsigned char*)_DIMFLG)
+#define _dimflg (*(unsigned char*)_DIMFLG)
 #endif
 
 // DV* *PV TYPE FLAG: 0=NUMERIC, $FF=STRING
@@ -187,7 +187,7 @@
 #define _VALTYP 6
 #endif
 #ifndef _valtyp
-#define _valtyp *((unsigned char*)_VALTYP)
+#define _valtyp (*(unsigned char*)_VALTYP)
 #endif
 
 // TV STRING SPACE HOUSEKEEPING FLAG
@@ -195,7 +195,7 @@
 #define _GARBFL 7
 #endif
 #ifndef _garbfl
-#define _garbfl *((unsigned char*)_GARBFL)
+#define _garbfl (*(unsigned char*)_GARBFL)
 #endif
 
 // DISABLE ARRAY SEARCH: 00=ALLOW SEARCH
@@ -203,7 +203,7 @@
 #define _ARYDIS 8
 #endif
 #ifndef _arydis
-#define _arydis *((unsigned char*)_ARYDIS)
+#define _arydis (*(unsigned char*)_ARYDIS)
 #endif
 
 // TV INPUT FLAG: READ=0, INPUT<>0
@@ -211,7 +211,7 @@
 #define _INPFLG 9
 #endif
 #ifndef _inpflg
-#define _inpflg *((unsigned char*)_INPFLG)
+#define _inpflg (*(unsigned char*)_INPFLG)
 #endif
 
 // TV RELATIONAL OPERATOR FLAG
@@ -219,7 +219,7 @@
 #define _RELFLG 10
 #endif
 #ifndef _relflg
-#define _relflg *((unsigned char*)_RELFLG)
+#define _relflg (*(unsigned char*)_RELFLG)
 #endif
 
 // PV TEMPORARY STRING STACK POINTER
@@ -227,7 +227,7 @@
 #define _TEMPPT 11
 #endif
 #ifndef _temppt
-#define _temppt *((unsigned*)_TEMPPT)
+#define _temppt (*(unsigned*)_TEMPPT)
 #endif
 
 // PV ADDR OF LAST USED STRING STACK ADDRESS
@@ -235,7 +235,7 @@
 #define _LASTPT 13
 #endif
 #ifndef _lastpt
-#define _lastpt *((unsigned*)_LASTPT)
+#define _lastpt (*(unsigned*)_LASTPT)
 #endif
 
 // TEMPORARY POINTER
@@ -243,7 +243,7 @@
 #define _TEMPTR 15
 #endif
 #ifndef _temptr
-#define _temptr *((unsigned*)_TEMPTR)
+#define _temptr (*(unsigned*)_TEMPTR)
 #endif
 
 // TEMPORARY DESCRIPTOR STORAGE (STACK SEARCH)
@@ -251,7 +251,7 @@
 #define _TMPTR1 17
 #endif
 #ifndef _tmptr1
-#define _tmptr1 *((unsigned*)_TMPTR1)
+#define _tmptr1 (*(unsigned*)_TMPTR1)
 #endif
 
 // FLOATING POINT ACCUMULATOR #2 MANTISSA
@@ -267,7 +267,7 @@
 #define _BOTSTK 23
 #endif
 #ifndef _botstk
-#define _botstk *((unsigned*)_BOTSTK)
+#define _botstk (*(unsigned*)_BOTSTK)
 #endif
 
 // PV BEGINNING OF BASIC PROGRAM
@@ -275,7 +275,7 @@
 #define _TXTTAB 25
 #endif
 #ifndef _txttab
-#define _txttab *((unsigned*)_TXTTAB)
+#define _txttab (*(unsigned*)_TXTTAB)
 #endif
 
 // PV START OF VARIABLES
@@ -283,7 +283,7 @@
 #define _VARTAB 27
 #endif
 #ifndef _vartab
-#define _vartab *((unsigned*)_VARTAB)
+#define _vartab (*(unsigned*)_VARTAB)
 #endif
 
 // PV START OF ARRAYS
@@ -291,7 +291,7 @@
 #define _ARYTAB 29
 #endif
 #ifndef _arytab
-#define _arytab *((unsigned*)_ARYTAB)
+#define _arytab (*(unsigned*)_ARYTAB)
 #endif
 
 // PV END OF ARRAYS (+1)
@@ -299,7 +299,7 @@
 #define _ARYEND 31
 #endif
 #ifndef _aryend
-#define _aryend *((unsigned*)_ARYEND)
+#define _aryend (*(unsigned*)_ARYEND)
 #endif
 
 // PV START OF STRING STORAGE (TOP OF FREE RAM)
@@ -307,7 +307,7 @@
 #define _FRETOP 33
 #endif
 #ifndef _fretop
-#define _fretop *((unsigned*)_FRETOP)
+#define _fretop (*(unsigned*)_FRETOP)
 #endif
 
 // PV START OF STRING VARIABLES
@@ -315,7 +315,7 @@
 #define _STRTAB 35
 #endif
 #ifndef _strtab
-#define _strtab *((unsigned*)_STRTAB)
+#define _strtab (*(unsigned*)_STRTAB)
 #endif
 
 // UTILITY STRING POINTER
@@ -323,7 +323,7 @@
 #define _FRESPC 37
 #endif
 #ifndef _frespc
-#define _frespc *((unsigned*)_FRESPC)
+#define _frespc (*(unsigned*)_FRESPC)
 #endif
 
 // PV TOP OF STRING SPACE
@@ -331,7 +331,7 @@
 #define _MEMSIZ 39
 #endif
 #ifndef _memsiz
-#define _memsiz *((unsigned*)_MEMSIZ)
+#define _memsiz (*(unsigned*)_MEMSIZ)
 #endif
 
 // SAVED LINE NUMBER DURING A "STOP"
@@ -339,7 +339,7 @@
 #define _OLDTXT 41
 #endif
 #ifndef _oldtxt
-#define _oldtxt *((unsigned*)_OLDTXT)
+#define _oldtxt (*(unsigned*)_OLDTXT)
 #endif
 
 // BINARY VALUE OF A CONVERTED LINE NUMBER
@@ -347,7 +347,7 @@
 #define _BINVAL 43
 #endif
 #ifndef _binval
-#define _binval *((unsigned*)_BINVAL)
+#define _binval (*(unsigned*)_BINVAL)
 #endif
 
 // SAVED INPUT PTR DURING A "STOP"
@@ -355,7 +355,7 @@
 #define _OLDPTR 45
 #endif
 #ifndef _oldptr
-#define _oldptr *((unsigned*)_OLDPTR)
+#define _oldptr (*(unsigned*)_OLDPTR)
 #endif
 
 // TEMPORARY INPUT POINTER STORAGE
@@ -363,7 +363,7 @@
 #define _TINPTR 47
 #endif
 #ifndef _tinptr
-#define _tinptr *((unsigned*)_TINPTR)
+#define _tinptr (*(unsigned*)_TINPTR)
 #endif
 
 // PV 'DATA' STATEMENT LINE NUMBER POINTER
@@ -371,7 +371,7 @@
 #define _DATTXT 49
 #endif
 #ifndef _dattxt
-#define _dattxt *((unsigned*)_DATTXT)
+#define _dattxt (*(unsigned*)_DATTXT)
 #endif
 
 // PV 'DATA' STATEMENT ADDRESS POINTER
@@ -379,7 +379,7 @@
 #define _DATPTR 51
 #endif
 #ifndef _datptr
-#define _datptr *((unsigned*)_DATPTR)
+#define _datptr (*(unsigned*)_DATPTR)
 #endif
 
 // DATA POINTER FOR 'INPUT' & 'READ'
@@ -387,7 +387,7 @@
 #define _DATTMP 53
 #endif
 #ifndef _dattmp
-#define _dattmp *((unsigned*)_DATTMP)
+#define _dattmp (*(unsigned*)_DATTMP)
 #endif
 
 // TV TEMP STORAGE FOR A VARIABLE NAME
@@ -395,7 +395,7 @@
 #define _VARNAM 55
 #endif
 #ifndef _varnam
-#define _varnam *((unsigned*)_VARNAM)
+#define _varnam (*(unsigned*)_VARNAM)
 #endif
 
 // TV POINTER TO A VARIABLE DESCRIPTOR
@@ -403,7 +403,7 @@
 #define _VARPTR 57
 #endif
 #ifndef _varptr
-#define _varptr *((unsigned*)_VARPTR)
+#define _varptr (*(unsigned*)_VARPTR)
 #endif
 
 // TEMP POINTER TO A VARIABLE DESCRIPTOR
@@ -411,7 +411,7 @@
 #define _VARDES 59
 #endif
 #ifndef _vardes
-#define _vardes *((unsigned*)_VARDES)
+#define _vardes (*(unsigned*)_VARDES)
 #endif
 
 // POINTER TO RELATIONAL OPERATOR PROCESSING ROUTINE
@@ -419,7 +419,7 @@
 #define _RELPTR 61
 #endif
 #ifndef _relptr
-#define _relptr *((unsigned*)_RELPTR)
+#define _relptr (*(unsigned*)_RELPTR)
 #endif
 
 // TEMPORARY RELATIONAL OPERATOR FLAG BYTE
@@ -427,91 +427,91 @@
 #define _TRELFL 63
 #endif
 #ifndef _trelfl
-#define _trelfl *((unsigned char*)_TRELFL)
+#define _trelfl (*(unsigned char*)_TRELFL)
 #endif
 
 #ifndef _V40
 #define _V40 64
 #endif
 #ifndef _v40
-#define _v40 *((unsigned char*)_V40)
+#define _v40 (*(unsigned char*)_V40)
 #endif
 
 #ifndef _V41
 #define _V41 65
 #endif
 #ifndef _v41
-#define _v41 *((unsigned char*)_V41)
+#define _v41 (*(unsigned char*)_V41)
 #endif
 
 #ifndef _V42
 #define _V42 66
 #endif
 #ifndef _v42
-#define _v42 *((unsigned char*)_V42)
+#define _v42 (*(unsigned char*)_V42)
 #endif
 
 #ifndef _V43
 #define _V43 67
 #endif
 #ifndef _v43
-#define _v43 *((unsigned char*)_V43)
+#define _v43 (*(unsigned char*)_V43)
 #endif
 
 #ifndef _V44
 #define _V44 68
 #endif
 #ifndef _v44
-#define _v44 *((unsigned char*)_V44)
+#define _v44 (*(unsigned char*)_V44)
 #endif
 
 #ifndef _V45
 #define _V45 69
 #endif
 #ifndef _v45
-#define _v45 *((unsigned char*)_V45)
+#define _v45 (*(unsigned char*)_V45)
 #endif
 
 #ifndef _V46
 #define _V46 70
 #endif
 #ifndef _v46
-#define _v46 *((unsigned char*)_V46)
+#define _v46 (*(unsigned char*)_V46)
 #endif
 
 #ifndef _V47
 #define _V47 71
 #endif
 #ifndef _v47
-#define _v47 *((unsigned char*)_V47)
+#define _v47 (*(unsigned char*)_V47)
 #endif
 
 #ifndef _V48
 #define _V48 72
 #endif
 #ifndef _v48
-#define _v48 *((unsigned*)_V48)
+#define _v48 (*(unsigned*)_V48)
 #endif
 
 #ifndef _V4A
 #define _V4A 74
 #endif
 #ifndef _v4a
-#define _v4a *((unsigned char*)_V4A)
+#define _v4a (*(unsigned char*)_V4A)
 #endif
 
 #ifndef _V4B
 #define _V4B 75
 #endif
 #ifndef _v4b
-#define _v4b *((unsigned*)_V4B)
+#define _v4b (*(unsigned*)_V4B)
 #endif
 
 #ifndef _V4D
 #define _V4D 77
 #endif
 #ifndef _v4d
-#define _v4d *((unsigned*)_V4D)
+#define _v4d (*(unsigned*)_V4D)
 #endif
 
 // PV FLOATING POINT ACCUMULATOR #0 EXPONENT
@@ -519,7 +519,7 @@
 #define _FP0EXP 79
 #endif
 #ifndef _fp0exp
-#define _fp0exp *((unsigned char*)_FP0EXP)
+#define _fp0exp (*(unsigned char*)_FP0EXP)
 #endif
 
 // PV FLOATING POINT ACCUMULATOR #0 MANTISSA
@@ -535,7 +535,7 @@
 #define _FP0SGN 84
 #endif
 #ifndef _fp0sgn
-#define _fp0sgn *((unsigned char*)_FP0SGN)
+#define _fp0sgn (*(unsigned char*)_FP0SGN)
 #endif
 
 // POLYNOMIAL COEFFICIENT COUNTER
@@ -543,7 +543,7 @@
 #define _COEFCT 85
 #endif
 #ifndef _coefct
-#define _coefct *((unsigned char*)_COEFCT)
+#define _coefct (*(unsigned char*)_COEFCT)
 #endif
 
 // TEMPORARY STRING DESCRIPTOR
@@ -559,7 +559,7 @@
 #define _FPCARY 91
 #endif
 #ifndef _fpcary
-#define _fpcary *((unsigned char*)_FPCARY)
+#define _fpcary (*(unsigned char*)_FPCARY)
 #endif
 
 // PV FLOATING POINT ACCUMULATOR #1 EXPONENT
@@ -567,7 +567,7 @@
 #define _FP1EXP 92
 #endif
 #ifndef _fp1exp
-#define _fp1exp *((unsigned char*)_FP1EXP)
+#define _fp1exp (*(unsigned char*)_FP1EXP)
 #endif
 
 // PV FLOATING POINT ACCUMULATOR #1 MANTISSA
@@ -583,7 +583,7 @@
 #define _FP1SGN 97
 #endif
 #ifndef _fp1sgn
-#define _fp1sgn *((unsigned char*)_FP1SGN)
+#define _fp1sgn (*(unsigned char*)_FP1SGN)
 #endif
 
 // SIGN OF RESULT OF FLOATING POINT OPERATION
@@ -591,7 +591,7 @@
 #define _RESSGN 98
 #endif
 #ifndef _ressgn
-#define _ressgn *((unsigned char*)_RESSGN)
+#define _ressgn (*(unsigned char*)_RESSGN)
 #endif
 
 // FLOATING POINT SUB BYTE (FIFTH BYTE)
@@ -599,7 +599,7 @@
 #define _FPSBYT 99
 #endif
 #ifndef _fpsbyt
-#define _fpsbyt *((unsigned char*)_FPSBYT)
+#define _fpsbyt (*(unsigned char*)_FPSBYT)
 #endif
 
 // POLYNOMIAL COEFFICIENT POINTER
@@ -607,7 +607,7 @@
 #define _COEFPT 100
 #endif
 #ifndef _coefpt
-#define _coefpt *((unsigned*)_COEFPT)
+#define _coefpt (*(unsigned*)_COEFPT)
 #endif
 
 // CURRENT LINE POINTER DURING LIST
@@ -615,7 +615,7 @@
 #define _LSTTXT 102
 #endif
 #ifndef _lsttxt
-#define _lsttxt *((unsigned*)_LSTTXT)
+#define _lsttxt (*(unsigned*)_LSTTXT)
 #endif
 
 // PV CURRENT LINE # OF BASIC PROGRAM, $FFFF = DIRECT
@@ -623,7 +623,7 @@
 #define _CURLIN 104
 #endif
 #ifndef _curlin
-#define _curlin *((unsigned*)_CURLIN)
+#define _curlin (*(unsigned*)_CURLIN)
 #endif
 
 // TV TAB FIELD WIDTH
@@ -631,7 +631,7 @@
 #define _DEVCFW 106
 #endif
 #ifndef _devcfw
-#define _devcfw *((unsigned char*)_DEVCFW)
+#define _devcfw (*(unsigned char*)_DEVCFW)
 #endif
 
 // TV TAB ZONE
@@ -639,7 +639,7 @@
 #define _DEVLCF 107
 #endif
 #ifndef _devlcf
-#define _devlcf *((unsigned char*)_DEVLCF)
+#define _devlcf (*(unsigned char*)_DEVLCF)
 #endif
 
 // TV PRINT POSITION
@@ -647,7 +647,7 @@
 #define _DEVPOS 108
 #endif
 #ifndef _devpos
-#define _devpos *((unsigned char*)_DEVPOS)
+#define _devpos (*(unsigned char*)_DEVPOS)
 #endif
 
 // TV PRINT WIDTH
@@ -655,7 +655,7 @@
 #define _DEVWID 109
 #endif
 #ifndef _devwid
-#define _devwid *((unsigned char*)_DEVWID)
+#define _devwid (*(unsigned char*)_DEVWID)
 #endif
 
 // TV PRINT DEVICE: 0=NOT CASSETTE, -1=CASSETTE
@@ -663,7 +663,7 @@
 #define _PRTDEV 110
 #endif
 #ifndef _prtdev
-#define _prtdev *((unsigned char*)_PRTDEV)
+#define _prtdev (*(unsigned char*)_PRTDEV)
 #endif
 
 // PV DEVICE NUMBER: -3=DLOAD, -2=PRINTER,
@@ -671,7 +671,7 @@
 #define _DEVNUM 111
 #endif
 #ifndef _devnum
-#define _devnum *((unsigned char*)_DEVNUM)
+#define _devnum (*(unsigned char*)_DEVNUM)
 #endif
 
 // PV CONSOLE IN BUFFER FLAG: 00=NOT EMPTY, $FF=EMPTY
@@ -679,7 +679,7 @@
 #define _CINBFL 112
 #endif
 #ifndef _cinbfl
-#define _cinbfl *((unsigned char*)_CINBFL)
+#define _cinbfl (*(unsigned char*)_CINBFL)
 #endif
 
 // PV WARM START FLAG: $55=WARM, OTHER=COLD
@@ -687,7 +687,7 @@
 #define _RSTFLG 113
 #endif
 #ifndef _rstflg
-#define _rstflg *((unsigned char*)_RSTFLG)
+#define _rstflg (*(unsigned char*)_RSTFLG)
 #endif
 
 // PV WARM START VECTOR - JUMP ADDRESS FOR WARM START
@@ -695,7 +695,7 @@
 #define _RSTVEC 114
 #endif
 #ifndef _rstvec
-#define _rstvec *((unsigned*)_RSTVEC)
+#define _rstvec (*(unsigned*)_RSTVEC)
 #endif
 
 // PV TOP OF RAM
@@ -703,7 +703,7 @@
 #define _TOPRAM 116
 #endif
 #ifndef _topram
-#define _topram *((unsigned*)_TOPRAM)
+#define _topram (*(unsigned*)_TOPRAM)
 #endif
 
 // PV FILE STATUS FLAG: 0=CLOSED, 1=INPUT, 2=OUTPUT
@@ -711,7 +711,7 @@
 #define _FILSTA 120
 #endif
 #ifndef _filsta
-#define _filsta *((unsigned char*)_FILSTA)
+#define _filsta (*(unsigned char*)_FILSTA)
 #endif
 
 // PV CONSOLE IN BUFFER CHAR COUNTER
@@ -719,7 +719,7 @@
 #define _CINCTR 121
 #endif
 #ifndef _cinctr
-#define _cinctr *((unsigned char*)_CINCTR)
+#define _cinctr (*(unsigned char*)_CINCTR)
 #endif
 
 // PV CONSOLE IN BUFFER POINTER
@@ -727,7 +727,7 @@
 #define _CINPTR 122
 #endif
 #ifndef _cinptr
-#define _cinptr *((unsigned*)_CINPTR)
+#define _cinptr (*(unsigned*)_CINPTR)
 #endif
 
 // TV CASS BLOCK TYPE: 0=HEADER, 1=DATA, $FF=EOF
@@ -735,7 +735,7 @@
 #define _BLKTYP 124
 #endif
 #ifndef _blktyp
-#define _blktyp *((unsigned char*)_BLKTYP)
+#define _blktyp (*(unsigned char*)_BLKTYP)
 #endif
 
 // TV CASSETTE BYTE COUNT
@@ -743,7 +743,7 @@
 #define _BLKLEN 125
 #endif
 #ifndef _blklen
-#define _blklen *((unsigned char*)_BLKLEN)
+#define _blklen (*(unsigned char*)_BLKLEN)
 #endif
 
 // TV CASSETTE LOAD BUFFER POINTER
@@ -751,7 +751,7 @@
 #define _CBUFAD 126
 #endif
 #ifndef _cbufad
-#define _cbufad *((unsigned*)_CBUFAD)
+#define _cbufad (*(unsigned*)_CBUFAD)
 #endif
 
 // TV CASSETTE CHECKSUM BYTE
@@ -759,7 +759,7 @@
 #define _CCKSUM 128
 #endif
 #ifndef _ccksum
-#define _ccksum *((unsigned char*)_CCKSUM)
+#define _ccksum (*(unsigned char*)_CCKSUM)
 #endif
 
 // TV ERROR FLAG/CHARACTER COUNT
@@ -767,7 +767,7 @@
 #define _CSRERR 129
 #endif
 #ifndef _csrerr
-#define _csrerr *((unsigned char*)_CSRERR)
+#define _csrerr (*(unsigned char*)_CSRERR)
 #endif
 
 // TV PULSE WIDTH COUNT
@@ -775,7 +775,7 @@
 #define _CPULWD 130
 #endif
 #ifndef _cpulwd
-#define _cpulwd *((unsigned char*)_CPULWD)
+#define _cpulwd (*(unsigned char*)_CPULWD)
 #endif
 
 // TV BIT COUNTER
@@ -783,7 +783,7 @@
 #define _CPERTM 131
 #endif
 #ifndef _cpertm
-#define _cpertm *((unsigned char*)_CPERTM)
+#define _cpertm (*(unsigned char*)_CPERTM)
 #endif
 
 // TV BIT PHASE FLAG
@@ -791,7 +791,7 @@
 #define _CBTPHA 132
 #endif
 #ifndef _cbtpha
-#define _cbtpha *((unsigned char*)_CBTPHA)
+#define _cbtpha (*(unsigned char*)_CBTPHA)
 #endif
 
 // TV LAST SINE TABLE ENTRY
@@ -799,7 +799,7 @@
 #define _CLSTSN 133
 #endif
 #ifndef _clstsn
-#define _clstsn *((unsigned char*)_CLSTSN)
+#define _clstsn (*(unsigned char*)_CLSTSN)
 #endif
 
 // TV GRAPHIC BLOCK VALUE FOR SET, RESET AND POINT
@@ -807,7 +807,7 @@
 #define _GRBLOK 134
 #endif
 #ifndef _grblok
-#define _grblok *((unsigned char*)_GRBLOK)
+#define _grblok (*(unsigned char*)_GRBLOK)
 #endif
 
 // TV INKEY$ RAM IMAGE
@@ -815,7 +815,7 @@
 #define _IKEYIM 135
 #endif
 #ifndef _ikeyim
-#define _ikeyim *((unsigned char*)_IKEYIM)
+#define _ikeyim (*(unsigned char*)_IKEYIM)
 #endif
 
 // PV CURSOR LOCATION
@@ -823,7 +823,7 @@
 #define _CURPOS 136
 #endif
 #ifndef _curpos
-#define _curpos *((unsigned*)_CURPOS)
+#define _curpos (*(unsigned*)_CURPOS)
 #endif
 
 // PV DUMMY - THESE TWO BYTES ARE ALWAYS ZERO
@@ -831,7 +831,7 @@
 #define _ZERO 138
 #endif
 #ifndef _zero
-#define _zero *((unsigned*)_ZERO)
+#define _zero (*(unsigned*)_ZERO)
 #endif
 
 // TV TONE VALUE FOR SOUND COMMAND
@@ -839,7 +839,7 @@
 #define _SNDTON 140
 #endif
 #ifndef _sndton
-#define _sndton *((unsigned char*)_SNDTON)
+#define _sndton (*(unsigned char*)_SNDTON)
 #endif
 
 // TV DURATION VALUE FOR SOUND COMMAND
@@ -847,7 +847,7 @@
 #define _SNDDUR 141
 #endif
 #ifndef _snddur
-#define _snddur *((unsigned*)_SNDDUR)
+#define _snddur (*(unsigned*)_SNDDUR)
 #endif
 
 // 18      *PV 1200/2400 HERTZ PARTITION
@@ -855,7 +855,7 @@
 #define _CMPMID 143
 #endif
 #ifndef _cmpmid
-#define _cmpmid *((unsigned char*)_CMPMID)
+#define _cmpmid (*(unsigned char*)_CMPMID)
 #endif
 
 // 24      *PV UPPER LIMIT OF 1200 HERTZ PERIOD
@@ -863,7 +863,7 @@
 #define _CMP0 144
 #endif
 #ifndef _cmp0
-#define _cmp0 *((unsigned char*)_CMP0)
+#define _cmp0 (*(unsigned char*)_CMP0)
 #endif
 
 // 10      *PV UPPER LIMIT OF 2400 HERTZ PERIOD
@@ -871,7 +871,7 @@
 #define _CMP1 145
 #endif
 #ifndef _cmp1
-#define _cmp1 *((unsigned char*)_CMP1)
+#define _cmp1 (*(unsigned char*)_CMP1)
 #endif
 
 // 128     *PV NUMBER OF $55'S TO CASSETTE LEADER
@@ -879,7 +879,7 @@
 #define _SYNCLN 146
 #endif
 #ifndef _syncln
-#define _syncln *((unsigned*)_SYNCLN)
+#define _syncln (*(unsigned*)_SYNCLN)
 #endif
 
 // 11      *PV CURSOR BLINK DELAY
@@ -887,7 +887,7 @@
 #define _BLKCNT 148
 #endif
 #ifndef _blkcnt
-#define _blkcnt *((unsigned char*)_BLKCNT)
+#define _blkcnt (*(unsigned char*)_BLKCNT)
 #endif
 
 // 88      *PV BAUD RATE CONSTANT (600)
@@ -895,7 +895,7 @@
 #define _LPTBTD 149
 #endif
 #ifndef _lptbtd
-#define _lptbtd *((unsigned*)_LPTBTD)
+#define _lptbtd (*(unsigned*)_LPTBTD)
 #endif
 
 // 1       *PV PRINTER CARRIAGE RETURN DELAY
@@ -903,7 +903,7 @@
 #define _LPTLND 151
 #endif
 #ifndef _lptlnd
-#define _lptlnd *((unsigned*)_LPTLND)
+#define _lptlnd (*(unsigned*)_LPTLND)
 #endif
 
 // 16      *PV TAB FIELD WIDTH
@@ -911,7 +911,7 @@
 #define _LPTCFW 153
 #endif
 #ifndef _lptcfw
-#define _lptcfw *((unsigned char*)_LPTCFW)
+#define _lptcfw (*(unsigned char*)_LPTCFW)
 #endif
 
 // 112     *PV LAST TAB ZONE
@@ -919,7 +919,7 @@
 #define _LPTLCF 154
 #endif
 #ifndef _lptlcf
-#define _lptlcf *((unsigned char*)_LPTLCF)
+#define _lptlcf (*(unsigned char*)_LPTLCF)
 #endif
 
 // 132     *PV PRINTER WIDTH
@@ -927,7 +927,7 @@
 #define _LPTWID 155
 #endif
 #ifndef _lptwid
-#define _lptwid *((unsigned char*)_LPTWID)
+#define _lptwid (*(unsigned char*)_LPTWID)
 #endif
 
 // 0       *PV LINE PRINTER POSITION
@@ -935,7 +935,7 @@
 #define _LPTPOS 156
 #endif
 #ifndef _lptpos
-#define _lptpos *((unsigned char*)_LPTPOS)
+#define _lptpos (*(unsigned char*)_LPTPOS)
 #endif
 
 // LB4AA   *PV JUMP ADDRESS FOR EXEC COMMAND
@@ -943,7 +943,7 @@
 #define _EXECJP 157
 #endif
 #ifndef _execjp
-#define _execjp *((unsigned*)_EXECJP)
+#define _execjp (*(unsigned*)_EXECJP)
 #endif
 
 #ifndef _GETNCH
@@ -958,7 +958,7 @@
 #define _GETCCH 165
 #endif
 #ifndef _getcch
-#define _getcch *((unsigned char*)_GETCCH)
+#define _getcch (*(unsigned char*)_GETCCH)
 #endif
 
 // PV THESE 2 BYTES CONTAIN ADDRESS OF THE CURRENT
@@ -966,7 +966,7 @@
 #define _CHARAD 166
 #endif
 #ifndef _charad
-#define _charad *((unsigned*)_CHARAD)
+#define _charad (*(unsigned*)_CHARAD)
 #endif
 
 // = LOW ORDER FOUR BYTES OF THE PRODUCT
@@ -974,7 +974,7 @@
 #define _VAB 171
 #endif
 #ifndef _vab
-#define _vab *((unsigned char*)_VAB)
+#define _vab (*(unsigned char*)_VAB)
 #endif
 
 // = OF A FLOATING POINT MULTIPLICATION
@@ -982,7 +982,7 @@
 #define _VAC 172
 #endif
 #ifndef _vac
-#define _vac *((unsigned char*)_VAC)
+#define _vac (*(unsigned char*)_VAC)
 #endif
 
 // = THESE BYTES ARE USE AS RANDOM DATA
@@ -990,7 +990,7 @@
 #define _VAD 173
 #endif
 #ifndef _vad
-#define _vad *((unsigned char*)_VAD)
+#define _vad (*(unsigned char*)_VAD)
 #endif
 
 // = BY THE RND STATEMENT
@@ -998,7 +998,7 @@
 #define _VAE 174
 #endif
 #ifndef _vae
-#define _vae *((unsigned char*)_VAE)
+#define _vae (*(unsigned char*)_VAE)
 #endif
 
 // PV TRACE FLAG 0=OFF ELSE=ON
@@ -1006,7 +1006,7 @@
 #define _TRCFLG 175
 #endif
 #ifndef _trcflg
-#define _trcflg *((unsigned char*)_TRCFLG)
+#define _trcflg (*(unsigned char*)_TRCFLG)
 #endif
 
 // PV ADDRESS OF THE START OF USR VECTORS
@@ -1014,7 +1014,7 @@
 #define _USRADR 176
 #endif
 #ifndef _usradr
-#define _usradr *((unsigned*)_USRADR)
+#define _usradr (*(unsigned*)_USRADR)
 #endif
 
 // PV FOREGROUND COLOR
@@ -1022,7 +1022,7 @@
 #define _FORCOL 178
 #endif
 #ifndef _forcol
-#define _forcol *((unsigned char*)_FORCOL)
+#define _forcol (*(unsigned char*)_FORCOL)
 #endif
 
 // PV BACKGROUND COLOR
@@ -1030,7 +1030,7 @@
 #define _BAKCOL 179
 #endif
 #ifndef _bakcol
-#define _bakcol *((unsigned char*)_BAKCOL)
+#define _bakcol (*(unsigned char*)_BAKCOL)
 #endif
 
 // TV WORKING COLOR BEING USED BY EX BASIC
@@ -1038,7 +1038,7 @@
 #define _WCOLOR 180
 #endif
 #ifndef _wcolor
-#define _wcolor *((unsigned char*)_WCOLOR)
+#define _wcolor (*(unsigned char*)_WCOLOR)
 #endif
 
 // TV ALL PIXELS IN THIS BYTE SET TO COLOR OF VB3
@@ -1046,7 +1046,7 @@
 #define _ALLCOL 181
 #endif
 #ifndef _allcol
-#define _allcol *((unsigned char*)_ALLCOL)
+#define _allcol (*(unsigned char*)_ALLCOL)
 #endif
 
 // PV PMODE'S MODE ARGUMENT
@@ -1054,7 +1054,7 @@
 #define _PMODE 182
 #endif
 #ifndef _pmode
-#define _pmode *((unsigned char*)_PMODE)
+#define _pmode (*(unsigned char*)_PMODE)
 #endif
 
 // PV END OF CURRENT GRAPHIC PAGE
@@ -1062,7 +1062,7 @@
 #define _ENDGRP 183
 #endif
 #ifndef _endgrp
-#define _endgrp *((unsigned*)_ENDGRP)
+#define _endgrp (*(unsigned*)_ENDGRP)
 #endif
 
 // PV NUMBER OF BYTES/HORIZONTAL GRAPHIC LINE
@@ -1070,7 +1070,7 @@
 #define _HORBYT 185
 #endif
 #ifndef _horbyt
-#define _horbyt *((unsigned char*)_HORBYT)
+#define _horbyt (*(unsigned char*)_HORBYT)
 #endif
 
 // PV START OF CURRENT GRAPHIC PAGE
@@ -1078,7 +1078,7 @@
 #define _BEGGRP 186
 #endif
 #ifndef _beggrp
-#define _beggrp *((unsigned*)_BEGGRP)
+#define _beggrp (*(unsigned*)_BEGGRP)
 #endif
 
 // PV START OF GRAPHIC RAM (MS BYTE)
@@ -1086,7 +1086,7 @@
 #define _GRPRAM 188
 #endif
 #ifndef _grpram
-#define _grpram *((unsigned char*)_GRPRAM)
+#define _grpram (*(unsigned char*)_GRPRAM)
 #endif
 
 // DV* *PV HORIZ COORD - START POINT
@@ -1094,7 +1094,7 @@
 #define _HORBEG 189
 #endif
 #ifndef _horbeg
-#define _horbeg *((unsigned*)_HORBEG)
+#define _horbeg (*(unsigned*)_HORBEG)
 #endif
 
 // DV* *PV VERT COORD - START POINT
@@ -1102,7 +1102,7 @@
 #define _VERBEG 191
 #endif
 #ifndef _verbeg
-#define _verbeg *((unsigned*)_VERBEG)
+#define _verbeg (*(unsigned*)_VERBEG)
 #endif
 
 // PV SCREEN'S COLOR SET ARGUMENT
@@ -1110,7 +1110,7 @@
 #define _CSSVAL 193
 #endif
 #ifndef _cssval
-#define _cssval *((unsigned char*)_CSSVAL)
+#define _cssval (*(unsigned char*)_CSSVAL)
 #endif
 
 // PV PRESET/PSET FLAG: 0=PRESET, 1=PSET
@@ -1118,7 +1118,7 @@
 #define _SETFLG 194
 #endif
 #ifndef _setflg
-#define _setflg *((unsigned char*)_SETFLG)
+#define _setflg (*(unsigned char*)_SETFLG)
 #endif
 
 // DV* *PV HORIZ COORD - ENDING POINT
@@ -1126,7 +1126,7 @@
 #define _HOREND 195
 #endif
 #ifndef _horend
-#define _horend *((unsigned*)_HOREND)
+#define _horend (*(unsigned*)_HOREND)
 #endif
 
 // DV* *PV VERT COORD - ENDING POINT
@@ -1134,7 +1134,7 @@
 #define _VEREND 197
 #endif
 #ifndef _verend
-#define _verend *((unsigned*)_VEREND)
+#define _verend (*(unsigned*)_VEREND)
 #endif
 
 // PV HORIZ COORD - DEFAULT COORD
@@ -1142,7 +1142,7 @@
 #define _HORDEF 199
 #endif
 #ifndef _hordef
-#define _hordef *((unsigned*)_HORDEF)
+#define _hordef (*(unsigned*)_HORDEF)
 #endif
 
 // PV VERT COORD - DEFAULT COORD
@@ -1150,91 +1150,91 @@
 #define _VERDEF 201
 #endif
 #ifndef _verdef
-#define _verdef *((unsigned*)_VERDEF)
+#define _verdef (*(unsigned*)_VERDEF)
 #endif
 
 #ifndef _VCB
 #define _VCB 203
 #endif
 #ifndef _vcb
-#define _vcb *((unsigned*)_VCB)
+#define _vcb (*(unsigned*)_VCB)
 #endif
 
 #ifndef _VCD
 #define _VCD 205
 #endif
 #ifndef _vcd
-#define _vcd *((unsigned*)_VCD)
+#define _vcd (*(unsigned*)_VCD)
 #endif
 
 #ifndef _VCF
 #define _VCF 207
 #endif
 #ifndef _vcf
-#define _vcf *((unsigned*)_VCF)
+#define _vcf (*(unsigned*)_VCF)
 #endif
 
 #ifndef _VD1
 #define _VD1 209
 #endif
 #ifndef _vd1
-#define _vd1 *((unsigned*)_VD1)
+#define _vd1 (*(unsigned*)_VD1)
 #endif
 
 #ifndef _VD3
 #define _VD3 211
 #endif
 #ifndef _vd3
-#define _vd3 *((unsigned char*)_VD3)
+#define _vd3 (*(unsigned char*)_VD3)
 #endif
 
 #ifndef _VD4
 #define _VD4 212
 #endif
 #ifndef _vd4
-#define _vd4 *((unsigned char*)_VD4)
+#define _vd4 (*(unsigned char*)_VD4)
 #endif
 
 #ifndef _VD5
 #define _VD5 213
 #endif
 #ifndef _vd5
-#define _vd5 *((unsigned char*)_VD5)
+#define _vd5 (*(unsigned char*)_VD5)
 #endif
 
 #ifndef _VD6
 #define _VD6 214
 #endif
 #ifndef _vd6
-#define _vd6 *((unsigned char*)_VD6)
+#define _vd6 (*(unsigned char*)_VD6)
 #endif
 
 #ifndef _VD7
 #define _VD7 215
 #endif
 #ifndef _vd7
-#define _vd7 *((unsigned char*)_VD7)
+#define _vd7 (*(unsigned char*)_VD7)
 #endif
 
 #ifndef _VD8
 #define _VD8 216
 #endif
 #ifndef _vd8
-#define _vd8 *((unsigned char*)_VD8)
+#define _vd8 (*(unsigned char*)_VD8)
 #endif
 
 #ifndef _VD9
 #define _VD9 217
 #endif
 #ifndef _vd9
-#define _vd9 *((unsigned char*)_VD9)
+#define _vd9 (*(unsigned char*)_VD9)
 #endif
 
 #ifndef _VDA
 #define _VDA 218
 #endif
 #ifndef _vda
-#define _vda *((unsigned char*)_VDA)
+#define _vda (*(unsigned char*)_VDA)
 #endif
 
 // TV FLAG TO INDICATE IF GRAPHIC DATA HAS BEEN CHANGED
@@ -1242,7 +1242,7 @@
 #define _CHGFLG 219
 #endif
 #ifndef _chgflg
-#define _chgflg *((unsigned char*)_CHGFLG)
+#define _chgflg (*(unsigned char*)_CHGFLG)
 #endif
 
 // TV STACK POINTER STORAGE DURING PAINT
@@ -1250,7 +1250,7 @@
 #define _TMPSTK 220
 #endif
 #ifndef _tmpstk
-#define _tmpstk *((unsigned*)_TMPSTK)
+#define _tmpstk (*(unsigned*)_TMPSTK)
 #endif
 
 // PV OCTAVE VALUE (PLAY)
@@ -1258,7 +1258,7 @@
 #define _OCTAVE 222
 #endif
 #ifndef _octave
-#define _octave *((unsigned char*)_OCTAVE)
+#define _octave (*(unsigned char*)_OCTAVE)
 #endif
 
 // DV* *PV VOLUME HIGH VALUE (PLAY)
@@ -1266,7 +1266,7 @@
 #define _VOLHI 223
 #endif
 #ifndef _volhi
-#define _volhi *((unsigned char*)_VOLHI)
+#define _volhi (*(unsigned char*)_VOLHI)
 #endif
 
 // DV* *PV VOLUME LOW VALUE (PLAY)
@@ -1274,7 +1274,7 @@
 #define _VOLLOW 224
 #endif
 #ifndef _vollow
-#define _vollow *((unsigned char*)_VOLLOW)
+#define _vollow (*(unsigned char*)_VOLLOW)
 #endif
 
 // PV NOTE LENGTH (PLAY)
@@ -1282,7 +1282,7 @@
 #define _NOTELN 225
 #endif
 #ifndef _noteln
-#define _noteln *((unsigned char*)_NOTELN)
+#define _noteln (*(unsigned char*)_NOTELN)
 #endif
 
 // PV TEMPO VALUE (PLAY)
@@ -1290,7 +1290,7 @@
 #define _TEMPO 226
 #endif
 #ifndef _tempo
-#define _tempo *((unsigned char*)_TEMPO)
+#define _tempo (*(unsigned char*)_TEMPO)
 #endif
 
 // TV TIMER FOR THE PLAY COMMAND
@@ -1298,7 +1298,7 @@
 #define _PLYTMR 227
 #endif
 #ifndef _plytmr
-#define _plytmr *((unsigned*)_PLYTMR)
+#define _plytmr (*(unsigned*)_PLYTMR)
 #endif
 
 // TV DOTTED NOTE TIMER SCALE FACTOR
@@ -1306,7 +1306,7 @@
 #define _DOTVAL 229
 #endif
 #ifndef _dotval
-#define _dotval *((unsigned char*)_DOTVAL)
+#define _dotval (*(unsigned char*)_DOTVAL)
 #endif
 
 #ifndef _HRMODE
@@ -1318,7 +1318,7 @@
 #define _DLBAUD 230
 #endif
 #ifndef _dlbaud
-#define _dlbaud *((unsigned char*)_DLBAUD)
+#define _dlbaud (*(unsigned char*)_DLBAUD)
 #endif
 
 #ifndef _HRWIDTH
@@ -1330,7 +1330,7 @@
 #define _TIMOUT 231
 #endif
 #ifndef _timout
-#define _timout *((unsigned char*)_TIMOUT)
+#define _timout (*(unsigned char*)_TIMOUT)
 #endif
 
 // DV* *PV ANGLE VALUE (DRAW)
@@ -1338,7 +1338,7 @@
 #define _ANGLE 232
 #endif
 #ifndef _angle
-#define _angle *((unsigned char*)_ANGLE)
+#define _angle (*(unsigned char*)_ANGLE)
 #endif
 
 // DV* *PV SCALE VALUE (DRAW)
@@ -1346,7 +1346,7 @@
 #define _SCALE 233
 #endif
 #ifndef _scale
-#define _scale *((unsigned char*)_SCALE)
+#define _scale (*(unsigned char*)_SCALE)
 #endif
 
 // PV DSKCON OPERATION CODE 0-3
@@ -1354,7 +1354,7 @@
 #define _DCOPC 234
 #endif
 #ifndef _dcopc
-#define _dcopc *((unsigned char*)_DCOPC)
+#define _dcopc (*(unsigned char*)_DCOPC)
 #endif
 
 // PV DSKCON DRIVE NUMBER 0—3
@@ -1362,7 +1362,7 @@
 #define _DCDRV 235
 #endif
 #ifndef _dcdrv
-#define _dcdrv *((unsigned char*)_DCDRV)
+#define _dcdrv (*(unsigned char*)_DCDRV)
 #endif
 
 // PV DSKCON TRACK NUMBER 0—34
@@ -1370,7 +1370,7 @@
 #define _DCTRK 236
 #endif
 #ifndef _dctrk
-#define _dctrk *((unsigned char*)_DCTRK)
+#define _dctrk (*(unsigned char*)_DCTRK)
 #endif
 
 // PV DSKCON SECTOR NUMBER 1-18
@@ -1378,7 +1378,7 @@
 #define _DSEC 237
 #endif
 #ifndef _dsec
-#define _dsec *((unsigned char*)_DSEC)
+#define _dsec (*(unsigned char*)_DSEC)
 #endif
 
 // PV DSKCON DATA POINTER
@@ -1386,7 +1386,7 @@
 #define _DCBPT 238
 #endif
 #ifndef _dcbpt
-#define _dcbpt *((unsigned*)_DCBPT)
+#define _dcbpt (*(unsigned*)_DCBPT)
 #endif
 
 // PV DSKCON STATUS BYTE
@@ -1394,7 +1394,7 @@
 #define _DCSTA 240
 #endif
 #ifndef _dcsta
-#define _dcsta *((unsigned char*)_DCSTA)
+#define _dcsta (*(unsigned char*)_DCSTA)
 #endif
 
 // TEMPORARY FCB POINTER
@@ -1402,7 +1402,7 @@
 #define _FCBTMP 241
 #endif
 #ifndef _fcbtmp
-#define _fcbtmp *((unsigned*)_FCBTMP)
+#define _fcbtmp (*(unsigned*)_FCBTMP)
 #endif
 
 // $XXXX $XXXX $3B3B SWI3 VECTOR
@@ -1470,7 +1470,7 @@
 #define _RVSEED 277
 #endif
 #ifndef _rvseed
-#define _rvseed *((unsigned char*)_RVSEED)
+#define _rvseed (*(unsigned char*)_RVSEED)
 #endif
 
 // UPPER CASE/LOWER CASE FLAG: $FF=UPPER, 0=LOWER
@@ -1478,7 +1478,7 @@
 #define _CASFLG 282
 #endif
 #ifndef _casflg
-#define _casflg *((unsigned char*)_CASFLG)
+#define _casflg (*(unsigned char*)_CASFLG)
 #endif
 
 // KEYBOARD DEBOUNCE DELAY (SET TO $45E)
@@ -1486,7 +1486,7 @@
 #define _DEBVAL 283
 #endif
 #ifndef _debval
-#define _debval *((unsigned*)_DEBVAL)
+#define _debval (*(unsigned*)_DEBVAL)
 #endif
 
 // JUMP ADDRESS FOR EXPONENTIATION
@@ -1510,7 +1510,7 @@
 #define _USR0 318
 #endif
 #ifndef _usr0
-#define _usr0 *((unsigned*)_USR0)
+#define _usr0 (*(unsigned*)_USR0)
 #endif
 
 // KEYBOARD MEMORY BUFFER
@@ -1526,7 +1526,7 @@
 #define _POTVAL 346
 #endif
 #ifndef _potval
-#define _potval *((unsigned char*)_POTVAL)
+#define _potval (*(unsigned char*)_POTVAL)
 #endif
 
 // $A5F6       $C426 $C44B OPEN COMMAND
@@ -1758,7 +1758,7 @@
 #define _LINHDR 730
 #endif
 #ifndef _linhdr
-#define _linhdr *((unsigned*)_LINHDR)
+#define _linhdr (*(unsigned*)_LINHDR)
 #endif
 
 // +1        BASIC LINE INPUT BUFFER
@@ -1846,7 +1846,7 @@
 #define _RNBFAD 2376
 #endif
 #ifndef _rnbfad
-#define _rnbfad *((unsigned*)_RNBFAD)
+#define _rnbfad (*(unsigned*)_RNBFAD)
 #endif
 
 // START OF FILE CONTROL BLOCKS
@@ -1854,7 +1854,7 @@
 #define _FCBADR 2378
 #endif
 #ifndef _fcbadr
-#define _fcbadr *((unsigned*)_FCBADR)
+#define _fcbadr (*(unsigned*)_FCBADR)
 #endif
 
 // DISK FILE NAME BUFFER
@@ -1878,7 +1878,7 @@
 #define _DFLTYP 2391
 #endif
 #ifndef _dfltyp
-#define _dfltyp *((unsigned char*)_DFLTYP)
+#define _dfltyp (*(unsigned char*)_DFLTYP)
 #endif
 
 // DV* ASCII FLAG: 0=CRUNCHED OR BINARY, $FF=ASCII
@@ -1886,7 +1886,7 @@
 #define _DASCFL 2392
 #endif
 #ifndef _dascfl
-#define _dascfl *((unsigned char*)_DASCFL)
+#define _dascfl (*(unsigned char*)_DASCFL)
 #endif
 
 // RUN FLAG: (IF BIT 1=1 THEN RUN, IF BIT 0=1, THEN CLOSE
@@ -1894,7 +1894,7 @@
 #define _DRUNFL 2393
 #endif
 #ifndef _drunfl
-#define _drunfl *((unsigned char*)_DRUNFL)
+#define _drunfl (*(unsigned char*)_DRUNFL)
 #endif
 
 // DEFAULT DRIVE NUMBER
@@ -1902,7 +1902,7 @@
 #define _DEFDRV 2394
 #endif
 #ifndef _defdrv
-#define _defdrv *((unsigned char*)_DEFDRV)
+#define _defdrv (*(unsigned char*)_DEFDRV)
 #endif
 
 // NUMBER OF FCBS ACTIVE
@@ -1910,7 +1910,7 @@
 #define _FCBACT 2395
 #endif
 #ifndef _fcbact
-#define _fcbact *((unsigned char*)_FCBACT)
+#define _fcbact (*(unsigned char*)_FCBACT)
 #endif
 
 // RESET FLAG: <>0 WILL CAUSE A 'NEW' & SHUT DOWN ALL FCBS
@@ -1918,7 +1918,7 @@
 #define _DRESFL 2396
 #endif
 #ifndef _dresfl
-#define _dresfl *((unsigned char*)_DRESFL)
+#define _dresfl (*(unsigned char*)_DRESFL)
 #endif
 
 // LOAD FLAG: CAUSE A 'NEW' FOLLOWING A LOAD ERROR
@@ -1926,7 +1926,7 @@
 #define _DLODFL 2397
 #endif
 #ifndef _dlodfl
-#define _dlodfl *((unsigned char*)_DLODFL)
+#define _dlodfl (*(unsigned char*)_DLODFL)
 #endif
 
 // MERGE FLAG: 0=N0 MERGE, $FF=MERGE
@@ -1934,7 +1934,7 @@
 #define _DMRGFL 2398
 #endif
 #ifndef _dmrgfl
-#define _dmrgfl *((unsigned char*)_DMRGFL)
+#define _dmrgfl (*(unsigned char*)_DMRGFL)
 #endif
 
 // DISK BASIC USR COMMAND VECTORS
@@ -1950,7 +1950,7 @@
 #define _V973 2419
 #endif
 #ifndef _v973
-#define _v973 *((unsigned char*)_V973)
+#define _v973 (*(unsigned char*)_V973)
 #endif
 
 // RAM DIRECTORY IMAGE ADDRESS
@@ -1958,7 +1958,7 @@
 #define _V974 2420
 #endif
 #ifndef _v974
-#define _v974 *((unsigned*)_V974)
+#define _v974 (*(unsigned*)_V974)
 #endif
 
 // FIRST GRANULE NUMBER
@@ -1966,7 +1966,7 @@
 #define _V976 2422
 #endif
 #ifndef _v976
-#define _v976 *((unsigned char*)_V976)
+#define _v976 (*(unsigned char*)_V976)
 #endif
 
 // SECTOR NUMBER
@@ -1974,7 +1974,7 @@
 #define _V977 2423
 #endif
 #ifndef _v977
-#define _v977 *((unsigned char*)_V977)
+#define _v977 (*(unsigned char*)_V977)
 #endif
 
 // RAM DIRECTORY IMAGE ADDRESS
@@ -1982,7 +1982,7 @@
 #define _V978 2424
 #endif
 #ifndef _v978
-#define _v978 *((unsigned*)_V978)
+#define _v978 (*(unsigned*)_V978)
 #endif
 
 // WRITE FAT VALUE: NUMBER OF FREE GRANULES WHICH MUST BE TAKEN
@@ -1990,7 +1990,7 @@
 #define _WFATVL 2426
 #endif
 #ifndef _wfatvl
-#define _wfatvl *((unsigned*)_WFATVL)
+#define _wfatvl (*(unsigned*)_WFATVL)
 #endif
 
 // DIRECT ACCESS FILE RECORD LENGTH
@@ -1998,7 +1998,7 @@
 #define _DFFLEN 2428
 #endif
 #ifndef _dfflen
-#define _dfflen *((unsigned*)_DFFLEN)
+#define _dfflen (*(unsigned*)_DFFLEN)
 #endif
 
 // CURRENT TRACK NUMBER, DRIVES 0,1,2,3
@@ -2014,7 +2014,7 @@
 #define _NMIFLG 2434
 #endif
 #ifndef _nmiflg
-#define _nmiflg *((unsigned char*)_NMIFLG)
+#define _nmiflg (*(unsigned char*)_NMIFLG)
 #endif
 
 // NMI VECTOR: WHERE TO JUMP FOLLOWING AN NMI
@@ -2022,7 +2022,7 @@
 #define _DNMIVC 2435
 #endif
 #ifndef _dnmivc
-#define _dnmivc *((unsigned*)_DNMIVC)
+#define _dnmivc (*(unsigned*)_DNMIVC)
 #endif
 
 // MOTOR TURN OFF TIMER
@@ -2030,7 +2030,7 @@
 #define _RDYTMR 2437
 #endif
 #ifndef _rdytmr
-#define _rdytmr *((unsigned char*)_RDYTMR)
+#define _rdytmr (*(unsigned char*)_RDYTMR)
 #endif
 
 // RAM IMAGE OF DSKREG ($FF40)
@@ -2038,7 +2038,7 @@
 #define _DRGRAM 2438
 #endif
 #ifndef _drgram
-#define _drgram *((unsigned char*)_DRGRAM)
+#define _drgram (*(unsigned char*)_DRGRAM)
 #endif
 
 // VERIFY FLAG: 0=OFF, $FF=ON
@@ -2046,7 +2046,7 @@
 #define _DVERFL 2439
 #endif
 #ifndef _dverfl
-#define _dverfl *((unsigned char*)_DVERFL)
+#define _dverfl (*(unsigned char*)_DVERFL)
 #endif
 
 // READ/WRITE ATTEMPT COUNTER: NUMBER OF TIMES THE
@@ -2054,7 +2054,7 @@
 #define _ATTCTR 2440
 #endif
 #ifndef _attctr
-#define _attctr *((unsigned char*)_ATTCTR)
+#define _attctr (*(unsigned char*)_ATTCTR)
 #endif
 
 // INITIALIZED TO SECLEN BY DISKBAS
@@ -2106,7 +2106,7 @@
 #define _DSKREG 65344
 #endif
 #ifndef _dskreg
-#define _dskreg *((unsigned char*)_DSKREG)
+#define _dskreg (*(unsigned char*)_DSKREG)
 #endif
 
 // STATUS/COMMAND REGISTER
@@ -2114,7 +2114,7 @@
 #define _FDCREG 65352
 #endif
 #ifndef _fdcreg
-#define _fdcreg *((unsigned char*)_FDCREG)
+#define _fdcreg (*(unsigned char*)_FDCREG)
 #endif
 
 // INITIALIZATION REGISTER 0
@@ -2122,7 +2122,7 @@
 #define _INIT0 65424
 #endif
 #ifndef _init0
-#define _init0 *((unsigned char*)_INIT0)
+#define _init0 (*(unsigned char*)_INIT0)
 #endif
 
 // INITIALIZATION REGISTER 1
@@ -2130,7 +2130,7 @@
 #define _INIT1 65425
 #endif
 #ifndef _init1
-#define _init1 *((unsigned char*)_INIT1)
+#define _init1 (*(unsigned char*)_INIT1)
 #endif
 
 // IRQ INTERRUPT ENABLE REGISTER
@@ -2138,7 +2138,7 @@
 #define _IRQENR 65426
 #endif
 #ifndef _irqenr
-#define _irqenr *((unsigned char*)_IRQENR)
+#define _irqenr (*(unsigned char*)_IRQENR)
 #endif
 
 // FIRQ INTERRUPT ENABLE REGISTER
@@ -2146,7 +2146,7 @@
 #define _FIRQENR 65427
 #endif
 #ifndef _firqenr
-#define _firqenr *((unsigned char*)_FIRQENR)
+#define _firqenr (*(unsigned char*)_FIRQENR)
 #endif
 
 // TIMER REGISTER
@@ -2154,7 +2154,7 @@
 #define _V_TIMER 65428
 #endif
 #ifndef _v_timer
-#define _v_timer *((unsigned*)_V_TIMER)
+#define _v_timer (*(unsigned*)_V_TIMER)
 #endif
 
 // VIDEO MODE REGISTER
@@ -2162,7 +2162,7 @@
 #define _VIDEOMOD 65432
 #endif
 #ifndef _videomod
-#define _videomod *((unsigned char*)_VIDEOMOD)
+#define _videomod (*(unsigned char*)_VIDEOMOD)
 #endif
 
 // VIDEO MODE REGISTER
@@ -2170,7 +2170,7 @@
 #define _VIDEORES 65433
 #endif
 #ifndef _videores
-#define _videores *((unsigned char*)_VIDEORES)
+#define _videores (*(unsigned char*)_VIDEORES)
 #endif
 
 // BORDER REGISTER
@@ -2178,7 +2178,7 @@
 #define _V_BORDER 65434
 #endif
 #ifndef _v_border
-#define _v_border *((unsigned char*)_V_BORDER)
+#define _v_border (*(unsigned char*)_V_BORDER)
 #endif
 
 // VERTICAL SCROLL REGISTER
@@ -2186,7 +2186,7 @@
 #define _V_SCROLL 65436
 #endif
 #ifndef _v_scroll
-#define _v_scroll *((unsigned char*)_V_SCROLL)
+#define _v_scroll (*(unsigned char*)_V_SCROLL)
 #endif
 
 // VERTICAL OFFSET 1 REGISTER
@@ -2194,7 +2194,7 @@
 #define _V_OFSET1 65437
 #endif
 #ifndef _v_ofset1
-#define _v_ofset1 *((unsigned char*)_V_OFSET1)
+#define _v_ofset1 (*(unsigned char*)_V_OFSET1)
 #endif
 
 // VERTICAL OFFSET 0 REGISTER
@@ -2202,7 +2202,7 @@
 #define _V_OFSET0 65438
 #endif
 #ifndef _v_ofset0
-#define _v_ofset0 *((unsigned char*)_V_OFSET0)
+#define _v_ofset0 (*(unsigned char*)_V_OFSET0)
 #endif
 
 // HORIZONTAL OFFSET 0 REGISTER
@@ -2210,7 +2210,7 @@
 #define _H_OFSET0 65439
 #endif
 #ifndef _h_ofset0
-#define _h_ofset0 *((unsigned char*)_H_OFSET0)
+#define _h_ofset0 (*(unsigned char*)_H_OFSET0)
 #endif
 
 // MEMORY MANAGEMENT UNIT REGISTERS (6 BITS)
@@ -2239,7 +2239,7 @@
 #define _V0CLR 65472
 #endif
 #ifndef _v0clr
-#define _v0clr *((unsigned char*)_V0CLR)
+#define _v0clr (*(unsigned char*)_V0CLR)
 #endif
 
 // SET COCO GRAPHICS MODE V0
@@ -2247,7 +2247,7 @@
 #define _V0SET 65473
 #endif
 #ifndef _v0set
-#define _v0set *((unsigned char*)_V0SET)
+#define _v0set (*(unsigned char*)_V0SET)
 #endif
 
 // CLEAR COCO GRAPHICS MODE V1
@@ -2255,7 +2255,7 @@
 #define _V1CLR 65474
 #endif
 #ifndef _v1clr
-#define _v1clr *((unsigned char*)_V1CLR)
+#define _v1clr (*(unsigned char*)_V1CLR)
 #endif
 
 // SET COCO GRAPHICS MODE V1
@@ -2263,7 +2263,7 @@
 #define _V1SET 65475
 #endif
 #ifndef _v1set
-#define _v1set *((unsigned char*)_V1SET)
+#define _v1set (*(unsigned char*)_V1SET)
 #endif
 
 // CLEAR COCO GRAPHICS MODE V2
@@ -2271,7 +2271,7 @@
 #define _V2CLR 65476
 #endif
 #ifndef _v2clr
-#define _v2clr *((unsigned char*)_V2CLR)
+#define _v2clr (*(unsigned char*)_V2CLR)
 #endif
 
 // SET COCO GRAPHICS MODE V2
@@ -2279,7 +2279,7 @@
 #define _V2SET 65477
 #endif
 #ifndef _v2set
-#define _v2set *((unsigned char*)_V2SET)
+#define _v2set (*(unsigned char*)_V2SET)
 #endif
 
 // CLEAR COCO GRAPHICS OFFSET F0
@@ -2287,7 +2287,7 @@
 #define _F0CLR 65478
 #endif
 #ifndef _f0clr
-#define _f0clr *((unsigned char*)_F0CLR)
+#define _f0clr (*(unsigned char*)_F0CLR)
 #endif
 
 // SET COCO GRAPHICS OFFSET F0
@@ -2295,7 +2295,7 @@
 #define _F0SET 65479
 #endif
 #ifndef _f0set
-#define _f0set *((unsigned char*)_F0SET)
+#define _f0set (*(unsigned char*)_F0SET)
 #endif
 
 // CLEAR COCO GRAPHICS OFFSET F1
@@ -2303,7 +2303,7 @@
 #define _F1CLR 65480
 #endif
 #ifndef _f1clr
-#define _f1clr *((unsigned char*)_F1CLR)
+#define _f1clr (*(unsigned char*)_F1CLR)
 #endif
 
 // SET COCO GRAPHICS OFFSET F1
@@ -2311,7 +2311,7 @@
 #define _F1SET 65481
 #endif
 #ifndef _f1set
-#define _f1set *((unsigned char*)_F1SET)
+#define _f1set (*(unsigned char*)_F1SET)
 #endif
 
 // CLEAR COCO GRAPHICS OFFSET F2
@@ -2319,7 +2319,7 @@
 #define _F2CLR 65482
 #endif
 #ifndef _f2clr
-#define _f2clr *((unsigned char*)_F2CLR)
+#define _f2clr (*(unsigned char*)_F2CLR)
 #endif
 
 // SET COCO GRAPHICS OFFSET F2
@@ -2327,7 +2327,7 @@
 #define _F2SET 65483
 #endif
 #ifndef _f2set
-#define _f2set *((unsigned char*)_F2SET)
+#define _f2set (*(unsigned char*)_F2SET)
 #endif
 
 // CLEAR COCO GRAPHICS OFFSET F3
@@ -2335,7 +2335,7 @@
 #define _F3CLR 65484
 #endif
 #ifndef _f3clr
-#define _f3clr *((unsigned char*)_F3CLR)
+#define _f3clr (*(unsigned char*)_F3CLR)
 #endif
 
 // SET COCO GRAPHICS OFFSET F3
@@ -2343,7 +2343,7 @@
 #define _F3SET 65485
 #endif
 #ifndef _f3set
-#define _f3set *((unsigned char*)_F3SET)
+#define _f3set (*(unsigned char*)_F3SET)
 #endif
 
 // CLEAR COCO GRAPHICS OFFSET F4
@@ -2351,7 +2351,7 @@
 #define _F4CLR 65486
 #endif
 #ifndef _f4clr
-#define _f4clr *((unsigned char*)_F4CLR)
+#define _f4clr (*(unsigned char*)_F4CLR)
 #endif
 
 // SET COCO GRAPHICS OFFSET F4
@@ -2359,7 +2359,7 @@
 #define _F4SET 65487
 #endif
 #ifndef _f4set
-#define _f4set *((unsigned char*)_F4SET)
+#define _f4set (*(unsigned char*)_F4SET)
 #endif
 
 // CLEAR COCO GRAPHICS OFFSET F5
@@ -2367,7 +2367,7 @@
 #define _F5CLR 65488
 #endif
 #ifndef _f5clr
-#define _f5clr *((unsigned char*)_F5CLR)
+#define _f5clr (*(unsigned char*)_F5CLR)
 #endif
 
 // SET COCO GRAPHICS OFFSET F5
@@ -2375,7 +2375,7 @@
 #define _F5SET 65489
 #endif
 #ifndef _f5set
-#define _f5set *((unsigned char*)_F5SET)
+#define _f5set (*(unsigned char*)_F5SET)
 #endif
 
 // CLEAR COCO GRAPHICS OFFSET F6
@@ -2383,7 +2383,7 @@
 #define _F6CLR 65490
 #endif
 #ifndef _f6clr
-#define _f6clr *((unsigned char*)_F6CLR)
+#define _f6clr (*(unsigned char*)_F6CLR)
 #endif
 
 // SET COCO GRAPHICS OFFSET F6
@@ -2391,7 +2391,7 @@
 #define _F6SET 65491
 #endif
 #ifndef _f6set
-#define _f6set *((unsigned char*)_F6SET)
+#define _f6set (*(unsigned char*)_F6SET)
 #endif
 
 // CLEAR CPU RATE, (0.89 MHz)
@@ -2399,7 +2399,7 @@
 #define _R1CLR 65496
 #endif
 #ifndef _r1clr
-#define _r1clr *((unsigned char*)_R1CLR)
+#define _r1clr (*(unsigned char*)_R1CLR)
 #endif
 
 // SET CPU RATE, (1.78 MHz)
@@ -2407,7 +2407,7 @@
 #define _R1SET 65497
 #endif
 #ifndef _r1set
-#define _r1set *((unsigned char*)_R1SET)
+#define _r1set (*(unsigned char*)_R1SET)
 #endif
 
 // ROM DISABLED
@@ -2415,7 +2415,7 @@
 #define _ROMCLR 65502
 #endif
 #ifndef _romclr
-#define _romclr *((unsigned char*)_ROMCLR)
+#define _romclr (*(unsigned char*)_ROMCLR)
 #endif
 
 // ROM ENABLED
@@ -2423,56 +2423,56 @@
 #define _ROMSET 65503
 #endif
 #ifndef _romset
-#define _romset *((unsigned char*)_ROMSET)
+#define _romset (*(unsigned char*)_ROMSET)
 #endif
 
 #ifndef _SWI3
 #define _SWI3 65522
 #endif
 #ifndef _swi3
-#define _swi3 *((unsigned*)_SWI3)
+#define _swi3 (*(unsigned*)_SWI3)
 #endif
 
 #ifndef _SWI2
 #define _SWI2 65524
 #endif
 #ifndef _swi2
-#define _swi2 *((unsigned*)_SWI2)
+#define _swi2 (*(unsigned*)_SWI2)
 #endif
 
 #ifndef _FIRQ
 #define _FIRQ 65526
 #endif
 #ifndef _firq
-#define _firq *((unsigned*)_FIRQ)
+#define _firq (*(unsigned*)_FIRQ)
 #endif
 
 #ifndef _IRQ
 #define _IRQ 65528
 #endif
 #ifndef _irq
-#define _irq *((unsigned*)_IRQ)
+#define _irq (*(unsigned*)_IRQ)
 #endif
 
 #ifndef _SWI
 #define _SWI 65530
 #endif
 #ifndef _swi
-#define _swi *((unsigned*)_SWI)
+#define _swi (*(unsigned*)_SWI)
 #endif
 
 #ifndef _NMI
 #define _NMI 65532
 #endif
 #ifndef _nmi
-#define _nmi *((unsigned*)_NMI)
+#define _nmi (*(unsigned*)_NMI)
 #endif
 
 #ifndef _RESETV
 #define _RESETV 65534
 #endif
 #ifndef _resetv
-#define _resetv *((unsigned*)_RESETV)
+#define _resetv (*(unsigned*)_RESETV)
 #endif
 
 

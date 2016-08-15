@@ -86,9 +86,9 @@ type
               LDefine(LIdent, IntToStr(LValue));
               if LSize >= 0 then begin
                 if LSize = 1 then begin
-                  LDefine(LowerCase(LIdent), '*((unsigned char*)' + LIdent + ')');
+                  LDefine(LowerCase(LIdent), '(*(unsigned char*)' + LIdent + ')');
                 end else if LSize = 2 then begin
-                  LDefine(LowerCase(LIdent), '*((unsigned*)' + LIdent + ')');
+                  LDefine(LowerCase(LIdent), '(*(unsigned*)' + LIdent + ')');
                 end else begin
                   LDefine(LowerCase(LIdent), '((char*)' + LIdent + ')');
                 end;
