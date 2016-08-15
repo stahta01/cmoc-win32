@@ -1,6 +1,6 @@
 
 #include <conio.h>
-#include <coco/equates.h>
+#include <equates.h>
 
 unsigned char wherex(void)
 {
