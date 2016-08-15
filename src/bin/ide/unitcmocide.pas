@@ -339,7 +339,7 @@ end;
 
 procedure TFormCmocIDE.MenuFileSaveClick(ASender: TObject);
 begin
-  if FormCmocIDESynEdit.Modified then begin
+  if FormCmocIDESynEdit.Modified or not FileExists(FormCmocIDESynEdit.FileName) then begin
     try
       FormCmocIDESynEdit.SaveToFile(FileNameSrc);
     except

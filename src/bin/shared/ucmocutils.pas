@@ -167,8 +167,8 @@ type
     class function SymbolIsPublic(const A: string): boolean;
     class procedure ExtractPragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
       var ATarget: string);
-    class procedure ExtractPragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
-      var ATarget: string);
+    class procedure ExtractPragmas(const ADst, ASrc: TStrings; out AOrigin: cardinal;
+      out ATarget: string);
     class procedure FileNamesAppend(var A: TStringDynArray; AFileName: TFileName;
       const AMustExist: boolean);
     class procedure RaiseError(AMessage, ADetails: string; const AExitCode: integer = -1);
@@ -347,14 +347,16 @@ begin
   Result := AnsiStartsStr('_', A) and not AnsiStartsStr('___', A);
 end;
 
-class procedure OCmoc.ExtractPragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
-  var ATarget: string);
+class procedure OCmoc.ExtractPragmas(const ADst, ASrc: TStrings; out AOrigin: cardinal;
+  out ATarget: string);
 var
   LIndex: integer;
   LName: string;
   LParser: OAsmParser;
 begin
   LParser := default(OAsmParser);
+  ATarget := Target_COCO;
+  AOrigin := Origin_DEFAULT;
   if Assigned(ADst) then begin
     ADst.Clear;
   end;
