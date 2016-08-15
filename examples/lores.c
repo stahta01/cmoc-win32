@@ -7,7 +7,6 @@
 int main()
 {
     CLS(0);
-    return 0;
     DRAWRECT(0, 0, 63, 31, 4);
     FILLRECT(2, 2, 61, 29, 3);
     DRAWELLIPSE(32, 16, 25, 13, 0);
