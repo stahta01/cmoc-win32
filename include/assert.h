@@ -11,11 +11,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void _assert(char* _Message, char* _File, unsigned _Line);
+
 #ifdef NDEBUG
 #define assert(cond)
 #else
-#define assert(cond) if (!(cond)) {\
-    printf("\nASSERT FAILED!\n\nFILE:%s\nLINE:%d\nCOND:%s\n", __FILE__, __LINE__, #cond); exit(-1); }
+#define assert(cond) if (!(cond)) _assert(#cond, __FILE__, __LINE__);
 #endif
 
 #endif  /* _ASSERT_H */

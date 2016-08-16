@@ -2,7 +2,7 @@
 #ifndef _COCO_H
 #define _COCO_H
 
-#include <cmoc/types.h>
+#include <6809.h>
 #include <coco/equates.h>
 
 #define DEV_SCREEN      ( 0)

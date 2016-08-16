@@ -1,6 +1,6 @@
 
-#ifndef __VDG_H
-#define __VDG_H
+#ifndef _VDG_H
+#define _VDG_H
 
 #define VDG_BLACK       0
 #define VDG_GREEN       1

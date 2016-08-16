@@ -1,6 +1,6 @@
 
-#ifndef __SAM_H
-#define __SAM_H
+#ifndef _SAM_H
+#define _SAM_H
 
 // TODO Write a SAM lib
 
