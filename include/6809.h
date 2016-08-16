@@ -19,13 +19,25 @@ typedef struct
 {
     byte cmd;
     void* addr;
-} _jump_t;
+} _jmp6809_t;
 
-#define _BYTEPTR(addr) (*(byte*)(addr))
-#define _WORDPTR(addr) (*(word*)(addr))
-#define _TYPEPTR(addr,type) ((type*)*(word*)(addr))
-#define _FUNCPTR(addr) ((void*)(addr))
-#define _JUMPPTR(addr) (*(_jump_t*)(addr))
+// Byte variable
+#define _BYTEVAR(addr) (*(byte*)(addr))
+
+// Word variable
+#define _WORDVAR(addr) (*(word*)(addr))
+
+// Address variable
+#define _ADDRVAR(addr) (*(word*)(addr))
+
+// Pointer to type variable
+#define _PTRTYPE(addr,type) ((type*)_ADDRVAR(addr))
+
+// Pointer to function
+#define _FUNCVAR(addr) ((void*)(addr))
+
+// Pointer to jump
+#define _JUMPVAR(addr) (*(_jmp6809_t*)(addr))
 
 #define _HIBYTE(A) ((byte*)&(A))[0]
 #define _LOBYTE(A) ((byte*)&(A))[1]
