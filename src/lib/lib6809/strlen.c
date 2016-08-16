@@ -7,9 +7,9 @@ unsigned asm strlen(char* s)
         pshs    x
         ldx     4,s
 
-        _strlen_010:
+        strlen_010:
         tst     ,x+
-        bne     _strlen_010
+        bne     strlen_010
 
         tfr     x,d
         subd    #1      // compensate for increment past '\0'

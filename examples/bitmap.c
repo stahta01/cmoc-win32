@@ -11,30 +11,36 @@
 #include <windef.h>
 
 typedef struct {
-    BOOL freememory;
-    INT width, height;
-    BYTE* bytes;
+    BYTE* Data;
+    INT BytesPerLine, Width, Height;
+    BOOL FreeMemory;
 } BITMAP;
 
-BITMAP* BitmapCreate(INT width, INT height, BYTE* bytes, BOOL freememory)
+#define Create(A) ((A*)calloc(sizeof(A), 1))
+
+BITMAP* BitmapCreate(INT Width, INT Height, BYTE* Data, INT BytesPerLine, BOOL FreeMemory)
 {
-    BITMAP* bytemap = (BITMAP*) malloc(sizeof(BITMAP));
-    bytemap->width = width;
-    bytemap->height = height;
-    bytemap->bytes = bytes;
-    bytemap->freememory = freememory;
-    return bytemap;
+    BITMAP* Bitmap = Create(BITMAP);
+    Bitmap->Width = Width;
+    Bitmap->Height = Height;
+    Bitmap->Data = Data;
+    Bitmap->BytesPerLine = BytesPerLine;
+    Bitmap->FreeMemory = FreeMemory;
+    return Bitmap;
 }
 
-BITMAP* BitmapCreate2(INT width, INT height)
+BITMAP* BitmapCreate2(INT Width, INT Height)
 {
-    return BitmapCreate(width, height, (BYTE*) calloc(width, height), true);;
+    return BitmapCreate(Width, Height, (BYTE*) calloc(Width, Height), Width, true);
 }
 
-VOID BitmapFree(BITMAP* bytemap)
+VOID BitmapFree(BITMAP* bitmap)
 {
-    free(bytemap->bytes);
-    free(bytemap);
+    assert(bitmap);
+    if (bitmap->FreeMemory) {
+        free(bitmap->Data);
+    }
+    free(bitmap);
 }
 
 VOID BitmapCopyRect(BITMAP* dstmap, INT x1, INT y1, INT x2, INT y2, BITMAP* srcmap,
@@ -60,18 +66,18 @@ VOID BitmapCopyRect(BITMAP* dstmap, INT x1, INT y1, INT x2, INT y2, BITMAP* srcm
             v1 += (0 - y1) * vv;
             y1 = 0;
         }
-        if (x2 > dstmap->width) {
-            x2 = dstmap->width;
+        if (x2 > dstmap->Width) {
+            x2 = dstmap->Width;
         }
-        if (y2 > dstmap->height) {
-            y2 = dstmap->height;
+        if (y2 > dstmap->Height) {
+            y2 = dstmap->Height;
         }
         if ((w = x2 - x1) > 0 && (y2 - y1) > 0) {
-            BYTE* dst = dstmap->bytes + y1 * dstmap->width + x1;
+            BYTE* dst = dstmap->Data + y1 * dstmap->Width + x1;
             BYTE* end = dst + w;
-            w = dstmap->width - w;
-            for (; y1 < y2; y1++, v1 += vv, dst += w, end += dstmap->width) {
-                BYTE* src = &srcmap->bytes[HIBYTE(v1) * srcmap->width];
+            w = dstmap->Width - w;
+            for (; y1 < y2; y1++, v1 += vv, dst += w, end += dstmap->Width) {
+                BYTE* src = &srcmap->Data[HIBYTE(v1) * srcmap->Width];
                 for (INT u = u1; dst < end; u += uu) {
                     *dst++ = src[HIBYTE(u)];
                 }
@@ -82,7 +88,13 @@ VOID BitmapCopyRect(BITMAP* dstmap, INT x1, INT y1, INT x2, INT y2, BITMAP* srcm
 
 VOID BitmapStretch(BITMAP* dstmap, INT x1, INT y1, INT x2, INT y2, BITMAP* srcmap)
 {
-    BitmapCopyRect(dstmap, x1, y1, x2, y2, srcmap, 0, 0, srcmap->width, srcmap->height);
+    BitmapCopyRect(dstmap, x1, y1, x2, y2, srcmap, 0, 0, srcmap->Width, srcmap->Height);
+}
+
+VOID BitmapDraw(BITMAP* dstmap, INT x, INT y, BITMAP* srcmap)
+{
+    BitmapCopyRect(dstmap, x, y, srcmap->Width, srcmap->Height, srcmap, 0, 0, srcmap->Width,
+                   srcmap->Height);
 }
 
 CHAR* image =
@@ -105,8 +117,8 @@ INT main(VOID)
         *p = *p == ' ' ? 128 : 200;
     }
 
-    screen = BitmapCreate(32, 16, 0x400, false);
-    test = BitmapCreate(30, 7, (BYTE*)image, false);
+    screen = BitmapCreate(32, 16, 0x400, 32, false);
+    test = BitmapCreate(30, 7, (BYTE*)image, 30, false);
 
     CLS(0);
 
@@ -120,10 +132,15 @@ INT main(VOID)
             BitmapStretch(screen, 16 - i, y, 16 + i, y + 10, test);
         }
         y -= 1;
-        if (y < -10) y = 16;
+        if (y < -10) {
+            y = 16;
+        }
     }
     return 0;
 }
+
+
+
 
 
 
