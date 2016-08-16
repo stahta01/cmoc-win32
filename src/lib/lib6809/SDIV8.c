@@ -1,4 +1,9 @@
 
+// By Pierre Sarrazin <http://sarrazip.com/>.
+// This file is in the public domain.
+//
+// Converted to C for WinCMOC by Derek Evans 2016
+
 // Divide A by B, signed; return quotient in B, remainder in A.
 // Non-zero remainder is negative iff dividend is negative.
 // Does not preserve X.
@@ -41,5 +46,6 @@ void asm __SDIV8(void)
         leas    2,S
     }
 }
+
 
 

@@ -1,4 +1,9 @@
 
+// By Pierre Sarrazin <http://sarrazip.com/>.
+// This file is in the public domain.
+//
+// Converted to C for WinCMOC by Derek Evans 2016
+
 // Multiply D by X, unsigned; return result in D; preserve X.
 
 void asm __MUL16(void)
@@ -22,5 +27,6 @@ void asm __MUL16(void)
         leas    6,S
     }
 }
+
 
 

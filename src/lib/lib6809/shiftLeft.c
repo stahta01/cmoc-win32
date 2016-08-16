@@ -1,4 +1,9 @@
 
+// By Pierre Sarrazin <http://sarrazip.com/>.
+// This file is in the public domain.
+//
+// Converted to C for WinCMOC by Derek Evans 2016
+
 // Shifts the 16-bit value on the stack left by
 // a number of bits given in D.
 // Result left in D.
@@ -42,5 +47,6 @@ void asm __shiftLeft(void)
         tfr     x,pc                // return from routine (with result in D)
     }
 }
+
 
 

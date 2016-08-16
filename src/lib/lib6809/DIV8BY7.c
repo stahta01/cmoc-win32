@@ -1,4 +1,9 @@
 
+// By Pierre Sarrazin <http://sarrazip.com/>.
+// This file is in the public domain.
+//
+// Converted to C for WinCMOC by Derek Evans 2016
+
 // Unsigned division by seven
 // Input: an unsigned byte (0..255) in A
 // Output: Computes A/7
@@ -34,4 +39,5 @@ void asm __DIV8BY7(void)
         //PAUL    EQU 12 // Unsure why this was here
     }
 }
+
 

@@ -1,7 +1,10 @@
 
+// Converted to C for WinCMOC by Derek Evans 2016
+
 #include <stdlib.h>
 
 // Return ABSOLUTE VALUE of argument
+
 int asm abs(int a)
 {
     asm{

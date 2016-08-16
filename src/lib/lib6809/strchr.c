@@ -1,4 +1,9 @@
 
+// By Pierre Sarrazin <http://sarrazip.com/>.
+// This file is in the public domain.
+//
+// Converted to C for WinCMOC by Derek Evans 2016
+
 // Note that CMOC passes a character value(e.g., 'x')
 // as a word to a function.
 
@@ -26,5 +31,6 @@ unsigned asm strchr(char* s, int c)
         puls    x,pc
     }
 }
+
 
 

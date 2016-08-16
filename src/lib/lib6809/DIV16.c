@@ -1,4 +1,9 @@
 
+// By Pierre Sarrazin <http://sarrazip.com/>.
+// This file is in the public domain.
+//
+// Converted to C for WinCMOC by Derek Evans 2016
+
 // Divide X by D, unsigned; return quotient in X, remainder in D.
 
 void asm __DIV16(void)
@@ -43,5 +48,6 @@ void asm __DIV16(void)
 
     }
 }
+
 
 

@@ -1,4 +1,9 @@
 
+// By Pierre Sarrazin <http://sarrazip.com/>.
+// This file is in the public domain.
+//
+// Converted to C for WinCMOC by Derek Evans 2016
+
 int asm strcmp(char* s1, char* s2)
 {
     asm {
@@ -37,5 +42,6 @@ int asm strcmp(char* s1, char* s2)
         puls    x,u,pc
     }
 }
+
 
 

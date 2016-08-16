@@ -1,4 +1,9 @@
 
+// By Pierre Sarrazin <http://sarrazip.com/>.
+// This file is in the public domain.
+//
+// Converted to C for WinCMOC by Derek Evans 2016
+
 // Returns 0, 1 or $FF in B. Leaves A undefined.
 
 int asm memcmp(void* s1, void* s2, unsigned n)
@@ -38,5 +43,6 @@ int asm memcmp(void* s1, void* s2, unsigned n)
 
     }
 }
+
 
 

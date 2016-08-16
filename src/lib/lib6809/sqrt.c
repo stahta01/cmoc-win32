@@ -1,4 +1,6 @@
 
+// Converted to C for WinCMOC by Derek Evans 2016
+
 #include <stdlib.h>
 
 // Return SQUARE ROOT of argument
@@ -25,5 +27,6 @@ int asm sqrt(int a)
         tfr     X,D         // Get result
     }
 }
+
 
 

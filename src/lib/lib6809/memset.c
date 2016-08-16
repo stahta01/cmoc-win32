@@ -1,4 +1,9 @@
 
+// By Pierre Sarrazin <http://sarrazip.com/>.
+// This file is in the public domain.
+//
+// Converted to C for WinCMOC by Derek Evans 2016
+
 unsigned asm memset(void* s, int c, unsigned n)
 {
     asm {
@@ -26,5 +31,6 @@ unsigned asm memset(void* s, int c, unsigned n)
         puls    u,pc
     }
 }
+
 
 

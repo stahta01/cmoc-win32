@@ -1,8 +1,8 @@
 
-// CMOC's standard library functions.
-//
 // By Pierre Sarrazin <http://sarrazip.com/>.
 // This file is in the public domain.
+//
+// Converted to C for WinCMOC by Derek Evans 2016
 
 #include <cmoc.h>
 
@@ -26,6 +26,7 @@ void asm adddww(word* dw, word w)
         puls    u,pc
     }
 }
+
 
 
 

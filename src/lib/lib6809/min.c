@@ -1,4 +1,6 @@
 
+// Converted to C for WinCMOC by Derek Evans 2016
+
 #include <stdlib.h>
 
 // Return MINIMUM of two arguments

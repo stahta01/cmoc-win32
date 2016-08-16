@@ -1,8 +1,8 @@
 
-// CMOC's standard library functions.
-//
 // By Pierre Sarrazin <http://sarrazip.com/>.
 // This file is in the public domain.
+//
+// Converted to C for WinCMOC by Derek Evans 2016
 
 #include <cmoc.h>
 
@@ -169,4 +169,5 @@ char* dwtoa(char* buffer, unsigned hi, unsigned lo)
     }
     return result;
 }
+
 

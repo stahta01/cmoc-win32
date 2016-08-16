@@ -1,4 +1,9 @@
 
+// By Pierre Sarrazin <http://sarrazip.com/>.
+// This file is in the public domain.
+//
+// Converted to C for WinCMOC by Derek Evans 2016
+
 int asm tolower(int c)
 {
     asm {
@@ -12,5 +17,6 @@ int asm tolower(int c)
         tolower_done:
     }
 }
+
 
 

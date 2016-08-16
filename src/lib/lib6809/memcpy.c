@@ -1,4 +1,9 @@
 
+// By Pierre Sarrazin <http://sarrazip.com/>.
+// This file is in the public domain.
+//
+// Converted to C for WinCMOC by Derek Evans 2016
+
 // Preserves X and U. Trashes D.
 unsigned asm memcpy(void* dst, void* src, int n)
 {
@@ -24,5 +29,6 @@ unsigned asm memcpy(void* dst, void* src, int n)
         puls    x,u,pc
     }
 }
+
 
 

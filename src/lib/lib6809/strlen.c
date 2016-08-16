@@ -1,4 +1,9 @@
 
+// By Pierre Sarrazin <http://sarrazip.com/>.
+// This file is in the public domain.
+//
+// Converted to C for WinCMOC by Derek Evans 2016
+
 #include <string.h>
 
 unsigned asm strlen(char* s)
@@ -17,4 +22,5 @@ unsigned asm strlen(char* s)
         puls    x,pc
     }
 }
+
 

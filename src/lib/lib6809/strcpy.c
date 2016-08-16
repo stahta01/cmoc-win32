@@ -1,4 +1,9 @@
 
+// By Pierre Sarrazin <http://sarrazip.com/>.
+// This file is in the public domain.
+//
+// Converted to C for WinCMOC by Derek Evans 2016
+
 unsigned asm strcpy(char* dest, char* src)
 {
     asm {
@@ -15,5 +20,6 @@ unsigned asm strcpy(char* dest, char* src)
         puls    x,u,pc
     }
 }
+
 
 
