@@ -164,7 +164,7 @@ begin
 
     Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm',
       '_DRAGON_EQUATES_H', TStringDynArray.Create('BS', 'CR', 'ESC', 'LF',
-      'FORMF', 'SPACE', 'TEMPTR', 'CURPOS', 'SNDTON', 'SNDDUR', 'TIMVAL', 'VIDRAM'));
+      'FORMF', 'SPACE', 'TEMPTR', 'CURPOS', 'SNDTON', 'SNDDUR', 'TIMVAL', 'VIDRAM', 'POTVAL'));
 
     LDstPath := OCmoc.PathToInclude + 'vectrex/';
     Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexdefs.asm',

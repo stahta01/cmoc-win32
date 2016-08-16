@@ -533,20 +533,24 @@ begin
 end;
 
 procedure TFormCmocIDE.MenuRunBuildAndRunClick(Sender: TObject);
+var
+  LMachine: string;
 begin
   MenuRunBuild.Click;
   WriteLn('// Running xroar emulator');
   try
     case FTarget of
       Target_COCO: begin
-        Execute('xroar.exe', ['-machine', 'cocous', '-ram', '64',
-          '-bas', 'bas12.rom', '-extbas', 'extbas11.rom', '-dos', 'disk11.rom', '-kbd-translate',
-          FileNameBin], True);
+        LMachine := 'cocous';
       end;
       Target_DRAGON: begin
-        Execute('xroar.exe', ['-machine', 'dragon64', '-kbd-translate', FileNameBin], True);
+        LMachine := 'dragon64';
+      end else begin
+        OCmoc.RaiseError('Unknown target machine');
       end;
     end;
+    Execute('xroar.exe', ['-machine', LMachine, '-joy-right', 'mjoy0', '-kbd-translate',
+      FileNameBin], True);
   except
     WriteLn(StdErr, 'xroar failed to execute');
     WriteLn('xroar.exe must be in your enviroments search path. (xroar requires target roms to be avaliable)');

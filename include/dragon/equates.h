@@ -67,6 +67,14 @@
 #define _TIMVAL 274
 #endif
 
+// LEFT VERTICAL JOYSTICK DATA
+#ifndef _POTVAL
+#define _POTVAL 346
+#endif
+#ifndef _potval
+#define _potval (*(unsigned char*)_POTVAL)
+#endif
+
 // VIDEO DISPLAY AREA
 #ifndef _VIDRAM
 #define _VIDRAM 1024

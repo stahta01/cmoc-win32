@@ -6,6 +6,7 @@
 
 #define JSR_POLCAT      _JSR([$a000])
 #define JSR_CHROUT      _JSR([$a002])
+#define JSR_JOYIN       _JSR([$a00a])
 
 #if defined(__COCO__)
 
