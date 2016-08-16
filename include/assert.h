@@ -9,6 +9,7 @@
 #define _ASSERT_H
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #ifdef NDEBUG
 #define assert(cond)

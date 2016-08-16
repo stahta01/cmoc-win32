@@ -114,7 +114,7 @@ INT main(VOID)
     INT i, y;
 
     for (CHAR* p = image; *p; p++) {
-        *p = *p == ' ' ? 128 : 200;
+        *p = *p == ' ' ? 128 : (128 +(2<<4)+ 8);
     }
 
     screen = BitmapCreate(32, 16, 0x400, 32, false);

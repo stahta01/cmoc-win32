@@ -1,5 +1,5 @@
-#ifndef _VECTREX_BIOS_H
-#define _VECTREX_BIOS_H
+#ifndef _VECTREX_VECTREXBIOS_H
+#define _VECTREX_VECTREXBIOS_H
 
 // Shadow of sound chip registers (15 bytes)
 #ifndef _VEC_SND_SHADOW

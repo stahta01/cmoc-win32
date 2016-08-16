@@ -36,13 +36,14 @@ type
 
   CCmocProcess_ASMTOH = class(CCmocProcess)
   public
-    procedure ProcessFile(const ADst, ASrc: TStrings; const AFileName: TFileName;
-      const AHeaderIdent: string);
-    procedure ProcessFile(const ADst, ASrc: TFileName; const AHeaderIdent: string);
+    procedure ProcessFile(const ADst, ASrc: TStrings; const AHeaderIdent: string;
+      const AFilter: TStringDynArray);
+    procedure ProcessFile(const ADst, ASrc: TFileName; const AHeaderIdent: string;
+      const AFilter: TStringDynArray);
   end;
 
   procedure CCmocProcess_ASMTOH.ProcessFile(const ADst, ASrc: TStrings;
-  const AFileName: TFileName; const AHeaderIdent: string);
+  const AHeaderIdent: string; const AFilter: TStringDynArray);
 
     procedure LDefine(const AName, AValue: string);
     begin
@@ -66,34 +67,36 @@ type
         LParser.IncludeUntil([')']);
         if LParser.NextAndTokenIs(')') and LParser.NextAndTokenIs(':') and
           LParser.Next and LParser.Next then begin
-          LIdent := OCmoc.StringToIdent('_' + UpperCase(LParser.Token));
-          if LParser.Next then begin
-            LSize := -1;
-            if LParser.SameText('EQU') or LParser.SameText('RMB') then begin
-              if LParser.SameText('EQU') then begin
-                if LParser.Next then begin
-                  LParser.IncludeUntil(CharSet_Space);
+          if (Length(AFilter) = 0) or AnsiMatchText(LParser.Token, AFilter) then begin
+            LIdent := OCmoc.StringToIdent('_' + UpperCase(LParser.Token));
+            if LParser.Next then begin
+              LSize := -1;
+              if LParser.SameText('EQU') or LParser.SameText('RMB') then begin
+                if LParser.SameText('EQU') then begin
+                  if LParser.Next then begin
+                    LParser.IncludeUntil(CharSet_Space);
+                  end;
+                end else if LParser.SameText('RMB') then begin
+                  if LParser.Next then begin
+                    LSize := StrToIntDef(LParser.Token, 0);
+                  end;
                 end;
-              end else if LParser.SameText('RMB') then begin
-                if LParser.Next then begin
-                  LSize := StrToIntDef(LParser.Token, 0);
+                LComment := Trim(LParser.Remaining);
+                if Length(LComment) > 0 then begin
+                  ADst.Add('// ' + TrimSet(LParser.Remaining, [#0..#32, '*', ';']));
                 end;
-              end;
-              LComment := Trim(LParser.Remaining);
-              if Length(LComment) > 0 then begin
-                ADst.Add('// ' + TrimSet(LParser.Remaining, [#0..#32, '*', ';']));
-              end;
-              LDefine(LIdent, IntToStr(LValue));
-              if LSize >= 0 then begin
-                if LSize = 1 then begin
-                  LDefine(LowerCase(LIdent), '(*(unsigned char*)' + LIdent + ')');
-                end else if LSize = 2 then begin
-                  LDefine(LowerCase(LIdent), '(*(unsigned*)' + LIdent + ')');
-                end else begin
-                  LDefine(LowerCase(LIdent), '((char*)' + LIdent + ')');
+                LDefine(LIdent, IntToStr(LValue));
+                if LSize >= 0 then begin
+                  if LSize = 1 then begin
+                    LDefine(LowerCase(LIdent), '(*(unsigned char*)' + LIdent + ')');
+                  end else if LSize = 2 then begin
+                    LDefine(LowerCase(LIdent), '(*(unsigned*)' + LIdent + ')');
+                  end else begin
+                    LDefine(LowerCase(LIdent), '((char*)' + LIdent + ')');
+                  end;
                 end;
+                ADst.Add(EmptyStr);
               end;
-              ADst.Add(EmptyStr);
             end;
           end;
         end;
@@ -103,7 +106,7 @@ type
   end;
 
   procedure CCmocProcess_ASMTOH.ProcessFile(const ADst, ASrc: TFileName;
-  const AHeaderIdent: string);
+  const AHeaderIdent: string; const AFilter: TStringDynArray);
   var
     LSrc, LDst: TStrings;
   begin
@@ -112,7 +115,7 @@ type
       LSrc.LoadFromFile(ASrc);
       LDst := TStringList.Create;
       try
-        ProcessFile(LDst, LSrc, ADst, AHeaderIdent);
+        ProcessFile(LDst, LSrc, AHeaderIdent, AFilter);
         LDst.SaveToFile(ADst);
       finally
         FreeAndNil(LDst);
@@ -122,7 +125,8 @@ type
     end;
   end;
 
-  procedure Main(const ADstPath, ASrc: TFileName; const AHeaderIdent: string);
+  procedure Main(const ADstPath, ASrc: TFileName; const AHeaderIdent: string;
+  const AFilter: TStringDynArray);
   var
     LTmpFile: TFileName;
   begin
@@ -133,7 +137,7 @@ type
           Execute(OCmoc.FileNameTool(Tool_LWASM), TStringDynArray.Create('-s',
             '--depend', '--list=' + LTmpFile, ASrc));
           ProcessFile(ADstPath + ChangeFileExt(ExtractFileName(ASrc), '.h'),
-            LTmpFile, AHeaderIdent);
+            LTmpFile, AHeaderIdent, AFilter);
         finally
           Free;
         end;
@@ -149,13 +153,24 @@ var
 begin
   try
     LDstPath := OCmoc.PathToInclude + 'coco/';
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm', '_COCO_EQUATES_H');
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/cocodefs.asm', '_COCO_DEFS_H');
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/coco3defs.asm', '_COCO3_DEFS_H');
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm',
+      '_COCO_EQUATES_H', default(TStringDynArray));
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/cocodefs.asm', '_COCO_DEFS_H',
+      default(TStringDynArray));
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/coco3defs.asm', '_COCO3_DEFS_H',
+      default(TStringDynArray));
+
+    LDstPath := OCmoc.PathToInclude + 'dragon/';
+
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm',
+      '_DRAGON_EQUATES_H', TStringDynArray.Create('BS', 'CR', 'ESC', 'LF',
+      'FORMF', 'SPACE', 'TEMPTR', 'CURPOS', 'SNDTON', 'SNDDUR', 'TIMVAL', 'VIDRAM'));
 
     LDstPath := OCmoc.PathToInclude + 'vectrex/';
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexdefs.asm', '_VECTREX_DEFS_H');
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexbios.asm', '_VECTREX_BIOS_H');
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexdefs.asm',
+      '_VECTREX_VECTREXDEFS_H', default(TStringDynArray));
+    Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexbios.asm',
+      '_VECTREX_VECTREXBIOS_H', default(TStringDynArray));
 
     WriteLn;
     WriteLn('Done');
