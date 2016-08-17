@@ -56,6 +56,13 @@ void PCLIP(int x1, int y1, int x2, int y2);
 
 // Internal use only
 
+void _SET(void);
+void _PSET(void);
+
+#define X  (*(int*)_HORDEF)
+#define Y  (*(int*)_VERDEF)
+#define C  _wcolor
+
 #define X1 (*(int*)_HORBEG)
 #define Y1 (*(int*)_VERBEG)
 #define X2 (*(int*)_HOREND)

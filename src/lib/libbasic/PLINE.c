@@ -4,7 +4,7 @@
 #include <motorola.h>
 #include <fixpt.h>
 
-void __PLINE(void)
+void _PLINE(void)
 {
     /*
     if ((X1 < _basic.pclip.x1 && X2 < _basic.pclip.x1) || (X1 > _basic.pclip.x2 && X2 > _basic.pclip.x2)
@@ -41,38 +41,48 @@ void __PLINE(void)
     Y2 -= Y1;
     int w = _abs(X2), h = _abs(Y2), i = _max(w, h);
     if (i) {
-        X1 = _I2F(X1);
-        Y1 = _I2F(Y1);
-        X2 = _I2F(X2) / i;
-        Y2 = _I2F(Y2) / i;
+        _HIBYTE(X1) = _LOBYTE(X1);
+        _HIBYTE(Y1) = _LOBYTE(Y1);
+        _HIBYTE(X2) = _LOBYTE(X2);
+        _HIBYTE(Y2) = _LOBYTE(Y2);
+        _LOBYTE(X1) = _LOBYTE(Y1) = _LOBYTE(X2) = _LOBYTE(Y2) = 127;
+        X2 /= i;
+        Y2 /= i;
         while (i-- >= 0) {
-            PSET(_HIBYTE(X1), _HIBYTE(Y1), _wcolor);
+            X = _HIBYTE(X1);
+            Y = _HIBYTE(Y1);
+            _PSET();
             X1 += X2;
             Y1 += Y2;
         }
     } else {
-        PSET(X1, Y1, _wcolor);
+        X = X1;
+        Y = Y1;
+        _PSET();
     }
 }
 
-void PLINE(int _x1, int _y1, int _x2, int _y2, byte c)
+void PLINE(int x1, int y1, int x2, int y2, byte c)
 {
-    int x = _x2 - _x1;
-    int y = _y2 - _y1;
+    int x = x2 - x1;
+    int y = y2 - y1;
     if (_abs(x) > 100 || _abs(y) > 100) {
-        x = (_x1 + _x2) / 2;
-        y = (_y1 + _y2) / 2;
-        PLINE(_x1, _y1, x, y, c);
-        PLINE(x, y, _x2, _y2, c);
+        x = (x1 + x2) / 2;
+        y = (y1 + y2) / 2;
+        PLINE(x1, y1, x, y, c);
+        PLINE(x, y, x2, y2, c);
     } else {
-        _wcolor = c;
-        X1 = _x1;
-        Y1 = _y1;
-        X2 = _x2;
-        Y2 = _y2;
-        __PLINE();
+        C = c;
+        X1 = x1;
+        Y1 = y1;
+        X2 = x2;
+        Y2 = y2;
+        _PLINE();
     }
 }
+
+
+
 
 
 

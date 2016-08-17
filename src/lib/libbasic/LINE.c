@@ -3,28 +3,44 @@
 #include <stdlib.h>
 #include <motorola.h>
 
-void LINE(int x1, int y1, int x2, int y2, byte c)
+void _LINE(void)
 {
-    x2 -= x1;
-    y2 -= y1;
-    int x = _abs(x2), y = _abs(y2), i = _max(x, y);
+    X2 -= X1;
+    Y2 -= Y1;
+    int w = _abs(X2), h = _abs(Y2), i = _max(w, h);
     if (i) {
-        _HIBYTE(x1) = _LOBYTE(x1);
-        _HIBYTE(y1) = _LOBYTE(y1);
-        _HIBYTE(x2) = _LOBYTE(x2);
-        _HIBYTE(y2) = _LOBYTE(y2);
-        _LOBYTE(x1) = _LOBYTE(y1) = _LOBYTE(x2) = _LOBYTE(y2) = 127;
-        x2 /= i;
-        y2 /= i;
+        _HIBYTE(X1) = _LOBYTE(X1);
+        _HIBYTE(Y1) = _LOBYTE(Y1);
+        _HIBYTE(X2) = _LOBYTE(X2);
+        _HIBYTE(Y2) = _LOBYTE(Y2);
+        _LOBYTE(X1) = _LOBYTE(Y1) = _LOBYTE(X2) = _LOBYTE(Y2) = 127;
+        X2 /= i;
+        Y2 /= i;
         while (i-- >= 0) {
-            SET(_HIBYTE(x1), _HIBYTE(y1), c);
-            x1 += x2;
-            y1 += y2;
+            X = _HIBYTE(X1);
+            Y = _HIBYTE(Y1);
+            _SET();
+            X1 += X2;
+            Y1 += Y2;
         }
     } else {
-        SET((byte)x1, (byte)y1, c);
+        X = X1;
+        Y = Y1;
+        _SET();
     }
 }
+
+void LINE(int x1, int y1, int x2, int y2, byte c)
+{
+    C = c;
+    X1 = x1;
+    Y1 = y1;
+    X2 = x2;
+    Y2 = y2;
+    _LINE();
+}
+
+
 
 
 

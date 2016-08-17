@@ -5,22 +5,37 @@
 byte _chr_set[2][2] = {{128|8, 128|2}, {128|4, 128|1}};
 byte _chr_clr[2][2] = {{240|7, 240|13}, {240|11, 240|14}};
 
-#define PTR _PTRTYPE(_TEMPTR, byte)
-#define VIDLOC(X,Y) (byte*)(_VIDRAM + ((word)((Y) & 30) << 4) + (word)(((X) & 63) >> 1))
+#define p _PTRTYPE(_TEMPTR, byte)
+#define VIDLOC(x,y) (byte*)(_VIDRAM + ((word)((y) & 30) << 4) + (word)(((x) & 63) >> 1))
+
+void _SET(void)
+{
+    p = VIDLOC(X, Y);
+    *p = C ?
+           _chr_set[X & 1][Y & 1] | ((C - 1) << 4) | ((*p & 128 ? *p : 0) & 15) :
+           _chr_clr[X & 1][Y & 1] & (*p & 128 ? *p : (15+128));
+}
 
 void SET(int x, int y, byte c)
 {
-    PTR = VIDLOC(x, y);
-    *PTR = c ?
-           _chr_set[x & 1][y & 1] | ((c - 1) << 4) | ((*PTR & 128 ? *PTR : 0) & 15) :
-           _chr_clr[x & 1][y & 1] & (*PTR & 128 ? *PTR : (15+128));
+    X = x;
+    Y = y;
+    C = c;
+    _SET();
+}
+
+int _POINT(void)
+{
+    p = VIDLOC(X, Y);
+    byte c = *p;
+    return c & 128 ? ((c & 15) & _chr_set[X & 1][Y & 1]) ? ((c >> 4) & 7) + 1 : 0 : -1;
 }
 
 int POINT(int x, int y)
 {
-    PTR = VIDLOC(x, y);
-    byte c = *PTR;
-    return c & 128 ? ((c & 15) & _chr_set[x & 1][y & 1]) ? ((c >> 4) & 7) + 1 : 0 : -1;
+    X = x;
+    Y = y;
+    return _POINT();
 }
 
 
