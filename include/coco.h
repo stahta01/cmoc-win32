@@ -2,7 +2,7 @@
 #ifndef _COCO_H
 #define _COCO_H
 
-#include <6809.h>
+#include <motorola/types.h>
 #include <coco/equates.h>
 
 #define DEV_SCREEN      ( 0)

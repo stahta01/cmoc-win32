@@ -3,7 +3,7 @@
 #define _VECTREX_BIOS_H
 
 #include <stdint.h>
-#include <6809.h>
+#include <motorola/6809.h>
 
 #include <vectrex/vectrexdefs.h>
 #include <vectrex/vectrexbios.h>

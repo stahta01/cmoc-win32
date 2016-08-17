@@ -21,7 +21,7 @@
 
 #include <peekpoke.h>
 
-#include <6809.h>
+#include <motorola/types.h>
 
 // Double-word to ASCII.
 // Converts the unsigned 32-bit integer formed by hi * 65536 + lo into

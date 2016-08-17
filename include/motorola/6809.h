@@ -1,19 +1,8 @@
 
-#ifndef _6809_H
-#define _6809_H
+#ifndef _MOTOROLA_6809_H
+#define _MOTOROLA_6809_H
 
-#ifndef FALSE
-#define FALSE 0
-#endif
-
-#ifndef TRUE
-#define TRUE  1
-#endif
-
-typedef unsigned char byte;
-typedef signed char   sbyte;
-typedef unsigned int  word;
-typedef signed int    sword;
+#include <motorola/types.h>
 
 typedef struct
 {

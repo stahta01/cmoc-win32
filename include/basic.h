@@ -2,7 +2,7 @@
 #ifndef _BASIC_H
 #define _BASIC_H
 
-#include <6809.h>
+#include <motorola/types.h>
 #include <equates.h>
 
 #define COLOR_BLACK       0

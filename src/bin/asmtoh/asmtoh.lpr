@@ -147,6 +147,27 @@ type
     end;
   end;
 
+  procedure Create6883;
+  var
+    LIndex: integer;
+  begin
+    with TStringList.Create do begin
+      try
+        Add('#ifndef _6883_H');
+        Add('#define _6883_H');
+        Add(EmptyStr);
+        for LIndex := 0 to 127 do begin
+          Add('#define _SAM_' + IntToHex(LIndex * 512, 4) + ' (0x' + IntToHex(LIndex, 2) + ')');
+        end;
+        Add(EmptyStr);
+        Add('#endif');
+        SaveToFile(OCmoc.PathToInclude + '6883.h');
+      finally
+        Free;
+      end;
+    end;
+  end;
+
 var
   LDstPath: TFileName;
 
@@ -171,6 +192,8 @@ begin
       '_VECTREX_VECTREXDEFS_H', default(TStringDynArray));
     Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexbios.asm',
       '_VECTREX_VECTREXBIOS_H', default(TStringDynArray));
+
+    Create6883;
 
     WriteLn;
     WriteLn('Done');
