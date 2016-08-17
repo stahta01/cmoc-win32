@@ -31,6 +31,8 @@ typedef struct
 #define _HIBYTE(A) ((byte*)&(A))[0]
 #define _LOBYTE(A) ((byte*)&(A))[1]
 
+#define _HISBYTE(A) ((sbyte*)&(A))[0]
+
 #define _MAKEWORD(LO,HI) (((byte)(LO)) | ((word)((byte)(HI)) << 8))
 
 #endif

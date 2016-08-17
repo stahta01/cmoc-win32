@@ -20,14 +20,44 @@ int main(void)
     _endgrp = _beggrp + (24 << 8);
     _horbyt = 32;
 
-    PCLS(1);
-    PLINE(0, 0, 100, 50, 0);
+    PCLIP(0, 0, 300, 302);
 
-    PELLIPSE(60, 60, 40, 20, 0);
+    PCLS(1);
+
+    PLINE(0, 0, 250, 180, 0);
+
+    for (int i = 0; i < 190; i += 4) {
+    PLINE(0, i, i, 190, 0);
+    }
+
+    PELLIPSE(60, 60, 20, 20, 0);
 
     while (!kbhit()) {}
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

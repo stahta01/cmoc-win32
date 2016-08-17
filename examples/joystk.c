@@ -14,7 +14,7 @@ int main(void)
 
     for (i = 0; i < 32; i++)
     {
-        DRAWLINE(0, i, 64, i, 1);
+        LINE(0, i, 64, i, 1);
     }
 
     cc = VIDSEMI(cx,cy);

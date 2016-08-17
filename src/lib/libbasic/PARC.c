@@ -11,7 +11,7 @@ void PARC(int x, int y, int w, int h, int s, int e, byte c)
         for (; s < e; s += 4) {
             x2 = fxsin((byte)s) * w;
             y2 = fxcos((byte)s) * h;
-            PLINE(_HIBYTE(x1) + x, _HIBYTE(y1) + y, _HIBYTE(x2) + x, _HIBYTE(y2) + y, c);
+            PLINE(_F2I(x1) + x, _F2I(y1) + y, _F2I(x2) + x, _F2I(y2) + y, c);
             x1 = x2;
             y1 = y2;
         }
@@ -19,13 +19,13 @@ void PARC(int x, int y, int w, int h, int s, int e, byte c)
         for (; s > e; s -= 4) {
             x2 = fxsin((byte)s) * w;
             y2 = fxcos((byte)s) * h;
-            PLINE(_HIBYTE(x1) + x, _HIBYTE(y1) + y, _HIBYTE(x2) + x, _HIBYTE(y2) + y, c);
+            PLINE(_F2I(x1) + x, _F2I(y1) + y, _F2I(x2) + x, _F2I(y2) + y, c);
             x1 = x2;
             y1 = y2;
         }
     }
     x2 = fxsin((byte)e) * w;
     y2 = fxcos((byte)e) * h;
-    PLINE(_HIBYTE(x1) + x, _HIBYTE(y1) + y, _HIBYTE(x2) + x, _HIBYTE(y2) + y, c);
+    PLINE(_F2I(x1) + x, _F2I(y1) + y, _F2I(x2) + x, _F2I(y2) + y, c);
 }
 

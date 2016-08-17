@@ -17,9 +17,9 @@ int main(void)
 {
     CLS(1);
 
-    DRAWLINE(2, 4, 2, 24, COLOR_BLACK);
-    DRAWLINE(1, 24, 60, 24, COLOR_BLACK);
-    DRAWLINE(1, 15, 60, 15, COLOR_BLACK);
+    LINE(2, 4, 2, 24, COLOR_BLACK);
+    LINE(1, 24, 60, 24, COLOR_BLACK);
+    LINE(1, 15, 60, 15, COLOR_BLACK);
 
     for (int i = 0; i < 12; i++) {
         DrawBar(i, monthlysales[i]);
