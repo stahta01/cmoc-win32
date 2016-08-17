@@ -153,15 +153,17 @@ type
   begin
     with TStringList.Create do begin
       try
-        Add('#ifndef _6883_H');
-        Add('#define _6883_H');
+        Add('#ifndef _MOTOROLA_6883_H');
+        Add('#define _MOTOROLA_6883_H');
+        Add(EmptyStr);
+        Add('#include <motorola/types.h>');
         Add(EmptyStr);
         for LIndex := 0 to 127 do begin
           Add('#define _SAM_' + IntToHex(LIndex * 512, 4) + ' (0x' + IntToHex(LIndex, 2) + ')');
         end;
         Add(EmptyStr);
         Add('#endif');
-        SaveToFile(OCmoc.PathToInclude + '6883.h');
+        SaveToFile(OCmoc.PathToInclude + 'motorola/6883.h');
       finally
         Free;
       end;

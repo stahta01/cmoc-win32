@@ -10,7 +10,7 @@
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="147"/>
-        <CursorPos X="18" Y="161"/>
+        <CursorPos X="42" Y="159"/>
         <UsageCount Value="30"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -268,7 +268,7 @@
       </Position29>
       <Position30>
         <Filename Value="asmtoh.lpr"/>
-        <Caret Line="159" Column="95" TopLine="145"/>
+        <Caret Line="159" Column="41" TopLine="147"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

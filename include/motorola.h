@@ -6,6 +6,7 @@
 #include <motorola/6847.h>
 
 void MotorolaSetSAM(byte section);
+void MotorolaSetVDG(byte section, word mode);
 
 #endif
 

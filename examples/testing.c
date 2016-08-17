@@ -11,13 +11,15 @@
 
 int main(void)
 {
-    MotorolaSetSAM(_SAM_FE00);
+    MotorolaSetVDG(_SAM_FE00, _VDG_GRAPH_6R1);
 
     //printf("%d\n", strlen(""));
 
     while (!kbhit()) {}
     return 0;
 }
+
+
 
 
 
