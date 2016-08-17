@@ -46,6 +46,12 @@ Source: "lib\*.txt"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "include\*.h"; DestDir: "{app}\include"; Flags: ignoreversion recursesubdirs
 Source: "examples\*.c"; DestDir: "{app}\examples"; Flags: ignoreversion recursesubdirs
 
+Source: "xroar\xroar.exe"; DestDir: "{app}\xroar"; Flags: ignoreversion
+Source: "xroar\xroar.pdf"; DestDir: "{app}\xroar"; Flags: ignoreversion
+Source: "xroar\README"; DestDir: "{app}\xroar"; Flags: ignoreversion
+Source: "xroar\COPYING.GPL"; DestDir: "{app}\xroar"; Flags: ignoreversion
+Source: "xroar\ChangeLog"; DestDir: "{app}\xroar"; Flags: ignoreversion
+
 [Icons]
 Name: "{group}\WinCMOC Editor"; Filename: "{app}\bin\cmocide.exe"
 Name: "{group}\{cm:UninstallProgram,WinCMOC}"; Filename: "{uninstallexe}"

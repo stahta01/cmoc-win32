@@ -27,7 +27,7 @@ interface
 
 uses
   Classes, ComCtrls, Controls, Dialogs, ExtCtrls, FileUtil, Forms, Graphics,
-  Menus, MouseAndKeyInput, process, StreamIO, SynEdit, SynHighlighterAny,
+  LCLIntf, Menus, MouseAndKeyInput, process, StreamIO, SynEdit, SynHighlighterAny,
   SynHighlighterCpp, SysUtils, UCmocIDE, UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
 
 type
@@ -55,6 +55,12 @@ type
     MenuItem5: TMenuItem;
     MenuEditUppercaseSelection: TMenuItem;
     MenuEditLowercaseSelection: TMenuItem;
+    MenuHelpOpenRomFolder: TMenuItem;
+    MenuHelpCmocOnline: TMenuItem;
+    MenuHelpWinCmocOnline: TMenuItem;
+    MenuHelpFatCowIconsOnline: TMenuItem;
+    MenuItem7: TMenuItem;
+    MenuItem8: TMenuItem;
     MenuRunBuildAndRun: TMenuItem;
     MenuRunCompile: TMenuItem;
     MenuRun: TMenuItem;
@@ -127,6 +133,10 @@ type
     procedure MenuFileSaveClick(ASender: TObject);
     procedure MenuFileOpenInNewWindowClick(ASender: TObject);
     procedure MenuEditUppercaseSelectionClick(Sender: TObject);
+    procedure MenuHelpFatCowIconsOnlineClick(Sender: TObject);
+    procedure MenuHelpOpenRomFolderClick(Sender: TObject);
+    procedure MenuHelpCmocOnlineClick(Sender: TObject);
+    procedure MenuHelpWinCmocOnlineClick(Sender: TObject);
     procedure MenuRunCompileClick(ASender: TObject);
     procedure MenuRunBuildAndRunClick(Sender: TObject);
     procedure SynEditLogChangeUpdating(ASender: TObject; AIsUpdating: boolean);
@@ -537,6 +547,17 @@ var
   LMachine: string;
 begin
   MenuRunBuild.Click;
+  with FindAllFiles(OCmoc.PathToXroarRoms, '*.rom', False) do begin
+    try
+      if Count = 0 then begin
+        OCmoc.RaiseError('No xroar rom files found. You must place roms into the rom path.',
+          OCmoc.PathToXroarRoms);
+      end;
+      WriteLn('# ', Count, ' xroar rom file(s) found');
+    finally
+      Free;
+    end;
+  end;
   WriteLn('// Running xroar emulator');
   try
     case FTarget of
@@ -549,11 +570,10 @@ begin
         OCmoc.RaiseError('Unknown target machine');
       end;
     end;
-    Execute('xroar.exe', ['-machine', LMachine, '-joy-right', 'mjoy0', '-kbd-translate',
-      FileNameBin], True);
+    Execute(OCmoc.PathToXroar + 'xroar.exe', ['-rompath', 'roms', '-machine', LMachine,
+      '-joy-right', 'mjoy0', '-kbd-translate', FileNameBin], True);
   except
     WriteLn(StdErr, 'xroar failed to execute');
-    WriteLn('xroar.exe must be in your enviroments search path. (xroar requires target roms to be avaliable)');
   end;
 end;
 
@@ -646,6 +666,26 @@ end;
 procedure TFormCmocIDE.MenuEditUppercaseSelectionClick(Sender: TObject);
 begin
   FormCmocIDESynEdit.SynEdit._UpperCaseSelText;
+end;
+
+procedure TFormCmocIDE.MenuHelpFatCowIconsOnlineClick(Sender: TObject);
+begin
+  OpenURL(OCmoc._UrlFatCowFreeIcons);
+end;
+
+procedure TFormCmocIDE.MenuHelpOpenRomFolderClick(Sender: TObject);
+begin
+  OpenURL(OCmoc.PathToXroarRoms);
+end;
+
+procedure TFormCmocIDE.MenuHelpCmocOnlineClick(Sender: TObject);
+begin
+  OpenURL(OCmoc._UrlCmoc);
+end;
+
+procedure TFormCmocIDE.MenuHelpWinCmocOnlineClick(Sender: TObject);
+begin
+  OpenURL(OCmoc._UrlWinCmoc);
 end;
 
 procedure TFormCmocIDE.MenuEditLowercaseSelectionClick(Sender: TObject);

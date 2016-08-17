@@ -148,7 +148,13 @@ type
   strict private
     class function PathToTemp: TFileName;
   public
-    class function DosToUnix(const A: string): string;
+  const
+    _UrlCmoc = 'http://perso.b2b2c.ca/~sarrazip/dev/cmoc.html';
+    _UrlWinCmoc = 'https://sourceforge.net/projects/cmoc-win32/';
+    _UrlFatCowFreeIcons = 'http://www.fatcow.com/free-icons';
+  public
+    class function DosToUnix(const A: TFileName): TFileName;
+    class function UnixToDos(const A: TFileName): TFileName;
     class function FileChanged(const ADst, ASrc: TFileName): boolean;
     class function FileNameTemp(const APostfix: string): TFileName;
     class function FileNameTemp(const APrefix, APostfix: string): TFileName;
@@ -158,6 +164,8 @@ type
     class function PathToInclude: TFileName;
     class function PathToLib: TFileName;
     class function PathToPackage: TFileName;
+    class function PathToXroar: TFileName;
+    class function PathToXroarRoms: TFileName;
     class function PathToSrc: TFileName;
     class function PathToSrcAsm: TFileName;
     class function PathToSrcLib: TFileName;
@@ -202,7 +210,7 @@ end;
 
 class procedure OCmoc.RaiseError(AMessage, ADetails: string; const AExitCode: integer);
 begin
-  RaiseError(AMessage + ' // ' + StringQuoted(ADetails), AExitCode);
+  RaiseError(AMessage + ' # ' + StringQuoted(ADetails), AExitCode);
 end;
 
 class function OCmoc.FileChanged(const ADst, ASrc: TFileName): boolean;
@@ -248,14 +256,29 @@ begin
   StringDynArrayAppend(A, AFileName);
 end;
 
-class function OCmoc.DosToUnix(const A: string): string;
+class function OCmoc.DosToUnix(const A: TFileName): TFileName;
 begin
   Result := AnsiReplaceStr(A, '\', '/');
+end;
+
+class function OCmoc.UnixToDos(const A: TFileName): TFileName;
+begin
+  Result := AnsiReplaceStr(A, '/', '\');
 end;
 
 class function OCmoc.PathToPackage: TFileName;
 begin
   Result := DosToUnix(ExtractFilePath(ExcludeTrailingPathDelimiter(ProgramDirectory)));
+end;
+
+class function OCmoc.PathToXroar: TFileName;
+begin
+  Result := PathToPackage + 'xroar/';
+end;
+
+class function OCmoc.PathToXroarRoms: TFileName;
+begin
+  Result := PathToXroar + 'roms/';
 end;
 
 class function OCmoc.PathToLib: TFileName;
