@@ -1,5 +1,6 @@
 
 #include <fixpt.h>
+#include <motorola.h>
 
 byte table[] = {
     0,6,13,19,25,31,37,44,50,56,62,68,74,80,86,92,98,103,109,115,120,126,131,136,142,147,152,
@@ -10,15 +11,15 @@ byte table[] = {
     74,68,62,56,50,44,37,31,25,19,13,6,0
 };
 
-int fxsin(byte x)
+int fxsin(int x)
 {
-    return x >= 128 ? -(int)table[x - 128] : (int)table[x];
+    return _LOBYTE(x) >= 128 ? -(int)table[_LOBYTE(x) - 128] : (int)table[_LOBYTE(x)];
 }
 
-int fxcos(byte x)
+int fxcos(int x)
 {
-    x += 64;
-    return x >= 128 ? -(int)table[x - 128] : (int)table[x];
+    _LOBYTE(x) += 64;
+    return _LOBYTE(x) >= 128 ? -(int)table[_LOBYTE(x) - 128] : (int)table[_LOBYTE(x)];
 }
 
 

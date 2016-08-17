@@ -63,6 +63,11 @@ void _PSET(void);
 #define Y  (*(int*)_VERDEF)
 #define C  _wcolor
 
+#define COL     (*(int*)_HORBEG)
+#define ROW     (*(int*)_VERBEG)
+#define COL2    (*(int*)_HOREND)
+#define ROW2    (*(int*)_VEREND)
+
 #define X1 (*(int*)_HORBEG)
 #define Y1 (*(int*)_VERBEG)
 #define X2 (*(int*)_HOREND)

@@ -39,6 +39,19 @@ void PSET(int x, int y, byte c)
     _PSET();
 }
 
+int _PPOINT(void)
+{
+    return *((byte*)_beggrp + (Y * _horbyt) + (X >> 3)) & pset_set[X & 7];
+}
+
+int PPOINT(int x, int y)
+{
+    X = x;
+    Y = y;
+    return _PPOINT();
+}
+
+
 
 
 
