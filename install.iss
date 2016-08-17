@@ -1,9 +1,9 @@
 
 [Setup]
-OutputBaseFilename=WinCMOC v0.1
+OutputBaseFilename=WinCMOC v0.2
 AppName=WinCMOC
-AppVersion=0.1
-AppVerName=WinCMOC 0.1
+AppVersion=0.2
+AppVerName=WinCMOC 0.2
 AppPublisher=Geep Software
 AppPublisherURL=https://sourceforge.net/projects/cmoc-win32/
 AppSupportURL=https://sourceforge.net/projects/cmoc-win32/
@@ -51,6 +51,7 @@ Source: "xroar\xroar.pdf"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\README"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\COPYING.GPL"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\ChangeLog"; DestDir: "{app}\xroar"; Flags: ignoreversion
+Source: "xroar\roms\readme.txt"; DestDir: "{app}\xroar\roms"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\WinCMOC Editor"; Filename: "{app}\bin\cmocide.exe"
