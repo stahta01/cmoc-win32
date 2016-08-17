@@ -15,14 +15,13 @@ int monthlysales[] = {20, 10, 25, 30, 40, 35, 45, 50, 40, 52, 90, 80};
 
 int main(void)
 {
-    int i;
     CLS(1);
 
     DRAWLINE(2, 4, 2, 24, COLOR_BLACK);
     DRAWLINE(1, 24, 60, 24, COLOR_BLACK);
-    DRAWLINE(1, 15, 60, 15, 0);
+    DRAWLINE(1, 15, 60, 15, COLOR_BLACK);
 
-    for (i = 0; i < 12; i++) {
+    for (int i = 0; i < 12; i++) {
         DrawBar(i, monthlysales[i]);
     }
 
