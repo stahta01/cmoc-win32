@@ -29,10 +29,10 @@ int main(void)
     gotoxy(4, 11);
     cputs("J F M A M J J A S O N D");
 
-    cputsxy(9, 0, "COCO SALES 1982");
-    cputsxy(9, 1, "---------------");
+    cputsxy(10, 0, "COCO SALES 82");
+    cputsxy(10, 1, "-------------");
     cputsxy(7, 13, "SALES PREDICT COCO");
-    cputsxy(8, 14, "WORLD DOMINATION");
+    cputsxy(4, 14, "WORLD DOMINATION BY 1984");
 
     return 0;
 }
