@@ -30,6 +30,13 @@ byte JOYSTK(int j);
 char INKEY(void);
 word TIMER(void);
 
+void PCLS(int c);
+void PSET(int x, int y, int c);
+void PRESET(int x, int y);
+void PLINE(int x1, int y1, int x2, int y2, int c);
+void PARC(int x, int y, int w, int h, int s, int e, int c);
+void PELLIPSE(int x, int y, int w, int h, int c);
+
 #define PEEK(X) (*(byte*)(X))
 #define POKE(X,Y) (PEEK(X)=(byte)(Y))
 
