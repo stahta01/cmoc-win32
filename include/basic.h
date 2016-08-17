@@ -3,7 +3,17 @@
 #define _BASIC_H
 
 #include <6809.h>
-#include <dragon/equates.h>
+#include <equates.h>
+
+#define COLOR_BLACK       0
+#define COLOR_GREEN       1
+#define COLOR_YELLOW      2
+#define COLOR_BLUE        3
+#define COLOR_RED         4
+#define COLOR_BUFF        5
+#define COLOR_CYAN        6
+#define COLOR_MAGENTA     7
+#define COLOR_ORANGE      8
 
 int ABS(int numeric);
 void CLS(byte c);

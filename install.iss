@@ -1,4 +1,3 @@
-; NOTE: asmtoh is not needed for a working install. Remember to delete from bin before build
 
 [Setup]
 OutputBaseFilename=WinCMOC v0.1
