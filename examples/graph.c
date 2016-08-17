@@ -1,8 +1,8 @@
 
+#pragma target coco
+
 #include <basic.h>
 #include <conio.h>
-
-#define BLACK 0
 
 void DrawBar(int month, int percent)
 {
