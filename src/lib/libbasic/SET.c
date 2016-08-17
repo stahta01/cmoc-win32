@@ -8,7 +8,7 @@ byte _chr_clr[2][2] = {{240|7, 240|13}, {240|11, 240|14}};
 #define PTR _PTRTYPE(_TEMPTR, byte)
 #define VIDLOC(X,Y) (byte*)(_VIDRAM + ((word)((Y) & 30) << 4) + (word)(((X) & 63) >> 1))
 
-void SET(byte x, byte y, byte c)
+void SET(int x, int y, byte c)
 {
     PTR = VIDLOC(x, y);
     *PTR = c ?
@@ -16,7 +16,7 @@ void SET(byte x, byte y, byte c)
            _chr_clr[x & 1][y & 1] & (*PTR & 128 ? *PTR : (15+128));
 }
 
-sbyte POINT(byte x, byte y)
+int POINT(int x, int y)
 {
     PTR = VIDLOC(x, y);
     byte c = *PTR;

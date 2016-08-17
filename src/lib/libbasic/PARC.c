@@ -3,7 +3,7 @@
 #include <fixpt.h>
 #include <motorola.h>
 
-void PARC(int x, int y, int w, int h, int s, int e, int c)
+void PARC(int x, int y, int w, int h, int s, int e, byte c)
 {
     int x1 = fxsin((byte)s) * w, x2 = x1;
     int y1 = fxcos((byte)s) * h, y2 = y1;

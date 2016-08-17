@@ -1,7 +1,7 @@
 
 #include <basic.h>
 
-void RESET(byte x, byte y)
+void RESET(int x, int y)
 {
     SET(x, y, 0);
 }
