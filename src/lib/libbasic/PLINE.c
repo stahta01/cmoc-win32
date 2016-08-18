@@ -51,14 +51,14 @@ void _PLINE(void)
         while (i-- >= 0) {
             X = _HIBYTE(X1);
             Y = _HIBYTE(Y1);
-            _PSET2();
+            _PSET1();
             X1 += X2;
             Y1 += Y2;
         }
     } else {
         X = X1;
         Y = Y1;
-        _PSET2();
+        _PSET1();
     }
 }
 
