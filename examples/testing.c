@@ -10,13 +10,12 @@
 
 int main(void)
 {
-
     sleep(1);
 
-    PMODE(0, 1);
+    PMODE(4, 1);
     SCREEN(1, 1);
 
-//    _pmode = 3;
+    _pmode = 3;
 
     PCLS(0);
 

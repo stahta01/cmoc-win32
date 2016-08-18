@@ -14,17 +14,13 @@ void _SETLINE(void)
         Y1 = _i2f(Y1);
         X2 = _i2f(X2) / i;
         Y2 = _i2f(Y2) / i;
-        while (i-- >= 0) {
+        while (i-- > 0) {
             X = _HIBYTE(X1);
             Y = _HIBYTE(Y1);
             _SET();
             X1 += X2;
             Y1 += Y2;
         }
-    } else {
-        X = X1;
-        Y = Y1;
-        _SET();
     }
 }
 
