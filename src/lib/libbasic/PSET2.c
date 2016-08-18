@@ -32,12 +32,7 @@ void _PSET2(void)
     }
 }
 
-int _PPOINT2(void)
-{
-    return *((byte*)_beggrp + (Y * _horbyt) + (X >> 3)) & pset2_set[X & 7];
-}
-
-void PSET(int x, int y, byte c)
+void PSET2(int x, int y, byte c)
 {
     X = x;
     Y = y;
@@ -45,7 +40,12 @@ void PSET(int x, int y, byte c)
     _PSET2();
 }
 
-int PPOINT(int x, int y)
+byte _PPOINT2(void)
+{
+    return *((byte*)_beggrp + (Y * _horbyt) + (X >> 3)) & pset2_set[X & 7];
+}
+
+byte PPOINT2(int x, int y)
 {
     X = x;
     Y = y;

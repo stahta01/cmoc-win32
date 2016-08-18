@@ -28,6 +28,14 @@ void _PSET4(void)
     *p = *p & _HIBYTE(mask) | _LOBYTE(mask);
 }
 
+void PSET4(int x, int y, byte c)
+{
+    X = x;
+    Y = y;
+    C = c;
+    _PSET4();
+}
+
 byte _PPOINT4(void)
 {
     word mask = pset4_masks[C][X & 3];
@@ -43,5 +51,12 @@ byte _PPOINT4(void)
         break;
     }
     return (*p & _HIBYTE(mask)) >> (3 - (X & 3));
+}
+
+byte PPOINT4(int x, int y)
+{
+    X = x;
+    Y = y;
+    return _PPOINT4();
 }
 
