@@ -4,7 +4,7 @@
 #include <math.h>
 #include <motorola.h>
 
-void _LINE(void)
+void _SETLINE(void)
 {
     X2 -= X1;
     Y2 -= Y1;
@@ -28,14 +28,14 @@ void _LINE(void)
     }
 }
 
-void LINE(int x1, int y1, int x2, int y2, byte c)
+void SETLINE(int x1, int y1, int x2, int y2, byte c)
 {
     C = c;
     X1 = x1;
     Y1 = y1;
     X2 = x2;
     Y2 = y2;
-    _LINE();
+    _SETLINE();
 }
 
 

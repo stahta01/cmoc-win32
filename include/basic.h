@@ -36,19 +36,21 @@ typedef struct {
 extern TBASIC _basic;
 
 int ABS(int numeric);
-void CLS(byte c);
 void SOUND(byte tone, byte duration);
-void SET(int x, int y, byte c);
-int POINT(int x, int y);
-void RESET(int x, int y);
-void LINE(int x1, int y1, int x2, int y2, byte c);
-void RECT(int x1, int y1, int x2, int y2, byte c);
-void FILLRECT(int x1, int y1, int x2, int y2, byte c);
-void ARC(int x, int y, int w, int h, int s, int e, byte c);
-void ELLIPSE(int x, int y, int w, int h, byte c);
 byte JOYSTK(int j);
 char INKEY(void);
 word TIMER(void);
+
+void CLS(byte c);
+void SET(int x, int y, byte c);
+int POINT(int x, int y);
+void RESET(int x, int y);
+
+void SETLINE(int x1, int y1, int x2, int y2, byte c);
+void SETRECT(int x1, int y1, int x2, int y2, byte c);
+void FILLRECT(int x1, int y1, int x2, int y2, byte c);
+void SETARC(int x, int y, int w, int h, int s, int e, byte c);
+void SETELLIPSE(int x, int y, int w, int h, byte c);
 
 void SCREEN(int agr, int css);
 void PMODE(int mode, int page);
