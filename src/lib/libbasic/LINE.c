@@ -1,6 +1,7 @@
 
 #include <basic.h>
 #include <stdlib.h>
+#include <math.h>
 #include <motorola.h>
 
 void _LINE(void)
@@ -9,13 +10,10 @@ void _LINE(void)
     Y2 -= Y1;
     int w = _abs(X2), h = _abs(Y2), i = _max(w, h);
     if (i) {
-        _HIBYTE(X1) = _LOBYTE(X1);
-        _HIBYTE(Y1) = _LOBYTE(Y1);
-        _HIBYTE(X2) = _LOBYTE(X2);
-        _HIBYTE(Y2) = _LOBYTE(Y2);
-        _LOBYTE(X1) = _LOBYTE(Y1) = _LOBYTE(X2) = _LOBYTE(Y2) = 127;
-        X2 /= i;
-        Y2 /= i;
+        X1 = _i2f(X1);
+        Y1 = _i2f(Y1);
+        X2 = _i2f(X2) / i;
+        Y2 = _i2f(Y2) / i;
         while (i-- >= 0) {
             X = _HIBYTE(X1);
             Y = _HIBYTE(Y1);
@@ -39,6 +37,7 @@ void LINE(int x1, int y1, int x2, int y2, byte c)
     Y2 = y2;
     _LINE();
 }
+
 
 
 

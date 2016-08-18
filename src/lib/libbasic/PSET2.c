@@ -4,19 +4,20 @@
 
 #define p _PTRTYPE(_TEMPTR, byte)
 
-word pset2_masks[4][4] = {
-    {0xFF00,0xFF00,0xFF00,0xFF00},
-    {0xBF40,0xEF10,0xFB04,0xFE01},
-    {0x7F80,0xDF20,0xF708,0xFD02},
-    {0x3FC0,0xCF30,0xF30C,0xFC03}
+byte pset2_set[4][4] = {
+    {0x00,0x00,0x00,0x00},
+    {0x40,0x10,0x04,0x01},
+    {0x80,0x20,0x08,0x02},
+    {0xC0,0x30,0x0C,0x03}
 };
+
+byte pset2_clr[] = {0x3F, 0xCF, 0xF3, 0xFC};
 
 void _PSET2(void)
 {
-    word mask = pset2_masks[C][X & 3];
     switch (_horbyt) {
     case 16:
-        p = (byte*)_beggrp + (Y << 4) + (X >> 2);
+        p = (byte*)_beggrp + (Y << 4) + (X >> 2);  // We could use _LOBYTE(X)
         break;
     case 32:
         p = (byte*)_beggrp + (Y << 5) + (X >> 2);
@@ -25,7 +26,8 @@ void _PSET2(void)
         p = (byte*)_beggrp + (Y * _horbyt) + (X >> 2);
         break;
     }
-    *p = *p & _HIBYTE(mask) | _LOBYTE(mask);
+    _allcol = _LOBYTE(X) & 3;
+    *p = *p & pset2_clr[_allcol] | pset2_set[C][_allcol];
 }
 
 void PSET2(int x, int y, byte c)
@@ -38,7 +40,6 @@ void PSET2(int x, int y, byte c)
 
 byte _PPOINT2(void)
 {
-    word mask = pset2_masks[C][X & 3];
     switch (_horbyt) {
     case 16:
         p = (byte*)_beggrp + (Y << 4) + (X >> 2);
@@ -50,7 +51,8 @@ byte _PPOINT2(void)
         p = (byte*)_beggrp + (Y * _horbyt) + (X >> 2);
         break;
     }
-    return (*p & _HIBYTE(mask)) >> (3 - (X & 3));
+    _allcol = _LOBYTE(X) & 3;
+    return (*p & pset2_set[3][_allcol]) >> (3 - (_allcol));
 }
 
 byte PPOINT2(int x, int y)
@@ -59,4 +61,5 @@ byte PPOINT2(int x, int y)
     Y = y;
     return _PPOINT2();
 }
+
 

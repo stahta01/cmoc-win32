@@ -2,7 +2,7 @@
 #include <basic.h>
 #include <stdlib.h>
 #include <motorola.h>
-#include <fixpt.h>
+#include <math.h>
 
 void _PLINE_CLIP(void)
 {
@@ -62,13 +62,10 @@ void _PLINE(void)
     Y2 -= Y1;
     int w = _abs(X2), h = _abs(Y2), i = _max(w, h);
     if (i) {
-        _HIBYTE(X1) = _LOBYTE(X1);
-        _HIBYTE(Y1) = _LOBYTE(Y1);
-        _HIBYTE(X2) = _LOBYTE(X2);
-        _HIBYTE(Y2) = _LOBYTE(Y2);
-        _LOBYTE(X1) = _LOBYTE(Y1) = _LOBYTE(X2) = _LOBYTE(Y2) = 127;
-        X2 /= i;
-        Y2 /= i;
+        X1 = _i2f(X1);
+        Y1 = _i2f(Y1);
+        X2 = _i2f(X2) / i;
+        Y2 = _i2f(Y2) / i;
         if (_pmode & 1) {
             while (i-- > 0) {
                 X = _HIBYTE(X1);

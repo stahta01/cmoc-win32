@@ -1,7 +1,7 @@
 
 #include <basic.h>
 #include <fixpt.h>
-#include <motorola.h>
+#include <math.h>
 
 void ARC(int x, int y, int w, int h, int s, int e, byte c)
 {
@@ -11,7 +11,7 @@ void ARC(int x, int y, int w, int h, int s, int e, byte c)
         for (; s < e; s += 4) {
             x2 = fxsin(s) * w;
             y2 = fxcos(s) * h;
-            LINE(_HIBYTE(x1) + x, _HIBYTE(y1) + y, _HIBYTE(x2) + x, _HIBYTE(y2) + y, c);
+            LINE(_f2i(x1) + x, _f2i(y1) + y, _f2i(x2) + x, _f2i(y2) + y, c);
             x1 = x2;
             y1 = y2;
         }
@@ -19,13 +19,13 @@ void ARC(int x, int y, int w, int h, int s, int e, byte c)
         for (; s > e; s -= 4) {
             x2 = fxsin(s) * w;
             y2 = fxcos(s) * h;
-            LINE(_HIBYTE(x1) + x, _HIBYTE(y1) + y, _HIBYTE(x2) + x, _HIBYTE(y2) + y, c);
+            LINE(_f2i(x1) + x, _f2i(y1) + y, _f2i(x2) + x, _f2i(y2) + y, c);
             x1 = x2;
             y1 = y2;
         }
     }
     x2 = fxsin(e) * w;
     y2 = fxcos(e) * h;
-    LINE(_HIBYTE(x1) + x, _HIBYTE(y1) + y, _HIBYTE(x2) + x, _HIBYTE(y2) + y, c);
+    LINE(_f2i(x1) + x, _f2i(y1) + y, _f2i(x2) + x, _f2i(y2) + y, c);
 }
 

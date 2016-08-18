@@ -33,7 +33,7 @@ typedef struct
 
 #define _HISBYTE(A) ((sbyte*)&(A))[0]
 
-#define _MAKEWORD(LO,HI) (((byte)(LO)) | ((word)((byte)(HI)) << 8))
+#define _MAKEWORD(LO,HI) (((byte)(LO))|((word)((byte)(HI))<<8))
 
 #endif
 

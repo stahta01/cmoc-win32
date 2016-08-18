@@ -4,6 +4,9 @@
 
 #include <stddef.h>
 
+#define _i2f(x) ((x)<<8)
+#define _f2i(x) ((int)((sbyte*)&(x))[0])
+
 int sqrt(int a);
 
 #endif

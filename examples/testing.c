@@ -23,15 +23,15 @@ int main(void)
 
     PCLIP(0, 0, 300, 302);
 
-    PCLS(0);
+    PCLS(1);
 
-    PLINE(0, 0, 250, 180, 1);
+    PLINE(0, 0, 250, 180, 0);
 
-    for (int i = 0; i < 190; i += 8) {
-        PLINE(0, i, i, 190, 2);
+    for (int i = 2; i < 190; i += 8) {
+        PLINE(2, i, i, 190, 2);
     }
 
-    PELLIPSE(128, 96, 60, 60, 3);
+    PELLIPSE(128, 96, 70, 40, 3);
 
     while (!kbhit()) {}
 

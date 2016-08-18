@@ -4,6 +4,18 @@
 
 void PCLS(byte c)
 {
-    memset((void*)_beggrp, c ? 255 : 0, _endgrp - _beggrp);
+    if (_pmode & 1) {
+        c &= 3;
+        c = (c << 6) | (c << 4) | (c << 2) | c;
+    } else {
+        if (c) {
+            c = 255;
+        }
+    }
+    memset((void*)_beggrp, c, _endgrp - _beggrp);
 }
+
+
+
+
 
