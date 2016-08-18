@@ -19,22 +19,25 @@ int main(void)
     _beggrp = 0x0C00;
     _endgrp = _beggrp + (24 << 8);
     _horbyt = 32;
+    _pmode = 5;
 
     PCLIP(0, 0, 300, 302);
 
-    PCLS(1);
+    PCLS(0);
 
-    PLINE(0, 0, 250, 180, 0);
+    PLINE(0, 0, 250, 180, 1);
 
-    for (int i = 0; i < 190; i += 4) {
-    PLINE(0, i, i, 190, 0);
+    for (int i = 0; i < 190; i += 8) {
+        PLINE(0, i, i, 190, 2);
     }
 
-    PELLIPSE(60, 60, 20, 20, 0);
+    PELLIPSE(128, 96, 60, 60, 3);
 
     while (!kbhit()) {}
+
     return 0;
 }
+
 
 
 

@@ -44,8 +44,17 @@ char INKEY(void);
 word TIMER(void);
 
 void PCLS(byte c);
+
 void PSET(int x, int y, byte c);
+void PSET1(int x, int y, byte c);
+void PSET2(int x, int y, byte c);
+
+byte PPOINT(int x, int y);
+byte PPOINT1(int x, int y);
+byte PPOINT2(int x, int y);
+
 void PRESET(int x, int y);
+
 void PLINE(int x1, int y1, int x2, int y2, byte c);
 void PARC(int x, int y, int w, int h, int s, int e, byte c);
 void PELLIPSE(int x, int y, int w, int h, byte c);
@@ -58,8 +67,8 @@ void PCLIP(int x1, int y1, int x2, int y2);
 
 void _SET(void);
 
+void _PSET1(void);
 void _PSET2(void);
-void _PSET4(void);
 
 #define X  (*(int*)_HORDEF)
 #define Y  (*(int*)_VERDEF)

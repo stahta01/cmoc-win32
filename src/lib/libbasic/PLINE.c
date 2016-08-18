@@ -4,8 +4,16 @@
 #include <motorola.h>
 #include <fixpt.h>
 
-void _PLINE(void)
+void _PLINE_CLIP(void)
 {
+    if (_pmode & 1)  {
+        X1 >>= 1;
+        X2 >>= 1;
+    }
+    if (_pmode < 2) {
+        Y1 >>= 1;
+        Y2 >>= 1;
+    }
     /*
     if ((X1 < _basic.pclip.x1 && X2 < _basic.pclip.x1) || (X1 > _basic.pclip.x2 && X2 > _basic.pclip.x2)
         || (Y1 < _basic.pclip.y1 && Y2 < _basic.pclip.y1) || (Y1 > _basic.pclip.y2
@@ -37,6 +45,19 @@ void _PLINE(void)
         return;
     }
     */
+}
+
+void _PLINE(void)
+{
+    if (_pmode & 1)  {
+        X1 >>= 1;
+        X2 >>= 1;
+    }
+    if (_pmode < 2) {
+        Y1 >>= 1;
+        Y2 >>= 1;
+    }
+
     X2 -= X1;
     Y2 -= Y1;
     int w = _abs(X2), h = _abs(Y2), i = _max(w, h);
@@ -48,24 +69,29 @@ void _PLINE(void)
         _LOBYTE(X1) = _LOBYTE(Y1) = _LOBYTE(X2) = _LOBYTE(Y2) = 127;
         X2 /= i;
         Y2 /= i;
-        while (i-- >= 0) {
-            X = _HIBYTE(X1);
-            Y = _HIBYTE(Y1);
-            _PSET1();
-            X1 += X2;
-            Y1 += Y2;
+        if (_pmode & 1) {
+            while (i-- > 0) {
+                X = _HIBYTE(X1);
+                Y = _HIBYTE(Y1);
+                _PSET2();
+                X1 += X2;
+                Y1 += Y2;
+            }
+        } else {
+            while (i-- > 0) {
+                X = _HIBYTE(X1);
+                Y = _HIBYTE(Y1);
+                _PSET1();
+                X1 += X2;
+                Y1 += Y2;
+            }
         }
-    } else {
-        X = X1;
-        Y = Y1;
-        _PSET1();
     }
 }
 
 void PLINE(int x1, int y1, int x2, int y2, byte c)
 {
-    int x = x2 - x1;
-    int y = y2 - y1;
+    int x = x2 - x1, y = y2 - y1;
     if (_abs(x) > 100 || _abs(y) > 100) {
         x = (x1 + x2) / 2;
         y = (y1 + y2) / 2;
@@ -80,6 +106,19 @@ void PLINE(int x1, int y1, int x2, int y2, byte c)
         _PLINE();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
