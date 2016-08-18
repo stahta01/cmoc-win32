@@ -3,7 +3,7 @@
 #include <fixpt.h>
 #include <math.h>
 
-void SETARC(int x, int y, int w, int h, int s, int e, byte c)
+void SETARC(int x, int y, int w, int h, int s, int e, byte c, bool fill)
 {
     int x1 = fxsin(s) * w, x2 = x1;
     int y1 = fxcos(s) * h, y2 = y1;

@@ -47,10 +47,10 @@ int POINT(int x, int y);
 void RESET(int x, int y);
 
 void SETLINE(int x1, int y1, int x2, int y2, byte c);
-void SETRECT(int x1, int y1, int x2, int y2, byte c);
-void FILLRECT(int x1, int y1, int x2, int y2, byte c);
-void SETARC(int x, int y, int w, int h, int s, int e, byte c);
-void SETELLIPSE(int x, int y, int w, int h, byte c);
+void SETBOX(int x1, int y1, int x2, int y2, byte c, bool fill);
+void SETARC(int x, int y, int w, int h, int s, int e, byte c, bool fill);
+void SETELLIPSE(int x, int y, int w, int h, byte c, bool fill);
+void SETCIRCLE(int x, int y, int r, byte c, bool fill);
 
 void SCREEN(int agr, int css);
 void PMODE(int mode, int page);

@@ -8,7 +8,7 @@ void DrawBar(int month, int percent)
 {
     byte x = (byte)(month * 4 + 8);
     byte y = (byte)(percent * 18 / 100);
-    FILLRECT(x, (21 - y) & 0xFE, x + 1, 21, (byte)(month >> 1) + 2);
+    SETBOX(x, (21 - y) & 0xFE, x + 1, 21, (byte)(month >> 1) + 2, true);
 }
 
 int monthlysales[] = {20, 10, 25, 30, 40, 35, 45, 50, 40, 52, 90, 80};
