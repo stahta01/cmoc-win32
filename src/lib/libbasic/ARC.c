@@ -3,7 +3,7 @@
 #include <fixpt.h>
 #include <math.h>
 
-void PARC(int x, int y, int w, int h, int s, int e, byte c)
+void ARC(int x, int y, int w, int h, int s, int e, byte c)
 {
     int x1 = fxsin(s) * w, x2 = x1;
     int y1 = fxcos(s) * h, y2 = y1;
@@ -11,7 +11,7 @@ void PARC(int x, int y, int w, int h, int s, int e, byte c)
         for (; s < e; s += 4) {
             x2 = fxsin(s) * w;
             y2 = fxcos(s) * h;
-            PLINE(_f2i(x1) + x, _f2i(y1) + y, _f2i(x2) + x, _f2i(y2) + y, c);
+            LINE(_f2i(x1) + x, _f2i(y1) + y, _f2i(x2) + x, _f2i(y2) + y, c);
             x1 = x2;
             y1 = y2;
         }
@@ -19,13 +19,13 @@ void PARC(int x, int y, int w, int h, int s, int e, byte c)
         for (; s > e; s -= 4) {
             x2 = fxsin(s) * w;
             y2 = fxcos(s) * h;
-            PLINE(_f2i(x1) + x, _f2i(y1) + y, _f2i(x2) + x, _f2i(y2) + y, c);
+            LINE(_f2i(x1) + x, _f2i(y1) + y, _f2i(x2) + x, _f2i(y2) + y, c);
             x1 = x2;
             y1 = y2;
         }
     }
     x2 = fxsin(e) * w;
     y2 = fxcos(e) * h;
-    PLINE(_f2i(x1) + x, _f2i(y1) + y, _f2i(x2) + x, _f2i(y2) + y, c);
+    LINE(_f2i(x1) + x, _f2i(y1) + y, _f2i(x2) + x, _f2i(y2) + y, c);
 }
 

@@ -4,7 +4,7 @@
 #include <motorola.h>
 #include <math.h>
 
-void _PLINE(void)
+void _LINE(void)
 {
     if (LINECLIPPER()) {
         if (_pmode < 4)  {
@@ -45,21 +45,21 @@ void _PLINE(void)
     }
 }
 
-void PLINE(int x1, int y1, int x2, int y2, byte c)
+void LINE(int x1, int y1, int x2, int y2, byte c)
 {
     int x = x2 - x1, y = y2 - y1;
     if (_abs(x) > 100 || _abs(y) > 100) {
         x = (x1 + x2) / 2;
         y = (y1 + y2) / 2;
-        PLINE(x1, y1, x, y, c);
-        PLINE(x, y, x2, y2, c);
+        LINE(x1, y1, x, y, c);
+        LINE(x, y, x2, y2, c);
     } else {
         C = c;
         X1 = x1;
         Y1 = y1;
         X2 = x2;
         Y2 = y2;
-        _PLINE();
+        _LINE();
     }
 }
 
