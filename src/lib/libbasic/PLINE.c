@@ -7,13 +7,13 @@
 void _PLINE(void)
 {
     if (LINECLIPPER()) {
-        if (_pmode & 1)  {
+        if (_pmode < 4)  {
             X1 >>= 1;
             X2 >>= 1;
-        }
-        if (_pmode < 2) {
-            Y1 >>= 1;
-            Y2 >>= 1;
+            if (_pmode < 2) {
+                Y1 >>= 1;
+                Y2 >>= 1;
+            }
         }
 
         X2 -= X1;
@@ -62,6 +62,7 @@ void PLINE(int x1, int y1, int x2, int y2, byte c)
         _PLINE();
     }
 }
+
 
 
 

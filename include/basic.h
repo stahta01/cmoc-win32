@@ -2,6 +2,13 @@
 #ifndef _BASIC_H
 #define _BASIC_H
 
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+#include <conio.h>
+
 #include <motorola/types.h>
 #include <equates.h>
 
@@ -43,6 +50,9 @@ byte JOYSTK(int j);
 char INKEY(void);
 word TIMER(void);
 
+void SCREEN(int agr, int css);
+void PMODE(int mode, int page);
+
 void PCLS(byte c);
 
 void PSET(int x, int y, byte c);
@@ -59,6 +69,8 @@ void PLINE(int x1, int y1, int x2, int y2, byte c);
 void PARC(int x, int y, int w, int h, int s, int e, byte c);
 void PELLIPSE(int x, int y, int w, int h, byte c);
 void PCLIP(int x1, int y1, int x2, int y2);
+
+bool LINECLIPPER(void);
 
 #define PEEK(X) (*(byte*)(X))
 #define POKE(X,Y) (PEEK(X)=(byte)(Y))
@@ -78,8 +90,6 @@ void _PSET2(void);
 #define Y1 (*(int*)_VERBEG)
 #define X2 (*(int*)_HOREND)
 #define Y2 (*(int*)_VEREND)
-
-#define CLIP(a,b,w,h,lo,hi)if(a<lo){b+=(h)*(lo-a)/(w);a=lo;}else if(a>hi){b+=(h)*(hi-a)/(w);a=hi;}
 
 #endif
 

@@ -4,39 +4,62 @@
 
 #pragma org $3600
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <conio.h>
-
 #include <basic.h>
 #include <motorola.h>
 
 int main(void)
 {
-    MotorolaSetVDG(_SAM_0C00, _VDG_GRAPH_6R1);
+    SCREEN(1, 1);
+    PMODE(1, 0);
 
-    _beggrp = 0x0C00;
-    _endgrp = _beggrp + (24 << 8);
-    _horbyt = 32;
-    _pmode = 5;
+    //_pmode = 5;
 
-    PCLIP(0, 0, 300, 302);
+    PCLIP(1, 1, 254, 191);
 
-    PCLS(1);
+    PCLS(0);
 
-    PLINE(0, 0, 250, 180, 0);
+    PLINE(255, 0, 0, 192, 3);
+
+    PLINE(0, 0, 255, 192, 2);
 
     for (int i = 2; i < 190; i += 8) {
         PLINE(2, i, i, 190, 2);
     }
 
-    PELLIPSE(128, 96, 70, 40, 3);
+    PELLIPSE(128, 96, 70, 40, 1);
 
-    while (!kbhit()) {}
+    while (!kbhit()) {
+    }
 
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
