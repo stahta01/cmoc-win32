@@ -10,9 +10,9 @@
 int main(void)
 {
     PMODE(4, 1);
-    SCREEN(1, 1);
+    SCREEN(1, 0);
 
-    _pmode = 3;
+//    _pmode = 3;
 
     PCLS(0);
 
