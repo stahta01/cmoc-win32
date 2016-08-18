@@ -10,15 +10,13 @@ void SCREEN(int agr, int css)
             page >>= 1;
         }
         byte mode = _pmode + 3;
-        POKE(0xff22, PEEK(0xff22) & 0x8F | (mode << 4));
         if (mode == 7) {
             mode = 6;
         }
-        for (word i = 0xffc0; i < 0xffc5; i += 2) {
-            POKE(i + (mode & 1), true);
-            mode >>= 1;
-        }
-        POKE(0xff22, PEEK(0xff22) | 128);
+        POKE(0xffc4 + ((mode & 4) ? 1 : 0), 0);
+        POKE(0xffc2 + ((mode & 2) ? 1 : 0), 0);
+        POKE(0xffc0 + ((mode & 1) ? 1 : 0), 0);
+        POKE(0xff22, (PEEK(0xff22) & 7) | (128 + ((_pmode + 3) << 4)));
     } else {
         POKE(0xff22, PEEK(0xff22) & 127);
     }

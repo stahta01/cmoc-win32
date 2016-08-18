@@ -36,6 +36,9 @@ typedef struct {
 extern TBASIC _basic;
 
 int ABS(int numeric);
+byte PEEK(word addr);
+void POKE(word addr, byte value);
+
 void SOUND(byte tone, byte duration);
 byte JOYSTK(int j);
 char INKEY(void);
@@ -75,9 +78,6 @@ void CIRCLE(int x, int y, int r, byte c);
 void PCLIP(int x1, int y1, int x2, int y2);
 
 bool LINECLIPPER(void);
-
-#define PEEK(X) (*(byte*)(X))
-#define POKE(X,Y) (PEEK(X)=(byte)(Y))
 
 // Internal use only
 

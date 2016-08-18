@@ -5,12 +5,16 @@
 #pragma org $3600
 
 #include <basic.h>
+#include <unistd.h>
 #include <motorola.h>
 
 int main(void)
 {
-    PMODE(4, 1);
-    SCREEN(1, 0);
+
+    sleep(1);
+
+    PMODE(0, 1);
+    SCREEN(1, 1);
 
 //    _pmode = 3;
 
@@ -31,6 +35,16 @@ int main(void)
 
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

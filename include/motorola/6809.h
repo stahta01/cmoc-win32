@@ -4,6 +4,12 @@
 
 #include <motorola/types.h>
 
+// Enable main interrupt
+void asm enable(void);
+
+// Disable main interrupt
+void asm disable(void);
+
 typedef struct
 {
     byte cmd;
