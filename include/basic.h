@@ -88,7 +88,7 @@ typedef struct {
     bool freememory;
 } BITMAP;
 
-BITMAP* BITMAPCREATE2(word width, word height, byte* data, word bytesperline, bool freememory);
+BITMAP* BITMAPATTACH(word width, word height, byte* data, word bytesperline, bool freememory);
 BITMAP* BITMAPCREATE(word width, word height);
 void BITMAPFREE(BITMAP* bitmap);
 void BITMAPCOPYRECT(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src,

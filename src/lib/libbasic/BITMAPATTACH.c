@@ -1,7 +1,7 @@
 
 #include <basic.h>
 
-BITMAP* BITMAPCREATE2(word width, word height, byte* data, word bytesperline, bool freememory)
+BITMAP* BITMAPATTACH(word width, word height, byte* data, word bytesperline, bool freememory)
 {
     BITMAP* bitmap = (BITMAP*)calloc(sizeof(BITMAP), 1);
     bitmap->width = width;

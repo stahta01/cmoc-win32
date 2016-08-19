@@ -31,8 +31,8 @@ int main(void)
         *p = *p == ' ' ? 128 : (128 +(2<<4)+ 8);
     }
 
-    screen = BITMAPCREATE2(32, 16, 0x400, 32, false);
-    test = BITMAPCREATE2(30, 7, (byte*)image, 30, false);
+    screen = BITMAPATTACH(32, 16, 0x400, 32, false);
+    test = BITMAPATTACH(30, 7, (byte*)image, 30, false);
 
     CLS(0);
 
