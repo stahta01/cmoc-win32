@@ -1674,6 +1674,7 @@ object FormCmocIDE: TFormCmocIDE
       end
       object MenuRunBuildAndRun: TMenuItem
         Caption = 'Build and &Run ...'
+        ImageIndex = 22
         ShortCut = 120
         OnClick = MenuRunBuildAndRunClick
       end
