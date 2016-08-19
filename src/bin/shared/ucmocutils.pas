@@ -210,7 +210,7 @@ end;
 
 class procedure OCmoc.RaiseError(AMessage, ADetails: string; const AExitCode: integer);
 begin
-  RaiseError(AMessage + ' # ' + StringQuoted(ADetails), AExitCode);
+  RaiseError(AMessage + ' -> ' + StringQuoted(ADetails), AExitCode);
 end;
 
 class function OCmoc.FileChanged(const ADst, ASrc: TFileName): boolean;

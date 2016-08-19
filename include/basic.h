@@ -86,14 +86,16 @@ void _SET(void);
 void _PSET1(void);
 void _PSET2(void);
 
-#define X  (*(int*)_HORDEF)
-#define Y  (*(int*)_VERDEF)
-#define C  _wcolor
+#define GR_P    ((byte*)*(word*)_TEMPTR)
 
-#define X1 (*(int*)_HORBEG)
-#define Y1 (*(int*)_VERBEG)
-#define X2 (*(int*)_HOREND)
-#define Y2 (*(int*)_VEREND)
+#define X       (*(unsigned*)_HORDEF)
+#define Y       (*(unsigned*)_VERDEF)
+#define C       _wcolor
+
+#define X1      (*(int*)_HORBEG)
+#define Y1      (*(int*)_VERBEG)
+#define X2      (*(int*)_HOREND)
+#define Y2      (*(int*)_VEREND)
 
 #endif
 

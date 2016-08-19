@@ -28,7 +28,7 @@ interface
 uses
   Classes, ComCtrls, Controls, Dialogs, ExtCtrls, FileUtil, Forms, Graphics,
   LCLIntf, Menus, MouseAndKeyInput, process, StreamIO, SynEdit, SynHighlighterAny,
-  SynHighlighterCpp, SysUtils, UCmocIDE, UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
+  SysUtils, UCmocIDE, UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
 
 type
 
@@ -154,6 +154,8 @@ type
     function FileNameObj: TFileName;
     function FileNameBin: TFileName;
   strict private
+    procedure CheckRoms;
+  strict private
     function Execute(const AExecutable: string; const AParameters: array of string;
       const AExternal: boolean): integer;
     function RunTool(const ATool: string; const AParameters: array of string;
@@ -240,6 +242,11 @@ begin
   end;
 
   WriteLn('// Welcome to ' + Application.Title);
+
+  try
+    CheckRoms;
+  except
+  end;
 end;
 
 procedure TFormCmocIDE.FormCloseQuery(ASender: TObject; var ACanClose: boolean);
@@ -542,22 +549,40 @@ begin
   end;
 end;
 
+procedure TFormCmocIDE.CheckRoms;
+var
+  LIndex: integer;
+  LMessage: string;
+begin
+  with FindAllFiles(OCmoc.PathToXroarRoms, '*.rom', False) do begin
+    try
+      if Count = 0 then begin
+        LMessage := 'Unable to locate XRoar ROM files' + LineEnding +
+          'You must place ROM''s into the ROM path @ ' +
+          OCmoc.StringQuoted(OCmoc.PathToXroarRoms);
+        if MessageDlg(LMessage + LineEnding + LineEnding +
+          'Would you like to explore the ROM folder?', mtInformation, [mbYes, mbNo], 0) =
+          mrYes then begin
+          MenuHelpOpenRomFolder.Click;
+        end;
+        OCmoc.RaiseError(LMessage);
+      end;
+      for LIndex := 0 to Count - 1 do begin
+        Strings[LIndex] := ChangeFileExt(ExtractFileName(Strings[LIndex]), EmptyStr);
+      end;
+      WriteLn('# ', Count, ' XRoar rom file(s) found.' + LineEnding + '# ' + CommaText);
+    finally
+      Free;
+    end;
+  end;
+end;
+
 procedure TFormCmocIDE.MenuRunBuildAndRunClick(Sender: TObject);
 var
   LMachine: string;
 begin
   MenuRunBuild.Click;
-  with FindAllFiles(OCmoc.PathToXroarRoms, '*.rom', False) do begin
-    try
-      if Count = 0 then begin
-        OCmoc.RaiseError('No xroar rom files found. You must place roms into the rom path.',
-          OCmoc.PathToXroarRoms);
-      end;
-      WriteLn('# ', Count, ' xroar rom file(s) found');
-    finally
-      Free;
-    end;
-  end;
+  CheckRoms;
   WriteLn('// Running xroar emulator');
   try
     case FTarget of
@@ -675,7 +700,9 @@ end;
 
 procedure TFormCmocIDE.MenuHelpOpenRomFolderClick(Sender: TObject);
 begin
-  OpenURL(OCmoc.PathToXroarRoms);
+  if not OpenURL(OCmoc.PathToXroarRoms) then begin
+    OCmoc.RaiseError('Unable to open', OCmoc.PathToXroarRoms);
+  end;
 end;
 
 procedure TFormCmocIDE.MenuHelpCmocOnlineClick(Sender: TObject);
