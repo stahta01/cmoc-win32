@@ -28,7 +28,7 @@ int main(void)
     int i, y;
 
     for (char* p = image; *p; p++) {
-        *p = *p == ' ' ? 128 : (128 +(2<<4)+ 8);
+        *p = (char)(*p == _SPACE ? 128 : (128 + (((p - image) / 30) << 4) | 8));
     }
 
     screen = BITMAPATTACH(32, 16, 0x400, 32, false);
