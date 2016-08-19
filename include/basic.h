@@ -11,6 +11,7 @@
 
 #include <motorola/types.h>
 #include <equates.h>
+#include <zeropage.h>
 
 #define COLOR_BLACK       0
 #define COLOR_GREEN       1
@@ -79,12 +80,30 @@ void CLIP(int x1, int y1, int x2, int y2);
 
 bool LINECLIPPER(void);
 
+// Bitmap functions
+
+typedef struct {
+    byte* data;
+    word bytesperline, width, height;
+    bool freememory;
+} BITMAP;
+
+BITMAP* BITMAPCREATE2(word width, word height, byte* data, word bytesperline, bool freememory);
+BITMAP* BITMAPCREATE(word width, word height);
+void BITMAPFREE(BITMAP* bitmap);
+void BITMAPCOPYRECT(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src,
+                    int u1, int v1, int u2, int v2);
+void BITMAPSTRETCH(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src);
+void BITMAPDRAW(BITMAP* dst, int x, int y, BITMAP* src);
+
 // Internal use only
 
 void _SET(void);
 
 void _PSET1(void);
 void _PSET2(void);
+
+void _COPYRECT(byte* dst, word dstw, word dsth, byte* src, word srcw);
 
 #define GR_P    ((byte*)*(word*)_TEMPTR)
 
