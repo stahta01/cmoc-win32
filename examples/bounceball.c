@@ -31,11 +31,11 @@ void PlayGame(void)
         ball_y += ball_yy;
         if (_f2i(ball_x) < 2 || _f2i(ball_x) > 61) {
             ball_x += ball_xx = -ball_xx;
-            //SOUND(100, 0);
+            SOUND(100, 0);
         }
         if (_f2i(ball_y) < 14 || _f2i(ball_y) > 30) {
             ball_y += ball_yy = -ball_yy;
-            //SOUND(200, 0);
+            SOUND(200, 0);
         }
         if (_f2i(ball_x) != ball_sx || _f2i(ball_y) != ball_sy) {
             SET(ball_sx, ball_sy, 0);
@@ -43,9 +43,9 @@ void PlayGame(void)
             ball_sy = (byte)_f2i(ball_y);
             SET(ball_sx, ball_sy, 5);
         }
-        paddle_x = (((unsigned)JOYSTK(0) * 205) >> 8) + 2;
+        paddle_x = (byte)(((unsigned)JOYSTK(0) * 205) >> 8) + 2;
         SETLINE(paddle_sx, 31, paddle_sx + 10, 31, paddle_x !=  paddle_sx ? 0 : 5);
-        paddle_sx = paddle_x;
+        paddle_sx = (byte)paddle_x;
         SETLINE(paddle_sx, 31, paddle_sx + 10, 31, 5);
     }
 }

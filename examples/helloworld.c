@@ -15,9 +15,9 @@ int main()
 #ifdef __DRAGON__
     printf("HELLO DRAGON WORLD!\n");
 #endif
-    _beep(100, 2);
-    _beep(150, 1);
-    _beep(200, 1);
+    beep(100, 2);
+    beep(150, 1);
+    beep(200, 1);
     return 0;
 }
 
