@@ -1,8 +1,9 @@
 
 #include <stdlib.h>
 #include <equates.h>
+#include <stdio.h>
 
-void _beep(unsigned char tone, unsigned duration)
+void beep(unsigned char tone, unsigned duration)
 {
     asm {
         pshs    u

@@ -155,12 +155,14 @@ type
   public
     class function DosToUnix(const A: TFileName): TFileName;
     class function UnixToDos(const A: TFileName): TFileName;
+  public
     class function FileChanged(const ADst, ASrc: TFileName): boolean;
     class function FileNameTemp(const APostfix: string): TFileName;
     class function FileNameTemp(const APrefix, APostfix: string): TFileName;
     class function FileNameToIdent(const A: TFileName): string;
     class function FileNameToInitGlobals(const A: TFileName): string;
     class function FileNameTool(const ATool: string): TFileName;
+  public
     class function PathToInclude: TFileName;
     class function PathToLib: TFileName;
     class function PathToPackage: TFileName;
@@ -169,14 +171,17 @@ type
     class function PathToSrc: TFileName;
     class function PathToSrcAsm: TFileName;
     class function PathToSrcLib: TFileName;
+  public
     class function StringQuoted(const A: string): string;
     class function StringToIdent(const A: string): string;
     class function StringToInteger(const A: string): longint;
     class function SymbolIsPublic(const A: string): boolean;
-    class procedure ExtractPragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
+  public
+    class procedure SourcePragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
       var ATarget: string);
-    class procedure ExtractPragmas(const ADst, ASrc: TStrings; out AOrigin: cardinal;
-      out ATarget: string);
+    class procedure SourcePragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
+      var ATarget: string);
+  public
     class procedure FileNamesAppend(var A: TStringDynArray; AFileName: TFileName;
       const AMustExist: boolean);
     class procedure RaiseError(AMessage, ADetails: string; const AExitCode: integer = -1);
@@ -370,16 +375,16 @@ begin
   Result := AnsiStartsStr('_', A) and not AnsiStartsStr('___', A);
 end;
 
-class procedure OCmoc.ExtractPragmas(const ADst, ASrc: TStrings; out AOrigin: cardinal;
-  out ATarget: string);
+class procedure OCmoc.SourcePragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
+  var ATarget: string);
 var
   LIndex: integer;
   LName: string;
   LParser: OAsmParser;
 begin
   LParser := default(OAsmParser);
-  ATarget := Target_COCO;
-  AOrigin := Origin_DEFAULT;
+  //ATarget := Target_COCO;
+  //AOrigin := Origin_DEFAULT;
   if Assigned(ADst) then begin
     ADst.Clear;
   end;
@@ -412,7 +417,7 @@ begin
   end;
 end;
 
-class procedure OCmoc.ExtractPragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
+class procedure OCmoc.SourcePragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
   var ATarget: string);
 var
   LDst, LSrc: TStrings;
@@ -422,7 +427,7 @@ begin
     LSrc.LoadFromFile(ASrc);
     LDst := TStringList.Create;
     try
-      ExtractPragmas(LDst, LSrc, AOrigin, ATarget);
+      SourcePragmas(LDst, LSrc, AOrigin, ATarget);
       LDst.SaveToFile(ADst);
     finally
       FreeAndNil(LDst);

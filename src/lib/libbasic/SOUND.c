@@ -4,7 +4,7 @@
 
 void SOUND(byte tone, byte duration)
 {
-    _beep(tone, duration);
+    beep(tone, duration);
 }
 
 

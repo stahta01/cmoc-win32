@@ -1,5 +1,5 @@
 
-#pragma target coco
+#pragma target dragon
 
 #include <basic.h>
 #include <unistd.h>
@@ -31,11 +31,11 @@ void PlayGame(void)
         ball_y += ball_yy;
         if (_f2i(ball_x) < 2 || _f2i(ball_x) > 61) {
             ball_x += ball_xx = -ball_xx;
-            SOUND(100, 0);
+            //SOUND(100, 0);
         }
         if (_f2i(ball_y) < 14 || _f2i(ball_y) > 30) {
             ball_y += ball_yy = -ball_yy;
-            SOUND(200, 0);
+            //SOUND(200, 0);
         }
         if (_f2i(ball_x) != ball_sx || _f2i(ball_y) != ball_sy) {
             SET(ball_sx, ball_sy, 0);

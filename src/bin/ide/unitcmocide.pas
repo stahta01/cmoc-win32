@@ -187,9 +187,6 @@ begin
   Rewrite(StdErr);
 
   SetBounds(Left, Top, 640, 480);
-
-  FTarget := Target_COCO;
-  FOrigin := Origin_DEFAULT;
 end;
 
 procedure TFormCmocIDE.FormShow(ASender: TObject);
@@ -531,7 +528,9 @@ end;
 procedure TFormCmocIDE.MenuRunCompileClick(ASender: TObject);
 begin
   SynEditLog.Clear;
-  OCmoc.ExtractPragmas(nil, FormCmocIDESynEdit.SynEdit.Lines, FOrigin, FTarget);
+  FTarget := Target_COCO;
+  FOrigin := Origin_DEFAULT;
+  OCmoc.SourcePragmas(nil, FormCmocIDESynEdit.SynEdit.Lines, FOrigin, FTarget);
   if BeginProcess(FileNameObj, FileNameSrcExists) then begin
     RunTool(Tool_CMOC2, [Opt_DontLink1, Opt_Output2, FileNameObj, Opt_Target2,
       FTarget, Opt_Origin2, IntToStr(FOrigin), FileNameSrc], False);

@@ -1,9 +1,11 @@
 
-#pragma target coco
+#pragma target dragon
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+#include <equates.h>
 
 int main()
 {
@@ -13,7 +15,6 @@ int main()
 #ifdef __DRAGON__
     printf("HELLO DRAGON WORLD!\n");
 #endif
-    _beep(200, 1);
     _beep(100, 2);
     _beep(150, 1);
     _beep(200, 1);

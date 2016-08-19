@@ -73,7 +73,7 @@ begin
       'long=int', Opt_Define2, 'restrict=', Opt_Include2,
       OCmoc.DosToUnix(OCmoc.PathToPackage + 'include')));
 
-    OCmoc.ExtractPragmas(LPre, LPre, FOrigin, FTarget);
+    OCmoc.SourcePragmas(LPre, LPre, FOrigin, FTarget);
 
     LParams := TStringDynArray.Create(Opt_EmitUncalled1, Opt_DontLink1);
     if AWerror then begin
