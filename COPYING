@@ -1,8 +1,22 @@
+WinCMOC License
+===============
+
+WinCMOC is a port of CMOC. Below is the license for CMOC. Everything I've
+coded is either GPL or public domain. I'm not fussed.
+
+Download the WinCMOC source code from:
+https://sourceforge.net/p/cmoc-win32/code/HEAD/tree/
+
+CMOC License
+============
+
 The following license applies to all files in this package, except
 the files under src/bin/usim and any other file that is
 explicitly distributed under another license.
 
 -- Pierre Sarrazin
+http://perso.b2b2c.ca/~sarrazip/dev/cmoc.html
+
 
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007

@@ -1,6 +1,9 @@
 CMOC Compiler/Editor for Windows
 ================================
 
+Website:
+https://sourceforge.net/projects/cmoc-win32/
+
 This is a port of CMOC to Windows. The port was pretty easy todo, but CMOC 
 does not support linking.
 
@@ -29,6 +32,7 @@ To obtain the original source code and more information about CMOC, please
 visit the CMOC homepage.
 
 CMOC - A C-like 6809-targeting cross-compiler
+=============================================
 
 Home page: http://sarrazip.com/dev/cmoc.html
 
