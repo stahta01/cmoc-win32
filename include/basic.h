@@ -103,7 +103,7 @@ void _SET(void);
 void _PSET1(void);
 void _PSET2(void);
 
-void _COPYRECT(byte* dst, word dstw, word dsth, byte* src, word srcw);
+void BYTESCOPYRECT(byte* dst, word dstw, word dsth, byte* src, word srcw);
 
 #define GR_P    ((byte*)*(word*)_TEMPTR)
 

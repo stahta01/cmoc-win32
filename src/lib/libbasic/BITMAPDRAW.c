@@ -11,7 +11,7 @@ void BITMAPDRAW(BITMAP* dst, int x, int y, BITMAP* src)
     zV1 = 0;
     zU2 = src->width;
     zV2 = src->height;
-    _COPYRECT(dst->data, dst->width, dst->height, src->data, src->width);
+    BYTESCOPYRECT(dst->data, dst->width, dst->height, src->data, src->width);
 }
 
 

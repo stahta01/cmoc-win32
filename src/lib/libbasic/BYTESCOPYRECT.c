@@ -1,7 +1,7 @@
 
 #include <basic.h>
 
-void _COPYRECT(byte* dst, word dstw, word dsth, byte* src, word srcw)
+void BYTESCOPYRECT(byte* dst, word dstw, word dsth, byte* src, word srcw)
 {
     int w = zX2 - zX1, h = zY2 - zY1;
 

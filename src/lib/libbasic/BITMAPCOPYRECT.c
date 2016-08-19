@@ -12,7 +12,7 @@ void BITMAPCOPYRECT(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src,
     zV1 = v1;
     zU2 = u2;
     zV2 = v2;
-    _COPYRECT(dst->data, dst->width, dst->height, src->data, src->width);
+    BYTESCOPYRECT(dst->data, dst->width, dst->height, src->data, src->width);
 }
 
 

@@ -11,7 +11,7 @@ void BITMAPSTRETCH(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src)
     zV1 = 0;
     zU2 = src->width;
     zV2 = src->height;
-    _COPYRECT(dst->data, dst->width, dst->height, src->data, src->width);
+    BYTESCOPYRECT(dst->data, dst->width, dst->height, src->data, src->width);
 }
 
 
