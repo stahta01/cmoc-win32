@@ -570,7 +570,7 @@ begin
       for LIndex := 0 to Count - 1 do begin
         Strings[LIndex] := ChangeFileExt(ExtractFileName(Strings[LIndex]), EmptyStr);
       end;
-      WriteLn('# ', Count, ' XRoar rom file(s) found.' + LineEnding + '# ' + CommaText);
+      WriteLn('# ', Count, ' XRoar ROM file(s) found.' + LineEnding + '# ' + CommaText);
     finally
       Free;
     end;

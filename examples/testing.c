@@ -6,7 +6,6 @@
 
 #include <basic.h>
 #include <unistd.h>
-#include <motorola.h>
 
 int main(void)
 {
