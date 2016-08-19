@@ -75,7 +75,7 @@ void ARC(int x, int y, int w, int h, int s, int e, byte c);
 void ELLIPSE(int x, int y, int w, int h, byte c);
 void CIRCLE(int x, int y, int r, byte c);
 
-void PCLIP(int x1, int y1, int x2, int y2);
+void CLIP(int x1, int y1, int x2, int y2);
 
 bool LINECLIPPER(void);
 

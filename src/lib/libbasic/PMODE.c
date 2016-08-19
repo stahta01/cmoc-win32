@@ -9,7 +9,8 @@ void PMODE(int mode, int page)
     mode = _min(_max(mode, 0), 4);
     _pmode = (byte)mode;
     _horbyt = (_pmode == 0 || _pmode == 2) ? 16 : 32;
-    PCLIP(1, 1, 254, 191); // TODO: Set this correctly
+
+    CLIP(2, 2, 254, 190); // TODO: Set this correctly
 }
 
 
