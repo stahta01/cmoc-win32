@@ -6,20 +6,20 @@
 
 void _SETLINE(void)
 {
-    X2 -= X1;
-    Y2 -= Y1;
-    int w = _abs(X2), h = _abs(Y2), i = _max(w, h);
+    zX2 -= zX1;
+    zY2 -= zY1;
+    int w = _abs(zX2), h = _abs(zY2), i = _max(w, h);
     if (i) {
-        X1 = _i2f(X1);
-        Y1 = _i2f(Y1);
-        X2 = _i2f(X2) / i;
-        Y2 = _i2f(Y2) / i;
+        zX1 = _i2f(zX1);
+        zY1 = _i2f(zY1);
+        zX2 = _i2f(zX2) / i;
+        zY2 = _i2f(zY2) / i;
         while (i-- > 0) {
-            X = _HIBYTE(X1);
-            Y = _HIBYTE(Y1);
+            zX = _HIBYTE(zX1);
+            zY = _HIBYTE(zY1);
             _SET();
-            X1 += X2;
-            Y1 += Y2;
+            zX1 += zX2;
+            zY1 += zY2;
         }
     }
 }
@@ -27,10 +27,10 @@ void _SETLINE(void)
 void SETLINE(int x1, int y1, int x2, int y2, byte c)
 {
     C = c;
-    X1 = x1;
-    Y1 = y1;
-    X2 = x2;
-    Y2 = y2;
+    zX1 = x1;
+    zY1 = y1;
+    zX2 = x2;
+    zY2 = y2;
     _SETLINE();
 }
 

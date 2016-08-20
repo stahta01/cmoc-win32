@@ -3,68 +3,68 @@
 
 bool LINECLIPPER(void)
 {
-    X = _basic.pclip.x1;
-    Y = _basic.pclip.x2;
-    if (X1 < X) {
-        if (X2 < X) {
+    zX = _basic.pclip.x1;
+    zY = _basic.pclip.x2;
+    if (zX1 < zX) {
+        if (zX2 < zX) {
             return false;
         }
-        Y1 += (Y2-Y1)*(X-X1)/(X2-X1);
-        X1 = X;
+        zY1 += (zY2 - zY1) * (zX - zX1) / (zX2 - zX1);
+        zX1 = zX;
     } else {
-        if (X1 > Y) {
-            if (X2 > Y) {
+        if (zX1 > zY) {
+            if (zX2 > zY) {
                 return false;
             }
-            Y1 += (Y2-Y1)*(Y-X1)/(X2-X1);
-            X1 = Y;
+            zY1 += (zY2 - zY1) * (zY - zX1) / (zX2 - zX1);
+            zX1 = zY;
         }
     }
-    if (X2 < X) {
-        if (X1 < X) {
+    if (zX2 < zX) {
+        if (zX1 < zX) {
             return false;
         }
-        Y2 += (Y2-Y1)*(X-X2)/(X2-X1);
-        X2 = X;
+        zY2 += (zY2 - zY1) * (zX - zX2)/(zX2 - zX1);
+        zX2 = zX;
     } else {
-        if (X2 > Y) {
-            if (X1 > Y) {
+        if (zX2 > zY) {
+            if (zX1 > zY) {
                 return false;
             }
-            Y2 += (Y2-Y1)*(Y-X2)/(X2-X1);
-            X2 = Y;
+            zY2 += (zY2 - zY1) * (zY - zX2) / (zX2 - zX1);
+            zX2 = zY;
         }
     }
-    X = _basic.pclip.y1;
-    Y = _basic.pclip.y2;
-    if (Y1 < X) {
-        if (Y2 < X) {
+    zX = _basic.pclip.y1;
+    zY = _basic.pclip.y2;
+    if (zY1 < zX) {
+        if (zY2 < zX) {
             return false;
         }
-        X1 += (X2-X1)*(X-Y1)/(Y2-Y1);
-        Y1 = X;
+        zX1 += (zX2 - zX1) * (zX - zY1) / (zY2 - zY1);
+        zY1 = zX;
     } else {
-        if (Y1 > Y) {
-            if (Y2 > Y) {
+        if (zY1 > zY) {
+            if (zY2 > zY) {
                 return false;
             }
-            X1 += (X2-X1)*(Y-Y1)/(Y2-Y1);
-            Y1 = Y;
+            zX1 += (zX2 - zX1) * (zY - zY1) / (zY2 - zY1);
+            zY1 = zY;
         }
     }
-    if (Y2 < X) {
-        if (Y1 < X) {
+    if (zY2 < zX) {
+        if (zY1 < zX) {
             return false;
         }
-        X2 += (X2-X1)*(X-Y2)/(Y2-Y1);
-        Y2 = X;
+        zX2 += (zX2 - zX1) * (zX - zY2) / (zY2 - zY1);
+        zY2 = zX;
     } else {
-        if (Y2 > Y) {
-            if (Y1 > Y) {
+        if (zY2 > zY) {
+            if (zY1 > zY) {
                 return false;
             }
-            X2 += (X2-X1)*(Y-Y2)/(Y2-Y1);
-            Y2 = Y;
+            zX2 += (zX2 - zX1) * (zY - zY2) / (zY2 - zY1);
+            zY2 = zY;
         }
     }
     return true;

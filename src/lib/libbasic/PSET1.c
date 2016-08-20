@@ -10,23 +10,23 @@ void _PSET1(void)
     switch (_horbyt) {
     case 16:
         if (C) {
-            *((byte*)_beggrp + (Y << 4) + (X >> 3)) |= pset1_set[X & 7];
+            *((byte*)_beggrp + (zY << 4) + (zX >> 3)) |= pset1_set[zX & 7];
         } else {
-            *((byte*)_beggrp + (Y << 4) + (X >> 3)) &= pset1_clr[X & 7];
+            *((byte*)_beggrp + (zY << 4) + (zX >> 3)) &= pset1_clr[zX & 7];
         }
         break;
     case 32:
         if (C) {
-            *((byte*)_beggrp + (Y << 5) + (X >> 3)) |= pset1_set[X & 7];
+            *((byte*)_beggrp + (zY << 5) + (zX >> 3)) |= pset1_set[zX & 7];
         } else {
-            *((byte*)_beggrp + (Y << 5) + (X >> 3)) &= pset1_clr[X & 7];
+            *((byte*)_beggrp + (zY << 5) + (zX >> 3)) &= pset1_clr[zX & 7];
         }
         break;
     default:
         if (C) {
-            *((byte*)_beggrp + (Y * _horbyt) + (X >> 3)) |= pset1_set[X & 7];
+            *((byte*)_beggrp + (zY * _horbyt) + (zX >> 3)) |= pset1_set[zX & 7];
         } else {
-            *((byte*)_beggrp + (Y * _horbyt) + (X >> 3)) &= pset1_clr[X & 7];
+            *((byte*)_beggrp + (zY * _horbyt) + (zX >> 3)) &= pset1_clr[zX & 7];
         }
         break;
     }
@@ -34,21 +34,21 @@ void _PSET1(void)
 
 void PSET1(int x, int y, byte c)
 {
-    X = x;
-    Y = y;
+    zX = x;
+    zY = y;
     C = c;
     _PSET1();
 }
 
 byte _PPOINT1(void)
 {
-    return *((byte*)_beggrp + (Y * _horbyt) + (X >> 3)) & pset1_set[X & 7];
+    return *((byte*)_beggrp + (zY * _horbyt) + (zX >> 3)) & pset1_set[zX & 7];
 }
 
 byte PPOINT1(int x, int y)
 {
-    X = x;
-    Y = y;
+    zX = x;
+    zY = y;
     return _PPOINT1();
 }
 

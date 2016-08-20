@@ -8,37 +8,37 @@ void _LINE(void)
 {
     if (LINECLIPPER()) {
         if (_pmode < 4)  {
-            X1 >>= 1;
-            X2 >>= 1;
+            zX1 >>= 1;
+            zX2 >>= 1;
             if (_pmode < 2) {
-                Y1 >>= 1;
-                Y2 >>= 1;
+                zY1 >>= 1;
+                zY2 >>= 1;
             }
         }
 
-        X2 -= X1;
-        Y2 -= Y1;
-        int w = _abs(X2), h = _abs(Y2), i = _max(w, h);
+        zX2 -= zX1;
+        zY2 -= zY1;
+        int w = _abs(zX2), h = _abs(zY2), i = _max(w, h);
         if (i) {
-            X1 = _i2f(X1);
-            Y1 = _i2f(Y1);
-            X2 = _i2f(X2) / i;
-            Y2 = _i2f(Y2) / i;
+            zX1 = _i2f(zX1);
+            zY1 = _i2f(zY1);
+            zX2 = _i2f(zX2) / i;
+            zY2 = _i2f(zY2) / i;
             if (_pmode & 1) {
                 while (i-- > 0) {
-                    X = _HIBYTE(X1);
-                    Y = _HIBYTE(Y1);
+                    zX = _HIBYTE(zX1);
+                    zY = _HIBYTE(zY1);
                     _PSET2();
-                    X1 += X2;
-                    Y1 += Y2;
+                    zX1 += zX2;
+                    zY1 += zY2;
                 }
             } else {
                 while (i-- > 0) {
-                    X = _HIBYTE(X1);
-                    Y = _HIBYTE(Y1);
+                    zX = _HIBYTE(zX1);
+                    zY = _HIBYTE(zY1);
                     _PSET1();
-                    X1 += X2;
-                    Y1 += Y2;
+                    zX1 += zX2;
+                    zY1 += zY2;
                 }
             }
         }
@@ -55,10 +55,10 @@ void LINE(int x1, int y1, int x2, int y2, byte c)
         LINE(x, y, x2, y2, c);
     } else {
         C = c;
-        X1 = x1;
-        Y1 = y1;
-        X2 = x2;
-        Y2 = y2;
+        zX1 = x1;
+        zY1 = y1;
+        zX2 = x2;
+        zY2 = y2;
         _LINE();
     }
 }

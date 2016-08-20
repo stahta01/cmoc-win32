@@ -107,14 +107,7 @@ void BYTESCOPYRECT(byte* dst, word dstw, word dsth, byte* src, word srcw);
 
 #define GR_P    ((byte*)*(word*)_TEMPTR)
 
-#define X       (*(unsigned*)_HORDEF)
-#define Y       (*(unsigned*)_VERDEF)
 #define C       _wcolor
-
-#define X1      (*(int*)_HORBEG)
-#define Y1      (*(int*)_VERBEG)
-#define X2      (*(int*)_HOREND)
-#define Y2      (*(int*)_VEREND)
 
 #endif
 
