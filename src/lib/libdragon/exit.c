@@ -1,3 +1,0 @@
-
-#include "../libcoco/exit.c"
-

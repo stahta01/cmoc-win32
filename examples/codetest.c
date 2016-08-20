@@ -6,9 +6,8 @@
 
 int main(void)
 {
-    puts("HERE");
-    exit(123);
-    puts("last");
-    return 0;
+    puts("START");
+    puts("EXIT");
+    return -1;
 }
 
