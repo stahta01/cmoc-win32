@@ -4,13 +4,14 @@
 #include <conio.h>
 #include <stdlib.h>
 
-#define SIMPLE_EFFECT(X) for (unsigned char i = 0; i < 255; i++) beep(X, 0)
+#define SIMPLE_EFFECT(X) for (unsigned i = 0; i < 256; i++) beep((unsigned char)(X), 0)
 
 int main(void)
 {
     clrscr();
-    cputs("SOUND EFFECTS MACHINE\n\n");
-    cputs("PRESS [0-9] FOR EFFECTS");
+    cputs("     SOUND EFFECTS MACHINE\n");
+    cputs("     ---------------------\n\n");
+    cputs("KEYS 0-9,Q,W,E,R,T,Y FOR EFFECTS");
     for (;;) {
         switch (getch()) {
         case '0':
@@ -43,25 +44,28 @@ int main(void)
         case '9':
             SIMPLE_EFFECT(i & 170);
             break;
+        case 'Q':
+            SIMPLE_EFFECT(-i << 1 & 180);
+            break;
+        case 'W':
+            SIMPLE_EFFECT(-i << 1 & 99);
+            break;
+        case 'E':
+            SIMPLE_EFFECT(-i & 180);
+            break;
+        case 'R':
+            SIMPLE_EFFECT(i & 22 ^ 3);
+            break;
+        case 'T':
+            SIMPLE_EFFECT(i ^ 24 * 8);
+            break;
+        case 'Y':
+            SIMPLE_EFFECT(-i | 170 * (i >> (i & 3)));
+            break;
         }
     }
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
