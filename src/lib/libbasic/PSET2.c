@@ -23,8 +23,8 @@ void _PSET2(void)
         GR_P = (byte*)_beggrp + (zY * _horbyt) + (zX >> 2);
         break;
     }
-    _allcol = (byte)zX & 3;
-    *GR_P = *GR_P & _pset2_clr[_allcol] | _pset2_set[zFC][_allcol];
+    zWC = (byte)zX & 3;
+    *GR_P = *GR_P & _pset2_clr[zWC] | _pset2_set[zFC][zWC];
 }
 
 void PSET2(int x, int y, byte c)
