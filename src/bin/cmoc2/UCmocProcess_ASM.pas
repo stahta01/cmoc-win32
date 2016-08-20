@@ -26,7 +26,7 @@ unit UCmocProcess_ASM;
 interface
 
 uses
-  Classes, StrUtils, SysUtils, UCmocAsm, UCmocUtils, UCmocProcess_TOOLS;
+  Classes, StrUtils, SysUtils, UCmocAsm, UCmocProcess_TOOLS, UCmocUtils;
 
 type
 
@@ -78,12 +78,14 @@ begin
 
   AddImport('DIV16'); // YES
   AddImport('DIV16BY10'); // YES
-  AddImport('DIV8BY7'); // YES
   AddImport('DIV8'); // YES
+  AddImport('DIV8BY7'); // YES
   AddImport('MUL16'); // YES
+  AddImport('SDIV16'); // YES
+  AddImport('SDIV8'); // YES
+
   //AddImport('MUL168_TO24');
   //AddImport('MUL168_TO32');
-  AddImport('SDIV16'); // YES
 
   AddImport('shiftByteLeft');
   AddImport('shiftByteRightSigned');

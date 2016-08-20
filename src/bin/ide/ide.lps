@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="56">
+    <Units Count="58">
       <Unit0>
         <Filename Value="ide.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -365,14 +365,14 @@
         <Filename Value="..\cmoc2\cmoc2.lpr"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="26"/>
-        <CursorPos X="79" Y="46"/>
+        <CursorPos X="23" Y="37"/>
         <UsageCount Value="10"/>
       </Unit45>
       <Unit46>
         <Filename Value="..\cmoc2\UCmocProcess_TOOLS.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="188"/>
-        <CursorPos X="40" Y="209"/>
+        <TopLine Value="114"/>
+        <CursorPos X="3" Y="33"/>
         <UsageCount Value="10"/>
       </Unit46>
       <Unit47>
@@ -445,6 +445,20 @@
         <CursorPos X="9" Y="841"/>
         <UsageCount Value="10"/>
       </Unit55>
+      <Unit56>
+        <Filename Value="..\cmoc2\UCmocProcess_CMOC2.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="30"/>
+        <CursorPos X="39" Y="33"/>
+        <UsageCount Value="10"/>
+      </Unit56>
+      <Unit57>
+        <Filename Value="..\cmoc2\UCmocProcess_ASM.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="72"/>
+        <CursorPos X="19" Y="86"/>
+        <UsageCount Value="10"/>
+      </Unit57>
     </Units>
     <JumpHistory Count="24" HistoryIndex="23">
       <Position1>
