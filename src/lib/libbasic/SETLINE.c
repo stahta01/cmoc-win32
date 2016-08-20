@@ -26,7 +26,7 @@ void _SETLINE(void)
 
 void SETLINE(int x1, int y1, int x2, int y2, byte c)
 {
-    C = c;
+    zFC = c;
     zX1 = x1;
     zY1 = y1;
     zX2 = x2;

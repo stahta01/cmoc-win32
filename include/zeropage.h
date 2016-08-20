@@ -4,6 +4,10 @@
 #include <equates.h>
 #include <motorola/types.h>
 
+#define zFC     _forcol
+#define zBC     _bakcol
+#define zWC     _wcolor
+
 #define zDST1   ((byte*)*(word*)0)
 #define zDST2   ((byte*)*(word*)2)
 #define zSRC1   ((byte*)*(word*)4)

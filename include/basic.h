@@ -107,7 +107,5 @@ void BYTESCOPYRECT(byte* dst, word dstw, word dsth, byte* src, word srcw);
 
 #define GR_P    ((byte*)*(word*)_TEMPTR)
 
-#define C       _wcolor
-
 #endif
 

@@ -24,14 +24,14 @@ void _PSET2(void)
         break;
     }
     _allcol = (byte)zX & 3;
-    *GR_P = *GR_P & _pset2_clr[_allcol] | _pset2_set[C][_allcol];
+    *GR_P = *GR_P & _pset2_clr[_allcol] | _pset2_set[zFC][_allcol];
 }
 
 void PSET2(int x, int y, byte c)
 {
     zX = x;
     zY = y;
-    C = c;
+    zFC = c;
     _PSET2();
 }
 
@@ -48,8 +48,8 @@ byte _PPOINT2(void)
         GR_P = (byte*)_beggrp + (zY * _horbyt) + (zX >> 2);
         break;
     }
-    _allcol = (byte)zX & 3;
-    return (*GR_P & _pset2_set[3][_allcol]) >> (3 - (_allcol));
+    zWC = (byte)zX & 3;
+    return (*GR_P & _pset2_set[3][zWC]) >> (3 - (zWC));
 }
 
 byte PPOINT2(int x, int y)
