@@ -1,22 +1,14 @@
 
+#pragma target dragon
+
 #include <stdio.h>
-
-void test1(void)
-{
-    int i;
-    unsigned char b;
-    b = *(((unsigned char*)&i)+1);
-}
-
-void test2(void)
-{
-    int i;
-    char b;
-    b = (char)i;
-}
+#include <stdlib.h>
 
 int main(void)
 {
+    puts("HERE");
+    exit(123);
+    puts("last");
     return 0;
 }
 
