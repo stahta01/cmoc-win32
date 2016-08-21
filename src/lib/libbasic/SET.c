@@ -7,35 +7,22 @@ byte _chr_clr[2][2] = {{240|7, 240|13}, {240|11, 240|14}};
 
 #define VIDLOC(x,y) (byte*)(_VIDRAM + ((word)((y) & 30) << 4) + (word)(((x) & 63) >> 1))
 
-void _SET(void)
-{
-    GR_P = VIDLOC(zX, zY);
-    *GR_P = zFC ?
-           _chr_set[zX & 1][zY & 1] | ((zFC - 1) << 4) | ((*GR_P & 128 ? *GR_P : 0) & 15) :
-           _chr_clr[zX & 1][zY & 1] & (*GR_P & 128 ? *GR_P : 0x8f);
-}
-
 void SET(int x, int y, byte c)
 {
-    zX = x;
-    zY = y;
-    zFC = c;
-    _SET();
-}
-
-int _POINT(void)
-{
-    GR_P = VIDLOC(zX, zY);
-    zWC = *GR_P;
-    return zWC & 128 ? ((zWC & 15) & _chr_set[zX & 1][zY & 1]) ? ((zWC >> 4) & 7) + 1 : 0 : -1;
+    byte* p = VIDLOC(x, y);
+    *p = c ?
+         _chr_set[x & 1][y & 1] | ((c - 1) << 4) | ((*p & 128 ? *p : 0) & 15) :
+         _chr_clr[x & 1][y & 1] & (*p & 128 ? *p : 0x8f);
 }
 
 int POINT(int x, int y)
 {
-    zX = x;
-    zY = y;
-    return _POINT();
+    byte i = *VIDLOC(x, y);
+    return i & 128 ? ((i & 15) & _chr_set[x & 1][y & 1]) ? ((i >> 4) & 7) + 1 : 0 : -1;
 }
+
+
+
 
 
 

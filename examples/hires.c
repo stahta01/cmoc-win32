@@ -28,6 +28,8 @@ int main(void)
 
     _pmode = 3;
 
+    unsigned start = TIMER();
+
     CLIP(2, 2, 128, 96);
     DrawGraphics();
     CLIP(128, 2, 254, 96);
@@ -37,8 +39,10 @@ int main(void)
     CLIP(128, 96, 254, 190);
     DrawGraphics();
 
-    while (!kbhit()) {
-    }
+    printf("%d\n", TIMER() - start);
+
+    //while (!kbhit()) {
+    //}
 
     return 0;
 }

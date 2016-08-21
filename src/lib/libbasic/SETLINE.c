@@ -4,34 +4,22 @@
 #include <math.h>
 #include <motorola.h>
 
-void _SETLINE(void)
-{
-    zX2 -= zX1;
-    zY2 -= zY1;
-    int w = _abs(zX2), h = _abs(zY2), i = _max(w, h);
-    if (i) {
-        zX1 = _i2f(zX1);
-        zY1 = _i2f(zY1);
-        zX2 = _i2f(zX2) / i;
-        zY2 = _i2f(zY2) / i;
-        while (i-- > 0) {
-            zX = _HIBYTE(zX1);
-            zY = _HIBYTE(zY1);
-            _SET();
-            zX1 += zX2;
-            zY1 += zY2;
-        }
-    }
-}
-
 void SETLINE(int x1, int y1, int x2, int y2, byte c)
 {
-    zFC = c;
-    zX1 = x1;
-    zY1 = y1;
-    zX2 = x2;
-    zY2 = y2;
-    _SETLINE();
+    x2 -= x1;
+    y2 -= y1;
+    int w = _abs(x2), h = _abs(y2), i = _max(w, h);
+    if (i) {
+        x1 = _i2f(x1);
+        y1 = _i2f(y1);
+        x2 = _i2f(x2) / i;
+        y2 = _i2f(y2) / i;
+        while (i-- > 0) {
+            SET(_HIBYTE(x1), _HIBYTE(y1), c);
+            x1 += x2;
+            y1 += y2;
+        }
+    }
 }
 
 

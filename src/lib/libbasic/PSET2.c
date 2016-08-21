@@ -10,53 +10,40 @@ byte _pset2_set[4][4] = {
 
 byte _pset2_clr[] = {0x3F, 0xCF, 0xF3, 0xFC};
 
-void _PSET2(void)
-{
-    switch (_horbyt) {
-    case 16:
-        GR_P = (byte*)_beggrp + (zY << 4) + (zX >> 2);
-        break;
-    case 32:
-        GR_P = (byte*)_beggrp + (zY << 5) + (zX >> 2);
-        break;
-    default:
-        GR_P = (byte*)_beggrp + (zY * _horbyt) + (zX >> 2);
-        break;
-    }
-    zWC = (byte)zX & 3;
-    *GR_P = *GR_P & _pset2_clr[zWC] | _pset2_set[zFC][zWC];
-}
-
 void PSET2(int x, int y, byte c)
 {
-    zX = x;
-    zY = y;
-    zFC = c;
-    _PSET2();
-}
-
-byte _PPOINT2(void)
-{
+    byte* p;
     switch (_horbyt) {
     case 16:
-        GR_P = (byte*)_beggrp + (zY << 4) + (zX >> 2);
+        p = (byte*)_beggrp + (y << 4) + (x >> 2);
         break;
     case 32:
-        GR_P = (byte*)_beggrp + (zY << 5) + (zX >> 2);
+        p = (byte*)_beggrp + (y << 5) + (x >> 2);
         break;
     default:
-        GR_P = (byte*)_beggrp + (zY * _horbyt) + (zX >> 2);
+        p = (byte*)_beggrp + (y * _horbyt) + (x >> 2);
         break;
     }
-    zWC = (byte)zX & 3;
-    return (*GR_P & _pset2_set[3][zWC]) >> (3 - (zWC));
+    byte i = (byte)x & 3;
+    *p = *p & _pset2_clr[i] | _pset2_set[c][i];
 }
 
 byte PPOINT2(int x, int y)
 {
-    zX = x;
-    zY = y;
-    return _PPOINT2();
+    byte* p;
+    switch (_horbyt) {
+    case 16:
+        p = (byte*)_beggrp + (y << 4) + (x >> 2);
+        break;
+    case 32:
+        p = (byte*)_beggrp + (y << 5) + (x >> 2);
+        break;
+    default:
+        p = (byte*)_beggrp + (y * _horbyt) + (x >> 2);
+        break;
+    }
+    byte i = (byte)x & 3;
+    return (*p & _pset2_set[3][i]) >> (3 - (i));
 }
 
 

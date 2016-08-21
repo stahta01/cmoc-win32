@@ -96,13 +96,6 @@ void BITMAPCOPYRECT(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src,
 void BITMAPSTRETCH(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src);
 void BITMAPDRAW(BITMAP* dst, int x, int y, BITMAP* src);
 
-// Internal use only
-
-void _SET(void);
-
-void _PSET1(void);
-void _PSET2(void);
-
 void BYTESCOPYRECT(byte* dst, word dstw, word dsth, byte* src, word srcw);
 
 #define GR_P    ((byte*)*(word*)_TEMPTR)
