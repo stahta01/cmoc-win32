@@ -102,7 +102,7 @@ void LINE(int x1, int y1, int x2, int y2, byte c)
                 }
             } else {
                 while (i-- > 0) {
-                    PSET2(_HIBYTE(x1), _HIBYTE(y1), c);
+                    PSET1(_HIBYTE(x1), _HIBYTE(y1), c);
                     x1 += x2;
                     y1 += y2;
                 }

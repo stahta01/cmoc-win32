@@ -39,10 +39,10 @@ int main(void)
     CLIP(128, 96, 254, 190);
     DrawGraphics();
 
-    printf("%d\n", TIMER() - start);
+    //printf("%d\n", TIMER() - start);
 
-    //while (!kbhit()) {
-    //}
+    while (!kbhit()) {
+    }
 
     return 0;
 }
