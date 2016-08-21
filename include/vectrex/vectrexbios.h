@@ -331,17 +331,14 @@
 #define _VEC_EXPL_1 51288
 #endif
 
-// 
 #ifndef _VEC_EXPL_2
 #define _VEC_EXPL_2 51289
 #endif
 
-// 
 #ifndef _VEC_EXPL_3
 #define _VEC_EXPL_3 51290
 #endif
 
-// 
 #ifndef _VEC_EXPL_4
 #define _VEC_EXPL_4 51291
 #endif
@@ -521,187 +518,150 @@
 #define _VIA_PORT_A_NOHS 53263
 #endif
 
-// 
 #ifndef _COLD_START
 #define _COLD_START 61440
 #endif
 
-// 
 #ifndef _WARM_START
 #define _WARM_START 61548
 #endif
 
-// 
 #ifndef _INIT_VIA
 #define _INIT_VIA 61772
 #endif
 
-// 
 #ifndef _INIT_OS_RAM
 #define _INIT_OS_RAM 61796
 #endif
 
-// 
 #ifndef _INIT_OS
 #define _INIT_OS 61835
 #endif
 
-// 
 #ifndef _WAIT_RECAL
 #define _WAIT_RECAL 61842
 #endif
 
-// 
 #ifndef _SET_REFRESH
 #define _SET_REFRESH 61858
 #endif
 
-// 
 #ifndef _DP_TO_D0
 #define _DP_TO_D0 61866
 #endif
 
-// 
 #ifndef _DP_TO_C8
 #define _DP_TO_C8 61871
 #endif
 
-// 
 #ifndef _READ_BTNS_MASK
 #define _READ_BTNS_MASK 61876
 #endif
 
-// 
 #ifndef _READ_BTNS
 #define _READ_BTNS 61882
 #endif
 
-// 
 #ifndef _JOY_ANALOG
 #define _JOY_ANALOG 61941
 #endif
 
-// 
 #ifndef _JOY_DIGITAL
 #define _JOY_DIGITAL 61944
 #endif
 
-// 
 #ifndef _SOUND_BYTE
 #define _SOUND_BYTE 62038
 #endif
 
-// 
 #ifndef _SOUND_BYTE_X
 #define _SOUND_BYTE_X 62041
 #endif
 
-// 
 #ifndef _SOUND_BYTE_RAW
 #define _SOUND_BYTE_RAW 62043
 #endif
 
-// 
 #ifndef _CLEAR_SOUND
 #define _CLEAR_SOUND 62066
 #endif
 
-// 
 #ifndef _SOUND_BYTES
 #define _SOUND_BYTES 62077
 #endif
 
-// 
 #ifndef _SOUND_BYTES_X
 #define _SOUND_BYTES_X 62084
 #endif
 
-// 
 #ifndef _DO_SOUND
 #define _DO_SOUND 62089
 #endif
 
-// 
 #ifndef _DO_SOUND_X
 #define _DO_SOUND_X 62092
 #endif
 
-// 
 #ifndef _INTENSITY_1F
 #define _INTENSITY_1F 62109
 #endif
 
-// 
 #ifndef _INTENSITY_3F
 #define _INTENSITY_3F 62113
 #endif
 
-// 
 #ifndef _INTENSITY_5F
 #define _INTENSITY_5F 62117
 #endif
 
-// 
 #ifndef _INTENSITY_7F
 #define _INTENSITY_7F 62121
 #endif
 
-// 
 #ifndef _INTENSITY_A
 #define _INTENSITY_A 62123
 #endif
 
-// 
 #ifndef _DOT_IX_B
 #define _DOT_IX_B 62142
 #endif
 
-// 
 #ifndef _DOT_IX
 #define _DOT_IX 62145
 #endif
 
-// 
 #ifndef _DOT_D
 #define _DOT_D 62147
 #endif
 
-// 
 #ifndef _DOT_HERE
 #define _DOT_HERE 62149
 #endif
 
-// 
 #ifndef _DOT_LIST
 #define _DOT_LIST 62165
 #endif
 
-// 
 #ifndef _DOT_LIST_RESET
 #define _DOT_LIST_RESET 62174
 #endif
 
-// 
 #ifndef _RECALIBRATE
 #define _RECALIBRATE 62182
 #endif
 
-// 
 #ifndef _MOVETO_X_7F
 #define _MOVETO_X_7F 62194
 #endif
 
-// 
 #ifndef _MOVETO_D_7F
 #define _MOVETO_D_7F 62204
 #endif
 
-// 
 #ifndef _MOVETO_IX_FF
 #define _MOVETO_IX_FF 62216
 #endif
 
-// 
 #ifndef _MOVETO_IX_7F
 #define _MOVETO_IX_7F 62220
 #endif
@@ -711,77 +671,62 @@
 #define _MOVETO_IX_B 62222
 #endif
 
-// 
 #ifndef _MOVETO_IX
 #define _MOVETO_IX 62224
 #endif
 
-// 
 #ifndef _MOVETO_D
 #define _MOVETO_D 62226
 #endif
 
-// 
 #ifndef _RESET0REF_D0
 #define _RESET0REF_D0 62282
 #endif
 
-// 
 #ifndef _CHECK0REF
 #define _CHECK0REF 62287
 #endif
 
-// 
 #ifndef _RESET0REF
 #define _RESET0REF 62292
 #endif
 
-// 
 #ifndef _RESET_PEN
 #define _RESET_PEN 62299
 #endif
 
-// 
 #ifndef _RESET0INT
 #define _RESET0INT 62315
 #endif
 
-// 
 #ifndef _PRINT_STR_HWYX
 #define _PRINT_STR_HWYX 62323
 #endif
 
-// 
 #ifndef _PRINT_STR_YX
 #define _PRINT_STR_YX 62328
 #endif
 
-// 
 #ifndef _PRINT_STR_D
 #define _PRINT_STR_D 62330
 #endif
 
-// 
 #ifndef _PRINT_LIST_HW
 #define _PRINT_LIST_HW 62341
 #endif
 
-// 
 #ifndef _PRINT_LIST
 #define _PRINT_LIST 62346
 #endif
 
-// 
 #ifndef _PRINT_LIST_CHK
 #define _PRINT_LIST_CHK 62348
 #endif
 
-// 
 #ifndef _PRINT_SHIPS_X
 #define _PRINT_SHIPS_X 62353
 #endif
 
-// 
 #ifndef _PRINT_SHIPS
 #define _PRINT_SHIPS 62355
 #endif
@@ -901,27 +846,22 @@
 #define _DRAW_VL_MODE 62574
 #endif
 
-// 
 #ifndef _PRINT_STR
 #define _PRINT_STR 62613
 #endif
 
-// 
 #ifndef _RANDOM_3
 #define _RANDOM_3 62737
 #endif
 
-// 
 #ifndef _RANDOM
 #define _RANDOM 62743
 #endif
 
-// 
 #ifndef _INIT_MUSIC_BUF
 #define _INIT_MUSIC_BUF 62771
 #endif
 
-// 
 #ifndef _CLEAR_X_B
 #define _CLEAR_X_B 62783
 #endif
@@ -931,37 +871,30 @@
 #define _CLEAR_C8_RAM 62786
 #endif
 
-// 
 #ifndef _CLEAR_X_256
 #define _CLEAR_X_256 62789
 #endif
 
-// 
 #ifndef _CLEAR_X_D
 #define _CLEAR_X_D 62792
 #endif
 
-// 
 #ifndef _CLEAR_X_B_80
 #define _CLEAR_X_B_80 62800
 #endif
 
-// 
 #ifndef _CLEAR_X_B_A
 #define _CLEAR_X_B_A 62802
 #endif
 
-// 
 #ifndef _DEC_3_COUNTERS
 #define _DEC_3_COUNTERS 62810
 #endif
 
-// 
 #ifndef _DEC_6_COUNTERS
 #define _DEC_6_COUNTERS 62814
 #endif
 
-// 
 #ifndef _DEC_COUNTERS
 #define _DEC_COUNTERS 62819
 #endif
@@ -996,182 +929,146 @@
 #define _DELAY_RTS 62845
 #endif
 
-// 
 #ifndef _BITMASK_A
 #define _BITMASK_A 62846
 #endif
 
-// 
 #ifndef _ABS_A_B
 #define _ABS_A_B 62852
 #endif
 
-// 
 #ifndef _ABS_B
 #define _ABS_B 62859
 #endif
 
-// 
 #ifndef _RISE_RUN_ANGLE
 #define _RISE_RUN_ANGLE 62867
 #endif
 
-// 
 #ifndef _GET_RISE_IDX
 #define _GET_RISE_IDX 62937
 #endif
 
-// 
 #ifndef _GET_RUN_IDX
 #define _GET_RUN_IDX 62939
 #endif
 
-// 
 #ifndef _GET_RISE_RUN
 #define _GET_RISE_RUN 62959
 #endif
 
-// 
 #ifndef _RISE_RUN_X
 #define _RISE_RUN_X 62975
 #endif
 
-// 
 #ifndef _RISE_RUN_Y
 #define _RISE_RUN_Y 62977
 #endif
 
-// 
 #ifndef _RISE_RUN_LEN
 #define _RISE_RUN_LEN 62979
 #endif
 
-// 
 #ifndef _ROT_VL_AB
 #define _ROT_VL_AB 62992
 #endif
 
-// 
 #ifndef _ROT_VL
 #define _ROT_VL 62998
 #endif
 
-// 
 #ifndef _ROT_VL_MODE_A
 #define _ROT_VL_MODE_A 63007
 #endif
 
-// 
 #ifndef _ROT_VL_MODE
 #define _ROT_VL_MODE 63019
 #endif
 
-// 
 #ifndef _ROT_VL_DFT
 #define _ROT_VL_DFT 63031
 #endif
 
-// 
 #ifndef _XFORM_RUN_A
 #define _XFORM_RUN_A 63067
 #endif
 
-// 
 #ifndef _XFORM_RUN
 #define _XFORM_RUN 63069
 #endif
 
-// 
 #ifndef _XFORM_RISE_A
 #define _XFORM_RISE_A 63073
 #endif
 
-// 
 #ifndef _XFORM_RISE
 #define _XFORM_RISE 63075
 #endif
 
-// 
 #ifndef _MOVE_MEM_A_1
 #define _MOVE_MEM_A_1 63103
 #endif
 
-// 
 #ifndef _MOVE_MEM_A
 #define _MOVE_MEM_A 63107
 #endif
 
-// 
 #ifndef _INIT_MUSIC_CHK
 #define _INIT_MUSIC_CHK 63111
 #endif
 
-// 
 #ifndef _INIT_MUSIC
 #define _INIT_MUSIC 63117
 #endif
 
-// 
 #ifndef _INIT_MUSIC_X
 #define _INIT_MUSIC_X 63122
 #endif
 
-// 
 #ifndef _SELECT_GAME
 #define _SELECT_GAME 63401
 #endif
 
-// 
 #ifndef _CLEAR_SCORE
 #define _CLEAR_SCORE 63567
 #endif
 
-// 
 #ifndef _ADD_SCORE_A
 #define _ADD_SCORE_A 63582
 #endif
 
-// 
 #ifndef _ADD_SCORE_D
 #define _ADD_SCORE_D 63612
 #endif
 
-// 
 #ifndef _STRIP_ZEROS
 #define _STRIP_ZEROS 63671
 #endif
 
-// 
 #ifndef _COMPARE_SCORE
 #define _COMPARE_SCORE 63687
 #endif
 
-// 
 #ifndef _NEW_HIGH_SCORE
 #define _NEW_HIGH_SCORE 63704
 #endif
 
-// 
 #ifndef _OBJ_WILL_HIT_U
 #define _OBJ_WILL_HIT_U 63717
 #endif
 
-// 
 #ifndef _OBJ_WILL_HIT
 #define _OBJ_WILL_HIT 63731
 #endif
 
-// 
 #ifndef _OBJ_HIT
 #define _OBJ_HIT 63743
 #endif
 
-// 
 #ifndef _EXPLOSION_SND
 #define _EXPLOSION_SND 63790
 #endif
 
-// 
 #ifndef _DRAW_GRID_VL
 #define _DRAW_GRID_VL 65439
 #endif

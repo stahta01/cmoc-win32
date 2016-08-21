@@ -10,7 +10,8 @@
 #include <conio.h>
 
 #include <motorola/types.h>
-#include <equates.h>
+// Use dragon equates to ensure we are compatible
+#include <dragon/equates.h>
 #include <zeropage.h>
 
 #define COLOR_BLACK       0

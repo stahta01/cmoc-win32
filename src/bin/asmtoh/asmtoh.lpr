@@ -54,7 +54,7 @@ type
 
   var
     LValue, LSize: integer;
-    LLine, LIdent, LComment: string;
+    LLine, LIdent, LSymbol, LComment: string;
     LParser: OAsmParser;
   begin
     ADst.Add('#ifndef ' + AHeaderIdent);
@@ -68,7 +68,8 @@ type
         if LParser.NextAndTokenIs(')') and LParser.NextAndTokenIs(':') and
           LParser.Next and LParser.Next then begin
           if (Length(AFilter) = 0) or AnsiMatchText(LParser.Token, AFilter) then begin
-            LIdent := OCmoc.StringToIdent('_' + UpperCase(LParser.Token));
+            LSymbol := LParser.Token;
+            LIdent := OCmoc.StringToIdent('_' + UpperCase(LSymbol));
             if LParser.Next then begin
               LSize := -1;
               if LParser.SameText('EQU') or LParser.SameText('RMB') then begin
@@ -81,9 +82,15 @@ type
                     LSize := StrToIntDef(LParser.Token, 0);
                   end;
                 end;
-                LComment := Trim(LParser.Remaining);
+                LComment := TrimSet(LParser.Remaining, [#0..#32, '*', ';']);
+                if AnsiMatchText(LSymbol, AFilter) then begin
+                  if Length(LComment) > 0 then begin
+                    LComment += ' ';
+                  end;
+                  LComment += '(Compatible with CoCo)';
+                end;
                 if Length(LComment) > 0 then begin
-                  ADst.Add('// ' + TrimSet(LParser.Remaining, [#0..#32, '*', ';']));
+                  ADst.Add('// ' + LComment);
                 end;
                 LDefine(LIdent, IntToStr(LValue));
                 if LSize >= 0 then begin
@@ -185,9 +192,13 @@ begin
 
     LDstPath := OCmoc.PathToInclude + 'dragon/';
 
+    // Note: we list the equates from coco which are the same as the dragon.
     Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm',
       '_DRAGON_EQUATES_H', TStringDynArray.Create('BS', 'CR', 'ESC', 'LF',
-      'FORMF', 'SPACE', 'TEMPTR', 'CURPOS', 'SNDTON', 'SNDDUR', 'TIMVAL', 'VIDRAM', 'POTVAL'));
+      'FORMF', 'SPACE', 'TEMPTR', 'CURPOS', 'SNDTON', 'SNDDUR', 'TIMVAL',
+      'VIDRAM', 'POTVAL', 'PMODE', 'ALLCOL', 'WCOLOR', 'FORCOL', 'BAKCOL',
+      'USRADR', 'TRCFLG', 'ENDGRP', 'HORBYT', 'BEGGRP', 'GRPRAM', 'HORBEG',
+      'VERBEG', 'CSSVAL', 'SETFLG', 'HOREND', 'VEREND', 'HORDEF', 'VERDEF'));
 
     LDstPath := OCmoc.PathToInclude + 'vectrex/';
     Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexdefs.asm',
