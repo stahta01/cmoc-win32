@@ -1,15 +1,27 @@
 
-#include <basic.h>
+#include "basicdefs.h"
+
 #include <stdlib.h>
 #include <motorola.h>
 #include <math.h>
 
+byte _pset2_set[4][4] = {
+    {0x00,0x00,0x00,0x00},
+    {0x40,0x10,0x04,0x01},
+    {0x80,0x20,0x08,0x02},
+    {0xC0,0x30,0x0C,0x03}
+};
+
+byte _pset2_clr[4] = {0x3F, 0xCF, 0xF3, 0xFC};
+
 void LINE(int x1, int y1, int x2, int y2, byte c)
 {
+    byte sx, *p;
+    word sy;
     int x = x2 - x1, y = y2 - y1;
-    if (_abs(x) > 100 || _abs(y) > 100) {
-        x = (x1 + x2) / 2;
-        y = (y1 + y2) / 2;
+    if (_abs(x) > 120 || _abs(y) > 120) {
+        x = (x1 + x2) >> 1;
+        y = (y1 + y2) >> 1;
         LINE(x1, y1, x, y, c);
         LINE(x, y, x2, y2, c);
     } else {
@@ -88,28 +100,69 @@ void LINE(int x1, int y1, int x2, int y2, byte c)
 
         x2 -= x1;
         y2 -= y1;
-        int w = _abs(x2), h = _abs(y2), i = _max(w, h);
-        if (i) {
+        x = _abs(x2);
+        y = _abs(y2);
+        byte length = (byte)_max(x, y);
+        if (length) {
             x1 = _i2f(x1);
             y1 = _i2f(y1);
-            x2 = _i2f(x2) / i;
-            y2 = _i2f(y2) / i;
+            x2 = _i2f(x2) / length;
+            y2 = _i2f(y2) / length;
             if (_pmode & 1) {
-                while (i-- > 0) {
-                    PSET2(_HIBYTE(x1), _HIBYTE(y1), c);
-                    x1 += x2;
-                    y1 += y2;
+                for (; length--; x1 += x2, y1 += y2) {
+                    sx = (byte)((word)x1 >> 8);
+                    sy = ((word)y1 >> 8);
+                    switch (_horbyt) {
+                    case 16:
+                        p = (byte*)_beggrp + (sy << 4) + (sx >> 2);
+                        break;
+                    case 32:
+                        p = (byte*)_beggrp + (sy << 5) + (sx >> 2);
+                        break;
+                    default:
+                        p = (byte*)_beggrp + (sy * _horbyt) + (sx >> 2);
+                        break;
+                    }
+                    sx &= 3;
+                    *p = *p & _pset2_clr[sx] | _pset2_set[c][sx];
                 }
             } else {
-                while (i-- > 0) {
-                    PSET1(_HIBYTE(x1), _HIBYTE(y1), c);
-                    x1 += x2;
-                    y1 += y2;
+                for (; length--; x1 += x2, y1 += y2) {
+                    sx = (byte)((word)x1 >> 8);
+                    sy = ((word)y1 >> 8);
+                    switch (_horbyt) {
+                    case 16:
+                        if (c) {
+                            *((byte*)_beggrp + (sy << 4) + (sx >> 3)) |= _pset1_set[sx & 7];
+                        } else {
+                            *((byte*)_beggrp + (sy << 4) + (sx >> 3)) &= _pset1_clr[sx & 7];
+                        }
+                        break;
+                    case 32:
+                        if (c) {
+                            *((byte*)_beggrp + (sy << 5) + (sx >> 3)) |= _pset1_set[sx & 7];
+                        } else {
+                            *((byte*)_beggrp + (sy << 5) + (sx >> 3)) &= _pset1_clr[sx & 7];
+                        }
+                        break;
+                    default:
+                        if (c) {
+                            *((byte*)_beggrp + (sy * _horbyt) + (sx >> 3)) |= _pset1_set[sx & 7];
+                        } else {
+                            *((byte*)_beggrp + (sy * _horbyt) + (sx >> 3)) &= _pset1_clr[sx & 7];
+                        }
+                        break;
+                    }
                 }
             }
         }
     }
 }
+
+
+
+
+
 
 
 
