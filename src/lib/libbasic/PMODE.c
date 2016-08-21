@@ -10,6 +10,6 @@ void PMODE(int mode, int page)
 
     CLIP(2, 2, 254, 190); // TODO: Set this correctly
 
-    SCREENSETUP();
+    //SCREENSETUP();
 }
 

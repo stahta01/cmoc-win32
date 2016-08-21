@@ -23,8 +23,6 @@ void DrawGraphics(void)
 
 int main(void)
 {
-    sleep(1);
-
     PMODE(4, 1);
     PCLS(0);
     SCREEN(1, 1);
