@@ -6,7 +6,7 @@ void SCREEN(int agr, int css)
     if (agr) {
         byte page = PEEK(_BEGGRP) >> 1;
         for (byte i = 0; i < 7; i++) {
-            POKE(65478 + (i << 1) + (page & 1), true);
+            POKE(0xffc6 + (i << 1) + (page & 1), true);
             page >>= 1;
         }
         byte mode = _pmode + 3;
