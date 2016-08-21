@@ -1,5 +1,5 @@
 
-#include <basic.h>
+#include "basicdefs.h"
 
 void PMODE(int mode, int page)
 {
@@ -9,7 +9,7 @@ void PMODE(int mode, int page)
     _horbyt = (_pmode == 0 || _pmode == 2) ? 16 : 32;
 
     CLIP(2, 2, 254, 190); // TODO: Set this correctly
+
+    SCREENSETUP();
 }
-
-
 

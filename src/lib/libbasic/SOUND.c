@@ -7,4 +7,3 @@ void SOUND(byte tone, byte duration)
     beep(tone, duration);
 }
 
-

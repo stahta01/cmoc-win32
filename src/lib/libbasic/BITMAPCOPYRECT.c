@@ -15,4 +15,3 @@ void BITMAPCOPYRECT(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src,
     BYTESCOPYRECT(dst->data, dst->width, dst->height, src->data, src->width);
 }
 
-

@@ -44,4 +44,3 @@ void BYTESCOPYRECT(byte* dst, word dstw, word dsth, byte* src, word srcw)
     }
 }
 
-

@@ -1,33 +1,68 @@
 
 #include <basic.h>
+#include <coco/cocodefs.h>
+
+void SCREENSETUP(void)
+{
+    byte mode, sect;
+    if (PEEK(_PIA1BD) & 128) {
+        sect = PEEK(_BEGGRP) >> 1;
+        mode = _pmode + 3;
+    } else {
+        sect = 2;
+        mode = 0;
+    }
+    ((byte*)_F0CLR)[sect & 1] = true;
+    sect >>= 1;
+    ((byte*)_F1CLR)[sect & 1] = true;
+    sect >>= 1;
+    ((byte*)_F2CLR)[sect & 1] = true;
+    sect >>= 1;
+    ((byte*)_F3CLR)[sect & 1] = true;
+    sect >>= 1;
+    ((byte*)_F4CLR)[sect & 1] = true;
+    sect >>= 1;
+    ((byte*)_F5CLR)[sect & 1] = true;
+    sect >>= 1;
+    ((byte*)_F6CLR)[sect & 1] = true;
+    sect >>= 1;
+
+    byte v = _min(mode, 6);
+    POKE(_V2CLR + ((v & 4) ? 1 : 0), true);
+    POKE(_V1CLR + ((v & 2) ? 1 : 0), true);
+    POKE(_V0CLR + ((v & 1) ? 1 : 0), true);
+
+    POKE(_PIA1BD, (PEEK(_PIA1BD) & 0x8f) | (mode << 4));
+}
 
 void SCREEN(int agr, int css)
 {
     if (agr) {
-        byte page = PEEK(_BEGGRP) >> 1;
-        for (byte i = 0; i < 7; i++) {
-            POKE(0xffc6 + (i << 1) + (page & 1), true);
-            page >>= 1;
+        asm {
+            lda     _PIA1BD
+            ora     #128
+            sta     _PIA1BD
         }
-        byte mode = _pmode + 3;
-        if (mode == 7) {
-            mode = 6;
-        }
-        POKE(0xffc4 + ((mode & 4) ? 1 : 0), 0);
-        POKE(0xffc2 + ((mode & 2) ? 1 : 0), 0);
-        POKE(0xffc0 + ((mode & 1) ? 1 : 0), 0);
-        POKE(0xff22, (PEEK(0xff22) & 7) | (128 + ((_pmode + 3) << 4)));
     } else {
-        POKE(0xff22, PEEK(0xff22) & 127);
+        asm {
+            lda     _PIA1BD
+            anda    #127
+            sta     _PIA1BD
+        }
     }
     if (css) {
-        POKE(0xff22, PEEK(0xff22) | 8);
+        asm {
+            lda     _PIA1BD
+            ora     #8
+            sta     _PIA1BD
+        }
     } else {
-        POKE(0xff22, PEEK(0xff22) & 247);
+        asm {
+            lda     _PIA1BD
+            anda    #247
+            sta     _PIA1BD
+        }
     }
+    SCREENSETUP();
 }
-
-
-
-
 

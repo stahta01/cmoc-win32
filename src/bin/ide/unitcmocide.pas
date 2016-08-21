@@ -472,26 +472,34 @@ end;
 
 procedure TFormCmocIDE.MenuEditFormatSourceCodeClick(ASender: TObject);
 var
-  LFileName: TFileName;
+  LTmpFile: TFileName;
 begin
   if MessageDlg('Do you want to format current file?', mtConfirmation, [mbYes, mbNo], 0) =
     mrYes then begin
-    LFileName := GetTempDir(False) + 'astyle.c';
-    FormCmocIDESynEdit.SynEdit.Lines.SaveToFile(LFileName);
-    RunTool(Tool_ASTYLE, ['-A8', '-xC100', '-k1', '-w', '-U', '-H', '-j', '-s' +
-      IntToStr(FormCmocIDESynEdit.SynEdit.TabWidth),
-      LFileName], False);
-    with TStringList.Create do begin
-      try
-        LoadFromFile(LFileName);
-        if (Count > 0) and (Length(Trim(Strings[0])) <> 0) then begin
+    LTmpFile := GetTempDir(False) + 'astyle.c';
+    FormCmocIDESynEdit.SynEdit.Lines.SaveToFile(LTmpFile);
+    try
+      RunTool(Tool_ASTYLE, ['-A8', '-xC100', '-k1', '-w', '-U', '-H', '-j', '-s' +
+        IntToStr(FormCmocIDESynEdit.SynEdit.TabWidth),
+        LTmpFile], False);
+      with TStringList.Create do begin
+        try
+          LoadFromFile(LTmpFile);
+          while (Count > 0) and (Length(Trim(Strings[0])) = 0) do begin
+            Delete(0);
+          end;
+          while (Count > 0) and (Length(Trim(Strings[Count - 1])) = 0) do begin
+            Delete(Count - 1);
+          end;
           Insert(0, EmptyStr);
+          FormCmocIDESynEdit.SynEdit._ChangeText(Text);
+          FormCmocIDESynEdit.SynEdit._SetCaretYCentered(FormCmocIDESynEdit.SynEdit.CaretY);
+        finally
+          Free;
         end;
-        FormCmocIDESynEdit.SynEdit._ChangeText(Text);
-        FormCmocIDESynEdit.SynEdit._SetCaretYCentered(FormCmocIDESynEdit.SynEdit.CaretY);
-      finally
-        Free;
       end;
+    finally
+      DeleteFile(LTmpFile);
     end;
     WriteLn('// Formatting complete');
   end;

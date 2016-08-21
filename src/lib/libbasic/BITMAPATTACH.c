@@ -12,4 +12,3 @@ BITMAP* BITMAPATTACH(word width, word height, byte* data, word bytesperline, boo
     return bitmap;
 }
 
-

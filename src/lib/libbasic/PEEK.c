@@ -6,4 +6,3 @@ byte PEEK(word addr)
     return *(byte*)addr;
 }
 
-

@@ -8,6 +8,7 @@
 
 #include <basic.h>
 #include <unistd.h>
+#include <motorola.h>
 
 void DrawGraphics(void)
 {
@@ -48,87 +49,4 @@ int main(void)
 
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

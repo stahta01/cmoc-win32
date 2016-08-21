@@ -70,4 +70,3 @@ bool LINECLIPPER(void)
     return true;
 }
 
-

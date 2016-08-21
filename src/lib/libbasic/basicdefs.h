@@ -9,5 +9,7 @@ extern byte _pset1_clr[8];
 extern byte _pset2_set[4][4];
 extern byte _pset2_clr[4];
 
+void SCREENSETUP(void);
+
 #endif
 

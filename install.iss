@@ -48,6 +48,7 @@ Source: "examples\*.c"; DestDir: "{app}\examples"; Flags: ignoreversion recurses
 
 Source: "xroar\xroar.exe"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\xroar.pdf"; DestDir: "{app}\xroar"; Flags: ignoreversion
+Source: "xroar\xroar.conf"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\README"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\COPYING.GPL"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\ChangeLog"; DestDir: "{app}\xroar"; Flags: ignoreversion
