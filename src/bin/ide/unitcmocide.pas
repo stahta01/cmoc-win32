@@ -216,7 +216,7 @@ begin
 
   if (ParamCount > 0) and FileExists(ParamStr(ParamCount)) then begin
     FormCmocIDESynEdit.LoadFromFile(ParamStr(ParamCount));
-  end else if not FindCmdLineSwitch('nocode') then begin
+  end else if not Application.HasOption('nocode') then begin
     with FormCmocIDESynEdit.SynEdit.Lines do begin
       Add('#include <math.h>');
       Add('#include <ctype.h>');
@@ -234,7 +234,7 @@ begin
       Add('}');
     end;
   end;
-  if not FindCmdLineSwitch('nomaximize') then begin
+  if not Application.HasOption('nomaximize') then begin
     WindowState := wsMaximized;
   end;
 
