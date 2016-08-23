@@ -16,7 +16,7 @@ uses
 {$R *.res}
 
 begin
-  Application.Title:='WinCMOC IDE v0.2';
+  Application.Title:='WinCMOC IDE v0.3';
   RequireDerivedFormResource := True;
   Application.Initialize;
   Application.CreateForm(TFormCmocIDE, FormCmocIDE);
