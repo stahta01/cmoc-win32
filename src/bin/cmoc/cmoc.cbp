@@ -38,9 +38,9 @@ Automake
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-m32" />
-					<Add option='-DPROGRAM=\&quot;CMOC\&quot;' />
+					<Add option='-DPROGRAM=\&quot;cmoc\&quot;' />
 					<Add option='-DPACKAGE=\&quot;CMOC\&quot;' />
-					<Add option='-DVERSION=\&quot;1.28\&quot;' />
+					<Add option='-DVERSION=\&quot;1.30\&quot;' />
 					<Add option='-DPKGDATADIR=\&quot;PKGDATADIR_IS_UNDEFINED\&quot;' />
 				</Compiler>
 				<Linker>
@@ -82,9 +82,6 @@ Automake
 		<Unit filename="src/FormalParamList.h" />
 		<Unit filename="src/FormalParameter.cpp" />
 		<Unit filename="src/FormalParameter.h" />
-		<Unit filename="src/FuncAddrExpr.cpp" />
-		<Unit filename="src/FuncAddrExpr.h" />
-		<Unit filename="src/FuncAddrFixer.h" />
 		<Unit filename="src/FunctionCallExpr.cpp" />
 		<Unit filename="src/FunctionCallExpr.h" />
 		<Unit filename="src/FunctionDef.cpp" />
@@ -106,6 +103,7 @@ Automake
 		<Unit filename="src/Scope.h" />
 		<Unit filename="src/ScopeCreator.cpp" />
 		<Unit filename="src/ScopeCreator.h" />
+		<Unit filename="src/SemanticsChecker.cpp" />
 		<Unit filename="src/SemanticsChecker.h" />
 		<Unit filename="src/StringLiteralExpr.cpp" />
 		<Unit filename="src/StringLiteralExpr.h" />

@@ -93,7 +93,7 @@ const
   Opt_DontAssemble1 = '-S';
 
   Def_CMOC = '__CMOC__';
-  Def_CMOC_VERSION = Def_CMOC + '=1.28';
+  Def_CMOC_VERSION = Def_CMOC + '=1.30';
   Def_DATE = '__DATE__';
   Def_FILE = '__FILE__';
   Def_6809 = '__6809__';
@@ -497,7 +497,7 @@ begin
   try
     inherited Execute;
   except
-    CheckExitCode(-1);
+    CheckExitCode(2);
   end;
   Sleep(20);
   while (Running or (Output.NumBytesAvailable > 0)) do begin
