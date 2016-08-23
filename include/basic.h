@@ -12,7 +12,6 @@
 #include <motorola/types.h>
 // Use dragon equates to ensure we are compatible
 #include <dragon/equates.h>
-#include <zeropage.h>
 
 #define COLOR_BLACK       0
 #define COLOR_GREEN       1
@@ -96,8 +95,6 @@ void BITMAPCOPYRECT(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src,
                     int u1, int v1, int u2, int v2);
 void BITMAPSTRETCH(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src);
 void BITMAPDRAW(BITMAP* dst, int x, int y, BITMAP* src);
-
-void BYTESCOPYRECT(byte* dst, word dstw, word dsth, byte* src, word srcw);
 
 #define GR_P    ((byte*)*(word*)_TEMPTR)
 

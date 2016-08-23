@@ -2,6 +2,8 @@
 #include <basic.h>
 #include <coco/cocodefs.h>
 
+#include <equates.h>
+
 void SCREENSETUP(void)
 {
     byte mode, sect;
