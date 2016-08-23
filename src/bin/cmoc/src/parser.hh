@@ -90,13 +90,14 @@
      SIZEOF = 308,
      ELLIPSIS = 309,
      TYPEDEF = 310,
-     SWITCH = 311,
-     CASE = 312,
-     DEFAULT = 313,
-     REGISTER = 314,
-     GOTO = 315,
-     EXTERN = 316,
-     STATIC = 317
+     ENUM = 311,
+     SWITCH = 312,
+     CASE = 313,
+     DEFAULT = 314,
+     REGISTER = 315,
+     GOTO = 316,
+     EXTERN = 317,
+     STATIC = 318
    };
 #endif
 /* Tokens.  */
@@ -153,13 +154,14 @@
 #define SIZEOF 308
 #define ELLIPSIS 309
 #define TYPEDEF 310
-#define SWITCH 311
-#define CASE 312
-#define DEFAULT 313
-#define REGISTER 314
-#define GOTO 315
-#define EXTERN 316
-#define STATIC 317
+#define ENUM 311
+#define SWITCH 312
+#define CASE 313
+#define DEFAULT 314
+#define REGISTER 315
+#define GOTO 316
+#define EXTERN 317
+#define STATIC 318
 
 
 
@@ -177,6 +179,7 @@ typedef union YYSTYPE
     int integer;
     BasicType basicType;
     const TypeDesc *typeDesc;
+    TypeSpecifier *typeSpecifier;
     DeclarationSpecifierList *declarationSpecifierList;
     Tree *tree;
     CompoundStmt *compoundStmt;
@@ -196,11 +199,13 @@ typedef union YYSTYPE
     ClassDef::ClassMember *classMember;
     FilenameAndLineNo *filenameAndLineNo;
     std::vector<ClassDef::ClassMember *> *classMemberList;
+    Enumerator *enumerator;
+    std::vector<Enumerator *> *enumeratorList;
 
 
 
 /* Line 2068 of yacc.c  */
-#line 204 "parser.hh"
+#line 209 "parser.hh"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

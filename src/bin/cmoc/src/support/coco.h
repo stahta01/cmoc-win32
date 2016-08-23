@@ -10,8 +10,7 @@
 #include <cmoc.h>
 
 
-#define FALSE 0
-#define TRUE  1
+enum { FALSE, TRUE };
 
 #ifndef _CMOC_BASIC_TYPES_
 #define _CMOC_BASIC_TYPES_

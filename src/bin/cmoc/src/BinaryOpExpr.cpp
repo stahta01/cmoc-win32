@@ -1,4 +1,4 @@
-/*  $Id: BinaryOpExpr.cpp,v 1.55 2016/06/29 05:41:43 sarrazip Exp $
+/*  $Id: BinaryOpExpr.cpp,v 1.60 2016/08/14 02:38:37 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -42,12 +42,6 @@ BinaryOpExpr::BinaryOpExpr(Op op, Tree *left, Tree *right)
     subExpr1(right),
     numBytesPerElement(0)
 {
-    IdentifierExpr *ie = dynamic_cast<IdentifierExpr *>(subExpr0);
-    if (ie != NULL)
-    {
-        subExpr0 = new VariableExpr(ie->getId());
-        delete ie;
-    }
 }
 
 
@@ -225,7 +219,7 @@ BinaryOpExpr::emitCode(ASMText &out, bool lValue) const
 
 CodeStatus
 BinaryOpExpr::emitAddImmediateToVariable(ASMText &out,
-                                        VariableExpr *ve0,
+                                        const VariableExpr *ve0,
                                         uint16_t imm) const
 {
     if (ve0->getType() == BYTE_TYPE)
@@ -298,7 +292,7 @@ BinaryOpExpr::emitBitwiseOperation(ASMText &out, bool lValue, Op op) const
 
     // Optimization for VARIABLE & CONST value.
     //
-    const VariableExpr *ve0 = dynamic_cast<VariableExpr *>(subExpr0);
+    const VariableExpr *ve0 = subExpr0->asVariableExpr();
     uint16_t rightValue = 0;
     if (ve0 && subExpr1->evaluateConstantExpr(rightValue))
     {
@@ -314,7 +308,7 @@ BinaryOpExpr::emitBitwiseOperation(ASMText &out, bool lValue, Op op) const
     //
     if (const CastExpr *castExpr0 = dynamic_cast<CastExpr *>(subExpr0))
     {
-        const VariableExpr *castVar0 = dynamic_cast<const VariableExpr *>(castExpr0->getSubExpr());
+        const VariableExpr *castVar0 = castExpr0->getSubExpr()->asVariableExpr();
         if (castExpr0->getType() == BYTE_TYPE && castVar0 && subExpr1->evaluateConstantExpr(rightValue))
         {
             int16_t offset = (castVar0->getType() == BYTE_TYPE ? 0 : 1);  // if var is word, look at its LSB
@@ -413,11 +407,11 @@ BinaryOpExpr::emitAdd(ASMText &out, bool lValue, bool doSub) const
     if (emitBinOpIfConstants(out, doSub ? subtract : add))  // if this emits code
         return true;  // done
 
-    VariableExpr *ve0 = dynamic_cast<VariableExpr *>(subExpr0);
+    const VariableExpr *ve0 = subExpr0->asVariableExpr();
     uint16_t rightValue = 0;
     bool isRightConst = subExpr1->evaluateConstantExpr(rightValue);
 
-    if (ve0 != NULL && isRightConst)
+    if (ve0 && !ve0->isFuncAddrExpr() && isRightConst)
         return emitAddImmediateToVariable(out, ve0, (doSub ? -1 : +1) * rightValue);
 
     if (!emitSubExpressions(out, true))
@@ -597,8 +591,8 @@ BinaryOpExpr::emitMulDivMod(ASMText &out, bool lValue) const
     bool const0 = subExpr0->evaluateConstantExpr(val0);
     bool const1 = subExpr1->evaluateConstantExpr(val1);
 
-    VariableExpr *ve0 = dynamic_cast<VariableExpr *>(subExpr0);
-    VariableExpr *ve1 = dynamic_cast<VariableExpr *>(subExpr1);
+    const VariableExpr *ve0 = subExpr0->asVariableExpr();
+    const VariableExpr *ve1 = subExpr1->asVariableExpr();
 
     bool bothWordOperands = (subExpr0->getType() != BYTE_TYPE && subExpr1->getType() != BYTE_TYPE);
     bool bothVarOrConst = (ve0 || const0) && (ve1 || const1);
@@ -646,8 +640,8 @@ BinaryOpExpr::emitMulDivMod(ASMText &out, bool lValue) const
         }
     }
 
-    // bug: always uses an unsigned divide
-    if (false) // oper == DIV && val1 == 10)
+    // Optimizations for an unsigned value divided by 10.
+    if (oper == DIV && val1 == 10 && ! subExpr0->isSigned())
     {
         if (const0)
             out.ins("LDD", "#" + wordToString(val0, true), "dividend");
@@ -811,15 +805,17 @@ BinaryOpExpr::emitMulDivMod(ASMText &out, bool lValue) const
 }
 
 
-// condBranchInstr: Ignored if produceIntegerResult is false.
-//
-CodeStatus
-BinaryOpExpr::emitComparison(ASMText &out,
-                                bool produceIntegerResult,
-                                const string &condBranchInstr) const
+bool
+BinaryOpExpr::emitComparisonIfNoFuncAddrExprInvolved(ASMText &out) const
 {
-    VariableExpr *ve0 = dynamic_cast<VariableExpr *>(subExpr0);
-    VariableExpr *ve1 = dynamic_cast<VariableExpr *>(subExpr1);
+    const VariableExpr *ve0 = subExpr0->asVariableExpr();
+    const VariableExpr *ve1 = subExpr1->asVariableExpr();
+
+    if (ve0 && ve0->isFuncAddrExpr())
+        return false;
+    if (ve1 && ve1->isFuncAddrExpr())
+        return false;
+
     uint16_t rightValue = 0;
     bool isRightConst = subExpr1->evaluateConstantExpr(rightValue);
 
@@ -853,22 +849,38 @@ BinaryOpExpr::emitComparison(ASMText &out,
             out.ins("LDD", ve0->getFrameDisplacementArg(), "variable " + ve0->getId());
             out.emitCMPDImmediate(imm);
         }
+        return true;
     }
-    else if (ve0 && ve1 && ve0->getType() == WORD_TYPE && ve1->getType() == WORD_TYPE)  // comparing 2 word vars
+    if (ve0 && ve1 && ve0->getType() == WORD_TYPE && ve1->getType() == WORD_TYPE)  // comparing 2 word vars
     {
         out.ins("LDD",  ve0->getFrameDisplacementArg(), "variable " + ve0->getId());
         out.ins("CMPD", ve1->getFrameDisplacementArg(), "variable " + ve1->getId());
+        return true;
     }
-    else if (ve0 && ve1 && ve0->getType() == BYTE_TYPE && ve1->getType() == BYTE_TYPE)  // comparing 2 byte vars
+    if (ve0 && ve1 && ve0->getType() == BYTE_TYPE && ve1->getType() == BYTE_TYPE)  // comparing 2 byte vars
     {
         out.ins("LDB",  ve0->getFrameDisplacementArg(), "variable " + ve0->getId());
         out.ins("CMPB", ve1->getFrameDisplacementArg(), "variable " + ve1->getId());
+        return true;
     }
-    else
+
+    return false;  // nothing emitted
+}
+
+
+// condBranchInstr: Ignored if produceIntegerResult is false.
+//
+CodeStatus
+BinaryOpExpr::emitComparison(ASMText &out,
+                                bool produceIntegerResult,
+                                const string &condBranchInstr) const
+{
+    if (! emitComparisonIfNoFuncAddrExprInvolved(out))  // try some specific cases
     {
+        // General case.
         if (!emitSubExpressions(out, true))
             return false;
-        if (subExpr0->getType() == BYTE_TYPE && subExpr1->getType() == BYTE_TYPE
+        if (subExpr0->fits8Bits() && subExpr1->fits8Bits()
             && subExpr0->isSigned() == subExpr1->isSigned())
         {
             // This optimization is only used if both operands have the same signednes.
@@ -1151,6 +1163,76 @@ BinaryOpExpr::getOperatorToken(Op oper)
     }
 }
 
+
+// If true is returned, the assignment is completed emitted.
+// If false is returned, no instructions have been emitted,
+// but assignedValueArg may have received a value.
+//
+//
+bool
+BinaryOpExpr::emitAssignmentIfNoFuncAddrExprInvolved(ASMText &out,
+                                                     bool lValue,
+                                                     string &assignedValueArg) const
+{
+    const VariableExpr *ve0 = subExpr0->asVariableExpr();
+    const VariableExpr *ve1 = subExpr1->asVariableExpr();
+
+    if (ve0 && ve0->isFuncAddrExpr())
+        return false;
+    if (ve1 && ve1->isFuncAddrExpr())
+        return false;
+
+    uint16_t val = 0;
+    bool isRightHandConst = subExpr1->evaluateConstantExpr(val);
+
+    if (oper == ASSIGNMENT && isRightHandConst)  // assign from a constant
+    {
+        if (getType() == BYTE_TYPE || subExpr1->getType() == BYTE_TYPE)
+            val &= 0xFF;
+        assignedValueArg = "#" + wordToString(val, true);
+        return optimizeConstantAddressCase(out, assignedValueArg);
+    }
+    if (oper == ASSIGNMENT && ve1 != NULL)  // assign from variable
+    {
+        /*  If loading a single byte from a word, remember that the 6809
+            is a big endian processor:
+        */
+        assignedValueArg = ve1->getFrameDisplacementArg(getType() == BYTE_TYPE && ve1->getType() == WORD_TYPE);
+        return optimizeConstantAddressCase(out, assignedValueArg);
+    }
+    if (!lValue && (oper == INC_ASSIGN || oper == DEC_ASSIGN) && ve0 && isRightHandConst)  // += or -= on variable with constant right-hand
+    {
+        if (getType() == BYTE_TYPE || subExpr1->getType() == BYTE_TYPE)
+            val &= 0xFF;
+        const TypeDesc *pointedTD = ve0->getTypeDesc()->getPointedTypeDesc();
+        if (pointedTD)  // if applying += or -= on pointer/array, right side must be multiplied by array element type
+            val *= TranslationUnit::instance().getTypeSize(*pointedTD);
+        out.ins(getLoadInstruction(getType()), ve0->getFrameDisplacementArg(), "variable " + ve0->getId());
+        if (val != 0)  // if nothing to inc/dec, we still need to load the variable in B or D, as per convention: needed for i = (j += 0);
+        {
+            string instr = (oper == INC_ASSIGN ? getAddInstruction(getType()) : getSubInstruction(getType()));
+            out.ins(instr,  "#" + wordToString(val, true), getOperatorToken(oper) + " operator at " + getLineNo());
+            out.ins(getStoreInstruction(getType()), ve0->getFrameDisplacementArg());
+        }
+        return true;
+    }
+    if (!lValue && (oper == INC_ASSIGN || oper == DEC_ASSIGN) && ve0 && ve1
+                && (   (ve0->getType() == BYTE_TYPE && ve1->getType() == BYTE_TYPE)
+                    || (ve0->getType() == WORD_TYPE && ve1->getType() == WORD_TYPE)
+                   )
+            )  // var += var, or var -= var, bytes on both sides
+    {
+        assert(getType() == ve0->getType());
+        out.ins(getLoadInstruction(getType()), ve0->getFrameDisplacementArg(), "variable " + ve0->getId());
+        out.ins(getAddOrSubInstruction(getType(), oper == INC_ASSIGN), ve1->getFrameDisplacementArg(), "variable " + ve1->getId());
+        out.ins(getStoreInstruction(getType()), ve0->getFrameDisplacementArg(), "variable " + ve0->getId());
+        return true;
+    }
+
+    return false;  // nothing emitted
+}
+
+
 // Applies to ASSIGNMENT, INC_ASSIGN, etc.
 //
 CodeStatus
@@ -1194,71 +1276,26 @@ BinaryOpExpr::emitAssignment(ASMText &out, bool lValue, Op oper) const
         return true;
     }
 
-    /*  Prepare to detect special cases:
-    */
-    VariableExpr *ve0 = dynamic_cast<VariableExpr *>(subExpr0);
-    uint16_t val = 0;
-    bool isRightHandConst = subExpr1->evaluateConstantExpr(val);
-    VariableExpr *ve1 = dynamic_cast<VariableExpr *>(subExpr1);
-
-
     /*  Prepare the assigned value argument, i.e., immediate, pushed,
         indexed, etc:
     */
     string assignedValueArg;
-    if (oper == ASSIGNMENT && isRightHandConst)  // assign from a constant
-    {
-        if (getType() == BYTE_TYPE || subExpr1->getType() == BYTE_TYPE)
-            val &= 0xFF;
-        assignedValueArg = "#" + wordToString(val, true);
-        if (optimizeConstantAddressCase(out, assignedValueArg))
-            return true;
-    }
-    else if (oper == ASSIGNMENT && ve1 != NULL)  // assign from variable
-    {
-        /*  If loading a single byte from a word, remember that the 6809
-            is a big endian processor:
-        */
-        assignedValueArg = ve1->getFrameDisplacementArg(getType() == BYTE_TYPE && ve1->getType() == WORD_TYPE);
-        if (optimizeConstantAddressCase(out, assignedValueArg))
-            return true;
-    }
-    else if (!lValue && (oper == INC_ASSIGN || oper == DEC_ASSIGN) && ve0 && isRightHandConst)  // += or -= on variable with constant right-hand
-    {
-        if (getType() == BYTE_TYPE || subExpr1->getType() == BYTE_TYPE)
-            val &= 0xFF;
-        const TypeDesc *pointedTD = ve0->getTypeDesc()->getPointedTypeDesc();
-        if (pointedTD)  // if applying += or -= on pointer/array, right side must be multiplied by array element type
-            val *= TranslationUnit::instance().getTypeSize(*pointedTD);
-        out.ins(getLoadInstruction(getType()), ve0->getFrameDisplacementArg(), "variable " + ve0->getId());
-        if (val != 0)  // if nothing to inc/dec, we still need to load the variable in B or D, as per convention: needed for i = (j += 0);
-        {
-            string instr = (oper == INC_ASSIGN ? getAddInstruction(getType()) : getSubInstruction(getType()));
-            out.ins(instr,  "#" + wordToString(val, true), getOperatorToken(oper) + " operator at " + getLineNo());
-            out.ins(getStoreInstruction(getType()), ve0->getFrameDisplacementArg());
-        }
+    if (emitAssignmentIfNoFuncAddrExprInvolved(out, lValue, assignedValueArg))
         return true;
-    }
-    else if (!lValue && (oper == INC_ASSIGN || oper == DEC_ASSIGN) && ve0 && ve1
-                && (   (ve0->getType() == BYTE_TYPE && ve1->getType() == BYTE_TYPE)
-                    || (ve0->getType() == WORD_TYPE && ve1->getType() == WORD_TYPE)
-                   )
-            )  // var += var, or var -= var, bytes on both sides
-    {
-        assert(getType() == ve0->getType());
-        out.ins(getLoadInstruction(getType()), ve0->getFrameDisplacementArg(), "variable " + ve0->getId());
-        out.ins(getAddOrSubInstruction(getType(), oper == INC_ASSIGN), ve1->getFrameDisplacementArg(), "variable " + ve1->getId());
-        out.ins(getStoreInstruction(getType()), ve0->getFrameDisplacementArg(), "variable " + ve0->getId());
-        return true;
-    }
-    else  // general case:
+
+    const VariableExpr *ve0 = subExpr0->asVariableExpr();
+
+    // Emit code for the right side, except for <<= and >>=.
+    //
+    if (oper != LEFT_ASSIGN && oper != RIGHT_ASSIGN)
     {
         if (!subExpr1->emitCode(out, false))
             return false;
 
         if (oper == ASSIGNMENT && ve0 != NULL)
         {
-            // No need to save D.
+            // No need to save D because no code will be needed to obtain
+            // the address of the left side, which is a variable (ve0).
             if (getType() != BYTE_TYPE && subExpr1->getType() == BYTE_TYPE)  // if assigning byte to word
                 out.ins(subExpr1->getConvToWordIns());
         }
@@ -1330,8 +1367,7 @@ BinaryOpExpr::emitAssignment(ASMText &out, bool lValue, Op oper) const
                 }
                 else
                 {
-                    assert(ve1 == NULL || ve1->getDeclaration() != NULL);
-
+                    const VariableExpr *ve1 = subExpr1->asVariableExpr();
                     if (ve1 != NULL && ve1->getType() == ARRAY_TYPE)
                     {
                         bool preserveX = (destAddr == ",X");
@@ -1481,7 +1517,11 @@ BinaryOpExpr::emitAssignment(ASMText &out, bool lValue, Op oper) const
     }
     else if (oper == LEFT_ASSIGN || oper == RIGHT_ASSIGN)
     {
-        emitShift(out, lValue, oper == LEFT_ASSIGN);
+        assert(!lValue || !destAddr.empty());
+
+        if (!emitShift(out, false, oper == LEFT_ASSIGN))  // emit as r-value
+            return false;
+
         out.ins((subExpr0->getType() == BYTE_TYPE ? "STB" : "STD"), destAddr, "result of shift assignment");
     }
 
@@ -1499,7 +1539,8 @@ BinaryOpExpr::emitAssignment(ASMText &out, bool lValue, Op oper) const
 // Emits a load and a store instruction (without using X) and returns true.
 // Returns false if this optimization is not applicable.
 //
-bool BinaryOpExpr::optimizeConstantAddressCase(ASMText &out, const string &assignedValueArg) const
+bool
+BinaryOpExpr::optimizeConstantAddressCase(ASMText &out, const string &assignedValueArg) const
 {
     UnaryOpExpr *uo0 = dynamic_cast<UnaryOpExpr *>(subExpr0);
 
@@ -1538,7 +1579,7 @@ BinaryOpExpr::isArrayOrPointerVariable(const Tree *tree)
 
     if (tree->getType() != POINTER_TYPE)
         return false;
-    return dynamic_cast<const VariableExpr *>(tree) != NULL;
+    return tree->asVariableExpr() != NULL;
 }
 
 
@@ -1555,7 +1596,7 @@ BinaryOpExpr::getNumBytesPerMultiDimArrayElement(const Tree *tree)
     size_t dimIndex = 1;  // to be incremented with each [] applied to an array
     for (;;)
     {
-        if (const VariableExpr *ve = dynamic_cast<const VariableExpr *>(tree))  // found the variable?
+        if (const VariableExpr *ve = tree->asVariableExpr())  // found the variable?
         {
             // Get the array dimensions.
             // Multiply the dimensions from the one designated by dimIndex to the last one.
@@ -1618,7 +1659,7 @@ BinaryOpExpr::emitArrayRef(ASMText &out, bool lValue) const
 
     // Optimization: left side is array variable and right side is a numerical constant.
     //
-    const VariableExpr *ve0 = dynamic_cast<VariableExpr *>(subExpr0);
+    const VariableExpr *ve0 = subExpr0->asVariableExpr();
     uint16_t rightValue = 0;
     bool isRightConst = subExpr1->evaluateConstantExpr(rightValue);
     if (ve0 != NULL && isRightConst)
@@ -1706,7 +1747,7 @@ BinaryOpExpr::emitArrayRef(ASMText &out, bool lValue) const
     }
     else
     {
-        const VariableExpr *ve1 = dynamic_cast<VariableExpr *>(subExpr1);
+        const VariableExpr *ve1 = subExpr1->asVariableExpr();
 
         // If right side is variable, no need to preserve X during evaluation of index,
         // because we can load right side directly into D or B.

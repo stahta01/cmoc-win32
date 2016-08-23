@@ -1149,6 +1149,7 @@ YY_RULE_SETUP
                 if (strcmp(yytext, "goto") == 0) return GOTO;
                 if (strcmp(yytext, "extern") == 0) return EXTERN;
                 if (strcmp(yytext, "static") == 0) return STATIC;
+                if (strcmp(yytext, "enum") == 0) return ENUM;
 
                 const TypeDesc *td = TranslationUnit::getTypeManager().getTypeDef(yytext);
                 if (td)  // if yytext is the name of a typedef: 
@@ -1163,7 +1164,7 @@ YY_RULE_SETUP
 /* Double-quoted string constant. No double-quote or newline allowed inside. */
 case 31:
 YY_RULE_SETUP
-#line 197 "lexer.ll"
+#line 198 "lexer.ll"
 { yylval.str = strdup(yytext + 1);
                         yylval.str[strlen(yylval.str) - 1] = '\0';
                         return STRLIT; }
@@ -1171,68 +1172,68 @@ YY_RULE_SETUP
 /* Control code character constants. */
 case 32:
 YY_RULE_SETUP
-#line 202 "lexer.ll"
+#line 203 "lexer.ll"
 { yylval.character = '\0'; return CHARLIT; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 203 "lexer.ll"
+#line 204 "lexer.ll"
 { yylval.character = '\0'; return CHARLIT; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 204 "lexer.ll"
+#line 205 "lexer.ll"
 { yylval.character = '\a'; return CHARLIT; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 205 "lexer.ll"
+#line 206 "lexer.ll"
 { yylval.character = '\b'; return CHARLIT; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 206 "lexer.ll"
+#line 207 "lexer.ll"
 { yylval.character = '\t'; return CHARLIT; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 207 "lexer.ll"
+#line 208 "lexer.ll"
 { yylval.character = '\n'; return CHARLIT; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 208 "lexer.ll"
+#line 209 "lexer.ll"
 { yylval.character = '\v'; return CHARLIT; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 209 "lexer.ll"
+#line 210 "lexer.ll"
 { yylval.character = '\f'; return CHARLIT; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 210 "lexer.ll"
+#line 211 "lexer.ll"
 { yylval.character = '\r'; return CHARLIT; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 211 "lexer.ll"
+#line 212 "lexer.ll"
 { yylval.character = '\''; return CHARLIT; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 212 "lexer.ll"
+#line 213 "lexer.ll"
 { yylval.character = '\"'; return CHARLIT; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 213 "lexer.ll"
+#line 214 "lexer.ll"
 { yylval.character = '\\'; return CHARLIT; }
 	YY_BREAK
 /* Character constant expressed as a hexadecimal character code (e.g., '\xFF'). */
 case 44:
 YY_RULE_SETUP
-#line 216 "lexer.ll"
+#line 217 "lexer.ll"
 { unsigned int n;
                                 sscanf(yytext + 3, "%x", &n);
                                 yylval.character = (char) n;
@@ -1241,7 +1242,7 @@ YY_RULE_SETUP
 /* Character constant expressed as an octal character code (e.g., '\0377'). */
 case 45:
 YY_RULE_SETUP
-#line 222 "lexer.ll"
+#line 223 "lexer.ll"
 { unsigned int n;
                             sscanf(yytext + 2, "%o", &n);
                             yylval.character = (char) n;
@@ -1250,21 +1251,21 @@ YY_RULE_SETUP
 /* Other character constant. */
 case 46:
 YY_RULE_SETUP
-#line 228 "lexer.ll"
+#line 229 "lexer.ll"
 { yylval.character = yytext[1]; return CHARLIT; }
 	YY_BREAK
 /* Any non-blank single-character token. */
 case 47:
 YY_RULE_SETUP
-#line 231 "lexer.ll"
+#line 232 "lexer.ll"
 { return yytext[0]; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 233 "lexer.ll"
+#line 234 "lexer.ll"
 ECHO;
 	YY_BREAK
-#line 1268 "lexer.cc"
+#line 1269 "lexer.cc"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2265,7 +2266,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 233 "lexer.ll"
+#line 234 "lexer.ll"
 
 
 

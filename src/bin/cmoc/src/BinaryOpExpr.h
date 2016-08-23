@@ -1,4 +1,4 @@
-/*  $Id: BinaryOpExpr.h,v 1.7 2016/05/06 03:42:54 sarrazip Exp $
+/*  $Id: BinaryOpExpr.h,v 1.10 2016/07/26 02:38:58 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -78,6 +78,11 @@ public:
 
 private:
 
+    bool emitComparisonIfNoFuncAddrExprInvolved(ASMText &out) const;
+    bool emitAssignmentIfNoFuncAddrExprInvolved(ASMText &out,
+                                                bool lValue,
+                                                std::string &assignedValueArg) const;
+
     // Forbidden:
     BinaryOpExpr(const BinaryOpExpr &);
     BinaryOpExpr &operator = (const BinaryOpExpr &);
@@ -90,8 +95,8 @@ private:
     int16_t numBytesPerElement;
 
     CodeStatus emitAddImmediateToVariable(ASMText &out,
-                                        VariableExpr *ve0,
-                                        uint16_t imm) const;
+                                          const VariableExpr *ve0,
+                                          uint16_t imm) const;
     CodeStatus emitSubExpressions(ASMText &out, bool reverseOrder = false) const;
 
     CodeStatus emitBitwiseOperation(ASMText &out, bool lValue, Op op) const;

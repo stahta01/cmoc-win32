@@ -1,4 +1,4 @@
-/*  $Id: ASMText.cpp,v 1.54 2016/06/09 02:11:14 sarrazip Exp $
+/*  $Id: ASMText.cpp,v 1.56 2016/07/24 23:03:05 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -495,8 +495,8 @@ ASMText::peepholeOptimize(bool useStage2Optims)
                     modified = true;
                 else if (removeClr(i))
                     modified = true;
-                else if (removeAndOrMulAddSub(i))
-                    modified = true;
+                //else if (removeAndOrMulAddSub(i))  // unit tests do not pass with this, as of 2016-07-24
+                    //modified = true;
                 else if (isInstr(i, "CMPB", "#$00") ||
                          isInstr(i, "CMPA", "#$00") ||
                          isInstr(i, "CMPB", "#0") ||
@@ -546,8 +546,8 @@ ASMText::peepholeOptimize(bool useStage2Optims)
                     modified = true;
                 else if (optimizeIndexedX2(i))
                     modified = true;
-                else if (removeUselessLdb(i))
-                    modified = true;
+                //else if (removeUselessLdb(i))  // unit tests do not pass with this, as of 2016-07-24
+                    //modified = true;
                 else if (removeUselessLdd(i))
                     modified = true;
                 else if (transformPshsXPshsX(i))
@@ -817,7 +817,10 @@ ASMText::storeLoad(size_t &index)
 bool
 ASMText::condBranchOverUncondBranch(size_t &index)
 {
-    const Element &labelElement = elements[index + 2];  // require label after 2 instructions
+    // Require label after 2 instructions.
+    if (index + 2 >= elements.size())
+        return false;
+    const Element &labelElement = elements[index + 2];
     if (labelElement.type != LABEL)
         return false;
 

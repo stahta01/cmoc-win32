@@ -1,4 +1,4 @@
-/*  $Id: ExpressionTypeSetter.cpp,v 1.20 2016/06/29 05:41:43 sarrazip Exp $
+/*  $Id: ExpressionTypeSetter.cpp,v 1.23 2016/07/26 01:55:11 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -28,7 +28,7 @@
 #include "FunctionCallExpr.h"
 #include "TranslationUnit.h"
 #include "VariableExpr.h"
-#include "FuncAddrExpr.h"
+#include "IdentifierExpr.h"
 
 using namespace std;
 
@@ -43,6 +43,15 @@ ExpressionTypeSetter::~ExpressionTypeSetter()
 }
 
 
+// Calls setTypeDesc() on 't'.
+//
+// This method is called for each node of a syntax tree.
+// It is called on a child node before being called on the parent node.
+// For example, for "return 42", this method is called on the "42" node,
+// then on the JumpStmt representing the "return".
+//
+// N.B.: A VariableExpr is not typed here. It is typed in ScopeCreator::processIdentifierExpr().
+//
 bool
 ExpressionTypeSetter::close(Tree *t)
 {
@@ -66,7 +75,7 @@ ExpressionTypeSetter::close(Tree *t)
     FunctionCallExpr *fc = dynamic_cast<FunctionCallExpr *>(t);
     if (fc != NULL)
     {
-        (void) fc->check();  // may report errors
+        (void) fc->checkAndSetTypes();  // may report errors
         return true;
     }
 
@@ -150,13 +159,23 @@ ExpressionTypeSetter::close(Tree *t)
         return true;
     }
 
-    // Taking the address of a function.
+    const TypeManager &tm = TranslationUnit::getTypeManager();
+
+    // Identifier that refers to an enumerated name.
+    // If an IdentifierExpr refers to a variable or function address,
+    // it gets typed in ScopeCreator::processIdentifierExpr().
     //
-    if (dynamic_cast<FuncAddrExpr *>(t))
+    if (const IdentifierExpr *ie = dynamic_cast<IdentifierExpr *>(t))
     {
-        TypeManager &tm = TranslationUnit::getTypeManager();
-        t->setTypeDesc(tm.getFunctionPointerType());
-        return true;
+        // If the identifier is an enumerated name, we get its TypeDesc and
+        // set it as the type of this IdentifierExpr.
+        //
+        const TypeDesc *td = tm.getEnumeratorTypeDesc(ie->getId());
+        if (td)
+        {
+            assert(td->type != VOID_TYPE);
+            t->setTypeDesc(td);
+        }
     }
 
     return true;
@@ -381,7 +400,8 @@ ExpressionTypeSetter::processUnaryOp(UnaryOpExpr *un)
                 return true;
             }
 
-            if (dynamic_cast<FuncAddrExpr *>(subExpr))
+            const IdentifierExpr *ie = dynamic_cast<const IdentifierExpr *>(subExpr);
+            if (ie && ie->isFuncAddrExpr())
             {
                 // Operator '&' used on a function name: gives the address of that function.
                 //

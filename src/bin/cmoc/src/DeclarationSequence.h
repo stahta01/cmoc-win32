@@ -1,4 +1,4 @@
-/*  $Id: DeclarationSequence.h,v 1.3 2015/06/28 05:04:29 sarrazip Exp $
+/*  $Id: DeclarationSequence.h,v 1.6 2016/07/12 03:12:40 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -31,7 +31,11 @@ class DeclarationSequence : public TreeSequence
 {
 public:
 
-    DeclarationSequence(const TypeDesc *_typeDesc);
+    // Keeps a pointer to _enumeratorList, if any.
+    // This is used by checkSemantics() to detect function-local enum definitions,
+    // which are not supported.
+    //
+    DeclarationSequence(const TypeDesc *_typeDesc, std::vector<Enumerator *> *_enumeratorList = NULL);
 
     virtual ~DeclarationSequence();
 
@@ -42,6 +46,19 @@ public:
     // Finishes by calling delete on 'declarator'.
     //
     void processDeclarator(Declarator *declarator, const DeclarationSpecifierList &dsl);
+
+    virtual void checkSemantics(Functor &f);
+
+    void removeEnumeratorList() { enumeratorList = NULL; }
+
+private:
+
+    DeclarationSequence(const DeclarationSequence &);
+    DeclarationSequence &operator = (const DeclarationSequence &);
+
+private:
+
+    std::vector<Enumerator *> *enumeratorList;  // owns the vector<>, but not the Enumerator objects
 
 };
 

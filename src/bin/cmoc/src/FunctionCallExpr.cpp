@@ -1,4 +1,4 @@
-/*  $Id: FunctionCallExpr.cpp,v 1.32 2016/05/06 03:42:54 sarrazip Exp $
+/*  $Id: FunctionCallExpr.cpp,v 1.35 2016/07/26 01:55:12 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -24,7 +24,6 @@
 #include "IdentifierExpr.h"
 #include "WordConstantExpr.h"
 #include "VariableExpr.h"
-#include "FuncAddrExpr.h"
 #include "StringLiteralExpr.h"
 #include "FunctionDef.h"
 #include "SemanticsChecker.h"
@@ -110,7 +109,7 @@ ptrParamAcceptsPtrArg(const TypeDesc &paramTD, const TypeDesc &argTD)
 // Called by the ExpressionTypeSetter.
 //
 bool
-FunctionCallExpr::check()
+FunctionCallExpr::checkAndSetTypes()
 {
     if (isCallThroughPointer())
     {
@@ -126,7 +125,7 @@ FunctionCallExpr::check()
         assert(arguments != NULL);
 
         string fid = getIdentifier();
-        FunctionDef *fd = TranslationUnit::instance().getFunctionDef(fid);
+        const FunctionDef *fd = TranslationUnit::instance().getFunctionDef(fid);
         if (!fd)
             return true;  // undeclared function: let FunctionChecker handle this
 
@@ -200,6 +199,24 @@ FunctionCallExpr::check()
                             argTree->warnmsg("passing negative constant as parameter %u of function %s(), which is %s",
                                      fpIndex, fd->getId().c_str(), paramTree->getTypeDesc()->toString().c_str());
                         continue;
+                    }
+                }
+
+                // If parameter is named enum, check that argument is member of it.
+                const string &enumTypeName = fp->getEnumTypeName();
+                if (!enumTypeName.empty())
+                {
+                    const IdentifierExpr *ie = dynamic_cast<const IdentifierExpr *>(argTree);
+                    if (!ie)
+                        argTree->errormsg("parameter %u of function %s() must be a member of enum %s",
+                                          fpIndex, fd->getId().c_str(), enumTypeName.c_str());
+                    else
+                    {
+                        // Get the enumerator list of the named enum.
+                        string id = ie->getId();
+                        if (! TranslationUnit::getTypeManager().isIdentiferMemberOfNamedEnum(enumTypeName, id))
+                            argTree->errormsg("`%s' used as parameter %u of function %s() but is not a member of enum %s",
+                                              id.c_str(), fpIndex, fd->getId().c_str(), enumTypeName.c_str());
                     }
                 }
             }
@@ -354,13 +371,13 @@ FunctionCallExpr::emitCode(ASMText &out, bool lValue) const
     for (vector<Tree *>::reverse_iterator it = arguments->rbegin();
                                          it != arguments->rend(); it++, index--)
     {
-        Tree *expr = *it;
+        const Tree *expr = *it;
         string comment = "argument " + wordToString(index)
-                + (functionId.empty() ? "" : " of " + functionId + "()");
-        VariableExpr *ve = dynamic_cast<VariableExpr *>(expr);
-        UnaryOpExpr *unary = dynamic_cast<UnaryOpExpr *>(expr);
+                         + (functionId.empty() ? "" : " of " + functionId + "()");
+        const VariableExpr *ve = expr->asVariableExpr();
+        const UnaryOpExpr *unary = dynamic_cast<const UnaryOpExpr *>(expr);
 
-        if (StringLiteralExpr *sle = dynamic_cast<StringLiteralExpr *>(expr))
+        if (const StringLiteralExpr *sle = dynamic_cast<const StringLiteralExpr *>(expr))
         {
             out.ins("LEAX", sle->getArg(), sle->getEscapedVersion());
             out.ins("PSHS", "X", comment);
@@ -425,7 +442,7 @@ FunctionCallExpr::emitCode(ASMText &out, bool lValue) const
         UnaryOpExpr *unary = dynamic_cast<UnaryOpExpr *>(function);
         if (unary && unary->getOperator() == UnaryOpExpr::INDIRECTION)  // if (*pf)()
         {
-            VariableExpr *ve = dynamic_cast<VariableExpr *>(unary->getSubExpr());
+            const VariableExpr *ve = unary->getSubExpr()->asVariableExpr();
             if (ve)
                 jsrArg = "[" + ve->getFrameDisplacementArg(0) + "]";
             else if (!function->emitCode(out, true))  // get function address in X

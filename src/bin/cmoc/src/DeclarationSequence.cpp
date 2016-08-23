@@ -1,7 +1,7 @@
-/*  $Id: DeclarationSequence.cpp,v 1.4 2016/06/29 18:40:53 sarrazip Exp $
+/*  $Id: DeclarationSequence.cpp,v 1.8 2016/08/20 01:07:05 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
-    Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
+    Copyright (C) 2003-2016 Pierre Sarrazin <http://sarrazip.com/>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,12 +19,14 @@
 
 #include "DeclarationSequence.h"
 #include "TranslationUnit.h"
+#include "SemanticsChecker.h"
 
 using namespace std;
 
 
-DeclarationSequence::DeclarationSequence(const TypeDesc *_typeDesc)
-:   TreeSequence()
+DeclarationSequence::DeclarationSequence(const TypeDesc *_typeDesc, std::vector<Enumerator *> *_enumeratorList)
+:   TreeSequence(),
+    enumeratorList(_enumeratorList)
 {
     assert(_typeDesc);
     assert(_typeDesc->isValid());
@@ -34,6 +36,10 @@ DeclarationSequence::DeclarationSequence(const TypeDesc *_typeDesc)
 
 DeclarationSequence::~DeclarationSequence()
 {
+    delete enumeratorList;
+
+    // We do not delete the Enumerators and the Trees b/c they are owned
+    // by the TypeManager (see TypeManager::declareEnumerationList()).
 }
 
 
@@ -54,11 +60,7 @@ void DeclarationSequence::processDeclarator(Declarator *declarator, const Declar
 
     if (declarator->getFormalParamList() != NULL)  // if function prototype
     {
-        FunctionDef *fd = new FunctionDef(declarator->getId(),
-                                          declarator->processPointerLevel(dsl.getTypeDesc()),
-                                          declarator->getFormalParamList(),
-                                          dsl.isInterruptServiceFunction(),
-                                          dsl.isAssemblyOnly());
+        FunctionDef *fd = new FunctionDef(dsl, *declarator);
         fd->setLineNo(declarator->getSourceFilename(), declarator->getLineNo());
         // Body of 'fd' is left null.
         addTree(fd);
@@ -78,4 +80,16 @@ void DeclarationSequence::processDeclarator(Declarator *declarator, const Declar
             addTree(decl);
     }
     delete declarator;
+}
+
+
+void
+DeclarationSequence::checkSemantics(Functor &f)
+{
+    if (!enumeratorList)
+        return;
+
+    const SemanticsChecker &sc = dynamic_cast<SemanticsChecker &>(f);
+    if (sc.getCurrentFunctionDef() != NULL)
+        errormsg("non-global enum not supported");
 }

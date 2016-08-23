@@ -1,4 +1,4 @@
-/*  $Id: CastExpr.cpp,v 1.5 2016/05/06 03:42:54 sarrazip Exp $
+/*  $Id: CastExpr.cpp,v 1.6 2016/07/24 23:03:05 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -31,7 +31,6 @@
 using namespace std;
 
 
-// Does not keep a reference to 'td'.
 // Keeps a copy of pointer 'e'.
 //
 CastExpr::CastExpr(const TypeDesc *td, Tree *e)
@@ -39,13 +38,6 @@ CastExpr::CastExpr(const TypeDesc *td, Tree *e)
     subExpr(e)
 {
     assert(subExpr != NULL);
-    IdentifierExpr *ie = dynamic_cast<IdentifierExpr *>(subExpr);
-    if (ie != NULL)
-    {
-        subExpr = new VariableExpr(ie->getId());
-        subExpr->copyLineNo(*ie);
-        delete ie;
-    }
 }
 
 

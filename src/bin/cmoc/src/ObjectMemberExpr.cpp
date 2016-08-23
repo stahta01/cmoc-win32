@@ -1,4 +1,4 @@
-/*  $Id: ObjectMemberExpr.cpp,v 1.8 2016/06/08 02:47:56 sarrazip Exp $
+/*  $Id: ObjectMemberExpr.cpp,v 1.9 2016/07/24 23:03:07 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -40,12 +40,6 @@ ObjectMemberExpr::ObjectMemberExpr(Tree *e,
     memberName(_memberName),
     direct(_direct)
 {
-    IdentifierExpr *ie = dynamic_cast<IdentifierExpr *>(subExpr);
-    if (ie != NULL)
-    {
-        subExpr = new VariableExpr(ie->getId());
-        delete ie;
-    }
 }
 
 
@@ -104,7 +98,7 @@ ObjectMemberExpr::emitCode(ASMText &out, bool lValue) const
     string arg = (offset > 0 ? wordToString(offset) : "");
     //cout << "ObjectMemberExpr::emitCode: opcode=" << opcode << ", arg=" << arg << endl;
 
-    VariableExpr *ve = dynamic_cast<VariableExpr *>(subExpr);
+    const VariableExpr *ve = subExpr->asVariableExpr();
 
     string memberComment = "member " + memberName + " of " + getClassName();
 

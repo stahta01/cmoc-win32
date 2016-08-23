@@ -1,7 +1,7 @@
-/*  $Id: DeclarationSpecifierList.cpp,v 1.6 2016/06/29 18:40:53 sarrazip Exp $
+/*  $Id: DeclarationSpecifierList.cpp,v 1.9 2016/07/24 23:03:06 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
-    Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
+    Copyright (C) 2003-2016 Pierre Sarrazin <http://sarrazip.com/>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,6 +21,8 @@
 
 #include "TranslationUnit.h"
 
+using namespace std;
+
 
 DeclarationSpecifierList::DeclarationSpecifierList()
   : typeDesc(NULL),
@@ -28,34 +30,59 @@ DeclarationSpecifierList::DeclarationSpecifierList()
     isISR(false),
     asmOnly(false),
     isExtern(false),
-    isStatic(false)
+    isStatic(false),
+    enumTypeName(),
+    enumeratorList(NULL)
 {
 }
 
-
-void
-DeclarationSpecifierList::add(const TypeDesc *td)
+DeclarationSpecifierList::~DeclarationSpecifierList()
 {
-    assert(td);
+    // detachEnumeratorList() must have been called.
+    if (enumeratorList)
+    {
+        warnmsg("suspicious use of enum");
+        delete enumeratorList;
+    }
+}
+
+
+// Does not keep a reference to 'ts', but keeps a pointer to 'ts.typeDesc'.
+//
+void
+DeclarationSpecifierList::add(const TypeSpecifier &ts)
+{
     if (!typeDesc)
     {
-        typeDesc = td;
+        typeDesc = ts.typeDesc;
+        enumTypeName = ts.enumTypeName;
+        assert(!enumeratorList);
+        enumeratorList = ts.enumeratorList;
+
+        if (enumeratorList)
+            TranslationUnit::getTypeManager().declareEnumerationList(ts.enumTypeName, *enumeratorList);
+
         return;
     }
 
-    if (td->type == SIZELESS_TYPE)  // if 'td' is 'signed' or 'unsigned'
+    if (ts.typeDesc->type == SIZELESS_TYPE)  // if type in 'ts' is just 'signed' or 'unsigned', without a size
     {
-        // Apply the signedness in 'td' to 'typeDesc', if the latter is an integral type.
+        // Apply the signedness of that keyword to 'typeDesc', if the latter is an integral type.
         if (!typeDesc->isIntegral())
         {
             errormsg("signed and unsigned modifiers can only be applied to integral type");
             return;
         }
-        typeDesc = TranslationUnit::getTypeManager().getIntType(typeDesc->type, td->isSigned);
+        if (enumeratorList)
+        {
+            errormsg("signed and unsigned modifiers cannot be applied to an enum");
+            return;
+        }
+        typeDesc = TranslationUnit::getTypeManager().getIntType(typeDesc->type, ts.typeDesc->isSigned);
         return;
     }
 
-    if (typeDesc != td)
+    if (typeDesc != ts.typeDesc)
         errormsg("combining type specifiers is not supported");
 }
 
@@ -133,6 +160,29 @@ bool
 DeclarationSpecifierList::isStaticDeclaration() const
 {
     return isStatic;
+}
+
+
+const string &
+DeclarationSpecifierList::getEnumTypeName() const
+{
+    return enumTypeName;
+}
+
+
+bool
+DeclarationSpecifierList::hasEnumeratorList() const
+{
+    return enumeratorList != NULL;
+}
+
+
+vector<Enumerator *> *
+DeclarationSpecifierList::detachEnumeratorList()
+{
+    vector<Enumerator *> *ret = enumeratorList;
+    enumeratorList = NULL;
+    return ret;
 }
 
 

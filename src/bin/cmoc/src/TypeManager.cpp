@@ -1,7 +1,7 @@
-/*  $Id: TypeManager.cpp,v 1.9 2016/06/21 01:06:13 sarrazip Exp $
+/*  $Id: TypeManager.cpp,v 1.15 2016/07/24 23:03:07 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
-    Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
+    Copyright (C) 2003-2016 Pierre Sarrazin <http://sarrazip.com/>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,6 +21,8 @@
 
 #include "util.h"
 #include "Declarator.h"
+#include "WordConstantExpr.h"
+#include "ExpressionTypeSetter.h"
 
 
 using namespace std;
@@ -28,7 +30,9 @@ using namespace std;
 
 TypeManager::TypeManager()
 :   types(),
-    typeDefs()
+    typeDefs(),
+    enumTypeNames(),
+    enumerators()
 {
     // The order is significant. See the other methods.
     types.push_back(new TypeDesc(VOID_TYPE, NULL, string(), false, false));
@@ -45,6 +49,10 @@ TypeManager::~TypeManager()
 {
     for (vector<TypeDesc *>::iterator it = types.begin(); it != types.end(); ++it)
         delete *it;
+
+    // Destroy the Enumerator objects.
+    for (EnumeratorMap::iterator it = enumerators.begin(); it != enumerators.end(); ++it)
+        delete it->second;
 }
 
 
@@ -265,4 +273,179 @@ TypeManager::getTypeDef(const char *id) const
     if (it != typeDefs.end())
         return it->second;
     return NULL;
+}
+
+
+// If an Enumerator in enumerationList is a duplicate, it gets destroyed
+// and removed from enumerationList.
+// Otherwise, calls declareEnumerator() for each Enumerator.
+// Also registers the enum type name with the list of its enumerated names.
+//
+// Does not keep a reference to enumerationList.
+//
+void
+TypeManager::declareEnumerationList(const std::string &enumTypeName,
+                                    std::vector<Enumerator *> &enumerationList)
+{
+    if (!enumTypeName.empty())
+    {
+        EnumTypeNameMap::const_iterator it = enumTypeNames.find(enumTypeName);
+        if (it != enumTypeNames.end())
+            errormsg("enum `%s' already defined at %s", enumTypeName.c_str(), it->second.sourceLineNo.c_str());
+        else
+        {
+            // Register the named enum with the source line number where it is defined
+            // and with the names of its members.
+            //
+            enumTypeNames[enumTypeName] = NamedEnum(getSourceLineNo());
+            NamedEnum &namedEnum = enumTypeNames[enumTypeName];
+            for (std::vector<Enumerator *>::const_iterator it = enumerationList.begin();
+                                                          it != enumerationList.end(); ++it)
+                namedEnum.members.push_back((*it)->name);
+        }
+    }
+
+    const Enumerator *prevEnumerator = NULL;
+
+    for (vector<Enumerator *>::iterator it = enumerationList.begin();
+                                       it != enumerationList.end(); /* iterator moves in for() body */ )
+    {
+        Enumerator *enumerator = *it;
+        if (!declareEnumerator(enumerator))
+        {
+            delete enumerator;
+            it = enumerationList.erase(it);
+            continue;
+        }
+
+        enumerator->setPreviousEnumerator(prevEnumerator);  // tie each enumerator to its predecessor(s)
+        prevEnumerator = enumerator;
+        ++it;
+    }
+}
+
+
+// enumerator: Upon success, this pointer is stored in the 'enumerators' map.
+// Returns true for success, false for failure (an error message is issued and
+// 'enumerator' is not destroyed).
+//
+bool
+TypeManager::declareEnumerator(Enumerator *enumerator)
+{
+    assert(enumerator);
+
+    EnumeratorMap::const_iterator existingEnumerator = enumerators.find(enumerator->name);
+    if (existingEnumerator != enumerators.end())
+    {
+        errormsg("enumerated name `%s' already defined at %s",
+                 enumerator->name.c_str(), existingEnumerator->second->sourceLineNo.c_str());
+        return false;
+    }
+
+    enumerators[enumerator->name] = enumerator;
+    return true;
+}
+
+bool
+TypeManager::isEnumeratorName(const string &id) const
+{
+    return enumerators.find(id) != enumerators.end();
+}
+
+
+const TypeDesc *
+TypeManager::getEnumeratorTypeDesc(const std::string &id) const
+{
+    EnumeratorMap::const_iterator it = enumerators.find(id);
+    if (it == enumerators.end())
+        return NULL;  // not an enumerated name
+
+    const Enumerator *enumerator = it->second;
+    while (enumerator && enumerator->valueExpr == NULL)
+        enumerator = enumerator->previousEnumerator;
+    if (!enumerator)
+        return getIntType(WORD_TYPE, true);  // signed int as default
+
+    return enumerator->valueExpr->getTypeDesc();
+}
+
+
+bool
+TypeManager::getEnumeratorValue(const std::string &id, uint16_t &value) const
+{
+    EnumeratorMap::const_iterator it = enumerators.find(id);
+    if (it == enumerators.end())
+        return false;  // not an enumerated name
+
+    const Enumerator *enumerator = it->second;
+    uint16_t increment = 0;
+    while (enumerator && enumerator->valueExpr == NULL)
+    {
+        // Use value of preceding name, if any, plus one.
+        enumerator = enumerator->previousEnumerator;
+        ++increment;
+    }
+
+    if (!enumerator)  // if no initializer expression found before reaching start of enum{}
+    {
+        value = increment - 1;  // value depends on rank of 'id' in enum{}
+        return true;
+    }
+
+    if (!enumerator->valueExpr->evaluateConstantExpr(value))
+    {
+        enumerator->valueExpr->errormsg("expression for enumerated name `%s' must be constant", id.c_str());
+        value = 0;  // return zero as fallback value; no code should be emitted anyway
+        return true;
+    }
+
+    value += increment;
+    return true;
+}
+
+
+bool
+TypeManager::isIdentiferMemberOfNamedEnum(const std::string &enumTypeName, const std::string &id) const
+{
+    EnumTypeNameMap::const_iterator it = enumTypeNames.find(enumTypeName);
+    if (it == enumTypeNames.end())
+        return false;  // unknown enum
+    const NamedEnum &namedEnum = it->second;
+    return find(namedEnum.members.begin(), namedEnum.members.end(), id) != namedEnum.members.end();
+}
+
+
+void
+TypeManager::setEnumeratorTypes() const
+{
+    /*for (EnumTypeNameMap::const_iterator it = enumTypeNames.begin(); it != enumTypeNames.end(); ++it)
+        cout << "# enum " << it->first << " defined at " << it->second.sourceLineNo << "\n";*/
+
+    ExpressionTypeSetter ets;
+    for (EnumeratorMap::const_iterator it = enumerators.begin(); it != enumerators.end(); ++it)
+    {
+        const Enumerator *enumerator = it->second;
+        assert(enumerator);
+        //cout << "# enumerator " << it->first << ": valueExpr=" << enumerator->valueExpr << "\n";
+        if (enumerator->valueExpr)
+        {
+            //cout << "#     type: " << *enumerator->valueExpr->getTypeDesc() << "\n";
+            enumerator->valueExpr->iterate(ets);
+        }
+    }
+}
+
+
+Enumerator::Enumerator(const char *_name, Tree *_valueExpr, const std::string &_sourceLineNo)
+:   name(_name),
+    valueExpr(_valueExpr),
+    sourceLineNo(_sourceLineNo),
+    previousEnumerator(NULL)
+{
+}
+
+
+Enumerator::~Enumerator()
+{
+    delete valueExpr;
 }

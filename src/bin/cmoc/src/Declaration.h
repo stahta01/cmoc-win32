@@ -1,4 +1,4 @@
-/*  $Id: Declaration.h,v 1.10 2016/06/29 18:40:53 sarrazip Exp $
+/*  $Id: Declaration.h,v 1.11 2016/08/20 01:07:04 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -90,12 +90,9 @@ public:
 
     bool emitStaticValues(ASMText &out, Tree *arrayElementInitializer, const TypeDesc *requiredTypeDesc);
 
-private:
-
-    std::string variableId;
-
 public:
 
+    std::string variableId;
     int16_t frameDisplacement;   // displacement from stack frame
     std::vector<uint16_t> arrayDimensions;   // empty means non-array; { a, b, c } meants T[a][b][c]
     Tree *initializationExpr;    // owns the pointed object

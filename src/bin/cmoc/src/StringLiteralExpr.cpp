@@ -1,4 +1,4 @@
-/*  $Id: StringLiteralExpr.cpp,v 1.7 2016/05/06 03:42:55 sarrazip Exp $
+/*  $Id: StringLiteralExpr.cpp,v 1.8 2016/07/26 03:32:40 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -142,16 +142,30 @@ StringLiteralExpr::escape(const string &s)
 // This puts 'A' in ch, advances 'i' by 4 (so that i becomes 5)
 // and returns true to indicate that 'ch' has been filled.
 //
-static bool
-interpretStringLiteralPosition(const char *s, size_t &i, char &out)
+// hexEscapeOutOfRange, octalEscapeOutOfRange: Set to true if a \x or \0 escape sequence
+//                                             is followed by an excessively large hex
+//                                             or octal constant. The caller must initialize
+//                                             those variables to false.
+//
+bool
+StringLiteralExpr::interpretStringLiteralPosition(size_t &i, char &out,
+                                                  bool &hexEscapeOutOfRange,
+                                                  bool &octalEscapeOutOfRange) const
 {
-    char c = s[i];
-    if (c == '\0')
+    if (i >= stringLiteral.size())
         return false;
+    char c = stringLiteral[i];
+    if (c == '\0')
+        return false;  // unexpected
     if (c == '\\')
     {
         ++i;
-        c = s[i];  // char following backslash
+        if (i >= stringLiteral.size())
+        {
+            out = '\\';
+            return true;  // 'i' is not advanced here
+        }
+        c = stringLiteral[i];  // char following backslash
         switch (c)
         {
         case 'a' : out = '\a'; ++i; return true;
@@ -165,29 +179,29 @@ interpretStringLiteralPosition(const char *s, size_t &i, char &out)
         case '\"': out = '\"'; ++i; return true;
         case '\\': out = '\\'; ++i; return true;
         case 'x':
+            out = 0;
+            for (++i; i < stringLiteral.size() && isxdigit(stringLiteral[i]); ++i)
             {
-                char accum = 0;
-                for (++i; isxdigit(s[i]); ++i)
-                {
-                    c = tolower(s[i]);
-                    char digit = (c <= '9' ? c - '0' : c - 'a' + 10);
-                    accum = (accum << 4) | digit;
-                }
-                out = accum;
+                int hexDigit = tolower(stringLiteral[i]);
+                char digit = (hexDigit <= '9' ? hexDigit - '0' : hexDigit - 'a' + 10);
+                if (out & 0xF0)
+                    hexEscapeOutOfRange = true;
+                out = (out << 4) | digit;
             }
             return true;
         case '0':
+            out = 0;
+            for (++i; i < stringLiteral.size() && stringLiteral[i] >= '0' && stringLiteral[i] <= '7'; ++i)
             {
-                char accum = 0;
-                for (++i; s[i] >= '0' && s[i] <= '7'; ++i)
-                {
-                    char digit = s[i] - '0';
-                    accum = (accum << 3) | digit;
-                }
-                out = accum;
+                char digit = stringLiteral[i] - '0';
+                if (out & 0xE0)
+                    octalEscapeOutOfRange = true;
+                out = (out << 3) | digit;
             }
             return true;
-        default  : out = '\\'; return true;  // 'i' is not advanced here
+        default:
+            out = '\\';
+            return true;  // 'i' is not advanced here
         }
     }
 
@@ -200,15 +214,18 @@ interpretStringLiteralPosition(const char *s, size_t &i, char &out)
 
 /*static*/
 string
-StringLiteralExpr::decodeEscapedLiteral(const char *s)
+StringLiteralExpr::decodeEscapedLiteral(bool &hexEscapeOutOfRange,
+                                        bool &octalEscapeOutOfRange) const
 {
+    hexEscapeOutOfRange = false, octalEscapeOutOfRange = false;
+
     string stringValue;
 
     // Advance through 's', converting one or more input characters
     // into a single output character at each iteration.
     //
     char ch = '\0';
-    for (size_t i = 0; interpretStringLiteralPosition(s, i, ch); )
+    for (size_t i = 0; interpretStringLiteralPosition(i, ch, hexEscapeOutOfRange, octalEscapeOutOfRange); )
         stringValue += ch;
 
     //cout << "StringLiteralExpr::decodeEscapedLiteral: return {" << stringValue << "}\n";

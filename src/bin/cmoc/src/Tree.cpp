@@ -1,4 +1,4 @@
-/*  $Id: Tree.cpp,v 1.21 2016/05/06 03:42:55 sarrazip Exp $
+/*  $Id: Tree.cpp,v 1.22 2016/07/24 23:03:07 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -23,6 +23,7 @@
 #include "ClassDef.h"
 #include "WordConstantExpr.h"
 #include "VariableExpr.h"
+#include "IdentifierExpr.h"
 #include "Declaration.h"
 #include "BinaryOpExpr.h"
 #include "UnaryOpExpr.h"
@@ -178,7 +179,7 @@ Tree::getPointedTypeSize() const
     // This is necessary in the case of an array because Declaration::getVariableSizeInBytes()
     // knows the array dimensions.
     //
-    const VariableExpr *ve = dynamic_cast<const VariableExpr *>(this);
+    const VariableExpr *ve = asVariableExpr();
     if (ve && typeDesc->type == ARRAY_TYPE)
     {
         const Declaration *decl = ve->getDeclaration();
@@ -345,6 +346,17 @@ Tree::warnmsg(const char *fmt, ...) const
 }
 
 
+const VariableExpr *
+Tree::asVariableExpr() const
+{
+    if (const VariableExpr *ve = dynamic_cast<const VariableExpr *>(this))
+        return ve;
+    if (const IdentifierExpr *ie = dynamic_cast<const IdentifierExpr *>(this))
+        return ie->getVariableExpr();
+    return NULL;
+}
+
+
 bool
 Tree::iterate(Functor &f)
 {
@@ -470,6 +482,13 @@ Tree::evaluateConstantExpr() const
         default:
             return sub;
         }
+    }
+
+    if (const IdentifierExpr *ie = dynamic_cast<const IdentifierExpr *>(this))
+    {
+        uint16_t value;
+        if (TranslationUnit::getTypeManager().getEnumeratorValue(ie->getId(), value))
+            return value;
     }
 
     throw -1;

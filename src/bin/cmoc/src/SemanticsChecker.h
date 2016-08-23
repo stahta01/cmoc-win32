@@ -1,4 +1,4 @@
-/*  $Id: SemanticsChecker.h,v 1.2 2016/06/29 19:13:08 sarrazip Exp $
+/*  $Id: SemanticsChecker.h,v 1.3 2016/07/10 06:36:22 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -27,37 +27,15 @@ class SemanticsChecker : public Tree::Functor
 {
 public:
 
-    SemanticsChecker()
-    : currentFunctionDef(NULL)
-    {
-    }
+    SemanticsChecker();
 
-    virtual bool open(Tree *t)
-    {
-        t->checkSemantics(*this);
-        return true;
-    }
+    virtual bool open(Tree *t);
 
-    virtual bool close(Tree *t)
-    {
-        if (FunctionDef *fd = dynamic_cast<FunctionDef *>(t))
-        {
-            if (fd->getBody())  // if end of function body
-                setCurrentFunctionDef(NULL);  // no more current function
-        }
-        return true;
-    }
+    virtual bool close(Tree *t);
 
-    void setCurrentFunctionDef(FunctionDef *fd)
-    {
-        assert(currentFunctionDef == NULL || fd == NULL);
-        currentFunctionDef = fd;
-    }
+    void setCurrentFunctionDef(FunctionDef *fd);
 
-    const FunctionDef *getCurrentFunctionDef() const
-    {
-        return currentFunctionDef;
-    }
+    const FunctionDef *getCurrentFunctionDef() const;
 
 private:
     // Forbidden:

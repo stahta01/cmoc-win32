@@ -1,4 +1,4 @@
-/*  $Id: util.h,v 1.18 2016/06/21 01:06:14 sarrazip Exp $
+/*  $Id: util.h,v 1.19 2016/07/10 06:36:23 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -22,6 +22,7 @@
 
 #include "TypeManager.h"
 
+#include <typeinfo>
 #include <vector>
 #include <list>
 #include <set>
@@ -206,6 +207,10 @@ operator << (std::ostream &out, const std::vector<T> &vec)
     return out;
 }
 
+
+// Returns a string of the form "foo.cpp:42".
+//
+std::string getSourceLineNo();
 
 void errormsg(const char *fmt, ...);
 void errormsgEx(const std::string &explicitLineNo, const char *fmt, ...);

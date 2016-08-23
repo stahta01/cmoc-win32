@@ -1,4 +1,4 @@
-/*  $Id: VariableExpr.cpp,v 1.9 2016/06/08 02:47:56 sarrazip Exp $
+/*  $Id: VariableExpr.cpp,v 1.12 2016/07/24 23:03:07 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -23,7 +23,7 @@
 #include "Declaration.h"
 #include "Scope.h"
 #include "FunctionDef.h"
-#include "FuncAddrExpr.h"
+#include "SemanticsChecker.h"
 
 using namespace std;
 
@@ -79,6 +79,37 @@ VariableExpr::setDeclaration(Declaration *decl)
 }
 
 
+/*virtual*/
+void
+VariableExpr::checkSemantics(Functor &f)
+{
+    if (!_isFuncAddrExpr)
+        return;
+
+    const FunctionDef *fd = TranslationUnit::instance().getFunctionDef(id);
+    if (fd == NULL)
+    {
+        errormsg("taking address of unknown function %s", id.c_str());
+        return;
+    }
+
+    // Register this expression as if the current function were calling 'id'.
+    // (If the expression is a global variable initializer, we consider main() to be
+    // the caller, even though it is the compiler generated driver that calls it.)
+    // This is for the purposes of determining which functions are never called
+    // and do not need to have assembly code emitted for them.
+    // See TranslationUnit::detectCalledFunctions().
+    //
+    SemanticsChecker &sem = dynamic_cast<SemanticsChecker &>(f);
+    TranslationUnit &tu = TranslationUnit::instance();
+    const FunctionDef *curFD = sem.getCurrentFunctionDef();
+    if (!curFD)
+        curFD = tu.getFunctionDef("main");
+    assert(curFD);
+    tu.registerFunctionCall(curFD->getId(), id);
+}
+
+
 bool
 VariableExpr::iterate(Functor &f)
 {
@@ -94,13 +125,27 @@ VariableExpr::iterate(Functor &f)
 CodeStatus
 VariableExpr::emitCode(ASMText &out, bool lValue) const
 {
-    assert(declaration != NULL && !_isFuncAddrExpr);
+    if (_isFuncAddrExpr)
+    {
+        const FunctionDef *fd = TranslationUnit::instance().getFunctionDef(id);
+        if (!fd)
+        {
+            errormsg("reference to unknown function %s()", id.c_str());
+            return true;
+        }
+        out.ins("LEAX", fd->getLabel() + ",PCR", "address of " + id + "(), defined at " + fd->getLineNo());
+        if (!lValue)
+            out.ins("TFR", "X,D", "as r-value");
+        return true;
+    }
+
+    assert(declaration != NULL);
 
     if (getType() == ARRAY_TYPE)
     {
         if (lValue)
         {
-            errormsg("array variable has no l-value");
+            errormsg("array variable `%s' has no l-value", id.c_str());
             return true;
         }
 

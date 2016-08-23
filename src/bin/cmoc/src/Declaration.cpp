@@ -1,4 +1,4 @@
-/*  $Id: Declaration.cpp,v 1.32 2016/06/29 18:40:53 sarrazip Exp $
+/*  $Id: Declaration.cpp,v 1.34 2016/08/20 01:07:04 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -28,7 +28,6 @@
 #include "VariableExpr.h"
 #include "ScopeCreator.h"
 #include "SemanticsChecker.h"
-#include "FuncAddrFixer.h"
 
 #include <assert.h>
 
@@ -493,7 +492,7 @@ Declaration::emitInitCode(ASMText &out, const Tree *initializer, const TypeDesc 
     else
     {
         string storeIns = (requiredTypeDesc->type == BYTE_TYPE ? "STB" : "STD");
-        const VariableExpr *ve = dynamic_cast<const VariableExpr *>(initializer);
+        const VariableExpr *ve = initializer->asVariableExpr();
         if (ve != NULL && initializer->getType() == ARRAY_TYPE)
         {
             out.ins("LEAX", ve->getFrameDisplacementArg(), "address of array " + ve->getId());
@@ -534,12 +533,6 @@ Declaration::checkSemantics(Functor &f)
         //
         if (initializationExpr != NULL)
         {
-            // Replace all VariableExpr objects that actually represent taking the address
-            // of a function with a FuncAddrExpr. See FuncAddrFixer for details.
-            //
-            FuncAddrFixer funcAddrFixer;
-            initializationExpr->iterate(funcAddrFixer);
-
             ExpressionTypeSetter ets;
             initializationExpr->iterate(ets);
         }

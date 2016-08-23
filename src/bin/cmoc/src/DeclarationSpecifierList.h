@@ -1,7 +1,7 @@
-/*  $Id: DeclarationSpecifierList.h,v 1.5 2016/06/29 18:40:53 sarrazip Exp $
+/*  $Id: DeclarationSpecifierList.h,v 1.9 2016/07/24 23:03:06 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
-    Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
+    Copyright (C) 2003-2016 Pierre Sarrazin <http://sarrazip.com/>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,7 +38,9 @@ public:
 
     DeclarationSpecifierList();
 
-    void add(const TypeDesc *td);
+    ~DeclarationSpecifierList();
+
+    void add(const TypeSpecifier &ts);
 
     void add(Specifier specifier);
 
@@ -54,7 +56,18 @@ public:
 
     bool isStaticDeclaration() const;
 
+    const std::string &getEnumTypeName() const;
+
+    bool hasEnumeratorList() const;
+
+    std::vector<Enumerator *> *detachEnumeratorList();
+
     bool isModifierLegalOnVariable() const;
+
+private:
+
+    DeclarationSpecifierList(const DeclarationSpecifierList &);
+    DeclarationSpecifierList &operator = (const DeclarationSpecifierList &);
 
 private:
 
@@ -64,6 +77,8 @@ private:
     bool asmOnly;
     bool isExtern;
     bool isStatic;
+    std::string enumTypeName;  // empty if type is not a named enum
+    std::vector<Enumerator *> *enumeratorList;
 
 };
 

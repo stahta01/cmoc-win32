@@ -1,4 +1,4 @@
-/*  $Id: Tree.h,v 1.14 2016/05/06 03:42:55 sarrazip Exp $
+/*  $Id: Tree.h,v 1.15 2016/07/24 23:03:07 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -25,6 +25,7 @@
 #include "ASMText.h"
 
 class Scope;
+class VariableExpr;
 
 
 class Tree
@@ -99,6 +100,8 @@ public:
     //
     bool is8BitConstant() const;
 
+    bool fits8Bits() const { return getType() == BYTE_TYPE || is8BitConstant(); }
+
     bool isExpressionAlwaysTrue() const;
     bool isExpressionAlwaysFalse() const;
 
@@ -109,6 +112,12 @@ public:
 
     void errormsg(const char *fmt, ...) const;
     void warnmsg(const char *fmt, ...) const;
+
+    // In general, this should be the only way to cast a Tree * to VariableExpr *,
+    // because it checks for the case where the Tree is an IdentifierExpr that
+    // contains a VariableExpr.
+    //
+    const VariableExpr *asVariableExpr() const;
 
 protected:
 

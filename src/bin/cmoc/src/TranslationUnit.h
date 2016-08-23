@@ -1,4 +1,4 @@
-/*  $Id: TranslationUnit.h,v 1.23 2016/05/06 03:49:45 sarrazip Exp $
+/*  $Id: TranslationUnit.h,v 1.25 2016/07/26 03:32:40 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -28,6 +28,9 @@ class TreeSequence;
 class Declaration;
 class FunctionDef;
 class ClassDef;
+class DeclarationSequence;
+class DeclarationSpecifierList;
+class Declarator;
 
 
 class TranslationUnit
@@ -96,7 +99,10 @@ public:
     static std::string genLabel(char letter);
     std::string generateLabel(char letter);
 
-    std::string registerStringLiteral(const char *s);
+    // Returns the assembly label now associated with the contents of sle's literal string.
+    //
+    std::string registerStringLiteral(const class StringLiteralExpr &sle);
+
     std::string getEscapedStringLiteral(const std::string &stringLabel);
 
     int16_t getTypeSize(const TypeDesc &typeDesc) const;
@@ -138,6 +144,9 @@ public:
     // Determines if the definition of the named function is provided by stdlib.inc or not.
     //
     bool isStandardFunction(const std::string &functionId) const;
+
+    static DeclarationSequence *createDeclarationSequence(DeclarationSpecifierList *dsl,
+                                                          std::vector<Declarator *> *declarators);
 
 private:
 

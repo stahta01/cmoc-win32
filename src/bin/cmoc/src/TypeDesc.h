@@ -1,4 +1,4 @@
-/*  $Id: TypeDesc.h,v 1.4 2016/06/21 01:06:13 sarrazip Exp $
+/*  $Id: TypeDesc.h,v 1.5 2016/07/10 06:36:22 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -71,13 +71,12 @@ class TypeDesc
 {
 public:
     BasicType type;
-    const TypeDesc *pointedTypeDesc;  // must come from TypeManager or be null
-        // relevant when type == POINTER_TYPE or type == ARRAY_TYPE
-    std::string className;
-        // non null if type == CLASS_TYPE
+    const TypeDesc *pointedTypeDesc;  // must come from TypeManager or be null;
+                                      // relevant when type == POINTER_TYPE or type == ARRAY_TYPE
+    std::string className;      // non empty if type == CLASS_TYPE
     uint16_t numArrayElements;  // relevant when type == ARRAY_TYPE; uint16_t(-1) means undermined number of elements
     bool isSigned;
-    bool isUnion;  // false means struct (only applies when type == CLASS_TYPE)
+    bool isUnion;               // false means struct (only applies when type == CLASS_TYPE)
 
 
     bool isValid() const;

@@ -1,4 +1,4 @@
-/*  $Id: FunctionDef.cpp,v 1.24 2016/06/29 19:13:07 sarrazip Exp $
+/*  $Id: FunctionDef.cpp,v 1.28 2016/08/20 01:07:05 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2016 Pierre Sarrazin <http://sarrazip.com/>
@@ -32,7 +32,6 @@
 #include "UnaryOpExpr.h"
 #include "CastExpr.h"
 #include "FunctionCallExpr.h"
-#include "FuncAddrExpr.h"
 #include "ObjectMemberExpr.h"
 #include "ClassDef.h"
 #include "ConditionalExpr.h"
@@ -41,7 +40,6 @@
 #include "ScopeCreator.h"
 #include "AssemblerStmt.h"
 #include "SemanticsChecker.h"
-#include "FuncAddrFixer.h"
 #include "LabeledStmt.h"
 
 #include <assert.h>
@@ -77,7 +75,7 @@ public:
         Declaration *decl = dynamic_cast<Declaration *>(t);
         if (decl != NULL)
             trace << ind << "declaration: " << decl->getVariableId() << ": " << decl->getLineNo() << "\n";
-        VariableExpr *ve = dynamic_cast<VariableExpr *>(t);
+        const VariableExpr *ve = t->asVariableExpr();
         if (ve != NULL)
             trace << ind << "variable expr: " << ve->getId() << ": " << ve->getLineNo() << "\n";
         TreeSequence *ts = dynamic_cast<TreeSequence *>(t);
@@ -162,23 +160,20 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 
 
-// retType: Return type of this function. Becomes the type of this Tree.
+// dsl: Specifies the return type of this function.
 //
-FunctionDef::FunctionDef(const string &id,
-                        const TypeDesc *retType,
-                        FormalParamList *formalParams,
-                        bool _isInterruptServiceRoutine,
-                        bool _asmOnly)
-  : Tree(retType),
-    functionId(id),
-    formalParamList(formalParams),
-    functionLabel("_" + id),
+FunctionDef::FunctionDef(const DeclarationSpecifierList &dsl,
+                         const Declarator &declarator)
+  : Tree(declarator.processPointerLevel(dsl.getTypeDesc())),
+    functionId(declarator.getId()),
+    formalParamList(declarator.getFormalParamList()),
+    functionLabel("_" + functionId),
     endLabel(TranslationUnit::instance().generateLabel('L')),
     scope(NULL),
     minDisplacement(9999),  // positive value means allocateLocalVariables() not called yet
     bodyStmts(NULL),
-    isISR(_isInterruptServiceRoutine),
-    asmOnly(_asmOnly),
+    isISR(dsl.isInterruptServiceFunction()),
+    asmOnly(dsl.isAssemblyOnly()),
     called(false)
 {
     assert(formalParamList != NULL);
@@ -273,7 +268,7 @@ FunctionDef::setBody(TreeSequence *body)
     }
 }
 
-
+    
 const TreeSequence *
 FunctionDef::getBody() const
 {
@@ -431,12 +426,6 @@ FunctionDef::checkSemantics(Functor &f)
         ScopeCreator sc(TranslationUnit::instance(), scope);
         bodyStmts->iterate(sc);
 
-        // Replace all VariableExpr objects that actually represent taking the address
-        // of a function with a FuncAddrExpr. See FuncAddrFixer for details.
-        //
-        FuncAddrFixer funcAddrFixer;
-        bodyStmts->iterate(funcAddrFixer);
-
         static const bool debug = (getenv("DEBUG") != 0);
         if (debug)
         {
@@ -526,7 +515,7 @@ FunctionDef::emitCode(ASMText &out, bool lValue) const
     assert(minDisplacement <= 0);  // allocateLocalVariables() must have been called
 
     // Generate code that sets up the function's stack frame:
-
+    
     out.emitSeparatorComment();
     out.emitFunctionStart(functionId, getLineNo());
     out.emitLabel(functionLabel);

@@ -1,4 +1,4 @@
-/*  $Id: FormalParameter.h,v 1.3 2016/06/18 03:20:51 sarrazip Exp $
+/*  $Id: FormalParameter.h,v 1.4 2016/07/24 23:03:06 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -30,7 +30,10 @@ public:
     // _paramId: Allowed to be empty.
     // Makes a deep copy of '_arrayDimensions'.
     //
-    FormalParameter(const TypeDesc *_td, const std::string &_paramId, const std::vector<uint16_t> &_arrayDimensions);
+    FormalParameter(const TypeDesc *_td,
+                    const std::string &_paramId,
+                    const std::vector<uint16_t> &_arrayDimensions,
+                    const std::string &_enumTypeName);
 
     virtual ~FormalParameter();
 
@@ -38,10 +41,13 @@ public:
 
     const std::vector<uint16_t> &getArrayDimensions() const;
 
+    const std::string &getEnumTypeName() const;
+
 private:
 
     std::string paramId;
     std::vector<uint16_t> arrayDimensions;
+    std::string enumTypeName;  // used when parameter is of named enum type
 
 };
 

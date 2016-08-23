@@ -1,4 +1,4 @@
-/*  $Id: Declarator.h,v 1.8 2016/06/29 18:40:54 sarrazip Exp $
+/*  $Id: Declarator.h,v 1.10 2016/08/20 01:07:05 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2016 Pierre Sarrazin <http://sarrazip.com/>
@@ -71,7 +71,7 @@ public:
 
     const TypeDesc *processPointerLevel(const TypeDesc *td) const;
 
-    FormalParameter *createFormalParameter(const TypeDesc *declarationSpecifierListTypeDesc) const;
+    FormalParameter *createFormalParameter(DeclarationSpecifierList &dsl) const;
 
     const std::string &getSourceFilename() const { return srcFilename; }
 

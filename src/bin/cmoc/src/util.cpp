@@ -1,4 +1,4 @@
-/*  $Id: util.cpp,v 1.18 2016/03/13 08:20:18 sarrazip Exp $
+/*  $Id: util.cpp,v 1.19 2016/07/10 06:36:22 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -191,6 +191,18 @@ isPowerOf2(int16_t n)
         n >>= 1;
 
     return n == 1;  // if only one set bit, original value was a power of 2
+}
+
+
+string
+getSourceLineNo()
+{
+    extern int lineno;
+    extern string sourceFilename;
+
+    char s[1024];
+    snprintf(s, sizeof(s), "%s:%d", sourceFilename.c_str(), lineno);
+    return s;
 }
 
 

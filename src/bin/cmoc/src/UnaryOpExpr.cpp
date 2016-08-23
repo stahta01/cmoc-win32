@@ -1,4 +1,4 @@
-/*  $Id: UnaryOpExpr.cpp,v 1.19 2016/05/06 03:42:56 sarrazip Exp $
+/*  $Id: UnaryOpExpr.cpp,v 1.20 2016/07/24 23:03:07 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -25,7 +25,6 @@
 #include "VariableExpr.h"
 #include "ObjectMemberExpr.h"
 #include "BinaryOpExpr.h"
-#include "FuncAddrExpr.h"
 #include "IdentifierExpr.h"
 #include "CastExpr.h"
 #include "Declaration.h"
@@ -43,13 +42,6 @@ UnaryOpExpr::UnaryOpExpr(Op op, Tree *e)
     sizeofArgTypeDesc(NULL)  // will be determined by checkSemantics()
 {
     assert(subExpr != NULL);
-    IdentifierExpr *ie = dynamic_cast<IdentifierExpr *>(subExpr);
-    if (ie != NULL)
-    {
-        subExpr = new VariableExpr(ie->getId());
-        subExpr->copyLineNo(*ie);
-        delete ie;
-    }
 }
 
 
@@ -151,7 +143,7 @@ UnaryOpExpr::isPostIncOfPtrToSmallType(const Tree &tree)
         return NULL;
     if (unary->getOperator() != POSTINC)
         return NULL;
-    const VariableExpr *ve = dynamic_cast<const VariableExpr *>(unary->getSubExpr());
+    const VariableExpr *ve = unary->getSubExpr()->asVariableExpr();
     if (!ve)
         return NULL;
     if (ve->getType() != POINTER_TYPE)
@@ -189,7 +181,7 @@ UnaryOpExpr::setSizeofArgTypeDesc()
         // has already been issued about the invalid argument.
 
         if (sizeofArgTypeDesc->type == ARRAY_TYPE
-                && (! dynamic_cast<VariableExpr *>(subExpr) && ! dynamic_cast<ObjectMemberExpr *>(subExpr) && ! isArrayRef(subExpr)))
+                && (! subExpr->asVariableExpr() && ! dynamic_cast<ObjectMemberExpr *>(subExpr) && ! isArrayRef(subExpr)))
             errormsg("taking size of array expression that is not an array name nor a struct member");
     }
 
@@ -229,7 +221,7 @@ UnaryOpExpr::getSizeOfValue(uint16_t &size) const
         return true;
     }
 
-    if (const VariableExpr *ve = dynamic_cast<const VariableExpr *>(subExpr))
+    if (const VariableExpr *ve = subExpr->asVariableExpr())
     {
         if (!ve->getDeclaration()->getVariableSizeInBytes(size))
         {
@@ -271,7 +263,7 @@ UnaryOpExpr::getSizeOfValue(uint16_t &size) const
             ++numDimsInSizeof;
             left = bin->getLeft();
             assert(left != NULL);
-            ve = dynamic_cast<const VariableExpr *>(left);
+            ve = left->asVariableExpr();
             if (ve != NULL)
                 break;  // reached the variable
         } while ((bin = isArrayRef(left)) != NULL);
@@ -414,10 +406,10 @@ UnaryOpExpr::emitCode(ASMText &out, bool lValue) const
             // Special case #2: if subExpr takes the address of a function, this '&' operator
             // has nothing to do.
             //
-            bool subIsLValue = (subExpr->getType() != ARRAY_TYPE && !dynamic_cast<FuncAddrExpr *>(subExpr));
+            bool subIsLValue = (subExpr->getType() != ARRAY_TYPE);
             if (!subExpr->emitCode(out, subIsLValue))
             {
-                assert(!"taking address of r-value");
+                assert(false);
                 return false;
             }
             if (subIsLValue)
@@ -474,7 +466,7 @@ UnaryOpExpr::emitCode(ASMText &out, bool lValue) const
                 }
                 else
                 {
-                    VariableExpr *ve = dynamic_cast<VariableExpr *>(subExpr);
+                    const VariableExpr *ve = subExpr->asVariableExpr();
                     if (ve != NULL)
                     {
                         string comment = "indirection of variable " + ve->getId();
@@ -544,7 +536,7 @@ UnaryOpExpr::emitSimplerIfIncrement(ASMText &out)
         return emitCode(out, false);
 
     assert(subExpr != NULL);
-    VariableExpr *ve = dynamic_cast<VariableExpr *>(subExpr);
+    const VariableExpr *ve = subExpr->asVariableExpr();
     if (ve == NULL)
         return emitCode(out, false);
 

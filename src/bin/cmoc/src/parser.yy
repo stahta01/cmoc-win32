@@ -1,5 +1,5 @@
 %{
-/*  $Id: parser.yy,v 1.25 2016/06/29 18:40:54 sarrazip Exp $
+/*  $Id: parser.yy,v 1.30 2016/08/16 02:04:19 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2016 Pierre Sarrazin <http://sarrazip.com/>
@@ -69,7 +69,7 @@ const TypeDesc *rejectTypeKeyword(const char *keyword)
 
 %}
 
-%expect 14  /* 1 shift/reduce conflict expected for if-else */
+%expect 15  /* 1 shift/reduce conflict expected for if-else */
 
 %union {
     char *str;
@@ -78,6 +78,7 @@ const TypeDesc *rejectTypeKeyword(const char *keyword)
     int integer;
     BasicType basicType;
     const TypeDesc *typeDesc;
+    TypeSpecifier *typeSpecifier;
     DeclarationSpecifierList *declarationSpecifierList;
     Tree *tree;
     CompoundStmt *compoundStmt;
@@ -97,6 +98,8 @@ const TypeDesc *rejectTypeKeyword(const char *keyword)
     ClassDef::ClassMember *classMember;
     FilenameAndLineNo *filenameAndLineNo;
     std::vector<ClassDef::ClassMember *> *classMemberList;
+    Enumerator *enumerator;
+    std::vector<Enumerator *> *enumeratorList;
 }
 
 %token <str> ID STRLIT PRAGMA
@@ -108,13 +111,13 @@ const TypeDesc *rejectTypeKeyword(const char *keyword)
 %token LT_LT GT_GT BREAK CONTINUE RETURN ASM VERBATIM_ASM STRUCT UNION THIS
 %token PLUS_EQUALS MINUS_EQUALS ASTERISK_EQUALS SLASH_EQUALS PERCENT_EQUALS LT_LT_EQUALS GT_GT_EQUALS
 %token CARET_EQUALS AMP_EQUALS PIPE_EQUALS
-%token RIGHT_ARROW INTERRUPT SIZEOF ELLIPSIS TYPEDEF SWITCH CASE DEFAULT REGISTER GOTO EXTERN STATIC
+%token RIGHT_ARROW INTERRUPT SIZEOF ELLIPSIS TYPEDEF ENUM SWITCH CASE DEFAULT REGISTER GOTO EXTERN STATIC
 
 %type <tree> external_declaration stmt selection_stmt else_part_opt while_stmt do_while_stmt for_stmt expr_stmt labeled_stmt
 %type <tree> expr expr_opt logical_or_expr logical_and_expr rel_expr add_expr mul_expr
 %type <tree> inclusive_or_expr exclusive_or_expr and_expr
 %type <tree> if_cond while_cond assignment_expr equality_expr shift_expr conditional_expr constant_expr
-%type <tree> unary_expr cast_expr postfix_expr_ex postfix_expr primary_expr initializer for_init
+%type <tree> unary_expr cast_expr postfix_expr primary_expr initializer for_init
 %type <declarationSequence> declaration
 %type <compoundStmt> compound_stmt stmt_list stmt_list_opt
 %type <treeSequence> expr_list_opt expr_list translation_unit
@@ -127,12 +130,15 @@ const TypeDesc *rejectTypeKeyword(const char *keyword)
 %type <binop> add_op mul_op rel_op equality_op assignment_op
 %type <unop> unary_op
 %type <integer> save_line_no pointer abstract_declarator struct_or_union
-%type <typeDesc> type_specifier basic_type non_void_basic_type type_name struct_or_union_specifier unsupported_basic_type
+%type <typeDesc> basic_type non_void_basic_type type_name struct_or_union_specifier unsupported_basic_type
+%type <typeSpecifier> type_specifier enum_specifier
 %type <declarationSpecifierList> declaration_specifiers specifier_qualifier_list
 %type <integer> storage_class_specifier
 %type <str> save_src_fn strlit_seq
 %type <classDef> struct_declaration_list struct_declaration_list_opt
 %type <classMemberList> struct_declaration
+%type <enumerator> enumerator
+%type <enumeratorList> enumerator_list
 
 %%
 
@@ -162,21 +168,23 @@ external_declaration:
     ;
 
 function_definition:
-      declaration_specifiers declarator compound_stmt
+      declaration_specifiers declarator compound_stmt       /* return type, name, body */
             {
                 DeclarationSpecifierList *dsl = $1;
                 Declarator *di = $2;
+
+                if (dsl->hasEnumeratorList())
+                {
+                    errormsg("enum with enumerated names is not supported in a function's return type");
+                    dsl->detachEnumeratorList();
+                }
 
                 // Example: In byte **f() {}, dsl represents "byte" and
                 // di represents **f. Hence, di contains a pointer level of 2,
                 // which is applied to the TypeDesc found in dsl, i.e., "byte".
                 // di also contains the name of the function, "f".
                 //
-                $$ = new FunctionDef(di->getId(),
-                                     di->processPointerLevel(dsl->getTypeDesc()),
-                                     di->getFormalParamList(),
-                                     dsl->isInterruptServiceFunction(),
-                                     dsl->isAssemblyOnly());
+                $$ = new FunctionDef(*dsl, *di);
                 $$->setLineNo(di->getSourceFilename(), di->getLineNo());
                 $$->setBody($3);
                 delete di;
@@ -198,8 +206,9 @@ parameter_list
 parameter_declaration
     : declaration_specifiers declarator
                 {
-                    $$ = $2->createFormalParameter($1->getTypeDesc());
-                    delete $1;
+                    DeclarationSpecifierList *dsl = $1;
+                    $$ = $2->createFormalParameter(*dsl);
+                    delete dsl;
                     delete $2;
                 }
     ;
@@ -223,8 +232,8 @@ pointer:
     ;
 
 specifier_qualifier_list:
-      type_specifier specifier_qualifier_list   { $$ = $2; $$->add($1); }
-    | type_specifier                            { $$ = new DeclarationSpecifierList(); $$->add($1); }
+      type_specifier specifier_qualifier_list   { $$ = $2; $$->add(*$1); delete $1; }
+    | type_specifier                            { $$ = new DeclarationSpecifierList(); $$->add(*$1); delete $1; }
     ;
 
 compound_stmt:
@@ -242,53 +251,11 @@ stmt_list_opt:
 declaration:
       declaration_specifiers ';'  // to define a struct without declaring an instance of it 
                         {
-                            const TypeDesc *td = $1->getTypeDesc();
-                            assert(td->type != SIZELESS_TYPE);
-                            if (td->type != CLASS_TYPE)
-                                errormsg("declaring a variable with a type but without a variable name");
-                            $$ = new DeclarationSequence(td);
-                            delete $1;
+                            $$ = TranslationUnit::createDeclarationSequence($1, NULL);  // deletes $1
                         }
     | declaration_specifiers init_declarator_list ';'  // includes function prototypes
                         {
-                            const TypeDesc *td = $1->getTypeDesc();
-                            assert(td->type != SIZELESS_TYPE);
-                            TypeManager &tm = TranslationUnit::getTypeManager();
-                            if ($1->isTypeDefinition())
-                            {
-                                if (! $1->isModifierLegalOnVariable())
-                                    errormsg("illegal modifier used on typedef");
-                                for (std::vector<Declarator *>::iterator it = $2->begin(); it != $2->end(); ++it)
-                                    (void) tm.addTypeDef(td, *it);  // destroys the Declarator object
-                                $$ = NULL;
-                            }
-                            else if ($1->isExternDeclaration())
-                            {
-                                // Ignore the declarators in a 'extern' declaration because
-                                // separate compilation is not supported.
-                                for (std::vector<Declarator *>::iterator it = $2->begin(); it != $2->end(); ++it)
-                                    delete *it;
-                                $$ = NULL;
-                            }
-                            else
-                            {
-                                $$ = new DeclarationSequence(td);
-                                
-                                bool undefClass = (td->type == CLASS_TYPE
-                                                   && TranslationUnit::instance().getClassDef(td->className) == NULL);
-
-                                for (std::vector<Declarator *>::iterator it = $2->begin(); it != $2->end(); ++it)
-                                {
-                                    Declarator *d = *it;
-                                    if (undefClass && d->getPointerLevel() == 0)
-                                        errormsg("declaring `%s' of undefined type struct `%s'",
-                                                 d->getId().c_str(), td->className.c_str());
-
-                                    $$->processDeclarator(d, *$1);  // destroys the Declarator object
-                                }
-                            }
-                            delete $2;  // destroy the Declarator vector
-                            delete $1;
+                            $$ = TranslationUnit::createDeclarationSequence($1, $2);  // deletes $1 and $2
                         }
     ;
 
@@ -300,9 +267,9 @@ declaration_specifiers:
     | storage_class_specifier declaration_specifiers
             { $$ = $2; if ($1 != -1) $$->add(DeclarationSpecifierList::Specifier($1)); }
     | type_specifier
-            { $$ = new DeclarationSpecifierList(); $$->add($1); }
+            { $$ = new DeclarationSpecifierList(); $$->add(*$1); delete $1; }
     | type_specifier declaration_specifiers
-            { $$ = $2; $$->add($1); }
+            { $$ = $2; $$->add(*$1); delete $1; }
     ;
 
 storage_class_specifier:
@@ -315,10 +282,13 @@ storage_class_specifier:
     ;
 
 type_specifier:
-      basic_type                    { $$ = $1; }
-    | struct_or_union_specifier     { $$ = $1; }
-    | struct_or_union ID            { $$ = TranslationUnit::getTypeManager().getClassType($2, $1 == UNION, true); free($2); }
-    | TYPE_NAME                     { $$ = $1; }
+      basic_type                    { $$ = new TypeSpecifier($1, "", NULL); }
+    | struct_or_union_specifier     { $$ = new TypeSpecifier($1, "", NULL); }
+    | struct_or_union ID            { const TypeDesc *td = TranslationUnit::getTypeManager().getClassType($2, $1 == UNION, true);
+                                      $$ = new TypeSpecifier(td, "", NULL);
+                                      free($2); }
+    | enum_specifier                { $$ = $1; }  /* already a TypeSpecifier */
+    | TYPE_NAME                     { $$ = new TypeSpecifier($1, "", NULL); }
     ;
 
 struct_or_union_specifier:
@@ -352,6 +322,41 @@ struct_or_union_specifier:
 struct_or_union:
       STRUCT        { $$ = STRUCT; }
     | UNION         { $$ = UNION;  }
+    ;
+
+enum_specifier:
+      ENUM ID '{' enumerator_list comma_opt '}'
+                        {
+                            const TypeDesc *td = TranslationUnit::getTypeManager().getIntType(WORD_TYPE, true);
+                            $$ = new TypeSpecifier(td, $2, $4);
+                            free($2);
+                        }
+    | ENUM '{' enumerator_list comma_opt '}'
+                        {
+                            const TypeDesc *td = TranslationUnit::getTypeManager().getIntType(WORD_TYPE, true);
+                            $$ = new TypeSpecifier(td, "", $3);
+                        }
+    | ENUM ID
+                        {
+                            const TypeDesc *td = TranslationUnit::getTypeManager().getIntType(WORD_TYPE, true);
+                            $$ = new TypeSpecifier(td, $2, NULL);
+                            free($2);
+                        }
+    ;
+
+enumerator_list:
+      enumerator                            { $$ = new vector<Enumerator *>(); $$->push_back($1); }
+    | enumerator_list ',' enumerator        { $$ = $1; $$->push_back($3); }
+    ;
+
+enumerator
+    : ID                                    { $$ = new Enumerator($1, NULL, getSourceLineNo()); free($1); }
+    | ID '=' expr                           { $$ = new Enumerator($1, $3,   getSourceLineNo()); free($1); }
+    ;
+
+comma_opt:
+      ','
+    | /* empty */
     ;
 
 non_void_basic_type:
@@ -440,11 +445,13 @@ direct_declarator:
                 $$ = new Declarator($3, sourceFilename, lineno);
                 $$->setAsFunctionPointer();
                 free($3);
+                delete $6;
             }
     | '(' '*' ')' '(' parameter_type_list_opt ')'  /* unnamed function pointer variable */
             {
                 $$ = new Declarator(string(), sourceFilename, lineno);
                 $$->setAsFunctionPointer();
+                delete $5;
             }
     ;
 
@@ -503,6 +510,7 @@ struct_declaration:
                     delete $1;
                     delete $2;  // destroy the vector<Declarator *>, but not the Declarators
                 }
+    ;
 
 struct_declarator_list:
       struct_declarator                             { $$ = new std::vector<Declarator *>(); $$->push_back($1); }
@@ -681,7 +689,7 @@ mul_op:
     ;
 
 unary_expr:
-      postfix_expr_ex           { $$ = $1; }
+      postfix_expr              { $$ = $1; }
     | unary_op cast_expr        { $$ = new UnaryOpExpr($1, $2); }
     | PLUS_PLUS unary_expr      { $$ = new UnaryOpExpr(UnaryOpExpr::PREINC, $2); }
     | MINUS_MINUS unary_expr    { $$ = new UnaryOpExpr(UnaryOpExpr::PREDEC, $2); }
@@ -701,21 +709,6 @@ unary_op:
 cast_expr:
       unary_expr                    { $$ = $1; }
     | '(' type_name ')' cast_expr   { $$ = new CastExpr($2, $4); }
-    ;
-
-/*  A postfix_expr_ex is a postfix_expr, but if the postfix_expr is
-    an IdentifierExpr, a VariableExpr is substituted for it, because
-    it is more informative for the code generator.
-*/
-postfix_expr_ex:
-      postfix_expr
-                { IdentifierExpr *ie = dynamic_cast<IdentifierExpr *>($1);
-                  if (ie != NULL) {
-                    $$ = new VariableExpr(ie->getId());
-                    $$->copyLineNo(*ie);
-                    delete $1;
-                  }
-                  else $$ = $1; }
     ;
 
 postfix_expr:

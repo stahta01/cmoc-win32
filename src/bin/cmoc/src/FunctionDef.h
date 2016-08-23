@@ -1,7 +1,7 @@
-/*  $Id: FunctionDef.h,v 1.10 2016/06/18 18:14:20 sarrazip Exp $
+/*  $Id: FunctionDef.h,v 1.12 2016/07/10 17:11:49 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
-    Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
+    Copyright (C) 2003-2016 Pierre Sarrazin <http://sarrazip.com/>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@
 
 #include "FormalParamList.h"
 
+class DeclarationSpecifierList;
 class Scope;
 
 
@@ -32,11 +33,8 @@ class FunctionDef : public Tree
 {
 public:
 
-    FunctionDef(const std::string &id,
-                const TypeDesc *retType,
-                FormalParamList *formalParams,
-                bool _isInterruptServiceRoutine,
-                bool _asmOnly);
+    FunctionDef(const DeclarationSpecifierList &dsl,
+                const Declarator &declarator);
 
     // Does NOT destroy the Scope objects used by this function.
     //

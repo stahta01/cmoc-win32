@@ -182,6 +182,7 @@ asm({ws}|\n)*\{([^\{\}]|(\{[^\{\}]*\}))*\}         {
                 if (strcmp(yytext, "goto") == 0) return GOTO;
                 if (strcmp(yytext, "extern") == 0) return EXTERN;
                 if (strcmp(yytext, "static") == 0) return STATIC;
+                if (strcmp(yytext, "enum") == 0) return ENUM;
 
                 const TypeDesc *td = TranslationUnit::getTypeManager().getTypeDef(yytext);
                 if (td)  // if yytext is the name of a typedef: 

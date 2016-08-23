@@ -1,4 +1,4 @@
-/*  $Id: IdentifierExpr.cpp,v 1.5 2016/05/06 03:42:54 sarrazip Exp $
+/*  $Id: IdentifierExpr.cpp,v 1.7 2016/07/24 23:03:06 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -20,13 +20,16 @@
 #include "IdentifierExpr.h"
 
 #include "VariableExpr.h"
+#include "TranslationUnit.h"
+#include "WordConstantExpr.h"
 
 using namespace std;
 
 
 IdentifierExpr::IdentifierExpr(const char *id)
   : Tree(),
-    identifier(id)
+    identifier(id),
+    variableExpr(NULL)
 {
 }
 
@@ -34,6 +37,7 @@ IdentifierExpr::IdentifierExpr(const char *id)
 /*virtual*/
 IdentifierExpr::~IdentifierExpr()
 {
+    delete variableExpr;
 }
 
 
@@ -44,10 +48,67 @@ IdentifierExpr::getId() const
 }
 
 
+void
+IdentifierExpr::setVariableExpr(VariableExpr *ve)
+{
+    delete variableExpr;
+    variableExpr = ve;
+
+    if (variableExpr)
+    {
+        setTypeDesc(variableExpr->getTypeDesc());
+        variableExpr->copyLineNo(*this);
+    }
+}
+
+
+const VariableExpr *
+IdentifierExpr::getVariableExpr() const
+{
+    return variableExpr;
+}
+
+
+bool
+IdentifierExpr::isFuncAddrExpr() const
+{
+    return variableExpr && variableExpr->isFuncAddrExpr();
+}
+
+
+bool
+IdentifierExpr::iterate(Functor &f)
+{
+    if (!f.open(this))
+        return false;
+    if (variableExpr)
+        variableExpr->iterate(f);
+    if (!f.close(this))
+        return false;
+    return true;
+}
+
+
 /*virtual*/
 CodeStatus
-IdentifierExpr::emitCode(ASMText & /*out*/, bool /*lValue*/) const
+IdentifierExpr::emitCode(ASMText &out, bool lValue) const
 {
+    if (variableExpr)
+        return variableExpr->emitCode(out, lValue);
+
+    uint16_t enumValue = 0;
+    if (TranslationUnit::getTypeManager().getEnumeratorValue(identifier, enumValue))
+    {
+        if (lValue)
+        {
+            errormsg("cannot use enumerated name (`%s') as l-value", identifier.c_str());
+            return true;
+        }
+        const TypeDesc *td = TranslationUnit::getTypeManager().getEnumeratorTypeDesc(identifier);
+        WordConstantExpr wce(enumValue, td->type == WORD_TYPE, td->isSigned);
+        return wce.emitCode(out, false);
+    }
+
     assert(false);
     return false;
 }

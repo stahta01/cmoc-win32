@@ -2598,6 +2598,11 @@ sbrk_success:
 _sbrkmax
 	ldd	end_of_sbrk_mem,DAT
 	subd	program_break,DAT
+        bhs     _sbrkmax_non_neg
+* The program break is after the stack space. Not supported by sbrk().
+        clra
+        clrb
+_sbrkmax_non_neg
 	rts
 
 #endif  /* defined(_CMOC_NEED_sbrkmax_) || defined(_CMOC_NEED_sbrk_) */

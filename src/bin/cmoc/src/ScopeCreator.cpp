@@ -1,4 +1,4 @@
-/*  $Id: ScopeCreator.cpp,v 1.7 2016/04/11 03:26:59 sarrazip Exp $
+/*  $Id: ScopeCreator.cpp,v 1.9 2016/07/26 02:06:26 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -25,6 +25,7 @@
 #include "WhileStmt.h"
 #include "DeclarationSequence.h"
 #include "VariableExpr.h"
+#include "IdentifierExpr.h"
 #include "FunctionCallExpr.h"
 
 using namespace std;
@@ -49,7 +50,7 @@ ScopeCreator::~ScopeCreator()
 // If 't' is a DeclarationSequence, calls declareVariable() on the current scope
 // for each Declaration in the sequence.
 //
-// If 't' is a VariableExpr, calls processVariableExpr() on it.
+// If 't' is an IdentifierExpr, calls processIdentifierExpr() on it.
 //
 // If 't' is a FunctionCallExpr and the function name is actually a variable name,
 // tells the FunctionCallExpr about the Declaration of that variable.
@@ -76,6 +77,7 @@ ScopeCreator::open(Tree *t)
 
         t->setScope(s);
         t->pushScopeIfExists();
+        return true;
     }
 
     DeclarationSequence *declSeq = dynamic_cast<DeclarationSequence *>(t);
@@ -99,12 +101,13 @@ ScopeCreator::open(Tree *t)
             else
                 (*it)->errormsg("invalid declaration");
         }
+        return true;
     }
 
-    VariableExpr *ve = dynamic_cast<VariableExpr *>(t);
-    if (ve != NULL)
+    IdentifierExpr *ie = dynamic_cast<IdentifierExpr *>(t);
+    if (ie)
     {
-        processVariableExpr(*ve);
+        processIdentifierExpr(*ie);
         return true;
     }
 
@@ -151,35 +154,51 @@ ScopeCreator::close(Tree *t)
 }
 
 
-// If 've' is a variable declared in the current scope (or an ancestor scope),
-// tells 've' about the found Declaration.
-// If 've' is instead a function name, tells 've' that it is a
-// function address expression.
-// Declares an error message otherwise.
+// Determines if the identifier expression is a reference to a variable
+// or to an enumerated type.
+// Issues an error message if neither.
+//
+// In the case of a variable reference, sets the type of this object
+// and of the created VariableExpr object.
+// In the case of an enumerated name, the type is not set, because it is
+// set by the ExpressionTypeSetter (look for the IdentifierExpr case).
+// (This method is intended to be called during parsing, so it would be too
+// soon to set the type of an enumerated name's initialization expression.)
+//
+// This should be the only place that creates a VariableExpr object.
 //
 void
-ScopeCreator::processVariableExpr(VariableExpr &ve)
+ScopeCreator::processIdentifierExpr(IdentifierExpr &ie)
 {
-    string id = ve.getId();
+    string id = ie.getId();
     Scope *cs = translationUnit.getCurrentScope();
     assert(cs);
     Declaration *decl = cs->getVariableDeclaration(id, true);
     if (decl != NULL)
     {
-        //cerr << "    decl at " << decl->getLineNo() << endl;
-        ve.setDeclaration(decl);
+        VariableExpr *ve = new VariableExpr(id);
+        ve->setDeclaration(decl);
 
         assert(decl->getType() != VOID_TYPE);
-        ve.setTypeDesc(decl->getTypeDesc());
+        ve->setTypeDesc(decl->getTypeDesc());
+        ie.setVariableExpr(ve);  // sets the type of *ie
         return;
     }
 
     const FunctionDef *fd = translationUnit.getFunctionDef(id);
     if (fd != NULL)
     {
-        ve.markAsFuncAddrExpr();
+        VariableExpr *ve = new VariableExpr(id);
+        ve->markAsFuncAddrExpr();
+        const TypeDesc *fpt  = translationUnit.getTypeManager().getFunctionPointerType();
+        ve->setTypeDesc(fpt);
+        ie.setTypeDesc(fpt);
+        ie.setVariableExpr(ve);
         return;
     }
 
-    ve.errormsg("undeclared variable `%s'", ve.getId().c_str());
+    if (TranslationUnit::getTypeManager().isEnumeratorName(id))  // if known enumerated name
+        return;
+
+    ie.errormsg("undeclared identifier `%s'", id.c_str());
 }

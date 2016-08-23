@@ -1,4 +1,4 @@
-/*  $Id: ScopeCreator.h,v 1.2 2015/05/31 23:43:26 sarrazip Exp $
+/*  $Id: ScopeCreator.h,v 1.4 2016/07/26 02:06:26 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -25,6 +25,7 @@
 class TranslationUnit;
 class Scope;
 class VariableExpr;
+class IdentifierExpr;
 
 
 /*  Functor to iterate in a function body to find all subtrees
@@ -47,7 +48,7 @@ public:
 
     virtual bool close(Tree *t);
 
-    void processVariableExpr(VariableExpr &ve);
+    void processIdentifierExpr(IdentifierExpr &ie);
 
 private:
 

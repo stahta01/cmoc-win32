@@ -1,4 +1,4 @@
-/*  $Id: Declarator.cpp,v 1.12 2016/06/29 18:40:54 sarrazip Exp $
+/*  $Id: Declarator.cpp,v 1.16 2016/08/20 01:07:05 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2016 Pierre Sarrazin <http://sarrazip.com/>
@@ -318,12 +318,18 @@ Declarator::processPointerLevel(const TypeDesc *td) const
 // Returns an object allocated with 'new'.
 //
 FormalParameter *
-Declarator::createFormalParameter(const TypeDesc *declarationSpecifierListTypeDesc) const
+Declarator::createFormalParameter(DeclarationSpecifierList &dsl) const
 {
-    const TypeDesc *td = declarationSpecifierListTypeDesc;
+    if (dsl.hasEnumeratorList())
+    {
+        errormsg("enum with enumerated names is not supported in a function's formal parameter");
+        delete dsl.detachEnumeratorList();  // won't be needed
+    }
+
+    const TypeDesc *td = dsl.getTypeDesc();
 
     if (! isFunctionPointer())
-        td = processPointerLevel(declarationSpecifierListTypeDesc);
+        td = processPointerLevel(td);
 
     assert(initExpr == NULL);  // no initialization expression for formal parameter
     vector<uint16_t> arrayDimensions;  // empty means not an array
@@ -340,7 +346,7 @@ Declarator::createFormalParameter(const TypeDesc *declarationSpecifierListTypeDe
     {
         td = TranslationUnit::getTypeManager().getFunctionPointerType();
     }
-    return new FormalParameter(td, id, arrayDimensions);
+    return new FormalParameter(td, id, arrayDimensions, dsl.getEnumTypeName());
 }
 
 

@@ -1,4 +1,4 @@
-/*  $Id: FunctionCallExpr.h,v 1.6 2016/05/06 03:42:54 sarrazip Exp $
+/*  $Id: FunctionCallExpr.h,v 1.7 2016/07/26 01:55:12 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -39,7 +39,7 @@ public:
         @returns                        true if the call is valid,
                                         false if errors were detected
     */
-    bool check();
+    bool checkAndSetTypes();
 
     /** Determines if this call is made as in pf(), (*pf)() or obj.member(),
         or if it is a standard, direct function call.

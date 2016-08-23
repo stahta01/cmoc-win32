@@ -1,7 +1,7 @@
-/*  $Id: TranslationUnit.cpp,v 1.48 2016/06/21 01:06:13 sarrazip Exp $
+/*  $Id: TranslationUnit.cpp,v 1.54 2016/08/20 01:07:05 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
-    Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
+    Copyright (C) 2003-2016 Pierre Sarrazin <http://sarrazip.com/>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -209,7 +209,6 @@ public:
             if (! TranslationUnit::instance().isStandardFunction(funcId)
                     && calledFunctions.find(funcId) != calledFunctions.end())
             {
-// DJE: Removed so we can link
 //                it->second->errormsg("function %s() declared and called but not defined", funcId.c_str());
             }
         }
@@ -284,15 +283,16 @@ TranslationUnit::checkSemantics()
                     //cerr << "# Declaring global variable " << decl->getVariableId() << " at line " << decl->getLineNo() << "\n";
                     bool hasExtern = false;
 
-                    if (!decl->isExtern) globalVariables.push_back(decl);
+                    if (!decl->isExtern)
+                        globalVariables.push_back(decl);
 
                     if (!globalScope->declareVariable(decl))
                     {
-                        Declaration *existingDecl = globalScope->getVariableDeclaration(decl->getVariableId(), false);
-
+                        const Declaration *existingDecl = globalScope->getVariableDeclaration(decl->getVariableId(), false);
+                        assert(existingDecl);
                         if (!existingDecl->isExtern)
-                          decl->errormsg("global variable `%s' already declared at global scope at %s",
-                               decl->getVariableId().c_str(), existingDecl->getLineNo().c_str());
+                            decl->errormsg("global variable `%s' already declared at global scope at %s",
+                                       decl->getVariableId().c_str(), existingDecl->getLineNo().c_str());
 
                         hasExtern = true;
                     }
@@ -307,11 +307,12 @@ TranslationUnit::checkSemantics()
                     uint16_t size = 0;
                     if (!decl->getVariableSizeInBytes(size))
                         decl->errormsg("invalid dimensions for array %s", decl->getVariableId().c_str());
-                    else {
+                    else
+                    {
                         if (decl->isExtern || hasExtern)
-                          decl->setLabel("_" + decl->getVariableId());
+                            decl->setLabel("_" + decl->getVariableId());
                         else
-                          decl->setLabel(generateLabel('G'));
+                            decl->setLabel(generateLabel('G'));
                     }
                 }
                 else if (FunctionDef *fd = dynamic_cast<FunctionDef *>(*it))
@@ -352,9 +353,7 @@ TranslationUnit::checkSemantics()
         {
             StringLiteralExpr *sle = dynamic_cast<StringLiteralExpr *>(t);
             if (sle != NULL)
-                sle->setLabel(
-                        TranslationUnit::instance().registerStringLiteral(
-                                                sle->getLiteral().c_str()));
+                sle->setLabel(TranslationUnit::instance().registerStringLiteral(*sle));
             return true;
         }
         virtual bool close(Tree * /*t*/)
@@ -367,7 +366,13 @@ TranslationUnit::checkSemantics()
     definitionList->iterate(r);
 
 
-    // The ExpressionTypeSetter is run over the function bodies during the following step.
+    // Set the TypeDesc of all enumerated names.
+    //
+    getTypeManager().setEnumeratorTypes();
+
+
+    // Among other things, the ExpressionTypeSetter is run over the function bodies
+    // during the following step.
     //
     SemanticsChecker sc;
     definitionList->iterate(sc);
@@ -709,7 +714,6 @@ TranslationUnit::emitAssembler(ASMText &out, const string &programName, bool com
         {
             Declaration *decl = *jt;
             assert(decl);
-
             if (! decl->isArrayWithIntegerInitValues())
                 decl->emitCode(out, false);
         }
@@ -839,7 +843,7 @@ TranslationUnit::~TranslationUnit()
 {
     assert(scopeStack.size() == 0);
 
-   // Scope tree must be destroyed after the TreeSequences in definitionList.
+    // Scope tree must be destroyed after the TreeSequences in definitionList.
     delete definitionList;
     delete globalScope;
 
@@ -967,12 +971,18 @@ TranslationUnit::getFunctionDefFromScope(const Scope &functionScope) const
 }
 
 string
-TranslationUnit::registerStringLiteral(const char *s)
+TranslationUnit::registerStringLiteral(const StringLiteralExpr &sle)
 {
-    string stringValue = StringLiteralExpr::decodeEscapedLiteral(s);
+    bool hexEscapeOutOfRange = false, octalEscapeOutOfRange = false;
 
-    map<string, string>::iterator it =
-                                stringLiteralValueToLabel.find(stringValue);
+    string stringValue = sle.decodeEscapedLiteral(hexEscapeOutOfRange, octalEscapeOutOfRange);
+
+    if (hexEscapeOutOfRange)
+        sle.warnmsg("hex escape sequence out of range");
+    if (octalEscapeOutOfRange)
+        sle.warnmsg("octal escape sequence out of range");
+
+    map<string, string>::iterator it = stringLiteralValueToLabel.find(stringValue);
     if (it != stringLiteralValueToLabel.end())
         return it->second;
 
@@ -987,8 +997,7 @@ string
 TranslationUnit::getEscapedStringLiteral(const string &stringLabel)
 {
     assert(!stringLabel.empty());
-    map<string, string>::iterator it =
-                                stringLiteralLabelToValue.find(stringLabel);
+    map<string, string>::iterator it = stringLiteralLabelToValue.find(stringLabel);
     if (it != stringLiteralLabelToValue.end())
         return StringLiteralExpr::escape(it->second);
     assert(!"unknown string literal label");
@@ -1222,4 +1231,89 @@ TranslationUnit::isStandardFunction(const std::string &functionId) const
         if (functionId == stdLibTable[f].name)
             return true;
     return false;
+}
+
+
+// Destroys the DeclarationSpecifierList, the vector of Declarators
+// and the Declarators.
+// May return null in the case of a typedef.
+//
+DeclarationSequence *
+TranslationUnit::createDeclarationSequence(DeclarationSpecifierList *dsl,
+                                           std::vector<Declarator *> *declarators)
+{
+    DeclarationSequence *ds = NULL;
+
+    const TypeDesc *td = dsl->getTypeDesc();
+    assert(td->type != SIZELESS_TYPE);
+    TypeManager &tm = TranslationUnit::getTypeManager();
+
+    if (!declarators)
+    {
+        std::vector<Enumerator *> *enumeratorList = dsl->detachEnumeratorList();  // null if not an enum
+        if (td->type != CLASS_TYPE && ! enumeratorList)
+        {
+            errormsg("declaration specifies a type but no variable name");
+        }
+
+        // We have taken the enumeratorList out of the DeclarationSpecifierList
+        // to give it to the created DeclarationSequence, whose checkSemantics()
+        // method is responsible for checking that this enum is global.
+        // (Enums local to a function are not supported.)
+        //
+        ds = new DeclarationSequence(td, enumeratorList);
+    }
+    else if (dsl->isTypeDefinition())
+    {
+        if (! dsl->isModifierLegalOnVariable())
+            errormsg("illegal modifier used on typedef");
+        if (! declarators || declarators->size() == 0)
+            errormsg("typedef defines no names");
+        else
+            for (std::vector<Declarator *>::iterator it = declarators->begin(); it != declarators->end(); ++it)
+                (void) tm.addTypeDef(td, *it);  // destroys the Declarator object
+        ds = NULL;
+    }
+    else if (0) //dsl->isExternDeclaration())
+    {
+        // Ignore the declarators in a 'extern' declaration because
+        // separate compilation is not supported.
+        if (! declarators || declarators->size() == 0)
+            errormsg("extern declaration defines no names");
+        else
+            for (std::vector<Declarator *>::iterator it = declarators->begin(); it != declarators->end(); ++it)
+                delete *it;
+        ds = NULL;
+    }
+    else
+    {
+        bool isEnumType = dsl->hasEnumeratorList();
+        ds = new DeclarationSequence(td, dsl->detachEnumeratorList());  // don't detach enumerator list from dsl yet
+
+        bool undefClass = (td->type == CLASS_TYPE
+                           && TranslationUnit::instance().getClassDef(td->className) == NULL);
+
+        assert(declarators->size() > 0);
+        for (std::vector<Declarator *>::iterator it = declarators->begin(); it != declarators->end(); ++it)
+        {
+            Declarator *d = *it;
+            if (undefClass && d->getPointerLevel() == 0)
+            {
+                errormsg("declaring `%s' of undefined type struct `%s'",
+                         d->getId().c_str(), td->className.c_str());
+            }
+            else if (d->getFormalParamList() != NULL && isEnumType)
+            {
+                errormsg("enum with enumerated names is not supported in a function prototype's return type");
+            }
+
+            ds->processDeclarator(d, *dsl);  // destroys the Declarator object; may need to check dsl's enumerator list
+        }
+    }
+
+    delete declarators;
+    delete dsl->detachEnumeratorList();  // delete enumerator list if not used
+    delete dsl;
+
+    return ds;
 }

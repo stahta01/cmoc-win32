@@ -1,4 +1,4 @@
-/*  $Id: VariableExpr.h,v 1.7 2016/05/06 03:42:56 sarrazip Exp $
+/*  $Id: VariableExpr.h,v 1.8 2016/07/24 23:03:07 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -45,6 +45,8 @@ public:
     void markAsFuncAddrExpr() { _isFuncAddrExpr = true; }
 
     bool isFuncAddrExpr() const { return _isFuncAddrExpr; }
+
+    virtual void checkSemantics(Functor &f);
 
     virtual CodeStatus emitCode(ASMText &out, bool lValue) const;
 

@@ -1,4 +1,4 @@
-/*  $Id: IdentifierExpr.h,v 1.4 2016/05/06 03:42:55 sarrazip Exp $
+/*  $Id: IdentifierExpr.h,v 1.5 2016/07/24 23:03:06 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -22,6 +22,8 @@
 
 #include "Tree.h"
 
+class VariableExpr;
+
 
 class IdentifierExpr : public Tree
 {
@@ -29,9 +31,28 @@ public:
 
     IdentifierExpr(const char *id);
 
+    // Calls delete on a VariableExpr given to this object via
+    // setVariableExpr(), if any.
+    //
     virtual ~IdentifierExpr();
 
     std::string getId() const;
+
+    // ve: Must come from operator new. If not null:
+    //     - sets the type of this IdentifierExpr to that of 've';
+    //     - this IdentifierExpr becomes owner of 've' and the destructor will
+    //       delete the VariableExpr.
+    // If this object already had a VariableExpr, the existing one gets destroyed.
+    //
+    void setVariableExpr(VariableExpr *ve);
+
+    // May be null.
+    //
+    const VariableExpr *getVariableExpr() const;
+
+    bool isFuncAddrExpr() const;
+
+    virtual bool iterate(Functor &f);
 
     virtual CodeStatus emitCode(ASMText &out, bool lValue) const;
 
@@ -44,6 +65,7 @@ private:
 private:
 
     std::string identifier;
+    VariableExpr *variableExpr;  // may be null; owned by this IdentifierExpr
 
 };
 
