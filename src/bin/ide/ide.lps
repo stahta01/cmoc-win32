@@ -20,8 +20,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="138"/>
-        <CursorPos X="42" Y="149"/>
+        <TopLine Value="591"/>
+        <CursorPos X="76" Y="603"/>
         <UsageCount Value="57"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -468,7 +468,7 @@
         <UsageCount Value="10"/>
       </Unit58>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="unitcmocide.pas"/>
         <Caret Line="591" Column="26" TopLine="583"/>
@@ -585,6 +585,10 @@
         <Filename Value="unitcmocide.pas"/>
         <Caret Line="147" Column="44" TopLine="136"/>
       </Position29>
+      <Position30>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="142" Column="27" TopLine="138"/>
+      </Position30>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

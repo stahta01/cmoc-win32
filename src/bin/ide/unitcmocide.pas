@@ -600,7 +600,7 @@ begin
   WriteLn('// Running XRoar emulator. Machine=', AMachine);
   try
     Execute(OCmoc.PathToXroar + 'xroar.exe', ['-rompath', 'roms', '-machine', AMachine,
-      '-joy-right', 'mjoy0', '-kbd-translate', AFileName], True);
+      '-joy-right', 'mjoy0', '-kbd-translate', '-nodos', AFileName], True);
   except
     OCmoc.RaiseError('XRoar failed to execute');
   end;
@@ -611,7 +611,6 @@ var
   LMachine: string;
 begin
   MenuRunBuild.Click;
-  CheckRoms;
   case FTarget of
     Target_COCO: begin
       LMachine := 'cocous';
