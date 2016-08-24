@@ -36,54 +36,77 @@ type
 
   TFormCmocIDE = class(TForm)
     AppProps: TApplicationProperties;
+    ButtonBuild: TToolButton;
+    ButtonCompile: TToolButton;
+    ButtonCopy: TToolButton;
+    ButtonCut: TToolButton;
+    ButtonDelete: TToolButton;
+    ButtonNew: TToolButton;
+    ButtonOpen: TToolButton;
+    ButtonPaste: TToolButton;
+    ButtonRedo: TToolButton;
+    ButtonRun: TToolButton;
+    ButtonSave: TToolButton;
+    ButtonSyntaxCheck: TToolButton;
+    ButtonUndo: TToolButton;
     ImageList16: TImageList;
     MainMenu: TMainMenu;
-    MenuFile: TMenuItem;
-    MenuHelpAbout: TMenuItem;
-    MenuItem1: TMenuItem;
+    MenuEdit: TMenuItem;
+    MenuEditCopy: TMenuItem;
+    MenuEditCut: TMenuItem;
+    MenuEditDelete: TMenuItem;
     MenuEditFind: TMenuItem;
     MenuEditFindNext: TMenuItem;
-    MenuItem2: TMenuItem;
     MenuEditFormatSourceCode: TMenuItem;
-    MenuFileNewEditor: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuFileOpenInNewEditor: TMenuItem;
-    MenuFileOpenInNewWindow: TMenuItem;
-    MenuFileNew: TMenuItem;
-    MenuItem4: TMenuItem;
-    MenuEditReplace: TMenuItem;
-    MenuItem5: TMenuItem;
-    MenuEditUppercaseSelection: TMenuItem;
     MenuEditLowercaseSelection: TMenuItem;
-    MenuHelpOpenRomFolder: TMenuItem;
-    MenuHelpCmocOnline: TMenuItem;
-    MenuHelpWinCmocOnline: TMenuItem;
-    MenuHelpFatCowIconsOnline: TMenuItem;
-    MenuItem7: TMenuItem;
-    MenuItem8: TMenuItem;
-    MenuRunBuildAndRun: TMenuItem;
-    MenuRunCompile: TMenuItem;
-    MenuRun: TMenuItem;
-    MenuItem10: TMenuItem;
-    MenuEditUndo: TMenuItem;
-    MenuEditRedo: TMenuItem;
-    MenuEditCut: TMenuItem;
-    MenuEditCopy: TMenuItem;
     MenuEditPaste: TMenuItem;
-    MenuEditDelete: TMenuItem;
+    MenuEditRedo: TMenuItem;
+    MenuEditReplace: TMenuItem;
     MenuEditSelectAll: TMenuItem;
-    MenuItem18: TMenuItem;
-    MenuItem19: TMenuItem;
-    MenuEdit: TMenuItem;
-    MenuHelp: TMenuItem;
+    MenuEditSep1: TMenuItem;
+    MenuEditSep2: TMenuItem;
+    MenuEditSep3: TMenuItem;
+    MenuEditSep4: TMenuItem;
+    MenuEditSep5: TMenuItem;
+    MenuEditUndo: TMenuItem;
+    MenuEditUppercaseSelection: TMenuItem;
+    MenuFile: TMenuItem;
+    MenuFileExit: TMenuItem;
+    MenuFileNew: TMenuItem;
+    MenuFileNewEditor: TMenuItem;
     MenuFileNewWindow: TMenuItem;
     MenuFileOpen: TMenuItem;
+    MenuFileOpenInNewEditor: TMenuItem;
+    MenuFileOpenInNewWindow: TMenuItem;
     MenuFileSave: TMenuItem;
     MenuFileSaveAs: TMenuItem;
-    MenuFileExit: TMenuItem;
-    MenuRunSyntaxCheck: TMenuItem;
+    MenuFileSep1: TMenuItem;
+    MenuFileSep2: TMenuItem;
+    MenuFileSep3: TMenuItem;
+    MenuHelp: TMenuItem;
+    MenuHelpAbout: TMenuItem;
+    MenuHelpCmocOnline: TMenuItem;
+    MenuHelpCoCoArchive: TMenuItem;
+    MenuHelpFatCowIconsOnline: TMenuItem;
+    MenuHelpOpenRomFolder: TMenuItem;
+    MenuHelpSep1: TMenuItem;
+    MenuHelpSep2: TMenuItem;
+    MenuHelpSep3: TMenuItem;
+    MenuHelpWinCmocOnline: TMenuItem;
+    MenuRun: TMenuItem;
     MenuRunBuild: TMenuItem;
-    MenuItem9: TMenuItem;
+    MenuRunBuildAndRun: TMenuItem;
+    MenuRunCompile: TMenuItem;
+    MenuRunSep1: TMenuItem;
+    MenuRunSyntaxCheck: TMenuItem;
+    MenuXRoar: TMenuItem;
+    MenuXRoarColourComputerNTSC: TMenuItem;
+    MenuXRoarColourComputerPAL: TMenuItem;
+    MenuXRoarDragon200E: TMenuItem;
+    MenuXRoarDragon32: TMenuItem;
+    MenuXRoarDragon64: TMenuItem;
+    MenuXRoarDynacmoMX1600: TMenuItem;
+    MenuXRoarTanoDragon: TMenuItem;
     OpenDialog: TOpenDialog;
     Process: TProcess;
     SaveDialog: TSaveDialog;
@@ -92,22 +115,6 @@ type
     SynAnySyn: TSynAnySyn;
     SynEditLog: TSynEdit;
     ToolBar: TToolBar;
-    ButtonNew: TToolButton;
-    ButtonOpen: TToolButton;
-    ButtonSave: TToolButton;
-    ButtonUndo: TToolButton;
-    ButtonRedo: TToolButton;
-    ToolButton1: TToolButton;
-    ToolButton2: TToolButton;
-    ButtonCompile: TToolButton;
-    ButtonSyntaxCheck: TToolButton;
-    ButtonRun: TToolButton;
-    ToolButton4: TToolButton;
-    ButtonCut: TToolButton;
-    ButtonCopy: TToolButton;
-    ButtonPaste: TToolButton;
-    ButtonDelete: TToolButton;
-    ButtonBuild: TToolButton;
     procedure AppPropsException(ASender: TObject; AException: Exception);
     procedure ButtonCopyClick(ASender: TObject);
     procedure ButtonCutClick(ASender: TObject);
@@ -118,11 +125,12 @@ type
     procedure FormCloseQuery(ASender: TObject; var ACanClose: boolean);
     procedure FormCreate(ASender: TObject);
     procedure FormShow(ASender: TObject);
+    procedure MenuHelpCoCoArchiveClick(ASender: TObject);
     procedure MenuEditClick(ASender: TObject);
     procedure MenuEditFindClick(ASender: TObject);
     procedure MenuEditFindNextClick(ASender: TObject);
     procedure MenuEditFormatSourceCodeClick(ASender: TObject);
-    procedure MenuEditLowercaseSelectionClick(Sender: TObject);
+    procedure MenuEditLowercaseSelectionClick(ASender: TObject);
     procedure MenuEditReplaceClick(ASender: TObject);
     procedure MenuEditUndoClick(ASender: TObject);
     procedure MenuFileNewClick(ASender: TObject);
@@ -132,13 +140,14 @@ type
     procedure MenuFileSaveAsClick(ASender: TObject);
     procedure MenuFileSaveClick(ASender: TObject);
     procedure MenuFileOpenInNewWindowClick(ASender: TObject);
-    procedure MenuEditUppercaseSelectionClick(Sender: TObject);
-    procedure MenuHelpFatCowIconsOnlineClick(Sender: TObject);
-    procedure MenuHelpOpenRomFolderClick(Sender: TObject);
-    procedure MenuHelpCmocOnlineClick(Sender: TObject);
-    procedure MenuHelpWinCmocOnlineClick(Sender: TObject);
+    procedure MenuEditUppercaseSelectionClick(ASender: TObject);
+    procedure MenuHelpFatCowIconsOnlineClick(ASender: TObject);
+    procedure MenuHelpOpenRomFolderClick(ASender: TObject);
+    procedure MenuHelpCmocOnlineClick(ASender: TObject);
+    procedure MenuHelpWinCmocOnlineClick(ASender: TObject);
     procedure MenuRunCompileClick(ASender: TObject);
-    procedure MenuRunBuildAndRunClick(Sender: TObject);
+    procedure MenuRunBuildAndRunClick(ASender: TObject);
+    procedure MenuXRoarClick(ASender: TObject);
     procedure SynEditLogChangeUpdating(ASender: TObject; AIsUpdating: boolean);
     procedure MenuHelpAboutClick(ASender: TObject);
     procedure MenuRunBuildClick(ASender: TObject);
@@ -156,6 +165,7 @@ type
   strict private
     procedure CheckRoms;
   strict private
+    procedure XRoar(const AMachine: string; const AFileName: TFileName);
     function Execute(const AExecutable: string; const AParameters: array of string;
       const AExternal: boolean): integer;
     function RunTool(const ATool: string; const AParameters: array of string;
@@ -584,28 +594,44 @@ begin
   end;
 end;
 
-procedure TFormCmocIDE.MenuRunBuildAndRunClick(Sender: TObject);
+procedure TFormCmocIDE.XRoar(const AMachine: string; const AFileName: TFileName);
+begin
+  CheckRoms;
+  WriteLn('// Running XRoar emulator. Machine=', AMachine);
+  try
+    Execute(OCmoc.PathToXroar + 'xroar.exe', ['-rompath', 'roms', '-machine', AMachine,
+      '-joy-right', 'mjoy0', '-kbd-translate', AFileName], True);
+  except
+    OCmoc.RaiseError('XRoar failed to execute');
+  end;
+end;
+
+procedure TFormCmocIDE.MenuRunBuildAndRunClick(ASender: TObject);
 var
   LMachine: string;
 begin
   MenuRunBuild.Click;
   CheckRoms;
-  WriteLn('// Running xroar emulator');
-  try
-    case FTarget of
-      Target_COCO: begin
-        LMachine := 'cocous';
-      end;
-      Target_DRAGON: begin
-        LMachine := 'dragon64';
-      end else begin
-        OCmoc.RaiseError('Unknown target machine');
-      end;
+  case FTarget of
+    Target_COCO: begin
+      LMachine := 'cocous';
     end;
-    Execute(OCmoc.PathToXroar + 'xroar.exe', ['-rompath', 'roms', '-machine', LMachine,
-      '-joy-right', 'mjoy0', '-kbd-translate', FileNameBin], True);
-  except
-    WriteLn(StdErr, 'xroar failed to execute');
+    Target_DRAGON: begin
+      LMachine := 'dragon64';
+    end else begin
+      OCmoc.RaiseError('Unknown target machine');
+    end;
+  end;
+  XRoar(LMachine, FileNameBin);
+end;
+
+procedure TFormCmocIDE.MenuXRoarClick(ASender: TObject);
+var
+  LMachine: string;
+begin
+  LMachine := (ASender as TMenuItem).Hint;
+  if Length(LMachine) > 0 then begin
+    XRoar(LMachine, EmptyStr);
   end;
 end;
 
@@ -695,34 +721,40 @@ begin
   MenuEditUndo.Click;
 end;
 
-procedure TFormCmocIDE.MenuEditUppercaseSelectionClick(Sender: TObject);
+procedure TFormCmocIDE.MenuEditUppercaseSelectionClick(ASender: TObject);
 begin
   FormCmocIDESynEdit.SynEdit._UpperCaseSelText;
 end;
 
-procedure TFormCmocIDE.MenuHelpFatCowIconsOnlineClick(Sender: TObject);
+procedure TFormCmocIDE.MenuHelpFatCowIconsOnlineClick(ASender: TObject);
 begin
   OpenURL(OCmoc._UrlFatCowFreeIcons);
 end;
 
-procedure TFormCmocIDE.MenuHelpOpenRomFolderClick(Sender: TObject);
+procedure TFormCmocIDE.MenuHelpCoCoArchiveClick(ASender: TObject);
+begin
+  OpenURL(OCmoc._UrlCoCoArchive);
+end;
+
+
+procedure TFormCmocIDE.MenuHelpOpenRomFolderClick(ASender: TObject);
 begin
   if not OpenURL(OCmoc.PathToXroarRoms) then begin
     OCmoc.RaiseError('Unable to open', OCmoc.PathToXroarRoms);
   end;
 end;
 
-procedure TFormCmocIDE.MenuHelpCmocOnlineClick(Sender: TObject);
+procedure TFormCmocIDE.MenuHelpCmocOnlineClick(ASender: TObject);
 begin
   OpenURL(OCmoc._UrlCmoc);
 end;
 
-procedure TFormCmocIDE.MenuHelpWinCmocOnlineClick(Sender: TObject);
+procedure TFormCmocIDE.MenuHelpWinCmocOnlineClick(ASender: TObject);
 begin
   OpenURL(OCmoc._UrlWinCmoc);
 end;
 
-procedure TFormCmocIDE.MenuEditLowercaseSelectionClick(Sender: TObject);
+procedure TFormCmocIDE.MenuEditLowercaseSelectionClick(ASender: TObject);
 begin
   FormCmocIDESynEdit.SynEdit._LowerCaseSelText;
 end;
