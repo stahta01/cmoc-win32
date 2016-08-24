@@ -1,8 +1,8 @@
 
-// This file is uses for testing of new functions. It may
-// not contain useful code.
-
-#pragma org $3600
+// NOTE: The PAINT function is not working the best.
+// I haven't got time to fix it. If someone wants to work on it and send it to me, the code is here:
+//
+// https://sourceforge.net/p/cmoc-win32/code/HEAD/tree/src/lib/libbasic/PAINT.c
 
 #pragma target coco
 
