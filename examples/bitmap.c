@@ -7,7 +7,6 @@
 #include <assert.h>
 
 #include <basic.h>
-#include <zeropage.h>
 
 #include <windef.h>
 
