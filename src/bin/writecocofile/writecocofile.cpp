@@ -1,4 +1,4 @@
-/*  $Id: writecocofile.cpp,v 1.15 2016/06/30 17:31:01 sarrazip Exp $
+/*  $Id: writecocofile.cpp,v 1.16 2016/07/01 19:41:59 sarrazip Exp $
 
     writecocofile.cpp - A tool to write native files to a CoCo DECB disk image.
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>

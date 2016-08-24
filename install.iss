@@ -38,6 +38,7 @@ Source: "bin\lwasm.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\lwlink.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\lwobjdump.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\mcpp.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\writecocofile.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 
 Source: "lib\*.a"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "lib\*.o"; DestDir: "{app}\lib"; Flags: ignoreversion
