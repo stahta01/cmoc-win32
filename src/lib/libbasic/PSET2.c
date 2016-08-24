@@ -3,7 +3,14 @@
 
 void PSET2(int x, int y, byte c)
 {
+    if (_pmode < 4)  {
+        x >>= 1;
+        if (_pmode < 2) {
+            y >>= 1;
+        }
+    }
     byte* p;
+    x >>= 1;
     switch (_horbyt) {
     case 16:
         p = (byte*)_beggrp + (y << 4) + (x >> 2);
@@ -21,6 +28,12 @@ void PSET2(int x, int y, byte c)
 
 byte PPOINT2(int x, int y)
 {
+    if (_pmode < 4)  {
+        x >>= 1;
+        if (_pmode < 2) {
+            y >>= 1;
+        }
+    }
     byte* p;
     switch (_horbyt) {
     case 16:
@@ -34,7 +47,6 @@ byte PPOINT2(int x, int y)
         break;
     }
     byte i = (byte)x & 3;
-    return (*p & _pset2_set[3][i]) >> (3 - (i));
+    return (*p & _pset2_set[3][i]) >> ((3 - i) << 1);
 }
-
 
