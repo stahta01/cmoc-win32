@@ -198,7 +198,8 @@ begin
       'FORMF', 'SPACE', 'TEMPTR', 'CURPOS', 'SNDTON', 'SNDDUR', 'TIMVAL',
       'VIDRAM', 'POTVAL', 'PMODE', 'ALLCOL', 'WCOLOR', 'FORCOL', 'BAKCOL',
       'USRADR', 'TRCFLG', 'ENDGRP', 'HORBYT', 'BEGGRP', 'GRPRAM', 'HORBEG',
-      'VERBEG', 'CSSVAL', 'SETFLG', 'HOREND', 'VEREND', 'HORDEF', 'VERDEF'));
+      'VERBEG', 'CSSVAL', 'SETFLG', 'HOREND', 'VEREND', 'HORDEF', 'VERDEF',
+      'LINBUF', 'CURLIN', 'CHARAD', 'GETNCH'));
 
     LDstPath := OCmoc.PathToInclude + 'vectrex/';
     Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexdefs.asm',

@@ -39,6 +39,14 @@
 #define _temptr (*(unsigned*)_TEMPTR)
 #endif
 
+// PV CURRENT LINE # OF BASIC PROGRAM, $FFFF = DIRECT (Compatible with CoCo)
+#ifndef _CURLIN
+#define _CURLIN 104
+#endif
+#ifndef _curlin
+#define _curlin (*(unsigned*)_CURLIN)
+#endif
+
 // PV CURSOR LOCATION (Compatible with CoCo)
 #ifndef _CURPOS
 #define _CURPOS 136
@@ -61,6 +69,22 @@
 #endif
 #ifndef _snddur
 #define _snddur (*(unsigned*)_SNDDUR)
+#endif
+
+// (Compatible with CoCo)
+#ifndef _GETNCH
+#define _GETNCH 159
+#endif
+#ifndef _getnch
+#define _getnch ((char*)_GETNCH)
+#endif
+
+// PV THESE 2 BYTES CONTAIN ADDRESS OF THE CURRENT (Compatible with CoCo)
+#ifndef _CHARAD
+#define _CHARAD 166
+#endif
+#ifndef _charad
+#define _charad (*(unsigned*)_CHARAD)
 #endif
 
 // PV TRACE FLAG 0=OFF ELSE=ON (Compatible with CoCo)
@@ -226,6 +250,14 @@
 #endif
 #ifndef _potval
 #define _potval (*(unsigned char*)_POTVAL)
+#endif
+
+// +1        BASIC LINE INPUT BUFFER (Compatible with CoCo)
+#ifndef _LINBUF
+#define _LINBUF 732
+#endif
+#ifndef _linbuf
+#define _linbuf ((char*)_LINBUF)
 #endif
 
 // VIDEO DISPLAY AREA (Compatible with CoCo)
