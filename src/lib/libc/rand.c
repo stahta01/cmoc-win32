@@ -10,7 +10,12 @@ void srand(unsigned seed)
 
 int rand(void)
 {
-    return (__rand_seed = __rand_seed * 13709 + 13849) & RAND_MAX;
+// Note: Taken from here
+// http://forth.sourceforge.net/mirror/comus/index.html#random
+
+// Im unsure where these numbers originally came from.
+
+    return (__rand_seed = __rand_seed * 31421 + 6927) & RAND_MAX;
 }
 
 
