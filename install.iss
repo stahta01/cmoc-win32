@@ -1,9 +1,9 @@
 
 [Setup]
-OutputBaseFilename=WinCMOC v0.3
+OutputBaseFilename=WinCMOC v0.4
 AppName=WinCMOC
-AppVersion=0.3
-AppVerName=WinCMOC v0.3
+AppVersion=0.4
+AppVerName=WinCMOC v0.4
 AppPublisher=Geep Software
 AppPublisherURL=https://sourceforge.net/projects/cmoc-win32/
 AppSupportURL=https://sourceforge.net/projects/cmoc-win32/
@@ -39,10 +39,13 @@ Source: "bin\lwlink.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\lwobjdump.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\mcpp.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\writecocofile.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\wimgtool.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 
 Source: "lib\*.a"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "lib\*.o"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "lib\*.txt"; DestDir: "{app}\lib"; Flags: ignoreversion
+
+Source: "doc\*.*"; DestDir: "{app}\doc"; Flags: ignoreversion recursesubdirs
 
 Source: "include\*.h"; DestDir: "{app}\include"; Flags: ignoreversion recursesubdirs
 Source: "examples\*.c"; DestDir: "{app}\examples"; Flags: ignoreversion recursesubdirs
