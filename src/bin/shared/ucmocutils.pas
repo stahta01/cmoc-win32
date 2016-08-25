@@ -148,12 +148,6 @@ type
   strict private
     class function PathToTemp: TFileName;
   public
-  const
-    _UrlCmoc = 'http://perso.b2b2c.ca/~sarrazip/dev/cmoc.html';
-    _UrlWinCmoc = 'https://sourceforge.net/projects/cmoc-win32/';
-    _UrlFatCowFreeIcons = 'http://www.fatcow.com/free-icons';
-    _UrlCoCoArchive = 'http://www.colorcomputerarchive.com/';
-  public
     class function DosToUnix(const A: TFileName): TFileName;
     class function UnixToDos(const A: TFileName): TFileName;
   public

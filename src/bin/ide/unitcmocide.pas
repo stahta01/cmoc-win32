@@ -27,7 +27,7 @@ interface
 
 uses
   Classes, ComCtrls, Controls, Dialogs, ExtCtrls, FileUtil, Forms, Graphics,
-  LCLIntf, Menus, MouseAndKeyInput, process, StreamIO, SynEdit, SynHighlighterAny,
+  LCLIntf, Menus, MouseAndKeyInput, process, StreamIO, StrUtils, SynEdit, SynHighlighterAny,
   SysUtils, UCmocIDE, UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
 
 type
@@ -93,6 +93,12 @@ type
     MenuHelpSep2: TMenuItem;
     MenuHelpSep3: TMenuItem;
     MenuHelpWinCmocOnline: TMenuItem;
+    MenuHelpCMOCManual: TMenuItem;
+    MenuHelpLWToolsManual: TMenuItem;
+    MenuHelpSep4: TMenuItem;
+    MenuHelpLWTools: TMenuItem;
+    MenuHelpXRoarEmulator: TMenuItem;
+    MenuHelpMCPP: TMenuItem;
     MenuRun: TMenuItem;
     MenuRunBuild: TMenuItem;
     MenuRunBuildAndRun: TMenuItem;
@@ -115,6 +121,9 @@ type
     SynAnySyn: TSynAnySyn;
     SynEditLog: TSynEdit;
     ToolBar: TToolBar;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton4: TToolButton;
     procedure AppPropsException(ASender: TObject; AException: Exception);
     procedure ButtonCopyClick(ASender: TObject);
     procedure ButtonCutClick(ASender: TObject);
@@ -125,7 +134,7 @@ type
     procedure FormCloseQuery(ASender: TObject; var ACanClose: boolean);
     procedure FormCreate(ASender: TObject);
     procedure FormShow(ASender: TObject);
-    procedure MenuHelpCoCoArchiveClick(ASender: TObject);
+    procedure MenuHelpClick(ASender: TObject);
     procedure MenuEditClick(ASender: TObject);
     procedure MenuEditFindClick(ASender: TObject);
     procedure MenuEditFindNextClick(ASender: TObject);
@@ -141,10 +150,7 @@ type
     procedure MenuFileSaveClick(ASender: TObject);
     procedure MenuFileOpenInNewWindowClick(ASender: TObject);
     procedure MenuEditUppercaseSelectionClick(ASender: TObject);
-    procedure MenuHelpFatCowIconsOnlineClick(ASender: TObject);
     procedure MenuHelpOpenRomFolderClick(ASender: TObject);
-    procedure MenuHelpCmocOnlineClick(ASender: TObject);
-    procedure MenuHelpWinCmocOnlineClick(ASender: TObject);
     procedure MenuRunCompileClick(ASender: TObject);
     procedure MenuRunBuildAndRunClick(ASender: TObject);
     procedure MenuXRoarClick(ASender: TObject);
@@ -165,6 +171,7 @@ type
   strict private
     procedure CheckRoms;
   strict private
+    procedure OpenBrowser(AURL: string);
     procedure XRoar(const AMachine: string; const AFileName: TFileName);
     function Execute(const AExecutable: string; const AParameters: array of string;
       const AExternal: boolean): integer;
@@ -389,26 +396,6 @@ begin
   end;
 end;
 
-procedure TFormCmocIDE.MenuHelpAboutClick(ASender: TObject);
-begin
-  MessageDlg(
-    Application.Title + LineEnding +
-    'Copyright (C) 2015-2016 Derek John Evans' + LineEnding + LineEnding +
-    'http://www.wascal.com' + LineEnding + LineEnding +
-    'This source is free software; you can redistribute it and/or modify' + LineEnding +
-    'it under the terms of the GNU General Public License as published by' + LineEnding +
-    'the Free Software Foundation; either version 2 of the License, or' + LineEnding +
-    '(at your option) any later version.' + LineEnding + LineEnding +
-    'This code is distributed in the hope that it will be useful, but' + LineEnding +
-    'WITHOUT ANY WARRANTY; without even the implied warranty of' + LineEnding +
-    'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.' + LineEnding +
-    'See the GNU General Public License for more details.' + LineEnding + LineEnding +
-    'A copy of the GNU General Public License is available on the World' + LineEnding +
-    'Wide Web at <http://www.gnu.org/copyleft/gpl.html>. You can also' + LineEnding +
-    'obtain it by writing to the Free Software Foundation,' + LineEnding +
-    'Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.', mtInformation, [mbOK], 0);
-end;
-
 function TFormCmocIDE.Execute(const AExecutable: string; const AParameters: array of string;
   const AExternal: boolean): integer;
 var
@@ -563,6 +550,14 @@ begin
     RunTool(Tool_CMOC2, [Opt_Output2, FileNameBin, Opt_Target2, FTarget,
       Opt_Origin2, IntToStr(FOrigin), FileNameObj], False);
     EndProcess('Build complete');
+  end;
+end;
+
+procedure TFormCmocIDE.OpenBrowser(AURL: string);
+begin
+  AURL := AnsiReplaceText(AURL, '%PACKAGE%', ExtractFileDir(OCmoc.PathToPackage));
+  if not LCLIntf.OpenURL(AURL) then begin
+    OCmoc.RaiseError('Unable to open', AURL);
   end;
 end;
 
@@ -725,32 +720,38 @@ begin
   FormCmocIDESynEdit.SynEdit._UpperCaseSelText;
 end;
 
-procedure TFormCmocIDE.MenuHelpFatCowIconsOnlineClick(ASender: TObject);
+procedure TFormCmocIDE.MenuHelpClick(ASender: TObject);
 begin
-  OpenURL(OCmoc._UrlFatCowFreeIcons);
-end;
-
-procedure TFormCmocIDE.MenuHelpCoCoArchiveClick(ASender: TObject);
-begin
-  OpenURL(OCmoc._UrlCoCoArchive);
-end;
-
-
-procedure TFormCmocIDE.MenuHelpOpenRomFolderClick(ASender: TObject);
-begin
-  if not OpenURL(OCmoc.PathToXroarRoms) then begin
-    OCmoc.RaiseError('Unable to open', OCmoc.PathToXroarRoms);
+  with ASender as TMenuItem do begin
+    if (Parent = MenuHelp) and (Length(Hint) > 0) then begin
+      OpenBrowser(Hint);
+    end;
   end;
 end;
 
-procedure TFormCmocIDE.MenuHelpCmocOnlineClick(ASender: TObject);
+procedure TFormCmocIDE.MenuHelpAboutClick(ASender: TObject);
 begin
-  OpenURL(OCmoc._UrlCmoc);
+  MessageDlg(
+    Application.Title + LineEnding +
+    'Copyright (C) 2015-2016 Derek John Evans' + LineEnding + LineEnding +
+    'http://www.wascal.com' + LineEnding + LineEnding +
+    'This source is free software; you can redistribute it and/or modify' + LineEnding +
+    'it under the terms of the GNU General Public License as published by' + LineEnding +
+    'the Free Software Foundation; either version 2 of the License, or' + LineEnding +
+    '(at your option) any later version.' + LineEnding + LineEnding +
+    'This code is distributed in the hope that it will be useful, but' + LineEnding +
+    'WITHOUT ANY WARRANTY; without even the implied warranty of' + LineEnding +
+    'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.' + LineEnding +
+    'See the GNU General Public License for more details.' + LineEnding + LineEnding +
+    'A copy of the GNU General Public License is available on the World' + LineEnding +
+    'Wide Web at <http://www.gnu.org/copyleft/gpl.html>. You can also' + LineEnding +
+    'obtain it by writing to the Free Software Foundation,' + LineEnding +
+    'Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.', mtInformation, [mbOK], 0);
 end;
 
-procedure TFormCmocIDE.MenuHelpWinCmocOnlineClick(ASender: TObject);
+procedure TFormCmocIDE.MenuHelpOpenRomFolderClick(ASender: TObject);
 begin
-  OpenURL(OCmoc._UrlWinCmoc);
+  OpenBrowser(OCmoc.PathToXroarRoms);
 end;
 
 procedure TFormCmocIDE.MenuEditLowercaseSelectionClick(ASender: TObject);

@@ -17,9 +17,9 @@
 <p>Distributed under the <strong>GNU General Public License</strong>,
 <strong>version 3 or later</strong> (see the License section).</p>
 
-<p>Version of CMOC covered by this manual: <strong>0.1.28</strong></p>
+<p>Version of CMOC covered by this manual: <strong>0.1.30</strong></p>
 
-<p>Date of this manual: 2016-07-01</p>
+<p>Date of this manual: 2016-08-21</p>
 
 <h2>Table of Contents</h2>
 <small>
@@ -74,15 +74,16 @@
 <li><a href="#t36">Local vs. global array</a></li> <!--4-->
 <li><a href="#t37">Execution of global array initializers</a></li> <!--4-->
 </ul>
-<li><a href="#t38">Compiling a ROM image for a cartridge</a></li> <!--3-->
-<li><a href="#t39">Detecting null pointer accesses at run time</a></li> <!--3-->
-<li><a href="#t40">Detecting stack overflows at run time</a></li> <!--3-->
-<li><a href="#t41">Single-execution programs</a></li> <!--3-->
-<li><a href="#t42">Calling convention</a></li> <!--3-->
-<li><a href="#t43">Compiling a program executable by the DOS command</a></li> <!--3-->
-<li><a href="#t44">Unused functions</a></li> <!--3-->
+<li><a href="#t38">Enumerations (enum)</a></li> <!--3-->
+<li><a href="#t39">Compiling a ROM image for a cartridge</a></li> <!--3-->
+<li><a href="#t40">Detecting null pointer accesses at run time</a></li> <!--3-->
+<li><a href="#t41">Detecting stack overflows at run time</a></li> <!--3-->
+<li><a href="#t42">Single-execution programs</a></li> <!--3-->
+<li><a href="#t43">Calling convention</a></li> <!--3-->
+<li><a href="#t44">Compiling a program executable by the DOS command</a></li> <!--3-->
+<li><a href="#t45">Unused functions</a></li> <!--3-->
 </ul>
-<li><a href="#t45">License</a></li> <!--2-->
+<li><a href="#t46">License</a></li> <!--2-->
 </ul>
 </small>
 <h2><a name="t1"></a>Introduction</h2>
@@ -126,7 +127,6 @@ product had higher priority than having a clean but theoretical design.</p>
 <li><p>Separate compilation (i.e., compiling several source files
 to several object files that get linked together).</p></li>
 <li><p>Bit fields.</p></li>
-<li><p>Enumerations.</p></li>
 <li><p>Type-safe function pointers.
 (The address of a function has type <code>void *</code>
 and the return type of a call through a pointer is assumed to be int.)</p></li>
@@ -174,6 +174,7 @@ i.e., void foo(const char *format, ...);</p></li>
 (the system's cpp is invoked): #include, #define, #ifdef, etc.
 (Use #includes instead of separating the program in more than one .c file.)</p></li>
 <li><p>Unions (since version 0.1.12).</p></li>
+<li><p>Enumerations (since version 0.1.29).</p></li>
 <li><p>Generating <a href="https://en.wikipedia.org/wiki/OS-9">OS-9</a> executables (since
 version 0.1.15, using the <code>--os9</code> command-line option).</p></li>
 <li><p><a href="https://en.wikipedia.org/wiki/Goto">Goto</a> and non-case labeled statements.</p></li>
@@ -599,13 +600,15 @@ The memory after that is presumed to be free for dynamic allocation.</p>
 <p>In the case of the CoCo, the assumption is that the program is loaded
 after the Basic program and variables. This means the space that
 sbrk() can allocate from goes from there to the top of the stack,
-which is around $3F00 on a 32K CoCo and $7F00 on a 64K CoCo or CoCo 3.</p>
+which is around $3F00 on a 16K CoCo and $7F00 on a 32K-or-more CoCo.</p>
 
 <p>To determine how much of that memory is available for sbrk(),
 call sbrkmax(), which returns the number of bytes as a size_t
 (unsigned). CMOC ends the region available to sbrk() about 1024 bytes
 before the stack pointer, leaving those bytes to program calls and
 local variables.</p>
+
+<p>sbrkmax() returns 0 if the program is loaded after the stack space.</p>
 
 <p>Be careful when using both sbrk() and #pragma const_data (see
 previous section). If the data is not positioned correctly, sbrk()
@@ -873,7 +876,21 @@ because array <code>a</code> is <em>not</em> reinitialized upon entry.</p>
 <p>This is meant to save memory by not including a second copy
 of the initializer just for run-time initialization purposes.</p>
 
-<h3><a name="t38"></a>Compiling a ROM image for a cartridge</h3>
+<h3><a name="t38"></a>Enumerations (enum)</h3>
+
+<p>Enumerations are supported, with the restriction that an enum must
+be declared at the global scope. In particular, an enum with an
+enumerator list (e.g., <code>enum { A, B }</code>) cannot be used in the formal
+parameter of a function, nor as its return type.</p>
+
+<p>An enum can be anonymous (e.g., <code>enum { A, B }</code>) or be given a name
+(e.g., <code>enum E { A, B }</code>).</p>
+
+<p>Each enumerated name can have a specified value, e.g.,
+<code>enum { SCREEN = 0x0400, BIT5 = 1 &lt;&lt; 5 }</code>. Such a value must be
+a constant expression.</p>
+
+<h3><a name="t39"></a>Compiling a ROM image for a cartridge</h3>
 
 <p>To help support the ROM cartridge format, CMOC supports directives
 that allow telling it to assemble the code, the string literals
@@ -958,7 +975,7 @@ put this at the beginning of the main() function:</p>
 }
 </code></pre>
 
-<h3><a name="t39"></a>Detecting null pointer accesses at run time</h3>
+<h3><a name="t40"></a>Detecting null pointer accesses at run time</h3>
 
 <p>Accessing a value through a null pointer is a common bug.
 To help detect such accesses, CMOC has the --check-null command-line
@@ -997,7 +1014,7 @@ in which function that null pointer was detected.</p>
 during debugging. An alternative is to define an <code>assert()</code> macro that
 expands to nothing when <code>NDEBUG</code> is defined.</p>
 
-<h3><a name="t40"></a>Detecting stack overflows at run time</h3>
+<h3><a name="t41"></a>Detecting stack overflows at run time</h3>
 
 <p>Runaway recursion or excessively long local arrays can cause corruption
 that is difficult to investigate. To help detect stack overflows,
@@ -1035,7 +1052,7 @@ during debugging.</p>
 with the default layout, the stack is preceded by the memory managed
 by sbrk() (see elsewhere in this manual).</p>
 
-<h3><a name="t41"></a>Single-execution programs</h3>
+<h3><a name="t42"></a>Single-execution programs</h3>
 
 <p>If a program is intended to be executable only once, i.e., that
 reloading it or rebooting the CoCo is required to run it again,
@@ -1048,7 +1065,7 @@ break" used by sbrk() (see the previous section) is placed at
 the start of the routine. This makes the memory of that routine
 available to be allocated by sbrk().</p>
 
-<h3><a name="t42"></a>Calling convention</h3>
+<h3><a name="t43"></a>Calling convention</h3>
 
 <p>CMOC follows the C convention of passing the parameters in the stack
 in the reverse order.</p>
@@ -1092,7 +1109,7 @@ pointer. Such a function starts with these instructions:</p>
     PULS    U,PC
 </code></pre>
 
-<h3><a name="t43"></a>Compiling a program executable by the DOS command</h3>
+<h3><a name="t44"></a>Compiling a program executable by the DOS command</h3>
 
 <p>Disk Basic 1.1 has a DOS command that loads track 34 at $2600
 and if the contents start with the bytes 'O' and 'S', the interpreter
@@ -1118,7 +1135,7 @@ option that will install the boot leader despite that.</p>
 <pre><code>install-coco-boot-loader --uninstall foo.dsk
 </code></pre>
 
-<h3><a name="t44"></a>Unused functions</h3>
+<h3><a name="t45"></a>Unused functions</h3>
 
 <p>A C function that is not called and whose address is not taken will
 not have assembly language generated for it by CMOC.</p>
@@ -1127,7 +1144,7 @@ not have assembly language generated for it by CMOC.</p>
 containing several functions, without having to worry about bloating
 an executable that would only use some of those functions.</p>
 
-<h2><a name="t45"></a>License</h2>
+<h2><a name="t46"></a>License</h2>
 
 <p><strong>EXCEPT FOR THE FILES UNDER src/usim-0.91-cmoc in the CMOC source archive,
 CMOC is distributed under the following license:</strong></p>
