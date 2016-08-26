@@ -19,16 +19,21 @@ int vsprintf(char* dst, char* fmt, va_list args)
                 s = stpcpy(s, (char*)*args);
                 args += step;
                 break;
-            case 'o':
-                s = strchr(itoa(*args, s, 8), 0);
-                args += step;
-                break;
             case 'd':
                 s = strchr(itoa(*args, s, 10), 0);
                 args += step;
                 break;
+            case 'o':
+                s = strchr(utoa(*args, s, 8), 0);
+                args += step;
+                break;
             case 'x':
-                s = strchr(itoa(*args, s, 16), 0);
+            case 'X':
+                s = strchr(utoa(*args, s, 16), 0);
+                args += step;
+                break;
+            case 'u':
+                s = strchr(utoa(*args, s, 10), 0);
                 args += step;
                 break;
             default:
@@ -42,5 +47,4 @@ int vsprintf(char* dst, char* fmt, va_list args)
     *s = 0;
     return s - dst;
 }
-
 

@@ -1,3 +1,4 @@
+
 /*---------------------------------------------------------------------------*/
 /* ultoa() - convert an unsigned long integer to a string                    */
 /*---------------------------------------------------------------------------*/
@@ -16,7 +17,7 @@ char* ultoa(unsigned long value, char* string, int radix)
             if (result.rem < 10) {
                 *p = (char)((char)(result.rem) + (char)'0');
             } else {
-                *p = (char)((char)(result.rem - 10) + (char)'a');
+                *p = (char)((char)(result.rem - 10) + (char)'A');
             }
             p++;
         } while (value > 0);
@@ -27,3 +28,4 @@ char* ultoa(unsigned long value, char* string, int radix)
     *p = '\0';
     return (strrev(string));
 }
+

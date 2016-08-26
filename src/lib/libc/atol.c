@@ -30,5 +30,4 @@ long atol(char* string)
     }
     return (value);
 }
-
 

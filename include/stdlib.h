@@ -47,7 +47,7 @@ int _msize(void* mem);
 void* realloc(void* mem, int size);
 
 int atoi(char* string);
-long atol(char* string);
+//long atol(char* string);
 int atexit(void(*func)(void));
 void* bsearch(void* keyval, void* base, size_t num, size_t width,
               int(*cmp)(void* keyval, void* elem));
@@ -55,18 +55,26 @@ void* bsearch(void* keyval, void* base, size_t num, size_t width,
 void div(div_t* result, int numer, int denom);
 void exit(int status);
 char* _getcmd(void);
-char* getenv(char* varname);
 char* itoa(int value, char* string, int radix);
+char* utoa(unsigned value, char* string, int radix);
 void ldiv(ldiv_t* result, long numer, long denom);
 char* ltoa(long value, char* string, int radix);
-int putenv(char* envptr);
-void qsort(void* base, size_t num, size_t width,
-           int(*cmp)(void* elem1, void* elem2));
+void qsort(void* base, size_t num, size_t width, int(*cmp)(void* elem1, void* elem2));
 int rand(void);
 void srand(unsigned int seed);
 long strtol(char* nptr, char** endptr, int base);
 unsigned long strtoul(char* nptr, char** endptr, int base);
-int system(char* command);
+
+int system(char* cmd);
+int putenv(char* envptr);  // TODO
+char* getenv(char* varname); // TODO
+
+// Non-Standard access to BASIC variables
+int setstr(char* name, char* value);
+char* getstr(char* name);
+int setuint(char* name, unsigned value);
+unsigned getuint(char* name);
+
 void uldiv(uldiv_t* result, unsigned long numer, unsigned long denom);
 char* ultoa(unsigned long value, char* string, int radix);
 
@@ -75,6 +83,4 @@ void beep(unsigned char _Frequency, unsigned _Duration);
 extern int heap_memory[1]; // INTERNAL USE ONLY
 
 #endif
-
-
 
