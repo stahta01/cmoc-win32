@@ -1,12 +1,11 @@
 
-#pragma target coco
+#pragma target dragon
 
 #include <basic.h>
 
 int main()
 {
     CLS(0);
-
     SETBOX(0, 0, 64, 32, 2, false);
     SETBOX(2, 2, 62, 30, 7, true);
     SETELLIPSE(32, 16, 25, 13, 0, false);

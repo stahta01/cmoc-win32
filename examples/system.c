@@ -12,9 +12,9 @@
 
 int main(void)
 {
-    system("PMODE 4,1");
-    system("PCLS 0");
-    system("SCREEN 1,1");
+    system("PMODE4,1");
+    system("PCLS0");
+    system("SCREEN1,1");
     system("LINE(0,0)-(100,100),PSET");
     system("CIRCLE(128,96),50");
 
