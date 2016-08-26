@@ -1,4 +1,6 @@
 
+#pragma target dragon
+
 #include <stdio.h>
 #include <equates.h>
 

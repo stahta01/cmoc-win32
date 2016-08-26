@@ -39,6 +39,150 @@
 #define _temptr (*(unsigned*)_TEMPTR)
 #endif
 
+// PV BEGINNING OF BASIC PROGRAM (Compatible with CoCo)
+#ifndef _TXTTAB
+#define _TXTTAB 25
+#endif
+#ifndef _txttab
+#define _txttab (*(unsigned*)_TXTTAB)
+#endif
+
+// PV START OF VARIABLES (Compatible with CoCo)
+#ifndef _VARTAB
+#define _VARTAB 27
+#endif
+#ifndef _vartab
+#define _vartab (*(unsigned*)_VARTAB)
+#endif
+
+// PV START OF ARRAYS (Compatible with CoCo)
+#ifndef _ARYTAB
+#define _ARYTAB 29
+#endif
+#ifndef _arytab
+#define _arytab (*(unsigned*)_ARYTAB)
+#endif
+
+// PV END OF ARRAYS (+1) (Compatible with CoCo)
+#ifndef _ARYEND
+#define _ARYEND 31
+#endif
+#ifndef _aryend
+#define _aryend (*(unsigned*)_ARYEND)
+#endif
+
+// PV START OF STRING STORAGE (TOP OF FREE RAM) (Compatible with CoCo)
+#ifndef _FRETOP
+#define _FRETOP 33
+#endif
+#ifndef _fretop
+#define _fretop (*(unsigned*)_FRETOP)
+#endif
+
+// PV START OF STRING VARIABLES (Compatible with CoCo)
+#ifndef _STRTAB
+#define _STRTAB 35
+#endif
+#ifndef _strtab
+#define _strtab (*(unsigned*)_STRTAB)
+#endif
+
+// UTILITY STRING POINTER (Compatible with CoCo)
+#ifndef _FRESPC
+#define _FRESPC 37
+#endif
+#ifndef _frespc
+#define _frespc (*(unsigned*)_FRESPC)
+#endif
+
+// PV TOP OF STRING SPACE (Compatible with CoCo)
+#ifndef _MEMSIZ
+#define _MEMSIZ 39
+#endif
+#ifndef _memsiz
+#define _memsiz (*(unsigned*)_MEMSIZ)
+#endif
+
+// SAVED LINE NUMBER DURING A "STOP" (Compatible with CoCo)
+#ifndef _OLDTXT
+#define _OLDTXT 41
+#endif
+#ifndef _oldtxt
+#define _oldtxt (*(unsigned*)_OLDTXT)
+#endif
+
+// BINARY VALUE OF A CONVERTED LINE NUMBER (Compatible with CoCo)
+#ifndef _BINVAL
+#define _BINVAL 43
+#endif
+#ifndef _binval
+#define _binval (*(unsigned*)_BINVAL)
+#endif
+
+// SAVED INPUT PTR DURING A "STOP" (Compatible with CoCo)
+#ifndef _OLDPTR
+#define _OLDPTR 45
+#endif
+#ifndef _oldptr
+#define _oldptr (*(unsigned*)_OLDPTR)
+#endif
+
+// TEMPORARY INPUT POINTER STORAGE (Compatible with CoCo)
+#ifndef _TINPTR
+#define _TINPTR 47
+#endif
+#ifndef _tinptr
+#define _tinptr (*(unsigned*)_TINPTR)
+#endif
+
+// PV 'DATA' STATEMENT LINE NUMBER POINTER (Compatible with CoCo)
+#ifndef _DATTXT
+#define _DATTXT 49
+#endif
+#ifndef _dattxt
+#define _dattxt (*(unsigned*)_DATTXT)
+#endif
+
+// PV 'DATA' STATEMENT ADDRESS POINTER (Compatible with CoCo)
+#ifndef _DATPTR
+#define _DATPTR 51
+#endif
+#ifndef _datptr
+#define _datptr (*(unsigned*)_DATPTR)
+#endif
+
+// DATA POINTER FOR 'INPUT' & 'READ' (Compatible with CoCo)
+#ifndef _DATTMP
+#define _DATTMP 53
+#endif
+#ifndef _dattmp
+#define _dattmp (*(unsigned*)_DATTMP)
+#endif
+
+// TV TEMP STORAGE FOR A VARIABLE NAME (Compatible with CoCo)
+#ifndef _VARNAM
+#define _VARNAM 55
+#endif
+#ifndef _varnam
+#define _varnam (*(unsigned*)_VARNAM)
+#endif
+
+// TV POINTER TO A VARIABLE DESCRIPTOR (Compatible with CoCo)
+#ifndef _VARPTR
+#define _VARPTR 57
+#endif
+#ifndef _varptr
+#define _varptr (*(unsigned*)_VARPTR)
+#endif
+
+// TEMP POINTER TO A VARIABLE DESCRIPTOR (Compatible with CoCo)
+#ifndef _VARDES
+#define _VARDES 59
+#endif
+#ifndef _vardes
+#define _vardes (*(unsigned*)_VARDES)
+#endif
+
 // PV CURRENT LINE # OF BASIC PROGRAM, $FFFF = DIRECT (Compatible with CoCo)
 #ifndef _CURLIN
 #define _CURLIN 104
@@ -69,6 +213,14 @@
 #endif
 #ifndef _snddur
 #define _snddur (*(unsigned*)_SNDDUR)
+#endif
+
+// LB4AA   *PV JUMP ADDRESS FOR EXEC COMMAND (Compatible with CoCo)
+#ifndef _EXECJP
+#define _EXECJP 157
+#endif
+#ifndef _execjp
+#define _execjp (*(unsigned*)_EXECJP)
 #endif
 
 // (Compatible with CoCo)
