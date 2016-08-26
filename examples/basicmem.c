@@ -1,5 +1,5 @@
 
-#pragma target dragon
+#pragma target coco
 
 #include <stdio.h>
 #include <equates.h>

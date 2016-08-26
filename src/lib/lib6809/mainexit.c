@@ -20,7 +20,7 @@ void _main(void)
 void exit(int status)
 {
     if (status) {
-        printf("exit status: %d\n", status);
+        printf("EXIT STATUS: %d\n", status);
     }
     //memset(0x2dd, 0, 250);
     asm {
