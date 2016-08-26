@@ -38,14 +38,13 @@ void DrawDemo(void)
 
 int main(void)
 {
-    ROM_OFF();
-
-    PMODE(3, 1);
+    PMODE(4, 1);
     PSECT(64);
-    PCLS(0);
     SCREEN(1, 1);
+    PCLS(1);
 
-    //_pmode = 3;
+    ROM_OFF();
+    _pmode = 3;
 
     DrawDemo();
 

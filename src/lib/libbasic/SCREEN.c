@@ -38,34 +38,5 @@ void SCREEN(int agr, int css)
     s[6] = '0' + (char)agr;
     s[8] = '0' + (char)css;
     system(s);
-    /*
-    if (agr) {
-        asm {
-            lda     _PIA1BD
-            ora     #128
-            sta     _PIA1BD
-        }
-    } else {
-        asm {
-            lda     _PIA1BD
-            anda    #127
-            sta     _PIA1BD
-        }
-    }
-    if (css) {
-        asm {
-            lda     _PIA1BD
-            ora     #8
-            sta     _PIA1BD
-        }
-    } else {
-        asm {
-            lda     _PIA1BD
-            anda    #247
-            sta     _PIA1BD
-        }
-    }
-    SCREENSETUP();
-    */
 }
 
