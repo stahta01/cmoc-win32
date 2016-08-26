@@ -1,18 +1,11 @@
 
-#include <basic.h>
-#include <string.h>
+#include <stdlib.h>
 
-void PCLS(byte c)
+void PCLS(unsigned char c)
 {
-    if (_pmode & 1) {
-        c &= 3;
-        c = (c << 6) | (c << 4) | (c << 2) | c;
-    } else {
-        if (c) {
-            c = 255;
-        }
-    }
-    memset((void*)_beggrp, c, _endgrp - _beggrp);
+    char s[] = "PCLS?";
+    s[4] = '0' + c;
+    system(s);
 }
 
 

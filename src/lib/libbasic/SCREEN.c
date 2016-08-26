@@ -34,6 +34,11 @@ void SCREENSETUP(void)
 
 void SCREEN(int agr, int css)
 {
+    char s[] = "SCREEN?,?";
+    s[6] = '0' + (char)agr;
+    s[8] = '0' + (char)css;
+    system(s);
+    /*
     if (agr) {
         asm {
             lda     _PIA1BD
@@ -61,5 +66,6 @@ void SCREEN(int agr, int css)
         }
     }
     SCREENSETUP();
+    */
 }
 

@@ -1,5 +1,5 @@
 
-#include "basicdefs.h"
+#include <basic.h>
 
 void PSECT(int sect)
 {
@@ -10,9 +10,10 @@ void PSECT(int sect)
 
 void PMODE(int mode, int page)
 {
-    _pmode = (byte)_min(_max(mode, 0), 4);
-    _horbyt = (_pmode == 0 || _pmode == 2) ? 16 : 32;
-    PSECT((page + 1) * 3);
+    char s[] = "PMODE?,?";
+    s[5] = '0' + (char)mode;
+    s[7] = '0' + (char)page;
+    system(s);
     CLIP(2, 2, 254, 190); // TODO: Set this correctly
 }
 
