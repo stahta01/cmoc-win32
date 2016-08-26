@@ -228,8 +228,14 @@ extern unsigned char conio_textcolor;
 extern unsigned char conio_bgcolor;
 extern unsigned char conio_bordercolorcolor;
 
+void cputdn(void);
+void cputup(void);
+void cputlt(void);
+void cputrt(void);
+void cputlf(void);
 
-/* End of conio.h */
+void cscrollup(void);
+
 #endif
 
 

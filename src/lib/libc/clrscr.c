@@ -1,8 +1,11 @@
 
-#include <stdlib.h>
+#include <conio.h>
+#include <string.h>
+#include <equates.h>
 
 void clrscr(void)
 {
-    system("CLS");
+    memset(_VIDRAM, 32, 32 * 16);
+    _curpos = _VIDRAM;
 }
 

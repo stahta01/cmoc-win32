@@ -1,6 +1,8 @@
 
 #include <conio.h>
+#include <string.h>
 #include <ctype.h>
+#include <equates.h>
 
 /*
 cgets reads a string of characters from the console, storing the string (and the string length)
@@ -15,30 +17,57 @@ read start at str[2] and end with a null terminator. Thus, str must be at least 
 char* cgets(char* s)
 {
     s += 2;
-    char* e = s;
+    s[0] = 0;
+    char* p = s;
     for (;;) {
-        cputc(128 + 5);
-        while (!kbhit()) {}
+        char cc = *(unsigned char*)_curpos;
+        while (!kbhit()) {
+            *(unsigned char*)_curpos = *(unsigned*)_TIMVAL & 16 ? cc | 64 : cc;
+        }
+        *(unsigned char*)_curpos = cc;
         char c = getch();
-        cputc(8);
-        if (c == 13) {
+        if (c == _CR) {
             break;
-        } else if (c == 8) {
-            if (e > s) {
-                e--;
-                cputc(8);
+        }
+        switch (c) {
+        case 94:
+            if (p > s) {
+                p--;
+                cputlt();
             }
-        } else {
-            if ((e - s) < ((unsigned)s[-2]) && isprint(c)) {
-                *e++ = c;
-                cputc(c);
+            break;
+        case 9:
+            if (*p) {
+                p++;
+                cputrt();
             }
+            break;
+        case _BS:
+            if (p > s) {
+                p--;
+                memmove(p, p + 1, strlen(p) + 1);
+                cputlt();
+                unsigned cp = _curpos;
+                cputs(p);
+                cputc(_SPACE);
+                _curpos = cp;
+            }
+            break;
+        default:
+            if (strlen(s) < ((unsigned)s[-2]) && _isprint(c)) {
+                memmove(p + 1, p, strlen(p) + 1);
+                *p = c;
+                unsigned cp = _curpos;
+                cputs(p);
+                _curpos = cp;
+                cputrt();
+                p++;
+            }
+            break;
         }
     }
-    *e = 0;
-    s[-1] = (char)(e - s);
+    *p = 0;
+    s[-1] = (char)strlen(s);
     return s;
 }
-
-
 
