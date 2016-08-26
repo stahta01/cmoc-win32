@@ -21,16 +21,11 @@ void DrawGraphics(void)
     ELLIPSE(128, 96, 70, 40, 3);
 }
 
-int main(void)
+#define ROM_OFF() asm("orcc", "#$50"); asm("sta", "$ffdf");
+#define ROM_ON() asm("sta", "$ffde"); asm("andcc", "#$af");
+
+void DrawDemo(void)
 {
-    PMODE(4, 1);
-    PCLS(0);
-    SCREEN(1, 1);
-
-    _pmode = 3;
-
-    unsigned start = TIMER();
-
     CLIP(2, 2, 128, 96);
     DrawGraphics();
     CLIP(128, 2, 254, 96);
@@ -39,8 +34,22 @@ int main(void)
     DrawGraphics();
     CLIP(128, 96, 254, 190);
     DrawGraphics();
+}
 
-    //printf("%d\n", TIMER() - start);
+int main(void)
+{
+    ROM_OFF();
+
+    PMODE(3, 1);
+    PSECT(64);
+    PCLS(0);
+    SCREEN(1, 1);
+
+    //_pmode = 3;
+
+    DrawDemo();
+
+    ROM_ON();
 
     while (!kbhit()) {
     }

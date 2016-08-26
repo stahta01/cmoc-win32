@@ -58,6 +58,7 @@ void SETCIRCLE(int x, int y, int r, byte c, bool fill);
 
 void SCREEN(int agr, int css);
 void PMODE(int mode, int page);
+void PSECT(int sect);
 
 void PCLS(byte c);
 
