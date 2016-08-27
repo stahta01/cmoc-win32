@@ -1,4 +1,4 @@
-@echo off
+call bat\setup
 
 set LIBDIR=..\..\..\lib\
 

@@ -10,7 +10,7 @@
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="26"/>
-        <CursorPos X="26" Y="37"/>
+        <CursorPos X="24" Y="37"/>
         <UsageCount Value="125"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -1355,22 +1355,22 @@
       <Unit188>
         <Filename Value="UCmocProcess_ASM.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="22"/>
-        <CursorPos X="42" Y="33"/>
+        <TopLine Value="31"/>
+        <CursorPos X="41" Y="33"/>
         <UsageCount Value="10"/>
       </Unit188>
       <Unit189>
         <Filename Value="UCmocProcess_TOOLS.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="145"/>
-        <CursorPos X="94" Y="161"/>
+        <TopLine Value="155"/>
+        <CursorPos X="40" Y="156"/>
         <UsageCount Value="10"/>
       </Unit189>
       <Unit190>
         <Filename Value="UCmocProcess_CMOC2.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="22"/>
-        <CursorPos X="41" Y="33"/>
+        <CursorPos X="35" Y="33"/>
         <UsageCount Value="10"/>
       </Unit190>
       <Unit191>
@@ -1465,7 +1465,7 @@
       </Position14>
       <Position15>
         <Filename Value="cmoc2.lpr"/>
-        <Caret Line="37" Column="26" TopLine="26"/>
+        <Caret Line="37" Column="24" TopLine="26"/>
       </Position15>
     </JumpHistory>
   </ProjectSession>

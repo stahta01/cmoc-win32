@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 #include <equates.h>
-#include <font.h>
+#include <charset.h>
 #include <conio.h>
 #include <ctype.h>
 
@@ -13,12 +13,12 @@ int main(void)
 {
     system("PMODE4,1");
     system("SCREEN1,0");
-    system("PCLS1");
+    system("PCLS0");
 
     _curpos = _beggrp;
 
     _conio.fontpack = 1;
-    _conio.fontdata = &font_atari_small;
+    _conio.fontdata = &charset_atari_small;
 
     char s[100];
     int i;

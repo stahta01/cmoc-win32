@@ -1,3 +1,5 @@
+call bat\setup
+
 ..\..\bin\cmoc2 -Werror -o ..\..\lib\libc.a libc\*.c
 
 del libc\*.o

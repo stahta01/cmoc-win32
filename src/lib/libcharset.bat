@@ -1,7 +1,7 @@
 call bat\setup
 
-cd libdragon || goto error
-..\..\..\bin\cmoc2 -t dragon -o ..\..\..\lib\libdragon.a *.c || goto error
+cd libcharset || goto error
+..\..\..\bin\cmoc2 -o ..\..\..\lib\libcharset.a *.c || goto error
 del *.c.i *.o *.asm *.asm.i
 cd ..
 

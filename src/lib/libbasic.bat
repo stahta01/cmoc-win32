@@ -1,4 +1,4 @@
-@echo off
+call bat\setup
 
 cd libbasic || goto error
 ..\..\..\bin\cmoc2 -o ..\..\..\lib\libbasic.a *.c || goto error

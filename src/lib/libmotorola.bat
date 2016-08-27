@@ -1,4 +1,4 @@
-@echo off
+call bat\setup
 
 cd libmotorola || goto error
 ..\..\..\bin\cmoc2 -o ..\..\..\lib\libmotorola.a *.c || goto error

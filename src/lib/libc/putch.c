@@ -25,7 +25,7 @@ char putch(char c)
             dst += _horbyt;
             *dst |= set;
             dst = (unsigned char*)_curpos;
-            unsigned char* src = _conio.fontdata + (((unsigned)c + _conio.fontbase) << 3);
+            unsigned char* src = _conio.fontdata + (((unsigned)(c - 32) + _conio.fontbase) << 3);
             *dst ^= *src++;
             dst += _horbyt;
             *dst ^= *src++;
