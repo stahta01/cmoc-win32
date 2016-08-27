@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="23">
+    <Units Count="28">
       <Unit0>
         <Filename Value="asmtoh.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -17,11 +17,10 @@
       <Unit1>
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="28"/>
         <CursorPos X="3" Y="39"/>
         <UsageCount Value="29"/>
-        <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\shared\ustringparser.pas"/>
@@ -151,152 +150,63 @@
       </Unit19>
       <Unit20>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\classes\classesh.inc"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="55"/>
         <CursorPos X="26" Y="65"/>
         <UsageCount Value="11"/>
-        <Loaded Value="True"/>
       </Unit20>
       <Unit21>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\types.pp"/>
         <UnitName Value="Types"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="109"/>
         <CursorPos X="27" Y="120"/>
         <UsageCount Value="11"/>
-        <Loaded Value="True"/>
       </Unit21>
       <Unit22>
         <Filename Value="..\shared\ucmocparser.pas"/>
         <UnitName Value="UCmocParser"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="17"/>
         <CursorPos X="15" Y="50"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit22>
+      <Unit23>
+        <Filename Value="..\..\lib\libc\bgcolor.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="19" Y="7"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="..\..\lib\libc\putch.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="31" Y="12"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="..\..\lib\libc\scrclr.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="50" Y="10"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="..\..\lib\libc\scrup.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="42" Y="16"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="..\..\lib\libc\backup\bgcolor.c.bak"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="6" Y="7"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit27>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
-      <Position1>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="126" Column="35" TopLine="116"/>
-      </Position1>
-      <Position2>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="105" Column="37" TopLine="104"/>
-      </Position2>
-      <Position3>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="42" Column="39" TopLine="29"/>
-      </Position3>
-      <Position4>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="46" Column="89" TopLine="33"/>
-      </Position4>
-      <Position5>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="107" Column="61" TopLine="94"/>
-      </Position5>
-      <Position6>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="116" Column="62" TopLine="98"/>
-      </Position6>
-      <Position7>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="39" Column="55" TopLine="36"/>
-      </Position7>
-      <Position8>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="40" Column="39" TopLine="32"/>
-      </Position8>
-      <Position9>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="159" Column="41" TopLine="147"/>
-      </Position9>
-      <Position10>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="192" Column="44" TopLine="177"/>
-      </Position10>
-      <Position11>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="46" Column="44" TopLine="42"/>
-      </Position11>
-      <Position12>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="187" Column="7" TopLine="180"/>
-      </Position12>
-      <Position13>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="55" Column="18" TopLine="37"/>
-      </Position13>
-      <Position14>
-        <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\classes\classesh.inc"/>
-        <Caret Line="772" Column="30" TopLine="763"/>
-      </Position14>
-      <Position15>
-        <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\classes\classesh.inc"/>
-        <Caret Line="65" Column="26" TopLine="55"/>
-      </Position15>
-      <Position16>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="114" Column="20" TopLine="101"/>
-      </Position16>
-      <Position17>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="89" Column="38" TopLine="77"/>
-      </Position17>
-      <Position18>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="104" Column="23" TopLine="87"/>
-      </Position18>
-      <Position19>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="128" Column="38" TopLine="119"/>
-      </Position19>
-      <Position20>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="99" Column="27" TopLine="89"/>
-      </Position20>
-      <Position21>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="94" Column="31" TopLine="92"/>
-      </Position21>
-      <Position22>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="153" Column="86" TopLine="141"/>
-      </Position22>
-      <Position23>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="162" Column="63" TopLine="151"/>
-      </Position23>
-      <Position24>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="172" Column="15" TopLine="164"/>
-      </Position24>
-      <Position25>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="173" Column="49" TopLine="161"/>
-      </Position25>
-      <Position26>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="184" Column="56" TopLine="174"/>
-      </Position26>
-      <Position27>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="232" Column="37" TopLine="213"/>
-      </Position27>
-      <Position28>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="91" Column="46" TopLine="78"/>
-      </Position28>
-      <Position29>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="92" Column="45" TopLine="78"/>
-      </Position29>
-      <Position30>
-        <Filename Value="asmtoh.lpr"/>
-        <Caret Line="27" Column="13" TopLine="16"/>
-      </Position30>
-    </JumpHistory>
+    <JumpHistory HistoryIndex="-1"/>
   </ProjectSession>
 </CONFIG>

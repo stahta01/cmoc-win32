@@ -153,6 +153,7 @@ typedef struct {
     unsigned char cursor;
     unsigned char revers;
     unsigned char bordercolor;
+    unsigned char bgcolor;
     unsigned char fontbase;
     unsigned char fontpack;
     unsigned char* fontdata;
@@ -168,6 +169,23 @@ void putlf(void);
 
 void scrclr(void); // Clear without moving cursor
 void scrup(void);
+
+#define MODE_T0_32X16 0
+#define MODE_T1_32X16 1
+#define MODE_L0_16X12 2
+#define MODE_L1_16X12 3
+#define MODE_L0_32X12 4
+#define MODE_L1_32X12 5
+#define MODE_M0_16X24 6
+#define MODE_M1_16X24 7
+#define MODE_M0_32X24 8
+#define MODE_M1_32X24 9
+#define MODE_H0_32X24 10
+#define MODE_H1_32X24 11
+#define MODE_H0_64X24 12
+#define MODE_H1_64X24 13
+
+void textmode(int newmode);
 
 #endif
 

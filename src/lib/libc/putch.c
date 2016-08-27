@@ -9,7 +9,7 @@ char putch(char c)
         if (isgrpram()) {
             unsigned char* dst = (unsigned char*)_curpos;
             unsigned char horbyt = _horbyt;
-            if (_bakcol) {
+            if (_conio.bgcolor) {
                 unsigned char bits = _conio.fontpack ? _conio.fontbase & 128 ? 0xF : 0xF0 : 0xFF;
                 *dst |= bits;
                 dst += horbyt;
