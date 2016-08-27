@@ -10,7 +10,7 @@ void scrup(void)
         if (isgrpram()) {
             unsigned line = (unsigned)_horbyt << 3;
             memmove((void*)_beggrp, (void*)(_beggrp + line), (_endgrp - _beggrp) - line);
-            memset((void*)(_endgrp - line), 255, line);
+            memset((void*)(_endgrp - line), _bakcol ? 255 : 0, line);
         }
     }
 }

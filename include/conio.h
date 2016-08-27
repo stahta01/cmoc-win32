@@ -32,130 +32,117 @@
 /*                                                                           */
 /*****************************************************************************/
 
-
-
-/*
-** This is the direct console interface for cc65. I do not like the function
-** names very much, but the first version started as a rewrite of Borland's
-** conio, and, even if the interface has changed, the names did not.
-**
-** The interface does direct screen I/O, so it is fast enough for most
-** programs. I did not implement text windows, since many applications do
-** not need them and should not pay for the additional overhead. It should
-** be easy to add text windows on a higher level if needed,
-**
-** Most routines do not check the parameters. This may be unfortunate but is
-** also related to speed. The coordinates are always 0/0 based.
-*/
-
-
+// This is the direct console interface for cmoc. I do not like the function
+// names very much, but the first version started as a rewrite of Borland's
+// conio, and, even if the interface has changed, the names did not.
+//
+// The interface does direct screen I/O, so it is fast enough for most
+// programs. I did not implement text windows, since many applications do
+// not need them and should not pay for the additional overhead. It should
+// be easy to add text windows on a higher level if needed,
+//
+// Most routines do not check the parameters. This may be unfortunate but is
+// also related to speed. The coordinates are always 0/0 based.
 
 #ifndef _CONIO_H
 #define _CONIO_H
 
 #include <stdarg.h>
 
-/*****************************************************************************/
-/*                                 Functions                                 */
-/*****************************************************************************/
-
+// Clear the whole screen and put the cursor into the top left corner
 void clrscr(void);
-/* Clear the whole screen and put the cursor into the top left corner */
 
+// Return true if there's a key waiting, return false if not
 unsigned char kbhit(void);
-/* Return true if there's a key waiting, return false if not */
 
-void __fastcall__ gotox(unsigned char x);
-/* Set the cursor to the specified X position, leave the Y position untouched */
+// Set the cursor to the specified X position, leave the Y position untouched
+void gotox(unsigned char x);
 
-void __fastcall__ gotoy(unsigned char y);
-/* Set the cursor to the specified Y position, leave the X position untouched */
+// Set the cursor to the specified Y position, leave the X position untouched
+void gotoy(unsigned char y);
 
-void __fastcall__ gotoxy(unsigned char x, unsigned char y);
-/* Set the cursor to the specified position */
+// Set the cursor to the specified position
+void gotoxy(unsigned char x, unsigned char y);
 
+// Return the X position of the cursor
 unsigned char wherex(void);
-/* Return the X position of the cursor */
 
+// Return the Y position of the cursor
 unsigned char wherey(void);
-/* Return the Y position of the cursor */
 
-void __fastcall__ cputc(char c);
-/* Output one character at the current cursor position */
+// Output one character at the current cursor position
+void cputc(char c);
 
-void __fastcall__ cputcxy(unsigned char x, unsigned char y, char c);
-/* Same as "gotoxy (x, y); cputc (c);" */
+// Same as "gotoxy (x, y); cputc (c);"
+void cputcxy(unsigned char x, unsigned char y, char c);
 
-void __fastcall__ cputs(const char* s);
-/* Output a NUL-terminated string at the current cursor position */
+// Output a NUL-terminated string at the current cursor position
+void cputs(const char* s);
 
-void __fastcall__ cputsxy(unsigned char x, unsigned char y, const char* s);
-/* Same as "gotoxy (x, y); puts (s);" */
+// Same as "gotoxy (x, y); puts (s);"
+void cputsxy(unsigned char x, unsigned char y, const char* s);
 
+// Like printf(), but uses direct screen output
 int cprintf(const char* format, ...);
-/* Like printf(), but uses direct screen output */
 
-int __fastcall__ vcprintf(const char* format, va_list ap);
-/* Like vprintf(), but uses direct screen output */
+// Like vprintf(), but uses direct screen output
+int vcprintf(const char* format, va_list ap);
 
+// Return a character from the keyboard. If there is no character available,
+// the function waits until the user does press a key. If cursor is set to
+// 1 (see below), a blinking cursor is displayed while waiting.
 char cgetc(void);
-/* Return a character from the keyboard. If there is no character available,
-** the function waits until the user does press a key. If cursor is set to
-** 1 (see below), a blinking cursor is displayed while waiting.
-*/
 
+// Like scanf(), but uses direct keyboard input
 int cscanf(const char* format, ...);
-/* Like scanf(), but uses direct keyboard input */
 
-int __fastcall__ vcscanf(const char* format, va_list ap);
-/* Like vscanf(), but uses direct keyboard input */
+// Like vscanf(), but uses direct keyboard input
+int vcscanf(const char* format, va_list ap);
 
-unsigned char __fastcall__ cursor(unsigned char onoff);
-/* If onoff is 1, a cursor is displayed when waiting for keyboard input. If
-** onoff is 0, the cursor is hidden when waiting for keyboard input. The
-** function returns the old cursor setting.
-*/
+// If onoff is 1, a cursor is displayed when waiting for keyboard input. If
+// onoff is 0, the cursor is hidden when waiting for keyboard input. The
+// function returns the old cursor setting.
+unsigned char cursor(unsigned char onoff);
 
-unsigned char __fastcall__ revers(unsigned char onoff);
-/* Enable/disable reverse character display. This may not be supported by
-** the output device. Return the old setting.
-*/
+// Enable/disable reverse character display. This may not be supported by
+// the output device. Return the old setting.
+unsigned char revers(unsigned char onoff);
 
-unsigned char __fastcall__ textcolor(unsigned char color);
-/* Set the color for text output. The old color setting is returned. */
+// Set the color for text output. The old color setting is returned.
+unsigned char textcolor(unsigned char color);
 
-unsigned char __fastcall__ bgcolor(unsigned char color);
-/* Set the color for the background. The old color setting is returned. */
+// Set the color for the background. The old color setting is returned.
+unsigned char bgcolor(unsigned char color);
 
-unsigned char __fastcall__ bordercolor(unsigned char color);
-/* Set the color for the border. The old color setting is returned. */
+// Set the color for the border. The old color setting is returned.
+unsigned char bordercolor(unsigned char color);
 
-void __fastcall__ chline(unsigned char length);
-/* Output a horizontal line with the given length starting at the current
-** cursor position.
-*/
+// Output a horizontal line with the given length starting at the current
+// cursor position.
+void chline(unsigned char length);
 
-void __fastcall__ chlinexy(unsigned char x, unsigned char y, unsigned char length);
-/* Same as "gotoxy (x, y); chline (length);" */
+// Same as "gotoxy (x, y); chline (length);"
+void chlinexy(unsigned char x, unsigned char y, unsigned char length);
 
-void __fastcall__ cvline(unsigned char length);
-/* Output a vertical line with the given length at the current cursor
-** position.
-*/
+// Output a vertical line with the given length at the current cursor
+// position.
+void cvline(unsigned char length);
 
-void __fastcall__ cvlinexy(unsigned char x, unsigned char y, unsigned char length);
-/* Same as "gotoxy (x, y); cvline (length);" */
+// Same as "gotoxy (x, y); cvline (length);"
+void cvlinexy(unsigned char x, unsigned char y, unsigned char length);
 
-void __fastcall__ cclear(unsigned char length);
-/* Clear part of a line (write length spaces). */
 
-void __fastcall__ cclearxy(unsigned char x, unsigned char y, unsigned char length);
-/* Same as "gotoxy (x, y); cclear (length);" */
+// Clear part of a line (write length spaces).
+void cclear(unsigned char length);
 
-void __fastcall__ screensize(unsigned char* x, unsigned char* y);
-/* Return the current screen size. */
+// Same as "gotoxy (x, y); cclear (length);"
+void cclearxy(unsigned char x, unsigned char y, unsigned char length);
 
-/* Non-standard. Added for CMOC */
+// Return the current screen size.
+void screensize(unsigned char* x, unsigned char* y);
+
+
+// Non-standard. Added for CMOC
 
 char* cgets(char* s);
 char getch(void);
@@ -165,9 +152,7 @@ char putch(char c);
 typedef struct {
     unsigned char cursor;
     unsigned char revers;
-    unsigned char bgcolor;
     unsigned char bordercolor;
-    unsigned char textcolor;
     unsigned char fontbase;
     unsigned char fontpack;
     unsigned char* fontdata;

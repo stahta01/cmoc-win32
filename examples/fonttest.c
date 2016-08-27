@@ -11,11 +11,12 @@
 
 int main(void)
 {
-    system("PMODE4,1");
-    system("SCREEN1,0");
-    system("PCLS0");
+    system("PMODE0,1");
+    system("SCREEN1,1");
+    system("PCLS1");
 
     _curpos = _beggrp;
+    bgcolor(1);
 
     _conio.fontpack = 1;
     _conio.fontdata = &charset_atari_small;
