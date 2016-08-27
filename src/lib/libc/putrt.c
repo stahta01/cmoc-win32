@@ -14,11 +14,10 @@ void putrt(void)
             if (!_conio.fontpack || _conio.fontbase & 128) {
                 _curpos++;
                 if ((_curpos & (_horbyt - 1)) == 0) {
-                    _curpos--;
-                    _curpos += _horbyt << 3;
+                    _curpos += ((unsigned)_horbyt << 3) - _horbyt;
                 }
                 if (!isgrpram()) {
-                    _curpos -= _horbyt << 3;
+                    _curpos -= (unsigned)_horbyt << 3;
                     scrup();
                 }
             }

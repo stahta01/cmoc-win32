@@ -1,6 +1,5 @@
 
-#include <conio.h>
-#include <equates.h>
+#include "_conio.h"
 
 char inkey();
 
@@ -23,12 +22,18 @@ char getch(void)
     } else    {
         if (_conio.cursor) {
             unsigned char timer = ((unsigned char*)_TIMVAL)[1];
-            unsigned char curchr = *(unsigned char*)_curpos;
-            do {
-                *(unsigned char*)_curpos = (((unsigned char*)_TIMVAL)[1] - timer) & 16 ? curchr : curchr ^ 64;
-                c = inkey();
-            } while (!c);
-            *(unsigned char*)_curpos = curchr;
+            if (isvidram()) {
+                unsigned char curchr = *(unsigned char*)_curpos;
+                do {
+                    *(unsigned char*)_curpos = (((unsigned char*)_TIMVAL)[1] - timer) & 16 ? curchr : curchr ^ 64;
+                    c = inkey();
+                } while (!c);
+                *(unsigned char*)_curpos = curchr;
+            } else {
+                do {
+                    c = inkey();
+                } while (!c);
+            }
         } else {
             do {
                 c = inkey();

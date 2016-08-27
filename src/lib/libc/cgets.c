@@ -42,26 +42,26 @@ char* cgets(char* s)
                 p--;
                 memmove(p, p + 1, strlen(p) + 1);
                 putlt();
-                unsigned cp = _curpos;
                 cputs(p);
-                putch(_SPACE);
-                _curpos = cp;
+                putch(' ');
+                for (int i = strlen(p) + 1; i-- > 0;) {
+                    putlt();
+                }
             }
             break;
         default:
             if (strlen(s) < ((unsigned)s[-2]) && _isprint(c)) {
                 memmove(p + 1, p, strlen(p) + 1);
                 *p = c;
-                unsigned cp = _curpos;
                 cputs(p);
-                _curpos = cp;
-                putrt();
+                for (int i = strlen(p) - 1; i-- > 0;) {
+                    putlt();
+                }
                 p++;
             }
             break;
         }
     }
-    *p = 0;
     s[-1] = (char)strlen(s);
     return s;
 }
