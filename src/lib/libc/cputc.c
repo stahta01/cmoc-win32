@@ -1,18 +1,17 @@
 
 #include <conio.h>
-#include <equates.h>
 
 void cputc(char c)
 {
     switch (c) {
-    case _BS:
-        cputlt();
+    case 8:
+        putlt();
         break;
     case 9:
-        cputrt();
+        putrt();
         break;
-    case _LF:
-        cputlf();
+    case 10:
+        putlf();
         break;
     default:
         putch(c);

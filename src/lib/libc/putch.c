@@ -5,7 +5,7 @@
 char putch(char c)
 {
     *(unsigned char*)_curpos = c & 63;
-    cputrt();
+    putrt();
     return c;
 }
 

@@ -2,11 +2,11 @@
 #include <conio.h>
 #include <equates.h>
 
-void cputdn(void)
+void putdn(void)
 {
     _curpos += 32;
     if (_curpos >= 1536) {
-        cscrollup();
+        scrup();
         _curpos -= 32;
     }
 }

@@ -172,13 +172,13 @@ typedef struct {
 
 extern _conio_t _conio;
 
-void cputdn(void);
-void cputup(void);
-void cputlt(void);
-void cputrt(void);
-void cputlf(void);
+void putdn(void);
+void putup(void);
+void putlt(void);
+void putrt(void);
+void putlf(void);
 
-void cscrollup(void);
+void scrup(void);
 
 #endif
 

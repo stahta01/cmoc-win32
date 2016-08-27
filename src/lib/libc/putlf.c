@@ -2,9 +2,9 @@
 #include <conio.h>
 #include <equates.h>
 
-void cputlf(void)
+void putlf(void)
 {
-    cputdn();
+    putdn();
     _curpos &= 0xffe0;
 }
 

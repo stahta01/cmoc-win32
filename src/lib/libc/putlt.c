@@ -2,11 +2,11 @@
 #include <conio.h>
 #include <equates.h>
 
-void cputup(void)
+void putlt(void)
 {
-    _curpos -= 32;
+    _curpos--;
     if (_curpos < _VIDRAM) {
-        _curpos += 32;
+        _curpos++;
     }
 }
 

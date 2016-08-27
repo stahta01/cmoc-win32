@@ -33,23 +33,23 @@ char* cgets(char* s)
         case 94:
             if (p > s) {
                 p--;
-                cputlt();
+                putlt();
             }
             break;
         case 9:
             if (*p) {
                 p++;
-                cputrt();
+                putrt();
             }
             break;
         case _BS:
             if (p > s) {
                 p--;
                 memmove(p, p + 1, strlen(p) + 1);
-                cputlt();
+                putlt();
                 unsigned cp = _curpos;
                 cputs(p);
-                cputc(_SPACE);
+                putch(_SPACE);
                 _curpos = cp;
             }
             break;
@@ -60,7 +60,7 @@ char* cgets(char* s)
                 unsigned cp = _curpos;
                 cputs(p);
                 _curpos = cp;
-                cputrt();
+                putrt();
                 p++;
             }
             break;
