@@ -1,9 +1,12 @@
+
 /*---------------------------------------------------------------------------*/
 /* memchr() - find a character in a buffer                                   */
 /*---------------------------------------------------------------------------*/
 
 #include <string.h>
 #include <stdlib.h>
+
+#undef memchr
 
 void* memchr(void* buf, int c, size_t count)
 {
@@ -20,4 +23,4 @@ void* memchr(void* buf, int c, size_t count)
     }
     return ((void*)p1);
 }
-
+

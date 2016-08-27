@@ -1,3 +1,6 @@
+
+#define memcmp __obsolete
+
 /*---------------------------------------------------------------------------*/
 /* memcmp() - compare characters in two buffers                              */
 /*---------------------------------------------------------------------------*/
@@ -24,4 +27,4 @@ int memcmp(void* buf1,  void* buf2, size_t count)
     }
     return (result);
 }
-
+

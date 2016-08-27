@@ -17,7 +17,7 @@ int main(void)
 
     for (;;)  {
         cputs("WELCOME TO...\n THE COLOR COMPUTER\n\n");
-        cputs("CONIO NOW HAS A TRUE CONSOLE\n");
+        cputs("CONIO NOW HAS TRUE CONSOLE\n");
         cputs("OUTPUT WITH A NEW LINE INPUT\n");
         cputs("PRESS UP TO MOVE CURSOR BACK\n");
         char s[100];

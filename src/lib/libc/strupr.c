@@ -1,3 +1,6 @@
+
+#define strupr __obsolete
+
 /*
 ** Al's FREE-C Runtime Library (2016)
 **

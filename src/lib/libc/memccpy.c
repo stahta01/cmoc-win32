@@ -1,7 +1,11 @@
+
 /*---------------------------------------------------------------------------*/
 /* memccpy() - copy characters from a buffer                                 */
 /*---------------------------------------------------------------------------*/
+
 #include <string.h>
+
+#undef memccpy
 
 void* memccpy(void* dest,  void* src, int c, unsigned int count)
 {

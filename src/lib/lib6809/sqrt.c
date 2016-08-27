@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 // Return SQUARE ROOT of argument
+
 int asm sqrt(int a)
 {
     asm {
@@ -27,6 +28,4 @@ int asm sqrt(int a)
         tfr     X,D         // Get result
     }
 }
-
-
 

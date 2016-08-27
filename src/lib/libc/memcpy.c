@@ -1,3 +1,6 @@
+
+#define memcmp __obsolete
+
 /*---------------------------------------------------------------------------*/
 /* memcpy() - copy characters from a buffer                                  */
 /*---------------------------------------------------------------------------*/
@@ -17,4 +20,4 @@ void* memcpy(void* dest, void* src, size_t count)
     }
     return (dest);
 }
-
+

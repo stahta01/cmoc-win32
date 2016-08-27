@@ -1,3 +1,6 @@
+
+#define memmove __obsolete
+
 /*---------------------------------------------------------------------------*/
 /* memmove() - move one buffer to another                                    */
 /*---------------------------------------------------------------------------*/
@@ -30,4 +33,4 @@ void* memmove(void* dest, void* src, size_t count)
     }
     return (dest);
 }
-
+
