@@ -1,0 +1,66 @@
+
+
+        GS_SIZE(2)       Kreider OS-9 C Library       GS_SIZE(2)
+
+
+        NNAAMMEE 
+
+             _gs_size - get file size
+
+        SSYYNNOOPPSSIISS 
+
+             long _gs_size(path)
+             int path;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             This function is used to determine the current size of the 
+             file opened on PATH, and returns this value to the calling 
+             function.  
+
+             If _p_a_t_h is invalid, this function returns -1 as its value 
+             and the error code is placed in the global variable _e_r_r_n_o.  
+
+        NNOOTTEE 
+
+             This call works only on RRBBFF devices.  
+
+        SSEEEE AALLSSOO 
+
+             I$GetStt system call - Microware Manual, getstat()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

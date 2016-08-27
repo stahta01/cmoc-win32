@@ -1,0 +1,132 @@
+
+
+        SETS(3C)         Kreider OS-9 C Library         SETS(3C)
+
+
+        NNAAMMEE 
+
+             allocset, addc2set, adds2set, rmfmset, smember, union,
+             sintersect, sdifference, copyset, dupset
+             
+             Set operations
+
+        SSYYNNOOPPSSIISS 
+
+             char *allocset(s, c)
+             char *s, *p;
+             
+             char *addc2set(s, c)
+             char *s c;
+             
+             char *adds2set(s, p)
+             char *s p;
+             
+             char *rmfrmset(s, c)
+             char *s, c;
+             
+             smember(s, c)
+             char *s, c;
+             
+             char *sunion(s1, s2)
+             char s1[], s2[];
+             
+             char *sintersect(s1, s2)
+             char s1[], s2[];
+             
+             char *sdifference(s1, s2)
+             char s1[], s2[];
+             
+             char *copyset(s1, s2)
+             char s1[], s2[];
+             
+             char *dupset(s)
+             char s[];
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             AALLLLOOCCSSEETT allocates memory for a set consisting of an array 
+             of 32 bytes (256 bits).  If successful, it returns a 
+             pointer to the set, or _n_u_l_l if not successful.  This array 
+             is then operated on with the following functions.  
+
+             AADDDDCC22SSEETT adds the character _c to the set _s.  No error is 
+             possible.  Adding a single character or any value in the 
+             range 0 - 255 decimal is the same as ORing the bit that 
+             corresponds to the numeric value of that character, i.e., 
+             adding a character 'A' to the set will set bit number $41, 
+             65 decimal.  
+
+             AADDDDSS22SSEETT adds the string _p to the set _s.  No error is 
+
+
+
+
+                                                                
+
+
+
+
+        SETS(3C)         Kreider OS-9 C Library         SETS(3C)
+
+
+             possible.  The string _p is added to the set in that same 
+             manner as AADDDDCC22SSEETT above, but the entire string of bits is 
+             added in a bit-by-bit progression.  
+
+             RRMMFFMMSSEETT removes character _c from the set _s.  Again, no 
+             error is possible.  Removing a character from the set 
+             amounts to ANDing the bit at the position corresponding to 
+             the numeric value of the character as in AADDDDCC22SSEETT above, 
+             but is the reverse procedure.  
+
+             SSMMEEMMBBEERR returns TRUE if character _c is a member of set _s, 
+             or returns FALSE if it is not a member.  
+
+             SSUUNNIIOONN merges a second set _s_2 into the first set _s_1.  
+
+             SSIINNTTEERRSSEECCTT returns any elements that only exist in both 
+             sets _s_1 and _s_2.  
+
+             SSDDIIFFFFEERREENNCCEE returns unigue elements of both sets that are 
+             in the first set, _s_1.  
+
+             CCOOPPYYSSEETT duplicates the second set, _s_2, into the first set, 
+             _s_1.  
+
+             DDUUPPSSEETT allocates memory for a new set, and then copies set 
+             _s into that memory area.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

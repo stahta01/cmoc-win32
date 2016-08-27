@@ -1,0 +1,66 @@
+
+
+        UNLINK(3S)       Kreider OS-9 C Library       UNLINK(3S)
+
+
+        NNAAMMEE 
+
+             unlink - remove a directory entry
+
+        SSYYNNOOPPSSIISS 
+
+             unlink(fname)
+             char *fname;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             UUNNLLIINNKK ddeelleetteess tthhee ddiirreeccttoorryy eennttrryy wwhhoossee nnaammee iiss ppooiinntteedd ttoo 
+             bbyy _f_n_a_m_e.  If the entry was the last link to the file, then 
+             the file itself is deleted and the disc space occupied made 
+             available for re-use.  If, however, the file is open or in 
+             any active task, the deletion of the actual file is delayed 
+             until the file is closed.  
+
+        DDIIAAGGNNOOSSTTIICCSS 
+
+             Zero is returned from a successful call, -1 if the file 
+             does not exist, if its directory is write-protected, the 
+             pathname cannot be searched or if the file itself is a 
+             non-empty directory or a device.  
+
+        SSEEEE AALLSSOO 
+
+             unlinkx(), OS-9 "kill" command
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

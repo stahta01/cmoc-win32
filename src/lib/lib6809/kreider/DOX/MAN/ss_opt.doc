@@ -1,0 +1,66 @@
+
+
+        SS_OPT(2)        Kreider OS-9 C Library        SS_OPT(2)
+
+
+        NNAAMMEE 
+
+             _ss_opt - set file descriptor options
+
+        SSYYNNOOPPSSIISS 
+
+             #include <sgstat.h>
+             
+             int _ss_opt(path, buffer)
+             int path;
+             struct sgbuf *buffer;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             SSSS_OOPPTT copies the buffer pointed to be _b_u_f_f_e_r into the 
+             options section of the path descriptor opened on _p_a_t_h.  
+
+             Generally, a program will fetch the options with the GGSS_OOPPTT 
+             function, change the desired values, and then update the 
+             path options with the SSSS_OOPPTT function.  The structure _s_g_b_u_f 
+             declared in SSGGSSTTAATT.HH provides a convenient means to access 
+             the individual option values.  
+
+             If the path is invalid, _ss_opt returns -1 and the 
+             appropriate error code is placed in _e_r_r_n_o.  
+
+        NNOOTTEE 
+
+             It is a common practice to preserve a copy of the original 
+             path descriptor options so a program can restore them prior 
+             to exiting.  The option changes take effect on the 
+             currently open path and any path created with the I$DUP 
+             system call.  
+
+        SSEEEE AALLSSOO 
+
+             I$SetStt system call - Microware Manual, _gs_opt().
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

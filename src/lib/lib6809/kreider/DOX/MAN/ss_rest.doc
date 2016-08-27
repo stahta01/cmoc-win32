@@ -1,0 +1,66 @@
+
+
+        SS_REST(2)       Kreider OS-9 C Library       SS_REST(2)
+
+
+        NNAAMMEE 
+
+             _ss_rest - restore disk drive head to track zero
+
+        SSYYNNOOPPSSIISS 
+
+             int _ss_rest(path)
+             int path;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             SSSS_RREESSTT causes an RRBBFF device to restore the disk head to 
+             track zero.  It is usually used prior to disk formatting 
+             and for error recovery.  
+
+             If an error occurs, the function returns -1 and the 
+             appropriate error code is placed in the global variable 
+             _e_r_r_n_o.  
+
+        SSEEEE AALLSSOO 
+
+             I$SetStt system call - Microware manual.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

@@ -1,0 +1,264 @@
+
+
+        STRINGS(3C)      Kreider OS-9 C Library      STRINGS(3C)
+
+
+        NNAAMMEE 
+
+             strcat, strucat, strncat, strcmp, strucmp, strncmp, strnucmp,
+             strcpy, strucpy, strncpy, strlen, strchr, strrchr, strpbrk,
+             strspn, strcspn, strtok, strclr, strend, reverse, pwcryp
+             index, rindex
+
+             String operations
+
+        SSYYNNOOPPSSIISS 
+
+             #include <string.h>
+
+             char *strcat (s1, s2)
+             char *s1, *s2;
+
+             char *strucat (s1, s2, n)
+             char *s1, *s2;
+             int n;
+
+             char *strncat (s1, s2, n)
+             char *s1, *s2
+             int n;
+
+             int strcmp (s1, s2)
+             char *s1, *s2;
+
+             char *strucmp (s1, s2)
+             char *s1, *s2;
+
+             int strncmp (s1, s2, n)
+             char *s1, *s2;
+             int n;
+
+             int strnucmp (s1, s2, n)
+             char *s1, s2;
+             int n;
+
+             char *strcpy (s1, s2)
+             char *s1, *s2;
+
+             char *strucpy (s1, s2)
+             char *s1, s2;
+
+             char strncpy (s1, s2, n)
+             char *s1, *s2;
+             int n;
+
+             int strlen (s)
+             char *s;
+
+             char *strchr (s, c)     /* aka index() */
+             char *s1;
+             int c;
+
+
+
+
+                                                                
+
+
+
+
+        STRINGS(3C)      Kreider OS-9 C Library      STRINGS(3C)
+
+
+             char *strrchr (s, c)    /* aka rindex() */
+             char *s1;
+             int c;
+
+             char *strpbrk (s1, s2)
+             char *s1, *s2;
+
+             int strspn (s1, s2)
+             char *s1, *s2;
+
+             int strcspn (s1, s2)
+             char *s1, *s2;
+
+             char *strtok (s1, s2)
+             char *s1, *s2;
+
+             char *strclr (s, c)
+             char *s;
+             int c;
+
+             char *strend (s)
+             char *s;
+
+             char *reverse (s)
+             char *s;
+
+             char *pwcryp (s)
+             char *s;
+
+             char *index(s, ch)
+             char *s, ch;
+
+             char *rindex(s, ch)
+             char *s, ch;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             The arguments _s_1, _s_2, and _s point to strings (arrays of 
+             characters terminated by a NULL character).  The functions 
+             SSTTRRCCAATT, SSTTRRUUCCAATT, SSTTRRNNCCAATT, SSTTRRCCPPYY, SSTTRRUUCCPPYY and SSTTRRNNCCPPYY all 
+             alter _s_1.  These functions do not check for overflow of the 
+             array pointed to by _s_1.  
+
+             SSTTRRCCAATT appends a copy of string _s_2 to the end of string 
+             _s_1.  SSTTRRNNCCAATT appends at most _n characters.  SSTTRRUUCCAATT is the 
+             same as SSTTRRCCAATT but makes all characters uppercase.  Each 
+             returns a pointer to the null-terminated result.  
+
+             SSTTRRCCMMPP compares its arguments and returns an integer less 
+             than, equal to, or greater than 0, according as _s_1 is 
+             lexicographically less than, equal to, or greater than _s_2.  
+             SSTTRRUUCCMMPP functions in the same way but makes all characters 
+             uppercase before comparing.  SSTTRRNNCCMMPP makes the same 
+             comparison but looks at at most _N characters.  SSTTRRNNUUCCMMPP is 
+
+
+
+
+                                                                
+
+
+
+
+        STRINGS(3C)      Kreider OS-9 C Library      STRINGS(3C)
+
+
+             the same except it makes all characters uppercase prior to 
+             the comparison.  
+
+             SSTTRRCCPPYY copies string _s_2 to _s_1, _s_t_o_p_p_i_n_g _a_f_t_e_r _t_h_e _n_u_l_l 
+             _c_h_a_r_a_c_t_e_r_s _h_a_s _b_e_e_n copied.  SSTTRRUUCCPPYY performs the same 
+             except all characters are made uppercase.  SSTTRRNNCCPPYY copies 
+             exactly _n characters, truncating _s_2 or adding nnuullll 
+             characters to _s_1 as necessary.  The result will not be 
+             null-terminated if the length of _s_2 is _n or more.  Each 
+             function returns _s_1.  
+
+             SSTTRRLLEENN returns the number of characters in _s, not including 
+             the terminating null characters.  
+
+             SSTTRRCCHHRR (SSTTRRRRCCHHRR) returns a pointer to the first (last) 
+             occurrence of character _c _i_n _s_t_r_i_n_g _s, or a nnuullll pointer if 
+             _c does not occur in the string.  The null character 
+             terminating a string is considered to be part of the 
+             string.  
+
+             SSTTRRPPBBRRKK returns a pointer to the first occurrence in string 
+             _s_1 of any character from _s_2, _o_r _a nnuullll pointer if no 
+             character from _s_2 exists in _s_1.  
+
+             SSTTRRSSPPNN (SSTTRRCCSSPPNN) rreettuurrnnss tthhee lleennggtthh ooff tthhee iinniittiiaall sseeggmmeenntt 
+             ooff ssttrriinngg _s_1 which consists entirely of characters from (or 
+             not from) string _s_2.  
+
+             SSTTRRTTOOKK considers the string _s_1 to consist of a sequence of 
+             zero or more text tokens separated by spans of one or more 
+             characters from the separator string _s_2.  The first call 
+             (with pointer _s_1 specified) returns a pointer to the first 
+             character of the first token, and will have written a null 
+             character into _s_1 immediately following the returned 
+             token.  the function keeps track of its position in the 
+             string between separate calls, so that subsequent calls 
+             (which must be made with the first argument a NULL pointer) 
+             will work through the string _s_1 immediately following that 
+             token.  In this way, subsequent calls will work through the 
+             string _s_1 until no tokens remain.  The separator string _s_2 
+             _m_a_y _b_e _d_i_f_f_e_r_e_n_t _f_r_o_m _c_a_l_l _t_o _c_a_l_l. _W_h_e_n _n_o _t_o_k_e_n _r_e_m_a_i_n_s 
+             _i_n _s_1, a nnuullll pointer is returned.  
+
+             SSTTRRCCLLRR sets at the most _c characters in string _s, but not 
+             including the null-terminator, to SPACES (Ox20).  
+
+             SSTTRREENNDD returns a pointer to the end of string _s.  
+
+             RREEVVEERRSSEE reverses the characters of string _s in memory and 
+             then returns _s.  
+
+             PPWWCCRRYYPP encrypts and returns string _s.  
+
+             IINNDDEEXX returns a pointer to the first occurance of _c_h in _s 
+
+
+
+
+                                                                
+
+
+
+
+        STRINGS(3C)      Kreider OS-9 C Library      STRINGS(3C)
+
+
+             or nnuullll if not found.  IINNDDEEXX is functionally the same as 
+             SSTTRRCCHHRR except _c_h is of type CHAR.  
+
+             RRIINNDDEEXX returns a pointer to the last occurance of _c_h in _s 
+             _o_r _N_U_L_L _i_f _n_o_t found.  RRIINNDDEEXX is functionally the same as 
+             SSTTRRRRCCHHRR except _c_h is of type CHAR.  
+
+             Both IINNDDEEXX and RRIINNDDEEXX are maintained for backward 
+             compatibility with older UNIX System V releases.  
+
+        NNOOTTEE 
+
+             For user convenience, all these functions are declared in 
+             the optional <string.h> header file.  
+
+        BBUUGGSS 
+
+             SSTTRRCCMMPP and SSTTRRNNCCMMPP use native character comparison, which 
+             is unsigned on some machines.  Thus, the sign of the value 
+             returned when one of the characters has its high order bit 
+             set is implementation-dependent.  
+
+             Character movement is performed differently in different 
+             implementations.  Thus, overlapping moves may yield 
+             surprises.  
+
+        CCAAVVEEAATTSS 
+
+             SSTTRRCCAATT and SSTTRRCCPPYY have no means of checking that the space 
+             provided is large enough.  It is the user's responsibility 
+             to ensure that string space does not overflow.  
+
+        SSEEEE AALLSSOO 
+
+             findstr()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

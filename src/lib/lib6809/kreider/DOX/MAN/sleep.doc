@@ -1,0 +1,66 @@
+
+
+        SLEEP(3C)        Kreider OS-9 C Library        SLEEP(3C)
+
+
+        NNAAMMEE 
+
+             sleep - stop execution for a time
+
+        SSYYNNOOPPSSIISS 
+
+             unsigned sleep (seconds);
+             unsigned seconds;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             The current process is stopped for the specified amount of 
+             time.  If _s_e_c_o_n_d_s is zero, the process will sleep for one 
+             time-slice (tick).  
+
+             The actual suspension time may be different than that 
+             requested if a wake-up signal is received before the sleep 
+             timer ends.  
+
+        SSEEEE AALLSSOO 
+
+             tsleep()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

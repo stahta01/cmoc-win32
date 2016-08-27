@@ -1,0 +1,28 @@
+.so header
+.tl /SYSTEM(3C)/Kreider OS-9 C Library/SYSTEM(3C)/
+.sh NAME
+.bb
+system - issue a shell command
+.eb
+.sh SYNOPSIS
+.bb
+system (string);
+char *string;
+.eb
+.sh DESCRIPTION
+.db
+.bo
+SYSTEM passes its argument to SHELL which executes it as a command line.
+The current process is suspended until the shell command is completed and
+.bo
+SYSTEM
+returns the shell's exit status.  The maximum length of a string is 80
+characters, including the command and any parameters.  If a longer string
+is needed, use
+.bo
+OS9Fork.
+.ed
+.sh SEE ALSO
+.bb
+os9fork(), wait(), chain().
+.eb

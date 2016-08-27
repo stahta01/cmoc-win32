@@ -1,0 +1,66 @@
+
+
+        WRITE(3S)        Kreider OS-9 C Library        WRITE(3S)
+
+
+        NNAAMMEE 
+
+             write, writeln - write to a file or device
+
+        SSYYNNOOPPSSIISS 
+
+             write(pn, buffer, count)
+             char *buffer;
+             int pn, count;
+
+             writeln(pn, buffer, count)
+             char *buffer
+             int pn, count;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             WWRRIITTEE and WWRRIITTEELLNN write to the path number _p_n which must be 
+             a value returned by _o_p_e_n(), _c_r_e_a_t_e(), _c_r_e_a_t(), or _d_u_p(), or 
+             should be 0 (stdin), 1 (stdout), or 2 (stderr).  
+
+             _B_u_f_f_e_r should point to an area of memory from which _c_o_u_n_t 
+             bytes are to be written.  Write returns the actual number 
+             of bytes written and if this is different from _c_o_u_n_t, an 
+             error has occured.  
+
+             Writes in multiples of 256 bytes to a file offset boundries 
+             of 256 bytes are the most efficient.  
+
+             WWRRIITTEE ccaauusseess nnoo "lliinnee-eeddiittiinngg" ttoo ooccccuurr oonn tthhee oouuttppuutt.  
+             WWRRIITTEELLNN causes line-editing and only writes up to the first 
+             "\n" (newline) in the buffer if this is found before _c_o_u_n_t 
+             is exhausted.  For a full description of the actions of 
+             these calls, the reader is referred to the OS-9 
+             documentation.  
+
+        DDIIAAGGNNOOSSTTIICCSS 
+
+             A -1 is returned if _p_n is a bad path number, if _c_o_u_n_t is 
+             ridiculous, or upon a physical I/O error.  
+
+        SSEEEE AALLSSOO 
+
+             create(), creat(), dup(), open()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

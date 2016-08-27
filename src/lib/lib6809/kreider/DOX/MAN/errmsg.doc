@@ -1,0 +1,66 @@
+
+
+        _ERRMSG(3C)      Kreider OS-9 C Library      _ERRMSG(3C)
+
+
+        NNAAMMEE 
+
+             _errmsg() - Print an error message
+
+        SSYYNNOOPPSSIISS 
+
+             int _errmsg(nerr, msg[,arg1, arg2, arg3])
+             int nerr;
+             char *msg;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             This function displays an error message on the standard 
+             error path along with the name of the program.  The message 
+             string _m_s_g is displayed in the following format: 
+
+                  prog: <message text> 
+
+             Note: _P_r_o_g is the module name of the program and <mmeessssaaggee 
+             tteexxtt> is the string passed as _m_s_g.  
+
+             For added flexibility in the message printing, the _m_s_g 
+             string can be a conversion string suitable for _p_r_i_n_t_f() 
+             with up to 3 additional arguments of any type.  The 
+             argument _n_e_r_r is returned as the value of the functions so 
+             __e_r_r_m_s_g can be used as a parameter to a function such as 
+             _e_x_i_t() or _p_r_e_r_r().  
+
+        EEXXAAMMPPLLEE 
+
+             Assume the program calling the function is named "foobar":
+
+             Call:   _errmsg(1,"programmed message");
+             Prints: foobar: programmed message
+
+             Call:   exit(_errmsg(errno,"unknown option '%c'",'q'));
+             Prints: foobar: unknown option 'q'
+
+             Then exits with the error code in errno.
+
+        SSEEEE AALLSSOO 
+
+             printf(), _prgname().
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

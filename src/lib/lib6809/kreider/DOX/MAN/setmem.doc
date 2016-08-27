@@ -1,0 +1,66 @@
+
+
+        SETMEM(3C)       Kreider OS-9 C Library       SETMEM(3C)
+
+
+        NNAAMMEE 
+
+             setmem - Fills memory with a character
+
+        SSYYNNOOPPSSIISS 
+
+             setmem(start, count, fill)
+             char *start
+             int count
+             char fill
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             SSEETTMMEEMM fills _c_o_u_n_t bytes of memory beginning at the 
+             location pointed to by _s_t_a_r_t with the AASSCCIIII character 
+             contained in _f_i_l_l.  
+
+             No value is returned making this a type VOID function.  
+
+        EEXXAAMMPPLLEE 
+
+             /* Initialize an 80 character string to all NULLS */
+             
+             count = 80;
+             fill = '0x00'
+             
+             setmem(start, count, fill)
+
+        SSEEEE AALLSSOO 
+
+             memset()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

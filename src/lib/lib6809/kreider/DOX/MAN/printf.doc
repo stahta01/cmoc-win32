@@ -1,0 +1,264 @@
+
+
+        PRINTF(3C)       Kreider OS-9 C Library       PRINTF(3C)
+
+
+        NNAAMMEE 
+
+             printf, fprintf, sprintf - formatted output conversion
+
+        SSYYNNOOPPSSIISS 
+
+             #include <stdio.h>
+
+             printf(format [,arg ] ... )
+             char *format;
+
+             fprintf(fp, format [,arg ] ... )
+             FILE  *fp;
+             char *format;
+
+             sprintf(s, format [,arg ] ... )
+             char *s, *format;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             These three functions are used to place numbers and strings 
+             in the output into formatted, human readable form.  
+
+             The PPRRIINNTTFF subroutine places output on the standard output 
+             stream _s_t_d_o_u_t.  The FFPPRRIINNTTFF subroutine places output on the 
+             named output _f_p.  Note that the file pointer _f_p may be 0, 
+             1, or 2 corresponding to stdin, stdout, and stderr or any 
+             valid pointer as returned by _f_o_p_e_n(), _c_r_e_a_t(), _c_r_e_a_t_e(), or 
+             _d_u_p().  The SSPPRRIINNTTFF subroutine places output in the string 
+             _s, followed by the character `\0' (NULL). NOTE: It is the 
+             programmers responsibility to insure that string _s is large 
+             enough to hold the output of SSPPRRIINNTTFF.  
+
+             Each of these functions converts, formats, and prints its 
+             arguments after the first under control of the _f_o_r_m_a_t 
+             argument.  The _f_o_r_m_a_t argument is a character string which 
+             contains two types of objects: plain characters, which are 
+             simply copied to the output stream, and conversion 
+             specifications.  Each of these cause conversion and 
+             printing of the next successive _a_r_g.  
+
+             Following is the order in which a PPRRIINNTTFF conversion 
+             specification is presented: 
+
+                  % [-] [field_width] [.] [num_to_print] [len] conv_char
+
+             This order must be followed.  Any of the optional (enclosed 
+             in brackets) conversion specifications may be omitted but, 
+             the order must remain the same.  A period must appear 
+             before the "nbr of chars to print" or PPRRIINNTTFF will interpret 
+             the number to be the field width specification.  
+
+
+
+
+
+
+
+                                                                
+
+
+
+
+        PRINTF(3C)       Kreider OS-9 C Library       PRINTF(3C)
+
+
+             Each conversion specification is introduced by the percent 
+             sign character (%).  Following the %, there may be: 
+
+                  Zero or more flags, which modify the meaning of the 
+                  conversion specification.  If the character following 
+                  the '%' is not a conversion character, that character 
+                  is printed literally.  The first uninterpretable 
+                  character ends the conversion string.  
+
+                  An optional minus sign (-) which specifies left 
+                  adjustment of the converted value in the indicated 
+                  field.  
+
+                  An optional digit string specifying a field width.  
+                  The field will be at least this wide and may be wider 
+                  if the conversion requires it.  If the converted value 
+                  has fewer characters than the field width, it is 
+                  blank-padded on the left (or right, if the 
+                  left-adjustment indicator has been given) to make up 
+                  the field width.  If the field width digit string 
+                  begins with a zero, zero-padding occurs instead of 
+                  blank-padding.  
+
+                  An optional period (.) which serves to separate the 
+                  field width from the next digit string.  
+
+                  An optional digit string specifying a precision which 
+                  specifies the number of digits to appear after the 
+                  radix character, for _e and _f conversions, or the 
+                  maximum number of characters to be printed from a 
+                  string.  
+
+                  The character _l (lowercase 'l' (ell)) specifying that 
+                  a following _d, _o, _x, _X, or _u corresponds to a long 
+                  integer _a_r_g .  
+
+                  A character which indicates the type of conversion to 
+                  be applied.  
+
+             A field width or precision may be an asterisk (*) instead 
+             of a digit string.  In this case an integer _a_r_g supplies 
+             the field width or precision.  
+
+             The flag characters and their meanings are: 
+
+                  - : The result of the conversion is left-justified 
+                  within the field.  
+
+                  + : The result of a signed conversion always begins 
+                  with a sign (+ or -).  
+
+                  blank : If the first character of a signed conversion 
+                  is not a sign, a blank is prepended to the result.  
+                  This implies that if the blank and plus sign (+) flags 
+
+
+
+
+                                                                
+
+
+
+
+        PRINTF(3C)       Kreider OS-9 C Library       PRINTF(3C)
+
+
+                  both appear, the blank flag is ignored.  
+
+                  # : The value is to be converted to an alternative 
+                  form.  For _c, _d, _s, and _u conversions, the flag has no 
+                  effect.  For _o conversions, it increases the precision 
+                  to force the first digit of the result to be a zero.  
+                  For _x or _X conversions, a non-zero result has 0x or 0X 
+                  prepended to it.  For _e, _E, _f, _g, and _G conversions, 
+                  the result always contains a decimal point, even if no 
+                  digits follow the point.  A decimal point usually 
+                  appears in the result of these conversions only if a 
+                  digit follows it.  For _g and _G conversions, trailing 
+                  zeroes are not removed from the result.  
+
+             The conversion characters and their meanings are 
+
+                  d, o, x - The integer _a_r_g is converted to decimal, 
+                  octal, or hexadecimal notation respectively.  
+
+                  f - The float or double _a_r_g is converted to decimal 
+                  notation in the style `[-]ddd.ddd' where the number of 
+                  d's after the decimal point is equal to the precision 
+                  specification for the argument.  If the precision is 
+                  missing, 6 digits are given; if the precision is 
+                  explicitly 0, no decimal point and following 
+                  characters are printed.  
+
+                  e, E - The float or double _a_r_g is converted in the 
+                  style `[-]d.ddde(+-)dd' where there is one digit 
+                  before the decimal point and the number after is equal 
+                  to the precision specification for the argument; when 
+                  the precision is missing, 6 digits are produced.  When 
+                  the argument is _E, the results are printed in 
+                  uppercase characters.  
+
+                  g, G - The float or double arg is printed in style d , 
+                  in style f , or in style e.  The style used depends on 
+                  the value converted and the shortest is printed.  
+                  Style _e is used only if the exponent resulting from 
+                  the conversion is less than 4 or greater than the 
+                  precision.  Trailing zeroes are removed from the 
+                  result.  A decimal point appears only if it is 
+                  followed by a digit.  If the _G form is used, the 
+                  output is printed in uppercase characters.  
+
+                  c - The character _a_r_g is printed.  
+
+                  s - The _a_r_g is taken to be a string (character 
+                  pointer) and characters from the string are printed 
+                  until a null character or the number of characters 
+                  indicated by the precision specification is reached; 
+                  however if the precision is 0 or missing all 
+                  characters up to a null are printed.  
+
+
+
+
+
+                                                                
+
+
+
+
+        PRINTF(3C)       Kreider OS-9 C Library       PRINTF(3C)
+
+
+                  u - The unsigned integer _a_r_g is converted to decimal 
+                  and printed.  The result is in the range 0 through 
+                  65535 (for 6809/OS-9 only) or whatever the maximum 
+                  integer size is on the system.  
+
+                  % - Print a `%'; no argument is converted.  
+
+             A non-existent or small field width never causes truncation 
+             of a field.  Padding takes place only if the specified 
+             field width exceeds the actual width.  Characters generated 
+             by PPRRIINNTTFF are printed by _p_u_t_c().  
+
+             In the case of double or float conversions, the last digit 
+             printed is rounded.  
+
+        CCAAVVEEAATTSS 
+
+             In the ULTRIX-32 environment, PPRRIINNTTFF and FFPPRRIINNTTFF return 0 
+             for success and EOF for failure.  The SSPPRRIINNTTFF subroutine 
+             returns its first argument for success and EOF for 
+             failure.  
+
+             In the System V environment, PPRRIINNTTFF, FFPPRRIINNTTFF, and SSPPRRIINNTTFF 
+             subroutines return the number of characters transmitted, 
+             not including the \0 in the case of SSPPRRIINNTTFF or a negative 
+             value if an output error was encountered.  
+
+             Within the OS-9 environment, in order to print long 
+             integers, the statement _p_f_l_i_n_i_t() must occur somewhere in 
+             the source code in order for the routines to print longs to 
+             be linked from the standard library.  In addition, to print 
+             floats or double integers, the statement _p_f_f_i_n_i_t() must 
+             occur somewhere in the source code.  Normally, either one 
+             or both of these statements are placed at the start of the 
+             source code file where printing of longs, floats, or 
+             doubles is required.  
+
+        SSEEEE AALLSSOO 
+
+             putc(), scanf()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

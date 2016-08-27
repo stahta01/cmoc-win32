@@ -1,0 +1,66 @@
+
+
+        _DUMP(3C)        Kreider OS-9 C Library        _DUMP(3C)
+
+
+        NNAAMMEE 
+
+             _dump - Dumps memory to standard output.
+
+        SSYYNNOOPPSSIISS 
+
+             void _dump(s, addr, count)
+             int count;
+             char *s, *addr;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             DDUUMMPP is used mostly as a debugging function.  It prints the 
+             title _s and then, starting at the memory address pointed to 
+             by _a_d_d_r, dumps at the most _c_o_u_n_t bytes to standard output.  
+
+        NNOOTTEE 
+
+             Care must be taken to insure the variable _c_o_u_n_t is not too 
+             large, else the memory dump will take a very long time.  
+             Also, the dump is formatted similar to the standard OS9 
+             dump utility.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

@@ -1,0 +1,132 @@
+
+
+        SETJMP(3C)       Kreider OS-9 C Library       SETJMP(3C)
+
+
+        NNAAMMEE 
+
+             setjmp, longjmp - nonlocal goto another function
+
+        SSYYNNOOPPSSIISS 
+
+             #include <setjmp.h>
+
+             setjmp(env)
+             jmp_buf env;
+
+             longjmp(env, val)
+             jmp_buf env;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             These routines are useful for dealing with errors and 
+             interrupts encountered in a low-level subroutine of a 
+             program.  
+
+             _G_o_t_o in C has a scope only in the function in which it is 
+             used; i.e., the label which is the object of the _g_o_t_o may 
+             only be in the same function.  Control can only be 
+             transferred elsewhere by means of the function call, which, 
+             fo course, returns to the caller.  In certain abnormal 
+             situations a programmer would perfer to be able to start 
+             some section of code again, but this would mean returning 
+             up a ladder of function calls with error indications all 
+             the way.  
+
+             SSEETTJJMMPP is used to "mark" a point in the program where a 
+             subsequent LLOONNGGJJMMPP can reach.  It places in the buffer, 
+             defined in the header file SSEETTJJMMPP.HH, enough information for 
+             the LLOONNGGJJMMPP to restore the environment to that existing at 
+             the time SSEETTJJMMPP is called.  
+
+             The SSEETTJJMMPP subroutine saves its stack environment in _e_n_v 
+             for later use by LLOONNGGJJMMPP.  It returns value 0.  
+
+             The LLOONNGGJJMMPP subroutine restores the environment saved by 
+             the last call of SSEETTJJMMPP .  It then returns in such a way 
+             that execution continues as if the call of SSEETTJJMMPP had just 
+             returned the value _v_a_l to the function that invoked SSEETTJJMMPP, 
+             which must not itself have returned in the interim.  
+             However, LLOONNGGJJMMPP cannot cause SSEETTJJMMPP to return the value 0. 
+             If LLOONNGGJJMMPP is invoked with a _v_a_l of 0, SSEETTJJMMPP will return 
+             1.  All accessible data have values as of the time LLOONNGGJJMMPP 
+             was called.  
+
+        CCAAVVEEAATTSS 
+
+             The SSEETTJJMMPP subroutine does not save current notion of 
+             whether the process is executing as a result of a signal.  
+             The result is that a LONGJMP to some place as a result of a 
+
+
+
+
+                                                                
+
+
+
+
+        SETJMP(3C)       Kreider OS-9 C Library       SETJMP(3C)
+
+
+             signal leaves the signal state incorrect.  
+
+             In addition, the variable _e_n_v MUST be globally declared.  
+
+        DDIIAAGGNNOOSSTTIICCSS 
+
+             SSEETTJJMMPP returns a zero (0) if the call is the the first made 
+             in the current program run.  If a one (1) is returned, then 
+             it must be a LLOONNGGJJMMPP returning from some deeper level in 
+             the program.  
+
+        SSEEEE AALLSSOO 
+
+             signal(), intercept()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

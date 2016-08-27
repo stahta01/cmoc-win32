@@ -1,0 +1,66 @@
+
+
+        INTERCEPT(3S)    Kreider OS-9 C Library    INTERCEPT(3S)
+
+
+        NNAAMMEE 
+
+             intercept - set a function for interrupt processing
+
+        SSYYNNOOPPSSIISS 
+
+             intercept(func)
+             int (*func)();
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             IINNTTEERRCCEEPPTT instructs OS-9 to pass control of the process to 
+             the function _f_u_n_c when an interrupt (signal) is received.  
+             If the interrupt processing function has an argument, it 
+             will contain the value of the signal received.  On return 
+             from _f_u_n_c, the process resumes at the point in the program 
+             where it was interrupted by the signal.  IINNTTEERRRRUUPPTT is an 
+             alternate to the use of _s_i_g_n_a_l() to process interrupts.  
+
+             As an example, suppose we wish to ensure that a partially 
+             completed output file is deleted if an interrupt is 
+             received.  The body of the program might include: 
+
+                  char *temp_file = "temp";
+                  int pn = 0;
+                  int intrupt();
+
+                  intercept(intrupt);
+                  pn = creat(temp_file, 3);
+                  write(pn, string, count);
+                  close(pn);
+                  pn = 0;
+
+                  The interrupt routine might be:
+
+                  intrupt(sig)
+                  {
+                      if (pn) {
+                          close(pn);
+                          unlink(temp_file);
+                      }
+                      exit(sig);
+                  }
+
+
+        CCAAVVEEAATTSS 
+
+             IInntteerrcceepptt() and _s_i_g_n_a_l() are mutually incompatible so that 
+             calls to both must not appear in the same program.  The 
+             linker guards against this by giving an "entry name clash - 
+             sigint" error if it is attempted.  
+
+
+
+
+
+
+
+                                                                
+
+

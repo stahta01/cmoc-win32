@@ -1,0 +1,66 @@
+
+
+        SKIPBL(3C)       Kreider OS-9 C Library       SKIPBL(3C)
+
+
+        NNAAMMEE 
+
+             skipbl - Skips spaces and tabs within a string
+
+        SSYYNNOOPPSSIISS 
+
+             char *skipbl(s)
+             char *s
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             SSKKIIPPBBLL skips over all spaces (0x20) and tabs (0x09) in a 
+             string and returns an updated pointer to the next non-blank 
+             character.  
+
+             Since the function returns a pointer, is must be declared 
+             prior to calling as a type CHAR function.  
+
+        EEXXAAMMPPLLEE 
+
+             Before entering, the pointer is positioned as:
+             
+                  Now    is    the    time
+                     ^
+             
+             skipbl("Now    is    the    time")
+             
+             returns the pointer as:
+             
+                  Now    is    the    time
+                         ^
+
+        SSEEEE AALLSSOO 
+
+             skipwd()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

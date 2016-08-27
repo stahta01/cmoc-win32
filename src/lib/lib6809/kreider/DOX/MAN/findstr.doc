@@ -1,0 +1,66 @@
+
+
+        FINDSTR(3C)      Kreider OS-9 C Library      FINDSTR(3C)
+
+
+        NNAAMMEE 
+
+             findstr, findnstr - string search
+
+        SSYYNNOOPPSSIISS 
+
+             findstr(pos, string, pattern)
+             char *string, *pattern;
+             int pos;
+
+             findnstr(pos, string, pattern, len)
+             char *string, *pattern;
+             int pos, len;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             These functions search the string pointed to by _s_t_r_i_n_g for 
+             the first instance of the pattern pointed to by _p_a_t_t_e_r_n 
+             starting at position _p_o_s (where the first position in a 
+             string is 1 not 0). The returned value is the position of 
+             the first matched character of the pattern in the string, 
+             or zero if a match is not found.  
+
+             FFIINNDDSSTTRR stops searching the string when a null byte is 
+             found.  
+
+             FFIINNDDNNSSTTRR only stops searching at position _p_o_s + _l_e_n so it 
+             may continue past nulls.  
+
+        CCAAVVEEAATTSS 
+
+             The current implementation does not use the most efficient 
+             algorithm for pattern matching so use on very long strings 
+             is likely to be somewhat slow.  
+
+        SSEEEE AALLSSOO 
+
+             patmatch(), index(), rindex(), strchr(), strrchr()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

@@ -1,0 +1,198 @@
+
+
+        CTIME(3C)        Kreider OS-9 C Library        CTIME(3C)
+
+
+        NNAAMMEE 
+
+             ctime, localtime, gmtime, asctime, tzset - convert date and time
+
+        SSYYNNOOPPSSIISS 
+
+             #include <utime.h>
+
+             *ctime (clock)
+             long *clock;
+
+             *localtime (clock)
+             long *clock;
+
+             *asctime (tm)
+             struct tm *tm;
+
+             extern long timezone;  /* used here for compatibility only */
+
+             extern int daylight;
+
+             void tzset()
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             CCTTIIMMEE converts a long integer, pointed to by _c_l_o_c_k, 
+             representing the time in seconds since 00:00:00, January 1, 
+             1970, and returns a pointer to a 26-character string in the 
+             following form: 
+
+                  Sun Sep 16 01:03:52 1973\n\0 
+
+             The TTIIMMEE function is ideally suited to return the long 
+             interger time value.  
+
+             LLOOCCAALLTTIIMMEE returns a pointer to the _t_m structure.  
+
+             AASSCCTTIIMMEE converts a _t_m structure to a 26-character string, 
+             as shown in the above example, and returns a pointer to the 
+             string.  
+
+             For user convience, declarations of all the functions and 
+             the externals, and the _t_m structure, are provided in the 
+             <utime.h> header file, shown on the next page.  
+
+             The external long variable _t_i_m_e_z_o_n_e is always zero.  
+
+        EEXXAAMMPPLLEE 
+
+             To print the current time:
+
+
+
+
+
+
+
+
+                                                                
+
+
+
+
+        CTIME(3C)        Kreider OS-9 C Library        CTIME(3C)
+
+
+             long curr_time;
+             curr_time = time ((long *)0);
+             printf ("The time is: %s", ctime(&curr_time));
+
+        BBUUGGSS 
+
+             The return values point to static data whose content is 
+             overwritten by each call.  
+
+        SSEEEE AALLSSOO 
+
+             time(), o2utime(), u2otime()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+
+
+
+        CTIME(3C)        Kreider OS-9 C Library        CTIME(3C)
+
+
+             /*
+             **      Utime.h
+             */
+             
+             struct tm {
+                   int   tm_sec;       /* seconds (0 - 59)         */
+                   int   tm_min;       /* minutes (0 - 59)         */
+                   int   tm_hour;      /* hours   (0 - 23)         */
+                   int   tm_mday;      /* day of month (1 - 31)    */
+                   int   tm_mon;       /* month of year (0 - 11)   */
+                   int   tm_year;      /* year ( year - 1900)      */
+                   int   tm_wday;      /* day of week (Sunday = 0) */
+                   int   tm_yday;      /* day of year (0 - 365)    */
+                   int   tm_isdst;     /* NOT USED                 */
+                   };
+             
+             long        time();       /* Same as UNIX */
+             struct tm   *localtime(); /* Same as UNIX */
+             char        *asctime();   /* Same as UNIX */
+             char        *ctime();     /* Same as UNIX */
+             
+             long        osutime();    /* Convert OS9 style buf to UNIX long */
+             /* void */  u2otime();    /* Convert 'tm' to OS9 char *buf */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

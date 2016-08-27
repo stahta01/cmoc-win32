@@ -1,0 +1,66 @@
+
+
+        REALLOC(3C)      Kreider OS-9 C Library      REALLOC(3C)
+
+
+        NNAAMMEE 
+
+             realloc - changes memory allocated by malloc()
+
+        SSYYNNOOPPSSIISS 
+
+             char realloc(p, size)
+             char *p;
+             int size;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             RREEAALLLLOOCC takes a pointer such as that returned by MMAALLLLOOCC and 
+             changes the size of the object.  If the pointer argument is 
+             _n_u_l_l, RREEAALLLLOOCC degenerates into a MMAALLLLOOCC.  
+
+        SSEEEE AALLSSOO 
+
+             malloc() (Microware Manual)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

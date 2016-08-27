@@ -1,0 +1,66 @@
+
+
+        ferror(3C)       Kreider OS-9 C Library       ferror(3C)
+
+
+        NNAAMMEE 
+
+             ferror, feof, clearerr, fileno - return status inquiries of files
+
+        SSYYNNOOPPSSIISS 
+
+             #include <stdio.h>
+
+             feof(fp)
+             FILE *fp;
+
+             ferror(fp)
+             FILE *fp;
+
+             clearerr(fp)
+             FILE *fp;
+
+             fileno(fp)
+             FILE *fp;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             The FFEERRRROORR function returns nonzero when an error has 
+             occurred reading or writing the file associated with the 
+             file pointer _f_p has reached its end, otherwise zero is 
+             returned.  Unless cleared by CCLLEEAARREERRRR, the error indication 
+             lasts until the file pointed to by _f_p is closed, thus 
+             preventing any further access to that file.  
+
+             The FFEEOOFF function returns nonzero when end of file is read 
+             on the named input _f_p, otherwise zero.  
+
+             The CCLLEEAARREERRRR function resets both the error and _E_O_F 
+             indicators on the named file associated with _f_p.  Note that 
+             the file is not "fixed" nor does it prevent the error from 
+             occurring again.  It just allows Standard Library functions 
+             to at least try to access the file.  
+
+             The FFIILLEENNOO function returns the integer path descriptor 
+             associated with the file pointer _f_p, for use with Standard 
+             Library calls the use path numbers, such as _c_l_o_s_e(), 
+             _o_p_e_n(), etc.  
+
+        CCAAVVEEAATTSS 
+
+             These functions are implemented as macros in SSTTDDIIOO.HH so 
+             they cannot be redeclared.  
+
+        SSEEEE AALLSSOO 
+
+             open(), fopen()
+
+
+
+
+
+
+
+                                                                
+
+

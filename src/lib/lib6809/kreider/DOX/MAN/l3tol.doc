@@ -1,0 +1,66 @@
+
+
+        L3TOL(3C)        Kreider OS-9 C Library        L3TOL(3C)
+
+
+        NNAAMMEE 
+
+             l3tol, ltol3 - convert between 3-byte integers and long integers
+
+        SSYYNNOOPPSSIISS 
+
+             void l3tol (lp, cp, n)
+             long *lp;
+             char *cp;
+             int n;
+
+             void ltol3 (cp, lp, n)
+             char *cp;
+             long *lp;
+             int n;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             The LL33TTOOLL subroutine converts a list of _n three-byte 
+             integers packed into a character string pointed to by _c_p 
+             into a list of long integers pointed to by _l_p .  
+
+             The LLTTOOLL33 performs the reverse conversion from long 
+             integers _l_p to three-byte integers _c_p.  
+
+             These functions are useful for file-system maintenance 
+             where the block numbers are three bytes long.  Certain disc 
+             addresses are maintained in three-byte form rather than 
+             four-bytes.  
+
+        CCAAVVEEAATTSS 
+
+             Because of possible differences in byte ordering, the 
+             numerical values of the long integers are 
+             machine-dependent.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+
