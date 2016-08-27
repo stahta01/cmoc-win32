@@ -4,7 +4,7 @@
 
 char putch(char c)
 {
-    *(unsigned char*)_curpos = c & 63;
+    *(unsigned char*)_curpos = _conio.revers ? c & 63 : c & 63 | 64;
     putrt();
     return c;
 }

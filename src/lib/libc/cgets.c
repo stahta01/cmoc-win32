@@ -20,11 +20,6 @@ char* cgets(char* s)
     s[0] = 0;
     char* p = s;
     for (;;) {
-        char cc = *(unsigned char*)_curpos;
-        while (!kbhit()) {
-            *(unsigned char*)_curpos = *(unsigned*)_TIMVAL & 16 ? cc | 64 : cc;
-        }
-        *(unsigned char*)_curpos = cc;
         char c = getch();
         if (c == _CR) {
             break;

@@ -163,11 +163,11 @@ char getche(void);
 char putch(char c);
 
 typedef struct {
-    unsigned char textcolor;
+    unsigned char cursor;
+    unsigned char revers;
     unsigned char bgcolor;
     unsigned char bordercolor;
-    unsigned char revers;
-    unsigned char cursor;
+    unsigned char textcolor;
 } _conio_t;
 
 extern _conio_t _conio;
@@ -178,6 +178,7 @@ void putlt(void);
 void putrt(void);
 void putlf(void);
 
+void scrclr(void); // Clear without moving cursor
 void scrup(void);
 
 #endif
