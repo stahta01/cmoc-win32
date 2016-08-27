@@ -1,6 +1,6 @@
 
 #include <motorola.h>
-#include "basicdefs.h"
+#include "_basic.h"
 
 void PSET1(int x, int y, byte c)
 {

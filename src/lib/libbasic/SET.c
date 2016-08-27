@@ -1,5 +1,5 @@
 
-#include "basicdefs.h"
+#include "_basic.h"
 #include <motorola.h>
 
 #define VIDLOC(x,y) (byte*)(_VIDRAM + ((word)((y) & 30) << 4) + (word)(((x) & 63) >> 1))

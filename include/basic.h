@@ -32,9 +32,9 @@ typedef struct {
 
 typedef struct {
     TRECT pclip, clip;
-} TBASIC;
+} _basic_t;
 
-extern TBASIC _basic;
+extern _basic_t _basic;
 
 int ABS(int numeric);
 byte PEEK(word addr);
