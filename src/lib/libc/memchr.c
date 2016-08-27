@@ -6,8 +6,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-#undef memchr
-
 void* memchr(void* buf, int c, size_t count)
 {
     char* p1 = NULL;

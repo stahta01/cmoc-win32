@@ -1,3 +1,4 @@
+
 /*---------------------------------------------------------------------------*/
 /* _strtoul() - low level conversion of a string of base n to an unsigned    */
 /*              long integer                                                 */
@@ -120,3 +121,4 @@ long strtol(const char* nptr, char** endptr, int base)
 {
     return (_strtoul(nptr, endptr, base, 1));
 }
+

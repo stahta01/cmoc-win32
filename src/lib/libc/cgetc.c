@@ -18,5 +18,3 @@ char cgetc(void)
     return getch();
 }
 
-
-

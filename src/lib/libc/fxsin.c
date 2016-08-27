@@ -22,14 +22,3 @@ int fxcos(int x)
     return _LOBYTE(x) >= 128 ? -(int)table[_LOBYTE(x) - 128] : (int)table[_LOBYTE(x)];
 }
 
-
-
-
-
-
-
-
-
-
-
-

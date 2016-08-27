@@ -18,5 +18,4 @@ char* strncat(char* string1, char* string2, size_t count)
     *p = '\0';
     return (string1);
 }
-
 

@@ -18,6 +18,3 @@ int rand(void)
     return (__rand_seed = __rand_seed * 31421 + 6927) & RAND_MAX;
 }
 
-
-
-

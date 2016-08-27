@@ -27,5 +27,3 @@ void* bsearch(void* keyval,  void* base, size_t num, size_t width,
     return (NULL);
 }
 
-
-

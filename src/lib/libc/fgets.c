@@ -15,6 +15,3 @@ char* fgets(char* s, size_t n, FILE* fp)
     }
 }
 
-
-
-

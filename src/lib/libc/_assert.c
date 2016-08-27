@@ -8,5 +8,3 @@ void _assert(char* _Message,  char* _File, unsigned _Line)
     exit(-1);
 }
 
-
-

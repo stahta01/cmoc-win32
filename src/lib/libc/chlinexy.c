@@ -7,4 +7,3 @@ void chlinexy(unsigned char x, unsigned char y, unsigned char length)
     chline(length);
 }
 
-

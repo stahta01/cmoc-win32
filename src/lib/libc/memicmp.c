@@ -6,8 +6,6 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-#undef memicmp
-
 int memicmp(void* buf1, void* buf2, unsigned int count)
 {
     char* p1, *p2;

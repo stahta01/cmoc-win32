@@ -12,9 +12,3 @@ int fputs(char* s, FILE* fp)
     }
 }
 
-
-
-
-
-
-

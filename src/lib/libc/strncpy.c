@@ -1,3 +1,4 @@
+
 /*---------------------------------------------------------------------------*/
 /* strncpy() - copy characters from one string to another                    */
 /*---------------------------------------------------------------------------*/
@@ -17,4 +18,4 @@ char* strncpy(char* string1, char* string2, size_t count)
     }
     return (string1);
 }
-
+
