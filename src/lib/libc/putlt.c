@@ -16,7 +16,7 @@ void putlt(void)
             if (_curpos & (_horbyt - 1)) {
                 _curpos--;
             } else {
-                _curpos += (unsigned)_horbyt << 3;
+                _curpos -= 1 + ((unsigned)_horbyt << 3) - _horbyt;
             }
             if (!isgrpram()) {
                 _curpos = _beggrp;

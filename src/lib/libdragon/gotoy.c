@@ -1,2 +1,0 @@
-
-#include "../libcoco/gotoy.c"
