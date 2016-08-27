@@ -1,10 +1,17 @@
 
-#include <conio.h>
-#include <string.h>
+#include "_conio.h"
 
 void scrup(void)
 {
-    memmove(1024, 1024 + 32, 32 * 15);
-    memset(1024 + 32 * 15, 96, 32);
+    if (isvidram()) {
+        memmove(_VIDRAM, _VIDRAM + 32, 32 * 15);
+        memset(_VIDRAM + 32 * 15, 96, 32);
+    } else {
+        if (isgrpram()) {
+            unsigned line = (unsigned)_horbyt << 3;
+            memmove((void*)_beggrp, (void*)(_beggrp + line), (_endgrp - _beggrp) - line);
+            memset((void*)(_endgrp - line), 255, line);
+        }
+    }
 }
 

@@ -1,6 +1,5 @@
 
-#include <conio.h>
-#include <equates.h>
+#include "_conio.h"
 
 void putlf(void)
 {

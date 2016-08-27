@@ -1,13 +1,23 @@
 
-#include <conio.h>
-#include <equates.h>
+#include "_conio.h"
 
 void putdn(void)
 {
-    _curpos += 32;
-    if (_curpos >= 1536) {
-        scrup();
-        _curpos -= 32;
+    if (isvidram()) {
+        _curpos += 32;
+        if (!isvidram()) {
+            _curpos -= 32;
+            scrup();
+        }
+    } else {
+        if (isgrpram()) {
+            unsigned line = (unsigned)_horbyt << 3;
+            _curpos += line;
+            if (!isgrpram()) {
+                _curpos -= line;
+                scrup();
+            }
+        }
     }
 }
 
