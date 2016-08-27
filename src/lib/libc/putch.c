@@ -7,7 +7,7 @@ char putch(char c)
         *(unsigned char*)_curpos = _conio.revers ? c & 63 : c & 63 | 64;
     } else {
         if (isgrpram()) {
-            unsigned char set = _conio.fontpack ? (_conio.fontbase & 128) ? 0xF : 0xF0 : 0xFF;
+            unsigned char set = _conio.fontpack ? _conio.fontbase & 128 ? 0xF : 0xF0 : 0xFF;
             unsigned char* dst = (unsigned char*)_curpos;
             *dst |= set;
             dst += _horbyt;

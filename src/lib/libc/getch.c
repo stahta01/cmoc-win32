@@ -22,18 +22,21 @@ char getch(void)
     } else    {
         if (_conio.cursor) {
             unsigned char timer = ((unsigned char*)_TIMVAL)[1];
+            unsigned char* curpos = (unsigned char*)_curpos;
+            unsigned char curxor, curchr;
             if (isvidram()) {
-                unsigned char curchr = *(unsigned char*)_curpos;
-                do {
-                    *(unsigned char*)_curpos = (((unsigned char*)_TIMVAL)[1] - timer) & 16 ? curchr : curchr ^ 64;
-                    c = inkey();
-                } while (!c);
-                *(unsigned char*)_curpos = curchr;
+                curchr = *curpos;
+                curxor = 64;
             } else {
-                do {
-                    c = inkey();
-                } while (!c);
+                curpos += ((unsigned)_horbyt << 3) - _horbyt;
+                curchr = *curpos;
+                curxor = _conio.fontpack ? _conio.fontbase & 128 ? 0xF : 0xF0 : 0xFF;
             }
+            do {
+                *curpos = (((unsigned char*)_TIMVAL)[1] - timer) & 16 ? curchr : curchr ^ curxor;
+                c = inkey();
+            } while (!c);
+            *curpos = curchr;
         } else {
             do {
                 c = inkey();
