@@ -1,8 +1,7 @@
 
 #define _NAME MEMMOVE
 #define _FILE "alib/memmove.as"
-
-#include "alib.h"
+#include "_alib.h"
 
 unsigned asm memmove(unsigned dst, unsigned src, unsigned len)
 {
