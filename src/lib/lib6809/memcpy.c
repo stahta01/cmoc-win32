@@ -1,4 +1,9 @@
 
+#define _NAME memcpy
+#define _FILE "kreider/LIB/LIB.A/memcpy.a"
+#include "_kreider.h"
+
+/*
 // By Pierre Sarrazin <http://sarrazip.com/>.
 // This file is in the public domain.
 //
@@ -29,6 +34,7 @@ unsigned asm memcpy(void* dst, void* src, int n)
         puls    x,u,pc
     }
 }
+*/
 
 
 

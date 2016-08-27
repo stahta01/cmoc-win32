@@ -1,4 +1,9 @@
 
+#define _NAME memcmp
+#define _FILE "kreider/LIB/LIB.A/memcmp.a"
+#include "_kreider.h"
+
+/*
 // By Pierre Sarrazin <http://sarrazip.com/>.
 // This file is in the public domain.
 //
@@ -43,6 +48,7 @@ int asm memcmp(void* s1, void* s2, unsigned n)
 
     }
 }
+*/
 
 
 

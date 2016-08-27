@@ -1,4 +1,9 @@
 
+#define _NAME strlen
+#define _FILE "kreider/LIB/LIB.A/strlen.a"
+#include "_kreider.h"
+
+/*
 // By Pierre Sarrazin <http://sarrazip.com/>.
 // This file is in the public domain.
 //
@@ -22,5 +27,6 @@ unsigned asm strlen(char* s)
         puls    x,pc
     }
 }
+*/
 
 
