@@ -12,7 +12,6 @@
 
 int main(void)
 {
-    //SCREEN(0, 1);
     clrscr();
 
     for (;;)  {
