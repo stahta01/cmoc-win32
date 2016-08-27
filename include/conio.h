@@ -168,6 +168,9 @@ typedef struct {
     unsigned char bgcolor;
     unsigned char bordercolor;
     unsigned char textcolor;
+    unsigned char fontbase;
+    unsigned char fontpack;
+    unsigned char* fontdata;
 } _conio_t;
 
 extern _conio_t _conio;

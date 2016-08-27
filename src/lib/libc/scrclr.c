@@ -1,10 +1,14 @@
 
-#include <conio.h>
-#include <string.h>
-#include <equates.h>
+#include "_conio.h"
 
 void scrclr(void)
 {
-    memset(_VIDRAM, 96, 32 * 16);
+    if (isvidram()) {
+        memset(_VIDRAM, 96, 0x200);
+    } else {
+        if (isgrpram()) {
+            memset((void*)_beggrp, 255, _endgrp - _beggrp);
+        }
+    }
 }
 

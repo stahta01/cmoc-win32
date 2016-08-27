@@ -5,43 +5,10 @@
 
 #include <equates.h>
 #include <font.h>
-
-unsigned char* fontdata;
-unsigned char fontbase;
-unsigned char fontpack;
+#include <conio.h>
 
 #define isvidram() (_curpos < 0x600 && _curpos >= 0x400)
 #define isgrpram() (_curpos < _endgrp && _curpos >= _beggrp)
-
-void putch(char c)
-{
-    unsigned char* dst = (unsigned char*)_curpos;
-    unsigned char* src = fontdata + (((unsigned)c + fontbase) << 3);
-    *dst ^= *src++;
-    dst += 32;
-    *dst ^= *src++;
-    dst += 32;
-    *dst ^= *src++;
-    dst += 32;
-    *dst ^= *src++;
-    dst += 32;
-    *dst ^= *src++;
-    dst += 32;
-    *dst ^= *src++;
-    dst += 32;
-    *dst ^= *src++;
-    dst += 32;
-    *dst ^= *src++;
-    dst += 32;
-    if (fontpack) {
-        if (fontbase & 128) {
-            _curpos++;
-        }
-        fontbase += 128;
-    } else {
-        _curpos++;
-    }
-}
 
 void gputc(char c)
 {
@@ -76,8 +43,8 @@ int main(void)
 
     _curpos = _beggrp;
 
-    fontpack = 1;
-    fontdata = font_atari_small;
+    _conio.fontpack = 1;
+    _conio.fontdata = &font_atari_small;
 
     char s[100];
     int i;
