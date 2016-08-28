@@ -3,6 +3,6 @@
 
 int LOADM(char* fn, void* addr)
 {
-    return systemf("LOAD \"%s\",%u", fn, addr);
+    return systemf("LOADM \"%s\",%u", fn, addr);
 }
 

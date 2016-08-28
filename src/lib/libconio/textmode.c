@@ -30,8 +30,8 @@ void textmode(int newmode)
         break;
     case MODE_M0_16X24:
     case MODE_M1_16X24:
-        system("SCREEN1");
         system("PMODE2");
+        system("SCREEN1");
         _curpos = _beggrp;
         _conio.fontpack = 0;
         _conio.fontdata = &charset_c64;

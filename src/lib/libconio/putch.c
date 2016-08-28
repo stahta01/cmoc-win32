@@ -47,7 +47,7 @@ char putch(char c)
                 }
             }
             unsigned char* src = _conio.fontdata + (((unsigned)(c - 32) + _conio.fontbase) << 3);
-            if (_conio.fontpack) {
+            if (_conio.fontpack || _conio.bgcolor) {
                 asm {
                     ldb     _HORBYT
                     ldx     _CURPOS
