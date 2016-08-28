@@ -99,13 +99,15 @@ type
     MenuHelpLWTools: TMenuItem;
     MenuHelpXRoarEmulator: TMenuItem;
     MenuHelpMCPP: TMenuItem;
+    MenuEmulatorsSep1: TMenuItem;
+    MenuStartColourComputer3: TMenuItem;
     MenuRun: TMenuItem;
     MenuRunBuild: TMenuItem;
     MenuRunBuildAndRun: TMenuItem;
     MenuRunCompile: TMenuItem;
     MenuRunSep1: TMenuItem;
     MenuRunSyntaxCheck: TMenuItem;
-    MenuXRoar: TMenuItem;
+    MenuEmulators: TMenuItem;
     MenuXRoarColourComputerNTSC: TMenuItem;
     MenuXRoarColourComputerPAL: TMenuItem;
     MenuXRoarDragon200E: TMenuItem;
@@ -153,7 +155,7 @@ type
     procedure MenuHelpOpenRomFolderClick(ASender: TObject);
     procedure MenuRunCompileClick(ASender: TObject);
     procedure MenuRunBuildAndRunClick(ASender: TObject);
-    procedure MenuXRoarClick(ASender: TObject);
+    procedure MenuEmulatorsClick(ASender: TObject);
     procedure SynEditLogChangeUpdating(ASender: TObject; AIsUpdating: boolean);
     procedure MenuHelpAboutClick(ASender: TObject);
     procedure MenuRunBuildClick(ASender: TObject);
@@ -172,7 +174,8 @@ type
     procedure CheckRoms;
   strict private
     procedure OpenBrowser(AURL: string);
-    procedure XRoar(const AMachine: string; const AFileName: TFileName);
+    procedure ExecuteXRoar(const AMachine: string; const AFileName: TFileName);
+    procedure ExecuteVcc(const AFileName: TFileName);
     function Execute(const AExecutable: string; const AParameters: array of string;
       const AExternal: boolean): integer;
     function RunTool(const ATool: string; const AParameters: array of string;
@@ -422,6 +425,7 @@ begin
     CurrentDirectory := ExtractFileDir(Executable);
     Parameters.Clear;
     Parameters.AddStrings(AParameters);
+    //WriteLn('# ', Executable, ' ', Parameters.CommaText);
     try
       Execute;
     except
@@ -589,43 +593,54 @@ begin
   end;
 end;
 
-procedure TFormCmocIDE.XRoar(const AMachine: string; const AFileName: TFileName);
+procedure TFormCmocIDE.ExecuteXRoar(const AMachine: string; const AFileName: TFileName);
 begin
   CheckRoms;
   WriteLn('// Running XRoar emulator. Machine=', AMachine);
   try
-    Execute(OCmoc.PathToXroar + 'xroar.exe', ['-rompath', 'roms', '-machine', AMachine,
-      '-joy-right', 'mjoy0', '-kbd-translate', '-nodos', AFileName], True);
+    Execute(OCmoc.PathToXroar + 'xroar.exe', ['-rompath', 'roms',
+      '-machine', AMachine, '-joy-right', 'mjoy0', '-kbd-translate', '-nodos', AFileName], True);
   except
     OCmoc.RaiseError('XRoar failed to execute');
   end;
 end;
 
+procedure TFormCmocIDE.ExecuteVcc(const AFileName: TFileName);
+begin
+  WriteLn('// Running Vcc emulator');
+  try
+    Execute(OCmoc.PathToVcc + 'Vcc.exe', [AFileName], True);
+  except
+    OCmoc.RaiseError('Vcc failed to execute');
+  end;
+end;
+
 procedure TFormCmocIDE.MenuRunBuildAndRunClick(ASender: TObject);
-var
-  LMachine: string;
 begin
   MenuRunBuild.Click;
   case FTarget of
     Target_COCO: begin
-      LMachine := 'cocous';
+      ExecuteVcc(FileNameBin);
     end;
     Target_DRAGON: begin
-      LMachine := 'dragon64';
+      ExecuteXRoar('dragon64', FileNameBin);
     end else begin
       OCmoc.RaiseError('Unknown target machine');
     end;
   end;
-  XRoar(LMachine, FileNameBin);
 end;
 
-procedure TFormCmocIDE.MenuXRoarClick(ASender: TObject);
+procedure TFormCmocIDE.MenuEmulatorsClick(ASender: TObject);
 var
   LMachine: string;
 begin
   LMachine := (ASender as TMenuItem).Hint;
   if Length(LMachine) > 0 then begin
-    XRoar(LMachine, EmptyStr);
+    if SameText(LMachine, 'coco3') then begin
+      ExecuteVcc(EmptyStr);
+    end else begin
+      ExecuteXRoar(LMachine, EmptyStr);
+    end;
   end;
 end;
 

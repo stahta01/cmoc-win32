@@ -161,11 +161,14 @@ type
     class function PathToInclude: TFileName;
     class function PathToLib: TFileName;
     class function PathToPackage: TFileName;
-    class function PathToXroar: TFileName;
-    class function PathToXroarRoms: TFileName;
+    class function PathToXRoar: TFileName;
+    class function PathToXRoarRoms: TFileName;
+    class function PathToVcc: TFileName;
     class function PathToSrc: TFileName;
     class function PathToSrcAsm: TFileName;
     class function PathToSrcLib: TFileName;
+  public
+    class function IntegerToDisplay(const A: integer): string;
   public
     class function StringQuoted(const A: string): string;
     class function StringToIdent(const A: string): string;
@@ -187,6 +190,11 @@ type
   end;
 
 implementation
+
+class function OCmoc.IntegerToDisplay(const A: integer): string;
+begin
+  Result := '$' + IntToHex(A, 4) + '(' + IntToStr(A) + ')';
+end;
 
 class function OCmoc.StringQuoted(const A: string): string;
 begin
@@ -271,14 +279,19 @@ begin
   Result := DosToUnix(ExtractFilePath(ExcludeTrailingPathDelimiter(ProgramDirectory)));
 end;
 
-class function OCmoc.PathToXroar: TFileName;
+class function OCmoc.PathToXRoar: TFileName;
 begin
   Result := PathToPackage + 'xroar/';
 end;
 
-class function OCmoc.PathToXroarRoms: TFileName;
+class function OCmoc.PathToXRoarRoms: TFileName;
 begin
-  Result := PathToXroar + 'roms/';
+  Result := PathToXRoar + 'roms/';
+end;
+
+class function OCmoc.PathToVcc: TFileName;
+begin
+  Result := PathToPackage + 'vcc/';
 end;
 
 class function OCmoc.PathToLib: TFileName;

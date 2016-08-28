@@ -169,6 +169,7 @@ procedure CCmocProcess_TOOLS.LWLINK(const ADst: TFileName; const ASrc: TFileName
   const ATarget: string; const AOrigin: cardinal);
 var
   LLibFile, LMapFile, LObjFile: TFileName;
+  LSize: cardinal;
 begin
   LLibFile := OCmoc.FileNameTemp('libmain', FileExt_A);
   try
@@ -193,6 +194,7 @@ begin
     try
       LoadFromFile(ADst);
       if Size >= 10 then begin
+        LSize := (PByte(Memory)[1] shl 8) or PByte(Memory)[2];
         PByte(Memory)[3] := byte(AOrigin shr 8);
         PByte(Memory)[4] := byte(AOrigin);
         PByte(Memory)[Size - 2] := byte(AOrigin shr 8);
@@ -204,7 +206,8 @@ begin
     end;
   end;
   WriteLn('output=', OCmoc.StringQuoted(ADst), ' target=', OCmoc.StringQuoted(ATarget),
-    ' origin=$', IntToHex(AOrigin, 4));
+    ' origin=', OCmoc.IntegerToDisplay(AOrigin), ' finish=', OCmoc.IntegerToDisplay(AOrigin + LSize),
+    ' length=', OCmoc.IntegerToDisplay(LSize));
 end;
 
 end.

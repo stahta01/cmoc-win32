@@ -50,6 +50,15 @@ Source: "doc\*.*"; DestDir: "{app}\doc"; Flags: ignoreversion recursesubdirs
 Source: "include\*.h"; DestDir: "{app}\include"; Flags: ignoreversion recursesubdirs
 Source: "examples\*.c"; DestDir: "{app}\examples"; Flags: ignoreversion recursesubdirs
 
+Source: "vcc\Vcc.exe"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\Welcome to Vcc.pdf"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\Vcc.ini"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\orch90.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\mpi.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\IDE.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\harddisk.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\fd502.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
+
 Source: "xroar\xroar.exe"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\xroar.pdf"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\xroar.conf"; DestDir: "{app}\xroar"; Flags: ignoreversion
