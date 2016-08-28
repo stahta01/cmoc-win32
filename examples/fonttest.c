@@ -9,8 +9,8 @@
 
 int main(void)
 {
-    //bgcolor(0);
-    textmode(MODE_H0_32X24);
+    bgcolor(1);
+    textmode(MODE_H0_64X24);
     //_pmode = 3;
     CLIP(0, 0, 256, 192);
     char s[100];
