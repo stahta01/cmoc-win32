@@ -7,84 +7,136 @@
 #include <conio.h>
 #include <basic.h>
 
-unsigned s;
+unsigned memcpy_stack;
 
-unsigned length;
-
-void asm fast(void)
+void asm memcpy_fast(void* dst, void* src, size_t len)
 {
     asm {
+        ldx     2,s             // dst
+        ldy     4,s             // src
+        ldd     6,s             // len
+
+        cmpd    #9
+        bhi     memcpy_copyx
+        beq     memcpy_copy9
+        cmpd    #7
+        bhi     memcpy_copy8
+        beq     memcpy_copy7
+        cmpd    #5
+        bhi     memcpy_copy6
+        beq     memcpy_copy5
+        cmpd    #3
+        bhi     memcpy_copy4
+        beq     memcpy_copy3
+        cmpd    #1
+        bhi     memcpy_copy2
+        beq     memcpy_copy1
+        rts
+
+        memcpy_copy9:
+        lda     8,y
+        sta     8,x
+        memcpy_copy8:
+        ldd     6,y
+        std     6,x
+        ldd     4,y
+        std     4,x
+        ldd     2,y
+        std     2,x
+        ldd     0,y
+        std     0,x
+        rts
+
+        memcpy_copy7:
+        lda     6,y
+        sta     6,x
+        memcpy_copy6:
+        ldd     4,y
+        std     4,x
+        ldd     2,y
+        std     2,x
+        ldd     0,y
+        std     0,x
+        rts
+
+        memcpy_copy5:
+        lda     4,y
+        sta     4,x
+        memcpy_copy4:
+        ldd     2,y
+        std     2,x
+        ldd     0,y
+        std     0,x
+        rts
+
+        memcpy_copy3:
+        lda     2,y
+        sta     2,x
+        memcpy_copy2:
+        ldd     0,y
+        std     0,x
+        rts
+
+        memcpy_copy1:
+        lda     0,y
+        sta     0,x
+        rts
+
+        memcpy_copyx:
         pshs    dp,u
-        sts     s
-        ldu     #$400 // dst
-        lds     #$420 // src
-        ldd     #8  // length
-        std     length
+        sts     memcpy_stack
+        leau    5,x
+        leas    ,y
+        subd    #5
 
-        leau 5,u
+        memcpy_copyx_loop:
+        puls    x,y,dp
+        pshu    x,y,dp
+        leau    10,u
+        subd    #5
+        bpl     memcpy_copyx_loop
 
-        copy_blocks:
-        subd #5
-        lbmi copy_bytes
-        puls x,y,dp
-        pshu x,y,dp
-        leau 10,u
-        bra copy_blocks
+        incb
+        beq     memcpy_copyx4
+        incb
+        beq     memcpy_copyx3
+        incb
+        beq     memcpy_copyx2
+        incb
+        beq     memcpy_copyx1
 
-        copy_bytes:
-        /*
-        leau -3,u
-        addd #7
-        bmi copy_exit
-        puls dp
-        pshu dp
-        */
-        /*
-        leau 2,u
-        subd #1
-        bmi copy_exit
-        puls dp
-        pshu dp
-        leau 2,u
-        subd #1
-        bmi copy_exit
-        puls dp
-        pshu dp
-        leau 2,u
-        subd #1
-        bmi copy_exit
-        puls dp
-        pshu dp
-        leau 2,u
-        subd #1
-        bmi copy_exit
-        puls dp
-        pshu dp
-        leau 2,u
-        subd #1
-        bmi copy_exit
-        puls dp
-        pshu dp
-        leau 2,u
-        subd #1
-        bmi copy_exit
-        puls dp
-        pshu dp
-        leau 2,u
-        */
-        copy_exit:
-        lds s
-        puls dp,u
+        memcpy_copyx0:
+        lds     memcpy_stack
+        puls    dp,u,pc
+
+        memcpy_copyx4:
+        ldd     2,s
+        std     -3,u
+        memcpy_copyx2:
+        ldd     0,s
+        std     -5,u
+        bra     memcpy_copyx0
+
+        memcpy_copyx3:
+        ldd     1,s
+        std     -4,u
+        memcpy_copyx1:
+        lda     0,s
+        sta     -5,u
+        bra     memcpy_copyx0
     }
 }
 
 int main(void)
 {
-    //clrscr();
-    //puts("");
-    //puts("ABCDEFGFabcdefg");
-    //fast();
-    //return 0;
+    for (int l = 0; l <= 26; l++) {
+        clrscr();
+        puts(">--------------------------");
+        puts(">ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        memcpy_fast(0x401, 0x421, l);
+        getch();
+    }
+    return 0;
     //bgcolor(0);
     textmode(MODE_H0_64X24);
     //_pmode = 3;
