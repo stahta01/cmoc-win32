@@ -1,11 +1,10 @@
 
-#include <stdio.h>
-#include <conio.h>
+#include "_conio.h"
 
 int cprintf(char* fmt, ...)
 {
-    int result = vsprintf(_stdbuf, fmt, (va_list)&fmt);
-    cputs(_stdbuf);
+    int result = vsprintf((char*)_linbuf + 1, fmt, (va_list)&fmt);
+    cputs(_linbuf + 1);
     return result;
 }
 

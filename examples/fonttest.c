@@ -19,7 +19,7 @@ void cputs_center(char* s)
 
 int main(void)
 {
-    int mode = MODE_T0_32X16;
+    int mode = MODE_L0_16X12;
     char s[100];
     unsigned char w, h;
 
@@ -37,16 +37,17 @@ int main(void)
         }
         clrscr();
 
+        cprintf("size=%dx%d\n", w, h);
         cputs_center("Welcome to");
-        cputs_center("CMOC conio.h");
-        cputs_center("1) 32x16+");
-        cputs_center("2) 16x12-");
-        cputs_center("3) 32x12-");
-        cputs_center("4) 16x24-");
-        cputs_center("5) 32x24+");
-        cputs_center("6) 32x24-");
-        cputs_center("7) 64x24+");
-        cputs_center("X) Exit");
+        cputs_center("CMOC CONIO");
+        cputs_center("1) 32x16t");
+        cputs_center("2) 16x12u");
+        cputs_center("3) 32x12p");
+        cputs_center("4) 16x24u");
+        cputs_center("5) 32x24p");
+        cputs_center("6) 32x24u");
+        cputs_center("7) 64x24p");
+        cputs_center("X) EXIT  ");
         cputs("Enter: ");
         s[0] = 80;
         cgets(s);
