@@ -1,7 +1,8 @@
 
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include <stdarg.h>
 #include <equates.h>
 
 #ifdef __COCO__
@@ -28,6 +29,12 @@ int _system(void)
         puls u
     }
     return 0;
+}
+
+int systemf(char* fmt, ...)
+{
+    vsprintf((char*)_linbuf + 1, fmt, (va_list)&fmt);
+    return _system();
 }
 
 int system(char* cmd)

@@ -66,6 +66,7 @@ long strtol(char* nptr, char** endptr, int base);
 unsigned long strtoul(char* nptr, char** endptr, int base);
 
 int system(char* cmd);
+int systemf(char* fmt, ...);
 int putenv(char* envptr);  // TODO
 char* getenv(char* varname); // TODO
 

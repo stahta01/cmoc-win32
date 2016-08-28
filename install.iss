@@ -58,6 +58,10 @@ Source: "vcc\mpi.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
 Source: "vcc\IDE.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
 Source: "vcc\harddisk.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
 Source: "vcc\fd502.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\disk0.dsk"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\disk1.dsk"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\disk2.dsk"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\disk3.dsk"; DestDir: "{app}\vcc"; Flags: ignoreversion
 
 Source: "xroar\xroar.exe"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\xroar.pdf"; DestDir: "{app}\xroar"; Flags: ignoreversion

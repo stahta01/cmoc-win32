@@ -1,8 +1,8 @@
 
 #include <basic.h>
 
-int DRIVE(byte drive)
+int DRIVE(byte d)
 {
-    return systemf("DRIVE %d", drive);
+    return systemf("DRIVE %d", d);
 }
 

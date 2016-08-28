@@ -1,6 +1,7 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef unsigned char byte;
 typedef unsigned word;
@@ -26,7 +27,12 @@ typedef struct {
     word size;
     byte flags;
     byte sid;
-} ent_t;
+} vname_t;
+
+typedef struct {
+    byte top, sid, pos;
+    word tell;
+} vfile_t;
 
 void vformat(void)
 {
@@ -55,11 +61,6 @@ void vsectfree(byte sid)
         sid = dos->sect[sid][SECT_LINK];
     }
 }
-
-typedef struct {
-    byte top, sid, pos;
-    word tell;
-} vfile_t;
 
 void vopen(vfile_t* file, byte sid)
 {
@@ -157,11 +158,11 @@ word vread(vfile_t* file, void* data, word len)
     return data - start;
 }
 
-int vfind(char* name, ent_t* ent)
+int vfind(char* name, vname_t* ent)
 {
     vfile_t file;
     vopen(&file, 0);
-    while (vread(&file, ent, sizeof(ent_t))) {
+    while (vread(&file, ent, sizeof(vname_t))) {
         if (!strcmp(name, ent->name)) {
             return 1;
         }
@@ -169,12 +170,12 @@ int vfind(char* name, ent_t* ent)
     return 0;
 }
 
-void vdir(void)
+void vdirectory(void)
 {
-    ent_t ent;
+    vname_t ent;
     vfile_t file;
     vopen(&file, 0);
-    while (vread(&file, &ent, sizeof(ent_t))) {
+    while (vread(&file, &ent, sizeof(vname_t))) {
         printf("%s ", ent.name);
     }
 }
@@ -182,7 +183,7 @@ void vdir(void)
 void WriteSomeNames(void)
 {
     vfile_t file;
-    ent_t ent;
+    vname_t ent;
     vopen(&file, 0);
     printf("NAME SIZE\n");
     for (int i = 0; i < 20; i++) {
@@ -210,9 +211,12 @@ int main(void)
 
     vformat();
     WriteSomeNames();
-    vdir();
+    vdirectory();
+
+    DIR(0);
 
     puts("Done");
+
     return 0;
 }
 
