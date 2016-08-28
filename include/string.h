@@ -1,3 +1,4 @@
+
 /*****************************************************************************/
 /*                                                                           */
 /*                                 string.h                                  */
@@ -31,65 +32,60 @@
 /*                                                                           */
 /*****************************************************************************/
 
-
-
 #ifndef _STRING_H
 #define _STRING_H
 
-
-
 #include <stddef.h>
 
-
-
-char* __fastcall__ strcat(char* dest, const char* src);
-char* __fastcall__ strchr(const char* s, int c);
-int __fastcall__ strcmp(const char* s1, const char* s2);
-int __fastcall__ strcoll(const char* s1, const char* s2);
-char* __fastcall__ strcpy(char* dest, const char* src);
-size_t __fastcall__ strcspn(const char* s1, const char* s2);
-char* __fastcall__ strerror(int errcode);
-size_t __fastcall__ strlen(const char* s);
-char* __fastcall__ strncat(char* s1, const char* s2, size_t count);
-int __fastcall__ strncmp(const char* s1, const char* s2, size_t count);
-char* __fastcall__ strncpy(char* dest, const char* src, size_t count);
-char* __fastcall__ strrchr(const char* s, int c);
-size_t __fastcall__ strspn(const char* s1, const char* s2);
-char* __fastcall__ strstr(const char* str, const char* substr);
-char* __fastcall__ strtok(char* s1, const char* s2);
-size_t __fastcall__ strxfrm(char* s1, const char* s2, size_t count);
-void* __fastcall__ memchr(const void* mem, int c, size_t count);
-int __fastcall__ memcmp(const void* p1, const void* p2, size_t count);
-void* __fastcall__ memcpy(void* dest, const void* src, size_t count);
-void* __fastcall__ memmove(void* dest, const void* src, size_t count);
-void* __fastcall__ memset(void* s, int c, size_t count);
+char* strcat(char* dest, const char* src);
+char* strchr(const char* s, int c);
+int strcmp(const char* s1, const char* s2);
+int strcoll(const char* s1, const char* s2);
+char* strcpy(char* dest, const char* src);
+size_t strcspn(const char* s1, const char* s2);
+char* strerror(int errcode);
+size_t strlen(const char* s);
+char* strncat(char* s1, const char* s2, size_t count);
+int strncmp(const char* s1, const char* s2, size_t count);
+char* strncpy(char* dest, const char* src, size_t count);
+char* strrchr(const char* s, int c);
+size_t strspn(const char* s1, const char* s2);
+char* strstr(const char* str, const char* substr);
+char* strtok(char* s1, const char* s2);
+size_t strxfrm(char* s1, const char* s2, size_t count);
+void* memchr(const void* mem, int c, size_t count);
+int memcmp(const void* p1, const void* p2, size_t count);
+void* memcpy(void* dest, const void* src, size_t count);
+void* memmove(void* dest, const void* src, size_t count);
+void* memset(void* s, int c, size_t count);
 
 /* The following is an internal function, the compiler will replace memset
 ** with it if the fill value is zero. Never use this one directly!
 */
-void* __fastcall__ _bzero(void* ptr, size_t n);
+void* _bzero(void* ptr, size_t n);
 
 /* Non standard: */
-void __fastcall__ bzero(void* ptr, size_t n);                 /* BSD */
-char* __fastcall__ strdup(const char* s);                     /* SYSV/BSD */
-int __fastcall__ stricmp(const char* s1, const char* s2);     /* DOS/Windows */
-int __fastcall__ strcasecmp(const char* s1, const char* s2);  /* Same for Unix */
-int __fastcall__ strnicmp(const char* s1, const char* s2, size_t count);      /* DOS/Windows */
-int __fastcall__ strncasecmp(const char* s1, const char* s2, size_t count);   /* Same for Unix */
-char* __fastcall__ strlwr(char* s);
-char* __fastcall__ strlower(char* s);
-char* __fastcall__ strupr(char* s);
-char* __fastcall__ strupper(char* s);
-char* __fastcall__ strqtok(char* s1, const char* s2);
+void bzero(void* ptr, size_t n);                 /* BSD */
+char* strdup(const char* s);                     /* SYSV/BSD */
+int stricmp(const char* s1, const char* s2);     /* DOS/Windows */
+int strcasecmp(const char* s1, const char* s2);  /* Same for Unix */
+int strnicmp(const char* s1, const char* s2, size_t count);      /* DOS/Windows */
+int strncasecmp(const char* s1, const char* s2, size_t count);   /* Same for Unix */
+char* strlwr(char* s);
+char* strlower(char* s);
+char* strupr(char* s);
+char* strupper(char* s);
+char* strqtok(char* s1, const char* s2);
 
 char* strrev(char* s);
 char* stpcpy(char* dest, char* src);
 
-const char* __fastcall__ _stroserror(unsigned char errcode);
+const char* _stroserror(unsigned char errcode);
 /* Map an operating system error number to an error message. */
 
 
 
-/* End of string.h */
+void memcpy_fast(void* dst, void* src, size_t len);
+
 #endif
 
