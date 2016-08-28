@@ -1,10 +1,16 @@
 
 #include "_conio.h"
 
+unsigned char _charsetgroups[] = {0 << 5, 3 << 5, 2 << 5, 0 << 5};
+
 char putch(char c)
 {
     if (isvidram()) {
-        *(unsigned char*)_curpos = _conio.revers ? c & 63 : c & 63 | 64;
+        c = (c & 31) | _charsetgroups[c >> 5];
+        if (_conio.revers) {
+            c &= 64^-1;
+        }
+        *(unsigned char*)_curpos = c;
     } else {
         if (isgrpram()) {
             unsigned char horbyt = _horbyt;
