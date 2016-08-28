@@ -2,9 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef unsigned char byte;
-typedef unsigned word;
+#include <basic.h>
 
 #define SECTOR_USED     1
 #define SECTOR_DIRTY    2
