@@ -159,9 +159,9 @@ begin
       Format_DECB, Opt_LibPath2, OCmoc.PathToLib, Opt_LibPath2, ExtractFilePath(ASrc),
       Opt_LibInclude2, LSrcLib, Opt_LibInclude2, ATarget, Opt_LibInclude2,
       'motorola', Opt_LibInclude2, '6809', Opt_LibInclude2, 'basic', Opt_LibInclude2, 'charset',
-      Opt_LibInclude2, 'c', Opt_ScriptFile2, OCmoc.PathToLib + 'linkscript.txt',
-      Opt_MapFile2, AMap, OCmoc.PathToLib + 'program_start.o', OCmoc.PathToLib +
-      'program_end.o'));
+      Opt_LibInclude2, 'conio', Opt_LibInclude2, 'c', Opt_ScriptFile2,
+      OCmoc.PathToLib + 'linkscript.txt', Opt_MapFile2, AMap, OCmoc.PathToLib +
+      'program_start.o', OCmoc.PathToLib + 'program_end.o'));
   end;
 end;
 
