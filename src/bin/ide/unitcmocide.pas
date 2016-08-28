@@ -90,7 +90,6 @@ type
     MenuHelpFatCowIconsOnline: TMenuItem;
     MenuHelpOpenRomFolder: TMenuItem;
     MenuHelpSep1: TMenuItem;
-    MenuHelpSep2: TMenuItem;
     MenuHelpSep3: TMenuItem;
     MenuHelpWinCmocOnline: TMenuItem;
     MenuHelpCMOCManual: TMenuItem;
@@ -100,6 +99,12 @@ type
     MenuHelpXRoarEmulator: TMenuItem;
     MenuHelpMCPP: TMenuItem;
     MenuEmulatorsSep1: TMenuItem;
+    MenuHelpDiskBasicSummary: TMenuItem;
+    MenuHelpExtendedBasicSummary: TMenuItem;
+    MenuHelpColorBasicSummary: TMenuItem;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuHelpVccEmulator: TMenuItem;
     MenuStartColourComputer3: TMenuItem;
     MenuRun: TMenuItem;
     MenuRunBuild: TMenuItem;
