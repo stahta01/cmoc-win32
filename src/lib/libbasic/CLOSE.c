@@ -1,7 +1,7 @@
 
 #include <basic.h>
 
-int CLOSE(byte f)
+int CLOSE(int f)
 {
     return systemf("CLOSE #%d", f);
 }

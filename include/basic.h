@@ -58,6 +58,7 @@ void SETCIRCLE(int x, int y, int r, byte c, bool fill);
 
 void SCREEN(int agr, int css);
 void PMODE(int mode, int page);
+int PCOPY(byte p1, byte p2);
 void PSECT(int sect);
 
 void PCLS(byte c);
@@ -112,14 +113,14 @@ int LOADM(char* fn, void* offset);
 int SAVEM(char* fn, void* start, void* finish, void* exec);
 int COPY(char* f1, char* f2);
 int UNLOAD(byte d);
-int CLOSE(byte f);
+int CLOSE(int f);
 int VERIFY(byte onoff);
 int VERIFY_ON(void);
 int VERIFY_OFF(void);
-int OPEN(char mode, byte f, char* fn, size_t len);
-int OPEN_I(byte f, char* fn);
-int OPEN_O(byte f, char* fn);
-int OPEN_D(byte f, char* fn, size_t len);
+int OPEN(char mode, int f, char* fn, size_t len);
+int OPEN_I(int f, char* fn);
+int OPEN_O(int f, char* fn);
+int OPEN_D(int f, char* fn, size_t len);
 
 #endif
 

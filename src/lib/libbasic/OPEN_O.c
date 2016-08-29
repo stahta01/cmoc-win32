@@ -1,7 +1,7 @@
 
 #include <basic.h>
 
-int OPEN_O(byte f, char* fn)
+int OPEN_O(int f, char* fn)
 {
     return OPEN('O', f, fn, 0);
 }
