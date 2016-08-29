@@ -1,10 +1,11 @@
 
 #include <basic.h>
+#include <unistd.h>
 
-int PRINT(int f, char* fmt, ...)
+int PRINT(int fd, char* fmt, ...)
 {
     char s[BUFSIZ];
     vsprintf(s, fmt, (va_list)&fmt);
-    return systemf("PRINT #%d,\"%s\"", f, s);
+    return write(fd, s, strlen(s));
 }
 

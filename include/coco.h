@@ -58,7 +58,9 @@ byte attr(byte foreColor, byte backColor, byte blink, byte underline);
 byte locate(byte column, byte row);
 byte hscreen(byte mode);
 byte hset(word x, word y, byte color);
-void sleep(int seconds);
+
+// avalible from unistd.h
+//void sleep(int seconds);
 
 // newValue: word value.
 //

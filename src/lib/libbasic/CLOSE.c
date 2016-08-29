@@ -4,6 +4,7 @@
 
 int CLOSE(int fd)
 {
-    return close(fd);
+    // Dont call close(). We do not alloc FileDesc's
+    return systemf("CLOSE #%d", fd);
 }
 

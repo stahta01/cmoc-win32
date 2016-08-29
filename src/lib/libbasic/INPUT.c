@@ -1,5 +1,6 @@
 
 #include "_basic.h"
+#include <unistd.h>
 
 void INPUT(int f, char* s)
 {
@@ -12,9 +13,9 @@ void INPUT(int f, char* s)
 
         char* pos = buf;
         for (;;) {
-            word len = _read(&_filedesc[f], pos, 16);
+            word len = read(&_filedesc[f], pos, 16);
             pos[len] = 0;
-            char* eol = strchr(pos, 13);
+            char* eol = strchr(pos, '\n');
             if (eol) {
                 *eol = 0;
                 break;

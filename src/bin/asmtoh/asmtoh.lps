@@ -232,11 +232,10 @@
       </Unit30>
       <Unit31>
         <Filename Value="..\..\..\examples\diskio.c.i"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="82"/>
         <CursorPos X="12" Y="92"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit31>
       <Unit32>
