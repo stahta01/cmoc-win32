@@ -5,17 +5,22 @@
 
 size_t lgets(int fd, char* s, size_t n)
 {
-    int tell = ltell(fd);
+    size_t size, tell = ltell(fd);
     char buf[BUFSIZ], *end = buf;
     do {
-        end[read(fd, end, 16)] = 0;
+        size = read(fd, end, 16);
+        end[size] = 0;
         while (*end && *end != '\n' && *end != '\r') {
             end++;
         }
-    } while (!*end);
-    end[1] = 0;
-    strcpy(s, buf);
-    lseek(fd, tell + end - buf + 1, SEEK_SET);
-    return end - buf + 1;
+    } while (size && !*end);
+    if (*end) {
+        end++;
+    }
+    size = end - buf;
+    memcpy(s, buf, size);
+    s[size] = 0;
+    lseek(fd, tell + size, SEEK_SET);
+    return size;
 }
 

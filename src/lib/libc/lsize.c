@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include <disk.h>
 
-size_t ltell(int fd)
+size_t lsize(int fd)
 {
     if (fd > FOPEN_MAX) {
-        return ((struct FileDesc*)fd)->offset[1];
+        return ((struct FileDesc*)fd)->length[1];
     }
-    return EOF;
+    return 0;
 }
 

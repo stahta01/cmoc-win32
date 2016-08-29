@@ -11,6 +11,7 @@ void cputc(char c)
         putrt();
         break;
     case 10:
+    case 13:
         putlf();
         break;
     default:

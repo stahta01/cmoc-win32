@@ -53,7 +53,8 @@ extern int optind, opterr, optopt;
 int write(int fd, void* buf, unsigned count);
 int read(int fd, void* buf, unsigned count);
 off_t lseek(int fd, off_t offset, int whence);
-int ltell(int fd);
+size_t ltell(int fd);
+size_t lsize(int fd);
 size_t lgets(int fd, char* s, size_t n);
 int unlink(char* name);
 
@@ -65,7 +66,7 @@ int rmdir(char* name);
 
 // Others
 unsigned sleep(unsigned seconds);
-int getopt(int argc, char* * argv, char* optstring);
+int getopt(int argc, char** argv, char* optstring);
 
 // Non standard
 int exec(char* progname, char* cmdline);
