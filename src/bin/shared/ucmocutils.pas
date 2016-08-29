@@ -276,6 +276,7 @@ begin
   StringDynArrayAppendLib(A, 'basic');
   StringDynArrayAppendLib(A, 'charset');
   StringDynArrayAppendLib(A, 'conio');
+  StringDynArrayAppendLib(A, 'unistd');
   StringDynArrayAppendLib(A, 'ctype');
   StringDynArrayAppendLib(A, 'string');
   StringDynArrayAppendLib(A, 'c');
