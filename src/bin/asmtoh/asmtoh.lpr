@@ -25,6 +25,7 @@ program asmtoh;
 
 uses
   Classes,
+  FileUtil,
   StrUtils,
   SysUtils,
   Types,
@@ -132,19 +133,18 @@ type
     end;
   end;
 
-  procedure Main(const ADstPath, ASrc: TFileName; const AHeaderIdent: string;
+  procedure ProcessSrcToDst(const ADst, ASrc: TFileName; const AHeaderIdent: string;
   const AFilter: TStringDynArray);
   var
     LTmpFile: TFileName;
   begin
-    LTmpFile := OCmoc.FileNameTemp(ExtractFileName(ASrc), '.lst');
+    LTmpFile := OCmoc.FileNameTemp('.lst');
     try
       with CCmocProcess_ASMTOH.Create(nil) do begin
         try
           Execute(OCmoc.FileNameTool(Tool_LWASM), TStringDynArray.Create('-s',
             '--depend', '--list=' + LTmpFile, ASrc));
-          ProcessFile(ADstPath + ChangeFileExt(ExtractFileName(ASrc), '.h'),
-            LTmpFile, AHeaderIdent, AFilter);
+          ProcessFile(ADst, LTmpFile, AHeaderIdent, AFilter);
         finally
           Free;
         end;
@@ -152,6 +152,42 @@ type
     finally
       DeleteFile(LTmpFile);
     end;
+  end;
+
+  procedure ProcessSrcToDstWithEquates(const ADst, ASrc: TFileName;
+  const AHeaderIdent: string; const AFilter: TStringDynArray);
+  var
+    LTmpFile: TFileName;
+  begin
+    LTmpFile := OCmoc.FileNameTemp('.asm');
+    try
+      with TStringList.Create do begin
+        try
+          Add(ReadFileToString(ExtractFilePath(ASrc) + 'equates.asm'));
+          Add(ReadFileToString(ASrc));
+          SaveToFile(LTmpFile);
+          ProcessSrcToDst(ADst, LTmpFile, AHeaderIdent, AFilter);
+        finally
+          Free;
+        end;
+      end;
+    finally
+      DeleteFile(LTmpFile);
+    end;
+  end;
+
+  procedure ProcessSrcToPath(const ADstPath, ASrc: TFileName; const AHeaderIdent: string;
+  const AFilter: TStringDynArray);
+  begin
+    ProcessSrcToDst(ADstPath + ChangeFileExt(ExtractFileName(ASrc), '.h'),
+      ASrc, AHeaderIdent, AFilter);
+  end;
+
+  procedure ProcessSrcToPathWithEquates(const ADstPath, ASrc: TFileName;
+  const AHeaderIdent: string; const AFilter: TStringDynArray);
+  begin
+    ProcessSrcToDstWithEquates(ADstPath + ChangeFileExt(ExtractFileName(ASrc), '.h'),
+      ASrc, AHeaderIdent, AFilter);
   end;
 
   procedure Create6883;
@@ -183,17 +219,22 @@ var
 begin
   try
     LDstPath := OCmoc.PathToInclude + 'coco/';
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm',
+    ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm',
       '_COCO_EQUATES_H', default(TStringDynArray));
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/cocodefs.asm', '_COCO_DEFS_H',
+
+    ProcessSrcToPathWithEquates(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/disk.asm',
+      '_COCO_DISK_H',
       default(TStringDynArray));
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/coco3defs.asm', '_COCO3_DEFS_H',
+
+    ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/cocodefs.asm', '_COCO_DEFS_H',
+      default(TStringDynArray));
+    ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/coco3defs.asm', '_COCO3_DEFS_H',
       default(TStringDynArray));
 
     LDstPath := OCmoc.PathToInclude + 'dragon/';
 
     // Note: we list the equates from coco which are the same as the dragon.
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm',
+    ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm',
       '_DRAGON_EQUATES_H', TStringDynArray.Create('BS', 'CR', 'ESC', 'LF',
       'FORMF', 'SPACE', 'TEMPTR', 'CURPOS', 'SNDTON', 'SNDDUR', 'TIMVAL',
       'VIDRAM', 'POTVAL', 'PMODE', 'ALLCOL', 'WCOLOR', 'FORCOL', 'BAKCOL',
@@ -205,9 +246,9 @@ begin
       'VARPTR', 'VARDES'));
 
     LDstPath := OCmoc.PathToInclude + 'vectrex/';
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexdefs.asm',
+    ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexdefs.asm',
       '_VECTREX_VECTREXDEFS_H', default(TStringDynArray));
-    Main(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexbios.asm',
+    ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexbios.asm',
       '_VECTREX_VECTREXBIOS_H', default(TStringDynArray));
 
     Create6883;

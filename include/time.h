@@ -32,12 +32,8 @@
 /*                                                                           */
 /*****************************************************************************/
 
-
-
 #ifndef _TIME_H
 #define _TIME_H
-
-
 
 /* NULL pointer */
 #ifndef _HAVE_NULL
@@ -45,11 +41,7 @@
 #define _HAVE_NULL
 #endif
 
-/* size_t is needed */
-#ifndef _HAVE_size_t
-#define _HAVE_size_t
-typedef unsigned size_t;
-#endif
+#include <sys/size.h>
 
 typedef unsigned long time_t;
 typedef unsigned long clock_t;
@@ -118,8 +110,6 @@ extern clock_t _clk_tck(void);
 #  define CLOCKS_PER_SEC        _clk_tck()
 #endif
 
-
-
 time_t _systime(void);
 /*  Similar to time(), but:
 **   - Is not ISO C
@@ -128,14 +118,14 @@ time_t _systime(void);
 */
 
 /* ISO C function prototypes */
-char* __fastcall__ asctime(const struct tm* timep);
+char*  asctime( struct tm* timep);
 clock_t clock(void);
-char* __fastcall__ ctime(const time_t* timep);
-struct tm* __fastcall__ gmtime(const time_t* timep);
-struct tm* __fastcall__ localtime(const time_t* timep);
-time_t __fastcall__ mktime(struct tm* timep);
-size_t __fastcall__ strftime(char* buf, size_t bufsize, const char* format, const struct tm* tm);
-time_t __fastcall__ time(time_t* t);
+char*  ctime( time_t* timep);
+struct tm*  gmtime( time_t* timep);
+struct tm*  localtime( time_t* timep);
+time_t  mktime(struct tm* timep);
+size_t  strftime(char* buf, size_t bufsize,  char* format,  struct tm* tm);
+time_t  time(time_t* t);
 
 
 

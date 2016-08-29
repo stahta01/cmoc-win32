@@ -52,7 +52,8 @@ extern FILE* stderr;
 #define _IONBF          2
 #define BUFSIZ          256
 #define EOF             -1
-#define FOPEN_MAX       8
+// FOPEN_MAX does not include the default printer(-2), cas(-1) and screen(0) files.
+#define FOPEN_MAX       15
 #define SEEK_CUR        0
 #define SEEK_END        1
 #define SEEK_SET        2

@@ -1,3 +1,4 @@
+
 /*****************************************************************************/
 /*                                                                           */
 /*                                 stdint.h                                  */
@@ -31,14 +32,13 @@
 /*                                                                           */
 /*****************************************************************************/
 
-/* Note: This file is not fully ISO 9899-1999 compliant because CMOC lacks
-** a 32/64 bit data types. The declarations have been adjusted accordingly.
-*/
+// Note: This file is not fully ISO 9899-1999 compliant because CMOC lacks
+// a 32/64 bit data types. The declarations have been adjusted accordingly.
 
 #ifndef _STDINT_H
 #define _STDINT_H
 
-/* Exact-width integer types */
+// Exact-width integer types
 typedef signed char         int8_t;
 typedef int                 int16_t;
 //typedef long                int32_t;
@@ -56,7 +56,7 @@ typedef unsigned            uint16_t;
 #define UINT16_MAX          ((uint16_t) 0xFFFF)
 //#define UINT32_MAX          ((uint32_t) 0xFFFFFFFF)
 
-/* Minimum-width integer types */
+// Minimum-width integer types
 typedef signed char         int_least8_t;
 typedef int                 int_least16_t;
 //typedef long                int_least32_t;
@@ -74,7 +74,7 @@ typedef unsigned            uint_least16_t;
 #define UINT_LEAST16_MAX    ((uint_least16_t) 0xFFFF)
 //#define UINT_LEAST32_MAX    ((uint_least32_t) 0xFFFFFFFF)
 
-/* Fastest minimum-width integer types */
+// Fastest minimum-width integer types
 typedef signed char         int_fast8_t;
 typedef int                 int_fast16_t;
 //typedef long                int_fast32_t;
@@ -92,7 +92,7 @@ typedef unsigned            uint_fast16_t;
 #define UINT_FAST16_MAX     ((uint_fast16_t) 0xFFFF)
 //#define UINT_FAST32_MAX     ((uint_fast32_t) 0xFFFFFFFF)
 
-/* Integer types capable of holding object pointers */
+// Integer types capable of holding object pointers
 typedef int                 intptr_t;
 typedef unsigned            uintptr_t;
 
@@ -100,7 +100,7 @@ typedef unsigned            uintptr_t;
 #define INTPTR_MAX          ((intptr_t)0x7FFF)
 #define UINTPTR_MAX         ((uintptr_t) 0xFFFF)
 
-/* Greatest width integer types */
+// Greatest width integer types
 typedef long                intmax_t;
 typedef unsigned long       uintmax_t;
 
@@ -108,7 +108,7 @@ typedef unsigned long       uintmax_t;
 #define INTMAX_MAX          ((intmax_t) 0x7FFFFFFF)
 #define UINTMAX_MAX         ((uintmax_t) 0xFFFFFFFF)
 
-/* Limits of other integer types */
+// Limits of other integer types
 #define PTRDIFF_MIN         ((int) 0x8000)
 #define PTRDIFF_MAX         ((int) 0x7FFF)
 
@@ -117,7 +117,7 @@ typedef unsigned long       uintmax_t;
 
 #define SIZE_MAX            0xFFFF
 
-/* Macros for minimum width integer constants */
+// Macros for minimum width integer constants
 #define INT8_C(c)           c
 #define INT16_C(c)          c
 //#define INT32_C(c)          c##L
@@ -125,11 +125,9 @@ typedef unsigned long       uintmax_t;
 #define UINT16_C(c)         c##U
 //#define UINT32_C(c)         c##UL
 
-/* Macros for greatest width integer constants */
+// Macros for greatest width integer constants
 #define INTMAX_C(c)         c##L
 #define UINTMAX_C(c)        c##UL
 
 #endif
-
-
 

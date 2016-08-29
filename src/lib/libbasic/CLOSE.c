@@ -1,8 +1,9 @@
 
 #include <basic.h>
+#include <fcntl.h>
 
-int CLOSE(int f)
+int CLOSE(int fd)
 {
-    return systemf("CLOSE #%d", f);
+    return close(fd);
 }
 

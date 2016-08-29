@@ -9,7 +9,7 @@
 #define RAND_MAX     0x7fff
 
 #define _MAX_PATH       260   /* max. length of full pathname           */
-#define _MAX_DRIVE      3     /* max. length of drive component         */
+#define _MAX_DRIVE      4     /* max. length of drive component         */
 #define _MAX_DIR        256   /* max. length of path component          */
 #define _MAX_FNAME      256   /* max. length of file name component     */
 #define _MAX_EXT        256   /* max. length of extension component     */

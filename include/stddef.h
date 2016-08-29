@@ -1,3 +1,4 @@
+
 /*****************************************************************************/
 /*                                                                           */
 /*                                 stddef.h                                  */
@@ -31,26 +32,12 @@
 /*                                                                           */
 /*****************************************************************************/
 
-
-
 #ifndef _STDDEF_H
 #define _STDDEF_H
 
-
-
-/* Standard data types */
-#ifndef _HAVE_ptrdiff_t
-#define _HAVE_ptrdiff_t
-typedef int ptrdiff_t;
-#endif
-#ifndef _HAVE_wchar_t
-#define _HAVE_wchar_t
-typedef char wchar_t;
-#endif
-#ifndef _HAVE_size_t
-#define _HAVE_size_t
-typedef unsigned size_t;
-#endif
+#include <sys/size.h>
+#include <sys/ptrdiff.h>
+#include <sys/wchar.h>
 
 /* NULL pointer */
 #ifndef _HAVE_NULL
@@ -61,10 +48,5 @@ typedef unsigned size_t;
 /* offsetof macro */
 #define offsetof(type, member)  (size_t) (&((type*) 0)->member)
 
-
-
-/* End of stddef.h */
 #endif
-
-
 

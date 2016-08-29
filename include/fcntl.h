@@ -1,16 +1,16 @@
 
 /*****************************************************************************/
 /*                                                                           */
-/*                                 unistd.h                                  */
+/*                                  fcntl.h                                  */
 /*                                                                           */
-/*                  Unix compatibility header file for cc65                  */
+/*                            File control operations                        */
 /*                                                                           */
 /*                                                                           */
 /*                                                                           */
-/* (C) 2003-2011, Ullrich von Bassewitz                                      */
-/*                Roemerstrasse 52                                           */
-/*                D-70794 Filderstadt                                        */
-/* EMail:         uz@cc65.org                                                */
+/* (C) 1998-2004 Ullrich von Bassewitz                                       */
+/*               Römerstraße 52                                              */
+/*               D-70794 Filderstadt                                         */
+/* EMail:        uz@cc65.org                                                 */
 /*                                                                           */
 /*                                                                           */
 /* This software is provided 'as-is', without any expressed or implied       */
@@ -32,41 +32,27 @@
 /*                                                                           */
 /*****************************************************************************/
 
-#ifndef _UNISTD_H
-#define _UNISTD_H
+#ifndef _FCNTL_H
+#define _FCNTL_H
 
-#include <disk.h>
+#define FD_SCREEN      ( 0)
+#define FD_CASSETTE    (-1)
+#define FD_SERIAL      (-2)
+#define FD_PRINTER     FD_SERIAL
+#define FD_MAX         (15)
 
-// Predefined file handles
-#define STDIN_FILENO    0
-#define STDOUT_FILENO   1
-#define STDERR_FILENO   2
+// Flag values for the open() call
+#define O_RDONLY        0x01
+#define O_WRONLY        0x02
+#define O_RDWR          0x03
+#define O_CREAT         0x10
+#define O_TRUNC         0x20
+#define O_APPEND        0x40
+#define O_EXCL          0x80
 
-#include <sys/size.h>
-#include <sys/types.h>
-
-// Stuff for getopt
-extern char* optarg;
-extern int optind, opterr, optopt;
-
-// Files
-int write(int fd, void* buf, unsigned count);
-int read(int fd, void* buf, unsigned count);
-off_t lseek(int fd, off_t offset, int whence);
-int unlink(char* name);
-
-// Directories
-int chdir(char* name);
-char* getcwd(char* buf, size_t size);
-int mkdir(char* name, ...);               /* May take a mode argument */
-int rmdir(char* name);
-
-// Others
-unsigned sleep(unsigned seconds);
-int getopt(int argc, char* * argv, char* optstring);
-
-// Non standard
-int exec(char* progname, char* cmdline);
+int open(char* name, int flags, ...);     // May take a mode argument
+int close(int fd);
+int creat(char* name, unsigned mode);
 
 #endif
 
