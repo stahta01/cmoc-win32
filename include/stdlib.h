@@ -6,20 +6,29 @@
 #include <crt.h>
 #include <math.h>
 
-#define RAND_MAX     0x7fff
+#define RAND_MAX        0x7fff
 
-#define _MAX_PATH       260   /* max. length of full pathname           */
-#define _MAX_DRIVE      4     /* max. length of drive component         */
-#define _MAX_DIR        256   /* max. length of path component          */
-#define _MAX_FNAME      256   /* max. length of file name component     */
-#define _MAX_EXT        256   /* max. length of extension component     */
+// max. length of full pathname
+#define _MAX_PATH       260
 
-#define _sys_nerr    (_crt_base->_crt_nerr)
-#define _sys_errlist (_crt_base->_crt_syserrlist)
+// max. length of drive component
+#define _MAX_DRIVE      4
 
-#define _max(a,b)   (((a) > (b)) ? (a) : (b))
-#define _min(a,b)   (((a) < (b)) ? (a) : (b))
-#define _abs(a)     ((a) < 0 ? -(a) : (a))
+// max. length of path component
+#define _MAX_DIR        256
+
+// max. length of file name component
+#define _MAX_FNAME      256
+
+// max. length of extension component
+#define _MAX_EXT        3
+
+#define _sys_nerr       (_crt_base->_crt_nerr)
+#define _sys_errlist    (_crt_base->_crt_syserrlist)
+
+#define _max(_a,_b)     (((_a) > (_b)) ? (_a) : (_b))
+#define _min(_a,_b)     (((_a) < (_b)) ? (_a) : (_b))
+#define _abs(_a)        ((_a) < 0 ? -(_a) : (_a))
 
 int max(int a, int b);
 int min(int a, int b);

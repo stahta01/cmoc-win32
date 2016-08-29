@@ -114,8 +114,8 @@ int vsscanf(char* s, char* format, va_list ap);
 int vfscanf(FILE* f, char* format, va_list ap);
 
 // Masking macros for some functions
-#define getc(f)         fgetc (f)               // ANSI
-#define putc(c, f)      fputc (c, f)            // ANSI
+#define getc(_f)        fgetc(_f)              // ANSI
+#define putc(_c,_f)     fputc(_c,_f)           // ANSI
 
 #endif
 

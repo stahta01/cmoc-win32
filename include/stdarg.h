@@ -5,8 +5,8 @@
     This file is in the public domain.
 */
 
-#ifndef _stdarg_h_
-#define _stdarg_h_
+#ifndef _STDARG_H
+#define _STDARG_H
 
 typedef unsigned int* va_list;
 
@@ -17,5 +17,5 @@ extern char* __va_arg(va_list* app, unsigned int sizeInBytes);
 #define va_end(ap) do {} while (0)
 
 
-#endif  /* _stdarg_h_ */
+#endif
 
