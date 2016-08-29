@@ -3,7 +3,11 @@
 
 void CLOSE(int fd)
 {
-    close(_filedesc[fd]);
-    _filedesc[fd] = 0;
+    if (fd <= FD_SCREEN) {
+        close(fd);
+    } else {
+        close(_filedesc[fd]);
+        _filedesc[fd] = 0;
+    }
 }
 

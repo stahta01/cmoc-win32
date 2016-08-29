@@ -4,7 +4,7 @@
 int OPEN(char mode, int fd, char* fn, size_t len)
 {
     mode = (char)toupper(mode);
-    if (fd < 0) {
+    if (fd <= FD_SCREEN) {
         systemf("OPEN \"%c\",#%d,\"%s\"", mode, fd, fn);
     } else {
         if (_filedesc[fd]) {
