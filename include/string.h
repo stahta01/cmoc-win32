@@ -37,53 +37,52 @@
 
 #include <stddef.h>
 
-char* strcat(char* dest, const char* src);
-char* strchr(const char* s, int c);
-int strcmp(const char* s1, const char* s2);
-int strcoll(const char* s1, const char* s2);
-char* strcpy(char* dest, const char* src);
-size_t strcspn(const char* s1, const char* s2);
+char* strcat(char* dest, char* src);
+char* strchr(char* s, int c);
+int strcmp(char* s1, char* s2);
+int strcoll(char* s1, char* s2);
+char* strcpy(char* dest, char* src);
+size_t strcspn(char* s1, char* s2);
 char* strerror(int errcode);
-size_t strlen(const char* s);
-char* strncat(char* s1, const char* s2, size_t count);
-int strncmp(const char* s1, const char* s2, size_t count);
-char* strncpy(char* dest, const char* src, size_t count);
-char* strrchr(const char* s, int c);
-size_t strspn(const char* s1, const char* s2);
-char* strstr(const char* str, const char* substr);
-char* strtok(char* s1, const char* s2);
-size_t strxfrm(char* s1, const char* s2, size_t count);
-void* memchr(const void* mem, int c, size_t count);
-int memcmp(const void* p1, const void* p2, size_t count);
-void* memcpy(void* dest, const void* src, size_t count);
-void* memmove(void* dest, const void* src, size_t count);
+size_t strlen(char* s);
+char* strncat(char* s1, char* s2, size_t count);
+int strncmp(char* s1, char* s2, size_t count);
+char* strncpy(char* dest, char* src, size_t count);
+char* strrchr(char* s, int c);
+size_t strspn(char* s1, char* s2);
+char* strstr(char* str, char* substr);
+char* strtok(char* s1, char* s2);
+size_t strxfrm(char* s1, char* s2, size_t count);
+
+void* memchr(void* mem, int c, size_t count);
+int memcmp(void* p1, void* p2, size_t count);
+void* memcpy(void* dest, void* src, size_t count);
+void* memmove(void* dest, void* src, size_t count);
 void* memset(void* s, int c, size_t count);
 
-/* The following is an internal function, the compiler will replace memset
-** with it if the fill value is zero. Never use this one directly!
-*/
+// The following is an internal function, the compiler will replace memset
+// with it if the fill value is zero. Never use this one directly!
 void* _bzero(void* ptr, size_t n);
 
-/* Non standard: */
-void bzero(void* ptr, size_t n);                 /* BSD */
-char* strdup(const char* s);                     /* SYSV/BSD */
-int stricmp(const char* s1, const char* s2);     /* DOS/Windows */
-int strcasecmp(const char* s1, const char* s2);  /* Same for Unix */
-int strnicmp(const char* s1, const char* s2, size_t count);      /* DOS/Windows */
-int strncasecmp(const char* s1, const char* s2, size_t count);   /* Same for Unix */
+// Non standard
+void bzero(void* ptr, size_t n);                    // BSD
+char* strdup(char* s);                              // SYSV/BSD
+int stricmp(char* s1, char* s2);                    // DOS/Windows
+int strcasecmp(char* s1, char* s2);                 // Same for Unix
+int strnicmp(char* s1, char* s2, size_t count);     // DOS/Windows
+int strncasecmp(char* s1, char* s2, size_t count);  // Same for Unix
+
 char* strlwr(char* s);
 char* strlower(char* s);
 char* strupr(char* s);
 char* strupper(char* s);
-char* strqtok(char* s1, const char* s2);
+char* strqtok(char* s1, char* s2);
 
 char* strrev(char* s);
 char* stpcpy(char* dest, char* src);
 
-const char* _stroserror(unsigned char errcode);
-/* Map an operating system error number to an error message. */
-
-
+// Map an operating system error number to an error message.
+char* _stroserror(unsigned char errcode);
 
 void memcpy_fast(void* dst, void* src, size_t len);
 
