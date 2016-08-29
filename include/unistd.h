@@ -53,6 +53,8 @@ extern int optind, opterr, optopt;
 int write(int fd, void* buf, unsigned count);
 int read(int fd, void* buf, unsigned count);
 off_t lseek(int fd, off_t offset, int whence);
+int ltell(int fd);
+size_t lgets(int fd, char* s, size_t n);
 int unlink(char* name);
 
 // Directories

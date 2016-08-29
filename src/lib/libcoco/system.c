@@ -16,6 +16,7 @@
 
 int _system(void)
 {
+    //puts(_LINBUF + 1);
     asm {
         pshs u
         ldx     #0  // Was -1

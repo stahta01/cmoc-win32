@@ -108,24 +108,24 @@ int CSAVEM(char* fn, void* start, void* finish, void* exec);
 
 int PRINT(int f, char* fmt, ...);
 
-int BACKUP(byte d);
-int BACKUP2(byte d1, byte d2);
-int DIR(byte d);
-int DSKINI(byte d);
-int DRIVE(byte d);
+int BACKUP(byte dr);
+int BACKUP2(byte dr1, byte dr2);
+int DIR(byte dr);
+int DSKINI(byte dr);
+int DRIVE(byte dr);
 int KILL(char* fn);
 int LOADM(char* fn, void* offset);
 int SAVEM(char* fn, void* start, void* finish, void* exec);
-int COPY(char* f1, char* f2);
-int UNLOAD(byte d);
-int CLOSE(int f);
+int COPY(char* fn1, char* fn2);
+int UNLOAD(byte dr);
+void CLOSE(int fd);
 int VERIFY(byte onoff);
 int VERIFY_ON(void);
 int VERIFY_OFF(void);
-int OPEN(char mode, int f, char* fn, size_t len);
-int OPEN_I(int f, char* fn);
-int OPEN_O(int f, char* fn);
-int OPEN_D(int f, char* fn, size_t len);
+int OPEN(char mode, int fd, char* fn, size_t len);
+int OPEN_I(int fd, char* fn);
+int OPEN_O(int fd, char* fn);
+int OPEN_D(int fd, char* fn, size_t len);
 
 #endif
 

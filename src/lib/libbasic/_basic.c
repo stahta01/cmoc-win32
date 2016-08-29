@@ -2,7 +2,7 @@
 #include "_basic.h"
 #include "coco.h"
 
-struct FileDesc _filedesc[FOPEN_MAX];
+int _filedesc[FOPEN_MAX];
 
 _basic_t _basic;
 

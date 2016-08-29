@@ -4,6 +4,8 @@
 #include <disk.h>
 #include <coco/disk.h>
 
+// Note: Disk only.
+
 int open(char* name, int flags, ...)
 {
     int fd = 0;
@@ -13,13 +15,11 @@ int open(char* name, int flags, ...)
             free((void*)fd);
             fd = 0;
         }
-    } else {
-        if (flags & O_WRONLY) {
-            for (fd = _fcbact; fd > 0; fd--) {
-                byte* fcb = (byte*)((word*)_FCBV1)[fd - 1];
-                if (!fcb[_FCBTYP]) {
-                    break;
-                }
+    } else if (flags & O_WRONLY) {
+        for (fd = _fcbact; fd > 0; fd--) {
+            byte* fcb = (byte*)((word*)_FCBV1)[fd - 1];
+            if (!fcb[_FCBTYP]) {
+                break;
             }
         }
         if (fd) {

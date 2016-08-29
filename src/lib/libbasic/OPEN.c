@@ -1,14 +1,26 @@
 
 #include "_basic.h"
 
-int OPEN(char mode, int f, char* fn, size_t len)
+int OPEN(char mode, int fd, char* fn, size_t len)
 {
-    if (mode == 'I' && f > 0) {
-        char s[32];
-        return _open(&_filedesc[f], strcat(strcpy(s, fn), ".DAT"));
+    mode = (char)toupper(mode);
+    if (fd < 0) {
+        systemf("OPEN \"%c\",#%d,\"%s\"", mode, fd, fn);
     } else {
-        return systemf(len ? "OPEN \"%c\",#%d,\"%s\",%u" : "OPEN \"%c\",#%d,\"%s\"", toupper(mode), f, fn,
-                       len);
+        if (_filedesc[fd]) {
+            fd = 0;
+        } else {
+            switch (mode)   {
+            case 'I':
+                _filedesc[fd] = open(fn, O_RDONLY);
+                break;
+            case 'O':
+                _filedesc[fd] = open(fn, O_WRONLY);
+                break;
+            }
+            fd = _filedesc[fd];
+        }
     }
+    return fd;
 }
 

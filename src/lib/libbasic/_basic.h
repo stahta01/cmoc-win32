@@ -6,8 +6,10 @@
 #include <cmoc.h>
 #include <coco.h>
 #include <disk.h>
+#include <unistd.h>
+#include <fcntl.h>
 
-extern struct FileDesc _filedesc[FOPEN_MAX];
+extern int _filedesc[FOPEN_MAX];
 
 extern byte _pset1_set[8];
 extern byte _pset1_clr[8];

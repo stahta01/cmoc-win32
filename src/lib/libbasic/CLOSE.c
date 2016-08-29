@@ -1,10 +1,9 @@
 
-#include <basic.h>
-#include <fcntl.h>
+#include "_basic.h"
 
-int CLOSE(int fd)
+void CLOSE(int fd)
 {
-    // Dont call close(). We do not alloc FileDesc's
-    return systemf("CLOSE #%d", fd);
+    close(_filedesc[fd]);
+    _filedesc[fd] = 0;
 }
 
