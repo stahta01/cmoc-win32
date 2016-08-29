@@ -10,7 +10,7 @@
 //
 // All accesses to the FAT must use the pointer returned by this function.
 //
-byte* updateFAT()
+byte* _updateFAT()
 {
     if (fatUpToDate) {
         return fatBuffer;

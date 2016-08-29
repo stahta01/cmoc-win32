@@ -1,7 +1,7 @@
 
 #include "_disk.h"
 
-byte setDefaultDriveNo(byte no)
+byte _setDefaultDriveNo(byte no)
 {
     if (no > 3) {
         return FALSE;

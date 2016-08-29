@@ -4,7 +4,7 @@
 // newPos: 2-word position in bytes.
 // Returns 0 for success, -1 for failure.
 //
-sbyte seek(struct FileDesc* fd, word* newPos)
+sbyte _seek(struct FileDesc* fd, word* newPos)
 {
     //printf("\n- seek(at %5u:%3u): start\n", newPos[0], newPos[1]);
     if (fd == 0) {

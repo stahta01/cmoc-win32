@@ -12,7 +12,7 @@ void INPUT(int f, char* s)
 
         char* pos = buf;
         for (;;) {
-            word len = read(&_filedesc[f], pos, 16);
+            word len = _read(&_filedesc[f], pos, 16);
             pos[len] = 0;
             char* eol = strchr(pos, 13);
             if (eol) {
@@ -25,7 +25,7 @@ void INPUT(int f, char* s)
             pos += len;
         }
         adddww(offset, strlen(buf) + 1);
-        seek(&_filedesc[f], offset);
+        _seek(&_filedesc[f], offset);
         strcpy(s, buf);
     } else {
         cgets(s);

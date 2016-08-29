@@ -1,7 +1,7 @@
 
 #include "_disk.h"
 
-void asm setOutputDevice(sbyte deviceNum)
+void asm _setOutputDevice(sbyte deviceNum)
 {
     asm {
         ldb     3,s     // deviceNum
