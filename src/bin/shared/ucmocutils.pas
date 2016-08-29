@@ -187,6 +187,10 @@ type
     class procedure StringDynArrayAppend(var A: TStringDynArray; const S: string);
     class procedure StringDynArrayInsert(var A: TStringDynArray; const I: integer;
       const S: string);
+    class procedure StringDynArrayAppendStrings(var A: TStringDynArray;
+      const AStrings: array of string);
+    class procedure StringDynArrayAppendLib(var A: TStringDynArray; const AName: string);
+    class procedure StringDynArrayAppendLibs(var A: TStringDynArray);
   end;
 
 implementation
@@ -245,6 +249,35 @@ begin
     A[LIndex + 1] := A[LIndex];
   end;
   A[I] := S;
+end;
+
+class procedure OCmoc.StringDynArrayAppendStrings(var A: TStringDynArray;
+  const AStrings: array of string);
+var
+  LString: string;
+begin
+  for LString in AStrings do begin
+    StringDynArrayAppend(A, LString);
+  end;
+end;
+
+class procedure OCmoc.StringDynArrayAppendLib(var A: TStringDynArray; const AName: string);
+begin
+  StringDynArrayAppend(A, Opt_LibInclude2);
+  StringDynArrayAppend(A, AName);
+end;
+
+class procedure OCmoc.StringDynArrayAppendLibs(var A: TStringDynArray);
+begin
+  StringDynArrayAppendLib(A, 'disk');
+  StringDynArrayAppendLib(A, 'motorola');
+  StringDynArrayAppendLib(A, 'cmoc');
+  StringDynArrayAppendLib(A, '6809');
+  StringDynArrayAppendLib(A, 'basic');
+  StringDynArrayAppendLib(A, 'charset');
+  StringDynArrayAppendLib(A, 'conio');
+  StringDynArrayAppendLib(A, 'string');
+  StringDynArrayAppendLib(A, 'c');
 end;
 
 class procedure OCmoc.FileNamesAppend(var A: TStringDynArray; AFileName: string;
