@@ -8,7 +8,7 @@
 // sector: 1..18 (sic).
 // Returns TRUE for success, FALSE for failure.
 //
-byte dskcon(byte operation, byte* buffer, byte drive, byte track, byte sector)
+byte _dskcon(byte operation, byte* buffer, byte drive, byte track, byte sector)
 {
     //printf("- dskcon(%u, 0x%04x, %u, %u, %u)\n", operation, buffer, drive, track, sector);
     if (operation != DSKCON_READ && operation != DSKCON_WRITE) {

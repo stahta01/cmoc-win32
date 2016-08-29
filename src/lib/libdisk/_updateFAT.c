@@ -26,7 +26,7 @@ byte* updateFAT()
     }
 
     byte fatSector[256];
-    if (!readDiskSector(fatSector, curDriveNo, 17, 2)) {
+    if (!_readDiskSector(fatSector, curDriveNo, 17, 2)) {
         printf("updateFAT: failed to read FAT of drive %u\n", curDriveNo);
         return (byte*) 0;
     }

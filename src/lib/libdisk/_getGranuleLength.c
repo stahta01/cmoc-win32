@@ -1,7 +1,7 @@
 
 #include "_disk.h"
 
-word getGranuleLength(byte* fat, byte granule, word numBytesLastSector)
+word _getGranuleLength(byte* fat, byte granule, word numBytesLastSector)
 {
     if (fat == 0) {
         return 0;

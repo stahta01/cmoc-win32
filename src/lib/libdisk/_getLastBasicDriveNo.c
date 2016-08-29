@@ -1,7 +1,7 @@
 
 #include "_disk.h"
 
-byte getLastBasicDriveNo()
+byte _getLastBasicDriveNo()
 {
 #ifdef _COCO_BASIC_
     return * (byte*) 0xEB;

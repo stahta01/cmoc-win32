@@ -3,9 +3,7 @@
 
 void INPUT(int f, char* s)
 {
-    if (f < 1) {
-        cgets(s);
-    } else {
+    if (f) {
         char buf[100];
         word offset[2];
 
@@ -29,6 +27,8 @@ void INPUT(int f, char* s)
         adddww(offset, strlen(buf) + 1);
         seek(&_filedesc[f], offset);
         strcpy(s, buf);
+    } else {
+        cgets(s);
     }
 }
 

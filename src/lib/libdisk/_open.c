@@ -13,7 +13,7 @@
 // close() must be called with fileDesc to release the
 // underlying resources.
 //
-byte open(struct FileDesc* fd, char* filename)
+byte _open(struct FileDesc* fd, char* filename)
 {
     if (fd == 0 || filename == 0) {
         return 0;    // invalid arguments
@@ -22,11 +22,11 @@ byte open(struct FileDesc* fd, char* filename)
     assert(fd->curSector != 0);
 
     char dirEntry[16];
-    if (!findDirEntry(dirEntry, filename)) {
+    if (!_findDirEntry(dirEntry, filename)) {
         return 0;    // file not found
     }
 
-    byte* fat = updateFAT();
+    byte* fat = _updateFAT();
     if (!fat) {
         return 0;
     }
@@ -37,7 +37,7 @@ byte open(struct FileDesc* fd, char* filename)
     fd->drive = curDriveNo;
     fd->firstGran = firstGran;
     fd->numBytesLastSector = numBytesLastSector;
-    computeFileLength(fd->length, fd->firstGran, fd->numBytesLastSector);
+    _computeFileLength(fd->length, fd->firstGran, fd->numBytesLastSector);
 
     _rewind(fd);
 

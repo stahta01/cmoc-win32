@@ -3,15 +3,15 @@
 
 // dirEntry: 16-byte region
 //
-byte findDirEntry(char* dirEntry, char* filename)
+byte _findDirEntry(char* dirEntry, char* filename)
 {
     char normalizedFilename[12];
-    normalizeFilename(normalizedFilename, filename);
+    _normalizeFilename(normalizedFilename, filename);
     //printf("Normalized filename: '%s'\n", normalizedFilename);
 
     for (byte sector = 3; sector <= 18; ++sector) {
         byte dirSector[256];
-        if (!readDiskSector(dirSector, curDriveNo, 17, sector)) {
+        if (!_readDiskSector(dirSector, curDriveNo, 17, sector)) {
             return 0;    // TODO: report I/O error instead of "not found"
         }
 

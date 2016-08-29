@@ -9,7 +9,7 @@
 // Writes 11 non-null characters to the destination buffer,
 // followed by a terminating '\0' character.
 //
-void normalizeFilename(char* dest, char* src)
+void _normalizeFilename(char* dest, char* src)
 {
     char* reader = src;
     byte i;

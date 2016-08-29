@@ -7,14 +7,14 @@ void _rewind(struct FileDesc* fd)
         return;    // invalid arguments
     }
 
-    byte* fat = updateFAT();
+    byte* fat = _updateFAT();
     if (!fat) {
         return;
     }
 
     fd->curGran = fd->firstGran;
     fd->curSec = 1;
-    fd->curGranLen = getGranuleLength(fat, fd->firstGran, fd->numBytesLastSector);
+    fd->curGranLen = _getGranuleLength(fat, fd->firstGran, fd->numBytesLastSector);
     fd->offset[0] = 0;
     fd->offset[1] = 0;
     fd->secOffset = 0;

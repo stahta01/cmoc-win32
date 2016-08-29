@@ -5,7 +5,7 @@
 // *track: 0..16, 18..34.
 // *sec: 0 or 9.
 //
-void granuleToTrack(byte granule, byte* track, byte* sec)
+void _granuleToTrack(byte granule, byte* track, byte* sec)
 {
     byte t = granule;
     asm("LSR", t);  // t = granule / 2

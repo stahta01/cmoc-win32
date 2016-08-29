@@ -3,7 +3,7 @@
 
 // Returns true if sector successfully read, false otherwise.
 //
-byte getNextSector(struct FileDesc* fd)
+byte _getNextSector(struct FileDesc* fd)
 {
     //printf("- getNextSector: start: curGran=%u, curSec=%u\n",
     //        fd->curGran, fd->curSec);
@@ -14,15 +14,15 @@ byte getNextSector(struct FileDesc* fd)
 
     byte track;
     byte sec;
-    granuleToTrack(fd->curGran, &track, &sec);
-    if (!readDiskSector(fd->curSector, fd->drive, track, sec + fd->curSec)) {
+    _granuleToTrack(fd->curGran, &track, &sec);
+    if (!_readDiskSector(fd->curSector, fd->drive, track, sec + fd->curSec)) {
         return 0;
     }
 
     // Sector read successfully.
     // Determine how many bytes in it are part of the file.
     //
-    if (isLastSectorOfFile(fd)) {
+    if (_isLastSectorOfFile(fd)) {
         fd->curSectorAvailBytes = fd->numBytesLastSector;
     } else {
         fd->curSectorAvailBytes = 256;
@@ -31,7 +31,7 @@ byte getNextSector(struct FileDesc* fd)
     // Determine number of sectors in current granule that are
     // part of the file (1..9).
     //
-    byte* fat = updateFAT();
+    byte* fat = _updateFAT();
     if (!fat) {
         return 0;
     }

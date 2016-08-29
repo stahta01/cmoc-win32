@@ -3,7 +3,7 @@
 
 byte writeDiskSector(byte* src, byte drive, byte track, byte sector)
 {
-    return dskcon(DSKCON_WRITE, src, drive, track, sector);
+    return _dskcon(DSKCON_WRITE, src, drive, track, sector);
 }
 
 

@@ -1,7 +1,7 @@
 
 #include "_disk.h"
 
-byte getDefautlDriveNo()
+byte _getDefautlDriveNo()
 {
     return curDriveNo;
 }

@@ -7,7 +7,7 @@
 #include <coco.h>
 #include <disk.h>
 
-extern struct FileDesc _filedesc[5];
+extern struct FileDesc _filedesc[FOPEN_MAX];
 
 extern byte _pset1_set[8];
 extern byte _pset1_clr[8];

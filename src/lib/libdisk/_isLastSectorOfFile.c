@@ -1,9 +1,9 @@
 
 #include "_disk.h"
 
-byte isLastSectorOfFile(struct FileDesc* fd)
+byte _isLastSectorOfFile(struct FileDesc* fd)
 {
-    byte* fat = updateFAT();
+    byte* fat = _updateFAT();
     if (!fat) {
         return 1;    // hope that caller will stop using disk...
     }

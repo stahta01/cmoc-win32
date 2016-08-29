@@ -3,6 +3,6 @@
 
 int KILL(char* fn)
 {
-    return systemf("KILL %s", fn);
+    return remove(fn);
 }
 

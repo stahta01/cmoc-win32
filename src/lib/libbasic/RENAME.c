@@ -3,6 +3,6 @@
 
 int RENAME(char* f1, char* f2)
 {
-    return systemf("RENAME \"%s\" TO \"%s\"", f1, f2);
+    return rename(f1, f2);
 }
 

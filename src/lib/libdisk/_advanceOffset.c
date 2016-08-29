@@ -1,7 +1,7 @@
 
 #include "_disk.h"
 
-void advanceOffset(struct FileDesc* fd, word numBytes)
+void _advanceOffset(struct FileDesc* fd, word numBytes)
 {
     adddww(fd->offset, numBytes);
     fd->secOffset += numBytes;

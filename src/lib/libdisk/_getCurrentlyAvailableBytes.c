@@ -1,7 +1,7 @@
 
 #include "_disk.h"
 
-byte* getCurrentlyAvailableBytes(struct FileDesc* fd, word* numAvailBytes)
+byte* _getCurrentlyAvailableBytes(struct FileDesc* fd, word* numAvailBytes)
 {
     //printf("- getCurrentlyAvailableBytes: start: %u, %u\n",
     //        fd->secOffset, fd->curSectorAvailBytes);

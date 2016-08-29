@@ -1,7 +1,7 @@
 
 #include "_disk.h"
 
-byte getFileLength(struct FileDesc* fd, word* dwLengthInBytes)
+byte _getFileLength(struct FileDesc* fd, word* dwLengthInBytes)
 {
     if (!fd || !dwLengthInBytes) {
         dwLengthInBytes[0] = 0;
@@ -9,7 +9,7 @@ byte getFileLength(struct FileDesc* fd, word* dwLengthInBytes)
         return FALSE;
     }
 
-    return computeFileLength(dwLengthInBytes,
+    return _computeFileLength(dwLengthInBytes,
                              fd->firstGran, fd->numBytesLastSector);
 }
 

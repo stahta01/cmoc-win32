@@ -3,7 +3,7 @@
 
 // TODO: test this on file whose length is multiple of 256 bytes.
 
-byte computeFileLength(word* dwLength, byte firstGran, word numBytesLastSector)
+byte _computeFileLength(word* dwLength, byte firstGran, word numBytesLastSector)
 {
     if (dwLength == 0) {
         return FALSE;
@@ -20,7 +20,7 @@ byte computeFileLength(word* dwLength, byte firstGran, word numBytesLastSector)
         return FALSE;
     }
 
-    byte* fat = updateFAT();
+    byte* fat = _updateFAT();
     if (!fat) {
         return FALSE;
     }

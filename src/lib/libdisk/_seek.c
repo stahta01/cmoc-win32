@@ -47,7 +47,7 @@ sbyte seek(struct FileDesc* fd, word* newPos)
 
     // Determine the granule (0..67) from granIndex and the FAT.
     //
-    byte* fat = updateFAT();
+    byte* fat = _updateFAT();
     if (!fat) {
         return -1;
     }
@@ -68,7 +68,7 @@ sbyte seek(struct FileDesc* fd, word* newPos)
 
     // Determine the current granule's length in bytes.
     //
-    fd->curGranLen = getGranuleLength(fat, gran, fd->numBytesLastSector);
+    fd->curGranLen = _getGranuleLength(fat, gran, fd->numBytesLastSector);
 
     fd->secOffset = offsetInLastGranule & 0xFF;
 
