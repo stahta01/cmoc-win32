@@ -1,9 +1,4 @@
 
-// This file is uses for testing of new functions. It may
-// not contain useful code.
-
-#pragma org $3600
-
 #pragma target coco
 
 #include <basic.h>

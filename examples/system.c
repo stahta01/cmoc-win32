@@ -1,7 +1,5 @@
 
-// This is a sandbox file for the new system commands.
-
-#pragma target dragon
+#pragma target coco
 
 #include <stdio.h>
 #include <string.h>

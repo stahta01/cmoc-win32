@@ -99,13 +99,16 @@ void BITMAPCOPYRECT(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src,
 void BITMAPSTRETCH(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src);
 void BITMAPDRAW(BITMAP* dst, int x, int y, BITMAP* src);
 
+int CLOADM(char* fn, void* offset);
+int CSAVEM(char* fn, void* start, void* finish, void* exec);
+
 int BACKUP(byte d);
 int BACKUP2(byte d1, byte d2);
 int DIR(byte d);
 int DSKINI(byte d);
 int DRIVE(byte d);
 int KILL(char* fn);
-int LOADM(char* fn, void* addr);
+int LOADM(char* fn, void* offset);
 int SAVEM(char* fn, void* start, void* finish, void* exec);
 int COPY(char* f1, char* f2);
 
