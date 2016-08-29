@@ -32,74 +32,50 @@
 /*                                                                           */
 /*****************************************************************************/
 
-
-
 #ifndef _UNISTD_H
 #define _UNISTD_H
 
+#include <disk.h>
 
-
-/*****************************************************************************/
-/*                                   Data                                    */
-/*****************************************************************************/
-
-
-
-/* Predefined file handles */
+// Predefined file handles
 #define STDIN_FILENO    0
 #define STDOUT_FILENO   1
 #define STDERR_FILENO   2
 
-/* WE need size_t */
+// WE need size_t
 #ifndef _HAVE_size_t
 #define _HAVE_size_t
 typedef unsigned size_t;
 #endif
 
-/* We need off_t if sys/types is not included */
+// We need off_t if sys/types is not included
 #ifndef _HAVE_off_t
 #define _HAVE_off_t
 typedef long int off_t;
 #endif
 
-/* Stuff for getopt */
+// Stuff for getopt
 extern char* optarg;
 extern int optind, opterr, optopt;
 
+// Files
+int write(int fd, void* buf, unsigned count);
+int read(int fd, void* buf, unsigned count);
+off_t lseek(int fd, off_t offset, int whence);
+int unlink(char* name);
 
+// Directories
+int chdir(char* name);
+char* getcwd(char* buf, size_t size);
+int mkdir(char* name, ...);               /* May take a mode argument */
+int rmdir(char* name);
 
-/*****************************************************************************/
-/*                                   Code                                    */
-/*****************************************************************************/
+// Others
+unsigned sleep(unsigned seconds);
+int getopt(int argc, char* const* argv, char* optstring);
 
+// Non standard
+int exec(char* progname, char* cmdline);
 
-
-/* Files */
-int __fastcall__ write(int fd, const void* buf, unsigned count);
-int __fastcall__ read(int fd, void* buf, unsigned count);
-off_t __fastcall__ lseek(int fd, off_t offset, int whence);
-int __fastcall__ unlink(const char* name);      /* Same as remove() */
-
-/* Directories */
-int __fastcall__ chdir(const char* name);
-char* __fastcall__ getcwd(char* buf, size_t size);
-int mkdir(const char* name, ...);               /* May take a mode argument */
-int __fastcall__ rmdir(const char* name);
-
-/* Others */
-unsigned __fastcall__ sleep(unsigned seconds);
-int __fastcall__ getopt(int argc, char* const* argv, const char* optstring);
-
-/* Non standard: */
-#if __CC65_STD__ == __CC65_STD_CC65__
-int __fastcall__ exec(const char* progname, const char* cmdline);
 #endif
-
-
-
-/* End of unistd.h */
-#endif
-
-
-
 

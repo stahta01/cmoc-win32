@@ -37,29 +37,31 @@ extern byte curDriveNo;
 extern byte* fatBuffer;  // will point to an array of MAX_NUM_GRANULES entries
 extern byte fatUpToDate;  // when TRUE, fatBuffer[] does not need to be reloaded
 
-byte dskcon(byte operation, byte* buffer, byte drive, byte track, byte sector);
-byte readDiskSector(byte* dest, byte drive, byte track, byte sector);
-byte writeDiskSector(byte* src, byte drive, byte track, byte sector);
-byte open(struct FileDesc* fd, char* filename);
-void _rewind(struct FileDesc* fd);
-byte* updateFAT();
-sbyte close(struct FileDesc* fd);
-word read(struct FileDesc* fd, char* buf, word numBytesRequested);
+// Move this to cmoc.h
 sbyte dwcompare(word* a, word* b);
-sbyte seek(struct FileDesc* fd, word* newPos);
-byte* getCurrentlyAvailableBytes(struct FileDesc* fd, word* numAvailBytes);
-void advanceOffset(struct FileDesc* fd, word numBytes);
-byte getNextSector(struct FileDesc* fd);
-void granuleToTrack(byte granule, byte* track, byte* sec);
-byte isLastSectorOfFile(struct FileDesc* fd);
-byte getFileLength(struct FileDesc* fd, word* dwLengthInBytes);
-byte computeFileLength(word* dwLength, byte firstGran, word numBytesLastSector);
-word getGranuleLength(byte* fat, byte granule, word numBytesLastSector);
-byte findDirEntry(char* dirEntry, char* filename);
-void normalizeFilename(char* dest, char* src);
-byte getLastBasicDriveNo();
-byte setDefaultDriveNo(byte no);
-byte getDefautlDriveNo();
+
+byte _dskcon(byte operation, byte* buffer, byte drive, byte track, byte sector);
+byte _readDiskSector(byte* dest, byte drive, byte track, byte sector);
+byte _writeDiskSector(byte* src, byte drive, byte track, byte sector);
+byte _open(struct FileDesc* fd, char* filename);
+void _rewind(struct FileDesc* fd);
+byte* _updateFAT();
+sbyte _close(struct FileDesc* fd);
+word _read(struct FileDesc* fd, char* buf, word numBytesRequested);
+sbyte _seek(struct FileDesc* fd, word* newPos);
+byte* _getCurrentlyAvailableBytes(struct FileDesc* fd, word* numAvailBytes);
+void _advanceOffset(struct FileDesc* fd, word numBytes);
+byte _getNextSector(struct FileDesc* fd);
+void _granuleToTrack(byte granule, byte* track, byte* sec);
+byte _isLastSectorOfFile(struct FileDesc* fd);
+byte _getFileLength(struct FileDesc* fd, word* dwLengthInBytes);
+byte _computeFileLength(word* dwLength, byte firstGran, word numBytesLastSector);
+word _getGranuleLength(byte* fat, byte granule, word numBytesLastSector);
+byte _findDirEntry(char* dirEntry, char* filename);
+void _normalizeFilename(char* dest, char* src);
+byte _getLastBasicDriveNo();
+byte _setDefaultDriveNo(byte no);
+byte _getDefautlDriveNo();
 
 #endif
 
