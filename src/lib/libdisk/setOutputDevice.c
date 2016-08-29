@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_disk.h"
 
 void asm setOutputDevice(sbyte deviceNum)
 {

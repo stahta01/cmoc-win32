@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_disk.h"
 
 // Returns true if sector successfully read, false otherwise.
 //

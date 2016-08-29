@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_disk.h"
 
 // operation: DSKCON operation code
 // dest: non null pointer to a 256-byte region.

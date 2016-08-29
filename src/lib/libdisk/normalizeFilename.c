@@ -1,6 +1,5 @@
 
-#include <ctype.h>
-#include <coco.h>
+#include "_disk.h"
 
 // Normalizes the filename in 'src' into the 12-byte buffer
 // designated by 'dest'.

@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_disk.h"
 
 byte setDefaultDriveNo(byte no)
 {

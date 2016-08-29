@@ -1,6 +1,5 @@
 
-#include <string.h>
-#include <coco.h>
+#include "_disk.h"
 
 // dirEntry: 16-byte region
 //

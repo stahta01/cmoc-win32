@@ -1,6 +1,5 @@
 
-#include <cmoc.h>
-#include <coco.h>
+#include "_disk.h"
 
 void advanceOffset(struct FileDesc* fd, word numBytes)
 {

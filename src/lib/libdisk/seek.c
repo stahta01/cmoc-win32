@@ -1,6 +1,5 @@
 
-#include <assert.h>
-#include <coco.h>
+#include "_disk.h"
 
 // newPos: 2-word position in bytes.
 // Returns 0 for success, -1 for failure.

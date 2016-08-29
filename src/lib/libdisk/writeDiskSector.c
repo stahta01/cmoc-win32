@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_disk.h"
 
 byte writeDiskSector(byte* src, byte drive, byte track, byte sector)
 {

@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_disk.h"
 
 byte getFileLength(struct FileDesc* fd, word* dwLengthInBytes)
 {
@@ -12,5 +12,4 @@ byte getFileLength(struct FileDesc* fd, word* dwLengthInBytes)
     return computeFileLength(dwLengthInBytes,
                              fd->firstGran, fd->numBytesLastSector);
 }
-
 

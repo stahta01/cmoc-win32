@@ -1,6 +1,5 @@
 
-#include <assert.h>
-#include <coco.h>
+#include "_disk.h"
 
 // Initializes a file descriptor with the given filename.
 // The filename must not contain a drive specification

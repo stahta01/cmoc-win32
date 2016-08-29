@@ -1,6 +1,5 @@
 
-#include <cmoc.h>
-#include <coco.h>
+#include "_disk.h"
 
 // TODO: test this on file whose length is multiple of 256 bytes.
 

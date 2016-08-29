@@ -55,11 +55,15 @@ constructor CCmocProcess_ASM.Create(AOwner: TComponent);
 begin
   inherited;
   FAsmCode := TStringList.Create;
+
   FExportSymbols := TStringList.Create;
   FExportSymbols.Sorted := True;
+  FExportSymbols.CaseSensitive := True;
   FExportSymbols.Duplicates := dupIgnore;
+
   FExternSymbols := TStringList.Create;
   FExternSymbols.Sorted := True;
+  FExternSymbols.CaseSensitive := True;
   FExternSymbols.Duplicates := dupIgnore;
 end;
 

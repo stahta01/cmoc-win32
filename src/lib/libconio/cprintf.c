@@ -3,8 +3,9 @@
 
 int cprintf(char* fmt, ...)
 {
-    int result = vsprintf((char*)_linbuf + 1, fmt, (va_list)&fmt);
-    cputs(_linbuf + 1);
+    char s[BUFSIZ];
+    int result = vsprintf(s, fmt, (va_list)&fmt);
+    cputs(s);
     return result;
 }
 

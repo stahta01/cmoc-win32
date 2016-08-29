@@ -18,7 +18,7 @@ int _system(void)
 {
     asm {
         pshs u
-        ldx     #$FFFF
+        ldx     #0  // Was -1
         stx     _CURLIN
         ldx     #_LINBUF
         stx     _CHARAD

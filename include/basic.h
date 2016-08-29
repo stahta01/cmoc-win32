@@ -12,6 +12,7 @@
 #include <motorola/types.h>
 // Use dragon equates to ensure we are compatible
 #include <dragon/equates.h>
+//#include <equates.h>
 
 #define COLOR_BLACK       0
 #define COLOR_GREEN       1
@@ -39,6 +40,8 @@ extern _basic_t _basic;
 int ABS(int numeric);
 byte PEEK(word addr);
 void POKE(word addr, byte value);
+void* VARPTR(char* s);
+void INPUT(int f, char* s);
 
 void SOUND(byte tone, byte duration);
 byte JOYSTK(int j);
@@ -102,6 +105,8 @@ void BITMAPDRAW(BITMAP* dst, int x, int y, BITMAP* src);
 
 int CLOADM(char* fn, void* offset);
 int CSAVEM(char* fn, void* start, void* finish, void* exec);
+
+int PRINT(int f, char* fmt, ...);
 
 int BACKUP(byte d);
 int BACKUP2(byte d1, byte d2);

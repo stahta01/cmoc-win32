@@ -4,6 +4,6 @@
 
 char* gets(char* s)
 {
-    return fgets(s, 255, stdin);
+    return fgets(s, BUFSIZ, stdin);
 }
 

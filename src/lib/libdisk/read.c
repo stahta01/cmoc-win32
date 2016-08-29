@@ -1,6 +1,5 @@
 
-#include <string.h>
-#include <coco.h>
+#include "_disk.h"
 
 // Returns number of bytes read.
 //

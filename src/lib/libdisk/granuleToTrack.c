@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_disk.h"
 
 // Output:
 // *track: 0..16, 18..34.

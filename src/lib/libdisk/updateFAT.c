@@ -1,8 +1,5 @@
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <coco.h>
+#include "_disk.h"
 
 // Reads the current drive's FAT and returns the address of the
 // internal buffer that contains it.

@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_disk.h"
 
 word getGranuleLength(byte* fat, byte granule, word numBytesLastSector)
 {

@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_disk.h"
 
 void _rewind(struct FileDesc* fd)
 {

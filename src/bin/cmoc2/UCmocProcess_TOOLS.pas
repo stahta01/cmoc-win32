@@ -157,7 +157,7 @@ begin
     LSrcLib := Copy(ChangeFileExt(ExtractFileName(ASrc), EmptyStr), 4, MaxInt);
     Execute(OCmoc.FileNameTool(Tool_LWLINK), TStringDynArray.Create(Opt_Output2, ADst, Opt_Format2,
       Format_DECB, Opt_LibPath2, OCmoc.PathToLib, Opt_LibPath2, ExtractFilePath(ASrc),
-      Opt_LibInclude2, LSrcLib, Opt_LibInclude2, ATarget, Opt_LibInclude2,
+      Opt_LibInclude2, LSrcLib, Opt_LibInclude2, ATarget, Opt_LibInclude2, 'disk', Opt_LibInclude2,
       'motorola', Opt_LibInclude2, '6809', Opt_LibInclude2, 'basic', Opt_LibInclude2, 'charset',
       Opt_LibInclude2, 'conio', Opt_LibInclude2, 'c', Opt_ScriptFile2,
       OCmoc.PathToLib + 'linkscript.txt', Opt_MapFile2, AMap, OCmoc.PathToLib +
@@ -206,7 +206,8 @@ begin
     end;
   end;
   WriteLn('output=', OCmoc.StringQuoted(ADst), ' target=', OCmoc.StringQuoted(ATarget),
-    ' origin=', OCmoc.IntegerToDisplay(AOrigin), ' finish=', OCmoc.IntegerToDisplay(AOrigin + LSize),
+    ' origin=', OCmoc.IntegerToDisplay(AOrigin), ' finish=',
+    OCmoc.IntegerToDisplay(AOrigin + LSize),
     ' length=', OCmoc.IntegerToDisplay(LSize));
 end;
 

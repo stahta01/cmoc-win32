@@ -1,5 +1,8 @@
 
 #include "_basic.h"
+#include "coco.h"
+
+struct FileDesc _filedesc[5];
 
 _basic_t _basic;
 

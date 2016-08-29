@@ -1,6 +1,5 @@
 
-#include <assert.h>
-#include <coco.h>
+#include "_disk.h"
 
 byte* getCurrentlyAvailableBytes(struct FileDesc* fd, word* numAvailBytes)
 {

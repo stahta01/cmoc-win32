@@ -3,6 +3,11 @@
 #define _BASIC_DEFS_H
 
 #include <basic.h>
+#include <cmoc.h>
+#include <coco.h>
+#include <disk.h>
+
+extern struct FileDesc _filedesc[5];
 
 extern byte _pset1_set[8];
 extern byte _pset1_clr[8];
