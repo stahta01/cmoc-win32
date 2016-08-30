@@ -116,6 +116,7 @@ type
     MenuHelpXRoarEmulator: TMenuItem;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
+    MenuToolsSep1: TMenuItem;
     MenuTools: TMenuItem;
     MenuToolsMessImageTool: TMenuItem;
     MenuToolsConsole: TMenuItem;

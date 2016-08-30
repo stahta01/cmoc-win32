@@ -13,11 +13,11 @@ int main(void)
 
     puts("Write out text file:");
 
-    OPEN_O(1, "FILE.DAT");
-    PRINT(1, "Derek\r");
-    PRINT(1, "Was\r");
-    PRINT(1, "Here\r");
-    CLOSE(1);
+    //OPEN_O(1, "FILE.DAT");
+    //PRINT(1, "Derek\r");
+    //PRINT(1, "Was\r");
+    //PRINT(1, "Here\r");
+    //CLOSE(1);
     /*
     int fd = open("FILE.DAT", O_WRONLY);
     if (fd) {
@@ -27,11 +27,13 @@ int main(void)
     }
     */
 
-    int fd = open("FILE.DAT", O_RDONLY);
+    int fd = open("DOC.TXT", O_RDONLY);
     printf("SIZE:%d\n", lsize(fd));
     if (fd) {
         while (lgets(fd, s, 50)) {
-            printf(">%s", s);
+            if (s[0] != '\n') {
+                printf("%s", s);
+            }
         }
         close(fd);
     }
