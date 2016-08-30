@@ -3,6 +3,7 @@
 
 #include <basic.h>
 #include <unistd.h>
+#include <math.h>
 
 void ClearBoard(void)
 {

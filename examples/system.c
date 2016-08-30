@@ -21,8 +21,8 @@ int main(void)
 
     char s[100];
 
-    putenv("A=DEREK");
-    putenvstr("B", "EVANS");
+    putenv("A=COLOUR");
+    putenvstr("B", "COMPUTER!");
     printf("A=%s\n", getenv("A"));
     printf("B=%s\n", getenv("B"));
 

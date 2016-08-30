@@ -28,8 +28,7 @@ void qsort(void* base, size_t num, size_t width,
         _qsort((char*)base, temp, left, right, width, cmp);
         free(temp);
     } else {
-        _crt_base->_crt_errno = ENOMEM;
-        _crt_base->_crt_doserrno = ERROR_NOT_ENOUGH_MEMORY;
+        _sys_nerr = ENOMEM;
     }
 }
 

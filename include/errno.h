@@ -1,9 +1,15 @@
+
 /*---------------------------------------------------------------------------*/
 /* errno.h - error number header file                                        */
 /*---------------------------------------------------------------------------*/
 
 #ifndef _ERRNO_H
 #define _ERRNO_H
+
+extern int errno;
+extern int _doserrno;
+extern int _sys_nerr;
+extern char* _sys_errlist[10];
 
 #define EZERO           0
 #define EDOM            1
@@ -45,12 +51,5 @@
 #define ENOTEXIST      37
 #define EUNKNOWN       38
 
-#include <crtdef.h>
-
-/*---------------------------------------------------------------------------*/
-/* macro definitions                                                         */
-/*---------------------------------------------------------------------------*/
-#define errno (_crt_base->_crt_errno)
-#define _doserrno (_crt_base->_crt_doserrno)
-
 #endif
+

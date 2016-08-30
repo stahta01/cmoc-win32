@@ -24,9 +24,6 @@
 // max. length of extension component
 #define _MAX_EXT        3
 
-#define _sys_nerr       (_crt_base->_crt_nerr)
-#define _sys_errlist    (_crt_base->_crt_syserrlist)
-
 // Return type of the div function
 typedef struct {
     int rem;

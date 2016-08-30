@@ -23,6 +23,17 @@
 
 #include <motorola/types.h>
 
+#define CMOC_OS_UNKNOWN     0
+#define CMOC_OS_COCO1       1
+#define CMOC_OS_COCO2       2
+#define CMOC_OS_COCO3       3
+#define CMOC_OS_DRAGON32    4
+#define CMOC_OS_DRAGON64    5
+
+// Get the ROM version. Returns one of the CMOC_OS_xxx codes.
+unsigned char get_ostype(void);
+
+
 // Double-word to ASCII.
 // Converts the unsigned 32-bit integer formed by hi * 65536 + lo into
 // an ASCII decimal representation that gets written to 'out'.

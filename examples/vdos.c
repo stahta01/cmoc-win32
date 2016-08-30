@@ -1,4 +1,7 @@
 
+// This is work in progress.
+// Im making a virtual disk drive for the upper 32k (under ROM)
+
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>

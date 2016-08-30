@@ -3,15 +3,13 @@
 /* umask() - set default file permission mask                                */
 /*---------------------------------------------------------------------------*/
 
-#include <crt.h>
-
-int _crt_umask = 0;
+int __umask = 0;
 
 int umask(int pmode)
 {
     int ppmode;
-    ppmode = _crt_umask;
-    _crt_umask = pmode;
+    ppmode = __umask;
+    __umask = pmode;
     return ppmode;
 }
 

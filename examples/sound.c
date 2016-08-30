@@ -1,5 +1,5 @@
 
-#pragma target dragon
+#pragma target coco
 
 #include <conio.h>
 #include <stdlib.h>

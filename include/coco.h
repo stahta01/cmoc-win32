@@ -72,7 +72,3 @@ byte hset(word x, word y, byte color);
 
 #endif // _COCO_H
 
-
-
-
-

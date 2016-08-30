@@ -6,7 +6,6 @@
 /* Note: this module also includes the strtol() and strtoul() functions.     */
 /*---------------------------------------------------------------------------*/
 
-#include <crt.h>
 #include <ctype.h>
 #include <errno.h>
 #include <limits.h>
@@ -97,7 +96,7 @@ unsigned long _strtoul(char* nptr, char** endptr, int base, int svalue)
             value = -(long)value;
         }
     } else {
-        _crt_base->_crt_errno = ERANGE;
+        _sys_nerr = ERANGE;
         value = errval;
     }
     if (endptr != NULL) {
