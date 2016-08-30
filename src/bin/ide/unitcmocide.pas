@@ -28,7 +28,7 @@ interface
 uses
   Classes, ComCtrls, Controls, Dialogs, ExtCtrls, FileUtil, Forms, Graphics,
   LCLIntf, Menus, MouseAndKeyInput, process, StreamIO, StrUtils, SynEdit, SynHighlighterAny,
-  SysUtils, UCmocIDE, UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
+  SysUtils, Types, UCmocIDE, UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
 
 type
 
@@ -177,6 +177,7 @@ type
   strict private
     FSynEditLinesCount: integer;
     FTarget: string;
+    FOptions: TStrings;
     FOrigin: cardinal;
   strict private
     function FileNameSrc: TFileName;
@@ -187,8 +188,7 @@ type
     procedure CheckRoms;
   strict private
     procedure OpenBrowser(AURL: string);
-    procedure ExecuteXRoar(const AMachine: string; const AFileName: TFileName);
-    procedure ExecuteVcc(const AFileName: TFileName);
+    procedure ExecuteEmulator(const AFileName: TFileName);
     function Execute(const AExecutable: string; const AParameters: array of string;
       const AExternal: boolean): integer;
     function RunTool(const ATool: string; const AParameters: array of string;
@@ -211,6 +211,8 @@ procedure TFormCmocIDE.FormCreate(ASender: TObject);
 var
   LStream: CStringsStream;
 begin
+  FOptions := TStringList.Create;
+
   LStream := CStringsStream.Create(SynEditLog.Lines);
   AssignStream(Output, LStream);
   Rewrite(Output);
@@ -438,7 +440,7 @@ begin
     CurrentDirectory := ExtractFileDir(Executable);
     Parameters.Clear;
     Parameters.AddStrings(AParameters);
-    //WriteLn('# ', Executable, ' ', Parameters.CommaText);
+    WriteLn('# ', Executable, ' ', Parameters.CommaText);
     try
       Execute;
     except
@@ -548,11 +550,15 @@ begin
 end;
 
 procedure TFormCmocIDE.MenuRunCompileClick(ASender: TObject);
+var
+  LOptions: string;
 begin
   SynEditLog.Clear;
   FTarget := Target_COCO;
   FOrigin := Origin_DEFAULT;
-  OCmoc.SourcePragmas(nil, FormCmocIDESynEdit.SynEdit.Lines, FOrigin, FTarget);
+  LOptions := default(string);
+  OCmoc.SourcePragmas(nil, FormCmocIDESynEdit.SynEdit.Lines, FOrigin, FTarget, LOptions);
+  FOptions.CommaText := LOptions;
   if BeginProcess(FileNameObj, FileNameSrcExists) then begin
     RunTool(Tool_CMOC2, [Opt_DontLink1, Opt_Output2, FileNameObj, Opt_Target2,
       FTarget, Opt_Origin2, IntToStr(FOrigin), FileNameSrc], False);
@@ -606,55 +612,58 @@ begin
   end;
 end;
 
-procedure TFormCmocIDE.ExecuteXRoar(const AMachine: string; const AFileName: TFileName);
+procedure TFormCmocIDE.ExecuteEmulator(const AFileName: TFileName);
+var
+  LParams: TStringDynArray;
 begin
-  CheckRoms;
-  WriteLn('// Running XRoar emulator. Machine=', AMachine);
-  try
-    Execute(OCmoc.PathToXroar + 'xroar.exe', ['-rompath', 'roms',
-      '-machine', AMachine, '-joy-right', 'mjoy0', '-kbd-translate', '-nodos', AFileName], True);
-  except
-    OCmoc.RaiseError('XRoar failed to execute');
-  end;
-end;
+  LParams := default(TStringDynArray);
 
-procedure TFormCmocIDE.ExecuteVcc(const AFileName: TFileName);
-begin
-  WriteLn('// Running Vcc emulator');
-  try
-    Execute(OCmoc.PathToVcc + 'Vcc.exe', [AFileName], True);
-  except
-    OCmoc.RaiseError('Vcc failed to execute');
+  if SameText(FOptions.Values[Opt_Machine2], 'coco3') then begin
+    WriteLn('// Running Vcc emulator');
+    try
+      Execute(OCmoc.PathToVcc + 'Vcc.exe', [AFileName], True);
+    except
+      OCmoc.RaiseError('Vcc failed to execute');
+    end;
+  end else begin
+    CheckRoms;
+    WriteLn('// Running XRoar emulator. Machine=', FOptions.Values[Opt_Machine2]);
+    try
+      OCmoc.StringDynArrayAppendStrings(LParams, ['-rompath', 'roms', '-joy-right',
+        'mjoy0', '-kbd-translate']);
+      OCmoc.StringDynArrayAppendOptions(LParams, FOptions, [Opt_Machine2, '-bas',
+        '-extbas', '-dos', '-cart', '-noextbas', '-nodos', '-ram', '-no-tape-fast']);
+      OCmoc.StringDynArrayAppend(LParams, AFileName);
+      Execute(OCmoc.PathToXroar + 'xroar.exe', LParams, True);
+    except
+      OCmoc.RaiseError('XRoar failed to execute');
+    end;
   end;
 end;
 
 procedure TFormCmocIDE.MenuRunBuildAndRunClick(ASender: TObject);
 begin
   MenuRunBuild.Click;
-  case FTarget of
-    Target_COCO: begin
-      ExecuteVcc(FileNameBin);
-    end;
-    Target_DRAGON: begin
-      ExecuteXRoar('dragon64', FileNameBin);
-    end else begin
-      OCmoc.RaiseError('Unknown target machine');
+  if FOptions.IndexOfName(Opt_Machine2) < 0 then begin
+    case FTarget of
+      Target_COCO: begin
+        FOptions.Values[Opt_Machine2] := 'coco3';
+      end;
+      Target_DRAGON: begin
+        FOptions.Values[Opt_Machine2] := 'dragon64';
+      end else begin
+        OCmoc.RaiseError('Unknown target machine');
+      end;
     end;
   end;
+  ExecuteEmulator(FileNameBin);
 end;
 
 procedure TFormCmocIDE.MenuEmulatorsClick(ASender: TObject);
-var
-  LMachine: string;
 begin
-  LMachine := (ASender as TMenuItem).Hint;
-  if Length(LMachine) > 0 then begin
-    if SameText(LMachine, 'coco3') then begin
-      ExecuteVcc(EmptyStr);
-    end else begin
-      ExecuteXRoar(LMachine, EmptyStr);
-    end;
-  end;
+  FOptions.Clear;
+  FOptions.Values['-machine'] := (ASender as TMenuItem).Hint;
+  ExecuteEmulator(EmptyStr);
 end;
 
 procedure TFormCmocIDE.MenuToolsConsoleClick(Sender: TObject);

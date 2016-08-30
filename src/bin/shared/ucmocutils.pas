@@ -91,6 +91,7 @@ const
   Opt_Werror1 = '-Werror';
   Opt_NoLineInfo1 = '-P';
   Opt_DontAssemble1 = '-S';
+  Opt_Machine2 = '-machine';
 
   Def_CMOC = '__CMOC__';
   Def_CMOC_VERSION = Def_CMOC + '=1.30';
@@ -177,9 +178,9 @@ type
     class function SymbolIsPublic(const A: string): boolean;
   public
     class procedure SourcePragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
-      var ATarget: string);
+      var ATarget: string; var AOptions: string);
     class procedure SourcePragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
-      var ATarget: string);
+      var ATarget: string; var AOptions: string);
   public
     class procedure FileNamesAppend(var A: TStringDynArray; AFileName: TFileName;
       const AMustExist: boolean);
@@ -192,6 +193,8 @@ type
       const AStrings: array of string);
     class procedure StringDynArrayAppendLib(var A: TStringDynArray; const AName: string);
     class procedure StringDynArrayAppendLibs(var A: TStringDynArray);
+    class procedure StringDynArrayAppendOptions(var A: TStringDynArray;
+      const AOptions: TStrings; const AInclude: array of string);
   end;
 
 implementation
@@ -208,10 +211,14 @@ end;
 
 class function OCmoc.StringToInteger(const A: string): longint;
 begin
-  if AnsiStartsStr('0x', A) then begin
-    Result := StrToInt('$' + Copy(A, 3, MaxInt));
-  end else begin
-    Result := StrToInt(A);
+  try
+    if AnsiStartsStr('0x', A) then begin
+      Result := StrToInt('$' + Copy(A, 3, MaxInt));
+    end else begin
+      Result := StrToInt(A);
+    end;
+  except
+    RaiseError(StringQuoted(A) + ' is an invalid number');
   end;
 end;
 
@@ -281,6 +288,29 @@ begin
   StringDynArrayAppendLib(A, 'ctype');
   StringDynArrayAppendLib(A, 'string');
   StringDynArrayAppendLib(A, 'c');
+end;
+
+class procedure OCmoc.StringDynArrayAppendOptions(var A: TStringDynArray;
+  const AOptions: TStrings; const AInclude: array of string);
+var
+  LIndex, LPos: integer;
+  LName, LValue: string;
+begin
+  for LIndex := 0 to AOptions.Count - 1 do begin
+    LName := Trim(AOptions[LIndex]);
+    LPos := Pos('=', LName);
+    if LPos = 0 then begin
+      LPos := Length(LName) + 1;
+    end;
+    LValue := Trim(Copy(LName, LPos + 1, MaxInt));
+    LName := Trim(Copy(LName, 1, LPos - 1));
+    if AnsiMatchText(LName, AInclude) then begin
+      StringDynArrayAppend(A, LName);
+      if Length(LValue) > 0 then begin
+        StringDynArrayAppend(A, LValue);
+      end;
+    end;
+  end;
 end;
 
 class procedure OCmoc.FileNamesAppend(var A: TStringDynArray; AFileName: string;
@@ -425,15 +455,13 @@ begin
 end;
 
 class procedure OCmoc.SourcePragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
-  var ATarget: string);
+  var ATarget: string; var AOptions: string);
 var
   LIndex: integer;
   LName: string;
   LParser: OAsmParser;
 begin
   LParser := default(OAsmParser);
-  //ATarget := Target_COCO;
-  //AOrigin := Origin_DEFAULT;
   if Assigned(ADst) then begin
     ADst.Clear;
   end;
@@ -442,20 +470,22 @@ begin
     LParser.SetString(ASrc[LIndex]);
     if LParser.NextAndTokenIs('#') and LParser.NextAndTokenIs('pragma') and LParser.Next then begin
       LName := LParser.Token;
-      if not LParser.Next then begin
-        RaiseError('missing pragma value');
-      end;
       case LName of
         'org': begin
+          LParser.Next;
           AOrigin := OCmoc.StringToInteger(LParser.Token);
         end;
+        'options': begin
+          AOptions := Trim(LParser.Remaining);
+        end;
         'target': begin
+          LParser.Next;
           ATarget := LParser.Token;
           if not AnsiMatchStr(ATarget, TargetList) then begin
             RaiseError('Unknown target', ATarget);
           end;
         end else begin
-          RaiseError('Unknown pragma name');
+          RaiseError('Unknown pragma name', LName);
         end;
       end;
     end else begin
@@ -467,7 +497,7 @@ begin
 end;
 
 class procedure OCmoc.SourcePragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
-  var ATarget: string);
+  var ATarget: string; var AOptions: string);
 var
   LDst, LSrc: TStrings;
 begin
@@ -476,7 +506,7 @@ begin
     LSrc.LoadFromFile(ASrc);
     LDst := TStringList.Create;
     try
-      SourcePragmas(LDst, LSrc, AOrigin, ATarget);
+      SourcePragmas(LDst, LSrc, AOrigin, ATarget, AOptions);
       LDst.SaveToFile(ADst);
     finally
       FreeAndNil(LDst);

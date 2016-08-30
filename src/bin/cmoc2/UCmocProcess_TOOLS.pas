@@ -33,7 +33,7 @@ type
   CCmocProcess_TOOLS = class(CCmocProcess)
   public
     FOrigin: cardinal;
-    FTarget: string;
+    FTarget, FOptions: string;
   strict private
     procedure LWLINK(const ADst, ASrc, AMap: TFileName; const ATarget: string);
   protected
@@ -73,7 +73,7 @@ begin
       'long=int', Opt_Define2, 'restrict=', Opt_Include2,
       OCmoc.DosToUnix(OCmoc.PathToPackage + 'include')));
 
-    OCmoc.SourcePragmas(LPre, LPre, FOrigin, FTarget);
+    OCmoc.SourcePragmas(LPre, LPre, FOrigin, FTarget, FOptions);
 
     LParams := TStringDynArray.Create(Opt_EmitUncalled1, Opt_DontLink1);
     if AWerror then begin
@@ -160,7 +160,8 @@ begin
       Format_DECB, Opt_LibPath2, OCmoc.PathToLib, Opt_LibPath2, ExtractFilePath(ASrc),
       Opt_LibInclude2, LSrcLib, Opt_LibInclude2, ATarget);
     OCmoc.StringDynArrayAppendLibs(LParams);
-    OCmoc.StringDynArrayAppendStrings(LParams, [Opt_ScriptFile2, OCmoc.PathToLib + 'linkscript.txt',
+    OCmoc.StringDynArrayAppendStrings(LParams, [Opt_ScriptFile2, OCmoc.PathToLib +
+      'linkscript.txt',
       Opt_MapFile2, AMap, OCmoc.PathToLib + 'program_start.o', OCmoc.PathToLib +
       'program_end.o']);
     Execute(OCmoc.FileNameTool(Tool_LWLINK), LParams);
