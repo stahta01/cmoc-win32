@@ -160,6 +160,7 @@ type
   public
     class function PathToInclude: TFileName;
     class function PathToLib: TFileName;
+    class function PathToBin: TFileName;
     class function PathToPackage: TFileName;
     class function PathToXRoar: TFileName;
     class function PathToXRoarRoms: TFileName;
@@ -327,6 +328,11 @@ end;
 class function OCmoc.PathToVcc: TFileName;
 begin
   Result := PathToPackage + 'vcc/';
+end;
+
+class function OCmoc.PathToBin: TFileName;
+begin
+  Result := PathToPackage + 'bin/';
 end;
 
 class function OCmoc.PathToLib: TFileName;

@@ -70,6 +70,18 @@ type
     MenuEditSep5: TMenuItem;
     MenuEditUndo: TMenuItem;
     MenuEditUppercaseSelection: TMenuItem;
+    MenuEmulators: TMenuItem;
+    MenuEmulatorsColourComputer3: TMenuItem;
+    MenuEmulatorsColourComputerNTSC: TMenuItem;
+    MenuEmulatorsColourComputerPAL: TMenuItem;
+    MenuEmulatorsDragon200E: TMenuItem;
+    MenuEmulatorsDragon32: TMenuItem;
+    MenuEmulatorsDragon64: TMenuItem;
+    MenuEmulatorsDynacmoMX1600: TMenuItem;
+    MenuEmulatorsSep1: TMenuItem;
+    MenuEmulatorsTanoDragon: TMenuItem;
+    MenuEmulatorsVcc: TMenuItem;
+    MenuEmulatorsXRoarEmulator: TMenuItem;
     MenuFile: TMenuItem;
     MenuFileExit: TMenuItem;
     MenuFileNew: TMenuItem;
@@ -85,41 +97,34 @@ type
     MenuFileSep3: TMenuItem;
     MenuHelp: TMenuItem;
     MenuHelpAbout: TMenuItem;
+    MenuHelpCMOCManual: TMenuItem;
     MenuHelpCmocOnline: TMenuItem;
     MenuHelpCoCoArchive: TMenuItem;
-    MenuHelpFatCowIconsOnline: TMenuItem;
-    MenuHelpOpenRomFolder: TMenuItem;
-    MenuHelpSep1: TMenuItem;
-    MenuHelpSep3: TMenuItem;
-    MenuHelpWinCmocOnline: TMenuItem;
-    MenuHelpCMOCManual: TMenuItem;
-    MenuHelpLWToolsManual: TMenuItem;
-    MenuHelpSep4: TMenuItem;
-    MenuHelpLWTools: TMenuItem;
-    MenuHelpXRoarEmulator: TMenuItem;
-    MenuHelpMCPP: TMenuItem;
-    MenuEmulatorsSep1: TMenuItem;
+    MenuHelpColorBasicSummary: TMenuItem;
     MenuHelpDiskBasicSummary: TMenuItem;
     MenuHelpExtendedBasicSummary: TMenuItem;
-    MenuHelpColorBasicSummary: TMenuItem;
+    MenuHelpFatCowIconsOnline: TMenuItem;
+    MenuHelpLocalDocuments: TMenuItem;
+    MenuHelpLWTools: TMenuItem;
+    MenuHelpLWToolsManual: TMenuItem;
+    MenuHelpMCPP: TMenuItem;
+    MenuHelpOnlineHelp: TMenuItem;
+    MenuHelpOpenRomFolder: TMenuItem;
+    MenuHelpSep3: TMenuItem;
+    MenuHelpVccEmulator: TMenuItem;
+    MenuHelpWinCmocOnline: TMenuItem;
+    MenuHelpXRoarEmulator: TMenuItem;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
-    MenuHelpVccEmulator: TMenuItem;
-    MenuStartColourComputer3: TMenuItem;
+    MenuTools: TMenuItem;
+    MenuToolsMessImageTool: TMenuItem;
+    MenuToolsConsole: TMenuItem;
     MenuRun: TMenuItem;
     MenuRunBuild: TMenuItem;
     MenuRunBuildAndRun: TMenuItem;
     MenuRunCompile: TMenuItem;
     MenuRunSep1: TMenuItem;
     MenuRunSyntaxCheck: TMenuItem;
-    MenuEmulators: TMenuItem;
-    MenuXRoarColourComputerNTSC: TMenuItem;
-    MenuXRoarColourComputerPAL: TMenuItem;
-    MenuXRoarDragon200E: TMenuItem;
-    MenuXRoarDragon32: TMenuItem;
-    MenuXRoarDragon64: TMenuItem;
-    MenuXRoarDynacmoMX1600: TMenuItem;
-    MenuXRoarTanoDragon: TMenuItem;
     OpenDialog: TOpenDialog;
     Process: TProcess;
     SaveDialog: TSaveDialog;
@@ -161,6 +166,8 @@ type
     procedure MenuRunCompileClick(ASender: TObject);
     procedure MenuRunBuildAndRunClick(ASender: TObject);
     procedure MenuEmulatorsClick(ASender: TObject);
+    procedure MenuToolsConsoleClick(Sender: TObject);
+    procedure MenuToolsMessImageToolClick(Sender: TObject);
     procedure SynEditLogChangeUpdating(ASender: TObject; AIsUpdating: boolean);
     procedure MenuHelpAboutClick(ASender: TObject);
     procedure MenuRunBuildClick(ASender: TObject);
@@ -473,7 +480,7 @@ end;
 function TFormCmocIDE.RunTool(const ATool: string; const AParameters: array of string;
   const AExternal: boolean): integer;
 begin
-  Result := Execute(ProgramDirectory + ATool + FileExt_EXE, AParameters, AExternal);
+  Result := Execute(OCmoc.PathToBin + ATool + FileExt_EXE, AParameters, AExternal);
 end;
 
 procedure TFormCmocIDE.MenuEditFormatSourceCodeClick(ASender: TObject);
@@ -647,6 +654,16 @@ begin
       ExecuteXRoar(LMachine, EmptyStr);
     end;
   end;
+end;
+
+procedure TFormCmocIDE.MenuToolsConsoleClick(Sender: TObject);
+begin
+  Execute(OCmoc.PathToBin + 'console.bat', [], True);
+end;
+
+procedure TFormCmocIDE.MenuToolsMessImageToolClick(Sender: TObject);
+begin
+  RunTool('wimgtool', [], True);
 end;
 
 procedure TFormCmocIDE.MenuFileExitClick(ASender: TObject);
