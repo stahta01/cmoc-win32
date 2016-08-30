@@ -41,20 +41,18 @@ int systemf(char* fmt, ...)
 int system(char* cmd)
 {
     strcpy(_linbuf + 1, cmd);
-    //_linbuf[0] = 0;
+    //_linbuf[0] = 0; // TODO: Unsure what to set this too.
     return _system();
 }
 
 int setstr(char* name, char* value)
 {
-    stpcpy(stpcpy(stpcpy(stpcpy(_linbuf + 1, name), "$=\""), value), "\"");
-    return _system();
+    return systemf("%s$=\"%s\"", name, value);
 }
 
 char* getstr(char* name)
 {
-    stpcpy(stpcpy(stpcpy(_linbuf + 1, "Z=VARPTR("), name), "$)");
-    _system();
+    systemf("ZZ=VARPTR(%s$)", name);
     memcpy(_linbuf, (void*)((unsigned*)_varptr)[1], ((unsigned char*)_varptr)[0]);
     _linbuf[((unsigned char*)_varptr)[0]] = 0;
     return _linbuf;
@@ -62,14 +60,12 @@ char* getstr(char* name)
 
 int setuint(char* name, unsigned value)
 {
-    itoa(value, stpcpy(stpcpy(_linbuf + 1, name), "="), 10);
-    return _system();
+    return systemf("%s=%u", name, value);
 }
 
 unsigned getuint(char* name)
 {
-    stpcpy(stpcpy(_linbuf + 1, "DEFUSR9="), name);
-    _system();
+    systemf("DEFUSR9=%s", name);
     return ((unsigned*)_usradr)[9];
 }
 

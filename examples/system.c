@@ -27,8 +27,10 @@ int main(void)
     puts(getstr("B"));
 
     setuint("A", 30000);
+    setuint("B", 20000);
     printf("A=%d\n", getuint("A"));
-    printf("A=%d\n", getuint("A"));
+    printf("B=%d\n", getuint("B"));
+
     while (!kbhit()) {
     }
     puts("END OF PROGRAM");
