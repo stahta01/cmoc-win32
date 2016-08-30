@@ -1,5 +1,6 @@
 
 #include <basic.h>
+#include <math.h>
 
 void BITMAPCOPYRECT(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src,
                     int u1, int v1, int u2, int v2)

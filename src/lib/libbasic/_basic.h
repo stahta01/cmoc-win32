@@ -3,6 +3,7 @@
 #define _BASIC_DEFS_H
 
 #include <basic.h>
+#include <math.h>
 #include <cmoc.h>
 #include <coco.h>
 #include <disk.h>

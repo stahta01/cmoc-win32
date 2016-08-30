@@ -2,10 +2,6 @@
 #ifndef _STDLIB_H
 #define _STDLIB_H
 
-#include <stddef.h>
-#include <crt.h>
-#include <math.h>
-
 #include <sys/size.h>
 
 #define EXIT_SUCCESS    0

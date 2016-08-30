@@ -4,6 +4,7 @@
 /*---------------------------------------------------------------------------*/
 
 #include <stdlib.h>
+#include <stddef.h>
 
 void* bsearch(void* keyval,  void* base, size_t num, size_t width,
               int(*cmp)(void* keyval,  void* elem))
