@@ -1,5 +1,5 @@
 
-#pragma target dragon
+#pragma options -machine=dragon32 -nodos -ram=64
 
 #include <sys/mman.h>
 #include <string.h>

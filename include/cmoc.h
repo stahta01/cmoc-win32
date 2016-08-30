@@ -23,14 +23,30 @@
 
 #include <motorola/types.h>
 
-#define CMOC_OS_UNKNOWN     0
-#define CMOC_OS_COCO1       1
-#define CMOC_OS_COCO2       2
-#define CMOC_OS_COCO3       3
-#define CMOC_OS_DRAGON32    4
-#define CMOC_OS_DRAGON64    5
+// 3 bits for the machine
 
-// Get the ROM version. Returns one of the CMOC_OS_xxx codes.
+#define CMOC_MAC_UNKNOWN         0
+#define CMOC_MAC_COCO            1
+#define CMOC_MAC_DRAGON          2
+#define CMOC_MAC_VECTREX         3
+#define CMOC_MAC_RESERVED4       4
+#define CMOC_MAC_RESERVED5       5
+#define CMOC_MAC_RESERVED6       6
+#define CMOC_MAC_RESERVED7       7
+
+#define CMOC_FLG_EXT             8
+
+// 3 bits for the memory size (blocks of 16K)
+
+#define CMOC_RAM_16K             16
+#define CMOC_RAM_32K             32
+#define CMOC_RAM_48K             48
+#define CMOC_RAM_64K             64
+
+// 2 flag bits
+
+#define CMOC_FLG_DOS             128
+
 unsigned char get_ostype(void);
 
 

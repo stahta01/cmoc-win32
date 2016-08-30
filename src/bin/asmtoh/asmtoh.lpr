@@ -234,8 +234,8 @@ begin
     LDstPath := OCmoc.PathToInclude + 'dragon/';
 
     // Note: we list the equates from coco which are the same as the dragon.
-    ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm',
-      '_DRAGON_EQUATES_H', TStringDynArray.Create('BS', 'CR', 'ESC', 'LF',
+    ProcessSrcToDst(LDstPath + '_equates.h', OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm',
+      '_DRAGON_COCO_EQUATES_H', TStringDynArray.Create('BS', 'CR', 'ESC', 'LF',
       'FORMF', 'SPACE', 'TEMPTR', 'CURPOS', 'SNDTON', 'SNDDUR', 'TIMVAL',
       'VIDRAM', 'POTVAL', 'PMODE', 'ALLCOL', 'WCOLOR', 'FORCOL', 'BAKCOL',
       'USRADR', 'TRCFLG', 'ENDGRP', 'HORBYT', 'BEGGRP', 'GRPRAM', 'HORBEG',
@@ -243,7 +243,8 @@ begin
       'LINBUF', 'CURLIN', 'CHARAD', 'GETNCH', 'EXECJP', 'TXTTAB', 'VARTAB',
       'ARYTAB', 'ARYEND', 'FRETOP', 'STRTAB', 'FRESPC', 'MEMSIZ', 'OLDTXT',
       'BINVAL', 'OLDPTR', 'TINPTR', 'DATTXT', 'DATPTR', 'DATTMP', 'VARNAM',
-      'VARPTR', 'VARDES'));
+      'VARPTR', 'VARDES', 'DEVLCF', 'DEVPOS', 'DEVWID', 'DEVNUM', 'RSTFLG',
+      'RSTVEC', 'TOPRAM', 'FILSTA', 'CINCTR', 'CINPTR', 'BLKTYP', 'BLKLEN'));
 
     LDstPath := OCmoc.PathToInclude + 'vectrex/';
     ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexdefs.asm',
