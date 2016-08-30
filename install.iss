@@ -46,9 +46,10 @@ Source: "lib\*.a"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "lib\*.o"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "lib\*.txt"; DestDir: "{app}\lib"; Flags: ignoreversion
 
-Source: "doc\*.*"; DestDir: "{app}\doc"; Flags: ignoreversion recursesubdirs
-
 Source: "include\*.h"; DestDir: "{app}\include"; Flags: ignoreversion recursesubdirs
+
+Source: "doc\*.*"; DestDir: "{app}\doc"; Flags: ignoreversion recursesubdirs
+Source: "dsk\*.dsk"; DestDir: "{app}\dsk"; Flags: ignoreversion
 Source: "examples\*.c"; DestDir: "{app}\examples"; Flags: ignoreversion recursesubdirs
 
 Source: "vcc\Vcc.exe"; DestDir: "{app}\vcc"; Flags: ignoreversion
@@ -59,10 +60,6 @@ Source: "vcc\mpi.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
 Source: "vcc\IDE.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
 Source: "vcc\harddisk.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
 Source: "vcc\fd502.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
-Source: "vcc\disk0.dsk"; DestDir: "{app}\vcc"; Flags: ignoreversion
-Source: "vcc\disk1.dsk"; DestDir: "{app}\vcc"; Flags: ignoreversion
-Source: "vcc\disk2.dsk"; DestDir: "{app}\vcc"; Flags: ignoreversion
-Source: "vcc\disk3.dsk"; DestDir: "{app}\vcc"; Flags: ignoreversion
 
 Source: "xroar\xroar.exe"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\xroar.pdf"; DestDir: "{app}\xroar"; Flags: ignoreversion
