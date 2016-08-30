@@ -317,7 +317,7 @@ end;
 function TFormCmocIDE.FileNameSrcExists: TFileName;
 begin
   if Length(FileNameSrc) = 0 then begin
-    WriteLn('# Source must be saved before being processed');
+    WriteLn('# Source must be saved before being compiled/processed');
     MenuFileSaveAs.Click;
   end;
   if not FileExists(FileNameSrc) then begin

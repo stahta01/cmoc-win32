@@ -40,6 +40,7 @@ Source: "bin\lwobjdump.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\mcpp.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\writecocofile.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\wimgtool.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\console.bat"; DestDir: "{app}\bin"; Flags: ignoreversion
 
 Source: "lib\*.a"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "lib\*.o"; DestDir: "{app}\lib"; Flags: ignoreversion
