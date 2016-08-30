@@ -661,9 +661,11 @@ end;
 
 procedure TFormCmocIDE.MenuEmulatorsClick(ASender: TObject);
 begin
-  FOptions.Clear;
-  FOptions.Values['-machine'] := (ASender as TMenuItem).Hint;
-  ExecuteEmulator(EmptyStr);
+  if ASender <> MenuEmulators then begin
+    FOptions.Clear;
+    FOptions.Values[Opt_Machine2] := (ASender as TMenuItem).Hint;
+    ExecuteEmulator(EmptyStr);
+  end;
 end;
 
 procedure TFormCmocIDE.MenuToolsConsoleClick(Sender: TObject);

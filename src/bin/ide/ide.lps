@@ -11,7 +11,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos Y="25"/>
-        <UsageCount Value="67"/>
+        <UsageCount Value="71"/>
       </Unit0>
       <Unit1>
         <Filename Value="unitcmocide.pas"/>
@@ -21,9 +21,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="628"/>
-        <CursorPos X="14" Y="637"/>
-        <UsageCount Value="67"/>
+        <TopLine Value="653"/>
+        <CursorPos X="33" Y="666"/>
+        <UsageCount Value="71"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -34,7 +34,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="16"/>
         <CursorPos X="14" Y="22"/>
-        <UsageCount Value="60"/>
+        <UsageCount Value="64"/>
       </Unit2>
       <Unit3>
         <Filename Value="unitcmocidesynedit.pas"/>
@@ -46,7 +46,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="35"/>
         <CursorPos X="17" Y="39"/>
-        <UsageCount Value="58"/>
+        <UsageCount Value="62"/>
       </Unit3>
       <Unit4>
         <Filename Value="..\shared\ucmocutils.pas"/>
@@ -504,7 +504,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="512"/>
         <CursorPos X="19" Y="531"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit63>
     </Units>
     <JumpHistory Count="2" HistoryIndex="1">
@@ -514,7 +514,7 @@
       </Position1>
       <Position2>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="634" Column="33" TopLine="628"/>
+        <Caret Line="634" Column="30" TopLine="628"/>
       </Position2>
     </JumpHistory>
   </ProjectSession>
