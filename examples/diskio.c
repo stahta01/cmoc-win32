@@ -1,53 +1,57 @@
 
-#include <equates.h>
 #include <basic.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <cmoc.h>
 
-extern int _filedesc[FOPEN_MAX];
+#define FILENAME "FILE.TXT"
 
-int main(void)
+void ExampleBasic(void)
 {
     char s[100];
 
-    puts("Write out text file:");
+    puts("*BASIC STYLE");
 
-    //OPEN_O(1, "FILE.DAT");
-    //PRINT(1, "Derek\r");
-    //PRINT(1, "Was\r");
-    //PRINT(1, "Here\r");
-    //CLOSE(1);
-    /*
-    int fd = open("FILE.DAT", O_WRONLY);
+    OPEN_O(1, FILENAME);
+    PRINT(1, "WRITING A FILE\r");
+    PRINT(1, "USING BASIC STYLE\r");
+    PRINT(1, "COMMANDS\r");
+    CLOSE(1);
+    if (OPEN_I(1, FILENAME)) {
+        while (INPUT(1, s)) {
+            printf(">%s\n", s);
+        }
+    }
+}
+
+void ExampleUnix(void)
+{
+    char s[100];
+
+    puts("*UNIX STYLE");
+
+    int fd = open(FILENAME, O_WRONLY);
     if (fd) {
-        puts("WRITING");
-        write(fd, "DEREK EVANS\nWAS HERE!", 23);
+        strcpy(s, "WRITING A FILE\nUSING UNIX\nSTYLE COMMANDS\nCOOL!\n");
+        write(fd, s, strlen(s));
         close(fd);
     }
-    */
-
-    int fd = open("DOC.TXT", O_RDONLY);
+    fd = open(FILENAME, O_RDONLY);
     printf("SIZE:%d\n", lsize(fd));
     if (fd) {
         while (lgets(fd, s, 50)) {
             if (s[0] != '\n') {
-                printf("%s", s);
+                printf(">%s", s);
             }
         }
         close(fd);
     }
-    puts("");
+}
 
-    if (OPEN_I(1, "FILE.DAT")) {
-        INPUT(1, s);
-        printf(">%s", s);
-        INPUT(1, s);
-        printf(">%s", s);
-        INPUT(1, s);
-        printf(">%s", s);
-    }
-
+int main(void)
+{
+    ExampleBasic();
+    ExampleUnix();
+    puts("DONE");
     return 0;
 }
 

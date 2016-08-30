@@ -41,7 +41,7 @@ int ABS(int numeric);
 byte PEEK(word addr);
 void POKE(word addr, byte value);
 void* VARPTR(char* s);
-void INPUT(int f, char* s);
+size_t INPUT(int f, char* s);
 
 void SOUND(byte tone, byte duration);
 byte JOYSTK(int j);

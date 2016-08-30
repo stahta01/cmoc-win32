@@ -1,18 +1,23 @@
 
 #include "_basic.h"
 
-void INPUT(int fd, char* s)
+size_t INPUT(int fd, char* s)
 {
+    size_t size = 0;
     if (fd) {
         fd = _filedesc[fd];
         if (fd > FOPEN_MAX) {
-            int len = lgets(fd, s, 200);
-            if (len > 0 && s[len - 1] == '\r') {
-                s[len - 1] = 0;
+            size = lgets(fd, s, 200);
+            if (size > 0 && s[size - 1] == '\r') {
+                s[size - 1] = 0;
             }
         }
     } else {
-        cgets(s);
+        // Does not support cas input. Yet.
+        char buf[BUFSIZ];
+        buf[0] = BUFSIZ - 1;
+        size = strlen(strcpy(s, cgets(buf)));
     }
+    return size;
 }
 
