@@ -16,23 +16,31 @@
 unsigned char get_ostype(void)
 {
     unsigned char ostype = 0;
-    // Look for "CO" (Color Computer copyright message)
-    if (*((unsigned*)0xa147) == 0x434f) {
-        ostype = CMOC_MAC_COCO;
-        // Look for "EX" (Extended BASIC)
-        if (*((unsigned*)0x8000) == 0x4558) {
+    char* bas = 0xa147; // Color Basic Copyright Message
+    char* ext = 0x80e8; // Extended Color Basic Copyright Message
+
+    if (bas[0] == 'C' && bas[1] == 'O') {
+        if (ext[0] == 'E' && ext[1] == 'X' && ext[21] == '2') {
+            ostype |= CMOC_MAC_COCO3;
             ostype |= CMOC_FLG_EXT;
+            ostype |= 64;
+        } else {
+            ostype |= bas[14] < '2' ? CMOC_MAC_COCO1 : CMOC_MAC_COCO2;
+            if (ext[0] == 'E' && ext[1] == 'X') {
+                ostype |= CMOC_FLG_EXT;
+            }
+            ostype |= (char)(((_topram >> 10) + 1) & 0x70);
         }
-        ostype |= (char)(((_topram >> 10) + 1) & 0x70);
     } else {
         if (*((unsigned*)0x8000) == 0x7ebb) {
-            ostype = CMOC_MAC_DRAGON;
-            ostype |= CMOC_FLG_EXT;
             if (*((char*)0x8002) == 0x3c) {
+                ostype |= CMOC_MAC_DRAGON64;
                 ostype |= 64;
             } else {
+                ostype |= CMOC_MAC_DRAGON32;
                 ostype |= 32;
             }
+            ostype |= CMOC_FLG_EXT;
         }
     }
     if (_grpram > 6) {
