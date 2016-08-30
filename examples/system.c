@@ -21,19 +21,22 @@ int main(void)
 
     char s[100];
 
-    setstr("A", "DEREK");
-    setstr("B", "EVANS");
-    puts(getstr("A"));
-    puts(getstr("B"));
+    putenv("A=DEREK");
+    putenvstr("B", "EVANS");
+    printf("A=%s\n", getenv("A"));
+    printf("B=%s\n", getenv("B"));
 
-    setuint("A", 30000);
-    setuint("B", 20000);
-    printf("A=%d\n", getuint("A"));
-    printf("B=%d\n", getuint("B"));
+    putenvuint("A", 30000);
+    putenvuint("B", 20000);
+
+    printf("A=%d\n", getenvuint("A"));
+    printf("B=%d\n", getenvuint("B"));
 
     while (!kbhit()) {
     }
-    puts("END OF PROGRAM");
+
+    system("PRINT \"END OF PROGRAM\"");
+
     return 0;
 }
 

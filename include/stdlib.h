@@ -6,6 +6,11 @@
 #include <crt.h>
 #include <math.h>
 
+#include <sys/size.h>
+
+#define EXIT_SUCCESS    0
+#define EXIT_FAILURE    1
+
 #define RAND_MAX        0x7fff
 
 // max. length of full pathname
@@ -26,17 +31,10 @@
 #define _sys_nerr       (_crt_base->_crt_nerr)
 #define _sys_errlist    (_crt_base->_crt_syserrlist)
 
-#define _max(_a,_b)     (((_a) > (_b)) ? (_a) : (_b))
-#define _min(_a,_b)     (((_a) < (_b)) ? (_a) : (_b))
-#define _abs(_a)        ((_a) < 0 ? -(_a) : (_a))
-
-int max(int a, int b);
-int min(int a, int b);
-int abs(int n);
-
-typedef struct _div_t {
-    int quot;
+// Return type of the div function
+typedef struct {
     int rem;
+    int quot;
 } div_t;
 
 typedef struct _ldiv_t {
@@ -48,6 +46,14 @@ typedef struct _uldiv_t {
     unsigned long quot;
     unsigned long rem;
 } uldiv_t;
+
+#define _max(_a,_b)     (((_a) > (_b)) ? (_a) : (_b))
+#define _min(_a,_b)     (((_a) < (_b)) ? (_a) : (_b))
+#define _abs(_a)        ((_a) < 0 ? -(_a) : (_a))
+
+int max(int a, int b);
+int min(int a, int b);
+int abs(int n);
 
 void* malloc(int size);
 void* calloc(int num, int size);
@@ -76,14 +82,15 @@ unsigned long strtoul(char* nptr, char** endptr, int base);
 
 int system(char* cmd);
 int systemf(char* fmt, ...);
-int putenv(char* envptr);  // TODO
-char* getenv(char* varname); // TODO
+
+int putenv(char* envptr);
+char* getenv(char* varname);
 
 // Non-Standard access to BASIC variables
-int setstr(char* name, char* value);
-char* getstr(char* name);
-int setuint(char* name, unsigned value);
-unsigned getuint(char* name);
+int putenvstr(char* name, char* value);
+char* getenvstr(char* name, char* dst);
+int putenvuint(char* name, unsigned value);
+unsigned getenvuint(char* name);
 
 void uldiv(uldiv_t* result, unsigned long numer, unsigned long denom);
 char* ultoa(unsigned long value, char* string, int radix);
