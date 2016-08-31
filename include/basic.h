@@ -37,6 +37,8 @@ typedef struct {
 
 extern _basic_t _basic;
 
+// Color BASIC
+
 int ABS(int numeric);
 byte PEEK(word addr);
 void POKE(word addr, byte value);
@@ -48,15 +50,21 @@ byte JOYSTK(int j);
 char INKEY(void);
 word TIMER(void);
 
-void CLS(byte c);
+void CLS(int c);
+void COLOR(int c1, int c2);
+void SET(int x, int y, int c);
+void RESET(int x, int y);
 
 // Extended Color BASIC V1
 
-void SCREEN(int agr, int css);
+void SCREEN(int mode, int css);
 void PMODE(int mode, int page);
-int PCOPY(byte p1, byte p2);
+void PCOPY(int p1, int p2);
 void PCLS(int c);
 void PAINT(int x, int y, int c, int b);
+void LINE(int x1, int y1, int x2, int y2, int onoff);
+void LINE_B(int x1, int y1, int x2, int y2, int onoff);
+void LINE_BF(int x1, int y1, int x2, int y2, int onoff);
 
 // Tape Functions
 
