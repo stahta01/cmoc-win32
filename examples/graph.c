@@ -8,7 +8,7 @@ void DrawBar(int month, int percent)
 {
     byte x = (byte)(month * 4 + 8);
     byte y = (byte)(percent * 18 / 100);
-    SETBOX(x, (21 - y) & 0xFE, x + 2, 21, (byte)(month >> 1) + 3, true);
+    LLINE_BF(x, (21 - y) & 0xFE, x + 2, 21, (byte)(month >> 1) + 3);
 }
 
 int monthlysales[] = {20, 10, 35, 30, 40, 35, 45, 50, 40, 52, 90, 80};
@@ -17,9 +17,9 @@ int main(void)
 {
     CLS(1);
 
-    SETLINE(2, 4, 2, 24, COLOR_BLACK);
-    SETLINE(1, 24, 61, 24, COLOR_BLACK);
-    SETLINE(1, 15, 61, 15, COLOR_BLACK);
+    LLINE(2, 4, 2, 24, COLOR_BLACK);
+    LLINE(1, 24, 61, 24, COLOR_BLACK);
+    LLINE(1, 15, 61, 15, COLOR_BLACK);
 
     for (int i = 0; i < 12; i++) {
         DrawBar(i, monthlysales[i]);

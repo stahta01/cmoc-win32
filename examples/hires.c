@@ -7,13 +7,13 @@
 
 void DrawGraphics(void)
 {
-    LINE(255, 0, 0, 192, 2);
-    LINE(0, 0, 255, 192, 2);
+    MLINE(255, 0, 0, 192, 2);
+    MLINE(0, 0, 255, 192, 2);
     for (int i = 0; i < 256; i += 8) {
-        LINE(0, i, i, 190, 1);
-        LINE(i, 0, 254, i, 1);
+        MLINE(0, i, i, 190, 1);
+        MLINE(i, 0, 254, i, 1);
     }
-    ELLIPSE(128, 96, 70, 40, 3);
+    MELLIPSE(128, 96, 70, 40, 3);
 }
 
 #define ROM_OFF() asm("orcc", "#$50"); asm("sta", "$ffdf");
@@ -21,13 +21,13 @@ void DrawGraphics(void)
 
 void DrawDemo(void)
 {
-    CLIP(2, 2, 128, 96);
+    MCLIP(2, 2, 128, 96);
     DrawGraphics();
-    CLIP(128, 2, 254, 96);
+    MCLIP(128, 2, 254, 96);
     DrawGraphics();
-    CLIP(2, 96, 128, 190);
+    MCLIP(2, 96, 128, 190);
     DrawGraphics();
-    CLIP(128, 96, 254, 190);
+    MCLIP(128, 96, 254, 190);
     DrawGraphics();
 }
 

@@ -12,7 +12,7 @@ int main(void)
     {
         byte oy = y;
         y = 30 - oy;
-        LINE(x, 100 - y, x + 10, 100 - oy, 1);
+        MLINE(x, 100 - y, x + 10, 100 - oy, 1);
     }
     while (!INKEY()) {}
 

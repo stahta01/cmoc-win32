@@ -1,7 +1,7 @@
 
 #include "_basic.h"
 
-void PSET2(int x, int y, byte c)
+void MSET2(int x, int y, byte c)
 {
     if (_pmode < 4)  {
         x >>= 1;
@@ -26,7 +26,7 @@ void PSET2(int x, int y, byte c)
     *p = *p & _pset2_clr[i] | _pset2_set[c][i];
 }
 
-byte PPOINT2(int x, int y)
+byte MPOINT2(int x, int y)
 {
     if (_pmode < 4)  {
         x >>= 1;

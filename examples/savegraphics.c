@@ -6,12 +6,12 @@ int main(void)
 {
     bgcolor(1);
     textmode(MODE_M0_16X24);
-    CLIP(0, 0, 256, 192);
+    MCLIP(0, 0, 256, 192);
     cprintf("Saving graphics to disk\n");
-    ELLIPSE(128,96, 100, 50, 0);
-    SAVEM("TEST", (void*)_beggrp, (void*)_endgrp, 0);
+    MELLIPSE(128,96, 100, 50, 0);
+    SAVEM("PICTURE.IMG", (void*)_beggrp, (void*)_endgrp, 0);
     PCLS(0);
-    LOADM("TEST", 0);
+    LOADM("PICTURE.IMG", 0);
     cprintf("\n\nGraphics loaded\n");
     cprintf("Press anykey\n");
     getch();

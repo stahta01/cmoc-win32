@@ -1,7 +1,7 @@
 
 #include "_basic.h"
 
-void SETLINE(int x1, int y1, int x2, int y2, byte c)
+void LLINE(int x1, int y1, int x2, int y2, byte c)
 {
     x2 -= x1;
     y2 -= y1;

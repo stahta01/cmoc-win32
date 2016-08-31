@@ -23,7 +23,7 @@ int main(void)
     char s[100];
     unsigned char w, h;
 
-    CLIP(0, 0, 256, 192);
+    MCLIP(0, 0, 256, 192);
 
     for (;;) {
         bgcolor(0);

@@ -9,12 +9,12 @@ void ClearBoard(void)
 {
     CLS(0);
 
-    SETLINE(1, 0, 1, 32, 5);
-    SETLINE(62, 0, 62, 32, 5);
-    SETLINE(1, 0, 62, 0, 5);
+    LLINE(1, 0, 1, 32, 5);
+    LLINE(62, 0, 62, 32, 5);
+    LLINE(1, 0, 62, 0, 5);
 
     for (int y = 2; y < 14; y += 2) {
-        SETBOX(2, y, 62, y + 2, (byte)(y >> 1) + 1, true);
+        LLINE_B(2, y, 62, y + 2, (byte)(y >> 1) + 1);
     }
 }
 
@@ -45,9 +45,9 @@ void PlayGame(void)
             SET(ball_sx, ball_sy, 5);
         }
         paddle_x = (byte)(((unsigned)JOYSTK(0) * 205) >> 8) + 2;
-        SETLINE(paddle_sx, 31, paddle_sx + 10, 31, paddle_x !=  paddle_sx ? 0 : 5);
+        LLINE(paddle_sx, 31, paddle_sx + 10, 31, paddle_x !=  paddle_sx ? 0 : 5);
         paddle_sx = (byte)paddle_x;
-        SETLINE(paddle_sx, 31, paddle_sx + 10, 31, 5);
+        LLINE(paddle_sx, 31, paddle_sx + 10, 31, 5);
     }
 }
 

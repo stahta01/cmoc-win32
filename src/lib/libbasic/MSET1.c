@@ -2,7 +2,7 @@
 #include <motorola.h>
 #include "_basic.h"
 
-void PSET1(int x, int y, byte c)
+void MSET1(int x, int y, byte c)
 {
     if (_pmode < 4)  {
         x >>= 1;
@@ -35,7 +35,7 @@ void PSET1(int x, int y, byte c)
     }
 }
 
-byte PPOINT1(int x, int y)
+byte MPOINT1(int x, int y)
 {
     if (_pmode < 4)  {
         x >>= 1;

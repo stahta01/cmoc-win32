@@ -11,8 +11,8 @@ void FillDonut(int x, int y, int w, int h, byte c)
         exit(0);
     }
     beep(c << 4, 1);
-    ELLIPSE(x, y, w, h, 3);
-    ELLIPSE(x, y, w >> 1, h >> 1, 3);
+    MELLIPSE(x, y, w, h, 3);
+    MELLIPSE(x, y, w >> 1, h >> 1, 3);
     beep(c << 5, 1);
     PAINT(x, y + h - 2, c, 0);
     beep(c << 6, 1);

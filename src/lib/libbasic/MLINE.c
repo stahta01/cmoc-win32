@@ -5,7 +5,7 @@
 #include <motorola.h>
 #include <math.h>
 
-void LINE(int x1, int y1, int x2, int y2, byte c)
+void MLINE(int x1, int y1, int x2, int y2, byte c)
 {
     byte sx, *p;
     word sy;
@@ -13,8 +13,8 @@ void LINE(int x1, int y1, int x2, int y2, byte c)
     if (_abs(x) > 120 || _abs(y) > 120) {
         x = (x1 + x2) >> 1;
         y = (y1 + y2) >> 1;
-        LINE(x1, y1, x, y, c);
-        LINE(x, y, x2, y2, c);
+        MLINE(x1, y1, x, y, c);
+        MLINE(x, y, x2, y2, c);
     } else {
         x = _basic.pclip.x1;
         y = _basic.pclip.x2;

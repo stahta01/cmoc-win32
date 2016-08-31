@@ -13,7 +13,7 @@ int main(void)
     byte cx = 0, cy = 0, cc = 128, jx = 1, jy = 1, pen = 2;
 
     for (i = 0; i < 32; i++) {
-        SETLINE(0, i, 64, i, 1);
+        LLINE(0, i, 64, i, 1);
     }
 
     cc = VIDSEMI(cx,cy);
@@ -30,14 +30,14 @@ int main(void)
             cx = jx;
             cy = jy;
             cc = VIDSEMI(cx, cy);
-            if (POINT(cx, cy)) {
-                SET(cx, cy, 0);
+            if (LPOINT(cx, cy)) {
+                LSET(cx, cy, 0);
             } else {
-                SET(cx, cy, ((cc >> 4) & 7) + 1);
+                LSET(cx, cy, ((cc >> 4) & 7) + 1);
             }
         }
         if ((PEEK(65280) & 1) == 0) {
-            SET(cx, cy, pen);
+            LSET(cx, cy, pen);
             cc = VIDSEMI(cx,cy);
         }
     }
