@@ -28,7 +28,7 @@ interface
 uses
   Classes, ComCtrls, Controls, Dialogs, ExtCtrls, FileUtil, Forms, Graphics,
   LCLIntf, Menus, MouseAndKeyInput, process, StreamIO, StrUtils, SynEdit, SynHighlighterAny,
-  SysUtils, Types, UCmocIDE, UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
+  SysUtils, Types, UCmocIDE, UCmocRbs, UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
 
 type
 
@@ -186,7 +186,7 @@ type
     procedure CheckRoms;
   strict private
     procedure OpenBrowser(AURL: string);
-    procedure ExecuteEmulator(const AFileName: TFileName);
+    procedure ExecuteEmulator(AFileName: TFileName);
     function Execute(const AExecutable: string; const AParameters: array of string;
       const AExternal: boolean): integer;
     function RunTool(const ATool: string; const AParameters: array of string;
@@ -605,11 +605,19 @@ begin
   end;
 end;
 
-procedure TFormCmocIDE.ExecuteEmulator(const AFileName: TFileName);
+procedure TFormCmocIDE.ExecuteEmulator(AFileName: TFileName);
 var
   LIndex: integer;
   LParams: TStringDynArray;
+  LBinFile: TFileName;
 begin
+  if Length(AFileName) > 0 then begin
+    LBinFile := GetTempDir(False) + 'cmocide.bin';
+    RbsSaveToFile(RbsDecb(RbsVideo(UpperCase(PadRight(Application.Title, 32))), 1120) +
+      RbsDecb(RbsVideo(PadRight('RUNNING BINARY ...', 32)), 1152) +
+      RbsLoadFromFile(AFileName), LBinFile);
+    AFileName := LBinFile;
+  end;
   LParams := default(TStringDynArray);
   if SameText(FOptions.Values[Opt_Machine2], 'coco3') then begin
     WriteLn('// Running Vcc emulator');
@@ -623,7 +631,7 @@ begin
     WriteLn('// Running XRoar emulator. Machine=', FOptions.Values[Opt_Machine2]);
     try
       OCmoc.StringDynArrayAppendStrings(LParams, ['-rompath', 'roms', '-joy-right',
-        'mjoy0', '-kbd-translate']);
+        'mjoy0', '-kbd-translate', '-vdg-type', '6847t1']);
       OCmoc.StringDynArrayAppendOptions(LParams, FOptions, [Opt_Machine2, '-bas',
         '-extbas', '-dos', '-cart', '-noextbas', '-nodos', '-ram', '-no-tape-fast']);
       for LIndex := 0 to 3 do begin
@@ -631,7 +639,7 @@ begin
           'disk' + IntToStr(LIndex) + '.dsk']);
       end;
       if Length(AFileName) > 0 then begin
-        OCmoc.StringDynArrayAppendStrings(LParams, [AFileName]);
+        OCmoc.StringDynArrayAppendStrings(LParams, ['-run', AFileName]);
       end;
       Execute(OCmoc.PathToXroar + 'xroar.exe', LParams, True);
     except
