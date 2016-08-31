@@ -28,18 +28,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; 
 
 [Files]
-Source: "bin\cmocide.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
-Source: "bin\astyle.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
-Source: "bin\cmoc2.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
-Source: "bin\cmoc.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
-Source: "bin\lwar.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
-Source: "bin\lwasm2.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
-Source: "bin\lwasm.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
-Source: "bin\lwlink.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
-Source: "bin\lwobjdump.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
-Source: "bin\mcpp.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
-Source: "bin\writecocofile.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
-Source: "bin\wimgtool.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\*.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\console.bat"; DestDir: "{app}\bin"; Flags: ignoreversion
 
 Source: "lib\*.a"; DestDir: "{app}\lib"; Flags: ignoreversion
@@ -62,7 +51,7 @@ Source: "vcc\harddisk.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
 Source: "vcc\fd502.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
 
 Source: "xroar\xroar.exe"; DestDir: "{app}\xroar"; Flags: ignoreversion
-Source: "xroar\xroar.bat"; DestDir: "{app}\xroar"; Flags: ignoreversion
+Source: "xroar\coco.bat"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\xroar.pdf"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\xroar.conf"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\README"; DestDir: "{app}\xroar"; Flags: ignoreversion
