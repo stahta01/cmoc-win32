@@ -32,11 +32,8 @@ void SCREENSETUP(void)
     (*(byte*)_PIA1BD) |= mode;
 }
 
-void SCREEN(int agr, int css)
+void SCREEN(int mode, int css)
 {
-    char s[] = "SCREEN?,?";
-    s[6] = '0' + (char)agr;
-    s[8] = '0' + (char)css;
-    system(s);
+    systemf("SCREEN%d,%d", mode, css);
 }
 

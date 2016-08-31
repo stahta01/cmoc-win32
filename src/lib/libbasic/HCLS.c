@@ -3,6 +3,6 @@
 
 void HCLS(int c)
 {
-    systemf("HCLS %d", c);
+    systemf("HCLS%d", c);
 }
 

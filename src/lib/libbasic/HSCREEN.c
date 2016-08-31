@@ -3,6 +3,6 @@
 
 void HSCREEN(int mode)
 {
-    systemf("HSCREEN %d", mode);
+    systemf("HSCREEN%d", mode);
 }
 

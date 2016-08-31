@@ -1,10 +1,8 @@
 
 #include <basic.h>
 
-void CLS(byte c)
+void CLS(int c)
 {
-    char s[] = "CLS?";
-    s[3] = '0' + c;
-    system(s);
+    systemf("CLS%d", c);
 }
 
