@@ -272,11 +272,6 @@ begin
   end;
 
   WriteLn('// Welcome to ' + Application.Title);
-
-  try
-    CheckRoms;
-  except
-  end;
 end;
 
 procedure TFormCmocIDE.FormCloseQuery(ASender: TObject; var ACanClose: boolean);
