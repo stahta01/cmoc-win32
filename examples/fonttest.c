@@ -1,4 +1,7 @@
 
+// Note: This demo crashes XRoar, but works fine in Vcc.
+// It looks like a bug in XRoar.
+
 #pragma target coco
 
 #include <stdio.h>
