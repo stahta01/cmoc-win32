@@ -39,10 +39,10 @@ void PlayGame(void)
             SOUND(200, 0);
         }
         if (_f2i(ball_x) != ball_sx || _f2i(ball_y) != ball_sy) {
-            SET(ball_sx, ball_sy, 0);
+            LSET(ball_sx, ball_sy, 0);
             ball_sx = (byte)_f2i(ball_x);
             ball_sy = (byte)_f2i(ball_y);
-            SET(ball_sx, ball_sy, 5);
+            LSET(ball_sx, ball_sy, 5);
         }
         paddle_x = (byte)(((unsigned)JOYSTK(0) * 205) >> 8) + 2;
         LLINE(paddle_sx, 31, paddle_sx + 10, 31, paddle_x !=  paddle_sx ? 0 : 5);
