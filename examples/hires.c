@@ -1,6 +1,8 @@
 
 #pragma target coco
 
+#pragma options -machine=cocous
+
 #include <basic.h>
 #include <unistd.h>
 #include <motorola.h>

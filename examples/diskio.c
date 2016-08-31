@@ -45,12 +45,17 @@ void ExampleUnix(void)
         }
         close(fd);
     }
+
 }
 
 int main(void)
 {
     ExampleBasic();
     ExampleUnix();
+    puts("REMOVING FILE");
+    remove(FILENAME);
+    puts("DISPLAY DIRECTORY");
+    system("DIR");
     puts("DONE");
     return 0;
 }
