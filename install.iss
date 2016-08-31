@@ -1,9 +1,9 @@
 
 [Setup]
-OutputBaseFilename=WinCMOC v0.4
+OutputBaseFilename=WinCMOC v0.5
 AppName=WinCMOC
-AppVersion=0.4
-AppVerName=WinCMOC v0.4
+AppVersion=0.5
+AppVerName=WinCMOC v0.5
 AppPublisher=Geep Software
 AppPublisherURL=https://sourceforge.net/projects/cmoc-win32/
 AppSupportURL=https://sourceforge.net/projects/cmoc-win32/
