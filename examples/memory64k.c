@@ -1,5 +1,5 @@
 
-#pragma options -machine=dragon32 -nodos -ram=64
+#pragma options -machine=coco -ram=64
 
 #include <sys/mman.h>
 #include <string.h>

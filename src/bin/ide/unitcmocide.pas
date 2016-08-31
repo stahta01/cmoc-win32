@@ -71,17 +71,13 @@ type
     MenuEditUndo: TMenuItem;
     MenuEditUppercaseSelection: TMenuItem;
     MenuEmulators: TMenuItem;
-    MenuEmulatorsColourComputer3: TMenuItem;
-    MenuEmulatorsColourComputerNTSC: TMenuItem;
-    MenuEmulatorsColourComputerPAL: TMenuItem;
+    MenuEmulatorsCoCo3: TMenuItem;
+    MenuEmulatorsCoCo1: TMenuItem;
     MenuEmulatorsDragon200E: TMenuItem;
     MenuEmulatorsDragon32: TMenuItem;
     MenuEmulatorsDragon64: TMenuItem;
     MenuEmulatorsDynacmoMX1600: TMenuItem;
-    MenuEmulatorsSep1: TMenuItem;
     MenuEmulatorsTanoDragon: TMenuItem;
-    MenuEmulatorsVcc: TMenuItem;
-    MenuEmulatorsXRoarEmulator: TMenuItem;
     MenuFile: TMenuItem;
     MenuFileExit: TMenuItem;
     MenuFileNew: TMenuItem;
@@ -116,6 +112,8 @@ type
     MenuHelpXRoarEmulator: TMenuItem;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
+    MenuEmulatorsCoCo2: TMenuItem;
+    MenuItem4: TMenuItem;
     MenuToolsSep1: TMenuItem;
     MenuTools: TMenuItem;
     MenuToolsMessImageTool: TMenuItem;
@@ -614,10 +612,10 @@ end;
 
 procedure TFormCmocIDE.ExecuteEmulator(const AFileName: TFileName);
 var
+  LIndex: integer;
   LParams: TStringDynArray;
 begin
   LParams := default(TStringDynArray);
-
   if SameText(FOptions.Values[Opt_Machine2], 'coco3') then begin
     WriteLn('// Running Vcc emulator');
     try
@@ -633,7 +631,13 @@ begin
         'mjoy0', '-kbd-translate']);
       OCmoc.StringDynArrayAppendOptions(LParams, FOptions, [Opt_Machine2, '-bas',
         '-extbas', '-dos', '-cart', '-noextbas', '-nodos', '-ram', '-no-tape-fast']);
-      OCmoc.StringDynArrayAppend(LParams, AFileName);
+      for LIndex := 0 to 3 do begin
+        OCmoc.StringDynArrayAppendStrings(LParams, ['-load', OCmoc.PathToDsk +
+          'disk' + IntToStr(LIndex) + '.dsk']);
+      end;
+      if Length(AFileName) > 0 then begin
+        OCmoc.StringDynArrayAppendStrings(LParams, [AFileName]);
+      end;
       Execute(OCmoc.PathToXroar + 'xroar.exe', LParams, True);
     except
       OCmoc.RaiseError('XRoar failed to execute');
@@ -663,7 +667,22 @@ procedure TFormCmocIDE.MenuEmulatorsClick(ASender: TObject);
 begin
   if ASender <> MenuEmulators then begin
     FOptions.Clear;
-    FOptions.Values[Opt_Machine2] := (ASender as TMenuItem).Hint;
+    case (ASender as TMenuItem).Hint of
+      'coco1': begin
+        FOptions.Values[Opt_Machine2] := 'cocous';
+        FOptions.Values['-bas'] := 'bas10.rom';
+        FOptions.Values['-noextbas'] := EmptyStr;
+        FOptions.Values['-nodos'] := EmptyStr;
+      end;
+      'coco2': begin
+        FOptions.Values[Opt_Machine2] := 'coco2bus';
+        FOptions.Values['-bas'] := 'bas13.rom';
+        FOptions.Values['-extbas'] := 'extbas11.rom';
+        FOptions.Values['-dos'] := 'disk11.rom';
+      end else begin
+        FOptions.Values[Opt_Machine2] := (ASender as TMenuItem).Hint;
+      end;
+    end;
     ExecuteEmulator(EmptyStr);
   end;
 end;

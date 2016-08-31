@@ -162,6 +162,7 @@ type
     class function PathToInclude: TFileName;
     class function PathToLib: TFileName;
     class function PathToBin: TFileName;
+    class function PathToDsk: TFileName;
     class function PathToPackage: TFileName;
     class function PathToXRoar: TFileName;
     class function PathToXRoarRoms: TFileName;
@@ -363,6 +364,11 @@ end;
 class function OCmoc.PathToBin: TFileName;
 begin
   Result := PathToPackage + 'bin/';
+end;
+
+class function OCmoc.PathToDsk: TFileName;
+begin
+  Result := PathToPackage + 'dsk/';
 end;
 
 class function OCmoc.PathToLib: TFileName;

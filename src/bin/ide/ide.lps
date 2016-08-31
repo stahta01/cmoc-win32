@@ -4,14 +4,14 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="64">
+    <Units Count="67">
       <Unit0>
         <Filename Value="ide.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos Y="25"/>
-        <UsageCount Value="71"/>
+        <UsageCount Value="75"/>
       </Unit0>
       <Unit1>
         <Filename Value="unitcmocide.pas"/>
@@ -21,9 +21,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="653"/>
-        <CursorPos X="33" Y="666"/>
-        <UsageCount Value="71"/>
+        <TopLine Value="622"/>
+        <CursorPos X="39" Y="618"/>
+        <UsageCount Value="75"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -34,7 +34,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="16"/>
         <CursorPos X="14" Y="22"/>
-        <UsageCount Value="64"/>
+        <UsageCount Value="68"/>
       </Unit2>
       <Unit3>
         <Filename Value="unitcmocidesynedit.pas"/>
@@ -46,15 +46,16 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="35"/>
         <CursorPos X="17" Y="39"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="66"/>
       </Unit3>
       <Unit4>
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="288"/>
-        <CursorPos X="32" Y="303"/>
-        <UsageCount Value="27"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="360"/>
+        <CursorPos X="31" Y="369"/>
+        <UsageCount Value="28"/>
+        <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="..\shared\ucmocparser.pas"/>
@@ -506,16 +507,76 @@
         <CursorPos X="19" Y="531"/>
         <UsageCount Value="9"/>
       </Unit63>
+      <Unit64>
+        <Filename Value="C:\Documents and Settings\Admin\My Documents\Downloads\Emulators\COCO\Emulators\XRoar\xroar-0.34.3.tar\xroar-0.34.3\xroar-0.34.3\src\xroar.c"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="333"/>
+        <CursorPos X="20" Y="347"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit64>
+      <Unit65>
+        <Filename Value="C:\Documents and Settings\Admin\My Documents\Downloads\Emulators\COCO\Emulators\XRoar\xroar-0.34.3.tar\xroar-0.34.3\xroar-0.34.3\src\xconfig.c"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="229"/>
+        <CursorPos X="23" Y="249"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit65>
+      <Unit66>
+        <Filename Value="C:\Documents and Settings\Admin\My Documents\Downloads\Emulators\COCO\Emulators\XRoar\xroar-0.34.3.tar\xroar-0.34.3\xroar-0.34.3\src\xconfig.h"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="79"/>
+        <CursorPos X="21" Y="90"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit66>
     </Units>
-    <JumpHistory Count="2" HistoryIndex="1">
+    <JumpHistory Count="11" HistoryIndex="10">
       <Position1>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="639" Column="19" TopLine="637"/>
+        <Caret Line="636" Column="69" TopLine="625"/>
       </Position1>
       <Position2>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="634" Column="30" TopLine="628"/>
+        <Caret Line="743" Column="63" TopLine="737"/>
       </Position2>
+      <Position3>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="639" Column="70" TopLine="626"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\shared\ucmocutils.pas"/>
+        <Caret Line="371" Column="36" TopLine="364"/>
+      </Position4>
+      <Position5>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="676" Column="14" TopLine="669"/>
+      </Position5>
+      <Position6>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="677" Column="27" TopLine="670"/>
+      </Position6>
+      <Position7>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="676" Column="27" TopLine="669"/>
+      </Position7>
+      <Position8>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="677" Column="27" TopLine="670"/>
+      </Position8>
+      <Position9>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="676" Column="27" TopLine="669"/>
+      </Position9>
+      <Position10>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="675" Column="27" TopLine="668"/>
+      </Position10>
+      <Position11>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="674" Column="27" TopLine="667"/>
+      </Position11>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
