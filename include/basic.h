@@ -53,6 +53,8 @@ void SET(int x, int y, byte c);
 int POINT(int x, int y);
 void RESET(int x, int y);
 
+// TODO: These should really be LLINE/LBOX etc. To fit in with V2
+
 void SETLINE(int x1, int y1, int x2, int y2, byte c);
 void SETBOX(int x1, int y1, int x2, int y2, byte c, bool fill);
 void SETARC(int x, int y, int w, int h, int s, int e, byte c, bool fill);
@@ -103,11 +105,14 @@ void BITMAPCOPYRECT(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src,
 void BITMAPSTRETCH(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src);
 void BITMAPDRAW(BITMAP* dst, int x, int y, BITMAP* src);
 
+// Tape Functions
+
 int CLOADM(char* fn, void* offset);
 int CSAVEM(char* fn, void* start, void* finish, void* exec);
 
-int PRINT(int f, char* fmt, ...);
+// Disk BASIC Functions
 
+int PRINT(int fd, char* fmt, ...);
 int BACKUP(byte dr);
 int BACKUP2(byte dr1, byte dr2);
 int DIR(byte dr);
@@ -126,6 +131,32 @@ int OPEN(char mode, int fd, char* fn, size_t len);
 int OPEN_I(int fd, char* fn);
 int OPEN_O(int fd, char* fn);
 int OPEN_D(int fd, char* fn, size_t len);
+
+
+// Extended Color BASIC Version 2 (CoCo 3)
+
+void HSCREEN(int mode);
+void HCIRCLE(int x, int y, int r);
+void HCLS(int c);
+void HCOLOR(int c1, int c2);
+void HPAINT(int x, int y, int c, int b);
+void HLINE(int x1, int y1, int x2, int y2, byte c);
+
+// New V2 Commands
+
+// PALETTE, PALETTE RGB, PALETTE CMP
+// WIDTH, LOCATE, ATTR,
+// BUTTON
+// HDRAW
+// HLINE
+// HRESET
+// HSET
+// HPOINT
+// HPRINT
+// HBUFF
+// HPUT HGET
+// HSTAT
+// ERLIN ERNO ONERR ONBRK
 
 #endif
 
