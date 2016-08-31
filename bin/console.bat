@@ -1,7 +1,9 @@
 @echo off
 color A0
 
-set PATH=%PATH%;%CD%
+set PATH=%CD%\;%PATH%
+set PATH=%CD%\..\xroar;%PATH%
+set PATH=%CD%\..\vcc;%PATH%
 
 echo WinCMOC Build Environment
 echo -------------------------

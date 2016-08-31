@@ -1,5 +1,5 @@
 
-#pragma options -machine=coco3
+#pragma options -machine=coco
 
 #include <stdio.h>
 #include <cmoc.h>
