@@ -1,6 +1,4 @@
 
-#pragma options -machine=cocous
-
 #include <conio.h>
 #include <unistd.h>
 #include <fcntl.h>
