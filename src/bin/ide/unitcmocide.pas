@@ -638,6 +638,7 @@ begin
     CheckRoms;
     WriteLn('// Running XRoar emulator. Machine=', FOptions.Values[Opt_Machine2]);
     try
+      //OCmoc.StringDynArrayAppendStrings(LParams, ['-vdg-type', '6847t1']);
       OCmoc.StringDynArrayAppendOptions(LParams, FOptions, [Opt_Machine2, '-bas',
         '-extbas', '-dos', '-cart', '-noextbas', '-nodos', '-ram', '-no-tape-fast']);
       for LIndex := 0 to 3 do begin
@@ -664,8 +665,6 @@ begin
       end;
       Target_DRAGON: begin
         FOptions.Values[Opt_Machine2] := 'dragon64';
-      end else begin
-        OCmoc.RaiseError('Unknown target machine');
       end;
     end;
   end;

@@ -1,0 +1,289 @@
+* Originally from Roger Taylor rtaylor at bayou.com
+* Edited by Chris Lomont, www.lomont.org, 2006
+* COCO3 DEFINITIONS
+
+* GIME REGISTER NAMES
+GR_INIT0        equ     $FF90   65424
+GR_INIT1        equ     $FF91   65425
+GR_IRQENR       equ     $FF92   65426
+GR_FIRQENR      equ     $FF93   65427
+GR_TIMERMSB     equ     $FF94
+GR_TIMERLSB     equ     $FF95
+GR_VIDEOMODE    equ     $FF98   65432
+GR_VRES         equ     $FF99   65433
+GR_BORDER       equ     $FF9A   65434
+GR_DISTO_VBANK  equ     $FF9B   65435
+GR_V_SCROLL     equ     $FF9C   65436
+GR_VOFFSET      equ     $FF9D
+GR_HOFFSET      equ     $FF9F
+GR_TASK1_BANK0  equ     $FFA0	
+GR_TASK1_BANK1  equ     $FFA1
+GR_TASK1_BANK2  equ     $FFA2
+GR_TASK1_BANK3  equ     $FFA3
+GR_TASK1_BANK4  equ     $FFA4
+GR_TASK1_BANK5  equ     $FFA5
+GR_TASK1_BANK6  equ     $FFA6
+GR_TASK1_BANK7  equ     $FFA7
+GR_TASK2_BANK0  equ     $FFA8
+GR_TASK2_BANK1  equ     $FFA9
+GR_TASK2_BANK2  equ     $FFAA
+GR_TASK2_BANK3  equ     $FFAB
+GR_TASK2_BANK4  equ     $FFAC
+GR_TASK2_BANK5  equ     $FFAD
+GR_TASK2_BANK6  equ     $FFAE
+GR_TASK2_BANK7  equ     $FFAF
+GR_TASK1_0000   equ     $FFA0
+GR_TASK1_2000   equ     $FFA1
+GR_TASK1_4000   equ     $FFA2
+GR_TASK1_6000   equ     $FFA3
+GR_TASK1_8000   equ     $FFA4
+GR_TASK1_A000   equ     $FFA5
+GR_TASK1_C000   equ     $FFA6
+GR_TASK1_E000   equ     $FFA7
+GR_TASK2_0000   equ     $FFA8
+GR_TASK2_2000   equ     $FFA9
+GR_TASK2_4000   equ     $FFAA
+GR_TASK2_6000   equ     $FFAB
+GR_TASK2_8000   equ     $FFAC
+GR_TASK2_A000   equ     $FFAD
+GR_TASK2_C000   equ     $FFAE
+GR_TASK2_E000   equ     $FFAF
+GR_PALETTE_0    equ     $FFB0
+GR_PALETTE_1    equ     $FFB1
+GR_PALETTE_2    equ     $FFB2
+GR_PALETTE_3    equ     $FFB3
+GR_PALETTE_4    equ     $FFB4
+GR_PALETTE_5    equ     $FFB5
+GR_PALETTE_6    equ     $FFB6
+GR_PALETTE_7    equ     $FFB7
+GR_PALETTE_8    equ     $FFB8
+GR_PALETTE_9    equ     $FFB9
+GR_PALETTE_10   equ     $FFBA
+GR_PALETTE_11   equ     $FFBB
+GR_PALETTE_12   equ     $FFBC
+GR_PALETTE_13   equ     $FFBD
+GR_PALETTE_14   equ     $FFBE
+GR_PALETTE_15   equ     $FFBF
+GR_NORMALCLOCK  equ     $FFD8   write for ~1mhz CPU
+GR_FASTCLOCK    equ     $FFD9   write for ~2mhz CPU
+GR_ENABLEROM    equ     $FFDE   write to switch ROMs into memory map
+GR_ROMMODE      equ     $FFDF   write to switch ROMs out of memory map (all-RAM)
+GR_RAMMODE      equ     $FFDF   write to switch ROMs out of memory map (all-RAM)
+
+* some duplicates for cleaner code
+GR_TIMER        equ     GR_TIMERMSB
+GR_PALETTE      equ     GR_PALETTE_COLOR0	palette startes here
+
+* interrupt flags
+INT_TIMER       equ     %00100000
+INT_H_BORDER    equ     %00010000
+INT_HSYNC       equ     INT_H_BORDER
+INT_V_BORDER    equ     %00001000
+INT_VSYNC       equ     INT_V_BORDER
+INT_EI2         equ     %00000100
+INT_SERIALDATA  equ     INT_EI2
+INT_EI1         equ     %00000010
+INT_KEYBOARD    equ     INT_EI1
+INT_EI0         equ     %00000001
+INT_CARTRIDGE   equ     INT_EI0
+
+GI_COCO         equ     %10000000
+GI_COCO1        equ     %10000000
+GI_COCO2        equ     %10000000
+GI_COCO3        equ     %00000000
+GI_MMUENABLED   equ     %01000000
+GI_IRQENABLED   equ     %00100000
+GI_FIRQENABLED  equ     %00010000
+GI_VECTORPAGE   equ     %00001000
+GI_STANDARDSCS  equ     %00000100
+GI_16KROMMAP    equ     %00000000
+GI_32KROMMAP    equ     %00000010
+GI_INTERNALROM  equ     %00000000
+GI_EXTERNALROM  equ     %00000001
+
+* VIDEOMODE, STORE IN $FF98, 65432
+VM_GRAPHICS     equ     %10000000
+VM_TEXT         equ     %00000000
+VM_50HZ         equ     %00001000
+VM_60HZ         equ     %00000000
+VM_MONOCHROME   equ     %00010000
+VM_COLORBURST   equ     %00000000
+VM_1LINEROW     equ     %00000000
+VM_2LINEROW     equ     %00000010
+VM_8LINEROW     equ     %00000011
+VM_9LINEROW     equ     %00000100
+VM_10LINEROW    equ     %00000101
+VM_11LINEROW    equ     %00000110
+VM_1LINESCREEN  equ     %00000111
+
+* VRES, $FF98, 65433
+VR_192SCANLINES equ     %00000000
+VR_200SCANLINES equ     %00100000
+VR_0SCANLINES   equ     %01000000
+VR_225SCANLINES equ     %01100000
+VR_16BYTEROW    equ     %00000000
+VR_20BYTEROW    equ     %00000100
+VR_32BYTEROW    equ     %00001000
+VR_40BYTEROW    equ     %00001100
+VR_64BYTEROW    equ     %00010000
+VR_80BYTEROW    equ     %00010100
+VR_128BYTEROW   equ     %00011000
+VR_160BYTEROW   equ     %00011100
+VR_2COLORS      equ     %00000000
+VR_4COLORS      equ     %00000001
+VR_16COLORS     equ     %00000010
+VR_256COLORS    equ     %00000011
+VR_8PIXELSBYTE  equ     %00000000
+VR_4PIXELSBYTE  equ     %00000001
+VR_2PIXELSBYTE  equ     %00000010
+VR_1PIXELPBYTE  equ     %00000011
+
+* combined graphics modes (shortcuts)
+* of course, there's more possibilities
+GM_640x192c4   equ     VR_192SCANLINES!VR_160BYTESPERROW!VR_4PIXELSPERBYTE
+GM_640x192c2   equ     VR_192SCANLINES!VR_80BYTESPERROW!VR_8PIXELSPERBYTE
+GM_640x200c4   equ     VR_200SCANLINES!VR_160BYTESPERROW!VR_4PIXELSPERBYTE
+GM_640x200c2   equ     VR_200SCANLINES!VR_80BYTESPERROW!VR_8PIXELSPERBYTE
+GM_640x225c4   equ     VR_225SCANLINES!VR_160BYTESPERROW!VR_4PIXELSPERBYTE
+GM_640x225c2   equ     VR_225SCANLINES!VR_80BYTESPERROW!VR_8PIXELSPERBYTE
+GM_512x192c4   equ     VR_192SCANLINES!VR_128BYTESPERROW!VR_4PIXELSPERBYTE
+GM_512x192c2   equ     VR_192SCANLINES!VR_128BYTESPERROW!VR_8PIXELSPERBYTE
+GM_512x200c4   equ     VR_200SCANLINES!VR_128BYTESPERROW!VR_4PIXELSPERBYTE
+GM_512x200c2   equ     VR_200SCANLINES!VR_128BYTESPERROW!VR_8PIXELSPERBYTE
+GM_512x225c4   equ     VR_225SCANLINES!VR_128BYTESPERROW!VR_4PIXELSPERBYTE
+GM_512x225c2   equ     VR_225SCANLINES!VR_128BYTESPERROW!VR_8PIXELSPERBYTE
+GM_320x192c16  equ     VR_192SCANLINES!VR_160BYTESPERROW!VR_2PIXELSPERBYTE
+GM_320x192c4   equ     VR_192SCANLINES!VR_80BYTESPERROW!VR_4PIXELSPERBYTE
+GM_320x192c2   equ     VR_192SCANLINES!VR_40BYTESPERROW!VR_8PIXELSPERBYTE
+GM_320x200c16  equ     VR_200SCANLINES!VR_160BYTESPERROW!VR_2PIXELSPERBYTE
+GM_320x200c4   equ     VR_200SCANLINES!VR_80BYTESPERROW!VR_4PIXELSPERBYTE
+GM_320x200c2   equ     VR_200SCANLINES!VR_40BYTESPERROW!VR_8PIXELSPERBYTE
+GM_320x225c16  equ     VR_225SCANLINES!VR_160BYTESPERROW!VR_2PIXELSPERBYTE
+GM_320x225c4   equ     VR_225SCANLINES!VR_80BYTESPERROW!VR_4PIXELSPERBYTE
+GM_320x225c2   equ     VR_225SCANLINES!VR_40BYTESPERROW!VR_8PIXELSPERBYTE
+GM_256x192c16  equ     VR_192SCANLINES!VR_128BYTESPERROW!VR_2PIXELSPERBYTE
+GM_256x192c4   equ     VR_192SCANLINES!VR_64BYTESPERROW!VR_4PIXELSPERBYTE
+GM_256x192c2   equ     VR_192SCANLINES!VR_32BYTESPERROW!VR_8PIXELSPERBYTE
+GM_256x200c16  equ     VR_200SCANLINES!VR_128BYTESPERROW!VR_2PIXELSPERBYTE
+GM_256x200c4   equ     VR_200SCANLINES!VR_64BYTESPERROW!VR_4PIXELSPERBYTE
+GM_256x200c2   equ     VR_200SCANLINES!VR_32BYTESPERROW!VR_8PIXELSPERBYTE
+GM_256x225c16  equ     VR_225SCANLINES!VR_128BYTESPERROW!VR_2PIXELSPERBYTE
+GM_256x225c4   equ     VR_225SCANLINES!VR_64BYTESPERROW!VR_4PIXELSPERBYTE
+GM_256x225c2   equ     VR_225SCANLINES!VR_32BYTESPERROW!VR_8PIXELSPERBYTE
+GM_160x192c16  equ     VR_192SCANLINES!VR_80BYTESPERROW!VR_2PIXELSPERBYTE
+GM_160x192c4   equ     VR_192SCANLINES!VR_40BYTESPERROW!VR_4PIXELSPERBYTE
+GM_160x192c2   equ     VR_192SCANLINES!VR_20BYTESPERROW!VR_8PIXELSPERBYTE
+GM_160x200c16  equ     VR_200SCANLINES!VR_80BYTESPERROW!VR_2PIXELSPERBYTE
+GM_160x200c4   equ     VR_200SCANLINES!VR_40BYTESPERROW!VR_4PIXELSPERBYTE
+GM_160x200c2   equ     VR_200SCANLINES!VR_20BYTESPERROW!VR_8PIXELSPERBYTE
+GM_160x225c16  equ     VR_225SCANLINES!VR_80BYTESPERROW!VR_2PIXELSPERBYTE
+GM_160x225c4   equ     VR_225SCANLINES!VR_40BYTESPERROW!VR_4PIXELSPERBYTE
+GM_160x225c2   equ     VR_225SCANLINES!VR_20BYTESPERROW!VR_8PIXELSPERBYTE
+GM_128x192c16  equ     VR_192SCANLINES!VR_64BYTESPERROW!VR_2PIXELSPERBYTE
+GM_128x192c4   equ     VR_192SCANLINES!VR_32BYTESPERROW!VR_4PIXELSPERBYTE
+GM_128x192c2   equ     VR_192SCANLINES!VR_16BYTESPERROW!VR_8PIXELSPERBYTE
+GM_128x200c16  equ     VR_200SCANLINES!VR_64BYTESPERROW!VR_2PIXELSPERBYTE
+GM_128x200c4   equ     VR_200SCANLINES!VR_32BYTESPERROW!VR_4PIXELSPERBYTE
+GM_128x200c2   equ     VR_200SCANLINES!VR_16BYTESPERROW!VR_8PIXELSPERBYTE
+GM_128x225c16  equ     VR_225SCANLINES!VR_64BYTESPERROW!VR_2PIXELSPERBYTE
+GM_128x225c4   equ     VR_225SCANLINES!VR_32BYTESPERROW!VR_4PIXELSPERBYTE
+GM_128x225c2   equ     VR_225SCANLINES!VR_16BYTESPERROW!VR_8PIXELSPERBYTE
+
+* COCO 1/2/3 stuff
+
+VDGSCR  equ $0400       32-column VDG screen @1024-1535
+
+* Color BASIC data
+BLKTYP  equ $007C       used by BLKOUT
+BLKLEN  equ $007D       used by BLKOUT
+CBUFAD  equ $007E       used by BLKOUT
+DEVNUM  equ $006F       used by CHROUT
+*       0=screen -2=printer
+POTVAL  equ $015A       used by JOYIN
+*       15A right joystick, X axis
+*       15B right joystick, Y axis
+*       15C left joystick, X axis
+*       15D left joystick, Y axis
+
+* Color BASIC subroutines
+POLCAT  equ $A000       Polls Keyboard for a Character
+CHROUT  equ $A002       Outputs a Character to Device
+CSRDON  equ $A004       Starts Cassette
+BLKIN   equ $A006       Reads a Block from Cassette
+BLKOUT  equ $A008       Writes a Block to Cassette
+JOYIN   equ $A00A       Samples Joystick Pots
+WRTLDR  equ $A00C       Turns Cassette On and Writes a Leader
+
+INTCNV  equ $B3ED       Convert USR Argument to Integer
+GIVABF  equ $B4F4       Return .d as the Result of USR
+
+* Possible values for BLKTYP
+NAMBLK  equ $00
+DATBLK  equ $01
+EOFBLK  equ $FF
+
+* Values for the file type byte in a cassette namefile block
+BASFIL  equ $00         BASIC program
+DATFIL  equ $01         Data
+MACFIL  equ $02         Machine language
+
+* Values for the ASCII flag byte in a cassette namefile block
+BINFLG  equ $00         Binary
+ASCFLG  equ $FF         ASCII
+
+* Values for the gap flag byte in a cassette namefile block
+* The tech manual claims that the value for "continuous"
+* is 01, but examination of saved binaries shows that it
+* actually uses 00.
+CONFLG  equ $00         ; Continuous
+GAPFLG  equ $FF         ; Gaps
+
+* CoCo hardware
+PIA0AD  equ $FF00       ; PIA 1 side A data register
+PIA0AC  equ $FF01       ; PIA 1 side A control register
+PIA0BD  equ $FF02       ; PIA 1 side A data register
+PIA0BC  equ $FF03       ; PIA 1 side A control register
+PIA1AD  equ $FF20       ; PIA 1 side A data register
+PIA1AC  equ $FF21       ; PIA 1 side A control register
+PIA1BD  equ $FF22       ; PIA 1 side A data register
+PIA1BC  equ $FF23       ; PIA 1 side A control register
+
+
+* SAM addresses
+SAMVDG  equ $FFC0       ; video display mode
+SAM_V0  equ $FFC0
+SAM_V1  equ $FFC2
+SAM_V2  equ $FFC4
+SAMDIS  equ $FFC6       ; display address offset
+SAM_F0  equ $FFC6
+SAM_F1  equ $FFC8
+SAM_F2  equ $FFCA
+SAM_F3  equ $FFCC
+SAM_F4  equ $FFCE
+SAM_F5  equ $FFD0
+SAM_F6  equ $FFD2
+SAMPAG  equ $FFD4       ; page #1
+SAM_P1  equ $FFD4
+SAMRAT  equ $FFD6       ; cpu rate
+SAM_R0  equ $FFD6
+SAM_R1  equ $FFD8
+SAMSIZ  equ $FFDA       ; memory size
+SAM_M0  equ $FFDA
+SAM_M1  equ $FFDC
+SAMTYP  equ $FFDE       ; memory map type
+SAM_TY  equ $FFDE
+
+
+* bitmask for PIA1AC
+CASMOT  equ $08         ; cassette motor control bit
+
+* lower-right corner of screen in standard text mode
+* (location for an activity indicator)
+ACTIND  equ $05FF
+
+* 6809 definitions
+IRQ     equ $10
+FIRQ    equ $40
+
+* END OF FILE
+
