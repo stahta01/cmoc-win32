@@ -62,6 +62,7 @@ Source: "vcc\harddisk.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
 Source: "vcc\fd502.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
 
 Source: "xroar\xroar.exe"; DestDir: "{app}\xroar"; Flags: ignoreversion
+Source: "xroar\xroar.bat"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\xroar.pdf"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\xroar.conf"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\README"; DestDir: "{app}\xroar"; Flags: ignoreversion
