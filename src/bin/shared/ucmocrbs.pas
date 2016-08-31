@@ -32,6 +32,11 @@ function RbsLoadFromFile(const AFileName: string): rawbytestring;
 procedure RbsSaveToFile(const A: rawbytestring; const AFileName: string);
 function RbsByte(const A: byte): rawbytestring;
 function RbsWord(const A: word): rawbytestring;
+function RbsByte(const A: rawbytestring; const AIndex: integer): byte;
+function RbsWord(const A: rawbytestring; const AIndex: integer): word;
+
+function RbsDecbLength(const A: rawbytestring): word;
+function RbsDecbBegin(const A: rawbytestring): word;
 
 function RbsDecb(const A: rawbytestring; const AAddr: word): rawbytestring;
 function RbsDecb(const A: rawbytestring; const AAddr, AExec: word): rawbytestring;
@@ -71,6 +76,26 @@ end;
 function RbsWord(const A: word): rawbytestring;
 begin
   Result := RbsByte(A shr 8) + RbsByte(A);
+end;
+
+function RbsByte(const A: rawbytestring; const AIndex: integer): byte;
+begin
+  Result := pbyte(@A[AIndex + 1])^;
+end;
+
+function RbsWord(const A: rawbytestring; const AIndex: integer): word;
+begin
+  Result := swap(pword(@A[AIndex + 1])^);
+end;
+
+function RbsDecbLength(const A: rawbytestring): word;
+begin
+  Result := RbsWord(A, 1);
+end;
+
+function RbsDecbBegin(const A: rawbytestring): word;
+begin
+  Result := RbsWord(A, 3);
 end;
 
 function RbsDecb(const A: rawbytestring; const AAddr: word): rawbytestring;

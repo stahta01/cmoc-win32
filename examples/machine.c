@@ -1,5 +1,5 @@
 
-#pragma options -machine=coco -nodos -noextbas -ram=16
+#pragma options -machine=coco -nodos -noextbas -ram=32
 
 #include <stdio.h>
 #include <cmoc.h>

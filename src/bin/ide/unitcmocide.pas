@@ -27,7 +27,7 @@ interface
 
 uses
   Classes, ComCtrls, Controls, Dialogs, ExtCtrls, FileUtil, Forms, Graphics,
-  LCLIntf, Menus, MouseAndKeyInput, process, StreamIO, StrUtils, SynEdit, SynHighlighterAny,
+  LCLIntf, Menus, MouseAndKeyInput, process, StreamIO, SynEdit, SynHighlighterAny,
   SysUtils, Types, UCmocIDE, UCmocRbs, UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
 
 type
@@ -113,7 +113,11 @@ type
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     MenuEmulatorsCoCo2: TMenuItem;
+    MenuToolsOpenDisk0: TMenuItem;
     MenuItem4: TMenuItem;
+    MenuToolsOpenDisk1: TMenuItem;
+    MenuToolsOpenDisk2: TMenuItem;
+    MenuToolsOpenDisk3: TMenuItem;
     MenuToolsSep1: TMenuItem;
     MenuTools: TMenuItem;
     MenuToolsMessImageTool: TMenuItem;
@@ -165,8 +169,8 @@ type
     procedure MenuRunCompileClick(ASender: TObject);
     procedure MenuRunBuildAndRunClick(ASender: TObject);
     procedure MenuEmulatorsClick(ASender: TObject);
-    procedure MenuToolsConsoleClick(Sender: TObject);
-    procedure MenuToolsMessImageToolClick(Sender: TObject);
+    procedure MenuToolsConsoleClick(ASender: TObject);
+    procedure MenuToolsMessImageToolClick(ASender: TObject);
     procedure SynEditLogChangeUpdating(ASender: TObject; AIsUpdating: boolean);
     procedure MenuHelpAboutClick(ASender: TObject);
     procedure MenuRunBuildClick(ASender: TObject);
@@ -571,7 +575,7 @@ end;
 
 procedure TFormCmocIDE.OpenBrowser(AURL: string);
 begin
-  AURL := AnsiReplaceText(AURL, '%PACKAGE%', ExtractFileDir(OCmoc.PathToPackage));
+  AURL := OCmoc.FileNameTranslate(AURL);
   if not LCLIntf.OpenURL(AURL) then begin
     OCmoc.RaiseError('Unable to open', AURL);
   end;
@@ -610,12 +614,16 @@ var
   LIndex: integer;
   LParams: TStringDynArray;
   LBinFile: TFileName;
+  LDecb: rawbytestring;
 begin
   if Length(AFileName) > 0 then begin
+    LDecb := RbsLoadFromFile(AFileName);
     LBinFile := GetTempDir(False) + 'cmocide.bin';
-    RbsSaveToFile(RbsDecb(RbsVideo(UpperCase(PadRight(Application.Title, 32))), 1120) +
-      RbsDecb(RbsVideo(PadRight('RUNNING BINARY ...', 32)), 1152) +
-      RbsLoadFromFile(AFileName), LBinFile);
+    RbsSaveToFile(RbsDecb(RbsVideo(
+      UpperCase(Format('%-32s   BEG=$%.4x END=$%.4x LEN=$%.4x%s', [ExtractFileName(AFileName),
+      RbsDecbBegin(LDecb), RbsDecbBegin(LDecb) + RbsDecbLength(LDecb),
+      RbsDecbLength(LDecb), StringOfChar(#131, 32)]))),
+      1024) + LDecb, LBinFile);
     AFileName := LBinFile;
   end;
   LParams := default(TStringDynArray);
@@ -630,8 +638,6 @@ begin
     CheckRoms;
     WriteLn('// Running XRoar emulator. Machine=', FOptions.Values[Opt_Machine2]);
     try
-      OCmoc.StringDynArrayAppendStrings(LParams, ['-rompath', 'roms', '-joy-right',
-        'mjoy0', '-kbd-translate', '-vdg-type', '6847t1']);
       OCmoc.StringDynArrayAppendOptions(LParams, FOptions, [Opt_Machine2, '-bas',
         '-extbas', '-dos', '-cart', '-noextbas', '-nodos', '-ram', '-no-tape-fast']);
       for LIndex := 0 to 3 do begin
@@ -672,14 +678,16 @@ begin
     FOptions.Clear;
     case (ASender as TMenuItem).Hint of
       'coco1': begin
-        FOptions.Values[Opt_Machine2] := 'cocous';
+        FOptions.Values['-machine'] := 'cocous';
+        FOptions.Values['-ram'] := '64';
         FOptions.Values['-bas'] := 'bas10.rom';
         FOptions.Values['-noextbas'] := EmptyStr;
         FOptions.Values['-nodos'] := EmptyStr;
       end;
       'coco2': begin
-        FOptions.Values[Opt_Machine2] := 'coco2bus';
-        FOptions.Values['-bas'] := 'bas13.rom';
+        FOptions.Values['-machine'] := 'cocous';
+        FOptions.Values['-ram'] := '64';
+        FOptions.Values['-bas'] := 'bas10.rom';
         FOptions.Values['-extbas'] := 'extbas11.rom';
         FOptions.Values['-dos'] := 'disk11.rom';
       end else begin
@@ -690,14 +698,14 @@ begin
   end;
 end;
 
-procedure TFormCmocIDE.MenuToolsConsoleClick(Sender: TObject);
+procedure TFormCmocIDE.MenuToolsConsoleClick(ASender: TObject);
 begin
   Execute(OCmoc.PathToBin + 'console.bat', [], True);
 end;
 
-procedure TFormCmocIDE.MenuToolsMessImageToolClick(Sender: TObject);
+procedure TFormCmocIDE.MenuToolsMessImageToolClick(ASender: TObject);
 begin
-  RunTool('wimgtool', [], True);
+  RunTool('wimgtool', [OCmoc.FileNameTranslate((ASender as TMenuItem).Hint)], True);
 end;
 
 procedure TFormCmocIDE.MenuFileExitClick(ASender: TObject);

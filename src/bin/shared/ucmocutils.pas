@@ -158,6 +158,7 @@ type
     class function FileNameToIdent(const A: TFileName): string;
     class function FileNameToInitGlobals(const A: TFileName): string;
     class function FileNameTool(const ATool: string): TFileName;
+    class function FileNameTranslate(const A: TFileName): TFileName;
   public
     class function PathToInclude: TFileName;
     class function PathToLib: TFileName;
@@ -410,6 +411,12 @@ end;
 class function OCmoc.FileNameTool(const ATool: string): TFileName;
 begin
   Result := PathToPackage + 'bin/' + ATool + '.exe';
+end;
+
+class function OCmoc.FileNameTranslate(const A: TFileName): TFileName;
+begin
+  Result := A;
+  Result := AnsiReplaceText(Result, '%PACKAGE%', ExtractFileDir(PathToPackage));
 end;
 
 var
