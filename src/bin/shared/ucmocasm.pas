@@ -30,12 +30,12 @@ uses
 
 const
 
+  Asm_SECTION = Char_TAB + 'SECTION' + Char_TAB + 'SECTION_NAME';
   Asm_ENDSECTION = Char_TAB + 'ENDSECTION';
 
 function Asm_SYMBOL(const AName: string; const AValue: string = '*'): string;
 function Asm_EXPORT(const AName: string): string;
 function Asm_EXTERN(const AName: string): string;
-function Asm_SECTION(const AName: string = Tool_CMOC): string;
 
 implementation
 
@@ -52,11 +52,6 @@ end;
 function Asm_EXPORT(const AName: string): string;
 begin
   Result := Asm_SYMBOL(AName, 'EXPORT');
-end;
-
-function Asm_SECTION(const AName: string): string;
-begin
-  Result := Char_TAB + 'SECTION' + Char_TAB + AName;
 end;
 
 end.

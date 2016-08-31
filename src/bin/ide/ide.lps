@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="72">
+    <Units Count="75">
       <Unit0>
         <Filename Value="ide.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -22,7 +22,7 @@
         <UnitName Value="UnitCmocIDE"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="19"/>
-        <CursorPos X="83" Y="30"/>
+        <CursorPos X="102" Y="28"/>
         <UsageCount Value="80"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -564,6 +564,28 @@
         <CursorPos X="3" Y="216"/>
         <UsageCount Value="10"/>
       </Unit71>
+      <Unit72>
+        <Filename Value="..\..\lib\libconio\textmode.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="53" Y="12"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit72>
+      <Unit73>
+        <Filename Value="..\cmoc\src\support\coco.h"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="159"/>
+        <CursorPos X="9" Y="167"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit73>
+      <Unit74>
+        <Filename Value="..\..\lib\libconio\textmode2.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="6" Y="5"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit74>
     </Units>
     <JumpHistory Count="28" HistoryIndex="27">
       <Position1>

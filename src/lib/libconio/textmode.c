@@ -9,6 +9,6 @@
 
 void textmode(int newmode)
 {
-    textmode2(newmode, newmode & MODE_FONT_PACKED ? &charset_atari_small : &charset_c64);
+    textmode2(newmode, newmode & MODE_FONT_PACKED ? charset_atari_small : charset_c64);
 }
 
