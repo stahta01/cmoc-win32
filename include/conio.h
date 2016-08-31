@@ -167,25 +167,55 @@ void putlt(void);
 void putrt(void);
 void putlf(void);
 
-void scrclr(void); // Clear without moving cursor
+void scrclr(void); // Clear screen without moving cursor
 void scrup(void);
 
-#define MODE_T0_32X16 0
-#define MODE_T1_32X16 1
-#define MODE_L0_16X12 2
-#define MODE_L1_16X12 3
-#define MODE_L0_32X12 4
-#define MODE_L1_32X12 5
-#define MODE_M0_16X24 6
-#define MODE_M1_16X24 7
-#define MODE_M0_32X24 8
-#define MODE_M1_32X24 9
-#define MODE_H0_32X24 10
-#define MODE_H1_32X24 11
-#define MODE_H0_64X24 12
-#define MODE_H1_64X24 13
+// 1 bit for the color set
+
+#define MODE_CSS0           0
+#define MODE_CSS1           1
+
+// 3 bits for the resolution (Just incase we support CoCo3 modes)
+
+#define MODE_TEXT           0
+#define MODE_LRES           2
+#define MODE_MRES           4
+#define MODE_HRES           6
+
+// 1 bit for font type. ie: packed or unpacked
+
+#define MODE_FONT_UNPACK    0
+#define MODE_FONT_PACKED    16
+
+#define MODE_T0_32X16 (MODE_CSS0 | MODE_TEXT)
+#define MODE_T1_32X16 (MODE_CSS1 | MODE_TEXT)
+
+#define MODE_L0_16X12 (MODE_CSS0 | MODE_LRES)
+#define MODE_L1_16X12 (MODE_CSS1 | MODE_LRES)
+
+#define MODE_L0_32X12 (MODE_CSS0 | MODE_LRES | MODE_FONT_PACKED)
+#define MODE_L1_32X12 (MODE_CSS1 | MODE_LRES | MODE_FONT_PACKED)
+
+#define MODE_M0_16X24 (MODE_CSS0 | MODE_MRES)
+#define MODE_M1_16X24 (MODE_CSS1 | MODE_MRES)
+
+#define MODE_M0_32X24 (MODE_CSS0 | MODE_MRES | MODE_FONT_PACKED)
+#define MODE_M1_32X24 (MODE_CSS1 | MODE_MRES | MODE_FONT_PACKED)
+
+#define MODE_H0_32X24 (MODE_CSS0 | MODE_HRES)
+#define MODE_H1_32X24 (MODE_CSS1 | MODE_HRES)
+
+#define MODE_H0_64X24 (MODE_CSS0 | MODE_HRES | MODE_FONT_PACKED)
+#define MODE_H1_64X24 (MODE_CSS1 | MODE_HRES | MODE_FONT_PACKED)
 
 void textmode(int newmode);
+
+// You can save 2K by calling textmode2. textmode() refers to 2 fonts, when you
+// may only need 1. Calling textmode2 with the font you need, will prevent the
+// linker from adding the second, but, you must make sure you select a mode
+// which matchs the font. ie: packed vs unpacked fonts.
+
+void textmode2(int newmode, unsigned char* fontdata);
 
 #endif
 
