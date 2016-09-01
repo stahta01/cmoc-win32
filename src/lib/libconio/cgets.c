@@ -50,7 +50,7 @@ char* cgets(char* s)
             }
             break;
         default:
-            if (strlen(s) < ((unsigned)s[-2]) && _isprint(c)) {
+            if (strlen(s) < (((unsigned)s[-2]) - 1) && _isprint(c)) {
                 memmove(p + 1, p, strlen(p) + 1);
                 *p = c;
                 cputs(p);
