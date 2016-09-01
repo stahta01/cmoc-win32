@@ -1,9 +1,9 @@
 
 #include <conio.h>
 
-char getche(void)
+int getche(void)
 {
-    char c = getch();
+    int c = getch();
     cputc(c);
     return c;
 }

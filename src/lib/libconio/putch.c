@@ -3,14 +3,14 @@
 
 unsigned char _charsetgroups[] = {0 << 5, 3 << 5, 2 << 5, 0 << 5};
 
-char putch(char c)
+int putch(int c)
 {
     if (isvidram()) {
         c = (c & 31) | _charsetgroups[c >> 5];
         if (_conio.revers) {
             c &= 64^-1;
         }
-        *(unsigned char*)_curpos = c;
+        *(char*)_curpos = (char)c;
     } else {
         if (isgrpram()) {
             if (_conio.bgcolor) {

@@ -1,24 +1,12 @@
 
 #include "_conio.h"
 
-char inkey();
-
-char last_key;
-
-unsigned char kbhit()
+int getch(void)
 {
-    if (!last_key) {
-        last_key = inkey();
-    }
-    return last_key ? 1 : 0;
-}
-
-char getch(void)
-{
-    char c;
-    if (last_key) {
-        c = last_key;
-        last_key = 0;
+    int c;
+    if (ungetch_buf) {
+        c = ungetch_buf;
+        ungetch_buf = 0;
     } else    {
         if (_conio.cursor) {
             unsigned char timer = ((unsigned char*)_TIMVAL)[1];
@@ -32,15 +20,14 @@ char getch(void)
                 curchr = *curpos;
                 curxor = _conio.fontpack ? _conio.fontbase & 128 ? 0xF : 0xF0 : 0xFF;
             }
-            do {
+            while (!kbhit()) {
                 *curpos = (((unsigned char*)_TIMVAL)[1] - timer) & 16 ? curchr : curchr ^ curxor;
-                c = inkey();
-            } while (!c);
+            }
+            c = getch();
             *curpos = curchr;
         } else {
-            do {
-                c = inkey();
-            } while (!c);
+            while (!kbhit()) { }
+            c = getch();
         }
     }
     return c;

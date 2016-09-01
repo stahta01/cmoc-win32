@@ -1,18 +1,18 @@
 
 #include <conio.h>
 
-unsigned char show_cursor = 1;
+unsigned char _cursor_onoff = 1;
 
 unsigned char cursor(unsigned char onoff)
 {
-    unsigned char result = show_cursor;
-    show_cursor = onoff;
+    unsigned char result = _cursor_onoff;
+    _cursor_onoff = onoff;
     return result;
 }
 
-char cgetc(void)
+int cgetc(void)
 {
-    if (!show_cursor) {
+    if (!_cursor_onoff) {
         while (!kbhit()) {}
     }
     return getch();

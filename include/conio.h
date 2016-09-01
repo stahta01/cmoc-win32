@@ -71,10 +71,10 @@ unsigned char wherex(void);
 unsigned char wherey(void);
 
 // Output one character at the current cursor position
-void cputc(char c);
+void cputc(int c);
 
 // Same as "gotoxy (x, y); cputc (c);"
-void cputcxy(unsigned char x, unsigned char y, char c);
+void cputcxy(unsigned char x, unsigned char y, int c);
 
 // Output a NUL-terminated string at the current cursor position
 void cputs(const char* s);
@@ -91,7 +91,7 @@ int vcprintf(const char* format, va_list ap);
 // Return a character from the keyboard. If there is no character available,
 // the function waits until the user does press a key. If cursor is set to
 // 1 (see below), a blinking cursor is displayed while waiting.
-char cgetc(void);
+int cgetc(void);
 
 // Like scanf(), but uses direct keyboard input
 int cscanf(const char* format, ...);
@@ -145,9 +145,12 @@ void screensize(unsigned char* x, unsigned char* y);
 // Non-standard. Added for CMOC
 
 char* cgets(char* s);
-char getch(void);
-char getche(void);
-char putch(char c);
+int getch(void);
+int getche(void);
+int putch(int c);
+int ungetch(int c);
+
+extern int ungetch_buf;
 
 typedef struct {
     unsigned char cursor;
@@ -167,7 +170,7 @@ void putlt(void);
 void putrt(void);
 void putlf(void);
 
-void scrclr(void); // Clear screen without moving cursor
+void scrclr(void);                      // Clear screen without moving cursor
 void scrup(void);
 
 // 1 bit for the color set

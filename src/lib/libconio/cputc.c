@@ -1,7 +1,7 @@
 
 #include <conio.h>
 
-void cputc(char c)
+void cputc(int c)
 {
     switch (c) {
     case 8:

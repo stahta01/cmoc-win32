@@ -20,7 +20,7 @@ char* cgets(char* s)
     s[0] = 0;
     char* p = s;
     for (;;) {
-        char c = getch();
+        int c = getch();
         if (c == _CR) {
             break;
         }
@@ -52,7 +52,7 @@ char* cgets(char* s)
         default:
             if (strlen(s) < (((unsigned)s[-2]) - 1) && _isprint(c)) {
                 memmove(p + 1, p, strlen(p) + 1);
-                *p = c;
+                *p = (char)c;
                 cputs(p);
                 for (int i = strlen(p) - 1; i-- > 0;) {
                     putlt();
