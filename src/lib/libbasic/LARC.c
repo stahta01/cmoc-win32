@@ -5,8 +5,8 @@
 
 void LARC(int x, int y, int w, int h, int s, int e, byte c)
 {
-    w <<= 1;
-    h <<= 1;
+    //w <<= 1;
+    //h <<= 1;
     int x1 = fxsin(s) * w, x2 = x1;
     int y1 = fxcos(s) * h, y2 = y1;
     if (s < e) {

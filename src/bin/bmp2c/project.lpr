@@ -47,9 +47,9 @@ var
 begin
   try
     try
-      FileCopyPictureToCpp('charset_6x8.c', 'charset_6x8.bmp');
-      FileCopyPictureToCpp('../../../examples/image256x192.c', 'image256x192.png');
-      Exit;
+      FileCopyPictureToCpp('../../lib/libcharset/charset_6x8.c', 'charset_6x8.bmp', 'charset_6x8');
+      //FileCopyPictureToCpp('../../../examples/image256x192.c', 'image256x192.png');
+      //Exit;
 
       LBitmap := TBitmap.Create;
       LBitmap.SetSize(8, 256 * 8);
@@ -66,14 +66,16 @@ begin
       for LIndex := 0 to 127 do begin
         LBitmap.Canvas.TextOut(4, (LIndex + 128) * 8, CocoChar(char(LIndex)));
       end;
-      BitmapSaveToCpp(LBitmap, LBitmap.Canvas.Font.Name + '.c');
+      BitmapSaveToCpp(LBitmap, '../../lib/libcharset/charset_atari_small.c',
+        'charset_atari_small');
 
+      LBitmap.SetSize(8, 128 * 8);
       LBitmap.Canvas.Font.Name := 'C64 Pro';
       LBitmap.Canvas.FillRect(0, 0, LBitmap.Width, LBitmap.Height);
-      for LIndex := 0 to 255 do begin
+      for LIndex := 0 to 127 do begin
         LBitmap.Canvas.TextOut(1, LIndex * 8, CocoChar(char(LIndex)));
       end;
-      BitmapSaveToCpp(LBitmap, LBitmap.Canvas.Font.Name + '.c');
+      BitmapSaveToCpp(LBitmap, '../../lib/libcharset/charset_c64.c', 'charset_c64');
     except
       on E: Exception do WriteLn(E.Message);
     end;

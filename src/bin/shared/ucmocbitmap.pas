@@ -29,9 +29,10 @@ uses
   Classes, Graphics, SysUtils;
 
 function BitmapGetPixelByte(const ABitmap: TBitmap; const AX, AY: integer): byte;
-function BitmapToCppString(const ABitmap: TBitmap; const AVarName: string): string;
-procedure BitmapSaveToCpp(const ABitmap: TBitmap; const AFileName: TFileName);
-procedure FileCopyPictureToCpp(const ADst, ASrc: TFileName);
+function BitmapToCppString(const ABitmap: TBitmap; const AName: string): string;
+procedure BitmapSaveToCpp(const ABitmap: TBitmap; const AFileName: TFileName;
+  const AVarName: string);
+procedure FileCopyPictureToCpp(const ADst, ASrc: TFileName; const AVarName: string);
 
 implementation
 
@@ -49,7 +50,7 @@ begin
   end;
 end;
 
-function BitmapToCppString(const ABitmap: TBitmap; const AVarName: string): string;
+function BitmapToCppString(const ABitmap: TBitmap; const AName: string): string;
 var
   LCol, LRow, LSize: integer;
 begin
@@ -68,14 +69,15 @@ begin
     end;
   end;
   Result := Format(#13'extern unsigned char %s[%d];'#13#13'unsigned char %s[%d] = {%s'#13'};',
-    [AVarName, LSize, AVarName, LSize, Result]);
+    [AName, LSize, AName, LSize, Result]);
 end;
 
-procedure BitmapSaveToCpp(const ABitmap: TBitmap; const AFileName: TFileName);
+procedure BitmapSaveToCpp(const ABitmap: TBitmap; const AFileName: TFileName;
+  const AVarName: string);
 begin
   with TStringList.Create do begin
     try
-      Text := BitmapToCppString(ABitmap, ChangeFileExt(ExtractFileName(AFileName), EmptyStr));
+      Text := BitmapToCppString(ABitmap, AVarName);
       SaveToFile(AFileName);
     finally
       Free;
@@ -83,18 +85,17 @@ begin
   end;
 end;
 
-procedure FileCopyPictureToCpp(const ADst, ASrc: TFileName);
+procedure FileCopyPictureToCpp(const ADst, ASrc: TFileName; const AVarName: string);
 var
   LPicture: TPicture;
 begin
   LPicture := TPicture.Create;
   try
     LPicture.LoadFromFile(ASrc);
-    BitmapSaveToCpp(LPicture.Bitmap, ADst);
+    BitmapSaveToCpp(LPicture.Bitmap, ADst, AVarName);
   finally
     FreeAndNil(LPicture);
   end;
 end;
 
 end.
-
