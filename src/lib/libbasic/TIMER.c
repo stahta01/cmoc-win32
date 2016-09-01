@@ -1,10 +1,9 @@
 
 #include <basic.h>
-#include <equates.h>
+#include <time.h>
 
 word TIMER(void)
 {
-    return *(word*)_TIMVAL;
+    return clock();
 }
-
 

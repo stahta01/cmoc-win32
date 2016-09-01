@@ -2,7 +2,7 @@
 #include <basic.h>
 #include <conio.h>
 
-char INKEY(void)
+int INKEY(void)
 {
     return kbhit() ? getch() : 0;
 }

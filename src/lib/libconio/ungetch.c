@@ -1,7 +1,7 @@
 
 #include <conio.h>
 
-int ungetch_buf;
+int ungetch_buf = 0;
 
 int ungetch(int c)
 {

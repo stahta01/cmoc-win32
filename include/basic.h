@@ -47,7 +47,7 @@ size_t INPUT(int f, char* s);
 
 void SOUND(byte tone, byte duration);
 byte JOYSTK(int j);
-char INKEY(void);
+int INKEY(void);
 word TIMER(void);
 
 void CLS(int c);
