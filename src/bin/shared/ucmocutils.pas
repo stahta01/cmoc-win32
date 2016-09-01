@@ -475,7 +475,7 @@ end;
 class procedure OCmoc.StringsInsertWinCMOCHeader(const A: TStrings);
 begin
   A.Insert(0, EmptyStr);
-  A.Insert(1, '// This file was created by the WinCMOC compiler');
+  A.Insert(1, '// This file was created by WinCMOC (CMOC 6809 C Compiler for Windows)');
   A.Insert(2, '// Created: ' + DateTimeToStr(Now));
   A.Insert(3, '// WinCMOC:  https://sourceforge.net/projects/cmoc-win32/');
   A.Insert(4, '// CMOC:     http://perso.b2b2c.ca/~sarrazip/dev/cmoc.html');
