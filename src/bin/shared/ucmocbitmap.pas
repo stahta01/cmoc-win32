@@ -19,39 +19,31 @@
  ***************************************************************************
 }
 
-unit UCmocAsm;
+unit UCmocBitmap;
 
 {$INCLUDE cmoc.inc}
 
 interface
 
 uses
-  Classes, SysUtils, UCmocUtils;
+  Classes, Graphics, SysUtils;
 
-const
-
-  Asm_SECTION = Char_TAB + 'SECTION' + Char_TAB + 'SECTION_NAME';
-  Asm_ENDSECTION = Char_TAB + 'ENDSECTION';
-
-function Asm_SYMBOL(const AName: string; const AValue: string = '*'): string;
-function Asm_EXPORT(const AName: string): string;
-function Asm_EXTERN(const AName: string): string;
+function BitmapPixelByte(const ABitmap: TBitmap; const AX, AY: integer): byte;
 
 implementation
 
-function Asm_SYMBOL(const AName, AValue: string): string;
+function BitmapPixelByte(const ABitmap: TBitmap; const AX, AY: integer): byte;
+var
+  LBit: integer;
 begin
-  Result := AName + Char_TAB + AValue;
-end;
-
-function Asm_EXTERN(const AName: string): string;
-begin
-  Result := Asm_SYMBOL(AName, 'EXTERN');
-end;
-
-function Asm_EXPORT(const AName: string): string;
-begin
-  Result := Asm_SYMBOL(AName, 'EXPORT');
+  Result := 0;
+  for LBit := AX to AX + 7 do begin
+    if ABitmap.Canvas.Pixels[LBit, AY] = clBlack then begin
+      Result := (Result shl 1) or 0;
+    end else begin
+      Result := (Result shl 1) or 1;
+    end;
+  end;
 end;
 
 end.
