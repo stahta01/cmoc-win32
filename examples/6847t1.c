@@ -1,6 +1,6 @@
 
 // This example requires the coco2b (6847t1 support)
-#pragma options -machine=coco2b
+#pragma options -machine=cocous
 
 #include <conio.h>
 

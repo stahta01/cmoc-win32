@@ -37,14 +37,14 @@ type
 
   CCmocProcess_ASMTOH = class(CCmocProcess)
   public
-    procedure ProcessFile(const ADst, ASrc: TStrings; const AHeaderIdent: string;
-      const AFilter: TStringDynArray);
-    procedure ProcessFile(const ADst, ASrc: TFileName; const AHeaderIdent: string;
-      const AFilter: TStringDynArray);
+    procedure ProcessFile(const ADst, ASrc: TStrings; const AOrgFile: TFileName;
+      const AHeaderIdent: string; const AFilter: TStringDynArray);
+    procedure ProcessFile(const ADst, ASrc, AOrgFile: TFileName;
+      const AHeaderIdent: string; const AFilter: TStringDynArray);
   end;
 
   procedure CCmocProcess_ASMTOH.ProcessFile(const ADst, ASrc: TStrings;
-  const AHeaderIdent: string; const AFilter: TStringDynArray);
+  const AOrgFile: TFileName; const AHeaderIdent: string; const AFilter: TStringDynArray);
 
     procedure LDefine(const AName, AValue: string);
     begin
@@ -58,6 +58,11 @@ type
     LLine, LIdent, LSymbol, LComment: string;
     LParser: OAsmParser;
   begin
+    OCmoc.StringsInsertWinCMOCHeader(ADst);
+    ADst.Add('// Translated from ' + OCmoc.StringQuoted(ExtractFileName(AOrgFile)));
+    ADst.Add('//');
+    ADst.Add('// This file is in the public domain');
+    ADst.Add(EmptyStr);
     ADst.Add('#ifndef ' + AHeaderIdent);
     ADst.Add('#define ' + AHeaderIdent + LineEnding);
 
@@ -113,7 +118,7 @@ type
     ADst.Add(LineEnding + '#endif');
   end;
 
-  procedure CCmocProcess_ASMTOH.ProcessFile(const ADst, ASrc: TFileName;
+  procedure CCmocProcess_ASMTOH.ProcessFile(const ADst, ASrc, AOrgFile: TFileName;
   const AHeaderIdent: string; const AFilter: TStringDynArray);
   var
     LSrc, LDst: TStrings;
@@ -123,7 +128,7 @@ type
       LSrc.LoadFromFile(ASrc);
       LDst := TStringList.Create;
       try
-        ProcessFile(LDst, LSrc, AHeaderIdent, AFilter);
+        ProcessFile(LDst, LSrc, AOrgFile, AHeaderIdent, AFilter);
         LDst.SaveToFile(ADst);
       finally
         FreeAndNil(LDst);
@@ -133,8 +138,8 @@ type
     end;
   end;
 
-  procedure ProcessSrcToDst(const ADst, ASrc: TFileName; const AHeaderIdent: string;
-  const AFilter: TStringDynArray);
+  procedure ProcessSrcToDst(const ADst, ASrc, AOrgFile: TFileName;
+  const AHeaderIdent: string; const AFilter: TStringDynArray);
   var
     LTmpFile: TFileName;
   begin
@@ -144,7 +149,7 @@ type
         try
           Execute(OCmoc.FileNameTool(Tool_LWASM), TStringDynArray.Create('-s',
             '--depend', '--list=' + LTmpFile, ASrc));
-          ProcessFile(ADst, LTmpFile, AHeaderIdent, AFilter);
+          ProcessFile(ADst, LTmpFile, AOrgFile, AHeaderIdent, AFilter);
         finally
           Free;
         end;
@@ -166,7 +171,7 @@ type
           Add(ReadFileToString(ExtractFilePath(ASrc) + 'equates.asm'));
           Add(ReadFileToString(ASrc));
           SaveToFile(LTmpFile);
-          ProcessSrcToDst(ADst, LTmpFile, AHeaderIdent, AFilter);
+          ProcessSrcToDst(ADst, LTmpFile, ASrc, AHeaderIdent, AFilter);
         finally
           Free;
         end;
@@ -180,7 +185,7 @@ type
   const AFilter: TStringDynArray);
   begin
     ProcessSrcToDst(ADstPath + ChangeFileExt(ExtractFileName(ASrc), '.h'),
-      ASrc, AHeaderIdent, AFilter);
+      ASrc, ASrc, AHeaderIdent, AFilter);
   end;
 
   procedure ProcessSrcToPathWithEquates(const ADstPath, ASrc: TFileName;
@@ -235,6 +240,7 @@ begin
 
     // Note: we list the equates from coco which are the same as the dragon.
     ProcessSrcToDst(LDstPath + '_equates.h', OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm',
+      OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm',
       '_DRAGON_COCO_EQUATES_H', TStringDynArray.Create('BS', 'CR', 'ESC', 'LF',
       'FORMF', 'SPACE', 'TEMPTR', 'CURPOS', 'SNDTON', 'SNDDUR', 'TIMVAL',
       'VIDRAM', 'POTVAL', 'PMODE', 'ALLCOL', 'WCOLOR', 'FORCOL', 'BAKCOL',

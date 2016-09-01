@@ -197,6 +197,8 @@ type
     class procedure StringDynArrayAppendLibs(var A: TStringDynArray);
     class procedure StringDynArrayAppendOptions(var A: TStringDynArray;
       const AOptions: TStrings; const AInclude: array of string);
+  public
+    class procedure StringsInsertWinCMOCHeader(const A: TStrings);
   end;
 
 implementation
@@ -241,95 +243,6 @@ begin
     RaiseError('Source file does not exist', ASrc);
   end;
   Result := FileAge(ADst) <= FileAge(ASrc);
-end;
-
-class procedure OCmoc.StringDynArrayAppend(var A: TStringDynArray; const S: string);
-begin
-  SetLength(A, Length(A) + 1);
-  A[High(A)] := S;
-end;
-
-class procedure OCmoc.StringDynArrayInsert(var A: TStringDynArray; const I: integer;
-  const S: string);
-var
-  LIndex: integer;
-begin
-  SetLength(A, Length(A) + 1);
-  for LIndex := High(A) - 1 downto I do begin
-    A[LIndex + 1] := A[LIndex];
-  end;
-  A[I] := S;
-end;
-
-class procedure OCmoc.StringDynArrayAppendStrings(var A: TStringDynArray;
-  const AStrings: array of string);
-var
-  LString: string;
-begin
-  for LString in AStrings do begin
-    StringDynArrayAppend(A, LString);
-  end;
-end;
-
-class procedure OCmoc.StringDynArrayAppendLib(var A: TStringDynArray; const AName: string);
-begin
-  StringDynArrayAppend(A, Opt_LibInclude2);
-  StringDynArrayAppend(A, AName);
-end;
-
-class procedure OCmoc.StringDynArrayAppendLibs(var A: TStringDynArray);
-begin
-  StringDynArrayAppendLib(A, 'disk');
-  StringDynArrayAppendLib(A, 'motorola');
-  StringDynArrayAppendLib(A, 'cmoc');
-  StringDynArrayAppendLib(A, '6809');
-  StringDynArrayAppendLib(A, 'basic');
-  StringDynArrayAppendLib(A, 'charset');
-  StringDynArrayAppendLib(A, 'conio');
-  StringDynArrayAppendLib(A, 'unistd');
-  StringDynArrayAppendLib(A, 'ctype');
-  StringDynArrayAppendLib(A, 'string');
-  StringDynArrayAppendLib(A, 'c');
-end;
-
-class procedure OCmoc.StringDynArrayAppendOptions(var A: TStringDynArray;
-  const AOptions: TStrings; const AInclude: array of string);
-var
-  LIndex, LPos: integer;
-  LName, LValue: string;
-begin
-  for LIndex := 0 to AOptions.Count - 1 do begin
-    LName := Trim(AOptions[LIndex]);
-    LPos := Pos('=', LName);
-    if LPos = 0 then begin
-      LPos := Length(LName) + 1;
-    end;
-    LValue := Trim(Copy(LName, LPos + 1, MaxInt));
-    LName := Trim(Copy(LName, 1, LPos - 1));
-    if AnsiMatchText(LName, AInclude) then begin
-      StringDynArrayAppend(A, LName);
-      if Length(LValue) > 0 then begin
-        StringDynArrayAppend(A, LValue);
-      end;
-    end;
-  end;
-end;
-
-class procedure OCmoc.FileNamesAppend(var A: TStringDynArray; AFileName: string;
-  const AMustExist: boolean);
-var
-  LFileName: TFileName;
-begin
-  AFileName := DosToUnix(CleanAndExpandFileName(AFileName));
-  if AMustExist and not FileExists(AFileName) then begin
-    RaiseError('Unable to find', AFileName);
-  end;
-  for LFileName in A do begin
-    if SameText(LFileName, AFileName) then begin
-      RaiseError('Duplicate filename', AFileName);
-    end;
-  end;
-  StringDynArrayAppend(A, AFileName);
 end;
 
 class function OCmoc.DosToUnix(const A: TFileName): TFileName;
@@ -465,6 +378,105 @@ end;
 class function OCmoc.SymbolIsPublic(const A: string): boolean;
 begin
   Result := AnsiStartsStr('_', A) and not AnsiStartsStr('___', A);
+end;
+
+class procedure OCmoc.StringDynArrayAppend(var A: TStringDynArray; const S: string);
+begin
+  SetLength(A, Length(A) + 1);
+  A[High(A)] := S;
+end;
+
+class procedure OCmoc.StringDynArrayInsert(var A: TStringDynArray; const I: integer;
+  const S: string);
+var
+  LIndex: integer;
+begin
+  SetLength(A, Length(A) + 1);
+  for LIndex := High(A) - 1 downto I do begin
+    A[LIndex + 1] := A[LIndex];
+  end;
+  A[I] := S;
+end;
+
+class procedure OCmoc.StringDynArrayAppendStrings(var A: TStringDynArray;
+  const AStrings: array of string);
+var
+  LString: string;
+begin
+  for LString in AStrings do begin
+    StringDynArrayAppend(A, LString);
+  end;
+end;
+
+class procedure OCmoc.StringDynArrayAppendLib(var A: TStringDynArray; const AName: string);
+begin
+  StringDynArrayAppend(A, Opt_LibInclude2);
+  StringDynArrayAppend(A, AName);
+end;
+
+class procedure OCmoc.StringDynArrayAppendLibs(var A: TStringDynArray);
+begin
+  StringDynArrayAppendLib(A, 'disk');
+  StringDynArrayAppendLib(A, 'motorola');
+  StringDynArrayAppendLib(A, 'cmoc');
+  StringDynArrayAppendLib(A, '6809');
+  StringDynArrayAppendLib(A, 'basic');
+  StringDynArrayAppendLib(A, 'charset');
+  StringDynArrayAppendLib(A, 'conio');
+  StringDynArrayAppendLib(A, 'unistd');
+  StringDynArrayAppendLib(A, 'ctype');
+  StringDynArrayAppendLib(A, 'string');
+  StringDynArrayAppendLib(A, 'c');
+end;
+
+class procedure OCmoc.StringDynArrayAppendOptions(var A: TStringDynArray;
+  const AOptions: TStrings; const AInclude: array of string);
+var
+  LIndex, LPos: integer;
+  LName, LValue: string;
+begin
+  for LIndex := 0 to AOptions.Count - 1 do begin
+    LName := Trim(AOptions[LIndex]);
+    LPos := Pos('=', LName);
+    if LPos = 0 then begin
+      LPos := Length(LName) + 1;
+    end;
+    LValue := Trim(Copy(LName, LPos + 1, MaxInt));
+    LName := Trim(Copy(LName, 1, LPos - 1));
+    if AnsiMatchText(LName, AInclude) then begin
+      StringDynArrayAppend(A, LName);
+      if Length(LValue) > 0 then begin
+        StringDynArrayAppend(A, LValue);
+      end;
+    end;
+  end;
+end;
+
+class procedure OCmoc.FileNamesAppend(var A: TStringDynArray; AFileName: string;
+  const AMustExist: boolean);
+var
+  LFileName: TFileName;
+begin
+  AFileName := DosToUnix(CleanAndExpandFileName(AFileName));
+  if AMustExist and not FileExists(AFileName) then begin
+    RaiseError('Unable to find', AFileName);
+  end;
+  for LFileName in A do begin
+    if SameText(LFileName, AFileName) then begin
+      RaiseError('Duplicate filename', AFileName);
+    end;
+  end;
+  StringDynArrayAppend(A, AFileName);
+end;
+
+class procedure OCmoc.StringsInsertWinCMOCHeader(const A: TStrings);
+begin
+  A.Insert(0, EmptyStr);
+  A.Insert(1, '// This file was created by the WinCMOC compiler');
+  A.Insert(2, '// Created: ' + DateTimeToStr(Now));
+  A.Insert(3, '// WinCMOC:  https://sourceforge.net/projects/cmoc-win32/');
+  A.Insert(4, '// CMOC:     http://perso.b2b2c.ca/~sarrazip/dev/cmoc.html');
+  A.Insert(5, EmptyStr);
 end;
 
 class procedure OCmoc.SourcePragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;

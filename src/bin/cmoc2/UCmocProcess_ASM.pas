@@ -264,6 +264,7 @@ begin
   //FAsmCode.Insert(0, '#define RMB ZMB');
   FAsmCode.Insert(1, Asm_SECTION);
   FAsmCode.Add(Asm_ENDSECTION);
+  OCmoc.StringsInsertWinCMOCHeader(FAsmCode);
   FAsmCode.SaveToFile(ADst);
 end;
 

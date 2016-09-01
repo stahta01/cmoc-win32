@@ -1,3 +1,13 @@
+
+// This file was created by the WinCMOC compiler
+// Created: 1/09/2016 10:53:13
+// WinCMOC:  https://sourceforge.net/projects/cmoc-win32/
+// CMOC:     http://perso.b2b2c.ca/~sarrazip/dev/cmoc.html
+
+// Translated from "vectrexbios.asm"
+//
+// This file is in the public domain
+
 #ifndef _VECTREX_VECTREXBIOS_H
 #define _VECTREX_VECTREXBIOS_H
 

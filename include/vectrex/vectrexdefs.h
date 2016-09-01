@@ -1,3 +1,13 @@
+
+// This file was created by the WinCMOC compiler
+// Created: 1/09/2016 10:53:13
+// WinCMOC:  https://sourceforge.net/projects/cmoc-win32/
+// CMOC:     http://perso.b2b2c.ca/~sarrazip/dev/cmoc.html
+
+// Translated from "vectrexdefs.asm"
+//
+// This file is in the public domain
+
 #ifndef _VECTREX_VECTREXDEFS_H
 #define _VECTREX_VECTREXDEFS_H
 
