@@ -10,11 +10,16 @@
 
 int main(void)
 {
-    byte x, y;
+    int x, y;
+    char* p;
     textmode(MODE_H0_32X24);
 
     *(unsigned char*)0xff22 &= 127;
-    puts("Hello there from Derek");
+
+    //for (p = _beggrp; p <= _endgrp; p++) {
+        //*p = 128;
+    //}
+    //puts("Hello there from Derek");
     // return 0;
     for (x = 0; x < 8; x++) {
         *(unsigned char*)0xff22 = (*(unsigned char*)0xff22 & 0x8f) | (x << 4);

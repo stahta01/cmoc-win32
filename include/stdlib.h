@@ -92,5 +92,7 @@ void beep(unsigned char _Frequency, unsigned _Duration);
 
 extern int heap_memory[1]; // INTERNAL USE ONLY
 
+#define _syscmdline ((char*)0x2dd)
+
 #endif
 

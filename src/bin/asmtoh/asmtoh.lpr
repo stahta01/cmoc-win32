@@ -88,16 +88,18 @@ type
                     LSize := StrToIntDef(LParser.Token, 0);
                   end;
                 end;
-                LComment := TrimSet(LParser.Remaining, [#0..#32, '*', ';']);
+                LComment := TrimSet(DelSpace1(LParser.Remaining), [#0..#32, '*', ';', '=']);
                 if AnsiMatchText(LSymbol, AFilter) then begin
                   if Length(LComment) > 0 then begin
                     LComment += ' ';
                   end;
                   LComment += '(Compatible with CoCo)';
                 end;
-                if Length(LComment) > 0 then begin
-                  ADst.Add('// ' + LComment);
-                end;
+                ADst.Add(Format('// Decimal %u (0x%x/$%x) [%s]%s',
+                  [LValue, LValue, LValue,
+                  IfThen(LSize <= 0, 'Constant', IfThen(LSize = 1, 'Byte',
+                  IfThen(LSize = 2, 'Word', 'Array'))),
+                  IfThen(Length(LComment) > 0, ' - ' + LComment, EmptyStr)]));
                 LDefine(LIdent, IntToStr(LValue));
                 if LSize >= 0 then begin
                   if LSize = 1 then begin
@@ -105,7 +107,7 @@ type
                   end else if LSize = 2 then begin
                     LDefine(LowerCase(LIdent), '(*(unsigned*)' + LIdent + ')');
                   end else begin
-                    LDefine(LowerCase(LIdent), '((char*)' + LIdent + ')');
+                    LDefine(LowerCase(LIdent), '((unsigned char*)' + LIdent + ')');
                   end;
                 end;
                 ADst.Add(EmptyStr);

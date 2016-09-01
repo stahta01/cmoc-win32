@@ -1,6 +1,6 @@
 
 // This file was created by the WinCMOC compiler
-// Created: 1/09/2016 10:53:12
+// Created: 1/09/2016 11:49:21
 // WinCMOC:  https://sourceforge.net/projects/cmoc-win32/
 // CMOC:     http://perso.b2b2c.ca/~sarrazip/dev/cmoc.html
 
@@ -11,37 +11,37 @@
 #ifndef _DRAGON_COCO_EQUATES_H
 #define _DRAGON_COCO_EQUATES_H
 
-// BACKSPACE (Compatible with CoCo)
+// Decimal 8 (0x8/$8) [Constant] - BACKSPACE (Compatible with CoCo)
 #ifndef _BS
 #define _BS 8
 #endif
 
-// ENTER KEY (Compatible with CoCo)
+// Decimal 13 (0xD/$D) [Constant] - ENTER KEY (Compatible with CoCo)
 #ifndef _CR
 #define _CR 13
 #endif
 
-// ESCAPE CODE (Compatible with CoCo)
+// Decimal 27 (0x1B/$1B) [Constant] - ESCAPE CODE (Compatible with CoCo)
 #ifndef _ESC
 #define _ESC 27
 #endif
 
-// LINE FEED (Compatible with CoCo)
+// Decimal 10 (0xA/$A) [Constant] - LINE FEED (Compatible with CoCo)
 #ifndef _LF
 #define _LF 10
 #endif
 
-// FORM FEED (Compatible with CoCo)
+// Decimal 12 (0xC/$C) [Constant] - FORM FEED (Compatible with CoCo)
 #ifndef _FORMF
 #define _FORMF 12
 #endif
 
-// SPACE (BLANK) (Compatible with CoCo)
+// Decimal 32 (0x20/$20) [Constant] - SPACE (BLANK) (Compatible with CoCo)
 #ifndef _SPACE
 #define _SPACE 32
 #endif
 
-// TEMPORARY POINTER (Compatible with CoCo)
+// Decimal 15 (0xF/$F) [Word] - TEMPORARY POINTER (Compatible with CoCo)
 #ifndef _TEMPTR
 #define _TEMPTR 15
 #endif
@@ -49,7 +49,7 @@
 #define _temptr (*(unsigned*)_TEMPTR)
 #endif
 
-// PV BEGINNING OF BASIC PROGRAM (Compatible with CoCo)
+// Decimal 25 (0x19/$19) [Word] - PV BEGINNING OF BASIC PROGRAM (Compatible with CoCo)
 #ifndef _TXTTAB
 #define _TXTTAB 25
 #endif
@@ -57,7 +57,7 @@
 #define _txttab (*(unsigned*)_TXTTAB)
 #endif
 
-// PV START OF VARIABLES (Compatible with CoCo)
+// Decimal 27 (0x1B/$1B) [Word] - PV START OF VARIABLES (Compatible with CoCo)
 #ifndef _VARTAB
 #define _VARTAB 27
 #endif
@@ -65,7 +65,7 @@
 #define _vartab (*(unsigned*)_VARTAB)
 #endif
 
-// PV START OF ARRAYS (Compatible with CoCo)
+// Decimal 29 (0x1D/$1D) [Word] - PV START OF ARRAYS (Compatible with CoCo)
 #ifndef _ARYTAB
 #define _ARYTAB 29
 #endif
@@ -73,7 +73,7 @@
 #define _arytab (*(unsigned*)_ARYTAB)
 #endif
 
-// PV END OF ARRAYS (+1) (Compatible with CoCo)
+// Decimal 31 (0x1F/$1F) [Word] - PV END OF ARRAYS (+1) (Compatible with CoCo)
 #ifndef _ARYEND
 #define _ARYEND 31
 #endif
@@ -81,7 +81,7 @@
 #define _aryend (*(unsigned*)_ARYEND)
 #endif
 
-// PV START OF STRING STORAGE (TOP OF FREE RAM) (Compatible with CoCo)
+// Decimal 33 (0x21/$21) [Word] - PV START OF STRING STORAGE (TOP OF FREE RAM) (Compatible with CoCo)
 #ifndef _FRETOP
 #define _FRETOP 33
 #endif
@@ -89,7 +89,7 @@
 #define _fretop (*(unsigned*)_FRETOP)
 #endif
 
-// PV START OF STRING VARIABLES (Compatible with CoCo)
+// Decimal 35 (0x23/$23) [Word] - PV START OF STRING VARIABLES (Compatible with CoCo)
 #ifndef _STRTAB
 #define _STRTAB 35
 #endif
@@ -97,7 +97,7 @@
 #define _strtab (*(unsigned*)_STRTAB)
 #endif
 
-// UTILITY STRING POINTER (Compatible with CoCo)
+// Decimal 37 (0x25/$25) [Word] - UTILITY STRING POINTER (Compatible with CoCo)
 #ifndef _FRESPC
 #define _FRESPC 37
 #endif
@@ -105,7 +105,7 @@
 #define _frespc (*(unsigned*)_FRESPC)
 #endif
 
-// PV TOP OF STRING SPACE (Compatible with CoCo)
+// Decimal 39 (0x27/$27) [Word] - PV TOP OF STRING SPACE (Compatible with CoCo)
 #ifndef _MEMSIZ
 #define _MEMSIZ 39
 #endif
@@ -113,7 +113,7 @@
 #define _memsiz (*(unsigned*)_MEMSIZ)
 #endif
 
-// SAVED LINE NUMBER DURING A "STOP" (Compatible with CoCo)
+// Decimal 41 (0x29/$29) [Word] - SAVED LINE NUMBER DURING A "STOP" (Compatible with CoCo)
 #ifndef _OLDTXT
 #define _OLDTXT 41
 #endif
@@ -121,7 +121,7 @@
 #define _oldtxt (*(unsigned*)_OLDTXT)
 #endif
 
-// BINARY VALUE OF A CONVERTED LINE NUMBER (Compatible with CoCo)
+// Decimal 43 (0x2B/$2B) [Word] - BINARY VALUE OF A CONVERTED LINE NUMBER (Compatible with CoCo)
 #ifndef _BINVAL
 #define _BINVAL 43
 #endif
@@ -129,7 +129,7 @@
 #define _binval (*(unsigned*)_BINVAL)
 #endif
 
-// SAVED INPUT PTR DURING A "STOP" (Compatible with CoCo)
+// Decimal 45 (0x2D/$2D) [Word] - SAVED INPUT PTR DURING A "STOP" (Compatible with CoCo)
 #ifndef _OLDPTR
 #define _OLDPTR 45
 #endif
@@ -137,7 +137,7 @@
 #define _oldptr (*(unsigned*)_OLDPTR)
 #endif
 
-// TEMPORARY INPUT POINTER STORAGE (Compatible with CoCo)
+// Decimal 47 (0x2F/$2F) [Word] - TEMPORARY INPUT POINTER STORAGE (Compatible with CoCo)
 #ifndef _TINPTR
 #define _TINPTR 47
 #endif
@@ -145,7 +145,7 @@
 #define _tinptr (*(unsigned*)_TINPTR)
 #endif
 
-// PV 'DATA' STATEMENT LINE NUMBER POINTER (Compatible with CoCo)
+// Decimal 49 (0x31/$31) [Word] - PV 'DATA' STATEMENT LINE NUMBER POINTER (Compatible with CoCo)
 #ifndef _DATTXT
 #define _DATTXT 49
 #endif
@@ -153,7 +153,7 @@
 #define _dattxt (*(unsigned*)_DATTXT)
 #endif
 
-// PV 'DATA' STATEMENT ADDRESS POINTER (Compatible with CoCo)
+// Decimal 51 (0x33/$33) [Word] - PV 'DATA' STATEMENT ADDRESS POINTER (Compatible with CoCo)
 #ifndef _DATPTR
 #define _DATPTR 51
 #endif
@@ -161,7 +161,7 @@
 #define _datptr (*(unsigned*)_DATPTR)
 #endif
 
-// DATA POINTER FOR 'INPUT' & 'READ' (Compatible with CoCo)
+// Decimal 53 (0x35/$35) [Word] - DATA POINTER FOR 'INPUT' & 'READ' (Compatible with CoCo)
 #ifndef _DATTMP
 #define _DATTMP 53
 #endif
@@ -169,7 +169,7 @@
 #define _dattmp (*(unsigned*)_DATTMP)
 #endif
 
-// TV TEMP STORAGE FOR A VARIABLE NAME (Compatible with CoCo)
+// Decimal 55 (0x37/$37) [Word] - TV TEMP STORAGE FOR A VARIABLE NAME (Compatible with CoCo)
 #ifndef _VARNAM
 #define _VARNAM 55
 #endif
@@ -177,7 +177,7 @@
 #define _varnam (*(unsigned*)_VARNAM)
 #endif
 
-// TV POINTER TO A VARIABLE DESCRIPTOR (Compatible with CoCo)
+// Decimal 57 (0x39/$39) [Word] - TV POINTER TO A VARIABLE DESCRIPTOR (Compatible with CoCo)
 #ifndef _VARPTR
 #define _VARPTR 57
 #endif
@@ -185,7 +185,7 @@
 #define _varptr (*(unsigned*)_VARPTR)
 #endif
 
-// TEMP POINTER TO A VARIABLE DESCRIPTOR (Compatible with CoCo)
+// Decimal 59 (0x3B/$3B) [Word] - TEMP POINTER TO A VARIABLE DESCRIPTOR (Compatible with CoCo)
 #ifndef _VARDES
 #define _VARDES 59
 #endif
@@ -193,7 +193,7 @@
 #define _vardes (*(unsigned*)_VARDES)
 #endif
 
-// PV CURRENT LINE # OF BASIC PROGRAM, $FFFF = DIRECT (Compatible with CoCo)
+// Decimal 104 (0x68/$68) [Word] - PV CURRENT LINE # OF BASIC PROGRAM, $FFFF = DIRECT (Compatible with CoCo)
 #ifndef _CURLIN
 #define _CURLIN 104
 #endif
@@ -201,7 +201,7 @@
 #define _curlin (*(unsigned*)_CURLIN)
 #endif
 
-// TV TAB ZONE (Compatible with CoCo)
+// Decimal 107 (0x6B/$6B) [Byte] - TV TAB ZONE (Compatible with CoCo)
 #ifndef _DEVLCF
 #define _DEVLCF 107
 #endif
@@ -209,7 +209,7 @@
 #define _devlcf (*(unsigned char*)_DEVLCF)
 #endif
 
-// TV PRINT POSITION (Compatible with CoCo)
+// Decimal 108 (0x6C/$6C) [Byte] - TV PRINT POSITION (Compatible with CoCo)
 #ifndef _DEVPOS
 #define _DEVPOS 108
 #endif
@@ -217,7 +217,7 @@
 #define _devpos (*(unsigned char*)_DEVPOS)
 #endif
 
-// TV PRINT WIDTH (Compatible with CoCo)
+// Decimal 109 (0x6D/$6D) [Byte] - TV PRINT WIDTH (Compatible with CoCo)
 #ifndef _DEVWID
 #define _DEVWID 109
 #endif
@@ -225,7 +225,7 @@
 #define _devwid (*(unsigned char*)_DEVWID)
 #endif
 
-// PV DEVICE NUMBER: -3=DLOAD, -2=PRINTER, (Compatible with CoCo)
+// Decimal 111 (0x6F/$6F) [Byte] - PV DEVICE NUMBER: -3=DLOAD, -2=PRINTER, (Compatible with CoCo)
 #ifndef _DEVNUM
 #define _DEVNUM 111
 #endif
@@ -233,7 +233,7 @@
 #define _devnum (*(unsigned char*)_DEVNUM)
 #endif
 
-// PV WARM START FLAG: $55=WARM, OTHER=COLD (Compatible with CoCo)
+// Decimal 113 (0x71/$71) [Byte] - PV WARM START FLAG: $55=WARM, OTHER=COLD (Compatible with CoCo)
 #ifndef _RSTFLG
 #define _RSTFLG 113
 #endif
@@ -241,7 +241,7 @@
 #define _rstflg (*(unsigned char*)_RSTFLG)
 #endif
 
-// PV WARM START VECTOR - JUMP ADDRESS FOR WARM START (Compatible with CoCo)
+// Decimal 114 (0x72/$72) [Word] - PV WARM START VECTOR - JUMP ADDRESS FOR WARM START (Compatible with CoCo)
 #ifndef _RSTVEC
 #define _RSTVEC 114
 #endif
@@ -249,7 +249,7 @@
 #define _rstvec (*(unsigned*)_RSTVEC)
 #endif
 
-// PV TOP OF RAM (Compatible with CoCo)
+// Decimal 116 (0x74/$74) [Word] - PV TOP OF RAM (Compatible with CoCo)
 #ifndef _TOPRAM
 #define _TOPRAM 116
 #endif
@@ -257,7 +257,7 @@
 #define _topram (*(unsigned*)_TOPRAM)
 #endif
 
-// PV FILE STATUS FLAG: 0=CLOSED, 1=INPUT, 2=OUTPUT (Compatible with CoCo)
+// Decimal 120 (0x78/$78) [Byte] - PV FILE STATUS FLAG: 0=CLOSED, 1=INPUT, 2=OUTPUT (Compatible with CoCo)
 #ifndef _FILSTA
 #define _FILSTA 120
 #endif
@@ -265,7 +265,7 @@
 #define _filsta (*(unsigned char*)_FILSTA)
 #endif
 
-// PV CONSOLE IN BUFFER CHAR COUNTER (Compatible with CoCo)
+// Decimal 121 (0x79/$79) [Byte] - PV CONSOLE IN BUFFER CHAR COUNTER (Compatible with CoCo)
 #ifndef _CINCTR
 #define _CINCTR 121
 #endif
@@ -273,7 +273,7 @@
 #define _cinctr (*(unsigned char*)_CINCTR)
 #endif
 
-// PV CONSOLE IN BUFFER POINTER (Compatible with CoCo)
+// Decimal 122 (0x7A/$7A) [Word] - PV CONSOLE IN BUFFER POINTER (Compatible with CoCo)
 #ifndef _CINPTR
 #define _CINPTR 122
 #endif
@@ -281,7 +281,7 @@
 #define _cinptr (*(unsigned*)_CINPTR)
 #endif
 
-// TV CASS BLOCK TYPE: 0=HEADER, 1=DATA, $FF=EOF (Compatible with CoCo)
+// Decimal 124 (0x7C/$7C) [Byte] - TV CASS BLOCK TYPE: 0=HEADER, 1=DATA, $FF=EOF (Compatible with CoCo)
 #ifndef _BLKTYP
 #define _BLKTYP 124
 #endif
@@ -289,7 +289,7 @@
 #define _blktyp (*(unsigned char*)_BLKTYP)
 #endif
 
-// TV CASSETTE BYTE COUNT (Compatible with CoCo)
+// Decimal 125 (0x7D/$7D) [Byte] - TV CASSETTE BYTE COUNT (Compatible with CoCo)
 #ifndef _BLKLEN
 #define _BLKLEN 125
 #endif
@@ -297,7 +297,7 @@
 #define _blklen (*(unsigned char*)_BLKLEN)
 #endif
 
-// PV CURSOR LOCATION (Compatible with CoCo)
+// Decimal 136 (0x88/$88) [Word] - PV CURSOR LOCATION (Compatible with CoCo)
 #ifndef _CURPOS
 #define _CURPOS 136
 #endif
@@ -305,7 +305,7 @@
 #define _curpos (*(unsigned*)_CURPOS)
 #endif
 
-// TV TONE VALUE FOR SOUND COMMAND (Compatible with CoCo)
+// Decimal 140 (0x8C/$8C) [Byte] - TV TONE VALUE FOR SOUND COMMAND (Compatible with CoCo)
 #ifndef _SNDTON
 #define _SNDTON 140
 #endif
@@ -313,7 +313,7 @@
 #define _sndton (*(unsigned char*)_SNDTON)
 #endif
 
-// TV DURATION VALUE FOR SOUND COMMAND (Compatible with CoCo)
+// Decimal 141 (0x8D/$8D) [Word] - TV DURATION VALUE FOR SOUND COMMAND (Compatible with CoCo)
 #ifndef _SNDDUR
 #define _SNDDUR 141
 #endif
@@ -321,7 +321,7 @@
 #define _snddur (*(unsigned*)_SNDDUR)
 #endif
 
-// LB4AA   *PV JUMP ADDRESS FOR EXEC COMMAND (Compatible with CoCo)
+// Decimal 157 (0x9D/$9D) [Word] - LB4AA *PV JUMP ADDRESS FOR EXEC COMMAND (Compatible with CoCo)
 #ifndef _EXECJP
 #define _EXECJP 157
 #endif
@@ -329,15 +329,15 @@
 #define _execjp (*(unsigned*)_EXECJP)
 #endif
 
-// (Compatible with CoCo)
+// Decimal 159 (0x9F/$9F) [Array] - (Compatible with CoCo)
 #ifndef _GETNCH
 #define _GETNCH 159
 #endif
 #ifndef _getnch
-#define _getnch ((char*)_GETNCH)
+#define _getnch ((unsigned char*)_GETNCH)
 #endif
 
-// PV THESE 2 BYTES CONTAIN ADDRESS OF THE CURRENT (Compatible with CoCo)
+// Decimal 166 (0xA6/$A6) [Word] - PV THESE 2 BYTES CONTAIN ADDRESS OF THE CURRENT (Compatible with CoCo)
 #ifndef _CHARAD
 #define _CHARAD 166
 #endif
@@ -345,7 +345,7 @@
 #define _charad (*(unsigned*)_CHARAD)
 #endif
 
-// PV TRACE FLAG 0=OFF ELSE=ON (Compatible with CoCo)
+// Decimal 175 (0xAF/$AF) [Byte] - PV TRACE FLAG 0=OFF ELSE=ON (Compatible with CoCo)
 #ifndef _TRCFLG
 #define _TRCFLG 175
 #endif
@@ -353,7 +353,7 @@
 #define _trcflg (*(unsigned char*)_TRCFLG)
 #endif
 
-// PV ADDRESS OF THE START OF USR VECTORS (Compatible with CoCo)
+// Decimal 176 (0xB0/$B0) [Word] - PV ADDRESS OF THE START OF USR VECTORS (Compatible with CoCo)
 #ifndef _USRADR
 #define _USRADR 176
 #endif
@@ -361,7 +361,7 @@
 #define _usradr (*(unsigned*)_USRADR)
 #endif
 
-// PV FOREGROUND COLOR (Compatible with CoCo)
+// Decimal 178 (0xB2/$B2) [Byte] - PV FOREGROUND COLOR (Compatible with CoCo)
 #ifndef _FORCOL
 #define _FORCOL 178
 #endif
@@ -369,7 +369,7 @@
 #define _forcol (*(unsigned char*)_FORCOL)
 #endif
 
-// PV BACKGROUND COLOR (Compatible with CoCo)
+// Decimal 179 (0xB3/$B3) [Byte] - PV BACKGROUND COLOR (Compatible with CoCo)
 #ifndef _BAKCOL
 #define _BAKCOL 179
 #endif
@@ -377,7 +377,7 @@
 #define _bakcol (*(unsigned char*)_BAKCOL)
 #endif
 
-// TV WORKING COLOR BEING USED BY EX BASIC (Compatible with CoCo)
+// Decimal 180 (0xB4/$B4) [Byte] - TV WORKING COLOR BEING USED BY EX BASIC (Compatible with CoCo)
 #ifndef _WCOLOR
 #define _WCOLOR 180
 #endif
@@ -385,7 +385,7 @@
 #define _wcolor (*(unsigned char*)_WCOLOR)
 #endif
 
-// TV ALL PIXELS IN THIS BYTE SET TO COLOR OF VB3 (Compatible with CoCo)
+// Decimal 181 (0xB5/$B5) [Byte] - TV ALL PIXELS IN THIS BYTE SET TO COLOR OF VB3 (Compatible with CoCo)
 #ifndef _ALLCOL
 #define _ALLCOL 181
 #endif
@@ -393,7 +393,7 @@
 #define _allcol (*(unsigned char*)_ALLCOL)
 #endif
 
-// PV PMODE'S MODE ARGUMENT (Compatible with CoCo)
+// Decimal 182 (0xB6/$B6) [Byte] - PV PMODE'S MODE ARGUMENT (Compatible with CoCo)
 #ifndef _PMODE
 #define _PMODE 182
 #endif
@@ -401,7 +401,7 @@
 #define _pmode (*(unsigned char*)_PMODE)
 #endif
 
-// PV END OF CURRENT GRAPHIC PAGE (Compatible with CoCo)
+// Decimal 183 (0xB7/$B7) [Word] - PV END OF CURRENT GRAPHIC PAGE (Compatible with CoCo)
 #ifndef _ENDGRP
 #define _ENDGRP 183
 #endif
@@ -409,7 +409,7 @@
 #define _endgrp (*(unsigned*)_ENDGRP)
 #endif
 
-// PV NUMBER OF BYTES/HORIZONTAL GRAPHIC LINE (Compatible with CoCo)
+// Decimal 185 (0xB9/$B9) [Byte] - PV NUMBER OF BYTES/HORIZONTAL GRAPHIC LINE (Compatible with CoCo)
 #ifndef _HORBYT
 #define _HORBYT 185
 #endif
@@ -417,7 +417,7 @@
 #define _horbyt (*(unsigned char*)_HORBYT)
 #endif
 
-// PV START OF CURRENT GRAPHIC PAGE (Compatible with CoCo)
+// Decimal 186 (0xBA/$BA) [Word] - PV START OF CURRENT GRAPHIC PAGE (Compatible with CoCo)
 #ifndef _BEGGRP
 #define _BEGGRP 186
 #endif
@@ -425,7 +425,7 @@
 #define _beggrp (*(unsigned*)_BEGGRP)
 #endif
 
-// PV START OF GRAPHIC RAM (MS BYTE) (Compatible with CoCo)
+// Decimal 188 (0xBC/$BC) [Byte] - PV START OF GRAPHIC RAM (MS BYTE) (Compatible with CoCo)
 #ifndef _GRPRAM
 #define _GRPRAM 188
 #endif
@@ -433,7 +433,7 @@
 #define _grpram (*(unsigned char*)_GRPRAM)
 #endif
 
-// DV* *PV HORIZ COORD - START POINT (Compatible with CoCo)
+// Decimal 189 (0xBD/$BD) [Word] - DV* *PV HORIZ COORD - START POINT (Compatible with CoCo)
 #ifndef _HORBEG
 #define _HORBEG 189
 #endif
@@ -441,7 +441,7 @@
 #define _horbeg (*(unsigned*)_HORBEG)
 #endif
 
-// DV* *PV VERT COORD - START POINT (Compatible with CoCo)
+// Decimal 191 (0xBF/$BF) [Word] - DV* *PV VERT COORD - START POINT (Compatible with CoCo)
 #ifndef _VERBEG
 #define _VERBEG 191
 #endif
@@ -449,7 +449,7 @@
 #define _verbeg (*(unsigned*)_VERBEG)
 #endif
 
-// PV SCREEN'S COLOR SET ARGUMENT (Compatible with CoCo)
+// Decimal 193 (0xC1/$C1) [Byte] - PV SCREEN'S COLOR SET ARGUMENT (Compatible with CoCo)
 #ifndef _CSSVAL
 #define _CSSVAL 193
 #endif
@@ -457,7 +457,7 @@
 #define _cssval (*(unsigned char*)_CSSVAL)
 #endif
 
-// PV PRESET/PSET FLAG: 0=PRESET, 1=PSET (Compatible with CoCo)
+// Decimal 194 (0xC2/$C2) [Byte] - PV PRESET/PSET FLAG: 0=PRESET, 1=PSET (Compatible with CoCo)
 #ifndef _SETFLG
 #define _SETFLG 194
 #endif
@@ -465,7 +465,7 @@
 #define _setflg (*(unsigned char*)_SETFLG)
 #endif
 
-// DV* *PV HORIZ COORD - ENDING POINT (Compatible with CoCo)
+// Decimal 195 (0xC3/$C3) [Word] - DV* *PV HORIZ COORD - ENDING POINT (Compatible with CoCo)
 #ifndef _HOREND
 #define _HOREND 195
 #endif
@@ -473,7 +473,7 @@
 #define _horend (*(unsigned*)_HOREND)
 #endif
 
-// DV* *PV VERT COORD - ENDING POINT (Compatible with CoCo)
+// Decimal 197 (0xC5/$C5) [Word] - DV* *PV VERT COORD - ENDING POINT (Compatible with CoCo)
 #ifndef _VEREND
 #define _VEREND 197
 #endif
@@ -481,7 +481,7 @@
 #define _verend (*(unsigned*)_VEREND)
 #endif
 
-// PV HORIZ COORD - DEFAULT COORD (Compatible with CoCo)
+// Decimal 199 (0xC7/$C7) [Word] - PV HORIZ COORD - DEFAULT COORD (Compatible with CoCo)
 #ifndef _HORDEF
 #define _HORDEF 199
 #endif
@@ -489,7 +489,7 @@
 #define _hordef (*(unsigned*)_HORDEF)
 #endif
 
-// PV VERT COORD - DEFAULT COORD (Compatible with CoCo)
+// Decimal 201 (0xC9/$C9) [Word] - PV VERT COORD - DEFAULT COORD (Compatible with CoCo)
 #ifndef _VERDEF
 #define _VERDEF 201
 #endif
@@ -497,12 +497,12 @@
 #define _verdef (*(unsigned*)_VERDEF)
 #endif
 
-// (Compatible with CoCo)
+// Decimal 274 (0x112/$112) [Constant] - (Compatible with CoCo)
 #ifndef _TIMVAL
 #define _TIMVAL 274
 #endif
 
-// LEFT VERTICAL JOYSTICK DATA (Compatible with CoCo)
+// Decimal 346 (0x15A/$15A) [Byte] - LEFT VERTICAL JOYSTICK DATA (Compatible with CoCo)
 #ifndef _POTVAL
 #define _POTVAL 346
 #endif
@@ -510,20 +510,20 @@
 #define _potval (*(unsigned char*)_POTVAL)
 #endif
 
-// +1        BASIC LINE INPUT BUFFER (Compatible with CoCo)
+// Decimal 732 (0x2DC/$2DC) [Constant] - +1 BASIC LINE INPUT BUFFER (Compatible with CoCo)
 #ifndef _LINBUF
 #define _LINBUF 732
 #endif
 #ifndef _linbuf
-#define _linbuf ((char*)_LINBUF)
+#define _linbuf ((unsigned char*)_LINBUF)
 #endif
 
-// VIDEO DISPLAY AREA (Compatible with CoCo)
+// Decimal 1024 (0x400/$400) [Array] - VIDEO DISPLAY AREA (Compatible with CoCo)
 #ifndef _VIDRAM
 #define _VIDRAM 1024
 #endif
 #ifndef _vidram
-#define _vidram ((char*)_VIDRAM)
+#define _vidram ((unsigned char*)_VIDRAM)
 #endif
 
 

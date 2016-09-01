@@ -16,7 +16,7 @@
 
 int _system(void)
 {
-    //puts(_LINBUF + 1);
+    //puts(_syscmdline);
     asm {
         pshs u
         ldx     #0  // Was -1
@@ -34,13 +34,13 @@ int _system(void)
 
 int systemf(char* fmt, ...)
 {
-    vsprintf((char*)_linbuf + 1, fmt, (va_list)&fmt);
+    vsprintf(_syscmdline, fmt, (va_list)&fmt);
     return _system();
 }
 
 int system(char* cmd)
 {
-    strcpy(_linbuf + 1, cmd);
+    strcpy(_syscmdline, cmd);
     //_linbuf[0] = 0; // TODO: Unsure what to set this too.
     return _system();
 }
