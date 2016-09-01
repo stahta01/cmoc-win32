@@ -5,8 +5,10 @@
 #pragma options -machine=cocous
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <conio.h>
 #include <charset.h>
+#include <equates.h>
 
 int main(void)
 {
@@ -17,13 +19,20 @@ int main(void)
 
     textmode2(MODE_H0_32X24, charset_6x8);
 
+    _pmode = 3;
+    system("COLOR 2,1");
     *(unsigned char*)0xff22 ^= 128;
-
-    puts("Four 32x24 CoCo Text Modes");
-    puts("--------------------------");
 
     s[0] = 0;
     while (s[0] != 'x' && s[0] != 'X') {
+        cputs("\n");
+        gotox(3);
+        cputs("Four 32x24 CoCo Text Modes\n");
+        cputs("\n");
+
+        int y = (wherey() << 3) - 20;
+        systemf("LINE(15,%d)-(238,%d),PSET,B", y, y + 16);
+
         puts("Bitmap graphics in text mode!");
         puts("This is a demo of a relatively");
         puts("unknown graphics mode of the");
