@@ -4115,10 +4115,12 @@ object FormCmocIDE: TFormCmocIDE
     }
   end
   object OpenDialog: TOpenDialog
+    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing, ofViewDetail]
     left = 80
     top = 127
   end
   object SaveDialog: TSaveDialog
+    Options = [ofOverwritePrompt, ofPathMustExist, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
     left = 139
     top = 128
   end
