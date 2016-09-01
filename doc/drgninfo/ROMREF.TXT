@@ -1,0 +1,472 @@
+#FILE: $RCSfile: romref.txt $
+#DESC: Dragon 32/64 ROM Reference guide
+#REV: $Revision: 1.3 $
+#DATE: $Date: 1995/08/18 15:37:03 $
+#AUTHOR: Graham E. Kinns
+#DISCLAIMER: All information provided as is etc.
+#ARCHIVE: This file is part of the DRGNINFO collection of Dragon info files
+#CONTACT: Comments, bugs, revisions, suggestions to Dragon@grempc.demon.co.uk
+#HISTORY: 1.0 16/01/95 - Initial version split from memmap.txt
+#RCSID: $Id: romref.txt 1.3 1995/08/18 15:37:03 Graham Exp $
+
+This information was originally part of memmap.txt and started as a
+brief note of the routines I found whilst compiling the memory map but
+its turning into a complete Rom reference .. 
+
+For a more detailed description of the differences between a Dragon 32
+and 64, especially software in the 32k mode rom - see d64difs.txt - this
+includes commented disassembly of the changes.
+
+Format conventions:
+  $xxxx references a memory address
+  0xab or 0xabcd are C style hexadecimal constants
+  %TITLE% shows a 'standard' assembler reference
+  UPPERCASE words typically refer to Basic keywords or Assembler mneumonics
+  {1} Numbers in braces refer to reference sources - see section at end
+
+Abbreviations:
+  CoCo	refers to the Tandy CoCo only
+  D32	only applicable to Dragon 32
+  D64	only applicable to Dragon 64
+  DOS	refers to a generic DragonDos compatible unless stated otherwise
+  lsb	least significant byte
+  msb	most significant byte
+  ptr	pointer (or address of)
+  SAM	Synchronous Address Multiplexer - Motorola MC6883 or 74LS783
+	device used in the Dragon to control RAM access.
+  w/o	without
+
+Additional shorthand for subroutines:
+  Pre:	Registers definitely preserved
+  Des:	Registers apparently destroyed
+  Ret:	Explicit return values
+
+$8000-8002	Hardware Initialisation (JMP $bb40; D64 JMP $bb3c)
+$8003-8005	Software Initialisation (JMP $bb88)
+$8006-8008	%POLCAT% Scans keyboard, rets value in A (JMP $bbe5)
+		  Called indirectly from [$a000]
+$8009-800b	%CBLINK% Cursor Blink (JMP $bbb5)
+$800c-800e	%CHROUT% Write chr in A to screen (JMP $bcab)
+$800f-8011	%LPOUT%	Line printer character output in A reg., forces
+		  end-of-line  sequences, outputs extra spaces to cause
+		  LFs etc. See: $0099-009c, $0148 (JMP $bd1a)
+$8012-8014	Reads Joystick (JMP $bd52)
+		  Called indirectly from [$a00a]
+$8015-8017	Cassette relay on (JMP $bdcf)
+$8018-801a	Cassette relay off (JMP $bddc)
+$801b-801d	Write leader to cassette (JMP $be68)
+		  Called indirectly from [$a00c]
+$801e-8020	Output byte in A to cassette (JMP $be12)
+$8021-8023	Cassette on, init for reading (JMP $bde7)
+  		  Called indirectly from [$a004]
+$8024-8026	Input byte from cassette into A (JMP $bdad)
+$8027-8029	Get one bit from cassette to CC.C (JMP $bda5)
+$802a-802c	Reads a byte from serial port (JMP $be7b)
+$802d-802f	Sends a byte to serial port (D32 JMP $be7c; D64 JMP $be98)
+$8030-8032	Set serial port baud rate (D32 JMP $be7d; D64 JMP $bea6)
+$8033-8153	Reserved words table
+$8154-81c9	Reserved words dispatch table (Tokens 0x80-0xba only)
+$81ca-824f	Function words table
+$8250-8293	Function words dispatch table
+$8294-82a8	Another dispatch table:
+		  0x79, $910e  	+
+		  0x79, $9105	-
+		  0x7b, $9275	*
+		  0x7b, $933c	/
+		  0x7f, $96a0	^
+		  0x50, $8a12	AND
+		  0x46, $8a11	OR
+		  The related functions come from {2, p.347}
+$82a9-82de	Error code table
+$82df-82e5	' ERROR', 0x00
+$82e6-82ea	' IN ', 0x00
+$82eb-82ef	0x0d, 'OK', 0x0d, 0x00
+$82f0-82f6	0x0d, 'BREAK', 0x00
+$8344		System Error - generates error message according to B
+		  (CoCo $ac46)
+$8371		Prints OK prompt and returns to Command mode (CoCo $ac73)
+$83ed		BasVect2 - completes init once BASIC program loaded
+		  (CoCo $acef)
+$8415		NEW token dispatch address
+$8417		Erases program in memory same as NEW (CoCo $ad19) {1}
+		  Called from BASIC init routine ($b3ba)
+$841f		BasVect1 - sets up various vectors after a BASIC program
+		  loaded (CoCo $ad21)
+$8434		Resets stack - all entries are lost (CoCo $ad33)
+$8448		FOR token dispatch address
+$849f		RUN BASIC - runs BASIC program in mem used by Autorun
+		  programs (CoCo $ad9e)
+$8514		RESTORE token dispatch address
+$852b		Waits for key press, returns key in A (CoCo $adfb)
+$8532		END token dispatch address
+$8539		STOP token dispatch address
+$8560		CONT token dispatch address
+$8571		CLEAR token dispatch address
+$85a5		RUN token dispatch address
+$85b9		GO token dispatch address
+$85f3		RETURN token dispatch address
+$8613		DATA token dispatch address
+$8616		REM, ', ELSE token dispatch address
+$8647		IF token dispatch address
+$8675		ON token dispatch address
+$86bc		LET token dispatch address
+$8705-870b	'?REDO', 0x0d, 0x00
+$872b		INPUT token dispatch address
+$8777		READ token dispatch address
+$8829		NEXT token dispatch address
+$8877		Get expression: evaluates next expression and puts VARPTR
+		  addr in $0052:0053 (CoCo $b146)
+$8887		Get string: compiles a string and puts it in free string
+		  space (CoCo $b156)
+$89a4		CkClBrak: checks cmd line for closed bracket (CoCo $b267)
+$89a7		CkOpBrak: checks cmd line for open bracket (CoCo $b26a)
+$89aa		CkComa: checks next cmd line chr for a comma, if not a Syntax
+		  error is generated (CoCo $b26d)
+$89ac		CkChar: as for CkComa but checks for chr in B (CoCo $b26f)
+$89b4		Both reserved word and function dispatch tables of Stub 1
+		  at $012a point here
+$8a11		OR operator dispatch address (see $8294)
+$8a12		AND operator dispatch address (see $8294)
+$8a8b		DIM token dispatch address
+$8a94		%GETVAR% gets VARPTR addr of following variables name
+		  (CoCo $b357)
+$8b29		%GETUSR% returns value of arg in USR fn in D (CoCo $b3e9)
+$8b2d		%INTCNV% 
+$8b30		Passes parameters to machine code routine {1}
+$8b39		Used to pass back values from m/c to BASIC {1}
+$8b8d-$8b91	Jump to this causes ?FC ERROR
+$8c31		MEM function token dispatch address
+$8c35-8c3f	Assign16Bit: assigns D to numeric variable (CoCo $b4f2)
+		  ?? 8c35:8c36 is a BRN
+$8c36-8c3f	Assign8Bit: assigns B to numeric variable (CoCo $b4f3)
+		  clears A, stores D in FAC
+$8c37-8c3f	%GIVABF% returns D as 16bit val in FAC
+$8c40		STR$ function token dispatch address
+$8cd7		Forces String space Garbage collection (CoCo $b591)
+$8d9a		Sub - 
+$8d9f		%DELVAR% frees space taken by variable (CoCo $b659)
+$8dc7		LEN function token dispatch address
+$8dd2		CHR$ function token dispatch address
+$8de6		ASC function token dispatch address
+$8df1		LEFT$ function token dispatch address
+$8e0e		RIGHT$ function token dispatch address
+$8e15		MID$ function token dispatch address
+$8e51		Get8Bit: returns value of following number in B (CoCo $b70b)
+$8e5c		VAL function token dispatch address
+$8e83		Get16Bit: returns value of following number in X (CoCo $b73d)
+$8e96		PEEK function token dispatch address
+$8e9d		POKE token dispatch address
+$8ea4		LLIST token dispatch address
+$8eaa		LIST token dispatch address, List Basic to DEVN
+		  (CoCo $b764)
+$903d		PRINT token dispatch address
+$90a1		Print CR/LF: moves cursor posn to start of new line
+		  (CoCo $b958)
+$90e5		Out String: Prints ASCIIZ string ptd to by X to DEVN
+		  (CoCo $b99c)
+$9105		- operator dispatch address (see $8294)
+$910e		+ operator dispatch address (see $8294)
+$923c		LOG function token dispatch address
+$9275		* operator dispatch address (see $8294)
+$933c		/ operator dispatch address (see $8294)
+$93bf-93d4	%MOVFM% Converts a 5-byte BASIC Real variable structure
+		  pointed to by X to FAC at $004f {2}
+$9425		SGN function token dispatch address
+$942d		Jumped to from GIVABF routine at 8c37-8c3f - returns 16
+		  bit value in FAC to BASIC ??
+$943e		ABS function token dispatch address
+$9499		INT function token dispatch address
+$9564-9568	5 byte floating point number
+$9569-956d	5 byte floating point number
+$956e-9572	5 byte floating point number
+$957a		Print Number: outputs D as number to DEVN (CoCo $bdcc)
+$9697		SQR function token dispatch address
+$96a0		^ operator dispatch address (see $8294)
+$9713		EXP function token dispatch address
+$9772		RND function token dispatch address
+$978e		Random Number: generates 8bit random number in $0116
+$97cb		COS function token dispatch address
+$97d1		SIN function token dispatch address
+$9816		TAN function token dispatch address
+$9877		ATN function token dispatch address
+$98e3		Called from BASIC init routine ($b3ba-)
+$9956		FIX function token dispatch address
+$9965		EDIT token dispatch address
+$9ad9		TRON token dispatch address
+$9ada		TROFF token dispatch address
+$9ade		POS function token dispatch address
+$9af4		VARPTR function token dispatch address
+$9b84		STRING$ function token dispatch address
+$9bb4		INSTR function token dispatch address
+$9c3e		Assign16BitB: assigns value in $0052:0053 to a variable
+		  (CoCo $880e)
+$9c81		DEF token dispatch address
+$9d00-9d0c	Sub
+$9d0d-9d1c	Sub which returns a ptr in X to the address in the USR table
+		  (ref'd by $00b0:00b1) of the USR function to be called
+$9d1d		USR function token dispatch address
+$9d35-9d3c	Sub which checks for '=' token, then gets value of next expression
+		  by JMPing to $8e83
+$9d3d		IRQ interrupt service routine
+$9d59		TIMER function token dispatch address
+$9d61		DEL token dispatch address
+$9dfa		RENUM token dispatch address
+$9fca-9fcd	3 bytes Unused ? 'UL '
+$9fce-9fff	D32 - Unused 0x00
+$9fd0-9fd8	D64 - Patch to support VARPTRs >32K
+$9fd9-9fff	D64 - Unused 0x00
+$a000-a00d	Indirect jump table
+$a000:a001	Keyboard input ($8006)
+$a002:a003	Character output in A to DEVNUM ($b54a)
+$a004:a005	Cassette on for reading ($8021)
+$a006:a007	Block input from tape ($b93e)
+$a008:a009	Block output to tape ($b999)
+$a00a:a00b	Joystick input ($8012)
+$a00c:a00d	Write leader to cassette ($801b)
+$a00e		HEX$ function token dispatch address
+$a049		DLOAD token dispatch address
+$a0e0		Can be used to wait for 2 keypresses {1}
+$a0ea		Waits for keypress with flashing cursor (CoCo $8cc6)
+$a0f4		Sub: called from DLOAD routine
+$a438-a440	Sub - returns CC.C set if A is not char '0'-'9'
+$a6ef		PSET token dispatch address
+$a6f3		PRESET token dispatch address
+$a6c7		PPOINT function token dispatch address
+$a749		LINE token dispatch address
+$a8c0		PCLS token dispatch address
+$a8c7		Clear Graphics: Clears current graphics screen with data
+		  in B (CoCo $9539)
+$a8d4		COLOR token dispatch address
+$a928		Set Colours: sets up locations $00b4, $00b5 (CoCo $959a)
+$a938		Select Display: Selects Text (CC.Z=1) or Graphics (CC.Z=0)
+		  mode (CoCo $95aa)
+$a93a		Reset VDU: resets default VDU mode (CoCo $95ac)
+$a989		Set VDG Mode given in A (CoCo $95fb)
+$a99d		Set VDG Offset for graphics mode (CoCo $960f)
+$a9a4		Set VDG Colour set from $00c1 (CoCo $9616)
+$a9af		PMODE token dispatch address
+$a9e1		Set Page to B (CoCo $9653)
+$a9fe		SCREEN token dispatch address
+$aa10		Select Colour set 0 or 1 from B (CoCo $9682)
+$aa19		PCLEAR token dispatch address
+$aa23		Reserve HiRes Graphics RAM, moves BASIC if nec. (CoCo $9695)
+$aa81		Called from BASIC init routine ($b3ba-)
+$aabe		PCOPY token dispatch address
+$aada-aaef	Sub - reads and checks PCOPY page numbers
+$aaf0		GET token dispatch address
+$aaf3		PUT token dispatch address
+$abd4-abec	5 entry table of form Word, Word, Token for matching PUT mode
+$ac87		PAINT token dispatch address
+$adbd		PLAY token dispatch address
+$ae9a		Play Note: A contains ASCII code (CoCo $9ad7)
+$af33		Sub - gets next PLAY cmd in A
+$afd9		PLAY IRQ routine - branches to $bb02 if $00e3 == 0x0000
+$aff6-affc	Table maps PLAY notes A-G to tone number
+$affd-b014	Table
+$b015-b050	Table
+$b051		DRAW token dispatch address (CoCo $9cb6)
+$b238		CIRCLE token dispatch address
+$b39b-b3b3	Called after Hardware init routine, following a RESET
+		  Inits stack, checks for Cold/warm start.  If $0071 contains
+		  0x55 and $0072:0073 points to NOP then execution is passed
+		  to [$0072:0073] otherwise branches to $b3ba
+$b3b4-b3b9	RESET interrupt service routine (CoCo $a027)
+		  Loads Y with $b39b and JMPs $8000
+$b3ba		Cold start routine - clears lo mem, inits BASIC
+$b400		Boot Basic: Restarts BASIC interpreter (CoCo $a0b6)
+$b432-b43b	Checks for $c000:c001 = 0x444b ('DK') and branches to $c002 if
+		  found
+$b44f		Warm start RESET jumps here
+$b469-b46e	FIRQ interrupt service routine - branches to $b46f if source
+		  was cartridge else RTI
+$b46f-b47a	Calls $b480 twice, then JMPs to $8000 with Y = $b47b
+$b47b-b47f	CLRs $0071, then JMPs $c000 to start cartridge
+$b480-b486	Loads X from $008a (0x0000) and decrements to 0x0000
+		  Gives 524,298 cycle, approx. 590ms delay
+$b487-b494	14 bytes copied to $009d-$00aa at startup
+$b495-b4b2	30 bytes copied to $010c-$0129 at startup
+$b4b3-b4cc	'(C) 1982 DRAGON DATA LTD ', 0x0d
+$b4cd-b4ec	'16K BASIC INTERPRETER 1.0      ', 0x0d
+$b4ed-b504	'(C) 1982 BY MICROSOFT', 0x0d, 0x0d, 0x00
+$b505		Waits for key with cursor ? Called from SuperDos E6 ROM
+$b54a		%OUTCHR% Sends char in A to DEVN (CoCo $a282)
+		  Called indirectly from [$a002]
+$b64c		CLOSE token dispatch address
+$b65f		Close files: closes an open tape stream (CoCo $a42d)
+$b682		CSAVE token dispatch address
+$b6d4		CLOAD token dispatch address
+$b6a5		Write BASIC: writes BASIC program to cassette (CoCo $a469)
+$b714		Loads a headerless program from cassette {10}
+$b748		Read Binary file from tape (CoCo $a511)
+$b770		EXEC token dispatch address
+$b796		INKEY$ function token dispatch address
+$b7cc		Copy B bytes from X to U
+$b800		EOF function token dispatch address
+$b81e		SKIPF token dispatch address
+$b828		OPEN token dispatch address
+$b8b3		Find File: searches tape for matching filename (CoCo $a681)
+$b933		Read 1st Block: reads filename block to cas. buf (CoCo $a701)
+$b93e		%BLKIN% reads a block of data into cas. buffer (CoCo $a70b)
+		  Called indirectly from [$a006]
+$b981		MOTOR token dispatch address
+$b991		Write 1st Block (CoCo $a7e5)
+$b999-b9d1	%BLKOUT% writes a block of data to cassette (CoCo $a7f4)
+		  Called indirectly from [$a008]
+$b9cd-b9d1	Write byte 0x55 to cassette by JMPing to $801e
+$b9cf-b9d1	JMPs to $801e to write byte in A
+$b9d2		SET token dispatch address
+$b9df		Set LoRes Pixel: X contains screen addr, B the colour and
+		  $00b8 the OR data (CoCo $a88d)
+$ba03		RESET token dispatch address
+$ba07		Reset LoRes Pixel: X contains screen addr, $00b8 OR data
+		  (CoCo $a8b5)
+$ba28		Calc LoRes Pixel Pos: Stack contains vert and horiz coords
+		  (CoCo $a8d9)
+$ba44		POINT function token dispatch address
+$ba5f		CLS token dispatch address
+$ba77-ba85	Clears text screen (CoCo $a928)
+$ba79-ba85	Clears text screen with value in B (CoCo $a92a)
+$ba86-ba8d	Clears screen, prints '(C) 1982 BY MICROSOFT' msg at $b4ec 
+$ba9a		SOUND token dispatch address
+$baa0		Produces Beep of length B, pitch in $008c (CoCo $a951)
+$bac3		Audio off: Disables sound (CoCo $a974)
+$bac5-bad3	Enables sound (CoCo $a976)
+$bad4-bade	Reset DAC - writes (D32 0x7e; D64 0x7c) to D/A (CoCo $a985)
+$bad6-bade	Writes A to DAC - bits 0,1 of A must be 0 (CoCo $a987)
+$badf		AUDIO token dispatch address
+$baec		AUDIO ON: B must be 0x00 on entry (CoCo $a99d)
+$baf1-bb01	Sub to init PIA for sound source output specified by the lower
+		  2 bits of B - 00 = DAC, 01 = Tape input, 10 = External
+		  Cart source, 11 = none
+		  This code duplicates the function of $bd41-bd51, the only
+		  dif being an ASRB replacing a RORB
+$bb02-bb0c	Interrupt service subroutine to decrement $008d:008e, returns
+		with RTI
+$bb0d		JOYSTK function token dispatch address
+$bb26-bb34	Jumped to from selfmodifying CHRGET routine at $009f
+$bb3c-bb87	D64 - Hardware init, JMPd to from $8000, Y should contain
+		  return address
+$bb40-bb87	D32 - Hardware init, JMPd to from $8000, Y should contain
+		  return address
+$bb80-bb82	D64 - Boots 64K mode with JMP $bf49
+$bb88-bb9e	Software init, JMPd to from $8003,
+		  inits $008f-009b, $0148-0150 with ROM defaults
+$bb92-bb94	D64 - patched to JSR $BEFF (CLR $03fd-03ff; LDU #$0148)
+$bb97-bb9e	CopyXtoU - copies B bytes from X to U
+$bb9f-bbab	default values for $008f-009b
+$bbac-bbb4	default values for $0148-0150
+$bbb5-bbcc	Flashes cursor, JMPd to from $8009 (CoCo $a199)
+$bbc5-bbcc	Decrements X from 0x045e, gives 1ms delay
+$bbc8-bbcc	Decrements X until 0 then returns
+$bbcd-bbd9	subroutine
+$bbe5-bbea	%INCH% Scans keyboard, returns char in A, JMPd to from $8006
+		  (CoCo $a1c1)
+$bbec		Keyboard polling sub, returns key code in A
+$bca0		Clear VDU line from cursor posn (CoCo $a323)
+$bcab		%OUTCH% Put char in A to screen, JMPd to from $800c
+		  (CoCo $a30a)
+$bcf5-bd09	%TXLPCH%  Low level routine to print char in A (CoCo $)
+$bd0a		PCRLF: moves print head to next line
+$bd1a		Send char in A to printer, JMPd to from $800f (CoCo $a2bf)
+		D64 - This routine uses Y as well and is source of a
+		bug in the Clear-J fn of Visitext Word-Pro.
+$bd41-bd51	%SNDSEL%  Selects Analogue Mux channel from B.  Used to read
+		  Joysticks or set sound channel (CoCo $a9a2)
+		  0x00	DAC       / Right Joystick, x-axis
+		  0x01	Cassette  / Right Joystick, y-axis
+		  0x02	Cartridge / Left Joystick, x-axis
+		  0x03	Unused    / Left Joystick, y-axis
+		  See also $baf1-bb01
+$bd52		%JOYIN% Reads Joysticks updates $015a-015d, JMPd to from $8012
+		  (CoCo $a9de)
+$bd8a-bd90	Increments $0082, samples Cassette input bit into CC.C
+$bd91-bd9d	Sub
+$bd97-bd9d	Sub
+$bd99-bd9d	Sub
+$bd9e		Sub
+$bda0		Sub
+$bda5		%BITIN% Get one bit from cassette to CC.C, JMPd to from $8027
+		  (CoCo $a755)
+$bdad		%CBIN% Input byte from cassette into A, JMPd to from $8024
+		  (CoCo $a749)
+$bdb9		Sub
+$bdbf		Sub
+$bdcf-bddb	%CASON% Motor on - Turns on relay, loads X with delay value
+		  from $0095:0096 (0xda5c) then LBRAs to $bbc8, JMPd to from
+		  $8015 (CoCo $a7ca)
+$bddc-bde6	%CASOFF% Motor off - turns relay off, re-enables FIRQ, IRQ,
+		  JMPd to from $8018 (CoCo $a7eb)
+$bde7		%CSRDON% Read Leader - Disables FIRQ, IRQ, Cassette on, 
+		  init for reading, JMPd to from $8021 (CoCo $a77c)
+$be12-be43	%CBOUT% Output byte in A to cassette, JMPd to from $801e
+		  (CoCo $a82a)
+$be44-be67	36 bytes of Sine Wave data in upper 5 bits of each byte.
+$be68-be7a	%WRTLDR% disables FIRQ, IRQ, turns on cassette, writes number
+		  of leader bytes = 0x55 according to $0090:0091 (d32 0x0080),
+		  JMPd to from $801b Pre: B,Y Des: CC,A,X Ret: X=0x0000,A=0x55
+$be7b		D32 - JMPd to from $802a (RTS) 
+$be7b-be97	D64 - Read byte from serial port to A, JMPd to from $802a
+$be7c		D32 - JMPd to from $802d (RTS)
+$be7d-be7e	D32 - JMPd to from $8030 (COMB; RTS)
+$be7f-bfef	D32 - Unused area, all 0x00
+$be98-bea5	D64 - Output byte in A to serial port, JMPd to from $802d
+$bea6-bebd	D64 - Set baud rate in B, JMPd to from $8030
+$bebe-bec4	D64 - Lookup table to map B to ACIA baud rate constant
+$bec5-beda	D64 - Key scan which pauses printer during printing {8}
+$beff-bf0b	D64 - Patched into Software init to CLR $03fd-03ff
+$bf0c-bf1f	D64 - handles serial printer end of line delay
+$bf20-bf48	D64 - IRQ routine which can be hooked in D32 mode to
+		  provide 64 mode style auto-repeat and serial support
+$bf49-bf59	D64 - Copies 64 mode bootstrap code to $01da and JMPs
+		  EXEC points here at startup.
+$bf5a-bfe8	D64 - Bootstrap routine code copied to $01da-0268
+$bf9c:bf9d	D64 - '64' Can be used to check for D64 32k mode ROM
+$bfe9-bfef	D64 - Unused 0x00
+$bff0-bfff	6809 interrupt vectors mapped to $fff0-$ffff by SAM
+$bff0:fff1	Reserved     ($0000)
+$bff2:bff3	SWI3 vector  ($0100)
+$bff4:bff5	SWI2 vector  ($0103)
+$bff6:bff7	FIRQ vector  ($010f)
+$bff8:bff9	IRQ vector   ($010c)
+$bffa:bffb	SWI vector   ($0106)
+$bffc:bffd	NMI vector   ($0109)
+$bffe:bfff	RESET vector ($b3b4)
+
+CoCo routines only - a complete cross-reference should really appear in
+another file .. when I've got time ..
+
+$894c		IRQ Interrupt service routine (Extended BASIC) {1}
+$a0f6		FIRQ Interrupt service routine {1}
+$a9b3		IRQ Interrupt service routine {1}
+$ac46		System Error (Dgn $8344)
+$ac73		Command Mode (Dgn $8371)
+$ad19		Erases program in memory same as NEW (Dgn $8417)
+$adfb		Waits for keypress (Dgn $852b)
+
+
+References
+==========
+
+{1}	'The Dragon Notebook', Ray Smith, NDUG.
+{2}	'Inside the Dragon', Duncan Smeed and Ian Sommerville,
+	   Addison-Wesley, 1983.
+{3}	'TRS-80 Color Computer Tech Ref Manual', Tandy Corp, 1981.
+{4}	WD2797 Floppy Disc Driver Controller Data Sheet (RS #6991).
+{5}	Dragon Disc Controller Circuit Diagram, ex Dragon Data Ltd, now NDUG.
+{6}	Dragon 32/64 Upgrade Manual, R. Hall, NDUG, 1985.
+
+Various Articles appearing in Dragon User magazine:
+{7}	'Inside the 32', Dave Barnish, p13, Jan 1987.
+{8}	'BREAKing the '64', Martyn Armitage, p8-9, Feb 1988.
+{9}	'Firmware - Part 1', Brian Cadge, p19, Sep 1985.
+{10}	'Dragon Answers', Brian Cadge, p31, Sep 1985.
+
+Acknowledgements
+================
+
+PC CoCo Emulator (coco2-14.zip) by Jeff Vavasour, without the excellent
+debugger / monitor included with the package checking some of the above
+would have been a lot harder.
+
+Ray Smith for the Dragon Notebook which was a major source and inspiration.
+

@@ -1,0 +1,506 @@
+#FILE: $RCSfile: memmap.txt $
+#DESC: Dragon 32/64 Memory Map (with CoCo refs)
+#REV: $Revision: 1.13 $
+#DATE: $Date: 1995/08/18 15:37:28 $
+#AUTHOR: Graham E. Kinns
+#DISCLAIMER: All information provided as is etc.
+#ARCHIVE: This file is part of the DRGNINFO collection of Dragon info files
+#CONTACT: Comments, bugs, revisions, suggestions to Dragon@grempc.demon.co.uk
+#HISTORY: 1.0  19/06/93 - Initial revision started
+#RCSID: $Id: memmap.txt 1.13 1995/08/18 15:37:28 Graham Exp $
+
+Format conventions:
+  $xxxx references a memory address
+  0xab or 0xabcd are C style hexadecimal constants
+  %TITLE% shows a 'standard' assembler reference
+  UPPERCASE words typically refer to Basic keywords or Assembler mneumonics
+  (0x1234) Numbers in brackets refer to the default value at switch on
+  {1} Numbers in braces refer to reference sources - see section at end
+
+Abbreviations:
+  CoCo	refers to the Tandy CoCo only
+  D32	only applicable to Dragon 32
+  D64	only applicable to Dragon 64
+  DOS	refers to a generic DragonDos compatible unless stated otherwise
+  lsb	least significant byte
+  msb	most significant byte
+  ptr	pointer (or address of)
+  w/o	without
+
+$0000		BREAK message flag - if negative print BREAK
+$0001		String delimiting char (0x22 '"')
+$0002		Another delimiting char (0x22 '"')
+$0003		General counter byte
+$0004		Count of IFs looking for ELSE
+$0005		DIM flag
+$0006		%VALTYP% Variable type flag (0x00 numeric, Non-0x00 string)
+$0007		Garbage collection flag
+$0008		Subscript allowed flag
+$0009		INPUT/READ flag
+$000a		Arithmetic use
+$000b:000c	String ptr first free temporary
+$000d:000e	String ptr last free temporary
+$000f-0018	Temporary results
+$0019:001a	Start address of BASIC program ($1e01, $2401 with DOS)
+$001b:001c	Start address of simple variables
+$001d:001e	Start address of array variables
+$001f:0020	End of storage, Start of unused mem after BASIC program
+$0021:0022	Top of stack, growing down ($7e36)
+$0023:0024	Top of free string space ($7ffe)
+$0025:0026	Temp Ptr to string in string space
+$0027:0028	Top of Ram available to BASIC - returned by DOS HIMEM ($7ffe)
+$0029:002a	Last/CONT line number
+$002b:002c	Temp/Input line number store
+$002d:002e	Ptr to next statement to be executed
+$002f:0030	Direct mode command text pointer
+$0031:0032	Current DATA statement line number
+$0033:0034	Ptr to next item in current DATA statement
+$0035:0036	Ptr to keyboard input buffer
+$0037:0038	Ptr to variable last in use
+$0037:0038	ASCII codes of last variable used {1}
+$0039:003a	VARPTR address of last variable used
+$003b-004e	Evaluation variables
+$0041:0042	High end destination addr for block
+$0043:0044	High end origin addr
+$0045:0046	Low end destination addr for block
+$0047:0048	Low end origin addr
+$004f-0054	Floating Point Accumulator Num 1
+$004f		Exponent
+$0050-0053	Mantissa
+$0050:0051	16 bit values in FAC stored here
+$0052:0053	VARPTR of variables is stored here {1}
+$0054		Mantissa Sign (0x00 positive, 0xff negative)
+$0055		Temp sign of FAC
+$0056		String variable length
+$0057-005b	String Descriptor temporaries
+$005c-0061	Floating Point Accumulator Num 2
+$0062		Sign comparison
+$0062-0067	Misc use
+$0063		CoCo - Extended precision byte {1} - also Dragon ?
+$0068:0069	Current Line number (0xffff in direct mode)
+$006a-006e	Device Params used in PRINT
+$006a		Device Comma field width (VDU - 0x10)
+$006b		Device Last comma field
+$006c		Device Current column num (VDU - 0x00-0x1f)
+$006d		Device Line width - num chars per line (VDU 0x20)
+$006e		Cassette I/O in progress flag - 0xff on input or output
+		  occurring  {9}
+$006f		%DEVNUM% Current device number
+			0x00 VDU screen
+			0x01-0x04 DOS - DosPlus only - drive number.
+			0xfd serial port (Dragon 64 only)
+			0xfe printer
+			0xff tape
+$0070		Cassette EOF flag - non-zero if EOF - used by EOF(-1) {9}
+$0071		Restart flag - if not 0x55 cold start on reset, see $0072
+$0072:0073	Restart vector - Following a reset if $0072 pts to a
+		  NOP opcode and $0071 is 0x55 then a warm start is
+		  performed to this vector else a cold start. (0xb44f)
+		  (DOS SuperDosE6 $c706)
+$0074:0075	Physical end of Ram minus 1 (0x7ffe)
+$0076:0077	Unused
+$0078		Cassette status
+			0x00 closed
+			0x01 input
+			0x02 output
+$0079		Cassette I/O - Buffer size - bytes in block
+$007a:007b	Header buffer addr - ptr to filename block
+$007c		%BLKTYP% Cassette block type
+			0x00 filename
+			0x01 data
+			0xff EOF block
+$007d		%DBLEN% Cassette block length, number bytes read/to write
+$007e:007f	%DBADR% Cassette I/O Buffer address
+		  Contains 1 + End address of last program loaded
+$0080		Cassette I/O - block checksum used internally
+$0081		Cassette I/O - error code
+			0x00 none
+			0x01 CRC (checksum) error
+			0x02 attempt to load into ROM
+$0082		Cassette I/O - Pulse width counter
+$0083		Cassette I/O - Sync bits counter
+$0084		Cassette I/O - Bit phase flag
+$0085		Last sine wave value for output to DAC
+$0086		Data for low res SET/RESET, POINT routines
+$0087		ASCII code of last key pressed (cleared by Break check)
+$0088:0089	Current VDU cursor addr (typ 0x0400-0x05ff)
+$008a:008b	Gen purpose 16bit scratch pad / 16bit zero (0x0000) {2}
+$008a:008b	CoCo - Motor on delay
+$008c		Sound pitch frequency
+$008d:008e	Gen purpose countdown (?sound timer {2})
+$008f		Cursor flash counter (0x20)
+$0090:0091	Cassette leader byte count - number of 0x55 bytes written
+		  as sync leader (D32 - 0x0080, D64 - 0x0100)
+$0092		Minimum cycle width of 1200Hz (0x12)
+$0092:0093	CoCo - Cassette leader byte count
+$0093		Minimum pulse width of 1200Hz (0x0a)
+$0094		Maximum pulse width of 1200Hz (0x12)
+$0095:0096	Motor on delay (0xda5c = approx 0.5s)
+$0095:0096	CoCo - Serial Baud rate constant (0x0057 = 600 baud)
+$0097:0098	Keyboard scan debounce delay constant (0x045e)
+$0097:0098	CoCo - Serial Line Printer End of Line delay (0x0001)
+$0099		Printer comma field width (0x10 = 16) 
+$009a		Printer last comma field (0x74 = 116) (CoCo 0x70 = 112)
+$009b		Printer line width dflt (0x84 = 132)
+$009c		Printer head column posn == POS(-2)
+		  Updated by LPOUT ($800f) routine
+$009d:009e	EXEC default entry address
+		 (D32 - $8b8d = ?FC ERROR; D64 - $bf49 = Boot 64k mode)
+$009f-00aa	%CHRGET% Self modifying routine to read next char
+$009f:00a0	INC <$A7
+$00a1:00a2	BNE $00A5
+$00a3:00a4	INC <$A6
+$00a5-00a7	LDA >xxxx
+$00a6:00a7	Ptr to next character to read
+$00a8-00aa	JMP $BB26
+$00ab-00ae	Used by RND
+$00af		TRON/TROFF trace flag - non zero for TRON
+$00b0:00b1	Ptr to start of USR table ($0134; DOS - $0683)
+$00b2		Current foreground colour (0x03)
+$00b3		Current background colour (0x00)
+$00b4		Temp/active colour in use
+$00b5		Byte value for current colour - ie bit pattern
+$00b6		Graphics PMODE number in use (0x00)
+$00b7:00b8	Ptr to last byte+1 of current graphics mode ($0c00 w/o Dos)
+$00b9		Number of bytes per line in current PMODE (0x10)
+$00ba:00bb	Ptr to first byte of current graphics mode ($0600)
+$00bc		Msb of start of graphics pages (0x06 or 0x0c with Dos)
+$00bd:00be	Current X cursor position (not user available ?{1})
+$00bf:00c0	Current Y cursor position (not user available ?{1})
+$00c1		Colour set currently in use (0x08 if colorset 1 {1})
+$00c2		Plot/Unplot flag: 0x00 reset, non zero set
+$00c3:00c4	Current horizontal pixel number
+$00c5:00c6	Current vertical pixel number
+$00c7:00c8	Current X cursor coord (0x0080)
+$00c9:00ca	Current Y cursor coord (0x0060)
+$00cb:00cc	CIRCLE command X coood as if drawn in PMODE 4
+$00cd:00ce	CIRCLE command Y coord as if drawn in PMODE 4
+$00cf:00d0	CIRCLE radius as if drawn in PMODE 4
+$00cf:00d0	RENUM increment value
+$00d1:00d2	RENUM start line
+$00d3:00d4	CLOADM 2's complement load offset
+$00d5:00d6	RENUM new start line
+$00d7		EDIT line length (not user available)
+$00d7		PLAY - 
+$00d8		PLAY - bytes left in string
+$00d9:00da	PLAY - ptr to current char in string
+$00d8-00dd	Graphics use ? {2}
+$00de		PLAY: Current octave in use (0-4) (0x02)
+$00df:00e0	PLAY: Volume data for volume setting (D32 - 0xba42)
+		  (D64 - 0xb844)
+$00e1		PLAY: Current note length (0x04)
+$00e2		PLAY: Current tempo (0x02)
+$00e3:00e4	PLAY: Music duration count
+$00e5		PLAY: Music dotted note flag
+$00e6-$00ff	D32 - Unused in Dragon 32 w/o DOS
+$00e6		CoCo - baud rate constant
+$00e7		Coco - Input timeout constant
+$00e8		Current angle used in DRAW {1} (??)
+$00e9		Current scale used in DRAW {1} (??)
+$00ea-00f6	DOS - Used by DragonDos
+$00f8		DOS - sector currently seeking {SuperDos Rom}
+$0100-0102	SWI3 Secondary vector (Uninitialised)
+$0103-0105	SWI2 Secondary vector (Uninitialised)
+$0106-0108	SWI Secondary vector (Uninitialised)
+$0109-010b	NMI Secondary vector (Uninitialised)
+		  (CoCo DOS JMP $d7ae; SuperDos E6 JMP $c71e)
+$010c-010e	IRQ Secondary vector - JMP $9d3d
+		  (CoCo JMP $a9b3 or $894c (extended); CoCo DOS JMP $d7bc;
+		   SuperDos E6 JMP $c727)
+$010f-0111	FIRQ Secondary vector - JMP $b469
+		  (CoCo JMP $a0f6; SuperDos E6 JMP $c7da)
+$0112:0113	TIMER value
+$0114		Unused
+$0115-0119	Random number seeds (0x80, 0x4f, 0xc7, 0x52, 0x59)
+$011a-011f	D32 - Unused
+$011a		D64 - %FLAG64% checked on Reset from 64K mode
+		  if 0x55 then checksum at $011b is checked against
+		  current contents of Ram, if the same then a warm start
+		  is performed (64 mode) else a cold start (32 mode)
+$011a		CoCo - Caps lock, 0x00 lower, non-0x00 upper
+$011b:011c	D64 - %CSUM64% 16bit sum of words of BASIC Rom-in-ram in
+		  64K mode from $c000 to $feff
+$011b:011c	CoCo - Keyboard Delay constant
+$011d-011f	CoCo - JMP $8489 ? {1}
+$011d		D64 - %LSTKEY% Last key code return by keybd poll routine
+$011e		D64 - %CNTDWN% Auto repeat countdown
+$011f		D64 - %REPDLY% Auto repeat inter-repeat delay value (0x05)
+$0120		%STUB0% Stub 0 - Number of reserved words (0x4e)
+$0121:0122	Stub 0 - Ptr to reserved words table ($8033)
+$0123:0124	Stub 0 - Ptr to reserved words dispatch table ($8154)
+$0125		Stub 0 - Number of functions (0x22)
+$0126:0127	Stub 0 - Ptr to reserved function words table ($81ca)
+$0128:0129	Stub 0 - Ptr to function words dispatch table ($8250)
+$012a		%STUB1% Stub 1 - Number of reserved words (0x00)
+		  (DOS 0x1a)
+$012b:012c	Stub 1 - Ptr to reserved words table (0x0000)
+		  (DOS $ded4; SuperDosE6 $deda)
+$012d:012e	Stub 1 - Ptr to reserved words token processing routine
+		  ($89b4; DOS $c64c; SuperDosE6 $c670)
+$012f		Stub 1 - Number of functions (0x00)
+		  (DOS 0x07)
+$0130:0131	Stub 1 - Ptr to function table (0x0000)
+		  (DOS $debb; SuperDosE6 $dec1)
+$0132:0133	Stub 1 - Ptr to function token processing routine
+		  ($89b4; DOS $c667; SuperDosE6 $c68b)
+$0134		%STUB2% Stub 2 - acts as a stub terminator under DOS
+$0134-0147	USR address table, relocated by DOS (10 x 2 bytes) ($8b8d)
+$0148		Auto line feed flag on buffer full - setting this to 0x00
+		  causes a EOL sequence to be sent to printer when buffer
+		  reaches length in $009b (0xff)
+$0149		Alpha Lock flag	- 0x00 Lower case, 0xff Upper case (0xff)
+$014a-0150	Line Printer End of line termination sequence
+$014a		Number of bytes in EOL sequence 1-6 (0x01)
+$014b		EOL chr 1 (0x0d CR)
+$014c		EOL chr 2 (0x0a LF)
+$014d		EOL chr 3 (D64 - 0x00; D32 - 0x20 ' ')
+$014e		EOL chr 4 (D64 - 0x00; D32 - 0x44 'D' Duncan)
+$014f		EOL chr 5 (D64 - 0x00; D32 - 0x4e 'N' N.)
+$0150		EOL chr 6 (D64 - 0x00; D32 - 0x4f 'S' Smeed)
+$0151-0159	Keyboard matrix state table
+$0152-0159	CoCo - Keyboard roll-over table
+$015a-015d	%POTVAL% Joystick values (0-63)
+$015a		Right Joystick, x value == JOYSTK(0)
+$015b		Right Joystick, y value == JOYSTK(1)
+$015c		Left Joystick, x value == JOYSTK(2)
+$015d		Left Joystick, y value == JOYSTK(3)
+$015e-01a8	Ram hooks - each is called from ROM with a JSR before
+		  carrying out the specified function
+$015e-0160	Device Open
+		  (DOS JMP $d902; SuperDosE6 $d8f4)
+$0161-0163	Verify Device Number
+		  (DOS SuperDosE6 JMP $d8ec)
+$0164-0166	Device Init
+		  (DOS SuperDosE6 JMP $c29c)
+$0167-0169	Output char in A to DEVN
+		  (DOS JMP $d8fa; SuperDosE6 $d90b)
+$0167		Setting to 0xff disables keyboard ?!? {1}
+		Setting to 0x39 (RTS) allows use of SCREEN 0,1 etc. ??{1}
+$016a-016c	Input char from DEVN to A
+		  (DOS SuperDosE6 JMP $c29c)
+$016d-016f	Input from DEVN using INPUT
+		  (DOS SuperDosE6 JMP $c29c)
+$0170-0172	Output to DEVN using PRINT
+		  (DOS SuperDosE6 JMP $c29c)
+$0173-0175	Close all files
+		  (DOS SuperDosE6 JMP $c29c)
+$0176-0178	Close file
+		  (DOS JMP $d917; SuperDosE6 $d6f5)
+$0179-017b	Command Interpreter - interpret token in A as command 
+		  (DOS SuperDosE6 JMP $c29c)
+$017c-017e	Re-request input from keyboard
+		  (DOS JMP $d960; SuperDosE6 $d954)
+$017f-0181	Check keys - scan for BREAK, SHIFT+'@'
+		  (DOS SuperDosE6 JMP $c29c)
+$017f		Setting this to 0x9e disables LIST/DIR {1}
+$0182-0184	Line input from DEVN using LINE INPUT
+		  (DOS JMP $d720; SuperDosE6 $dac5)
+$0185-0187	Close BASIC file read in and goto Command mode
+		  (DOS SuperDosE6 JMP $c29c)
+$0188-018a	Check EOF on DEVN
+		  (DOS JMP $dd4d; SuperDosE6 $dd54)
+$018b-018d	Evaluate expression
+		  (DOS SuperDosE6 JMP $c29c)
+$018e-0190	User error trap, called from $8344
+ 		  (DOS SuperDosE6 JMP $c29c)
+$0191-0193	System error trap, called from $8344
+  		  (DOS JMP $c69e; SuperDosE6 $c6c5)
+$0194-0196	Run Link - used by DOS to RUN filename
+		  (DOS JMP $d490; SuperDosE6 $d4b7)
+$0197-0199	Reset Basic Memory, editing or entering BASIC lines
+$019a-019c	Get next command - reading in next command to be executed
+$019d-019f	Assign string variable
+$01a0-01a2	Screen access - CLS, GET, PUT
+$01a3-01a5	Tokenise line
+$01a6-01a8	De-Tokenise line
+$01a9-01d0	String buffer area
+$01d1		Cassette filename length in range 0-8
+$01d2-01d9	Cassette filename to search for or write out
+$01da-02d8	Cassette I/O default data buffer - 255 bytes
+$01da-0268	D64 - 64K mode bootstrap routine is copied here to run
+$01da-01e1	Cassette buffer - filename of file read
+$01e2		Cassette buffer - filetype 
+			0x00 BASIC program
+			0x01 Data
+			0x02 Machine code
+$01e3		Cassette buffer - ASCII flag
+			0x00 Binary
+			0xff ASCII flag
+$01e4		Cassette buffer - gap flag
+			0x00 Continous
+			0xff Gapped file
+$01e5:01e6	Cassette buffer - Entry (Exec) addr of m/c file
+$01e7:01e8	Cassette buffer - Load address for ungapped m/c file
+$02d9-02dc	BASIC line input buffer preamble
+$02dd-03d8	BASIC line input buffer - used for de-/tokenising data
+$02dd-03dc	CoCo - 255 byte keyboard buffer {1}
+$02e1-033b	CoCo - 90 byte screen buffer {1}
+$03d9-03ea	Buffer space
+$03eb-03fc	Unused
+$03fd-03ff	D32 - Unused in Dragon 32
+$03fd:03fe	D64 - Printer end of line delay in milliseconds (0x0000)
+$03ff		D64 - %PRNSEL% selects default printer port
+		  0x00 Parallel, non-0x00 Serial (0x00)
+$0400-05ff	Default Text screen
+$0600-1dff	Available graphics pages w/o DOS
+$0600-0bff	DOS - workspace area see also $00ea-$00f6
+$0600-0dff	CoCo DOS workspace area (no more info)
+$0c00-23ff	DOS - Available graphics pages
+$8000-bfff	BASIC ROM in 32K mode
+$8000-9fff	CoCo - Extended Color BASIC ROM
+$a000-bfff	CoCo - Color BASIC ROM
+$bff0-bfff	These addresses mapped from ROM to $fff0-$ffff by the SAM
+$c000-dfff	DOS - Dos ROM
+$c000-feff	DOS - Cumana DOS ROM only
+$c000-feff	Available address range to cartridge expansion port 32K mode
+$c000-feff	D64 - 64K mode - copy of BASIC ROM 2 exists in RAM here
+$ff00		PIA 0 A side Data reg.
+	  PA7    i/p	Comparator input
+	  PA6    i/p	Keyboard Matrix   Ent Clr Brk N/c N/c N/c N/c Shift
+	  PA5    i/p	Keyboard Matrix   X   Y   Z   Up  Dwn Lft Rgt Space
+	         i/p	CoCo - Keyboard   8   9   :   ;   ,   -   .   /
+	  PA4    i/p	Keyboard Matrix   P   Q   R   S   T   U   V   W
+	         i/p	CoCo - Keyboard   0   1   2   3   4   5   6   7
+	  PA3    i/p	Keyboard Matrix   H   I   J   K   L   M   N   O
+	         i/p	CoCo - Keyboard   X   Y   Z   Up  Dwn Lft Rgt Space
+	  PA2    i/p	Keyboard Matrix   @   A   B   C   D   E   F   G
+	         i/p	CoCo - Keyboard   P   Q   R   S   T   U   V   W
+	  PA1    i/p	Keyboard Matrix   8   9   :   ;   ,   -   .   /
+	         i/p	CoCo - Keyboard   H   I   J   K   L   M   N   O
+		 i/p	Left Joystick Button
+	  PA0    i/p	Keyboard Matrix   0   1   2   3   4   5   6   7
+	         i/p	CoCo - Keyboard   @   A   B   C   D   E   F   G
+		 i/p	Right Joystick Button
+$ff01		PIA 0 A side Control reg.
+	  CA1    i/p	Horiz Sync Interrupt from VDG (15625Hz; CoCo 15750Hz)
+	  CA2    o/p	Analogue Mux channel select line A
+	            	Selects Joystick Axis (0 x-axis, 1 y-axis)
+$ff02		PIA 0 B side Data reg.
+	  PB7    o/p	Keyboard Matrix   7   /   G   O   W   Space  Shift
+	         o/p	Printer Out bit 7
+	  PB6    o/p	Keyboard Matrix   6   .   F   N   V   Right  N/c
+	         o/p	Printer Out bit 6
+	  PB5    o/p	Keyboard Matrix   5   -   E   M   U   Left   N/c
+	         o/p	Printer Out bit 5
+	  PB4    o/p	Keyboard Matrix   4   ,   D   L   T   Down   N/c
+	         o/p	Printer Out bit 4
+	  PB3    o/p	Keyboard Matrix   3   ;   C   K   S   Up     N/c
+	         o/p	Printer Out bit 3
+	  PB2    o/p	Keyboard Matrix   2   :   B   J   R   Z      Break
+	         o/p	Printer Out bit 2
+	  PB1    o/p	Keyboard Matrix   1   9   A   I   Q   Y      Clear
+	         o/p	Printer Out bit 1
+	  PB0    o/p	Keyboard Matrix   0   8   @   H   P   X      Enter
+	         o/p	Printer Out bit 0
+$ff03		PIA 0 B side Control reg.
+	  CB1    i/p	Field Sync Interrupt from VDG (50Hz; CoCo 60Hz)
+	  CB2    o/p	Analogue Mux channel select line B
+			Selects Joystick (0 right, 1 left)
+$ff04		D64 - ACIA serial port read/write data reg.
+$ff05		D64 - ACIA serial port status (R)/ reset (W) reg.
+$ff06		D64 - ACIA serial port command reg.
+$ff07		D64 - ACIA serial port control reg.
+$ff20		PIA 1 A side Data reg.
+	  PA7    o/p	DAC bit 5
+	  PA6    o/p	DAC bit 4
+	  PA5    o/p	DAC bit 3
+	  PA4    o/p	DAC bit 2
+	  PA3    o/p	DAC bit 1
+	  PA2    o/p	DAC bit 0
+	  PA1    o/p	Printer Strobe - Active High (i.e. Lo-Hi-Lo to print)
+	         o/p	CoCo - RS232 Tx o/p
+	  PA0    i/p	Cassette waveform single bit input
+$ff21		PIA 1 A side Control reg.
+	  CA1    i/p	Printer Acknowledge
+	         i/p	CoCo - CD RS232 Carrier Detect input
+	  CA2    o/p	Cassette Relay Motor control
+$ff22		PIA 1 B side Data reg.
+	  PB7    o/p	*A/G VDG control line
+	  PB6    o/p	GM2 VDG control line
+	  PB5    o/p	GM1 VDG control line
+	  PB4    o/p	GM0 or *INT/EXT VDG control line
+	  PB3    o/p	CSS VDG control line
+	  PB2    i/p	D32 - RAM size (0 8 x 32K bit; 1 16 x 16K bit) {6}
+	         o/p	D64 - ROM select (1 32K mode; 0 64K mode)
+	  PB1    i/p	Sample audio source
+	         o/p	Single bit sound output
+	  PB0    i/p	Printer Busy - Active High
+	         i/p	CoCo - RS232 Rx input
+$ff23		PIA 1 B side Control reg.
+	  CB1    i/p	Cartridge CART FIRQ auto-start signal
+	  CB2    o/p	Sound Mux enable (1 enable, 0 single bit sound)
+$ff40		DOS - Disk Controller command/status reg.
+$ff41		DOS - Disk Controller track reg.
+$ff42		DOS - Disk Controller sector reg.
+$ff43		DOS - Disk Controller data reg.
+$ff48		DOS - Disk Controller hardware control reg.
+$ffc0-ffdf	SAM (Synchronous Address Multiplexer) register bits - use
+		  even address to clear, odd address to set
+$ffc0-ffc5	SAM VDG Mode registers V0-V2
+$ffc0/ffc1	SAM VDG Reg V0
+$ffc2/ffc3	SAM VDG Reg V1
+$ffc3/ffc5	SAM VDG Reg V2
+$ffc6-ffd3	SAM Display offset in 512 byte pages F0-F6
+$ffc6/ffc7	SAM Display Offset bit F0
+$ffc8/ffc9	SAM Display Offset bit F1
+$ffca/ffcb	SAM Display Offset bit F2
+$ffcc/ffcd	SAM Display Offset bit F3
+$ffce/ffcf	SAM Display Offset bit F4
+$ffd0/ffc1	SAM Display Offset bit F5
+$ffd2/ffc3	SAM Display Offset bit F6
+$ffd4/ffd5	SAM Page #1 bit - in D64 maps upper 32K Ram to $0000 to $7fff
+$ffd6-ffd9	SAM MPU Rate R0-R1
+$ffd6/ffd7	SAM MPU Rate bit R0
+$ffd8/ffd9	SAM MPU Rate bit R1
+$ffda-ffdd	SAM Memory Size select M0-M1
+$ffda/ffdb	SAM Memory Size select bit M0
+$ffdc/ffdd	SAM Memory Size select bit M1
+$ffde/ffdf	SAM Map Type - in D64 switches in upper 32K RAM $8000-$feff
+$ffec-ffef	PC-Dragon - Used by Paul Burgin's emulator to provide enhanced
+		  services
+$fff0-ffff	6809 interrupt vectors mapped from $bff0-$bfff by SAM
+$fff0:fff1	Reserved ($0000; D64 64K mode 0x3634 '64')
+$fff2:fff3	SWI3	 ($0100)
+$fff4:fff5	SWI2	 ($0103)
+$fff6:fff7	FIRQ	 ($010f)
+$fff8:fff9	IRQ	 ($010c)
+$fffa:fffb	SWI	 ($0106)
+$fffc:fffd	NMI	 ($0109)
+$fffe:ffff	RESET	 ($b3b4; D64 64K mode $c000 - never accessed)
+
+ROM routines
+============
+
+    This section is now contained in the file romref.txt
+
+Dragon DOS ROM routines
+=======================
+
+    This is now part of drgndos.txt
+
+
+References
+==========
+
+{1}	'The Dragon Notebook', Ray Smith, NDUG.
+{2}	'Inside the Dragon', Duncan Smeed and Ian Sommerville,
+	   Addison-Wesley, 1983.
+{3}	'TRS-80 Color Computer Tech Ref Manual', Tandy Corp, 1981.
+{4}	WD2797 Floppy Disc Driver Controller Data Sheet (RS #6991).
+{5}	Dragon Disc Controller Circuit Diagram, ex Dragon Data Ltd, now NDUG.
+{6}	Dragon 32/64 Upgrade Manual, R. Hall, NDUG, 1985.
+
+Various Articles appearing in Dragon User magazine:
+{7}	'Inside the 32', Dave Barnish, p13, Jan 1987.
+{8}	'BREAKing the '64', Martyn Armitage, p8-9, Feb 1988.
+{9}	'Firmware - Part 1', Brian Cadge, p19, Sep 1985.
+{10}	'Dragon Answers', Brian Cadge, p31, Sep 1985.
+
+Acknowledgements
+================
+
+PC CoCo Emulator (coco2-13.zip) by Jeff Vavasour, without the excellent
+debugger / monitor included with the package checking some of the above
+would have been a lot harder.
+
+Ray Smith for the Dragon Notebook which was a major source and inspiration.

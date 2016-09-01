@@ -1,0 +1,109 @@
+#FILE: $RCSfile: os9formt.txt $
+#DESC: OS9 Disk and File formats
+#REV: $Revision: 1.1 $
+#DATE: 06/04/94
+#AUTHOR: Graham E.Kinns
+#DISCLAIMER: All information provided as is etc.
+#ARCHIVE: This file is part of the DRGNINFO collection of Dragon info files
+#CONTACT: Comments, bugs, revisions, suggestions to Dragon@grempc.demon.co.uk
+#HISTORY: 1.0 22/03/94 - Initial version
+#RCSID: $Id: os9formt.txt 1.1 1995/08/18 14:33:17 Graham Exp $
+#SOURCE: Dragon OS9 System Programmer's Manual + additional
+
+0.  Introduction
+================
+
+This file represents all I've amassed about the OS9 disk and file
+formats, particulartly OS9 level 1 as released by Dragon Data Ltd, UK
+for the Dragon computer in 1983 shortly before their demise.  Incidently,
+it is believed Microware never received any license royalties whatsoever.
+Having never run OS9, I may be missing a few things which are obvious
+to the experienced user.
+All words are stored in Motorola hi-order format.
+
+1.  Known disk formats
+======================
+
+2.  Sector organization
+=======================
+
+3.  Identification Sector
+=========================
+
+Identification Sector resides on LSN 0 and contains the Disk Descriptor:
+
+Os9 ref	 Byte	Length	Description
+	offset	(bytes)
+
+DD.TOT	0x00	 3	Total number of sectors on media
+DD.TKS	0x03	 1	Number of tracks
+DD.MAP	0x04	 2	Number of bytes in allocation map
+DD.BIT	0x06	 2	Number of sectors per cluster
+DD.DIR	0x08	 3	Starting sector of root directory
+DD.OWN	0x0b	 2	Owner's user number
+DD.ATT	0x0c	 1	Disk attributes (to be clarified)
+			bit 7:	D  -  Directory
+			bit 6:	S  -  Shared
+			bit 5:	PE -  Public Execute
+			bit 4:	PW -  Public Write
+			bit 3:	PR -  Public Read
+			bit 2:	E  -  Execute
+			bit 1:	W  -  Write
+			bit 0:	R  -  Read
+DD.DSK	0x0e	 2	Disk identification (for internal use)
+DD.FMT	0x10	 1	Disk format:  density, number of sides
+			bit 7:	
+			bit 6:	
+			bit 5:	
+			bit 4:	
+			bit 3:	
+			bit 2:	
+			bit 1:
+			bit 0:
+DD.SPT	0x11	 2	Number of sectors per track
+DD.RES	0x13	 2	Reserved for future use (under Level 1)
+DD.BT	0x15	 3	Starting sector of bootstrap file
+DD.BSZ	0x18	 2	Size of bootstrap file (in bytes)
+DD.DAT	0x1a	 5	Time of creation:  Y : M : D : H : M
+DD.NAM	0x1f	32	Volume name:  last char has sign bit set
+
+4.  Allocation Map
+==================
+
+5.  File / Directory storage
+============================
+
+The first sector of every file contains a file descriptor, which 
+contains the logical and physical description of the file.  The table 
+below describes the contents of the descriptor.
+
+Os9 ref	 Byte	Length	Description
+	offset	(bytes)
+
+FD.ATT	0x00	  1	File Attributes:  D S PE PW PR E W R
+			bit 7:	D  -  Directory
+			bit 6:	S  -  Shared
+			bit 5:	PE -  Public Execute
+			bit 4:	PW -  Public Write
+			bit 3:	PR -  Public Read
+			bit 2:	E  -  Execute
+			bit 1:	W  -  Write
+			bit 0:	R  -  Read
+FD.OWN	0x01	  2	Owner's User ID
+FD.DAT	0x03	  5	Date Last Modified Y : M : D : H : M
+FD.LNK	0x08	  1	Link Count
+FD.SIZ	0x09	  4	File Size (number of bytes)
+FD.DCR	0x0d	  3	Date Created:  Y : M : D
+FD.SEG	0x10	240	Segment List:  see below
+
+------------------------------------------------------------------------------
+
+99.  Acknowledgements
+=====================
+
+David J. Linsley ( djl102@tower.york.ac.uk ) for the information
+from the Dragon 6809/OS9 Lev 1 System Programmer's Manual
+
+
+
+All trademarks, servicemarks etc. are acknowledged

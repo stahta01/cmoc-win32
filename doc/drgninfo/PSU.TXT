@@ -1,0 +1,69 @@
+                           Dragon PSU Connections
+
+---------------------------------------------------------------------------
+
+PSU AC Adaptor ratings
+
+Original D32 PSU is marked:
+
+  Input:  240V 50/60Hz 20VA
+
+  Output: 8.5V ~ 1.5A
+          28V  ~ 250mA
+
+External Power Connector (9 pin D connector on back)
+
+    -----------------------
+    \  1   2   3   4   5  /      (Looking into the male socket
+     \                   /        on the rear of the Dragon)
+      \  6   7   8   9  /
+       \_______________/
+
+   1   8.5V AC
+   2   8.5V AC
+   3   28V AC
+   4   0V (centre-tap)
+   5   28V AC
+   6   Connected to pin 1 inside PSU plug
+   7   Connected to pin 2 inside PSU plug
+   8,9 D64 circuit diagram shows both these connected to pin 4 but these
+       are not connected inside the plug on two D32 PSUs I've checked.
+       They are all commoned together on the power regulator PCB.
+
+Power Regulator Board to Main Board Ribbon
+
+                  Power Connector
+ _______________++++_____________________
+|                                        |
+| Modulator                              |
+|                            Heatsink    |
+|      ^^^^                              |
+|______I||||||||_________________________|   (Unconventionally, 9 is the
+       987654321                              marked strand.  Numbering
+ ______I||||||||_________________________     convention matches the
+|      I||||||||                         |    circuit diagrams and PCBs)
+|            vvv                         |
+|                                        |
+|                                        |
+
+ Pin  Direction  Function
+
+  9       ^      Composite Video to modulator
+  8       ^      +5V supply to modulator (linked from pin 2 via main board)
+  7       ^      Sound to modulator and monitor socket
+  6       ^      Composite Video to monitor socket
+  5              Ground
+  4              Ground
+  3       v      -5V (D32) or -12V (D64)
+  2       v      +5V
+  1       v      +12V
+
+D64 power regulator PCBs have a -12V regulator (7912) fitted for the RS232
+port instead of a -5V (7905) originally fitted to the D32s. A small -5V
+regulator is used on the D64 main board for the video circuit.
+
+---------------------------------------------------------------------------
+Graham E. Kinns
+Graham@grempc.demon.co.uk
+
+Last update: Wed, 14 May 1997 15:21:02 +0100 (BST)

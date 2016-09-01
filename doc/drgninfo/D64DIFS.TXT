@@ -1,0 +1,425 @@
+#FILE: $RCSfile: d64difs.txt $
+#DESC: Dragon 64 differences
+#REV: $Revision: 1.2 $
+#DATE: 18/12/94
+#AUTHOR: Graham E. Kinns
+#DISCLAIMER: All information provided as is etc.
+#ARCHIVE: This file is part of the DRGNINFO collection of Dragon info files
+#CONTACT: Comments, bugs, revisions, suggestions to Dragon@grempc.demon.co.uk
+#HISTORY: 1.0  08/07/94 - Initial revision
+#RCSID: $Id: d64difs.txt 1.2 1995/08/18 14:19:33 Graham Exp $
+
+Contents:
+
+1.	Hardware Differences
+2.	General Software differences
+3.	Detailed 32K mode ROM differences from a Dragon 32
+4.	Detailed 64K mode ROM differences from 32K mode
+
+-----------------------------------------------------------------------------
+1.	Hardware Differences
+
+1.1	Clock Frequency
+
+	The Dragon 64 uses a 14.218 MHz crystal to give a CPU frequency (by
+/ 16) of 0.888625 MHz, a cycle time of 1.125334 us whereas the CoCo and
+original Dragon 32s (I'm unsure about later ones) used the NTSC standard
+frequency of 14.31818 MHz to give a CPU freq of 0.894886 MHz or 1.117460 us per
+cycle.  I suspect this was to reduce the harmonic interaction between the CPU
+frequency and that of the PAL crystal ( 4.433619 MHz ) used to generate the TV
+output, giving a 'cleaner' video signal.
+
+	The Dragon 64 therefore runs approx 6261 CPU cycles per second slower
+than a Dragon 32 / CoCo.
+
+1.2	Additional Memory Support
+
+1.3	Address Decoding
+
+1.4	Serial Port
+
+	The Serial Port is a 6551 ACIA which appears in locations $ff04-$ff07
+
+-----------------------------------------------------------------------------
+2.	General Software Differences
+
+2.1	Booting 64K mode
+
+	The default EXEC address is set to $bf49 so an EXEC or EXEC 48000 from
+initial D32 mode will enter 64K mode.  This causes a switch to RAM mode, the
+D64 BASIC ROM is copied to RAM $c000-$feff and 48K of RAM is available
+$0000-$bfff to the BASIC system.  Differences in 64K mode include auto
+repeating keys, a blue cursor and the copyright date in the sign on message
+changes from 1982 to 1983.  On reset, the machine enters 32K mode, the warm
+start interrupt routine points to $bf49 which re-enables 64K RAM mode and
+checksums the upper RAM contents.
+
+2.2	Auto repeat support
+	
+	The value at location $011f controls both the time delay at which
+autorepeat starts and the rate of repeat.  For a stored value n, the delay is
+given by n*160 milliseconds and the rate of repeat = 50/n per second.
+The default value of n is set to 5 giving a delay of 800ms and a rate of
+10 chrs per second.
+
+	To activate the auto-repeat routine in 32K mode, then the address of
+the new IRQ routine is placed in the IRQ vector at $010d.  The Dragon 64
+Supplement from Dragon Data recommends the following from BASIC:
+  POKE &HFF03, (PEEK(&HFF03) AND &HFE)
+  POKE &H10D, &HBF
+  POKE &H10E, &H20
+  POKE &HFF03, (PEEK(&HFF03) OR 1) 
+This IRQ routine is not compatible with Dragon DOS attached since the 50Hz IRQ
+is trapped by DOS to use for disk timeout etc. before calling the original
+service routine at $9d3d
+
+2.3	USR0n fix
+
+	The original Dragon 32 had a bug in the USR routine which caused USR1
+to USR9 to be always read as USR0.  The work-around is to use USR01-USR09
+instead.  This bug has been fixed but unfortunately USR0n now returns a Syntax
+Error on the D64 causing a BASIC incompatiblity.
+
+2.4	Serial port support
+
+	By default, no IRQ handling for the ACIA interrupt is installed in 32K
+mode.  This is only activated if the auto repeat routine is installed as
+above.
+
+	DLOAD / DLOADM function correctly through the $802a-$8032 hooks
+although no documentation was ever officially released, to my knowledge, as
+to the protocol involved - standard cassette block format ??
+
+2.5	64K mode BASIC differences
+
+	A notable feature is that the &H operator to specify hex numbers no
+longer works directly but VAL("&Habcd") does.  Bug or feature ??
+
+-----------------------------------------------------------------------------
+3.	Detailed 32K mode ROM differences from a Dragon 32
+
+Addr	Dragon 32				Dragon 64
+
+$8000	7e bb 40	JMP  $bb40		7e bb_3c_	JMP  $bb3c
+	Jump table - Hardware Initialisation routine
+	D64 routine contains additional serial port configuration routine
+
+$802d	7e be 7c	JMP  $be7c		7e be_98_	JMP  $be98
+	Jump table - read byte from serial port	
+	D32 jumps to dummy routine which returns error
+	D64 jumps to serial port handler routine
+
+$8030	7e be 7d	JMP  $be7d		7e be_a6_	JMP  $bea6
+	Jump table - send byte to serial port
+	D32 jumps to dummy routine which returns error
+	D64 jumps to serial port handler routine
+
+$8c33 	93 1f		SUBD <$1f		7e 9f ce	JMP  $9fce
+$8c35	21 4f		BRN  $8c86		-
+$8c36	4f		CLRA			4f		CLRA
+	Patch to the MEM routine to handle >32K free memory on D64
+
+$8ca0 	a7 00		STA  0,X		a7 84		STA  ,X
+	Change in assembly from 5 bit zero offset to no offset indexing
+
+$98e3	cc ba 42	LDD  #$ba42		cc b8 44	LDD  #$b844
+	Sets volume data default stored in $00df:00e0 - Each byte represents
+	values sent to $FF20 as DAC data - clearing bit 1 in each case fixes
+	problem with garbage being strobed to printer while DAC active.
+
+$9b09	7e 8c 37	JMP  $8c37		7e 9f d0	JMP  $9fd0
+	Patch to the VARPTR routine to handle >32K ptrs on D64
+
+$9d00	9d 9f		JSR  <$9f		9d 9f		JSR  <$9f
+$9d02	8d 09		BSR  $9d0d		9d 9f		JSR  <$9f
+$9d04	34 10		PSHS X			8d 07		BSR  $9d0d
+$9d06	8d 2d		BSR  $9d35		34 10		PSHS X
+$9d08	35 40		PULS U			8d 2b		BSR  $9d35
+$9d0b	c4 9f		STX  ,U			f1 a5		STX  [,S++]
+	?? DEF USR fix - note U now is unchanged ??
+
+$9d0e	9d 9f		JSR  <$9f		9d a5		JSR  <$a5
+	Bug fix in the USR function which required the D32 to use USR00-09
+	instead of USR0-9
+
+$9fce	00 00		Unused			93 1f		SUBD <$1f
+$9fd0	00 00		Unused			0f 06		CLR  <$06
+$9fd2	00 00		Unused			dd 52		STD  <$52
+$9fd4	00 00		Unused			c6 90		LDB  #$90
+$9fd6	00 00 00	Unused			7e 9c 3e	JMP  $9c3e
+	Extra code to support VARPTRs >32K on the D64
+
+$aae0	d1 19		CMPB <$19		5a		DECB
+$aae2	22 09		BHI  $aaed	$aae1	86 06		LDA  #$06
+$aae4	5a		DECB		$aae3	3d		MUL
+$aae5 	86 06		LDA  #$06	$aae4	db bc		ADDB <$bc
+$aae7	3d		MUL		$aae6	d1 19		CMPB <$19
+$aae8	db bc		ADDB <$bc		24 03		BLO  $aaed
+	Fixes bug which allowed PCOPY page numbers such as 20ish ??
+
+$ae1c	cc 7e 7e	LDD  #$7e7e		cc 7e 7c	LDD  #$7e7c
+$ae71	86 7e		LDA  #$7e		86 7c		LDA  #$7c
+$aef2	86 7e		LDA  #$7e		86 7c		LDA  #$7c
+$af1b	86 7e		LDA  #$7e		86 7c		LDA  #$7c
+	Fixes to the volume data sent to DAC to ensure printer strobe line
+	remains low.
+
+$b487	8b 8d		data			bf 49		data
+	Changes the default EXEC address at $009d:009e to boot 64k mode on D64
+
+$b4a8	00		data			05		data
+	Change to set default auto-repeat delay at $011f on D64
+	
+$b8cc	26 34		BNE  $b902		26 fa		BNE $b8c8
+	Change to ignore cassette i/o errors on match name block ??
+
+$baad	0f 08		CLR  <$08		12		NOP
+					$baae	5f		CLRB
+	Bug fix to ensure DAC is always selected as audio source when
+	producing a sound ??
+
+$bad5	86 7e		LDA  #$7e		86 7c		LDA  #$7c
+	Fixes to the volume data sent to DAC to ensure printer strobe line
+	remains low.
+
+$bb35	39 39 39 39 39 39 39			00 00 00 00 00 00 00 
+	Unused area ??
+
+$bb3c	6e a4 		JMP  ,Y			-	
+$bb3e	39 		RTS			-
+$bb3f	39		RTS			-
+$bb40	cc 00 34	LDD  #$0034	$bb3c	cc 00 34	LDD  #$0034
+$bb43	8e ff 00	LDX  #$ff20	$bb3f	8e ff 00	LDX  #$ff00
+        ....					....
+$bb67	6f 02		CLR  2,X	$bb63	6f 02		CLR  2,X
+$bb69 	a6 02		LDA  2,X	$bb65	cc 0a 98	LDD  #$0a98
+	-		-		$bb68	fd ff 06	STD  $ff06
+	-		-		$bb6b	b6 ff 04	LDA  $ff04
+						Inits Serial Port ACIA
+$bb6b	8e ff c0	LDX  #$ffc0	$bb6e	8e ff c0	LDX  #$ffc0
+	....					....
+$bb75	f7 ff c9	STB  $ffc9	$bb78	f7 ff c9	STB  $ffc9
+$bb78	85 04		BITA #$04	$bb7b	f7 ff dd	STB  $ffdd
+						64Kbit ram chips
+$bb7a	27 05		BEQ  $bb81	$bb7e	20 03		BRA  $bb83
+$bb7c	f7 ff db	STB  $ffdb	$bb80	7e bf 49	JMP  $bf49
+	16Kbit ram chips		  $bb80=48000 D64 64K mode boot exec
+$bb7f	20 03		BRA  $bb84	$bb83	5f		CLRB
+$bb81	f7 ff dd	STB  $ffdd		-		
+	64Kbit ram chips
+$bb84	1f 9b		TFR  B,DP	$bb84	1f 9b		TFR  B,DP
+
+$bb92	ce 01 48	LDU  #$0148		bd be ff	JSR  $beff
+	Patch to add code to clear serial printer delay and flag $03fd-03ff
+
+$bba0	00 80		data			01 00		data
+	Changes default cassette leader byte count at $0090:0091
+
+$bbb1	20 44 4e 53	" DNS"			00 00 00 00	data
+	Change to End of Line table default chrs $014d-0150
+
+$bbe9	4d		TSTA			7e be e0	JMP  $bee0
+$bbea	35 94		PULS  B,X,PC
+	Patch to include Auto-repeat routine into key scan on D64 in 32K mode
+
+$bcf7	f6 ff 22	STA  $ff22		7d 03 ff	TST  $03ff
+$bcaa	56		RORB			7e be c5	JMP  $bec5
+$bcfb	25 fa		BCS  $bcf7		-		-
+	Patch to the lowest level printer routine to support serial printer
+
+$bd16	5a		DECB			7e bf 0c	JMP  $bf0c
+$bd17	20 f6		BRA  $bd0f		-		-
+	Patch to include check for serial printer end of line delay
+
+$be7b	39 		RTS			34 05		PSHS CC,B
+					$be7d	1a 50		ORCC #$50
+					$be7f	86 08		LDA  #$08
+					$be81	f6 ff 06	LDB  $ff06
+					$be84	ca 01		ORB  #$01
+					$be86	f7 ff 07	STB  $ff07
+	 				$be89	c4 fe		ANDB #$fe
+	 				$be8b	b5 ff 05	BITA $ff05
+					$be8e	27 fb		BEQ  $be8b
+					$be90	f7 ff 06	STB  $ff06
+ 					$be93	b6 ff 04	LDA  $ff04
+					$be96	35 85		PULS CC,B,PC
+	Read a byte from serial port, JMP'd to from $802a
+
+$be7c	39 		RTS		$be98	34 05		PSHS CC,B
+					$be9a	c6 10		LDB  #$10	
+					$be9c	f5 ff 05	BITB $ff05
+					$be9f	27 fb		BEQ  $be9c
+					$bea1	b7 ff 04	STA  $ff04
+					$bea4	35 85		PULS CC,B,PC
+	Sends a byte to serial port, JMP'd to from $802d, also called
+	from patched printer routine at $bedb
+
+$be7d	53		COMB		$bea6	c1 07		CMPB #$07
+$be7e	39		RTS		$bea8	24 12		BHS  $bebc
+					$beaa	8e be be	LDX  #$bebe
+					$bead	3a		ABX
+					$beae	f6 ff 07	LDB  $ff07
+					$beb1	c4 f0		ANDB #$f0
+					$beb3	ea 84		ORB  #$84
+					$beb5	f7 ff 07	STB  $ff07
+					$beb8	1c fe		ANDCC #$fe
+					$beba	20 01		BRA  $bebd
+					$bebc 	53		COMB
+					$bebd	39		RTS
+
+					$bebe	03 06 07 08 0a 0c 0e
+						Data table maps B to h/w byte
+	Set serial port baud rate from B, JMP'd to from $8030
+
+					$bec5	26 14		BNE  $bedb
+					$bec7	f6 ff 22	LDB  $ff22
+					$beca	56		RORB
+					$becb	25 fa		BCS  $bec7
+					$becd	7f ff 02	CLR  $ff02
+					$bed0	f6 ff 00	LDB  $ff00
+					$bed3	ca 80		ORB  #$80
+					$bed5	5c		INCB
+					$bed6	26 f5		BNE  $becd
+					$bed8	7e bc fd	JMP  $bcfd
+	Added printer routine - see $bdf7, CC.Z is clear on entry if a serial
+	printer is set up.  Otherwise, loops while Printer Busy is high, then
+	loops if any key is pressed - this causes the Break check during
+	printing to be rendered almost useless.
+
+					$bedb	35 04		PULS CC,B
+					$bedd	7e be 98	JMP  $be98
+	Added routine to send byte to serial printer called from $bed5
+
+					$bee0	f6 01 51	LDB  $0151
+					$bee3	5c		INCB
+					$bee4	26 03		BNE  $bee9
+					$bee6	f7 01 1d	STB  $011d
+					$bee9	4d		TSTA
+					$beea	27 11		BEQ  $befd
+					$beec	f6 01 1f	LDB  $011f
+					$beef	b1 01 1d	CMPA $011d
+					$bef2	27 03		BEQ  $bef7
+					$bef4	58		LSLB
+					$bef5	58		LSLB
+					$bef6	58		LSLB
+					$bef7	f7 01 1e	STB  $011e
+					$befa	b7 01 1d	STA  $011d
+					$befd	35 94		PULS B,X,PC
+	Added subroutine to implement a simple auto repeat, JMPd to from $bbe9
+
+					$beff	7f 03 ff	CLR  $03ff
+					$bf02	7f 03 fd	CLR  $03fd
+					$bf05	7f 03 fe	CLR  $03fe
+					$bf08	ce 01 48	LDU  #$0148
+					$bf0b	39		RTS
+	Added code, patched from $bb92 to initialise serial printer data
+	storage.
+
+					$bf0c	5a		DECB
+					$bf0d	27 03		BEQ  $bf12
+					$bf0f	7e bd 0f	JMP  $bd0f
+	Added code, patched in from $bd16 to check for the serial end of
+	line delay
+
+					$bf12	10 be 03 fd	LDY  $03fd
+					$bf16	27 07		BEQ  $bf1f
+					$bf18	bd bb c5	JSR  $bbc5
+					$bf1b	31 3f		LEAY -1,Y
+					$bf1d	26 f9		BNE  $bf18
+					$bf1f	39		RTS
+	Added sub, called from $bf0d to implement the serial printer end
+	of line delay.
+
+					$bf20	f6 ff 05	LDB  $ff05
+					$bf23	2a 0d		BPL  $bf32
+					$bf25	c4 08		ANDB #$08
+					$bf27	27 08		BEQ  $bf31
+					$bf29	b6 ff 06	LDA  $ff06
+					$bf2c	84 fe		ANDA #$fe
+					$bf2e	b7 ff 06	STA  $ff06
+					$bf31	3b		RTI
+	New interrupt service routine to support the serial port ACIA.
+	If the serial port is not the source, the auto-repeat update at $bf32
+	is run.
+
+					$bf32	74 01 51	LSR  $0151
+					$bf35	7a 01 1e	DEC  $011e
+					$bf38	26 0c		BNE  $bf46
+					$bf3a	86 ff		LDA  #$ff
+					$bf3c	8e 01 51	LDX  #$0151
+					$bf3f	a7 80		STA  ,X+
+					$bf41	8c 01 5a	CMPX #$015a
+					$bf44	25 f9		BLO  $bf3f
+					$bf46	7e 9d 3d	JMP  $9d3d
+	Clears the keyoard table to recognise new key codes, then JMPs
+	to original IRQ routine
+
+					$bf49	12		NOP
+					$bf4a	1a 50		ORCC #$50
+					$bf4c	8e bf 5a	LDX  #$bf5a
+					$bf4f	ce 01 da	LDU  #$01da
+					$bf52	c6 8f		LDB  #$8f
+					$bf54	17 fc 40	LBSR $bb97
+					$bf57	7e 01 da	JMP  $01da
+	64K boot routine, JMP'd to from $bb80 (64000) also set as default EXEC
+	address in $009d:009e  This code is also called when doing a 'warm'
+	start from 64K mode since 32K ROM mode is re-enabled by the SAM.
+
+					$bf5a	b6 01 1a	LDA  $011a
+					$bf5d	81 55		CMPA #$55
+					$bf5f	26 16		BNE  $bf77
+					$bf61	b7 ff df	STA  $ffdf
+					$bf64	8e c0 00	LDX  #$c000
+					$bf67	cc 00 00	LDD  #$0000
+					$bf6a	e3 81		ADDD ,X++
+					$bf6c	8c ff 00	CMPX #$ff00
+					$bf6f	25 f9		BLO  $bf6a
+					$bf71	10 b3 01 1b	CMPD $011b
+					$bf75	27 6f		BEQ  $bfe6
+
+					$bf77	b7 ff de	STA  $ffde
+					$bf7a	b6 ff 23	LDA  $ff23
+					$bf7d	84 fb		ANDA #$fb
+					$bf7f	b7 ff 23	STA  $ff23
+					$bf82	f6 ff 22	LDB  $ff22
+					$bf85	ca 04		ORB  #$04
+					$bf87	f7 ff 22	STB  $ff22
+					$bf8a	8a 04		ORA  #$04
+					$bf8c	b7 ff 23	STA  $ff23
+					$bf8f	b6 ff 22	LDA  $ff22
+					$bf92	84 fb		ANDA #$fb
+					$bf94	b7 ff 22	STA  $ff22
+					$bf97	fe bf f0	LDU  #$bff0
+					$bf9a	11 83 36	CMPU #$3634
+					$bf9e	27 08		BEQ  $bfa8
+					$bfa0	8a 04		ORA  #$04
+					$bfa2	b7 ff 22	STA  $ff22
+					$bfa5	7e 8b 8d	JMP  $8b8d
+
+					$bfa8	7f 01 1b	CLR  $011b
+					$bfab	7f 01 1c	CLR  $011c
+					$bfae	8e 80 00	LDX  #$8000
+					$bfb1	10 8e c0 00	LDY  #$c000
+					$bfb5	ec 81		LDD  ,X++
+					$bfb7	b7 ff df	STA  $ffdf
+					$bfba	ed a1		STD  ,Y++
+					$bfbc	f3 01 1b	ADDD $011b
+					$bfbf	fd 01 1b	STD  $011b
+					$bfc2	10 8c ff 00	CMPY #$ff00
+					$bfc6	24 05		BHS  $bfcd
+					$bfc8	b7 ff de	STA  $ffde
+					$bfcb	20 e8		BRA  $bfb5
+
+					$bfcd	8e bf f0	LDX  #$bff0
+					$bfd0	9f 74		STX  <$74
+					$bfd2	9f 27		STX  <$27
+					$bfd4	9f 23		STX  <$23
+					$bfd6	30 89		LEAX -200,X
+					$bfda	9f 21		STX  <$21
+					$bfdc	1f 14		TFR  X,S
+					$bfde	8e bf 49	LDX  #$bf49
+					$bfe1	9f 72		STX  <$72
+					$bfe3	7e c0 00	JMP  $c000
+
+					$bfe6	7e c0 03	JMP  $c003
+

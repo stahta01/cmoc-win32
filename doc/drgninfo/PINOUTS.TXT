@@ -1,0 +1,192 @@
+                           Dragon Socket Pinouts
+
+---------------------------------------------------------------------------
+
+Contents
+
+   * Pin numbering conventions
+   * Power supply connectors
+   * Composite video monitor socket
+   * RS232 Serial socket (Dragon 64 only)
+   * Joystick sockets
+   * Cassette recorder socket
+   * Parallel printer port
+   * Cartridge 40 way expansion socket
+   * Disk drive 34 way connector
+
+---------------------------------------------------------------------------
+
+Pin numbering conventions
+
+All pinouts are shown as looking into the socket on the Dragon.
+
+[ Back up to contents ] - [ Information files ]
+---------------------------------------------------------------------------
+
+Composite video monitor socket
+
+180° 5 pin DIN
+
+      /    U    \
+     (           )
+     ( 3       1 )
+     (  5     4  )
+      \    2    /
+
+  1  Sound
+  2  Ground
+  3  Video
+  4  Not connected
+  5  Not connected
+
+[ Back up to contents ] - [ Information files ]
+---------------------------------------------------------------------------
+
+Dragon 64 RS232 serial socket
+
+7 pin DIN
+
+      /    U    \
+     (  7     6  )
+     ( 3       1 )
+     (  5     4  )
+      \    2    /
+
+  1  Ground
+  2  Rx data
+  3  +12V
+  4  DTR
+  5  CTS
+  6  Tx data
+  7  -12V
+
+[ Back up to contents ] - [ Information files ]
+---------------------------------------------------------------------------
+
+Joystick sockets
+
+270° 5 pin DIN
+
+      /    U    \
+     (  5     1  )
+     (           )
+     (  4     2  )
+      \    3    /
+
+  1  X wiper
+  2  Y wiper
+  3  Ground
+  4  Fire (pulled to ground)
+  5  +5V
+
+[ Back up to contents ] - [ Information files ]
+---------------------------------------------------------------------------
+
+Cassette recorder socket
+
+180° 5 pin DIN
+
+      /    U    \
+     (           )
+     ( 3       1 )
+     (  5     4  )
+      \    2    /
+
+  1  Remote control
+  2  Ground
+  3  Remote control
+  4  Input from cassette (from EAR)
+  5  Output from Dragon (to MIC)
+
+[ Back up to contents ] - [ Information files ]
+---------------------------------------------------------------------------
+
+Parallel Centronics printer port
+
+20 way IDC socket
+
+ 19                  1
+  . . . . . . . . . .
+  . . . . . . . . . .
+ 20                  2
+
+  1  Strobe      2  +5V
+  3  Data 0      4  +5V
+  5  Data 1      6  Ground
+  7  Data 2      8  Ground
+  9  Data 3     10  Ground
+ 11  Data 4     12  Ground
+ 13  Data 5     14  Ground
+ 15  Data 6     16  Ground
+ 17  Data 7     18  Ground
+ 19  !ACK       20  BUSY
+
+[ Back up to contents ] - [ Information files ]
+---------------------------------------------------------------------------
+
+Cartridge 40 way expansion socket
+
+40 way expansion socket
+
+ 39                                      1
+  . . . . . . . . . . . . . . . . . . . .
+  . . . . . . . . . . . . . . . . . . . .
+ 40                                      2
+
+       1  +12V           2  +12V
+       3  !HALT          4  !NMI
+       5  !RESET         6  E (main clock)
+       7  Q (leads E)    8  CART (PIA1 CB1)
+       9  +5V           10  D0
+      11  D1            12  D2
+      13  D3            14  D4
+      15  D5            16  D6
+      17  D7            18  R/!W
+      19  A0            20  A1
+      21  A2            22  A3
+      23  A4            24  A5
+      25  A6            26  A7
+      27  A8            28  A9
+      29  A10           30  A11
+      31  A12           32  !CTS ($C000-$FFEF)
+      33  Ground        34  Ground
+      35  Ext sound src 36  !P2 (PIA2 $FF40-$FF5F)
+      37  A13           38  A14
+      39  A15           40  !DSD (Device Select Disable)
+
+[ Back up to contents ] - [ Information files ]
+---------------------------------------------------------------------------
+
+Disk drive 34 way ribbon connector
+
+34 way IDC socket
+
+ 33                                1
+  . . . . . . . . . . . . . . . . .
+  . . . . . . . . . . . . . . . . .
+ 34                                2
+
+     1  Ground      2  O  Reserved (Density select)
+     3  Ground      4  O  !Head Load
+     5  Ground      6  O  !Drive Select #3
+     7  Ground      8  I  !Index hole sensor
+     9  Ground     10  O  !Drive Select #0
+    11  Ground     12  O  !Drive Select #1
+    13  Ground     14  O  !Drive Select #2
+    15  Ground     16  O  !Motor On
+    17  Ground     18  O  !Step In
+    19  Ground     20  O  !Step Pulse
+    21  Ground     22  O  !Write Data
+    23  Ground     24  O  !Write Gate
+    25  Ground     26  I  !Track 0 sensor
+    27  Ground     28  I  !Write Protect sensor
+    29  Ground     30  I  !Read Data
+    31  Ground     32  O  !Side 1 Select
+    33  Ground     34  I  !Drive Ready (Unused in Dragon cart.)
+
+[ Back up to contents ] - [ Information files ]
+---------------------------------------------------------------------------
+Graham E. Kinns
+Graham@grempc.demon.co.uk
+
+Last update: Wed, 14 May 1997 15:19:00 +0100 (BST)
