@@ -22,7 +22,7 @@
         <UnitName Value="UnitCmocIDE"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="490"/>
-        <CursorPos X="44" Y="505"/>
+        <CursorPos X="28" Y="496"/>
         <UsageCount Value="84"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -604,7 +604,7 @@
         <UsageCount Value="10"/>
       </Unit76>
     </Units>
-    <JumpHistory Count="24" HistoryIndex="23">
+    <JumpHistory Count="23" HistoryIndex="22">
       <Position1>
         <Filename Value="unitcmocide.pas"/>
         <Caret Line="642" Column="56" TopLine="633"/>
@@ -691,16 +691,12 @@
       </Position21>
       <Position22>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="656" Column="3" TopLine="657"/>
+        <Caret Line="506" Column="86" TopLine="490"/>
       </Position22>
       <Position23>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="506" Column="86" TopLine="490"/>
-      </Position23>
-      <Position24>
-        <Filename Value="unitcmocide.pas"/>
         <Caret Line="505" Column="44" TopLine="490"/>
-      </Position24>
+      </Position23>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

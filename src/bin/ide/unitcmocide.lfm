@@ -2535,7 +2535,7 @@ object FormCmocIDE: TFormCmocIDE
           FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
           FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00
         }
-        Hint = '%PACKAGE%/doc/basic.txt'
+        Hint = '%PACKAGE%/doc/basic/basic.txt'
         ImageIndex = 26
         OnClick = MenuHelpClick
       end
@@ -2577,7 +2577,7 @@ object FormCmocIDE: TFormCmocIDE
           FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
           FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00
         }
-        Hint = '%PACKAGE%/doc/extendedbasic.txt'
+        Hint = '%PACKAGE%/doc/basic/extendedbasic.txt'
         ImageIndex = 26
         OnClick = MenuHelpClick
       end
@@ -2619,7 +2619,7 @@ object FormCmocIDE: TFormCmocIDE
           FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
           FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00
         }
-        Hint = '%PACKAGE%/doc/diskbasic.txt'
+        Hint = '%PACKAGE%/doc/basic/diskbasic.txt'
         ImageIndex = 26
         OnClick = MenuHelpClick
       end
