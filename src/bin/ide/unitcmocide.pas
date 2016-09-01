@@ -492,21 +492,19 @@ begin
     LTmpFile := GetTempDir(False) + 'astyle.c';
     FormCmocIDESynEdit.SynEdit.Lines.SaveToFile(LTmpFile);
     try
-      RunTool(Tool_ASTYLE, ['-A8', '-xC100', '-k1', '-w', '-U', '-H', '-j', '-s' +
-        IntToStr(FormCmocIDESynEdit.SynEdit.TabWidth),
-        LTmpFile], False);
+      with CCmocProcess.Create(Self) do begin
+        try
+          ExecuteTool_ASTYLE(LTmpFile, LTmpFile, FormCmocIDESynEdit.SynEdit.TabWidth);
+        finally
+          Free;
+        end;
+      end;
       with TStringList.Create do begin
         try
           LoadFromFile(LTmpFile);
-          while (Count > 0) and (Length(Trim(Strings[0])) = 0) do begin
-            Delete(0);
-          end;
-          while (Count > 0) and (Length(Trim(Strings[Count - 1])) = 0) do begin
-            Delete(Count - 1);
-          end;
-          Insert(0, EmptyStr);
           FormCmocIDESynEdit.SynEdit._ChangeText(Text);
-          FormCmocIDESynEdit.SynEdit._SetCaretYCentered(FormCmocIDESynEdit.SynEdit.CaretY);
+          FormCmocIDESynEdit.SynEdit._SetCaretYCentered(FormCmocIDESynEdit.SynEdit.TopLine +
+            (FormCmocIDESynEdit.SynEdit.LinesInWindow div 2));
         finally
           Free;
         end;

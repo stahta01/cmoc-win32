@@ -149,7 +149,7 @@ type
     try
       with CCmocProcess_ASMTOH.Create(nil) do begin
         try
-          Execute(OCmoc.FileNameTool(Tool_LWASM), TStringDynArray.Create('-s',
+          ExecuteTool(Tool_LWASM, TStringDynArray.Create('-s',
             '--depend', '--list=' + LTmpFile, ASrc));
           ProcessFile(ADst, LTmpFile, AOrgFile, AHeaderIdent, AFilter);
         finally

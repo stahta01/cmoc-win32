@@ -37,46 +37,49 @@
 
 #include <stddef.h>
 
-char* strcat(char* dest, char* src);
-char* strchr(char* s, int c);
-int strcmp(char* s1, char* s2);
-int strcoll(char* s1, char* s2);
-char* strcpy(char* dest, char* src);
-size_t strcspn(char* s1, char* s2);
-char* strerror(int errcode);
-size_t strlen(char* s);
-char* strncat(char* s1, char* s2, size_t count);
-int strncmp(char* s1, char* s2, size_t count);
-char* strncpy(char* dest, char* src, size_t count);
-char* strrchr(char* s, int c);
-size_t strspn(char* s1, char* s2);
-char* strstr(char* str, char* substr);
-char* strtok(char* s1, char* s2);
-size_t strxfrm(char* s1, char* s2, size_t count);
+char* strcat(char* dest, char* src);    // ANSIC
+char* strchr(char* s, int c);           // ANSIC
+int strcmp(char* s1, char* s2);         // ANSIC
+int strcoll(char* s1, char* s2);        // ANSIC
+char* strcpy(char* dest, char* src);    // ANSIC
+size_t strcspn(char* s1, char* s2);     // ANSIC
+char* strerror(int errcode);            // ANSIC
+size_t strlen(char* s);                 // ANSIC
+char* strncat(char* s1, char* s2, size_t n); // ANSIC
+int strncmp(char* s1, char* s2, size_t n); // ANSIC
+char* strncpy(char* dest, char* src, size_t n); // ANSIC
+char* strrchr(char* s, int c);          // ANSIC
+size_t strspn(char* s1, char* s2);      // ANSIC
+char* strstr(char* str, char* substr);  // ANSIC
+char* strtok(char* s1, char* s2);       // ANSIC
+size_t strxfrm(char* s1, char* s2, size_t n); // ANSIC
 
-void* memchr(void* mem, int c, size_t count);
-int memcmp(void* p1, void* p2, size_t count);
-void* memcpy(void* dest, void* src, size_t count);
-void* memmove(void* dest, void* src, size_t count);
-void* memset(void* s, int c, size_t count);
+// Memory functions
 
-// The following is an internal function, the compiler will replace memset
-// with it if the fill value is zero. Never use this one directly!
-void* _bzero(void* ptr, size_t n);
+int memcmp(void* ptr1, void* ptr2, size_t n); // ANSIC
+void* memcpy(void* dst, void* src, size_t n); // ANSIC
+void* memmove(void* dst, void* src, size_t n); // ANSIC
 
-// Non standard
-void bzero(void* ptr, size_t n);                    // BSD
-char* strdup(char* s);                              // SYSV/BSD
-int stricmp(char* s1, char* s2);                    // DOS/Windows
-int strcasecmp(char* s1, char* s2);                 // Same for Unix
-int strnicmp(char* s1, char* s2, size_t count);     // DOS/Windows
-int strncasecmp(char* s1, char* s2, size_t count);  // Same for Unix
+void* memchr(void* ptr, int value, size_t n); // ANSIC
+void* memset(void* ptr, int value, size_t n); // ANSIC
+void* memxor(void* ptr, int value, size_t n); // CMOC
+void* memand(void* ptr, int value, size_t n); // CMOC
+void* memor(void* ptr, int value, size_t n); // CMOC
 
-char* strlwr(char* s);
-char* strlower(char* s);
-char* strupr(char* s);
-char* strupper(char* s);
-char* strqtok(char* s1, char* s2);
+
+void bzero(void* ptr, size_t n);        // BSD
+
+char* strdup(char* s);                  // SYSV/BSD
+int stricmp(char* s1, char* s2);        // DOS/Windows
+int strcasecmp(char* s1, char* s2);     // UNIX
+int strnicmp(char* s1, char* s2, size_t n); // DOS/Windows
+int strncasecmp(char* s1, char* s2, size_t n); // UNIX
+
+char* strlwr(char* s);                  // UNIX
+char* strlower(char* s);                // UNIX
+char* strupr(char* s);                  // UNIX
+char* strupper(char* s);                // UNIX
+char* strqtok(char* s1, char* s2);      // UNIX
 
 char* strrev(char* s);
 char* stpcpy(char* dest, char* src);
@@ -84,7 +87,7 @@ char* stpcpy(char* dest, char* src);
 // Map an operating system error number to an error message.
 char* _stroserror(unsigned char errcode);
 
-void memcpy_fast(void* dst, void* src, size_t len);
+void memcpy_fast(void* dst, void* src, size_t n);
 
 #endif
 

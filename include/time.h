@@ -35,18 +35,14 @@
 #ifndef _TIME_H
 #define _TIME_H
 
-/* NULL pointer */
-#ifndef _HAVE_NULL
-#define NULL    0
-#define _HAVE_NULL
-#endif
-
+#include <sys/null.h>
 #include <sys/size.h>
 
-typedef unsigned long time_t;
-typedef unsigned long clock_t;
+typedef unsigned time_t;
+typedef unsigned clock_t;
 
-/* Structure for broken down time */
+// Structure for broken down time
+
 struct tm {
     int     tm_sec;
     int     tm_min;
@@ -59,80 +55,35 @@ struct tm {
     int     tm_isdst;
 };
 
-/* Timezone representation, default is UTC */
+// Timezone representation, default is UTC
+
 extern struct _timezone {
-    char    daylight;   /* True if daylight savings time active */
-    long    timezone;   /* Number of seconds behind UTC */
-    char    tzname[5];  /* Name of timezone, e.g. CET */
-    char    dstname[5]; /* Name when daylight true, e.g. CEST */
+    char    daylight;                   // True if daylight savings time active
+    long    timezone;                   // Number of seconds behind UTC
+    char    tzname[5];                  // Name of timezone, e.g. CET
+    char    dstname[5];                 // Name when daylight true, e.g. CEST
 } _tz;
 
+#define CLOCKS_PER_SEC 60
+#define CLK_TCK 60
 
-
-#if defined(__ATARI__)
-/* The clock depends on the video standard, so read it at runtime */
-unsigned _clocks_per_sec(void);
-#  define CLK_TCK               _clocks_per_sec()
-#  define CLOCKS_PER_SEC        _clocks_per_sec()
-#elif defined(__ATARI5200__)
-#  define CLK_TCK               60      /* POSIX */
-#  define CLOCKS_PER_SEC        60      /* ANSI */
-#elif defined(__ATMOS__)
-#  define CLK_TCK               100     /* POSIX */
-#  define CLOCKS_PER_SEC        100     /* ANSI */
-#elif defined(__CBM__)
-#  if defined(__CBM510__) || defined(__CBM610__)
-/* The 510/610 gets its clock from the AC current */
-#    define CLK_TCK             50      /* POSIX */
-#    define CLOCKS_PER_SEC      50      /* ANSI */
-#  else
-#    define CLK_TCK             60      /* POSIX */
-#    define CLOCKS_PER_SEC      60      /* ANSI */
-#  endif
-#elif defined(__NES__)
-#  define CLK_TCK               50      /* POSIX */
-#  define CLOCKS_PER_SEC        50      /* ANSI */
-#elif defined(__PCE__)
-#  define CLK_TCK               60      /* POSIX */
-#  define CLOCKS_PER_SEC        60      /* ANSI */
-#elif  defined(__GAMATE__)
-#  define CLK_TCK               135     /* POSIX */     /* FIXME */
-#  define CLOCKS_PER_SEC        135     /* ANSI */      /* FIXME */
-#elif  defined(__GEOS__)
-#  define CLK_TCK               1       /* POSIX */
-#  define CLOCKS_PER_SEC        1       /* ANSI */
-#elif defined(__LYNX__)
-/*  The clock-rate depends on the video scan-rate;
-** so, read it at run-time.
-*/
-extern clock_t _clk_tck(void);
-#  define CLK_TCK               _clk_tck()
-#  define CLOCKS_PER_SEC        _clk_tck()
-#endif
+//  Similar to time(), but:
+//   - Is not ISO C
+//   - Does not take the additional pointer
+//   - Does not set errno when returning -1
 
 time_t _systime(void);
-/*  Similar to time(), but:
-**   - Is not ISO C
-**   - Does not take the additional pointer
-**   - Does not set errno when returning -1
-*/
 
-/* ISO C function prototypes */
-char*  asctime( struct tm* timep);
+// ISO C function prototypes
+
+char* asctime(struct tm* timep);
 clock_t clock(void);
-char*  ctime( time_t* timep);
-struct tm*  gmtime( time_t* timep);
-struct tm*  localtime( time_t* timep);
-time_t  mktime(struct tm* timep);
-size_t  strftime(char* buf, size_t bufsize,  char* format,  struct tm* tm);
-time_t  time(time_t* t);
-
-
-
-/* End of time.h */
+char* ctime(time_t* timep);
+struct tm* gmtime(time_t* timep);
+struct tm* localtime(time_t* timep);
+time_t mktime(struct tm* timep);
+size_t strftime(char* buf, size_t bufsize, char* format, struct tm* tm);
+time_t time(time_t* t);
 
 #endif
-
-
-
 

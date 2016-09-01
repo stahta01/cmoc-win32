@@ -18,9 +18,10 @@ int main(void)
     cgets(s);
     if (s[2] == 'y' || s[2] == 'Y') {
         memcpy((void*)_beggrp, image256x192, sizeof(image256x192));
-        gotoxy(0, 22);
-        cputs("Yes, its porn on the CoCo!\n");
-        cputs("Welcome to 2016 :-) ");
+        for (int i = 0; i < 4; i++) {
+            memxor((void*)_beggrp, 255, _endgrp - _beggrp);
+        }
+        cputsxy(0, 22, "Yes, its porn on the CoCo!\nWelcome to 2016 :-) ");
     } else {
         cputs("\nO, well, you miss out.\n");
     }

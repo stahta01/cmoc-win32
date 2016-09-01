@@ -56,7 +56,7 @@ begin
   OCmoc.StringDynArrayInsert(AParams, 2, Opt_NoLineInfo1);
   OCmoc.StringDynArrayInsert(AParams, 3, '-a');
   OCmoc.StringDynArrayAppend(AParams, ASrc);
-  Execute(OCmoc.FileNameTool(Tool_MCPP), AParams);
+  ExecuteTool(Tool_MCPP, AParams);
 end;
 
 procedure CCmocProcess_TOOLS.CMOC(const ADst, ASrc: TFileName; const AWerror, AVerbose: boolean);
@@ -84,7 +84,7 @@ begin
     end;
     //StringDynArrayAppend(LParams, Opt_Optimize0);
     OCmoc.StringDynArrayAppend(LParams, ExtractFileName(LPre));
-    Execute(OCmoc.FileNameTool(Tool_CMOC), LParams, ExtractFilePath(LPre));
+    ExecuteTool(Tool_CMOC, LParams, ExtractFilePath(LPre));
     DeleteFile(ADst);
     RenameFile(LPre + FileExt_ASM, ADst);
   end;
@@ -138,13 +138,13 @@ procedure CCmocProcess_TOOLS.LWAR(const AMode: string; const ADst: TFileName; AS
 begin
   OCmoc.StringDynArrayInsert(ASrc, 0, AMode);
   OCmoc.StringDynArrayInsert(ASrc, 1, ADst);
-  Execute(OCmoc.FileNameTool(Tool_LWAR), ASrc);
+  ExecuteTool(Tool_LWAR, ASrc);
 end;
 
 procedure CCmocProcess_TOOLS.LWASM(const ADst, ASrc: TFileName; const APreprocess: boolean);
 begin
   if OCmoc.FileChanged(ADst, ASrc) then begin
-    Execute(OCmoc.FileNameTool(IfThen(APreprocess, Tool_LWASM2, Tool_LWASM)),
+    ExecuteTool(IfThen(APreprocess, Tool_LWASM2, Tool_LWASM),
       TStringDynArray.Create(Opt_6809, Opt_Format2, Format_OBJ, Opt_Output2, ADst, ASrc));
   end;
 end;
@@ -164,7 +164,7 @@ begin
       'linkscript.txt',
       Opt_MapFile2, AMap, OCmoc.PathToLib + 'program_start.o', OCmoc.PathToLib +
       'program_end.o']);
-    Execute(OCmoc.FileNameTool(Tool_LWLINK), LParams);
+    ExecuteTool(Tool_LWLINK, LParams);
   end;
 end;
 

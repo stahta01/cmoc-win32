@@ -81,10 +81,12 @@ end;
 
 procedure TSynEditHelper._ChangeText(const AText: string);
 var
+  LTopLine: integer;
   LCaretXY: TPoint;
 begin
   if Text <> AText then begin
     LCaretXY := CaretXY;
+    LTopLine := TopLine;
     BeginUndoBlock;
     try
       SelectAll;
@@ -92,7 +94,8 @@ begin
     finally
       EndUndoBlock;
     end;
-    CaretXY := LCaretXY;
+    CaretXY := LCaretXY; // Must be set before setting topline.
+    TopLine := LTopLine;
   end;
 end;
 

@@ -41,17 +41,6 @@ type
     procedure ProcessLWASM;
   end;
 
-  procedure CCmocProcess_LWASM2.ProcessLWASM;
-  var
-    LIndex: integer;
-    LSrcFile, LDstFile: TFileName;
-    LParams: TStringDynArray;
-  begin
-    if ParamCount < 2 then begin
-      OCMOC.RaiseError('No input file selected', Tool_LWASM);
-    end;
-    LSrcFile := OCMOC.DosToUnix(ParamStr(ParamCount));
-    LDstFile := LSrcFile + FileExt_I;
 (* TODO: Change DAT for OS9
 #if defined(OS9)
 #define DAT Y  /* CMOC uses Y to point to the data segment of the current process. */
@@ -59,17 +48,28 @@ type
 #define DAT PCR  /* The data segment at a fixed offset of the code segment. */
 #endif
 *)
-    if OCMOC.FileChanged(LDstFile, LSrcFile) then begin
-      Execute(OCMOC.FileNameTool(Tool_MCPP), TStringDynArray.Create('-a', '-P',
-        '-W', '0', Opt_Output2, LDstFile, Opt_Define2, 'DAT=PCR', LSrcFile));
-    end;
+
+  procedure CCmocProcess_LWASM2.ProcessLWASM;
+  var
+    LIndex: integer;
+    LSrc: TFileName;
+    LParams: TStringDynArray;
+  begin
     LParams := default(TStringDynArray);
-    for LIndex := 1 to ParamCount - 1 do begin
+    for LIndex := 1 to ParamCount do begin
       OCMOC.StringDynArrayAppend(LParams, ParamStr(LIndex));
     end;
-    OCMOC.StringDynArrayAppend(LParams, LDstFile);
-
-    Execute(OCMOC.FileNameTool(Tool_LWASM), LParams);
+    if Length(LParams) = 0 then begin
+      OCMOC.StringDynArrayAppend(LParams, Opt_Help1);
+    end else if FileExists(LParams[High(LParams)]) then begin
+      LSrc := OCMOC.DosToUnix(LParams[High(LParams)]);
+      LParams[High(LParams)] := LSrc + FileExt_I;
+      //if OCMOC.FileChanged(LParams[High(LParams)], LSrc) then begin
+      ExecuteTool(Tool_MCPP, TStringDynArray.Create('-a', '-P',
+        '-W', '0', Opt_Output2, LParams[High(LParams)], Opt_Define2, 'DAT=PCR', LSrc));
+      //end;
+    end;
+    ExecuteTool(Tool_LWASM, LParams);
   end;
 
 begin

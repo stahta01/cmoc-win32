@@ -1,6 +1,8 @@
 
-#include <basic.h>
+#include <stdio.h>
+#include <string.h>
 #include <conio.h>
+#include <time.h>
 
 int main(void)
 {
@@ -11,8 +13,10 @@ int main(void)
     cputs("PRESS ANY KEY TO EXIT");
 
     while (!kbhit()) {
-        sprintf(s, "COCO TIMER=%d", TIMER());
-        gotoxy((byte)((32 - strlen(s)) >> 1), 7);
+        clock_t t = clock();
+
+        sprintf(s, "CLOCK: %d SECONDS (%d)", t / CLOCKS_PER_SEC, t);
+        gotoxy((unsigned char)((32 - strlen(s)) >> 1), 6);
         cputs(s);
     }
     return 0;
