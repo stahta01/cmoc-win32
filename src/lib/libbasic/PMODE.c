@@ -1,13 +1,6 @@
 
 #include <basic.h>
 
-void PSECT(int sect)
-{
-    _beggrp = sect * 0x200;
-    _endgrp = _beggrp + (0x600 << ((_pmode + 1) >> 1));
-    //SCREENSETUP();
-}
-
 void PMODE(int mode, int page)
 {
     char s[] = "PMODE?,?";

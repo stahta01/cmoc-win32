@@ -1,9 +1,12 @@
 
 #include <basic.h>
-#include <coco/cocodefs.h>
 
-#include <equates.h>
+void SCREEN(int mode, int css)
+{
+    systemf("SCREEN%d,%d", mode, css);
+}
 
+/*
 void SCREENSETUP(void)
 {
     byte mode, sect;
@@ -31,9 +34,5 @@ void SCREENSETUP(void)
     (*(byte*)_PIA1BD) &= 0x8f;
     (*(byte*)_PIA1BD) |= mode;
 }
-
-void SCREEN(int mode, int css)
-{
-    systemf("SCREEN%d,%d", mode, css);
-}
+*/
 

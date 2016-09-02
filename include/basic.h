@@ -121,7 +121,6 @@ void LCIRCLE(int x, int y, int r, byte c);
 
 // New medium resolution functions written in C
 
-void PSECT(int sect);
 void MSET(int x, int y, byte c);
 void MSET1(int x, int y, byte c);
 void MSET2(int x, int y, byte c);
