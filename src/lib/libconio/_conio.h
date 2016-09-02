@@ -12,9 +12,6 @@ typedef struct {
     unsigned char cursor;
     unsigned char revers;
     unsigned char bordercolor;
-    unsigned char fontbase;
-    unsigned char fontpack;
-    unsigned char* fontdata;
 } _conio_t;
 
 extern _conio_t _conio;

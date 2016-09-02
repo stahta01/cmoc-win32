@@ -7,10 +7,11 @@ unsigned char wherex(void)
     if (isvidram()) {
         result &= 31;
     } else {
+        struct _fontinfo* fi = _getfontinfo();
         result &= _horbyt - 1;
-        if (_conio.fontpack) {
+        if (fi->type) {
             result <<= 1;
-            if (_conio.fontbase & 128) {
+            if (fi->base & 128) {
                 result |= 1;
             }
         }

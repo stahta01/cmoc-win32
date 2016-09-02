@@ -2,6 +2,7 @@
 #include "_graph.h"
 
 _graph_t _graph;
+struct _fontinfo fontinfo;
 
 unsigned char _pset1_set[8] = {128, 64, 32, 16, 8, 4, 2, 1};
 unsigned char _pset1_clr[8] = {127, 191, 223, 239, 247, 251, 253, 254};

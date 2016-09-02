@@ -13,6 +13,7 @@ typedef struct {
 } _graph_t;
 
 extern _graph_t _graph;
+extern struct _fontinfo fontinfo;
 
 extern unsigned char _pset1_set[8];
 extern unsigned char _pset1_clr[8];

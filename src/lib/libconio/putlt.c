@@ -9,10 +9,12 @@ void putlt(void)
             _curpos = _VIDRAM;
         }
     }  else if (isgrpram()) {
-        if (_conio.fontpack) {
-            _conio.fontbase -= 128;
+        struct _fontinfo* fi = _getfontinfo();
+
+        if (fi->type) {
+            fi->base -= 128;
         }
-        if (!_conio.fontpack || _conio.fontbase & 128) {
+        if (!fi->type || fi->base & 128) {
             if (_curpos & (_horbyt - 1)) {
                 _curpos--;
             } else {

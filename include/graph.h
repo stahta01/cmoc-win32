@@ -38,22 +38,18 @@ struct textsettings {                   // structure for _gettextsettings
 };
 
 struct _fontinfo {                      // structure for _getfontinfo
-    int   type;
-    int   ascent;
-    int   pixwidth;
-    int   pixheight;
-    int   avgwidth;
-    char  filename[81];
-    char  facename[32];
+    unsigned char   type;               // 0=unpacked 1=packed
+    unsigned char   base;
+    unsigned char*  data;
 };
 
 
 // Video Setup and Query Functions
 
 int _setvideomode(int);
-int _setvideomoderows(int, int);
-struct videoconfig* _getvideoconfig(struct videoconfig*);
-int _grstatus(void);
+//int _setvideomoderows(int, int);
+//struct videoconfig* _getvideoconfig(struct videoconfig*);
+//int _grstatus(void);
 int _setactivepage(int);
 int _getactivepage(void);
 int _setvisualpage(int);
@@ -146,8 +142,8 @@ void _setcolor(int);
 int _getcolor(void);
 int _setbkcolor(int);
 int _getbkcolor(void);
-void _remappalette(int, long);
-int _remapallpalette(long*);
+//void _remappalette(int, long);
+//int _remapallpalette(long*);
 int _selectpalette(int);
 
 // Palette #0
@@ -197,10 +193,10 @@ void _arc(int x, int y, int w, int h, int s, int e);
 void _ellipse(int, int, int, int, int);
 void _pie(int, int, int, int, int, int, int, int, int);
 void _polygon(int, int, struct xycoord*);
-void _floodfill(int, int, int);
+//void _floodfill(int, int, int);
 void _setpixel(int, int);
 int _getpixel(int, int);
-void _getarcinfo(struct xycoord*, struct xycoord*, struct xycoord*);
+//void _getarcinfo(struct xycoord*, struct xycoord*, struct xycoord*);
 
 // Position Determination Functions
 
@@ -238,8 +234,8 @@ void _clearscreen(int);
 void _setviewport(int, int, int, int);
 void _setcliprgn(int, int, int, int);
 void _getcliprgn(int*, int*, int*, int*);
-int _displaycursor(int);
-int _wrapon(int);
+//int _displaycursor(int);
+//int _wrapon(int);
 
 #define _GCLEARSCREEN   0
 #define _GVIEWPORT      1
@@ -258,13 +254,13 @@ enum {                                  // text wrapping
 
 // Graphics Text Manipulation Functions and Constants
 
-struct textsettings* _gettextsettings(struct textsettings*);
-void _gettextextent(int, int, char*, struct xycoord*, struct xycoord*);
-void _setcharsize(int, int);
-void _settextalign(int, int);
-void _settextpath(int);
-void _settextorient(int, int);
-void _setcharspacing(int);
+//struct textsettings* _gettextsettings(struct textsettings*);
+//void _gettextextent(int, int, char*, struct xycoord*, struct xycoord*);
+//void _setcharsize(int, int);
+//void _settextalign(int, int);
+//void _settextpath(int);
+//void _settextorient(int, int);
+//void _setcharspacing(int);
 int _grtext(int, int, char*);
 
 enum {                                  // horizontal alignment
@@ -285,31 +281,34 @@ enum {                                  // text path
 #define _GSCROLLDOWN    (-1)
 #define _MAXTEXTROWS    (-1)
 
-void _settextwindow(int, int, int, int);
+//void _settextwindow(int, int, int, int);
+void _outchar(int);
 void _outtext(char*);
-int _settextcolor(int);
-int _gettextcolor(void);
+//int _settextcolor(int);
+//int _gettextcolor(void);
 //struct rccoord _settextposition(int, int);
 //struct rccoord _gettextposition(void);
 void _scrolltextwindow(int);
-void _gettextwindow(int*, int*, int*, int*);
-int _gettextcursor(void);
-int _settextcursor(int);
-void _outmem(unsigned char*, int);
-int _settextrows(int);
+//void _gettextwindow(int*, int*, int*, int*);
+//int _gettextcursor(void);
+//int _settextcursor(int);
+//void _outmem(unsigned char*, int);
+//int _settextrows(int);
 
 // Image Manipulation Functions
 
-void _getimage(int, int, int, int, char*);
-void _putimage(int, int, char*, int);
-long _imagesize(int, int, int, int);
+//void _getimage(int, int, int, int, char*);
+//void _putimage(int, int, char*, int);
+//long _imagesize(int, int, int, int);
 
 // Font Manipulation Functions
 
-int _registerfonts(char*);
-void _unregisterfonts(void);
-int _setfont(char*);
-int _getfontinfo(struct _fontinfo*);
+//int _registerfonts(char*);
+//void _unregisterfonts(void);
+void _setcharset(int type, int base, unsigned char* data);
+
+//int _setfont(char*);
+struct _fontinfo* _getfontinfo(void);
 void _outgtext(char*);
 int _getgtextextent(char*);
 //struct xycoord _setgtextvector(int, int);
