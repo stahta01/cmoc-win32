@@ -425,6 +425,7 @@ begin
   StringDynArrayAppendLib(A, '6809');
   StringDynArrayAppendLib(A, 'basic');
   StringDynArrayAppendLib(A, 'charset');
+  StringDynArrayAppendLib(A, 'graph');
   StringDynArrayAppendLib(A, 'conio');
   StringDynArrayAppendLib(A, 'unistd');
   StringDynArrayAppendLib(A, 'ctype');

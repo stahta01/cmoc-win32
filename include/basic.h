@@ -24,19 +24,6 @@
 #define COLOR_MAGENTA     7
 #define COLOR_ORANGE      8
 
-typedef struct {
-    int x1;
-    int y1;
-    int x2;
-    int y2;
-} TRECT;
-
-typedef struct {
-    TRECT pclip, clip;
-} _basic_t;
-
-extern _basic_t _basic;
-
 // Color BASIC
 
 int ABS(int numeric);

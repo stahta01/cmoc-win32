@@ -3,61 +3,61 @@
 #define _GRAPH_H
 
 struct xycoord {                        // structure for pixel position
-    short   xcoord;
-    short   ycoord;
+    int   xcoord;
+    int   ycoord;
 };
 
 struct rccoord {                        // structure for text position
-    short   row;
-    short   col;
+    int   row;
+    int   col;
 };
 
 struct videoconfig {                    // structure for _getvideoconfig
-    short   numxpixels;
-    short   numypixels;
-    short   numtextcols;
-    short   numtextrows;
-    short   numcolors;
-    short   bitsperpixel;
-    short   numvideopages;
-    short   mode;
-    short   adapter;
-    short   monitor;
-    short   memory;
+    int   numxpixels;
+    int   numypixels;
+    int   numtextcols;
+    int   numtextrows;
+    int   numcolors;
+    int   bitsperpixel;
+    int   numvideopages;
+    int   mode;
+    int   adapter;
+    int   monitor;
+    int   memory;
 };
 
 struct textsettings {                   // structure for _gettextsettings
-    short   basevectorx;
-    short   basevectory;
-    short   txpath;
-    short   height;
-    short   width;
-    short   spacing;
-    short   horizalign;
-    short   vertalign;
+    int   basevectorx;
+    int   basevectory;
+    int   txpath;
+    int   height;
+    int   width;
+    int   spacing;
+    int   horizalign;
+    int   vertalign;
 };
 
 struct _fontinfo {                      // structure for _getfontinfo
-    short   type;
-    short   ascent;
-    short   pixwidth;
-    short   pixheight;
-    short   avgwidth;
-    char    filename[81];
-    char    facename[32];
+    int   type;
+    int   ascent;
+    int   pixwidth;
+    int   pixheight;
+    int   avgwidth;
+    char  filename[81];
+    char  facename[32];
 };
 
 
 // Video Setup and Query Functions
 
-short _setvideomode(short);
-short _setvideomoderows(short, short);
+int _setvideomode(int);
+int _setvideomoderows(int, int);
 struct videoconfig* _getvideoconfig(struct videoconfig*);
-short _grstatus(void);
-short _setactivepage(short);
-short _getactivepage(void);
-short _setvisualpage(short);
-short _getvisualpage(void);
+int _grstatus(void);
+int _setactivepage(int);
+int _getactivepage(void);
+int _setvisualpage(int);
+int _getvisualpage(void);
 
 #define _MAXRESMODE     (-3)            // graphics mode with highest res.
 #define _MAXCOLORMODE   (-2)            // graphics mode with most colours
@@ -142,13 +142,13 @@ short _getvisualpage(void);
 
 // Colour Setting and Query Functions
 
-short _setcolor(short);
-short _getcolor(void);
-long _setbkcolor(long);
-long _getbkcolor(void);
-long _remappalette(short, long);
-short _remapallpalette(long*);
-short _selectpalette(short);
+void _setcolor(int);
+int _getcolor(void);
+void _setbkcolor(long);
+int _getbkcolor(void);
+void _remappalette(int, long);
+int _remapallpalette(long*);
+int _selectpalette(int);
 
 #define _BLACK          0x000000L
 #define _BLUE           0x2a0000L
@@ -170,33 +170,33 @@ short _selectpalette(short);
 
 // Shape and Curve Drawing Functions
 
-short _lineto(short, short);
-short _rectangle(short, short, short, short, short);
-short _rectangle_wxy(short, struct _wxycoord*, struct _wxycoord*);
-short _arc(short, short, short, short, short, short, short, short);
-short _arc_wxy(struct _wxycoord*, struct _wxycoord*, struct _wxycoord*, struct _wxycoord*);
+void _lineto(int, int);
+void _rectangle(int, int, int, int, int);
+void _rectangle_wxy(int, struct _wxycoord*, struct _wxycoord*);
+void _arc(int, int, int, int, int, int, int, int);
+void _arc_wxy(struct _wxycoord*, struct _wxycoord*, struct _wxycoord*, struct _wxycoord*);
 
-short _ellipse(short, short, short, short, short);
-short _ellipse_wxy(short, struct _wxycoord*, struct _wxycoord*);
-short _pie(short, short, short, short, short, short, short, short, short);
-short _pie_wxy(short, struct _wxycoord*, struct _wxycoord*, struct _wxycoord*, struct _wxycoord*);
-short _polygon(short, short, struct xycoord*);
-short _polygon_wxy(short, short, struct _wxycoord*);
-short _floodfill(short, short, short);
-short _setpixel(short, short);
-short _getpixel(short, short);
-short _getarcinfo(struct xycoord*, struct xycoord*, struct xycoord*);
+void _ellipse(int, int, int, int, int);
+void _ellipse_wxy(int, struct _wxycoord*, struct _wxycoord*);
+void _pie(int, int, int, int, int, int, int, int, int);
+void _pie_wxy(int, struct _wxycoord*, struct _wxycoord*, struct _wxycoord*, struct _wxycoord*);
+void _polygon(int, int, struct xycoord*);
+void _polygon_wxy(int, int, struct _wxycoord*);
+void _floodfill(int, int, int);
+void _setpixel(int, int);
+int _getpixel(int, int);
+void _getarcinfo(struct xycoord*, struct xycoord*, struct xycoord*);
 
 // Position Determination Functions
 
 //struct xycoord _getcurrentposition(void);
 //struct _wxycoord _getcurrentposition_w(void);
-//struct xycoord _getviewcoord(short, short);
+//struct xycoord _getviewcoord(int, int);
 //struct xycoord _getviewcoord_wxy(struct _wxycoord*);
-//struct xycoord _getphyscoord(short, short);
-//struct _wxycoord _getwindowcoord(short, short);
-//struct xycoord _moveto(short, short);
-//struct xycoord _setvieworg(short, short);
+//struct xycoord _getphyscoord(int, int);
+//struct _wxycoord _getwindowcoord(int, int);
+void _moveto(int, int);
+//struct xycoord _setvieworg(int, int);
 
 #define _getlogcoord    _getviewcoord   // for compatibility
 #define _setlogorg      _setvieworg
@@ -205,10 +205,10 @@ short _getarcinfo(struct xycoord*, struct xycoord*, struct xycoord*);
 
 void _setfillmask(unsigned char*);
 unsigned char* _getfillmask(unsigned char*);
-void _setlinestyle(unsigned short);
-unsigned short _getlinestyle(void);
-short _setplotaction(short);
-short _getplotaction(void);
+void _setlinestyle(unsigned int);
+unsigned int _getlinestyle(void);
+int _setplotaction(int);
+int _getplotaction(void);
 
 #define _setwritemode   _setplotaction  // for compatibility
 #define _getwritemode   _getplotaction
@@ -219,12 +219,12 @@ enum {                                  // plotting action
 
 // Screen Manipulation Functions
 
-void _clearscreen(short);
-void _setviewport(short, short, short, short);
-void _setcliprgn(short, short, short, short);
-void _getcliprgn(short*, short*, short*, short*);
-short _displaycursor(short);
-short _wrapon(short);
+void _clearscreen(int);
+void _setviewport(int, int, int, int);
+void _setcliprgn(int, int, int, int);
+void _getcliprgn(int*, int*, int*, int*);
+int _displaycursor(int);
+int _wrapon(int);
 
 #define _GCLEARSCREEN   0
 #define _GVIEWPORT      1
@@ -244,13 +244,13 @@ enum {                                  // text wrapping
 // Graphics Text Manipulation Functions and Constants
 
 struct textsettings* _gettextsettings(struct textsettings*);
-void _gettextextent(short, short, char*, struct xycoord*, struct xycoord*);
-void _setcharsize(short, short);
-void _settextalign(short, short);
-void _settextpath(short);
-void _settextorient(short, short);
-void _setcharspacing(short);
-short _grtext(short, short, char*);
+void _gettextextent(int, int, char*, struct xycoord*, struct xycoord*);
+void _setcharsize(int, int);
+void _settextalign(int, int);
+void _settextpath(int);
+void _settextorient(int, int);
+void _setcharspacing(int);
+int _grtext(int, int, char*);
 
 enum {                                  // horizontal alignment
     _NORMAL, _LEFT, _CENTER, _RIGHT
@@ -270,36 +270,36 @@ enum {                                  // text path
 #define _GSCROLLDOWN    (-1)
 #define _MAXTEXTROWS    (-1)
 
-void _settextwindow(short, short, short, short);
+void _settextwindow(int, int, int, int);
 void _outtext(char*);
-short _settextcolor(short);
-short _gettextcolor(void);
-//struct rccoord _settextposition(short, short);
+int _settextcolor(int);
+int _gettextcolor(void);
+//struct rccoord _settextposition(int, int);
 //struct rccoord _gettextposition(void);
-void _scrolltextwindow(short);
-void _gettextwindow(short*, short*, short*, short*);
-short _gettextcursor(void);
-short _settextcursor(short);
-void _outmem(unsigned char*, short);
-short _settextrows(short);
+void _scrolltextwindow(int);
+void _gettextwindow(int*, int*, int*, int*);
+int _gettextcursor(void);
+int _settextcursor(int);
+void _outmem(unsigned char*, int);
+int _settextrows(int);
 
 // Image Manipulation Functions
 
-void _getimage(short, short, short, short, char*);
+void _getimage(int, int, int, int, char*);
 void _getimage_wxy(struct _wxycoord*, struct _wxycoord*, char*);
-void _putimage(short, short, char*, short);
-long _imagesize(short, short, short, short);
+void _putimage(int, int, char*, int);
+long _imagesize(int, int, int, int);
 long _imagesize_wxy(struct _wxycoord*, struct _wxycoord*);
 
 // Font Manipulation Functions
 
-short _registerfonts(char*);
+int _registerfonts(char*);
 void _unregisterfonts(void);
-short _setfont(char*);
-short _getfontinfo(struct _fontinfo*);
+int _setfont(char*);
+int _getfontinfo(struct _fontinfo*);
 void _outgtext(char*);
-short _getgtextextent(char*);
-//struct xycoord _setgtextvector(short, short);
+int _getgtextextent(char*);
+//struct xycoord _setgtextvector(int, int);
 //struct xycoord _getgtextvector(void);
 
 #endif

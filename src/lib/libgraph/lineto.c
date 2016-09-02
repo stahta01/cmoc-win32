@@ -146,9 +146,9 @@ void _line(int x1, int y1, int x2, int y2, byte c)
     }
 }
 
-void _lineto(short x, short y)
+void _lineto(int x, int y)
 {
-    _line(_graph.curx, _graph.cury, x, y, 1);
+    _line(_graph.curx, _graph.cury, x, y, _graph.color);
     _graph.curx = x;
     _graph.cury = y;
 }

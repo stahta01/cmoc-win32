@@ -1,7 +1,7 @@
 
 #include "_graph.h"
 
-void _setpixel1(short x, short y, byte c)
+void _setpixel1(int x, int y, byte c)
 {
     if (_pmode < 4)  {
         x >>= 1;
