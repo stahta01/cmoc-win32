@@ -20,10 +20,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
-        <EditorIndex Value="-1"/>
         <TopLine Value="500"/>
         <CursorPos X="27" Y="525"/>
         <UsageCount Value="88"/>
+        <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="ucmocide.pas"/>
@@ -50,8 +50,9 @@
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="62"/>
-        <CursorPos X="13" Y="75"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="669"/>
+        <CursorPos X="80" Y="684"/>
         <UsageCount Value="29"/>
         <Loaded Value="True"/>
       </Unit4>

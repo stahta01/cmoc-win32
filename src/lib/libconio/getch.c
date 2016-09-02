@@ -18,7 +18,6 @@ int getch(void)
                 curxor = 64;
             } else {
                 struct _fontinfo* fi = _getfontinfo();
-
                 curpos += ((unsigned)_horbyt << 3) - _horbyt;
                 curchr = *curpos;
                 curxor = fi->type ? fi->base & 128 ? 0xF : 0xF0 : 0xFF;
