@@ -21,8 +21,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="24"/>
-        <CursorPos X="70" Y="31"/>
+        <TopLine Value="630"/>
+        <CursorPos X="12" Y="637"/>
         <UsageCount Value="87"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -51,10 +51,11 @@
       <Unit4>
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="662"/>
-        <CursorPos X="28" Y="675"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="62"/>
+        <CursorPos X="13" Y="75"/>
         <UsageCount Value="29"/>
+        <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="..\shared\ucmocparser.pas"/>
@@ -607,123 +608,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="517" Column="38" TopLine="512"/>
+        <Caret Line="346" Column="25" TopLine="329"/>
       </Position1>
       <Position2>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="475" Column="18" TopLine="461"/>
+        <Caret Line="335" Column="24" TopLine="329"/>
       </Position2>
       <Position3>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="475" Column="18" TopLine="440"/>
+        <Caret Line="346" Column="31" TopLine="335"/>
       </Position3>
       <Position4>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="484" Column="23" TopLine="475"/>
+        <Caret Line="857" Column="17" TopLine="847"/>
       </Position4>
       <Position5>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="485" Column="5" TopLine="477"/>
+        <Caret Line="29" Column="41" TopLine="19"/>
       </Position5>
       <Position6>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="188" Column="15" TopLine="182"/>
+        <Caret Line="857" Column="71" TopLine="845"/>
       </Position6>
       <Position7>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="506" Column="86" TopLine="490"/>
+        <Caret Line="851" Column="18" TopLine="847"/>
       </Position7>
       <Position8>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="505" Column="44" TopLine="490"/>
+        <Caret Line="632" Column="49" TopLine="623"/>
       </Position8>
       <Position9>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="150" Column="68" TopLine="142"/>
+        <Caret Line="346" Column="30" TopLine="335"/>
       </Position9>
       <Position10>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="613" Column="51" TopLine="607"/>
+        <Caret Line="853" Column="62" TopLine="847"/>
       </Position10>
       <Position11>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="614" Column="51" TopLine="608"/>
+        <Caret Line="638" Column="42" TopLine="623"/>
       </Position11>
       <Position12>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="615" Column="51" TopLine="609"/>
+        <Caret Line="341" Column="28" TopLine="329"/>
       </Position12>
       <Position13>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="360" Column="3" TopLine="358"/>
+        <Caret Line="690" Column="13" TopLine="674"/>
       </Position13>
       <Position14>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="837" Column="3" TopLine="830"/>
+        <Caret Line="693" Column="17" TopLine="674"/>
       </Position14>
       <Position15>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="375" Column="27" TopLine="368"/>
+        <Caret Line="694" Column="17" TopLine="675"/>
       </Position15>
       <Position16>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="838" Column="18" TopLine="830"/>
+        <Caret Line="695" Column="17" TopLine="676"/>
       </Position16>
       <Position17>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="660" Column="3" TopLine="610"/>
+        <Caret Line="696" Column="17" TopLine="677"/>
       </Position17>
       <Position18>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="561" Column="12" TopLine="550"/>
+        <Caret Line="697" Column="17" TopLine="678"/>
       </Position18>
       <Position19>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="841" Column="72" TopLine="826"/>
+        <Caret Line="700" Column="17" TopLine="681"/>
       </Position19>
       <Position20>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="374" Column="5" TopLine="371"/>
+        <Caret Line="701" Column="17" TopLine="682"/>
       </Position20>
       <Position21>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="31" Column="36" TopLine="10"/>
+        <Caret Line="702" Column="17" TopLine="683"/>
       </Position21>
       <Position22>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="844" Column="26" TopLine="832"/>
+        <Caret Line="703" Column="17" TopLine="684"/>
       </Position22>
       <Position23>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="850" Column="101" TopLine="832"/>
+        <Caret Line="704" Column="17" TopLine="685"/>
       </Position23>
       <Position24>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="847" Column="30" TopLine="835"/>
+        <Caret Line="706" Column="17" TopLine="687"/>
       </Position24>
       <Position25>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="842" Column="26" TopLine="837"/>
+        <Caret Line="186" Column="13" TopLine="176"/>
       </Position25>
       <Position26>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="849" Column="30" TopLine="833"/>
+        <Caret Line="220" Column="11" TopLine="207"/>
       </Position26>
       <Position27>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="847" Column="33" TopLine="839"/>
+        <Caret Line="342" Column="26" TopLine="329"/>
       </Position27>
       <Position28>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="844" Column="54" TopLine="836"/>
+        <Caret Line="343" Column="56" TopLine="329"/>
       </Position28>
       <Position29>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="856" Column="20" TopLine="843"/>
+        <Caret Line="344" Column="14" TopLine="338"/>
       </Position29>
       <Position30>
         <Filename Value="unitcmocide.pas"/>
-        <Caret Line="31" Column="70" TopLine="24"/>
+        <Caret Line="397" Column="85" TopLine="392"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

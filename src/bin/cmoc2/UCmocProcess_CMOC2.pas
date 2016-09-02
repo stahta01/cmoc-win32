@@ -71,7 +71,7 @@ begin
     FileExt_O: begin
       FDontLink := True;
     end;
-    FileExt_BIN, FileExt_A: begin
+    FileExt_BIN, FileExt_SREC, FileExt_RAW, FileExt_A, FileExt_WAV, FileExt_CAS: begin
     end else begin
       OCmoc.RaiseError('Unknown output file type', AFileName);
     end;
@@ -227,16 +227,40 @@ begin
 end;
 
 procedure CCmocProcess_CMOC2.DoLink;
+var
+  LFileExt, LTmpFile: TFileName;
+  LParams: TStringDynArray;
 begin
   if not FDontLink then begin
-    case ExtractFileExt(FOutFile) of
+    LFileExt := LowerCase(ExtractFileExt(FOutFile));
+    case LFileExt of
       FileExt_A: begin
         LWAR(Opt_Create1, FOutFile, FObjFiles);
       end;
+      FileExt_RAW: begin
+        LWLINK(FOutFile, FObjFiles, FTarget, FOrigin, Format_RAW);
+      end;
+      FileExt_SREC: begin
+        LWLINK(FOutFile, FObjFiles, FTarget, FOrigin, Format_SREC);
+      end;
+      FileExt_WAV, FileExt_CAS: begin
+        LTmpFile := OCmoc.FileNameTemp(FileExt_BIN);
+        try
+          LWLINK(LTmpFile, FObjFiles, FTarget, FOrigin, Format_DECB);
+          LParams := TStringDynArray.Create('-r', '-c',
+            '-o' + FOutFile, LTmpFile);
+          if SameText(LFileExt, FileExt_CAS) then begin
+            OCmoc.StringDynArrayInsert(LParams, 0, '-k');
+          end;
+          ExecuteTool('makewav', LParams);
+        finally
+          DeleteFile(LTmpFile);
+        end;
+      end;
       FileExt_BIN: begin
-        LWLINK(FOutFile, FObjFiles, FTarget, FOrigin);
+        LWLINK(FOutFile, FObjFiles, FTarget, FOrigin, Format_DECB);
       end else begin
-        OCmoc.RaiseError('Unable to link to file type', FOutFile);
+        OCmoc.RaiseError('Unable to output selected file type', FOutFile);
       end;
     end;
   end;

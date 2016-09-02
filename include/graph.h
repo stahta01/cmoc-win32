@@ -144,7 +144,7 @@ int _getvisualpage(void);
 
 void _setcolor(int);
 int _getcolor(void);
-void _setbkcolor(long);
+void _setbkcolor(int);
 int _getbkcolor(void);
 void _remappalette(int, long);
 int _remapallpalette(long*);

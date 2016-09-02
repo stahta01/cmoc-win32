@@ -1,5 +1,5 @@
 
-#pragma options -machine=cocous
+#pragma options -machine=cocous -f=decb
 
 #include <string.h>
 #include <conio.h>
@@ -7,6 +7,23 @@
 #include <charset.h>
 
 #include "image256x192.c"
+
+void mmm(void* ptr, char value, size_t n)
+{
+    asm {
+        ldy     n
+        beq     exitnow
+        ldx     ptr
+        beq     exitnow
+        loop:
+        lda     ,x
+        eora    value
+        sta     ,x+
+        leay    -1,y
+        bne     loop
+        exitnow:
+    }
+}
 
 int main(void)
 {
@@ -20,7 +37,7 @@ int main(void)
     if (s[2] == 'y' || s[2] == 'Y') {
         memcpy((void*)_beggrp, image256x192, sizeof(image256x192));
         for (i = 0; i < 4; i++) {
-            memxor((void*)_beggrp, 255, _endgrp - _beggrp);
+            mmm((void*)_beggrp, 255, _endgrp - _beggrp);
         }
         cputsxy(0, 22, "Yes, the CoCo just got sexy!\nWelcome to 2016 :-) ");
     } else {

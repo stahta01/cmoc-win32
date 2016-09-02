@@ -47,9 +47,13 @@ const
   FileExt_OBJ = '.obj';
   FileExt_C = '.c';
   FileExt_A = '.a';
+  FileExt_WAV = '.wav';
+  FileExt_CAS = '.cas';
   FileExt_BIN = '.bin';
   FileExt_ASM = '.asm';
   FileExt_EXE = '.exe';
+  FileExt_RAW = '.raw';
+  FileExt_SREC = '.srec';
 
   Tool_CMOC = 'cmoc';
   Tool_CMOC2 = 'cmoc2';
@@ -68,6 +72,9 @@ const
   Format_OBJ = 'obj';
   Format_RAW = 'raw';
   Format_DECB = 'decb';
+  Format_SREC = 'srec';
+  Format_WAV = 'wav';
+  Format_CAS = 'cas';
 
   Opt_ScriptFile2 = '-s';
   Opt_MapFile2 = '-m';

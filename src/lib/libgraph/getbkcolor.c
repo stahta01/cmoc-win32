@@ -3,6 +3,6 @@
 
 int _getbkcolor(void)
 {
-    return _graph.bkcolor;
+    return _bakcol;
 }
 

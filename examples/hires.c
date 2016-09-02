@@ -18,9 +18,6 @@ void DrawGraphics(void)
     MELLIPSE(128, 96, 70, 40, 3);
 }
 
-#define ROM_OFF() asm("orcc", "#$50"); asm("sta", "$ffdf");
-#define ROM_ON() asm("sta", "$ffde"); asm("andcc", "#$af");
-
 void DrawDemo(void)
 {
     MCLIP(2, 2, 128, 96);

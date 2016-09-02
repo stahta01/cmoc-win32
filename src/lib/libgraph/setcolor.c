@@ -3,6 +3,6 @@
 
 void _setcolor(int color)
 {
-    _graph.color = (byte)color;
+    _forcol = (byte)color;
 }
 

@@ -27,7 +27,7 @@ interface
 
 uses
   Classes, ComCtrls, Controls, Dialogs, ExtCtrls, FileUtil, Forms, Graphics,
-  LCLIntf, Menus, MouseAndKeyInput, process, StreamIO, SynEdit, SynHighlighterAny,
+  LCLIntf, Menus, MouseAndKeyInput, process, StreamIO, StrUtils, SynEdit, SynHighlighterAny,
   SysUtils, Types, UCmocIDE, UCmocRbs, UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
 
 type
@@ -189,7 +189,7 @@ type
     function FileNameSrc: TFileName;
     function FileNameSrcExists: TFileName;
     function FileNameObj: TFileName;
-    function FileNameBin: TFileName;
+    function FileNameOut: TFileName;
   strict private
     procedure CheckRoms;
   strict private
@@ -335,9 +335,23 @@ begin
   Result := ChangeFileExt(FileNameSrc, FileExt_O);
 end;
 
-function TFormCmocIDE.FileNameBin: TFileName;
+function TFormCmocIDE.FileNameOut: TFileName;
+var
+  LString: TFileName;
 begin
-  Result := ChangeFileExt(FileNameSrc, ExtensionSeparator + FTarget + FileExt_BIN);
+  LString := LowerCase(Trim(FOptions.Values[Opt_Format2]));
+  case LString of
+    Format_WAV, Format_CAS, Format_SREC: begin
+      LString := ExtensionSeparator + LString;
+    end;
+    Format_DECB: begin
+      LString := FileExt_BIN;
+    end else begin
+
+      OCmoc.RaiseError('Unknown output format', LString);
+    end;
+  end;
+  Result := ChangeFileExt(FileNameSrc, ExtensionSeparator + FTarget + LString);
 end;
 
 procedure TFormCmocIDE.MenuFileNewClick(ASender: TObject);
@@ -558,6 +572,9 @@ begin
   LOptions := default(string);
   OCmoc.SourcePragmas(nil, FormCmocIDESynEdit.SynEdit.Lines, FOrigin, FTarget, LOptions);
   FOptions.CommaText := LOptions;
+  if FOptions.IndexOfName(Opt_Format2) < 0 then begin
+    FOptions.Values[Opt_Format2] := Format_DECB;
+  end;
   if BeginProcess(FileNameObj, FileNameSrcExists) then begin
     ExecuteTool(Tool_CMOC2, [Opt_DontLink1, Opt_Output2, FileNameObj, Opt_Target2,
       FTarget, Opt_Origin2, IntToStr(FOrigin), FileNameSrc], False);
@@ -568,8 +585,8 @@ end;
 procedure TFormCmocIDE.MenuRunBuildClick(ASender: TObject);
 begin
   MenuRunCompile.Click;
-  if BeginProcess(FileNameBin, FileNameObj) then begin
-    ExecuteTool(Tool_CMOC2, [Opt_Output2, FileNameBin, Opt_Target2, FTarget,
+  if BeginProcess(FileNameOut, FileNameObj) then begin
+    ExecuteTool(Tool_CMOC2, [Opt_Output2, FileNameOut, Opt_Target2, FTarget,
       Opt_Origin2, IntToStr(FOrigin), FileNameObj], False);
     EndProcess('Build complete');
   end;
@@ -619,8 +636,11 @@ var
   LDecb: rawbytestring;
 begin
   if Length(AFileName) > 0 then begin
+    if not SameText(ExtractFileExt(AFileName), FileExt_BIN) then begin
+      OCmoc.RaiseError('Only bin (decb) files can be autoloaded by the emulator.');
+    end;
     LDecb := RbsLoadFromFile(AFileName);
-    LBinFile := GetTempDir(False) + 'cmocide.bin';
+    LBinFile := GetTempDir(False) + 'cmocide' + FileExt_BIN;
     RbsSaveToFile(RbsDecb(RbsVideo(
       UpperCase(Format('%-32s   BEG=$%.4x END=$%.4x LEN=$%.4x%s', [ExtractFileName(AFileName),
       RbsDecbBegin(LDecb), RbsDecbBegin(LDecb) + RbsDecbLength(LDecb),
@@ -669,7 +689,7 @@ begin
       end;
     end;
   end;
-  ExecuteEmulator(FileNameBin);
+  ExecuteEmulator(FileNameOut);
 end;
 
 procedure TFormCmocIDE.MenuEmulatorsClick(ASender: TObject);
@@ -841,11 +861,11 @@ var
   LRawBytes: rawbytestring;
 begin
   if OpenASM.Execute then begin
-    LSrc := GetTempDir(False) + 'wincmoc.d9asm.bin';
-    LDst := GetTempDir(False) + 'wincmoc.d9asm.asm';
+    LSrc := GetTempDir(False) + 'wincmoc.d9asm' + FileExt_BIN;
+    LDst := GetTempDir(False) + 'wincmoc.d9asm' + FileExt_ASM;
     LRawBytes := RbsLoadFromFile(OpenASM.FileName);
     LOrigin := 0;
-    if SameText(ExtractFileExt(OpenASM.FileName), FileExt_BIN) then begin
+    if AnsiMatchText(ExtractFileExt(OpenASM.FileName), [FileExt_BIN]) then begin
       if (Length(LRawBytes) > 5) and (RbsByte(LRawBytes, 0) = 0) then begin
         LOrigin := RbsWord(LRawBytes, 3);
         Delete(LRawBytes, 1, 5);

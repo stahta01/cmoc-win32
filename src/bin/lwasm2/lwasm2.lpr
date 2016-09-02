@@ -57,14 +57,14 @@ type
   begin
     LParams := default(TStringDynArray);
     for LIndex := 1 to ParamCount do begin
-      OCMOC.StringDynArrayAppend(LParams, ParamStr(LIndex));
+      OCmoc.StringDynArrayAppend(LParams, ParamStr(LIndex));
     end;
     if Length(LParams) = 0 then begin
-      OCMOC.StringDynArrayAppend(LParams, Opt_Help1);
+      OCmoc.StringDynArrayAppend(LParams, Opt_Help1);
     end else if FileExists(LParams[High(LParams)]) then begin
-      LSrc := OCMOC.DosToUnix(LParams[High(LParams)]);
+      LSrc := OCmoc.DosToUnix(LParams[High(LParams)]);
       LParams[High(LParams)] := LSrc + FileExt_I;
-      //if OCMOC.FileChanged(LParams[High(LParams)], LSrc) then begin
+      //if OCmoc.FileChanged(LParams[High(LParams)], LSrc) then begin
       ExecuteTool(Tool_MCPP, TStringDynArray.Create('-a', '-P',
         '-W', '0', Opt_Output2, LParams[High(LParams)], Opt_Define2, 'DAT=PCR', LSrc));
       //end;

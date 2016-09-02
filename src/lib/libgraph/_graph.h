@@ -9,7 +9,6 @@
 typedef struct {
     int curx, cury;
     int clipx1, clipy1, clipx2, clipy2;
-    unsigned char color, bkcolor;
 } _graph_t;
 
 extern _graph_t _graph;
