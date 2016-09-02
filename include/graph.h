@@ -172,16 +172,12 @@ int _selectpalette(int);
 
 void _lineto(int, int);
 void _rectangle(int, int, int, int, int);
-void _rectangle_wxy(int, struct _wxycoord*, struct _wxycoord*);
-void _arc(int, int, int, int, int, int, int, int);
-void _arc_wxy(struct _wxycoord*, struct _wxycoord*, struct _wxycoord*, struct _wxycoord*);
+//void _arc(int, int, int, int, int, int, int, int); // WATCOM Version
+void _arc(int x, int y, int w, int h, int s, int e);
 
 void _ellipse(int, int, int, int, int);
-void _ellipse_wxy(int, struct _wxycoord*, struct _wxycoord*);
 void _pie(int, int, int, int, int, int, int, int, int);
-void _pie_wxy(int, struct _wxycoord*, struct _wxycoord*, struct _wxycoord*, struct _wxycoord*);
 void _polygon(int, int, struct xycoord*);
-void _polygon_wxy(int, int, struct _wxycoord*);
 void _floodfill(int, int, int);
 void _setpixel(int, int);
 int _getpixel(int, int);
@@ -286,10 +282,8 @@ int _settextrows(int);
 // Image Manipulation Functions
 
 void _getimage(int, int, int, int, char*);
-void _getimage_wxy(struct _wxycoord*, struct _wxycoord*, char*);
 void _putimage(int, int, char*, int);
 long _imagesize(int, int, int, int);
-long _imagesize_wxy(struct _wxycoord*, struct _wxycoord*);
 
 // Font Manipulation Functions
 
