@@ -1,5 +1,5 @@
 
-#include <conio.h>
+#include "_conio.h"
 
 void cvlinexy(unsigned char x, unsigned char y, unsigned char length)
 {

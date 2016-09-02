@@ -14,5 +14,6 @@ unsigned char _pset2_set[4][4] = {
 };
 
 unsigned char _pset2_clr[4] = {0x3F, 0xCF, 0xF3, 0xFC};
+unsigned char _pset2_all[4] = {0x00, 0x55, 0xAA, 0xFF};
 
 

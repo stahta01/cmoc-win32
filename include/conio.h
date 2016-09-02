@@ -152,18 +152,6 @@ int ungetch(int c);
 
 extern int ungetch_buf;
 
-typedef struct {
-    unsigned char cursor;
-    unsigned char revers;
-    unsigned char bordercolor;
-    unsigned char bgcolor;
-    unsigned char fontbase;
-    unsigned char fontpack;
-    unsigned char* fontdata;
-} _conio_t;
-
-extern _conio_t _conio;
-
 void putdn(void);
 void putup(void);
 void putlt(void);

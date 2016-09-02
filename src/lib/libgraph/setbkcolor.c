@@ -1,8 +1,10 @@
 
 #include "_graph.h"
 
-void _setbkcolor(int bkcolor)
+int _setbkcolor(int bkcolor)
 {
+    int result = _bakcol;
     _bakcol = (unsigned char)bkcolor;
+    return result;
 }
 

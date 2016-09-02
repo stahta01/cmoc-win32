@@ -4,7 +4,9 @@
 #include <string.h>
 #include <conio.h>
 #include <equates.h>
+#include <stdlib.h>
 #include <charset.h>
+#include <graph.h>
 
 #include "image256x192.c"
 
@@ -29,7 +31,7 @@ int main(void)
 {
     int i;
     char s[4];
-    bgcolor(1);
+    bgcolor(3);
     textmode2(MODE_H1_32X24, charset_c64);
     cputs("Are you 18 years or older? ");
     s[0] = sizeof(s) - 2;

@@ -87,7 +87,5 @@ char* stpcpy(char* dest, char* src);
 // Map an operating system error number to an error message.
 char* _stroserror(unsigned char errcode);
 
-void memcpy_fast(void* dst, void* src, size_t n);
-
 #endif
 

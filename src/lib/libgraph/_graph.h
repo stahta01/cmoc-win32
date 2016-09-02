@@ -2,6 +2,7 @@
 #include <graph.h>
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
 #include <motorola.h>
 #include <equates.h>
 #include <fixpt.h>
@@ -17,6 +18,7 @@ extern unsigned char _pset1_set[8];
 extern unsigned char _pset1_clr[8];
 extern unsigned char _pset2_set[4][4];
 extern unsigned char _pset2_clr[4];
+extern unsigned char _pset2_all[4];
 
 void _setpixel1(int x, int y, unsigned char c);
 void _setpixel2(int x, int y, unsigned char c);

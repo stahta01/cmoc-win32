@@ -1,5 +1,5 @@
 
-#include <conio.h>
+#include "_conio.h"
 
 void delay(int ms)
 {

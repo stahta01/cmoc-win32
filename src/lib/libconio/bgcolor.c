@@ -3,8 +3,6 @@
 
 unsigned char bgcolor(unsigned char color)
 {
-    unsigned char result = _conio.bgcolor;
-    _conio.bgcolor = color;
-    return result;
+    return (unsigned char)_setbkcolor(color);
 }
 

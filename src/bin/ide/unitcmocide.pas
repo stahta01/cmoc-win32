@@ -26,8 +26,8 @@ unit UnitCmocIDE;
 interface
 
 uses
-  Classes, ComCtrls, Controls, Dialogs, ExtCtrls, FileUtil, Forms, Graphics,
-  LCLIntf, Menus, MouseAndKeyInput, process, StreamIO, StrUtils, SynEdit, SynHighlighterAny,
+  Classes, ComCtrls, Controls, Dialogs, ExtCtrls, FileUtil, Forms, Graphics, LCLIntf, Math,
+  Menus, MouseAndKeyInput, process, StreamIO, StrUtils, SynEdit, SynHighlighterAny,
   SysUtils, Types, UCmocIDE, UCmocRbs, UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
 
 type
@@ -521,10 +521,13 @@ begin
         try
           LoadFromFile(LTmpFile);
           FormCmocIDESynEdit.SynEdit._ChangeText(Text);
-          FormCmocIDESynEdit.SynEdit._SetCaretYCentered(FormCmocIDESynEdit.SynEdit.TopLine +
-            (FormCmocIDESynEdit.SynEdit.LinesInWindow div 2));
         finally
           Free;
+        end;
+      end;
+      with FormCmocIDESynEdit.SynEdit do begin
+        if not InRange(CaretY, TopLine, TopLine + LinesInWindow) then begin
+          _SetCaretYCentered(TopLine + (LinesInWindow div 2));
         end;
       end;
     finally

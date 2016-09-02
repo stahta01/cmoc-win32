@@ -1,5 +1,5 @@
 
-#include <conio.h>
+#include "_conio.h"
 
 void cclearxy(unsigned char x, unsigned char y, unsigned char length)
 {

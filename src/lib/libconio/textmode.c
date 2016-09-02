@@ -1,7 +1,5 @@
 
 #include "_conio.h"
-#include <stdlib.h>
-#include <charset.h>
 
 // textmode() refers to two charset's. Therefore, they both will be linked into your
 // binary. If you only need one, use textmode2(), but, you need to provide the

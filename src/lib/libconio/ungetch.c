@@ -1,5 +1,5 @@
 
-#include <conio.h>
+#include "_conio.h"
 
 int ungetch_buf = 0;
 

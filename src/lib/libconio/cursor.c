@@ -1,5 +1,5 @@
 
-#include <conio.h>
+#include "_conio.h"
 
 unsigned char cursor(unsigned char onoff)
 {

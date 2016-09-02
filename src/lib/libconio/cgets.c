@@ -1,8 +1,5 @@
 
-#include <conio.h>
-#include <string.h>
-#include <ctype.h>
-#include <equates.h>
+#include "_conio.h"
 
 /*
 cgets reads a string of characters from the console, storing the string (and the string length)

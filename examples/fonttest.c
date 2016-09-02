@@ -35,7 +35,7 @@ int main(void)
 
         for (unsigned i = 0; i < 1024; i += 8) {
             beep((char)i, 0);
-            gotox((char)((fxsin(i) >> 5) + (w >> 1)));
+            gotox((char)((fxsin((char)i) >> 5) + (w >> 1)));
             cputs("*<>*\n");
         }
         clrscr();

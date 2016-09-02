@@ -1,5 +1,5 @@
 
-#include <conio.h>
+#include "_conio.h"
 
 void cputcxy(unsigned char x, unsigned char y, int c)
 {

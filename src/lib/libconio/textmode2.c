@@ -1,9 +1,10 @@
 
 #include "_conio.h"
-#include <stdlib.h>
 
 void textmode2(int newmode, unsigned char* fontdata)
 {
+    int color = _getbkcolor();
+
     system(newmode & 1 ? "SCREEN0,1" : "SCREEN0,0");
 
     switch (newmode) {
@@ -60,6 +61,7 @@ void textmode2(int newmode, unsigned char* fontdata)
         _conio.fontdata = fontdata;
         break;
     }
+    _setbkcolor(color);
     clrscr();
 }
 

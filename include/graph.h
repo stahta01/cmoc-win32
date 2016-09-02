@@ -144,16 +144,34 @@ int _getvisualpage(void);
 
 void _setcolor(int);
 int _getcolor(void);
-void _setbkcolor(int);
+int _setbkcolor(int);
 int _getbkcolor(void);
 void _remappalette(int, long);
 int _remapallpalette(long*);
 int _selectpalette(int);
 
-#define _BLACK          0x000000L
-#define _BLUE           0x2a0000L
-#define _GREEN          0x002a00L
-#define _CYAN           0x2a2a00L
+// Palette #0
+
+#define P0_GREEN        0
+#define P0_YELLOW       1
+#define P0_BLUE         2
+#define P0_RED          3
+
+// Palette #1
+
+#define P1_BUFF         0
+#define P1_CYAN         1
+#define P1_MAGENTA      2
+#define P1_ORANGE       3
+
+// Palette #2
+
+#define P2_BLACK        0
+#define P2_BLUE         1
+#define P2_ORANGE       2
+#define P2_WHITE        3
+
+/*
 #define _RED            0x00002aL
 #define _MAGENTA        0x2a002aL
 #define _BROWN          0x00152aL
@@ -167,6 +185,7 @@ int _selectpalette(int);
 #define _YELLOW         0x153f3fL
 #define _BRIGHTWHITE    0x3f3f3fL
 #define _LIGHTYELLOW    _YELLOW
+*/
 
 // Shape and Curve Drawing Functions
 
