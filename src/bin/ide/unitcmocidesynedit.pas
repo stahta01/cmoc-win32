@@ -99,6 +99,18 @@ begin
     LineHighlightColor.Background := $E6FFFA;
     OnStatusChange := @SynEditStatusChange;
   end;
+  try
+    SynAnySyn.KeyWords.LoadFromFile(ProgramDirectory + 'cmocide/keywords.txt');
+  except
+  end;
+  try
+    SynAnySyn.Constants.LoadFromFile(ProgramDirectory + 'cmocide/constants.txt');
+  except
+  end;
+  try
+    SynAnySyn.Objects.LoadFromFile(ProgramDirectory + 'cmocide/objects.txt');
+  except
+  end;
 end;
 
 procedure TFormCmocIDESynEdit.MenuCopyClick(ASender: TObject);

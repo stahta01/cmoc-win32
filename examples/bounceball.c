@@ -4,6 +4,7 @@
 #include <basic.h>
 #include <unistd.h>
 #include <math.h>
+#include <fixpt.h>
 
 void ClearBoard(void)
 {
@@ -20,8 +21,8 @@ void ClearBoard(void)
 
 void PlayGame(void)
 {
-    int ball_x = _i2f(31), ball_xx = 150;
-    int ball_y = _i2f(16), ball_yy = 150;
+    int ball_x = i2f(31), ball_xx = 150;
+    int ball_y = i2f(16), ball_yy = 150;
     byte ball_sx = (byte)_f2i(ball_x);
     byte ball_sy = (byte)_f2i(ball_y);
 

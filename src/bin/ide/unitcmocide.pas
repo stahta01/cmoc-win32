@@ -113,6 +113,8 @@ type
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     MenuEmulatorsCoCo2: TMenuItem;
+    MenuToolsSep2: TMenuItem;
+    MenuToolsDisassemble: TMenuItem;
     MenuToolsOpenDisk0: TMenuItem;
     MenuItem4: TMenuItem;
     MenuToolsOpenDisk1: TMenuItem;
@@ -129,6 +131,7 @@ type
     MenuRunSep1: TMenuItem;
     MenuRunSyntaxCheck: TMenuItem;
     OpenDialog: TOpenDialog;
+    OpenASM: TOpenDialog;
     Process: TProcess;
     SaveDialog: TSaveDialog;
     SplitterBottom: TSplitter;
@@ -166,6 +169,7 @@ type
     procedure MenuFileOpenInNewWindowClick(ASender: TObject);
     procedure MenuEditUppercaseSelectionClick(ASender: TObject);
     procedure MenuHelpOpenRomFolderClick(ASender: TObject);
+    procedure MenuToolsDisassembleClick(Sender: TObject);
     procedure MenuRunCompileClick(ASender: TObject);
     procedure MenuRunBuildAndRunClick(ASender: TObject);
     procedure MenuEmulatorsClick(ASender: TObject);
@@ -193,7 +197,7 @@ type
     procedure ExecuteEmulator(AFileName: TFileName);
     function Execute(const AExecutable: string; const AParameters: array of string;
       const AExternal: boolean): integer;
-    function RunTool(const ATool: string; const AParameters: array of string;
+    function ExecuteTool(const ATool: string; const AParameters: array of string;
       const AExternal: boolean): integer;
   strict private
     function BeginProcess(const ADst, ASrc: TFileName): boolean;
@@ -349,7 +353,7 @@ end;
 
 procedure TFormCmocIDE.MenuFileNewWindowClick(ASender: TObject);
 begin
-  RunTool('cmocide', ['-nocode', '-nomaximize'], True);
+  ExecuteTool('cmocide', ['-nocode', '-nomaximize'], True);
 end;
 
 procedure TFormCmocIDE.MenuFileOpenClick(ASender: TObject);
@@ -368,7 +372,7 @@ end;
 procedure TFormCmocIDE.MenuFileOpenInNewWindowClick(ASender: TObject);
 begin
   if OpenDialog.Execute then begin
-    RunTool('cmocide', ['-nomaximize', OpenDialog.FileName], True);
+    ExecuteTool('cmocide', ['-nomaximize', OpenDialog.FileName], True);
   end else begin
     Abort;
   end;
@@ -477,7 +481,7 @@ begin
   end;
 end;
 
-function TFormCmocIDE.RunTool(const ATool: string; const AParameters: array of string;
+function TFormCmocIDE.ExecuteTool(const ATool: string; const AParameters: array of string;
   const AExternal: boolean): integer;
 begin
   Result := Execute(OCmoc.PathToBin + ATool + FileExt_EXE, AParameters, AExternal);
@@ -539,7 +543,7 @@ end;
 procedure TFormCmocIDE.MenuRunSyntaxCheckClick(ASender: TObject);
 begin
   if BeginProcess(EmptyStr, FileNameSrcExists) then begin
-    RunTool(Tool_CMOC2, [Opt_DontAssemble1, FileNameSrc], False);
+    ExecuteTool(Tool_CMOC2, [Opt_DontAssemble1, FileNameSrc], False);
     EndProcess('No syntax error were found');
   end;
 end;
@@ -555,7 +559,7 @@ begin
   OCmoc.SourcePragmas(nil, FormCmocIDESynEdit.SynEdit.Lines, FOrigin, FTarget, LOptions);
   FOptions.CommaText := LOptions;
   if BeginProcess(FileNameObj, FileNameSrcExists) then begin
-    RunTool(Tool_CMOC2, [Opt_DontLink1, Opt_Output2, FileNameObj, Opt_Target2,
+    ExecuteTool(Tool_CMOC2, [Opt_DontLink1, Opt_Output2, FileNameObj, Opt_Target2,
       FTarget, Opt_Origin2, IntToStr(FOrigin), FileNameSrc], False);
     EndProcess('Compilation complete');
   end;
@@ -565,7 +569,7 @@ procedure TFormCmocIDE.MenuRunBuildClick(ASender: TObject);
 begin
   MenuRunCompile.Click;
   if BeginProcess(FileNameBin, FileNameObj) then begin
-    RunTool(Tool_CMOC2, [Opt_Output2, FileNameBin, Opt_Target2, FTarget,
+    ExecuteTool(Tool_CMOC2, [Opt_Output2, FileNameBin, Opt_Target2, FTarget,
       Opt_Origin2, IntToStr(FOrigin), FileNameObj], False);
     EndProcess('Build complete');
   end;
@@ -701,7 +705,7 @@ end;
 
 procedure TFormCmocIDE.MenuToolsMessImageToolClick(ASender: TObject);
 begin
-  RunTool('wimgtool', [OCmoc.FileNameTranslate((ASender as TMenuItem).Hint)], True);
+  ExecuteTool('wimgtool', [OCmoc.FileNameTranslate((ASender as TMenuItem).Hint)], True);
 end;
 
 procedure TFormCmocIDE.MenuFileExitClick(ASender: TObject);
@@ -827,6 +831,37 @@ end;
 procedure TFormCmocIDE.MenuHelpOpenRomFolderClick(ASender: TObject);
 begin
   OpenBrowser(OCmoc.PathToXroarRoms);
+end;
+
+procedure TFormCmocIDE.MenuToolsDisassembleClick(Sender: TObject);
+var
+  LOrigin: cardinal;
+  LSrc, LDst: TFileName;
+  LString: string;
+  LRawBytes: rawbytestring;
+begin
+  if OpenASM.Execute then begin
+    LSrc := GetTempDir(False) + 'wincmoc.d9asm.bin';
+    LDst := GetTempDir(False) + 'wincmoc.d9asm.asm';
+    LRawBytes := RbsLoadFromFile(OpenASM.FileName);
+    LOrigin := 0;
+    if SameText(ExtractFileExt(OpenASM.FileName), FileExt_BIN) then begin
+      if (Length(LRawBytes) > 5) and (RbsByte(LRawBytes, 0) = 0) then begin
+        LOrigin := RbsWord(LRawBytes, 3);
+        Delete(LRawBytes, 1, 5);
+      end;
+    end;
+    if LOrigin = 0 then begin
+      LString := '$8000';
+      if InputQuery('Disassemble ' + OCmoc.StringQuoted(ExtractFileName(OpenASM.FileName)),
+        'Enter a binary offset for this disassembly.', LString) then begin
+        LOrigin := OCmoc.StringToInteger(LString);
+      end;
+    end;
+    RbsSaveToFile(LRawBytes, LSrc);
+    ExecuteTool('f9dasm', ['-offset', IntToHex(LOrigin, 4), '-noaddr', '-out', LDst, LSrc], False);
+    ExecuteTool('cmocide', [LDst], True);
+  end;
 end;
 
 procedure TFormCmocIDE.MenuEditLowercaseSelectionClick(ASender: TObject);

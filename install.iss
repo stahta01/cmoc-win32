@@ -30,6 +30,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "bin\*.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\console.bat"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\cmocide\*.txt"; DestDir: "{app}\bin\cmocide"; Flags: ignoreversion onlyifdoesntexist
 
 Source: "lib\*.a"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "lib\*.o"; DestDir: "{app}\lib"; Flags: ignoreversion
