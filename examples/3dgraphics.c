@@ -44,103 +44,42 @@ void matscale(defmat3(m), char x, char y, char z)
 void matrotx(defmat3(m), char a)
 {
     matident(m);
-    m[1][1] = (m[2][2] = (char)fxcos(a));
-    m[1][2] = - (m[2][1] = (char)fxsin(a));
+    m[1][1] = (m[2][2] = fxcos(a));
+    m[1][2] = - (m[2][1] = fxsin(a));
 }
 
 void matroty(defmat3(m), char a)
 {
     matident(m);
-    m[0][0] = (m[2][2] = (char)fxcos(a));
-    m[0][2] = - (m[2][0] = (char)fxsin(a));
+    m[0][0] = (m[2][2] = fxcos(a));
+    m[0][2] = - (m[2][0] = fxsin(a));
 }
 
 void matrotz(defmat3(m), char a)
 {
     matident(m);
-    m[0][0] = (m[1][1] = (char)fxcos(a));
-    m[0][1] = - (m[1][0] = (char)fxsin(a));
-}
-
-#define asm_dot() asm{ lda ,y+} asm{ ldb ,s+} asm{ mul} asm{ addd ,x} asm{ std ,x}
-
-void test(int* dst, char* src, char* mat)
-{
-    int stack;
-    asm {
-        sts     stack
-        ldx     dst
-        ldy     src
-        lds     mat
-        clra
-        clrb
-        std     ,x
-    }
-    asm_dot();
-    asm_dot();
-    asm_dot();
-    asm {
-        leax    2,x
-        ldy     src
-    }
-    asm_dot();
-    asm_dot();
-    asm_dot();
-    asm {
-        leax    2,x
-        ldy     src
-    }
-    asm_dot();
-    asm_dot();
-    asm_dot();
-    asm {
-        lds    stack
-    }
-}
-
-void testing(void)
-{
-    char s[3];
-    char m[3][3];
-    int d[3];
-
-    s[0] = 1;
-    s[1] = 2;
-    s[2] = 3;
-
-    m[0][0] = 10;
-    m[0][1] = 20;
-    m[0][2] = 30;
-    // (1 * 10) + (2 * 20) = 50
-
-    test(d, s, m[0]);
-
-    printf("%d\n", d[0]);
+    m[0][0] = (m[1][1] = fxcos(a));
+    m[0][1] = - (m[1][0] = fxsin(a));
 }
 
 int main(void)
 {
-    defmat3(m);
+    defmat3(mat);
     defvec3(v1);
-    defvec3(v2);
-
-    //testing();
-    //return 0;
+    int v2[3];
 
     system("PMODE4,1");
     system("SCREEN1,1");
     system("PCLS");
 
-    char x = 10, y = 20;
-    printf("%d\n", x * y);
-
     for (int a = 0; a < 256; a++) {
-        matrotz(m, (char)a);
-        vec3set(v1, 64, 64, 0);
-        v2[0] = f2i((int)v1[0]*m[0][0]) + f2i((int)v1[1]*m[0][1]) + f2i((int)v1[2]*m[0][2]);
-        v2[1] = f2i((int)v1[0]*m[1][0]) + f2i((int)v1[1]*m[1][1]) + f2i((int)v1[2]*m[1][2]);
-        v2[2] = f2i((int)v1[0]*m[2][0]) + f2i((int)v1[1]*m[2][1]) + f2i((int)v1[2]*m[2][2]);
-        MSET(128 + (v2[0] >> 1), 96 + (v2[1] >> 1), 1);
+        matrotz(mat, (char)a);
+        char* m = &mat[0][0];
+        vec3set(v1, 0, 64, 0);
+        v2[0]=(int)v1[0]*m[0]+(int)v1[1]*m[1]+(int)v1[2]*m[2];
+        v2[1]=(int)v1[0]*m[4]+(int)v1[1]*m[5]+(int)v1[2]*m[6];
+        v2[2]=(int)v1[0]*m[8]+(int)v1[1]*m[9]+(int)v1[2]*m[10];
+        MSET(128 - (v2[0] >> 8), 96 - (v2[1] >> 8), 1);
     }
     return 0;
 }

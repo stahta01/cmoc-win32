@@ -9,7 +9,7 @@ int main(void)
     MCLIP(0, 0, 256, 192);
     cprintf("Saving graphics to disk\n");
     MELLIPSE(128,96, 100, 50, 0);
-    SAVEM("PICTURE.IMG", (void*)_beggrp, (void*)_endgrp, 0);
+    SAVEM("PICTURE.IMG", (void*)_beggrp, (void*)_endgrp - 1, 0);
     PCLS(0);
     LOADM("PICTURE.IMG", 0);
     cprintf("\n\nGraphics loaded\n");
