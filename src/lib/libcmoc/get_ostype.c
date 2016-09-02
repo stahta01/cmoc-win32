@@ -16,8 +16,8 @@
 unsigned char get_ostype(void)
 {
     unsigned char ostype = 0;
-    char* bas = 0xa147; // Color Basic Copyright Message
-    char* ext = 0x80e8; // Extended Color Basic Copyright Message
+    char* bas = 0xa147;                 // Color Basic Copyright Message
+    char* ext = 0x80e8;                 // Extended Color Basic Copyright Message
 
     if (bas[0] == 'C' && bas[1] == 'O') {
         if (ext[0] == 'E' && ext[1] == 'X' && ext[21] == '2') {

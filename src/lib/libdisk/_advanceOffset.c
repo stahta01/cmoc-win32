@@ -18,4 +18,3 @@ void _advanceOffset(struct FileDesc* fd, word numBytes)
     }
 }
 
-

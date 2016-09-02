@@ -94,6 +94,7 @@ void adddww(unsigned* twoWords, unsigned term);
 //
 byte sub32(word* hi, word h, word l);
 
-#endif // _CMOC_H
+sbyte dwcompare(word* a, word* b);
 
+#endif
 

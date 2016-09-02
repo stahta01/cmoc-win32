@@ -32,29 +32,13 @@
 /*                                                                           */
 /*****************************************************************************/
 
-
-
 #ifndef _PEEKPOKE_H
 #define _PEEKPOKE_H
-
-
-
-/*****************************************************************************/
-/*                                  Macros                                   */
-/*****************************************************************************/
-
-
 
 #define POKE(addr,val)     (*(unsigned char*) (addr) = (val))
 #define POKEW(addr,val)    (*(unsigned*) (addr) = (val))
 #define PEEK(addr)         (*(unsigned char*) (addr))
 #define PEEKW(addr)        (*(unsigned*) (addr))
 
-
-
-/* End of peekpoke.h */
 #endif
-
-
-
 

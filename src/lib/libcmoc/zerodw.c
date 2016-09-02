@@ -9,12 +9,11 @@
 void asm zerodw(word* dw)
 {
     asm {
-        ldx     2,s     // load dw to point to double word
+        ldx     2,s                     // load dw to point to double word
         clra
         clrb
         std     ,x
         std     2,x
     }
 }
-
 

@@ -28,7 +28,7 @@ void exit(int status)
     //memset(0x2dd, 0, 250);
     asm {
         lds _exitstack,DAT
-        rts // Skip the user stack frame
+        rts                             // Skip the user stack frame
     }
 }
 
