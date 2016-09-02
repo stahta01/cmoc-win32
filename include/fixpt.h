@@ -12,8 +12,8 @@ typedef struct {
     };
 } fixed_t;
 
-int fxsin(int x);
-int fxcos(int x);
+char fxsin(char x);
+char fxcos(char x);
 
 #define i2f(x) ((x)<<8)
 #define f2i(x) ((x)>>8)

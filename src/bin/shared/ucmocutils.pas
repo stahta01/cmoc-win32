@@ -618,7 +618,7 @@ begin
     CheckExitCode(2);
   end;
   Sleep(20);
-  while (Running or (Output.NumBytesAvailable > 0)) do begin
+  while Running or (Output.NumBytesAvailable > 0) do begin
     while Output.NumBytesAvailable > 0 do begin
       FileWrite(StdOutputHandle, LBuffer, Output.Read(LBuffer, SizeOf(LBuffer)));
     end;
