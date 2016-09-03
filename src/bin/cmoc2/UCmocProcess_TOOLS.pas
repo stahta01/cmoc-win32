@@ -145,7 +145,8 @@ procedure CCmocProcess_TOOLS.LWASM(const ADst, ASrc: TFileName; const APreproces
 begin
   if OCmoc.FileChanged(ADst, ASrc) then begin
     ExecuteTool(IfThen(APreprocess, Tool_LWASM2, Tool_LWASM),
-      TStringDynArray.Create(Opt_6809, Opt_Format2, Format_OBJ, Opt_Output2, ADst, ASrc));
+      TStringDynArray.Create(Opt_6809, Opt_6800compat, Opt_Format2, Format_OBJ,
+      Opt_Output2, ADst, ASrc));
   end;
 end;
 

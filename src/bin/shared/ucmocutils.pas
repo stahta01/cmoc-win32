@@ -79,6 +79,7 @@ const
   Opt_ScriptFile2 = '-s';
   Opt_MapFile2 = '-m';
   Opt_6809 = '--6809';
+  Opt_6800compat = '--6800compat';
   Opt_DontLink1 = '-c';
   Opt_Create1 = '--create';
   Opt_Add1 = '--add';

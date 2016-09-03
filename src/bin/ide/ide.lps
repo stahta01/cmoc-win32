@@ -4,14 +4,14 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="77">
+    <Units Count="78">
       <Unit0>
         <Filename Value="ide.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos Y="25"/>
-        <UsageCount Value="88"/>
+        <UsageCount Value="89"/>
       </Unit0>
       <Unit1>
         <Filename Value="unitcmocide.pas"/>
@@ -20,9 +20,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="500"/>
         <CursorPos X="27" Y="525"/>
-        <UsageCount Value="88"/>
+        <UsageCount Value="89"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -32,7 +33,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="16"/>
         <CursorPos X="14" Y="22"/>
-        <UsageCount Value="81"/>
+        <UsageCount Value="82"/>
       </Unit2>
       <Unit3>
         <Filename Value="unitcmocidesynedit.pas"/>
@@ -44,17 +45,15 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="92"/>
         <CursorPos X="6" Y="102"/>
-        <UsageCount Value="79"/>
+        <UsageCount Value="80"/>
       </Unit3>
       <Unit4>
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="669"/>
         <CursorPos X="80" Y="684"/>
         <UsageCount Value="29"/>
-        <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="..\shared\ucmocparser.pas"/>
@@ -82,8 +81,8 @@
         <Filename Value="C:\lazarus\lcl\graphics.pp"/>
         <UnitName Value="Graphics"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="56"/>
-        <CursorPos X="16" Y="68"/>
+        <TopLine Value="1093"/>
+        <CursorPos X="25" Y="1102"/>
         <UsageCount Value="10"/>
       </Unit8>
       <Unit9>
@@ -604,6 +603,14 @@
         <CursorPos X="26" Y="224"/>
         <UsageCount Value="10"/>
       </Unit76>
+      <Unit77>
+        <Filename Value="..\..\..\..\upascal\uprinters.pas"/>
+        <UnitName Value="UPrinters"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="35"/>
+        <CursorPos X="19" Y="44"/>
+        <UsageCount Value="10"/>
+      </Unit77>
     </Units>
     <JumpHistory HistoryIndex="-1"/>
   </ProjectSession>
