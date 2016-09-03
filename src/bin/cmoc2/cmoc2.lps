@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="195">
+    <Units Count="196">
       <Unit0>
         <Filename Value="cmoc2.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -1406,6 +1406,12 @@
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="C++"/>
       </Unit194>
+      <Unit195>
+        <Filename Value="C:\Documents and Settings\Admin\Desktop\PrintPreview\ubitmapresample.pas"/>
+        <UnitName Value="UBitmapResample"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit195>
     </Units>
     <JumpHistory Count="1">
       <Position1>

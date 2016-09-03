@@ -9,7 +9,7 @@
         <Filename Value="lwasm2.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="67"/>
+        <TopLine Value="66"/>
         <CursorPos X="10" Y="60"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
@@ -18,11 +18,10 @@
         <Filename Value="..\shared\ucmocutils.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCmocUtils"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="143"/>
         <CursorPos X="3" Y="154"/>
         <UsageCount Value="20"/>
-        <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\cmoc2\ucmocutils.pas"/>

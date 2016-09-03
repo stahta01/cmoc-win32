@@ -26,10 +26,14 @@ unit UCmocRbs;
 interface
 
 uses
-  Classes;
+  Classes, LCLType, SysUtils;
 
+function RbsLoadFromFile(const AStream: TStream; ASize: SizeInt = -1): rawbytestring;
 function RbsLoadFromFile(const AFileName: string): rawbytestring;
+function RbsLoadFromResource(const AResName: string): rawbytestring;
+
 procedure RbsSaveToFile(const A: rawbytestring; const AFileName: string);
+
 function RbsByte(const A: byte): rawbytestring;
 function RbsWord(const A: word): rawbytestring;
 function RbsByte(const A: rawbytestring; const AIndex: integer): byte;
@@ -45,15 +49,36 @@ function RbsVideo(const A: rawbytestring): rawbytestring;
 
 implementation
 
-function RbsLoadFromFile(const AFileName: string): rawbytestring;
+function RbsLoadFromFile(const AStream: TStream; ASize: SizeInt): rawbytestring;
 begin
-  with TFileStream.Create(AFileName, fmOpenRead) do begin
-    try
-      SetLength(Result, Size);
-      ReadBuffer(Result[1], Size);
-    finally
-      Free;
-    end;
+  if ASize < 0 then begin
+    ASize := AStream.Size - AStream.Position;
+  end;
+  SetLength(Result, ASize);
+  AStream.ReadBuffer(Result[1], ASize);
+end;
+
+function RbsLoadFromFile(const AFileName: string): rawbytestring;
+var
+  LStream: TStream;
+begin
+  LStream := TFileStream.Create(AFileName, fmOpenRead);
+  try
+    Result := RbsLoadFromFile(LStream);
+  finally
+    FreeAndNil(LStream);
+  end;
+end;
+
+function RbsLoadFromResource(const AResName: string): rawbytestring;
+var
+  LStream: TStream;
+begin
+  LStream := TResourceStream.Create(HINSTANCE, AResName, RT_RCDATA);
+  try
+    Result := RbsLoadFromFile(LStream);
+  finally
+    FreeAndNil(LStream);
   end;
 end;
 

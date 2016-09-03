@@ -27,7 +27,8 @@ uses
   Classes,
   Process,
   StrUtils,
-  SysUtils;
+  SysUtils,
+  UCmocRbs;
 
 {$R *.res}
 
@@ -69,6 +70,7 @@ type
     try
       LArgs.CommaText := CmdLine;
       if LArgs.Count < 2 then begin
+        WriteLn(RbsLoadFromResource('HELP'));
         raise Exception.Create('missing executable parameter');
       end;
       Executable := LArgs[1];
@@ -76,13 +78,13 @@ type
         LParameter := LArgs[LIndex];
         if Length(LParameter) > 0 then begin
           if (LParameter[1] <> '-') and (PosSet(['*', '?'], LParameter) > 0) then begin
-            if SysUtils.FindFirst(LParameter, 0, LSearchRec) = 0 then begin
+            if FindFirst(LParameter, 0, LSearchRec) = 0 then begin
               try
                 repeat
                   Parameters.Add(ExtractFilePath(LParameter) + LSearchRec.Name);
-                until SysUtils.FindNext(LSearchRec) <> 0;
+                until FindNext(LSearchRec) <> 0;
               finally
-                SysUtils.FindClose(LSearchRec);
+                FindClose(LSearchRec);
               end;
             end;
           end else begin
@@ -121,7 +123,6 @@ type
   end;
 
 begin
-
   with TProcessRunWild.Create(nil) do begin
     try
       try
@@ -136,4 +137,5 @@ begin
       Free;
     end;
   end;
+  ReadLn;
 end.
