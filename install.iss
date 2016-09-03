@@ -39,7 +39,9 @@ Source: "lib\*.txt"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "include\*.h"; DestDir: "{app}\include"; Flags: ignoreversion recursesubdirs
 
 Source: "doc\*.*"; DestDir: "{app}\doc"; Flags: ignoreversion recursesubdirs
-Source: "dsk\*.dsk"; DestDir: "{app}\dsk"; Flags: ignoreversion onlyifdoesntexist
+Source: "dsk\disk0.dsk"; DestDir: "{app}\dsk"; Flags: ignoreversion onlyifdoesntexist
+Source: "dsk\disk1.dsk"; DestDir: "{app}\dsk"; Flags: ignoreversion 
+Source: "dsk\disk2.dsk"; DestDir: "{app}\dsk"; Flags: ignoreversion 
 Source: "examples\*.c"; DestDir: "{app}\examples"; Flags: ignoreversion recursesubdirs
 
 Source: "vcc\Vcc.exe"; DestDir: "{app}\vcc"; Flags: ignoreversion

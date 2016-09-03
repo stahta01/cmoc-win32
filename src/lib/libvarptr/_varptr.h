@@ -22,6 +22,9 @@
 // If the variable is a string, byte 2 is the length and bytes 4 and 5
 // are the address of the contents (if length > 0).
 
+#include <varptr.h>
+#include <string.h>
+
 // Useful Color Basic addresses.
 //
 enum {
@@ -32,8 +35,5 @@ enum {
     FRETOP = 0x0021,                        // start of string storage
     MEMSIZ = 0x0027,                        // top of string space
 };
-
-typedef unsigned char byte;
-typedef unsigned word;
 
 
