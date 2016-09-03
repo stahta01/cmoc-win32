@@ -113,13 +113,15 @@ type
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     MenuEmulatorsCoCo2: TMenuItem;
+    MenuItem3: TMenuItem;
+    MenuEmulatorsEDTASM: TMenuItem;
+    MenuEmulatorsSep2: TMenuItem;
     MenuToolsSep2: TMenuItem;
     MenuToolsDisassemble: TMenuItem;
     MenuToolsOpenDisk0: TMenuItem;
-    MenuItem4: TMenuItem;
+    MenuEmulatorsSep1: TMenuItem;
     MenuToolsOpenDisk1: TMenuItem;
     MenuToolsOpenDisk2: TMenuItem;
-    MenuToolsOpenDisk3: TMenuItem;
     MenuToolsSep1: TMenuItem;
     MenuTools: TMenuItem;
     MenuToolsMessImageTool: TMenuItem;
@@ -169,6 +171,7 @@ type
     procedure MenuFileOpenInNewWindowClick(ASender: TObject);
     procedure MenuEditUppercaseSelectionClick(ASender: TObject);
     procedure MenuHelpOpenRomFolderClick(ASender: TObject);
+    procedure MenuEmulatorsEDTASMClick(Sender: TObject);
     procedure MenuToolsDisassembleClick(Sender: TObject);
     procedure MenuRunCompileClick(ASender: TObject);
     procedure MenuRunBuildAndRunClick(ASender: TObject);
@@ -195,6 +198,7 @@ type
   strict private
     procedure OpenBrowser(AURL: string);
     procedure ExecuteEmulator(AFileName: TFileName);
+    procedure ExecuteMachine(const AName: string; const AFileName: TFileName);
     function Execute(const AExecutable: string; const AParameters: array of string;
       const AExternal: boolean): integer;
     function ExecuteTool(const ATool: string; const AParameters: array of string;
@@ -664,10 +668,24 @@ begin
     WriteLn('// Running XRoar emulator. Machine=', FOptions.Values[Opt_Machine2]);
     try
       OCmoc.StringDynArrayAppendOptions(LParams, FOptions, [Opt_Machine2, '-bas',
-        '-extbas', '-dos', '-cart', '-noextbas', '-nodos', '-ram', '-no-tape-fast']);
-      for LIndex := 0 to 3 do begin
-        OCmoc.StringDynArrayAppendStrings(LParams, ['-load', OCmoc.PathToDsk +
-          'disk' + IntToStr(LIndex) + '.dsk']);
+        '-extbas', '-dos', '-cart', '-noextbas', '-nodos', '-ram', '-no-tape-fast', Opt_Type2]);
+      if FOptions.IndexOfName(Opt_Load2) < 0 then begin
+        OCmoc.StringDynArrayAppendStrings(LParams, [Opt_Load2, OCmoc.PathToDsk + 'disk0.dsk']);
+        OCmoc.StringDynArrayAppendStrings(LParams, [Opt_Load2, OCmoc.PathToDsk + 'disk1.dsk']);
+        OCmoc.StringDynArrayAppendStrings(LParams, [Opt_Load2, OCmoc.PathToDsk + 'disk2.dsk']);
+      end else begin
+        with TStringList.Create do begin
+          try
+            Delimiter := PathSeparator;
+            DelimitedText := FOptions.Values[Opt_Load2];
+            for LIndex := 0 to Count - 1 do begin
+              OCmoc.StringDynArrayAppendStrings(LParams,
+                [Opt_Load2, OCmoc.FileNameTranslate(Strings[LIndex])]);
+            end;
+          finally
+            Free;
+          end;
+        end;
       end;
       if Length(AFileName) > 0 then begin
         OCmoc.StringDynArrayAppendStrings(LParams, ['-run', AFileName]);
@@ -677,6 +695,36 @@ begin
       OCmoc.RaiseError('XRoar failed to execute');
     end;
   end;
+end;
+
+procedure TFormCmocIDE.ExecuteMachine(const AName: string; const AFileName: TFileName);
+begin
+  case AName of
+    'coco1': begin
+      FOptions.Values['-machine'] := 'cocous';
+      FOptions.Values['-ram'] := '16';
+      FOptions.Values['-bas'] := 'bas10.rom';
+      FOptions.Values['-noextbas'] := EmptyStr;
+      FOptions.Values['-nodos'] := EmptyStr;
+    end;
+    'coco1d': begin
+      FOptions.Values['-machine'] := 'cocous';
+      FOptions.Values['-ram'] := '64';
+      FOptions.Values['-bas'] := 'bas10.rom';
+      FOptions.Values['-extbas'] := 'extbas10.rom';
+      FOptions.Values['-dos'] := 'disk10.rom';
+    end;
+    'coco2d': begin
+      FOptions.Values['-machine'] := 'cocous';
+      FOptions.Values['-ram'] := '64';
+      FOptions.Values['-bas'] := 'bas11.rom';
+      FOptions.Values['-extbas'] := 'extbas11.rom';
+      FOptions.Values['-dos'] := 'disk11.rom';
+    end else begin
+      FOptions.Values[Opt_Machine2] := AName;
+    end;
+  end;
+  ExecuteEmulator(AFileName);
 end;
 
 procedure TFormCmocIDE.MenuRunBuildAndRunClick(ASender: TObject);
@@ -699,25 +747,7 @@ procedure TFormCmocIDE.MenuEmulatorsClick(ASender: TObject);
 begin
   if ASender <> MenuEmulators then begin
     FOptions.Clear;
-    case (ASender as TMenuItem).Hint of
-      'coco1': begin
-        FOptions.Values['-machine'] := 'cocous';
-        FOptions.Values['-ram'] := '64';
-        FOptions.Values['-bas'] := 'bas10.rom';
-        FOptions.Values['-noextbas'] := EmptyStr;
-        FOptions.Values['-nodos'] := EmptyStr;
-      end;
-      'coco2': begin
-        FOptions.Values['-machine'] := 'cocous';
-        FOptions.Values['-ram'] := '64';
-        FOptions.Values['-bas'] := 'bas10.rom';
-        FOptions.Values['-extbas'] := 'extbas11.rom';
-        FOptions.Values['-dos'] := 'disk11.rom';
-      end else begin
-        FOptions.Values[Opt_Machine2] := (ASender as TMenuItem).Hint;
-      end;
-    end;
-    ExecuteEmulator(EmptyStr);
+    ExecuteMachine((ASender as TMenuItem).Hint, default(string));
   end;
 end;
 
@@ -854,6 +884,13 @@ end;
 procedure TFormCmocIDE.MenuHelpOpenRomFolderClick(ASender: TObject);
 begin
   OpenBrowser(OCmoc.PathToXroarRoms);
+end;
+
+procedure TFormCmocIDE.MenuEmulatorsEDTASMClick(Sender: TObject);
+begin
+  FOptions.Clear;
+  FOptions.Values[Opt_Type2] := 'LOADM"EDTASM++:2":EXEC\n';
+  ExecuteMachine('coco2d', default(string));
 end;
 
 procedure TFormCmocIDE.MenuToolsDisassembleClick(Sender: TObject);

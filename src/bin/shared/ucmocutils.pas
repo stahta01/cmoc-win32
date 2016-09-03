@@ -100,6 +100,8 @@ const
   Opt_NoLineInfo1 = '-P';
   Opt_DontAssemble1 = '-S';
   Opt_Machine2 = '-machine';
+  Opt_Type2 = '-type';
+  Opt_Load2 = '-load';
 
   Def_CMOC = '__CMOC__';
   Def_CMOC_VERSION = Def_CMOC + '=1.30';
@@ -446,21 +448,31 @@ class procedure OCmoc.StringDynArrayAppendOptions(var A: TStringDynArray;
 var
   LIndex, LPos: integer;
   LName, LValue: string;
+  LValues: TStrings;
 begin
-  for LIndex := 0 to AOptions.Count - 1 do begin
-    LName := Trim(AOptions[LIndex]);
-    LPos := Pos('=', LName);
-    if LPos = 0 then begin
-      LPos := Length(LName) + 1;
-    end;
-    LValue := Trim(Copy(LName, LPos + 1, MaxInt));
-    LName := Trim(Copy(LName, 1, LPos - 1));
-    if AnsiMatchText(LName, AInclude) then begin
-      StringDynArrayAppend(A, LName);
-      if Length(LValue) > 0 then begin
-        StringDynArrayAppend(A, LValue);
+  LValues := TStringList.Create;
+  try
+    LValues.Delimiter := '|';
+    for LIndex := 0 to AOptions.Count - 1 do begin
+      LName := Trim(AOptions[LIndex]);
+      LPos := Pos('=', LName);
+      if LPos = 0 then begin
+        LPos := Length(LName) + 1;
+      end;
+      LValue := Trim(Copy(LName, LPos + 1, MaxInt));
+      LName := Trim(Copy(LName, 1, LPos - 1));
+      if AnsiMatchText(LName, AInclude) then begin
+        LValues.DelimitedText := LValue;
+        for LValue in LValues do begin
+          StringDynArrayAppend(A, LName);
+          if Length(LValue) > 0 then begin
+            StringDynArrayAppend(A, LValue);
+          end;
+        end;
       end;
     end;
+  finally
+    FreeAndNil(LValues);
   end;
 end;
 

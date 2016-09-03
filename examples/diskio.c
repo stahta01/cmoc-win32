@@ -1,4 +1,6 @@
 
+#pragma options -machine=coco
+
 #include <basic.h>
 #include <fcntl.h>
 #include <unistd.h>
