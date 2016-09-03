@@ -58,6 +58,7 @@ int main(void)
     remove(FILENAME);
     puts("DISPLAY DIRECTORY");
     system("DIR");
+    printf("NOTE: \"%s\" IS REMOVED\n", FILENAME);
     puts("DONE");
     return 0;
 }
