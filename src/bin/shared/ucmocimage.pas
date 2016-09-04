@@ -32,17 +32,16 @@ type
   OImage = object
   public
     class function Palette2: TFPPalette;
-    class function Palette4: TFPPalette;
+    class function Palette4(const ACss: integer): TFPPalette;
   public
-    class procedure Resample(const ADst, ASrc: TFPCustomImage);
-    class procedure Dither(const ADst, ASrc: TFPCustomImage; const APalette: TFPPalette);
-    class procedure Dither2(const ADst, ASrc: TFPCustomImage);
+    class procedure Resample(const ADst, ASrc: TLazIntfImage);
+    class procedure Dither(const ADst, ASrc: TLazIntfImage; const APalette: TFPPalette);
   public
-    class procedure ResampleAndDither(const ADst, ASrc: TFPCustomImage;
+    class procedure ResampleAndDither(const ADst, ASrc: TLazIntfImage;
       const APalette: TFPPalette);
-    class procedure SaveToRawFile(const A: TFPCustomImage; const AStream: TStream;
+    class procedure SaveToRawFile(const A: TLazIntfImage; const AStream: TStream;
       const APalette: TFPPalette);
-    class procedure SaveToRawFile(const A: TFPCustomImage; const AFileName: TFileName;
+    class procedure SaveToRawFile(const A: TLazIntfImage; const AFileName: TFileName;
       const APalette: TFPPalette);
   end;
 
@@ -74,14 +73,39 @@ begin
   Result.Add(FPColor($FFFF, $FFFF, $FFFF));
 end;
 
-class function OImage.Palette4: TFPPalette;
+function MakeColor(const R, G, B: byte): TFPColor;
 begin
-  Result := TFPPalette.Create(0);
-  Result.Add(FPColor(0, 0, 0));
-  Result.Add(FPColor($FFFF, $FFFF, $FFFF));
+  Result.red := R * 257;
+  Result.green := G * 257;
+  Result.blue := B * 257;
+  Result.alpha := 0;
 end;
 
-class procedure OImage.Resample(const ADst, ASrc: TFPCustomImage);
+class function OImage.Palette4(const ACss: integer): TFPPalette;
+begin
+  Result := TFPPalette.Create(0);
+  case ACss of
+    0: begin
+      Result.Add(MakeColor(0, 255, 0));
+      Result.Add(MakeColor(33, 16, 189));
+      Result.Add(MakeColor(189, 0, 33));
+      Result.Add(MakeColor(255, 255, 66));
+    end;
+    1: begin
+      Result.Add(MakeColor(255, 255, 255));
+      Result.Add(MakeColor(0, 222, 115));
+      Result.Add(MakeColor(255, 16, 255));
+      Result.Add(MakeColor(255, 66, 0));
+    end else begin
+      Result.Add(MakeColor(0, 0, 0));
+      Result.Add(MakeColor(255, 0, 0));
+      Result.Add(MakeColor(0, 0, 255));
+      Result.Add(MakeColor(255, 255, 255));
+    end;
+  end;
+end;
+
+class procedure OImage.Resample(const ADst, ASrc: TLazIntfImage);
 var
   LResample: CImageResample;
 begin
@@ -93,7 +117,7 @@ begin
   end;
 end;
 
-class procedure OImage.Dither(const ADst, ASrc: TFPCustomImage; const APalette: TFPPalette);
+class procedure OImage.Dither(const ADst, ASrc: TLazIntfImage; const APalette: TFPPalette);
 var
   LDitherer: TFPFloydSteinbergDitherer;
 begin
@@ -105,30 +129,22 @@ begin
   end;
 end;
 
-class procedure OImage.Dither2(const ADst, ASrc: TFPCustomImage);
-var
-  LPalette: TFPPalette;
-begin
-  LPalette := Palette2;
-  try
-    Dither(ADst, ASrc, LPalette);
-  finally
-    FreeAndNil(LPalette);
-  end;
-end;
-
-class procedure OImage.ResampleAndDither(const ADst, ASrc: TFPCustomImage;
+class procedure OImage.ResampleAndDither(const ADst, ASrc: TLazIntfImage;
   const APalette: TFPPalette);
 var
-  LTmp: TFPCustomImage;
+  LTmp: TLazIntfImage;
 begin
-  LTmp := TLazIntfImage.Create(0, 0, [riqfRGB]);
-  try
-    LTmp.SetSize(ADst.Width, ADst.Height);
-    OImage.Resample(LTmp, ASrc);
-    OImage.Dither(ADst, LTmp, APalette);
-  finally
-    FreeAndNil(LTmp);
+  if (ADst.Width = ASrc.Width) and (ADst.Height = ASrc.Height) then begin
+    ADst.CopyPixels(ASrc);
+  end else begin
+    LTmp := TLazIntfImage.Create(0, 0, [riqfRGB]);
+    try
+      LTmp.SetSize(ADst.Width, ADst.Height);
+      OImage.Resample(LTmp, ASrc);
+      OImage.Dither(ADst, LTmp, APalette);
+    finally
+      FreeAndNil(LTmp);
+    end;
   end;
 end;
 
@@ -159,7 +175,7 @@ begin
   end;
 end;
 
-class procedure OImage.SaveToRawFile(const A: TFPCustomImage; const AStream: TStream;
+class procedure OImage.SaveToRawFile(const A: TLazIntfImage; const AStream: TStream;
   const APalette: TFPPalette);
 var
   LX, LY: integer;
@@ -167,9 +183,9 @@ var
 begin
   LDitherer := TBytePixelDitherer.Create(APalette);
   try
-    AStream.WriteByte(APalette.Count);
-    AStream.WriteWord(A.Width);
-    AStream.WriteWord(A.Height);
+    //AStream.WriteByte(APalette.Count);
+    //AStream.WriteWord(A.Width);
+    //AStream.WriteWord(A.Height);
     for LY := 0 to A.Height - 1 do begin
       LX := 0;
       while LX < A.Width do begin
@@ -181,7 +197,7 @@ begin
   end;
 end;
 
-class procedure OImage.SaveToRawFile(const A: TFPCustomImage; const AFileName: TFileName;
+class procedure OImage.SaveToRawFile(const A: TLazIntfImage; const AFileName: TFileName;
   const APalette: TFPPalette);
 var
   LStream: TStream;

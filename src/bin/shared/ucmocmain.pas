@@ -19,64 +19,49 @@
  ***************************************************************************
 }
 
-program bin2c;
+unit UCmocMain;
 
-{$mode objfpc}{$H+}
+{$INCLUDE cmoc.inc}
+
+interface
 
 uses
-  Classes,
-  SysUtils,
-  UCmocMain,
-  UCmocParams,
-  UCmocRbs,
-  UCmocUtils;
+  SysUtils, UCmocParams, UCmocRbs;
 
-{$R *.res}
+type
+  TMainProcedure = procedure(const AParams: TCmocParams);
 
-  procedure Main(const A: TCmocParams);
-  var
-    LDstFile: TFileName;
-    LBuffer: string;
-    LOutput: TStrings;
+procedure CmocMain(AMainProcedure: TMainProcedure);
 
-    procedure FlushBuffer;
-    begin
-      if Length(LBuffer) > 0 then begin
-        LOutput.Add('    ' + LBuffer);
-        LBuffer := EmptyStr;
-      end;
-    end;
+implementation
 
-  begin
-    LDstFile := A.GetFileNameOutput;
-    with TFileStream.Create(A.GetFileNameInput, fmOpenRead) do begin
-      try
-        LOutput := TStringList.Create;
-        try
-          OCmoc.StringsInsertWinCMOCHeader(LOutput);
-          LOutput.Add(Format('unsigned char %s[0x%x] = {', [A.GetOptString('v'), Size]));
-          LBuffer := EmptyStr;
-          while Position < Size do begin
-            if Length(LBuffer) > 0 then begin
-              LBuffer += ',';
-              if Length(LBuffer) > 75 then begin
-                FlushBuffer;
-              end;
-            end;
-            LBuffer += '0x' + IntToHex(ReadByte, 2);
-          end;
-          FlushBuffer;
-          LOutput.Add('};');
-          LOutput.SaveToFile(LDstFile);
-        finally
-          FreeAndNil(LOutput);
-        end;
-      finally
-        Free;
-      end;
-    end;
-  end;
-
+procedure CmocMain(AMainProcedure: TMainProcedure);
+var
+  LParams: TCmocParams;
 begin
-  CmocMain(@Main);
+  LParams := TCmocParams.Create;
+  try
+    try
+      AMainProcedure(LParams);
+    except
+      on LException: Exception do begin
+        WriteLn(StdErr, LineEnding + Trim(RbsLoadFromResource('USAGE')) + LineEnding + LineEnding +
+          'Copyright (C) 2016 Derek John Evans' + LineEnding + LineEnding +
+          'This program is free software; you may redistribute it under the terms of' +
+          LineEnding +
+          'the GNU General Public License, either version 3 or later.' + LineEnding +
+          'This program comes with absolutely no warranty.' + LineEnding);
+        WriteLn(StdErr, 'Error: ' + LException.Message);
+        if (startupinfo.dwFlags and 1) <> 0 then begin
+          WriteLn;
+          WriteLn('Press enter to exit');
+          ReadLn;
+        end;
+      end;
+    end;
+  finally
+    FreeAndNil(LParams);
+  end;
+end;
+
 end.

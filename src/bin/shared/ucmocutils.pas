@@ -28,6 +28,9 @@ interface
 uses
   Classes, FileUtil, LazFileUtils, Process, StrUtils, SysUtils, Types, UCmocParser;
 
+type
+  ECmocException = EAbort;
+
 const
 
   Char_SPC = char(#32);
@@ -162,6 +165,8 @@ type
   strict private
     class function PathToTemp: TFileName;
   public
+    class function IsDev: boolean;
+  public
     class function DosToUnix(const A: TFileName): TFileName;
     class function UnixToDos(const A: TFileName): TFileName;
   public
@@ -218,6 +223,11 @@ type
 
 implementation
 
+class function OCmoc.IsDev: boolean;
+begin
+  Result := AnsiStartsText('c:\dev\', ParamStr(0));
+end;
+
 class function OCmoc.IntegerToDisplay(const A: integer): string;
 begin
   Result := '$' + IntToHex(A, 4) + '(' + IntToStr(A) + ')';
@@ -252,7 +262,7 @@ end;
 class procedure OCmoc.RaiseError(AMessage: string; const AExitCode: integer);
 begin
   WriteLn('Error: ' + AMessage);
-  raise EAbort.CreateHelp(AMessage, AExitCode);
+  raise ECmocException.CreateHelp(AMessage, AExitCode);
 end;
 
 class procedure OCmoc.RaiseError(AMessage, ADetails: string; const AExitCode: integer);

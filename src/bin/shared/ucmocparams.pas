@@ -26,7 +26,7 @@ unit UCmocParams;
 interface
 
 uses
-  Classes, StrUtils, SysUtils, UCmocRbs, UCmocUtils;
+  Classes, StrUtils, SysUtils, UCmocUtils;
 
 type
   TCmocParams = class(TStringList)
@@ -71,12 +71,6 @@ end;
 
 procedure TCmocParams.Error(const AMessage: string);
 begin
-  WriteLn(StdErr, Trim(RbsLoadFromResource('USAGE')) + LineEnding + LineEnding +
-    'Copyright (C) 2016 Derek John Evans' + LineEnding + LineEnding +
-    'This program is free software; you may redistribute it under the terms of' + LineEnding +
-    'the GNU General Public License, either version 3 or later.' + LineEnding +
-    'This program comes with absolutely no warranty.' + LineEnding);
-
   OCmoc.RaiseError(AMessage);
 end;
 
@@ -109,14 +103,21 @@ end;
 function TCmocParams.GetFileNameInput: TFileName;
 begin
   if Count = 0 then begin
-    Error('Unable to find input filename');
+    Error('Input file not selected');
   end;
-  Result := Strings[Count - 1];
+  Result := ExpandFileName(Strings[Count - 1]);
+  if not FileExists(Result) then begin
+    //Error('Unable to find input filename ' + OCmoc.StringQuoted(Result));
+  end;
 end;
 
 function TCmocParams.GetFileNameOutput: TFileName;
 begin
   Result := GetOptString(OptOutput);
+  if Length(Result) = 0 then begin
+    Error('Output file not selected');
+  end;
+  Result := ExpandFileName(Result);
 end;
 
 end.

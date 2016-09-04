@@ -39,11 +39,16 @@
         <PackageName Value="LCLBase"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="1">
+    <Units Count="2">
       <Unit0>
         <Filename Value="bin2c.lpr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
+      <Unit1>
+        <Filename Value="..\shared\ucmocmain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UCmocMain"/>
+      </Unit1>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
