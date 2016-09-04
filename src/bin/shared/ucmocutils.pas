@@ -186,6 +186,8 @@ type
     class function PathToSrcLib: TFileName;
   public
     class function IntegerToDisplay(const A: integer): string;
+    class function AssertRange(const A, ALow, AHigh: integer;
+      const AName: string = 'number'): integer;
   public
     class function StringQuoted(const A: string): string;
     class function StringToIdent(const A: string): string;
@@ -219,6 +221,14 @@ implementation
 class function OCmoc.IntegerToDisplay(const A: integer): string;
 begin
   Result := '$' + IntToHex(A, 4) + '(' + IntToStr(A) + ')';
+end;
+
+class function OCmoc.AssertRange(const A, ALow, AHigh: integer; const AName: string): integer;
+begin
+  Result := A;
+  if (Result < ALow) or (Result > AHigh) then begin
+    RaiseError(Format('%s is out of range (%d..%d)', [AName, ALow, AHigh]));
+  end;
 end;
 
 class function OCmoc.StringQuoted(const A: string): string;

@@ -26,6 +26,7 @@ program bin2c;
 uses
   Classes,
   SysUtils,
+  UCmocParams,
   UCmocRbs;
 
 {$R *.res}
@@ -33,7 +34,7 @@ uses
   procedure Main;
   var
     LDstFile: TFileName;
-    LName, LBuffer: string;
+    LBuffer: string;
     LOutput: TStrings;
 
     procedure FlushBuffer;
@@ -45,42 +46,33 @@ uses
     end;
 
   begin
-    with TStringList.Create do begin
+    with TCmocParams.Create do begin
       try
-        CommaText := cmdline;
-        LDstFile := Trim(Values['-o']);
-        LName := Trim(Values['-v']);
-      finally
-        Free;
-      end;
-    end;
-    if (ParamCount = 0) or (Length(LDstFile) = 0) then begin
-      WriteLn(RbsLoadFromResource('HELP'));
-      raise Exception.Create('Output filename missing');
-    end;
-    if Length(LName) = 0 then begin
-      LName := '_array';
-    end;
-    with TFileStream.Create(ParamStr(ParamCount), fmOpenRead) do begin
-      try
-        LOutput := TStringList.Create;
-        try
-          LOutput.Add(Format('unsigned byte %s[%d] = {', [LName, Size]));
-          LBuffer := EmptyStr;
-          while Position < Size do begin
-            if Length(LBuffer) > 0 then begin
-              LBuffer += ',';
-              if Length(LBuffer) > 75 then begin
-                FlushBuffer;
+        LDstFile := GetFileNameOutput;
+        with TFileStream.Create(GetFileNameOutput, fmOpenRead) do begin
+          try
+            LOutput := TStringList.Create;
+            try
+              LOutput.Add(Format('unsigned byte %s[%d] = {', [GetOptString('v'), Size]));
+              LBuffer := EmptyStr;
+              while Position < Size do begin
+                if Length(LBuffer) > 0 then begin
+                  LBuffer += ',';
+                  if Length(LBuffer) > 75 then begin
+                    FlushBuffer;
+                  end;
+                end;
+                LBuffer += '0x' + IntToHex(ReadByte, 2);
               end;
+              FlushBuffer;
+              LOutput.Add('};');
+              LOutput.SaveToFile(LDstFile);
+            finally
+              FreeAndNil(LOutput);
             end;
-            LBuffer += '0x' + IntToHex(ReadByte, 2);
+          finally
+            Free;
           end;
-          FlushBuffer;
-          LOutput.Add('};');
-          LOutput.SaveToFile(LDstFile);
-        finally
-          FreeAndNil(LOutput);
         end;
       finally
         Free;
@@ -92,6 +84,6 @@ begin
   try
     Main;
   except
-    on LException: Exception do WriteLn(LException.Message);
+    ReadLn;
   end;
 end.

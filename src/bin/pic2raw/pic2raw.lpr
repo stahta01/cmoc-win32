@@ -8,45 +8,39 @@ uses
   GraphType,
   Interfaces,
   IntfGraphics,
+  Math,
   SysUtils,
-  UCmocImage;
+  UCmocImage,
+  UCmocParams,
+  UCmocUtils;
 
 {$R *.res}
-
-  function EnforeRange(const A, ALow, AHigh: integer): integer;
-  begin
-    Result := A;
-    if (Result < ALow) or (Result > AHigh) then begin
-      raise Exception.Create('Number out of range');
-    end;
-  end;
 
   procedure Main;
   var
     LWidth, LHeight: integer;
-    LParams: TStrings;
+    LParams: TCmocParams;
     LSrc, LDst: TLazIntfImage;
+    LPalette: TFPPalette;
   begin
     LWidth := 0;
     LHeight := 0;
-    LParams := TStringList.Create;
+    LPalette := nil;
+    LParams := TCmocParams.Create;
     try
-      LParams.CommaText := CmdLine;
       LParams.Add('-o=crap.raw');
+      LParams.Add('-w=256');
       LParams.Add('image.jpg');
-      if LParams.Count < 2 then begin
-        raise Exception.Create('missing parameters');
-      end;
       LDst := TLazIntfImage.Create(0, 0, [riqfRGB]);
       try
         LSrc := TLazIntfImage.Create(0, 0, [riqfRGB]);
         try
-          LSrc.LoadFromFile(LParams[LParams.Count - 1]);
-          if LParams.IndexOfName('-w') >= 0 then begin
-            LWidth := EnforeRange(StrToInt(LParams.Values['-w']), 8, 256);
+          LSrc.LoadFromFile(LParams.GetFileNameInput);
+          if LParams.HasOption(LParams.OptWidth) then begin
+            LWidth := LParams.GetOptInteger(LParams.OptWidth, 8, 256);
           end;
-          if LParams.IndexOfName('-h') >= 0 then begin
-            LHeight := EnforeRange(StrToInt(LParams.Values['-h']), 8, 256);
+          if LParams.HasOption(LParams.OptHeight) then begin
+            LHeight := LParams.GetOptInteger(LParams.OptHeight, 8, 256);
           end;
           if (LWidth = 0) and (LHeight > 0) then begin
             LWidth := LSrc.Width * LHeight div LSrc.Height;
@@ -57,8 +51,10 @@ uses
             LHeight := LSrc.Height;
           end;
           LDst.SetSize(LWidth, LHeight);
-          OImage.ResampleAndDither(LDst, LSrc);
-          OImage.SaveToRawFile(LDst, LParams.Values['-o']);
+          LPalette := OImage.Palette4;
+          OImage.ResampleAndDither(LDst, LSrc, LPalette);
+          LDst.SaveToFile('crap.bmp');
+          OImage.SaveToRawFile(LDst, LParams.GetFileNameOutput, LPalette);
         finally
           FreeAndNil(LSrc);
         end;
@@ -68,13 +64,13 @@ uses
     finally
       FreeAndNil(LParams);
     end;
+    FreeAndNil(LPalette);
   end;
 
 begin
   try
     Main;
   except
-    on LException: Exception do WriteLn(LException.Message);
+    ReadLn;
   end;
-  ReadLn;
 end.

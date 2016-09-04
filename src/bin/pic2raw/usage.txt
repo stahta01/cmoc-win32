@@ -1,0 +1,2 @@
+Usage: pic2raw -o=OUTPUT INPUTFILE
+pic2raw converts an image to a CoCo raw image file.

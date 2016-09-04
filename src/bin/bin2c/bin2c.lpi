@@ -14,7 +14,7 @@
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
       <Resources Count="1">
-        <Resource_0 FileName="help.txt" Type="RCDATA" ResourceName="HELP"/>
+        <Resource_0 FileName="usage.txt" Type="RCDATA" ResourceName="USAGE"/>
       </Resources>
     </General>
     <i18n>

@@ -1,0 +1,2 @@
+Usage: bin2c -v=VARNAME -o=OUTPUT INPUTFILE
+bin2c converts a file to a C file containing an array.

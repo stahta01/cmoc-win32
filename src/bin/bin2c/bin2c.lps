@@ -4,13 +4,13 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="3">
+    <Units Count="4">
       <Unit0>
         <Filename Value="bin2c.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="46"/>
-        <CursorPos X="50" Y="57"/>
+        <TopLine Value="66"/>
+        <CursorPos X="12" Y="87"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -28,8 +28,16 @@
         <CursorPos X="29" Y="33"/>
         <UsageCount Value="10"/>
       </Unit2>
+      <Unit3>
+        <Filename Value="..\shared\ucmocparams.pas"/>
+        <UnitName Value="UCmocParams"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="68"/>
+        <CursorPos X="52" Y="74"/>
+        <UsageCount Value="10"/>
+      </Unit3>
     </Units>
-    <JumpHistory Count="5" HistoryIndex="4">
+    <JumpHistory Count="10" HistoryIndex="9">
       <Position1>
         <Filename Value="bin2c.lpr"/>
         <Caret Line="13" Column="32"/>
@@ -50,6 +58,26 @@
         <Filename Value="bin2c.lpr"/>
         <Caret Line="88" Column="9" TopLine="40"/>
       </Position5>
+      <Position6>
+        <Filename Value="bin2c.lpr"/>
+        <Caret Line="29" Column="11" TopLine="24"/>
+      </Position6>
+      <Position7>
+        <Filename Value="bin2c.lpr"/>
+        <Caret Line="51" Column="33" TopLine="44"/>
+      </Position7>
+      <Position8>
+        <Filename Value="bin2c.lpr"/>
+        <Caret Line="52" Column="28" TopLine="42"/>
+      </Position8>
+      <Position9>
+        <Filename Value="bin2c.lpr"/>
+        <Caret Line="37" Column="21" TopLine="29"/>
+      </Position9>
+      <Position10>
+        <Filename Value="bin2c.lpr"/>
+        <Caret Line="56" Column="68" TopLine="42"/>
+      </Position10>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
