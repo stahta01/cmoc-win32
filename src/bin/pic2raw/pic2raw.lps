@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="9"/>
+    <BuildModes Active="Default"/>
+    <Units Count="27">
+      <Unit0>
+        <Filename Value="pic2raw.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="51"/>
+        <CursorPos X="26" Y="28"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="C:\Documents and Settings\Admin\Desktop\PrintPreview\ubitmapresample.pas"/>
+        <UnitName Value="UBitmapResample"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="2" Y="8"/>
+        <UsageCount Value="10"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="C:\lazarus\lcl\graphics.pp"/>
+        <UnitName Value="Graphics"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1358"/>
+        <CursorPos X="47" Y="1369"/>
+        <UsageCount Value="10"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="C:\lazarus\lcl\intfgraphics.pas"/>
+        <UnitName Value="IntfGraphics"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="98"/>
+        <CursorPos X="31" Y="107"/>
+        <UsageCount Value="10"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\fcl-image\src\fpcanvas.pp"/>
+        <UnitName Value="FPCanvas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="176"/>
+        <CursorPos X="73" Y="187"/>
+        <UsageCount Value="10"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="C:\lazarus\lcl\graphtype.pp"/>
+        <UnitName Value="GraphType"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="92"/>
+        <CursorPos X="3" Y="103"/>
+        <UsageCount Value="10"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\winunits-jedi\src\jwawingdi.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="8884"/>
+        <CursorPos X="4" Y="3803"/>
+        <UsageCount Value="10"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\hermes\src\hermes_converter.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="107"/>
+        <CursorPos X="18" Y="151"/>
+        <UsageCount Value="10"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\hermes\src\hermes.pp"/>
+        <UnitName Value="Hermes"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="133"/>
+        <CursorPos X="24" Y="61"/>
+        <UsageCount Value="10"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\fcl-image\src\fpimage.pp"/>
+        <UnitName Value="FPimage"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="97"/>
+        <CursorPos X="24" Y="105"/>
+        <UsageCount Value="11"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\inc\systemh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="657"/>
+        <CursorPos X="11" Y="668"/>
+        <UsageCount Value="10"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\win\syswin.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="347"/>
+        <CursorPos X="10" Y="349"/>
+        <UsageCount Value="10"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="C:\lazarus\components\bgrabitmap8.9.2\bgradefaultbitmap.pas"/>
+        <UnitName Value="BGRADefaultBitmap"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3531"/>
+        <CursorPos X="13" Y="3542"/>
+        <UsageCount Value="10"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="C:\lazarus\components\bgrabitmap8.9.2\bgradithering.pas"/>
+        <UnitName Value="BGRADithering"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="167"/>
+        <CursorPos X="30" Y="173"/>
+        <UsageCount Value="10"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="C:\lazarus\components\bgrabitmap8.9.2\bgracolorquantization.pas"/>
+        <UnitName Value="BGRAColorQuantization"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="969"/>
+        <CursorPos X="3" Y="971"/>
+        <UsageCount Value="10"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="C:\lazarus\components\bgrabitmap8.9.2\bgrapixel.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="311"/>
+        <CursorPos X="3" Y="322"/>
+        <UsageCount Value="10"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="C:\lazarus\components\bgrabitmap8.9.2\bgrapalette.pas"/>
+        <UnitName Value="BGRAPalette"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="330"/>
+        <CursorPos X="3" Y="323"/>
+        <UsageCount Value="10"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="C:\lazarus\components\bgrabitmap8.9.2\bgrafilters.pas"/>
+        <UnitName Value="BGRAFilters"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="22"/>
+        <CursorPos X="14" Y="38"/>
+        <UsageCount Value="10"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\fcl-image\src\fpditherer.pas"/>
+        <UnitName Value="FPDitherer"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="48"/>
+        <CursorPos X="53" Y="58"/>
+        <UsageCount Value="11"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\inc\objpash.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="182"/>
+        <CursorPos X="23" Y="193"/>
+        <UsageCount Value="10"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\fcl-image\src\fpimgcanv.pp"/>
+        <UnitName Value="FPImgCanv"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="18"/>
+        <CursorPos X="3" Y="23"/>
+        <UsageCount Value="10"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\fcl-image\src\fppixlcanv.pp"/>
+        <UnitName Value="FPPixlCanv"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="23"/>
+        <CursorPos X="3" Y="31"/>
+        <UsageCount Value="10"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\fcl-image\src\fppalette.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="172"/>
+        <CursorPos X="25" Y="176"/>
+        <UsageCount Value="10"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="..\shared\ucmocbitmap.pas"/>
+        <UnitName Value="UCmocBitmap"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="13"/>
+        <CursorPos X="19" Y="31"/>
+        <UsageCount Value="10"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="..\shared\ucmocimage.pas"/>
+        <UnitName Value="UCmocImage"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="136"/>
+        <CursorPos X="3" Y="116"/>
+        <UsageCount Value="20"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="..\shared\ucmocparser.pas"/>
+        <UnitName Value="UCmocParser"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="16"/>
+        <CursorPos Y="24"/>
+        <UsageCount Value="10"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\fcl-image\src\fpimage.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="259"/>
+        <CursorPos X="3" Y="269"/>
+        <UsageCount Value="10"/>
+      </Unit26>
+    </Units>
+    <JumpHistory Count="17" HistoryIndex="16">
+      <Position1>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="71" Column="21" TopLine="57"/>
+      </Position1>
+      <Position2>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="73" Column="27" TopLine="57"/>
+      </Position2>
+      <Position3>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="25" Column="70" TopLine="14"/>
+      </Position3>
+      <Position4>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="39" Column="48" TopLine="32"/>
+      </Position4>
+      <Position5>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="55" Column="9" TopLine="41"/>
+      </Position5>
+      <Position6>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="71" Column="31" TopLine="65"/>
+      </Position6>
+      <Position7>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="73" Column="18" TopLine="65"/>
+      </Position7>
+      <Position8>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="74" Column="23" TopLine="62"/>
+      </Position8>
+      <Position9>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="23" Column="22" TopLine="9"/>
+      </Position9>
+      <Position10>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="14" Column="11" TopLine="9"/>
+      </Position10>
+      <Position11>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="33" Column="28" TopLine="23"/>
+      </Position11>
+      <Position12>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="43" Column="62" TopLine="26"/>
+      </Position12>
+      <Position13>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="32" Column="17" TopLine="22"/>
+      </Position13>
+      <Position14>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="44" Column="55" TopLine="27"/>
+      </Position14>
+      <Position15>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="60" Column="34" TopLine="48"/>
+      </Position15>
+      <Position16>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="60" Column="34" TopLine="48"/>
+      </Position16>
+      <Position17>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="28" Column="26" TopLine="24"/>
+      </Position17>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>
