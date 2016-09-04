@@ -9,8 +9,8 @@
         <Filename Value="pic2raw.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="51"/>
-        <CursorPos X="26" Y="28"/>
+        <TopLine Value="45"/>
+        <CursorPos X="26" Y="61"/>
         <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -194,8 +194,8 @@
         <Filename Value="..\shared\ucmocimage.pas"/>
         <UnitName Value="UCmocImage"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="136"/>
-        <CursorPos X="3" Y="116"/>
+        <TopLine Value="129"/>
+        <CursorPos X="29" Y="139"/>
         <UsageCount Value="20"/>
       </Unit24>
       <Unit25>
@@ -214,7 +214,7 @@
         <UsageCount Value="10"/>
       </Unit26>
     </Units>
-    <JumpHistory Count="17" HistoryIndex="16">
+    <JumpHistory Count="18" HistoryIndex="17">
       <Position1>
         <Filename Value="pic2raw.lpr"/>
         <Caret Line="71" Column="21" TopLine="57"/>
@@ -283,6 +283,10 @@
         <Filename Value="pic2raw.lpr"/>
         <Caret Line="28" Column="26" TopLine="24"/>
       </Position17>
+      <Position18>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="61" Column="26" TopLine="45"/>
+      </Position18>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

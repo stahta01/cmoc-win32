@@ -135,6 +135,8 @@ class procedure OImage.SaveToRawFile(const A: TFPCustomImage; const AStream: TSt
 var
   LX, LY: integer;
 begin
+  AStream.WriteWord(A.Width);
+  AStream.WriteWord(A.Height);
   for LY := 0 to A.Height - 1 do begin
     LX := 0;
     while LX < A.Width do begin
