@@ -38,40 +38,43 @@ uses
   procedure Main(const A: TCmocParams);
   var
     LWidth, LHeight: integer;
-    LSrc, LDst: TLazIntfImage;
     LPalette: TFPPalette;
+    LSrcImage, LDstImage: TLazIntfImage;
   begin
     LWidth := 0;
     LHeight := 0;
-    LPalette := OImage.Palette4(A.GetOptInteger('css', 0, 1));
-    LDst := TLazIntfImage.Create(0, 0, [riqfRGB]);
+    LPalette := OImage.CreatePalette(A.GetOptInteger('css', -1, 2));
     try
-      LSrc := TLazIntfImage.Create(0, 0, [riqfRGB]);
+      LDstImage := TLazIntfImage.Create(0, 0, [riqfRGB]);
       try
-        LSrc.LoadFromFile(A.GetFileNameInput);
-        if A.HasOption(A.OptWidth) then begin
-          LWidth := A.GetOptInteger(A.OptWidth, 8, 256);
+        LSrcImage := TLazIntfImage.Create(0, 0, [riqfRGB]);
+        try
+          LSrcImage.LoadFromFile(A.GetFileNameInput);
+          if A.HasOption(A.OptWidth) then begin
+            LWidth := A.GetOptInteger(A.OptWidth, 8, 256);
+          end;
+          if A.HasOption(A.OptHeight) then begin
+            LHeight := A.GetOptInteger(A.OptHeight, 8, 256);
+          end;
+          if (LWidth = 0) and (LHeight > 0) then begin
+            LWidth := LSrcImage.Width * LHeight div LSrcImage.Height;
+          end else if (LHeight = 0) and (LWidth > 0) then begin
+            LHeight := LSrcImage.Height * LWidth div LSrcImage.Width;
+          end else if (LWidth = 0) and (LHeight = 0) then begin
+            LWidth := LSrcImage.Width;
+            LHeight := LSrcImage.Height;
+          end;
+          LDstImage.SetSize(LWidth, LHeight);
+          OImage.ResampleAndDither(LDstImage, LSrcImage, LPalette);
+          LDstImage.SaveToFile('crap.bmp');
+          OImage.SaveToRawFile(LDstImage, A.GetFileNameOutput, LPalette);
+        finally
+          FreeAndNil(LSrcImage);
         end;
-        if A.HasOption(A.OptHeight) then begin
-          LHeight := A.GetOptInteger(A.OptHeight, 8, 256);
-        end;
-        if (LWidth = 0) and (LHeight > 0) then begin
-          LWidth := LSrc.Width * LHeight div LSrc.Height;
-        end else if (LHeight = 0) and (LWidth > 0) then begin
-          LHeight := LSrc.Height * LWidth div LSrc.Width;
-        end else if (LWidth = 0) and (LHeight = 0) then begin
-          LWidth := LSrc.Width;
-          LHeight := LSrc.Height;
-        end;
-        LDst.SetSize(LWidth, LHeight);
-        OImage.ResampleAndDither(LDst, LSrc, LPalette);
-        LDst.SaveToFile('crap.bmp');
-        OImage.SaveToRawFile(LDst, A.GetFileNameOutput, LPalette);
       finally
-        FreeAndNil(LSrc);
+        FreeAndNil(LDstImage);
       end;
     finally
-      FreeAndNil(LDst);
       FreeAndNil(LPalette);
     end;
   end;

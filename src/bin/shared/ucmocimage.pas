@@ -31,8 +31,7 @@ uses
 type
   OImage = object
   public
-    class function Palette2: TFPPalette;
-    class function Palette4(const ACss: integer): TFPPalette;
+    class function CreatePalette(const ACss: integer): TFPPalette;
   public
     class procedure Resample(const ADst, ASrc: TLazIntfImage);
     class procedure Dither(const ADst, ASrc: TLazIntfImage; const APalette: TFPPalette);
@@ -66,13 +65,6 @@ begin
   end;
 end;
 
-class function OImage.Palette2: TFPPalette;
-begin
-  Result := TFPPalette.Create(0);
-  Result.Add(FPColor(0, 0, 0));
-  Result.Add(FPColor($FFFF, $FFFF, $FFFF));
-end;
-
 function MakeColor(const R, G, B: byte): TFPColor;
 begin
   Result.red := R * 257;
@@ -81,10 +73,14 @@ begin
   Result.alpha := 0;
 end;
 
-class function OImage.Palette4(const ACss: integer): TFPPalette;
+class function OImage.CreatePalette(const ACss: integer): TFPPalette;
 begin
   Result := TFPPalette.Create(0);
   case ACss of
+    -1: begin
+      Result.Add(MakeColor(0, 0, 0));
+      Result.Add(MakeColor(255, 255, 255));
+    end;
     0: begin
       Result.Add(MakeColor(0, 255, 0));
       Result.Add(MakeColor(33, 16, 189));

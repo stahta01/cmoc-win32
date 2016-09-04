@@ -1,2 +1,16 @@
-Usage: pic2raw -o=OUTPUT INPUTFILE
+Usage: pic2raw -css=CSSPAL [-w=WIDTH] [-h=HEIGHT] -o=OUTPUT INPUTFILE
 pic2raw converts an image to a CoCo raw image file.
+
+OUTFILE = Supports bmp, png & jpeg images.
+
+CSSPAL  = [-1,0,1,2]
+          -1 = 2 color (black/white)
+           0 = CSS mode 0. Used for SCREEN 1,0 modes. (4 colors)
+           1 = CSS mode 1. Used for SCREEN 1,1 modes. (4 colors)
+           2 = Artificial colors. Used for PMODE 4 (4 colors)
+
+WIDTH   = Width in pixels. If only a width is provided, the height will be
+          adjusted to maintain aspect ratio of the input size. (Optional)
+
+HEIGHT  = Height in pixels. If only a height is provided, the width will be
+          adjusted to maintain aspect ration of the input size. (Optional)
