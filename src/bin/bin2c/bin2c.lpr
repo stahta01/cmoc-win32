@@ -53,10 +53,13 @@ uses
         Free;
       end;
     end;
+    if Length(LDstFile) = 0 then begin
+      raise Exception.Create('Output filename missing');
+    end;
     if Length(LName) = 0 then begin
       LName := '_array';
     end;
-    if ParamCount > 1 then begin
+    if ParamCount > 0 then begin
       with TFileStream.Create(ParamStr(ParamCount), fmOpenRead) do begin
         try
           LOutput := TStringList.Create;
