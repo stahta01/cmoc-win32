@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="9"/>
+    <BuildModes Active="Default"/>
+    <Units Count="2">
+      <Unit0>
+        <Filename Value="bin2c.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="19"/>
+        <CursorPos Y="21"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="..\shared\ucmocasm.pas"/>
+        <UnitName Value="UCmocAsm"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit1>
+    </Units>
+    <JumpHistory Count="4" HistoryIndex="3">
+      <Position1>
+        <Filename Value="bin2c.lpr"/>
+        <Caret Line="13" Column="32"/>
+      </Position1>
+      <Position2>
+        <Filename Value="bin2c.lpr"/>
+        <Caret Line="12" Column="24" TopLine="8"/>
+      </Position2>
+      <Position3>
+        <Filename Value="bin2c.lpr"/>
+        <Caret Line="42" Column="32" TopLine="27"/>
+      </Position3>
+      <Position4>
+        <Filename Value="bin2c.lpr"/>
+        <Caret Line="59" Column="10" TopLine="37"/>
+      </Position4>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>
