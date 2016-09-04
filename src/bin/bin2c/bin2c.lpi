@@ -13,6 +13,9 @@
       <Title Value="bin2c"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
+      <Resources Count="1">
+        <Resource_0 FileName="help.txt" Type="RCDATA" ResourceName="HELP"/>
+      </Resources>
     </General>
     <i18n>
       <EnableI18N LFM="False"/>
@@ -31,6 +34,11 @@
         <FormatVersion Value="1"/>
       </local>
     </RunParams>
+    <RequiredPackages Count="1">
+      <Item1>
+        <PackageName Value="LCLBase"/>
+      </Item1>
+    </RequiredPackages>
     <Units Count="1">
       <Unit0>
         <Filename Value="bin2c.lpr"/>
@@ -46,6 +54,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="..\shared"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>

@@ -4,13 +4,13 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="2">
+    <Units Count="3">
       <Unit0>
         <Filename Value="bin2c.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="68"/>
-        <CursorPos X="32" Y="76"/>
+        <TopLine Value="46"/>
+        <CursorPos X="50" Y="57"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -20,8 +20,16 @@
         <EditorIndex Value="-1"/>
         <UsageCount Value="10"/>
       </Unit1>
+      <Unit2>
+        <Filename Value="..\shared\ucmocrbs.pas"/>
+        <UnitName Value="UCmocRbs"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="18"/>
+        <CursorPos X="29" Y="33"/>
+        <UsageCount Value="10"/>
+      </Unit2>
     </Units>
-    <JumpHistory Count="4" HistoryIndex="3">
+    <JumpHistory Count="5" HistoryIndex="4">
       <Position1>
         <Filename Value="bin2c.lpr"/>
         <Caret Line="13" Column="32"/>
@@ -38,6 +46,10 @@
         <Filename Value="bin2c.lpr"/>
         <Caret Line="59" Column="10" TopLine="37"/>
       </Position4>
+      <Position5>
+        <Filename Value="bin2c.lpr"/>
+        <Caret Line="88" Column="9" TopLine="40"/>
+      </Position5>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

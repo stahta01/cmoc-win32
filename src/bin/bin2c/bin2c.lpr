@@ -25,7 +25,8 @@ program bin2c;
 
 uses
   Classes,
-  SysUtils;
+  SysUtils,
+  UCmocRbs;
 
 {$R *.res}
 
@@ -53,37 +54,36 @@ uses
         Free;
       end;
     end;
-    if Length(LDstFile) = 0 then begin
+    if (ParamCount = 0) or (Length(LDstFile) = 0) then begin
+      WriteLn(RbsLoadFromResource('HELP'));
       raise Exception.Create('Output filename missing');
     end;
     if Length(LName) = 0 then begin
       LName := '_array';
     end;
-    if ParamCount > 0 then begin
-      with TFileStream.Create(ParamStr(ParamCount), fmOpenRead) do begin
+    with TFileStream.Create(ParamStr(ParamCount), fmOpenRead) do begin
+      try
+        LOutput := TStringList.Create;
         try
-          LOutput := TStringList.Create;
-          try
-            LOutput.Add(Format('unsigned byte %s[%d] = {', [LName, Size]));
-            LBuffer := EmptyStr;
-            while Position < Size do begin
-              if Length(LBuffer) > 0 then begin
-                LBuffer += ',';
-                if Length(LBuffer) > 75 then begin
-                  FlushBuffer;
-                end;
+          LOutput.Add(Format('unsigned byte %s[%d] = {', [LName, Size]));
+          LBuffer := EmptyStr;
+          while Position < Size do begin
+            if Length(LBuffer) > 0 then begin
+              LBuffer += ',';
+              if Length(LBuffer) > 75 then begin
+                FlushBuffer;
               end;
-              LBuffer += '0x' + IntToHex(ReadByte, 2);
             end;
-            FlushBuffer;
-            LOutput.Add('};');
-            LOutput.SaveToFile(LDstFile);
-          finally
-            FreeAndNil(LOutput);
+            LBuffer += '0x' + IntToHex(ReadByte, 2);
           end;
+          FlushBuffer;
+          LOutput.Add('};');
+          LOutput.SaveToFile(LDstFile);
         finally
-          Free;
+          FreeAndNil(LOutput);
         end;
+      finally
+        Free;
       end;
     end;
   end;
