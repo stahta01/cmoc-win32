@@ -4,14 +4,14 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="196">
+    <Units Count="198">
       <Unit0>
         <Filename Value="cmoc2.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="28"/>
         <CursorPos X="24" Y="37"/>
-        <UsageCount Value="125"/>
+        <UsageCount Value="127"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -1412,6 +1412,20 @@
         <EditorIndex Value="-1"/>
         <UsageCount Value="10"/>
       </Unit195>
+      <Unit196>
+        <Filename Value="C:\DOCUME~1\Admin\LOCALS~1\Temp\Temporary Directory 2 for lazxproj_src.zip\utils\fix_xproj.pas"/>
+        <UnitName Value="Fix_XProj"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="118"/>
+        <UsageCount Value="10"/>
+      </Unit196>
+      <Unit197>
+        <Filename Value="C:\DOCUME~1\Admin\LOCALS~1\Temp\Temporary Directory 3 for lazxproj_src.zip\newlazxproj.pas"/>
+        <UnitName Value="NewLazXProj"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="145"/>
+        <UsageCount Value="10"/>
+      </Unit197>
     </Units>
     <JumpHistory Count="1">
       <Position1>
