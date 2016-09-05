@@ -39,9 +39,9 @@ type
   public
     class procedure ResampleAndDither(const ADst, ASrc: TLazIntfImage;
       const APalette: TFPPalette);
-    class function SaveToCoCoPicture(const A: TLazIntfImage; const APalCode: byte;
+    class function SaveToCoCoPic(const A: TLazIntfImage; const APalCode: byte;
       const APalette: TFPPalette): rawbytestring;
-    class procedure SaveToCoCoPicture(const A: TLazIntfImage; const AFileName: TFileName;
+    class procedure SaveToCoCoPic(const A: TLazIntfImage; const AFileName: TFileName;
       const APalCode: byte; const APalette: TFPPalette);
   end;
 
@@ -185,7 +185,7 @@ begin
   end;
 end;
 
-class function OImage.SaveToCoCoPicture(const A: TLazIntfImage; const APalCode: byte;
+class function OImage.SaveToCoCoPic(const A: TLazIntfImage; const APalCode: byte;
   const APalette: TFPPalette): rawbytestring;
 var
   LX, LY: integer;
@@ -203,18 +203,18 @@ begin
   finally
     FreeAndNil(LDitherer);
   end;
-  Result := RbsByte(APalCode) + RbsWord(A.Width) + RbsWord(A.Height) + RbsCompressBlock(Result);
+  Result := RbsByte(APalCode) + RbsWord(A.Width) + RbsWord(A.Height) + RbsCompressBlock(Result, 1);
 end;
 
-class procedure OImage.SaveToCoCoPicture(const A: TLazIntfImage;
-  const AFileName: TFileName; const APalCode: byte; const APalette: TFPPalette);
+class procedure OImage.SaveToCoCoPic(const A: TLazIntfImage; const AFileName: TFileName;
+  const APalCode: byte; const APalette: TFPPalette);
 var
   LStream: TStream;
   LData: string;
 begin
   LStream := TFileStream.Create(AFileName, fmCreate);
   try
-    LData := SaveToCoCoPicture(A, APalCode, APalette);
+    LData := SaveToCoCoPic(A, APalCode, APalette);
     LStream.WriteBuffer(LData[1], Length(LData));
   finally
     FreeAndNil(LStream);

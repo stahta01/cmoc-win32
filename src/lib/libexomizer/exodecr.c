@@ -38,7 +38,7 @@ read_bits(const char **inp, int bit_count)
     {
         if(bit_buffer == 1)
         {
-            bit_buffer = 0x100 | (*--(*inp) & 0xff);
+            bit_buffer = 0x100 | ((unsigned)*--(*inp) & 0xff);
         }
         bits <<= 1;
         bits |= bit_buffer & 0x1;

@@ -47,7 +47,7 @@ function RbsDecb(const A: rawbytestring; const AAddr, AExec: word): rawbytestrin
 
 function RbsVideo(const A: rawbytestring): rawbytestring;
 
-function RbsCompressBlock(const A: rawbytestring): rawbytestring;
+function RbsCompressBlock(const A: rawbytestring; const AType: byte): rawbytestring;
 
 implementation
 
@@ -165,10 +165,38 @@ begin
   end;
 end;
 
-function RbsCompressBlock(const A: rawbytestring): rawbytestring;
+function RbsCompress_Exomizer(const A: rawbytestring): rawbytestring;
+var
+  LSrc, LDst: TFileName;
 begin
-  Result := RbsCompress_LZSS(A);
-  Result := RbsByte(10) + RbsWord(Length(A)) + RbsWord(Length(Result)) + Result;
+  LSrc := GetTempDir(False) + 'rbscompress.src.bin';
+  LDst := GetTempDir(False) + 'rbscompress.dst.bin';
+  try
+    RbsSaveToFile(A, LSrc);
+    ExecuteProcess(ProgramDirectory + 'exomizer.exe', ['raw', '-b', '-o', LDst, LSrc]);
+    Result := RbsLoadFromFile(LDst);
+  finally
+    DeleteFile(LSrc);
+    DeleteFile(LDst);
+  end;
+end;
+
+function RbsCompressBlock(const A: rawbytestring; const AType: byte): rawbytestring;
+begin
+  case AType of
+    0: begin
+      Result := A;
+    end;
+    1: begin
+      Result := RbsCompress_Exomizer(A);
+    end;
+    12: begin  // (1 << 12) = 4096 ring buffer size (Default).
+      Result := RbsCompress_LZSS(A);
+    end else begin
+      raise Exception.Create('Unknown compression type');
+    end;
+  end;
+  Result := RbsByte(AType) + RbsWord(Length(A)) + RbsWord(Length(Result)) + Result;
 end;
 
 end.

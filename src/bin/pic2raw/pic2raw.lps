@@ -8,10 +8,9 @@
       <Unit0>
         <Filename Value="pic2raw.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="45"/>
-        <CursorPos X="32" Y="48"/>
-        <UsageCount Value="32"/>
+        <TopLine Value="64"/>
+        <CursorPos X="29" Y="77"/>
+        <UsageCount Value="36"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -191,10 +190,12 @@
       <Unit24>
         <Filename Value="..\shared\ucmocimage.pas"/>
         <UnitName Value="UCmocImage"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="93"/>
-        <CursorPos X="52" Y="111"/>
-        <UsageCount Value="23"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="185"/>
+        <CursorPos X="98" Y="206"/>
+        <UsageCount Value="25"/>
+        <Loaded Value="True"/>
       </Unit24>
       <Unit25>
         <Filename Value="..\shared\ucmocparser.pas"/>
@@ -251,10 +252,11 @@
       <Unit32>
         <Filename Value="..\shared\ucmocrbs.pas"/>
         <UnitName Value="UCmocRbs"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="152"/>
-        <CursorPos X="81" Y="171"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="180"/>
+        <CursorPos X="3" Y="186"/>
+        <UsageCount Value="13"/>
+        <Loaded Value="True"/>
       </Unit32>
       <Unit33>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\unix\unix.pp"/>
@@ -299,7 +301,7 @@
         <UsageCount Value="10"/>
       </Unit38>
     </Units>
-    <JumpHistory Count="9" HistoryIndex="8">
+    <JumpHistory Count="14" HistoryIndex="13">
       <Position1>
         <Filename Value="pic2raw.lpr"/>
         <Caret Line="47" Column="31" TopLine="32"/>
@@ -336,6 +338,26 @@
         <Filename Value="pic2raw.lpr"/>
         <Caret Line="48" Column="32" TopLine="45"/>
       </Position9>
+      <Position10>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="71" Column="27" TopLine="60"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\shared\ucmocimage.pas"/>
+        <Caret Line="206" Column="77" TopLine="198"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\shared\ucmocrbs.pas"/>
+        <Caret Line="184" Column="20" TopLine="168"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\shared\ucmocrbs.pas"/>
+        <Caret Line="50" Column="19" TopLine="39"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\shared\ucmocimage.pas"/>
+        <Caret Line="206" Column="77" TopLine="185"/>
+      </Position14>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

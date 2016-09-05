@@ -68,7 +68,7 @@ uses
           end;
           LDstImage.SetSize(LWidth, LHeight);
           OImage.ResampleAndDither(LDstImage, LSrcImage, LPalette);
-          OImage.SaveToCoCoPicture(LDstImage, A.GetFileNameOutput, LPalCode, LPalette);
+          OImage.SaveToCoCoPic(LDstImage, A.GetFileNameOutput, LPalCode, LPalette);
         finally
           FreeAndNil(LSrcImage);
         end;
