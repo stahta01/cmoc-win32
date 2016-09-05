@@ -1,16 +1,19 @@
 Usage: pic2raw -pal=PALCODE [-w=WIDTH] [-h=HEIGHT] -o=OUTPUT INPUTFILE
 pic2raw converts an image to a CoCo raw image file.
 
-OUTFILE : Supports bmp, png & jpeg images.
+INPUTFILE : Supports bmp, png & jpeg images.
+OUTPUT    : Output name of compressed CoCo picture.
 
-PALCODE : [0,1,2,3]
-          0 = 2 color (black/white)
-          1 = CSS 0 palette. Used for SCREEN 1,0 modes. (4 colors)
-          2 = CSS 1 palette. Used for SCREEN 1,1 modes. (4 colors)
-          3 = Artificial palette. Used in PMODE 4.      (4 colors)
+PALCODE   : Selects palette used for color mapping.
+            0 = Black/Green
+            1 = Black/Buff
+            2 = Green/Yellow/Blue/Red
+            3 = Buff/Cyan/Magenta/Orange
+            4 = Black/Red/Blue/Buff (Artificial)
+            5 = Black/Blue/Red/Buff (Artificial)
 
-WIDTH   : Width in pixels. If only a width is provided, the height will be
-          adjusted to maintain aspect ratio of the input size. (Optional)
+WIDTH     : Width in pixels. If only a width is provided, the height will be
+            adjusted to maintain aspect ratio of the input size. (Optional)
 
-HEIGHT  : Height in pixels. If only a height is provided, the width will be
-          adjusted to maintain aspect ration of the input size. (Optional)
+HEIGHT    : Height in pixels. If only a height is provided, the width will be
+            adjusted to maintain aspect ration of the input size. (Optional)

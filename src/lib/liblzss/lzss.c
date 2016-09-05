@@ -40,11 +40,9 @@
  *  DRI: Josh de Cesare
  */
 
-//#include <sl.h>
-typedef unsigned char u_int8_t;
-typedef unsigned u_int32_t;
+#include <sl.h>
 
-#define N        1024   /* size of ring buffer - must be power of 2 */
+#define N         4096  /* size of ring buffer - must be power of 2 */
 #define F         18    /* upper limit for match_length */
 #define THRESHOLD 2     /* encode string into position and length
                            if match_length is greater than this */

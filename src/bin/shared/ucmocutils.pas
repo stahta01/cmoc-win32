@@ -72,6 +72,8 @@ const
   Target_COCO = 'coco';
   Target_DRAGON = 'dragon';
 
+  Machine_COCOUS = 'cocous';
+
   Format_OBJ = 'obj';
   Format_RAW = 'raw';
   Format_DECB = 'decb';
@@ -103,6 +105,14 @@ const
   Opt_NoLineInfo1 = '-P';
   Opt_DontAssemble1 = '-S';
   Opt_Machine2 = '-machine';
+  Opt_NoTapeFast1 = '-no-tape-fast';
+  Opt_NoDos1 = '-nodos';
+  Opt_NoExtBas1 = '-noextbas';
+  Opt_Cart2 = '-cart';
+  Opt_Bas2 = '-bas';
+  Opt_Ram2 = '-ram';
+  Opt_ExtBas2 = '-extbas';
+  Opt_Dos2 = '-dos';
   Opt_Type2 = '-type';
   Opt_Load2 = '-load';
 
@@ -474,7 +484,6 @@ var
 begin
   LValues := TStringList.Create;
   try
-    LValues.Delimiter := '|';
     for LIndex := 0 to AOptions.Count - 1 do begin
       LName := Trim(AOptions[LIndex]);
       LPos := Pos('=', LName);
@@ -484,11 +493,15 @@ begin
       LValue := Trim(Copy(LName, LPos + 1, MaxInt));
       LName := Trim(Copy(LName, 1, LPos - 1));
       if AnsiMatchText(LName, AInclude) then begin
-        LValues.DelimitedText := LValue;
-        for LValue in LValues do begin
+        if Length(LValue) = 0 then begin
           StringDynArrayAppend(A, LName);
-          if Length(LValue) > 0 then begin
-            StringDynArrayAppend(A, LValue);
+        end else begin
+          LValues.CommaText := LValue;
+          for LValue in LValues do begin
+            StringDynArrayAppend(A, LName);
+            if Length(LValue) > 0 then begin
+              StringDynArrayAppend(A, LValue);
+            end;
           end;
         end;
       end;

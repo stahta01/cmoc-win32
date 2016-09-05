@@ -47,7 +47,7 @@ function RbsDecb(const A: rawbytestring; const AAddr, AExec: word): rawbytestrin
 
 function RbsVideo(const A: rawbytestring): rawbytestring;
 
-function RbsCompress(const A: rawbytestring): rawbytestring;
+function RbsCompressBlock(const A: rawbytestring): rawbytestring;
 
 implementation
 
@@ -149,7 +149,7 @@ begin
   end;
 end;
 
-function RbsCompress(const A: rawbytestring): rawbytestring;
+function RbsCompress_LZSS(const A: rawbytestring): rawbytestring;
 var
   LSrc, LDst: TFileName;
 begin
@@ -163,6 +163,12 @@ begin
     DeleteFile(LSrc);
     DeleteFile(LDst);
   end;
+end;
+
+function RbsCompressBlock(const A: rawbytestring): rawbytestring;
+begin
+  Result := RbsCompress_LZSS(A);
+  Result := RbsByte(10) + RbsWord(Length(A)) + RbsWord(Length(Result)) + Result;
 end;
 
 end.

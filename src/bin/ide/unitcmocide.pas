@@ -667,8 +667,9 @@ begin
     CheckRoms;
     WriteLn('// Running XRoar emulator. Machine=', FOptions.Values[Opt_Machine2]);
     try
-      OCmoc.StringDynArrayAppendOptions(LParams, FOptions, [Opt_Machine2, '-bas',
-        '-extbas', '-dos', '-cart', '-noextbas', '-nodos', '-ram', '-no-tape-fast', Opt_Type2]);
+      OCmoc.StringDynArrayAppendOptions(LParams, FOptions, [Opt_Machine2, Opt_Bas2,
+        Opt_ExtBas2, Opt_Dos2, Opt_Cart2, Opt_NoExtBas1, Opt_NoDos1, Opt_Ram2,
+        Opt_NoTapeFast1, Opt_Type2]);
       if FOptions.IndexOfName(Opt_Load2) < 0 then begin
         OCmoc.StringDynArrayAppendStrings(LParams, [Opt_Load2, OCmoc.PathToDsk + 'disk0.dsk']);
         OCmoc.StringDynArrayAppendStrings(LParams, [Opt_Load2, OCmoc.PathToDsk + 'disk1.dsk']);
@@ -701,25 +702,25 @@ procedure TFormCmocIDE.ExecuteMachine(const AName: string; const AFileName: TFil
 begin
   case AName of
     'coco1': begin
-      FOptions.Values['-machine'] := 'cocous';
-      FOptions.Values['-ram'] := '16';
-      FOptions.Values['-bas'] := 'bas10.rom';
-      FOptions.Values['-noextbas'] := EmptyStr;
-      FOptions.Values['-nodos'] := EmptyStr;
+      FOptions.Values[Opt_Machine2] := Machine_COCOUS;
+      FOptions.Values[Opt_Ram2] := '16';
+      FOptions.Values[Opt_Bas2] := 'bas10.rom';
+      FOptions.Values[Opt_NoExtBas1] := EmptyStr;
+      FOptions.Values[Opt_NoDos1] := EmptyStr;
     end;
     'coco1d': begin
-      FOptions.Values['-machine'] := 'cocous';
-      FOptions.Values['-ram'] := '64';
-      FOptions.Values['-bas'] := 'bas10.rom';
-      FOptions.Values['-extbas'] := 'extbas10.rom';
-      FOptions.Values['-dos'] := 'disk10.rom';
+      FOptions.Values[Opt_Machine2] := Machine_COCOUS;
+      FOptions.Values[Opt_Ram2] := '64';
+      FOptions.Values[Opt_Bas2] := 'bas10.rom';
+      FOptions.Values[Opt_ExtBas2] := 'extbas10.rom';
+      FOptions.Values[Opt_Dos2] := 'disk10.rom';
     end;
     'coco2d': begin
-      FOptions.Values['-machine'] := 'cocous';
-      FOptions.Values['-ram'] := '64';
-      FOptions.Values['-bas'] := 'bas11.rom';
-      FOptions.Values['-extbas'] := 'extbas11.rom';
-      FOptions.Values['-dos'] := 'disk11.rom';
+      FOptions.Values[Opt_Machine2] := Machine_COCOUS;
+      FOptions.Values[Opt_Ram2] := '64';
+      FOptions.Values[Opt_Bas2] := 'bas11.rom';
+      FOptions.Values[Opt_ExtBas2] := 'extbas11.rom';
+      FOptions.Values[Opt_Dos2] := 'disk11.rom';
     end else begin
       FOptions.Values[Opt_Machine2] := AName;
     end;

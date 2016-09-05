@@ -44,7 +44,7 @@ uses
   begin
     LWidth := 0;
     LHeight := 0;
-    LPalCode := A.GetOptInteger('pal', 0, 3);
+    LPalCode := A.GetOptInteger('pal', 0, 5);
     LPalette := OImage.CreatePalette(LPalCode);
     try
       LDstImage := TLazIntfImage.Create(0, 0, [riqfRGB]);
@@ -68,7 +68,7 @@ uses
           end;
           LDstImage.SetSize(LWidth, LHeight);
           OImage.ResampleAndDither(LDstImage, LSrcImage, LPalette);
-          OImage.SaveToRaw(LDstImage, A.GetFileNameOutput, LPalCode, LPalette);
+          OImage.SaveToCoCoPicture(LDstImage, A.GetFileNameOutput, LPalCode, LPalette);
         finally
           FreeAndNil(LSrcImage);
         end;

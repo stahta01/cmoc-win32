@@ -39,9 +39,9 @@ type
   public
     class procedure ResampleAndDither(const ADst, ASrc: TLazIntfImage;
       const APalette: TFPPalette);
-    class function SaveToRaw(const A: TLazIntfImage; const APalCode: byte;
+    class function SaveToCoCoPicture(const A: TLazIntfImage; const APalCode: byte;
       const APalette: TFPPalette): rawbytestring;
-    class procedure SaveToRaw(const A: TLazIntfImage; const AFileName: TFileName;
+    class procedure SaveToCoCoPicture(const A: TLazIntfImage; const AFileName: TFileName;
       const APalCode: byte; const APalette: TFPPalette);
   end;
 
@@ -80,25 +80,35 @@ begin
   case APalCode of
     0: begin
       Result.Add(MakeColor(0, 0, 0)); // Black
-      Result.Add(MakeColor(255, 255, 255)); // White
+      Result.Add(MakeColor(0, 255, 0)); // Green
     end;
     1: begin
+      Result.Add(MakeColor(0, 0, 0)); // Black
+      Result.Add(MakeColor(255, 255, 255)); // Buff
+    end;
+    2: begin
       Result.Add(MakeColor(0, 255, 0)); // Green
       Result.Add(MakeColor(255, 255, 66)); // Yellow
       Result.Add(MakeColor(33, 16, 189)); //Blue
       Result.Add(MakeColor(189, 0, 33)); // Red
     end;
-    2: begin
+    3: begin
       Result.Add(MakeColor(255, 255, 255)); // Buff
       Result.Add(MakeColor(0, 222, 115)); // Cyan
       Result.Add(MakeColor(255, 16, 255)); //Magenta
       Result.Add(MakeColor(255, 66, 0)); // Orange
     end;
-    3: begin
+    4: begin
       Result.Add(MakeColor(0, 0, 0)); // Black
       Result.Add(MakeColor(255, 0, 0)); // Red
       Result.Add(MakeColor(0, 0, 255)); // Blue
-      Result.Add(MakeColor(255, 255, 255)); // White
+      Result.Add(MakeColor(255, 255, 255)); // Buff
+    end;
+    5: begin
+      Result.Add(MakeColor(0, 0, 0)); // Black
+      Result.Add(MakeColor(0, 0, 255)); // Blue
+      Result.Add(MakeColor(255, 0, 0)); // Red
+      Result.Add(MakeColor(255, 255, 255)); // Buff
     end else begin
       OCmoc.RaiseError('Invalid palette code');
     end;
@@ -175,7 +185,7 @@ begin
   end;
 end;
 
-class function OImage.SaveToRaw(const A: TLazIntfImage; const APalCode: byte;
+class function OImage.SaveToCoCoPicture(const A: TLazIntfImage; const APalCode: byte;
   const APalette: TFPPalette): rawbytestring;
 var
   LX, LY: integer;
@@ -193,20 +203,18 @@ begin
   finally
     FreeAndNil(LDitherer);
   end;
-  Result := RbsCompress(Result);
-  Result := RbsByte(0) + RbsByte(APalCode) + RbsWord(A.Width) +
-    RbsWord(A.Height) + RbsWord(Length(Result)) + Result;
+  Result := RbsByte(APalCode) + RbsWord(A.Width) + RbsWord(A.Height) + RbsCompressBlock(Result);
 end;
 
-class procedure OImage.SaveToRaw(const A: TLazIntfImage; const AFileName: TFileName;
-  const APalCode: byte; const APalette: TFPPalette);
+class procedure OImage.SaveToCoCoPicture(const A: TLazIntfImage;
+  const AFileName: TFileName; const APalCode: byte; const APalette: TFPPalette);
 var
   LStream: TStream;
   LData: string;
 begin
   LStream := TFileStream.Create(AFileName, fmCreate);
   try
-    LData := SaveToRaw(A, APalCode, APalette);
+    LData := SaveToCoCoPicture(A, APalCode, APalette);
     LStream.WriteBuffer(LData[1], Length(LData));
   finally
     FreeAndNil(LStream);
