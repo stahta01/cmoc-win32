@@ -26,22 +26,23 @@ unit UCmocImage;
 interface
 
 uses
-  Classes, extinterpolation, FPDitherer, FPImage, FPImgCanv, GraphType, IntfGraphics, SysUtils;
+  Classes, extinterpolation, FPDitherer, FPImage, FPImgCanv, GraphType,
+  IntfGraphics, SysUtils, UCmocRbs, UCmocUtils;
 
 type
   OImage = object
   public
-    class function CreatePalette(const ACss: integer): TFPPalette;
+    class function CreatePalette(const APalCode: integer): TFPPalette;
   public
     class procedure Resample(const ADst, ASrc: TLazIntfImage);
     class procedure Dither(const ADst, ASrc: TLazIntfImage; const APalette: TFPPalette);
   public
     class procedure ResampleAndDither(const ADst, ASrc: TLazIntfImage;
       const APalette: TFPPalette);
-    class procedure SaveToRawFile(const A: TLazIntfImage; const AStream: TStream;
-      const APalette: TFPPalette);
-    class procedure SaveToRawFile(const A: TLazIntfImage; const AFileName: TFileName;
-      const APalette: TFPPalette);
+    class function SaveToRaw(const A: TLazIntfImage; const APalCode: byte;
+      const APalette: TFPPalette): rawbytestring;
+    class procedure SaveToRaw(const A: TLazIntfImage; const AFileName: TFileName;
+      const APalCode: byte; const APalette: TFPPalette);
   end;
 
 implementation
@@ -73,30 +74,33 @@ begin
   Result.alpha := 0;
 end;
 
-class function OImage.CreatePalette(const ACss: integer): TFPPalette;
+class function OImage.CreatePalette(const APalCode: integer): TFPPalette;
 begin
   Result := TFPPalette.Create(0);
-  case ACss of
-    -1: begin
-      Result.Add(MakeColor(0, 0, 0));
-      Result.Add(MakeColor(255, 255, 255));
-    end;
+  case APalCode of
     0: begin
-      Result.Add(MakeColor(0, 255, 0));
-      Result.Add(MakeColor(33, 16, 189));
-      Result.Add(MakeColor(189, 0, 33));
-      Result.Add(MakeColor(255, 255, 66));
+      Result.Add(MakeColor(0, 0, 0)); // Black
+      Result.Add(MakeColor(255, 255, 255)); // White
     end;
     1: begin
-      Result.Add(MakeColor(255, 255, 255));
-      Result.Add(MakeColor(0, 222, 115));
-      Result.Add(MakeColor(255, 16, 255));
-      Result.Add(MakeColor(255, 66, 0));
+      Result.Add(MakeColor(0, 255, 0)); // Green
+      Result.Add(MakeColor(255, 255, 66)); // Yellow
+      Result.Add(MakeColor(33, 16, 189)); //Blue
+      Result.Add(MakeColor(189, 0, 33)); // Red
+    end;
+    2: begin
+      Result.Add(MakeColor(255, 255, 255)); // Buff
+      Result.Add(MakeColor(0, 222, 115)); // Cyan
+      Result.Add(MakeColor(255, 16, 255)); //Magenta
+      Result.Add(MakeColor(255, 66, 0)); // Orange
+    end;
+    3: begin
+      Result.Add(MakeColor(0, 0, 0)); // Black
+      Result.Add(MakeColor(255, 0, 0)); // Red
+      Result.Add(MakeColor(0, 0, 255)); // Blue
+      Result.Add(MakeColor(255, 255, 255)); // White
     end else begin
-      Result.Add(MakeColor(0, 0, 0));
-      Result.Add(MakeColor(255, 0, 0));
-      Result.Add(MakeColor(0, 0, 255));
-      Result.Add(MakeColor(255, 255, 255));
+      OCmoc.RaiseError('Invalid palette code');
     end;
   end;
 end;
@@ -171,36 +175,39 @@ begin
   end;
 end;
 
-class procedure OImage.SaveToRawFile(const A: TLazIntfImage; const AStream: TStream;
-  const APalette: TFPPalette);
+class function OImage.SaveToRaw(const A: TLazIntfImage; const APalCode: byte;
+  const APalette: TFPPalette): rawbytestring;
 var
   LX, LY: integer;
   LDitherer: TBytePixelDitherer;
 begin
+  Result := default(rawbytestring);
   LDitherer := TBytePixelDitherer.Create(APalette);
   try
-    //AStream.WriteByte(APalette.Count);
-    //AStream.WriteWord(A.Width);
-    //AStream.WriteWord(A.Height);
     for LY := 0 to A.Height - 1 do begin
       LX := 0;
       while LX < A.Width do begin
-        AStream.WriteByte(LDitherer.GetColorByte(A, LX, LY));
+        Result += RbsByte(LDitherer.GetColorByte(A, LX, LY));
       end;
     end;
   finally
     FreeAndNil(LDitherer);
   end;
+  Result := RbsCompress(Result);
+  Result := RbsByte(0) + RbsByte(APalCode) + RbsWord(A.Width) +
+    RbsWord(A.Height) + RbsWord(Length(Result)) + Result;
 end;
 
-class procedure OImage.SaveToRawFile(const A: TLazIntfImage; const AFileName: TFileName;
-  const APalette: TFPPalette);
+class procedure OImage.SaveToRaw(const A: TLazIntfImage; const AFileName: TFileName;
+  const APalCode: byte; const APalette: TFPPalette);
 var
   LStream: TStream;
+  LData: string;
 begin
   LStream := TFileStream.Create(AFileName, fmCreate);
   try
-    SaveToRawFile(A, LStream, APalette);
+    LData := SaveToRaw(A, APalCode, APalette);
+    LStream.WriteBuffer(LData[1], Length(LData));
   finally
     FreeAndNil(LStream);
   end;

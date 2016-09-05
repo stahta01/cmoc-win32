@@ -452,6 +452,7 @@ begin
   StringDynArrayAppendLib(A, 'disk');
   StringDynArrayAppendLib(A, 'motorola');
   StringDynArrayAppendLib(A, 'cmoc');
+  StringDynArrayAppendLib(A, 'lzss');
   StringDynArrayAppendLib(A, 'varptr');
   StringDynArrayAppendLib(A, '6809');
   StringDynArrayAppendLib(A, 'basic');

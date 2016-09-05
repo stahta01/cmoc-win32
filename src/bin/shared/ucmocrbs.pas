@@ -26,7 +26,7 @@ unit UCmocRbs;
 interface
 
 uses
-  Classes, LCLType, SysUtils;
+  Classes, FileUtil, LCLType, SysUtils;
 
 function RbsLoadFromFile(const AStream: TStream; ASize: SizeInt = -1): rawbytestring;
 function RbsLoadFromFile(const AFileName: string): rawbytestring;
@@ -46,6 +46,8 @@ function RbsDecb(const A: rawbytestring; const AAddr: word): rawbytestring;
 function RbsDecb(const A: rawbytestring; const AAddr, AExec: word): rawbytestring;
 
 function RbsVideo(const A: rawbytestring): rawbytestring;
+
+function RbsCompress(const A: rawbytestring): rawbytestring;
 
 implementation
 
@@ -147,5 +149,20 @@ begin
   end;
 end;
 
+function RbsCompress(const A: rawbytestring): rawbytestring;
+var
+  LSrc, LDst: TFileName;
+begin
+  LSrc := GetTempDir(False) + 'rbscompress.src.bin';
+  LDst := GetTempDir(False) + 'rbscompress.dst.bin';
+  try
+    RbsSaveToFile(A, LSrc);
+    ExecuteProcess(ProgramDirectory + 'lzss.exe', ['e', LSrc, LDst]);
+    Result := RbsLoadFromFile(LDst);
+  finally
+    DeleteFile(LSrc);
+    DeleteFile(LDst);
+  end;
+end;
 
 end.

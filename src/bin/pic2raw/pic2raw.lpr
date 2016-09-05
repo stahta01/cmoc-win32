@@ -31,19 +31,21 @@ uses
   SysUtils,
   UCmocImage,
   UCmocMain,
-  UCmocParams;
+  UCmocParams,
+  UCmocRbs;
 
 {$R *.res}
 
   procedure Main(const A: TCmocParams);
   var
-    LWidth, LHeight: integer;
+    LWidth, LHeight, LPalCode: integer;
     LPalette: TFPPalette;
     LSrcImage, LDstImage: TLazIntfImage;
   begin
     LWidth := 0;
     LHeight := 0;
-    LPalette := OImage.CreatePalette(A.GetOptInteger('css', -1, 2));
+    LPalCode := A.GetOptInteger('pal', 0, 3);
+    LPalette := OImage.CreatePalette(LPalCode);
     try
       LDstImage := TLazIntfImage.Create(0, 0, [riqfRGB]);
       try
@@ -66,8 +68,7 @@ uses
           end;
           LDstImage.SetSize(LWidth, LHeight);
           OImage.ResampleAndDither(LDstImage, LSrcImage, LPalette);
-          LDstImage.SaveToFile('crap.bmp');
-          OImage.SaveToRawFile(LDstImage, A.GetFileNameOutput, LPalette);
+          OImage.SaveToRaw(LDstImage, A.GetFileNameOutput, LPalCode, LPalette);
         finally
           FreeAndNil(LSrcImage);
         end;

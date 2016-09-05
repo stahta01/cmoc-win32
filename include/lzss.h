@@ -14,7 +14,7 @@
 #ifndef _LZSS_H
 #define _LZSS_H
 
-int decompress_lzss(unsigned char* dst, unsigned char* src, unsigned srclen);
+int decompress_lzss(void* dst, void* src, unsigned srclen);
 
 #endif
 
