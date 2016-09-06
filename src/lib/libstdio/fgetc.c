@@ -1,9 +1,8 @@
 
-#include "_libc.h"
+#include "_stdio.h"
 
 int fgetc(FILE* fp)
 {
-    assert(fp);
     if (fp->devnum) {
         if (fp->cinbfl) {
             return EOF;
@@ -16,6 +15,9 @@ int fgetc(FILE* fp)
             }
             _devnum = dn;
             fp->cinbfl = _cinbfl;
+            if (fp->cinbfl) {
+                return EOF;
+            }
             return c;
         }
     } else {

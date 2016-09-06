@@ -483,6 +483,7 @@ begin
   StringDynArrayAppendLib(A, 'conio');
   StringDynArrayAppendLib(A, 'unistd');
   StringDynArrayAppendLib(A, 'ctype');
+  StringDynArrayAppendLib(A, 'stdio');
   StringDynArrayAppendLib(A, 'string');
   StringDynArrayAppendLib(A, 'c');
 end;

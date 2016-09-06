@@ -1,5 +1,5 @@
 
-#include <stdio.h>
+#include "_stdio.h"
 
 FILE __stdin;
 FILE __stdout;

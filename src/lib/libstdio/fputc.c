@@ -1,13 +1,13 @@
 
-#include "_libc.h"
+#include "_stdio.h"
 
-int fputs(char* s, FILE* fp)
+int fputc(int c, FILE* fp)
 {
     assert(fp);
     if (fp->devnum) {
         return EOF;
     } else {
-        cputs(s);
+        cputc((char)c);
         return 0;
     }
 }

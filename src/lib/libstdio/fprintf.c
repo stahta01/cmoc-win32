@@ -1,5 +1,5 @@
 
-#include <stdio.h>
+#include "_stdio.h"
 
 int fprintf(FILE* fp, char* fmt, ...)
 {
