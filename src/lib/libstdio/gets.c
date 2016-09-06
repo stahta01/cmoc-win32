@@ -1,5 +1,5 @@
 
-#include "_libc.h"
+#include "_stdio.h"
 
 char* gets(char* s)
 {
