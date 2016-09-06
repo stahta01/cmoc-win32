@@ -1,10 +1,10 @@
 
-#include <stdio.h>
-#include <conio.h>
+#include "_libc.h"
 
 int fputc(int c, FILE* fp)
 {
-    if (fp) {
+    assert(fp);
+    if (fp->devnum) {
         return EOF;
     } else {
         cputc((char)c);

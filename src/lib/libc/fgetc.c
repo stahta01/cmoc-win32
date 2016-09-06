@@ -3,15 +3,21 @@
 
 int fgetc(FILE* fp)
 {
-    if (fp) {
-        char c, dn = _devnum;
-        _devnum = (char)fp;
-        asm {
-            jsr _LA176
-            sta c
+    assert(fp);
+    if (fp->devnum) {
+        if (fp->cinbfl) {
+            return EOF;
+        } else {
+            char c, dn = _devnum;
+            _devnum = fp->devnum;
+            asm {
+                jsr _LA176
+                sta c
+            }
+            _devnum = dn;
+            fp->cinbfl = _cinbfl;
+            return c;
         }
-        _devnum = dn;
-        return c ? c : EOF;
     } else {
         return cgetc();
     }

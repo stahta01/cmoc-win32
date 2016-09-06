@@ -38,12 +38,7 @@
 #include <sys/size.h>
 #include <sys/ptrdiff.h>
 #include <sys/wchar.h>
-
-/* NULL pointer */
-#ifndef _HAVE_NULL
-#define NULL    0
-#define _HAVE_NULL
-#endif
+#include <sys/null.h>
 
 /* offsetof macro */
 #define offsetof(type, member)  (size_t) (&((type*) 0)->member)

@@ -1,10 +1,10 @@
 
-#include <stdio.h>
-#include <conio.h>
+#include "_libc.h"
 
 int fputs(char* s, FILE* fp)
 {
-    if (fp) {
+    assert(fp);
+    if (fp->devnum) {
         return EOF;
     } else {
         cputs(s);

@@ -38,7 +38,11 @@
 #include <stddef.h>
 #include <stdarg.h>
 
-typedef struct _FILE FILE;
+typedef struct {
+    char devnum;
+    char cinbfl;
+} FILE;
+
 typedef unsigned int fpos_t;
 
 // Standard file descriptors
@@ -114,8 +118,8 @@ int vsscanf(char* s, char* format, va_list ap);
 int vfscanf(FILE* f, char* format, va_list ap);
 
 // Masking macros for some functions
-#define getc(_f)        fgetc(_f)              // ANSI
-#define putc(_c,_f)     fputc(_c,_f)           // ANSI
+#define getc(_f)        fgetc(_f)           // ANSI
+#define putc(_c,_f)     fputc(_c,_f)        // ANSI
 
 #endif
 

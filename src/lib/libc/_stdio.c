@@ -1,7 +1,10 @@
 
 #include <stdio.h>
 
-FILE* stdin;
-FILE* stdout;
+FILE __stdin;
+FILE __stdout;
+
+FILE* stdin = &__stdin;
+FILE* stdout = &__stdout;
 
 
