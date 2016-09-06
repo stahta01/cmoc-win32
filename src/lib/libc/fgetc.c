@@ -1,11 +1,17 @@
 
-#include <stdio.h>
-#include <conio.h>
+#include "_libc.h"
 
 int fgetc(FILE* fp)
 {
     if (fp) {
-        return EOF;
+        char c, dn = _devnum;
+        _devnum = (char)fp;
+        asm {
+            jsr _LA176
+            sta c
+        }
+        _devnum = dn;
+        return c ? c : EOF;
     } else {
         return cgetc();
     }

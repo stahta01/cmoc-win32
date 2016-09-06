@@ -2193,6 +2193,7 @@ object FormCmocIDE: TFormCmocIDE
           15FFB78115FFB78115FFB78114FFB88215FFB98418EABA861D00
         }
         ImageIndex = 29
+        ShortCut = 123
         OnClick = MenuToolsConsoleClick
       end
       object MenuToolsSep1: TMenuItem
@@ -2455,7 +2456,7 @@ object FormCmocIDE: TFormCmocIDE
         ImageIndex = 18
         OnClick = MenuHelpAboutClick
       end
-      object MenuItem2: TMenuItem
+      object MenuHelpSep1: TMenuItem
         Enabled = False
       end
       object MenuHelpLocalDocuments: TMenuItem
@@ -2585,6 +2586,9 @@ object FormCmocIDE: TFormCmocIDE
         ImageIndex = 26
         OnClick = MenuHelpClick
       end
+      object MenuHelpSep4: TMenuItem
+        Enabled = False
+      end
       object MenuHelpColorBasicSummary: TMenuItem
         Caption = 'Color Basic Summary ...'
         Bitmap.Data = {
@@ -2711,7 +2715,8 @@ object FormCmocIDE: TFormCmocIDE
         ImageIndex = 26
         OnClick = MenuHelpClick
       end
-      object MenuItem1: TMenuItem
+      object MenuHelpSep2: TMenuItem
+        Enabled = False
       end
       object MenuHelpOnlineHelp: TMenuItem
         Caption = 'Online Help'

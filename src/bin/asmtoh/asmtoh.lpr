@@ -58,7 +58,7 @@ type
     LLine, LIdent, LSymbol, LComment: string;
     LParser: OAsmParser;
   begin
-    OCmoc.StringsInsertWinCMOCHeader(ADst);
+    OCmoc.StringsInsertWinCMOCHeader(ADst, True);
     ADst.Add('// Translated from ' + OCmoc.StringQuoted(ExtractFileName(AOrgFile)));
     ADst.Add('//');
     ADst.Add('// This file is in the public domain');
@@ -95,9 +95,9 @@ type
                   end;
                   LComment += '(Compatible with CoCo)';
                 end;
-                ADst.Add(Format('// Decimal %u (0x%x/$%x) [%s]%s',
-                  [LValue, LValue, LValue,
-                  IfThen(LSize <= 0, 'Constant', IfThen(LSize = 1, 'Byte',
+                ADst.Add(Format('// Decimal %u (0x%x) [%s]%s',
+                  [LValue, LValue,
+                  IfThen(LSize < 0, 'Value', IfThen(LSize = 1, 'Byte',
                   IfThen(LSize = 2, 'Word', 'Array'))),
                   IfThen(Length(LComment) > 0, ' - ' + LComment, EmptyStr)]));
                 LDefine(LIdent, IntToStr(LValue));
@@ -166,7 +166,7 @@ type
   var
     LTmpFile: TFileName;
   begin
-    LTmpFile := OCmoc.FileNameTemp('.asm');
+    LTmpFile := ASrc + '.tmp.asm';
     try
       with TStringList.Create do begin
         try
@@ -221,29 +221,38 @@ type
   end;
 
 var
-  LDstPath: TFileName;
+  LDstPath, LSrcPath: TFileName;
 
 begin
   try
+    LSrcPath := OCmoc.PathToSrcLib + 'libcoco/asm/cocoroms/';
     LDstPath := OCmoc.PathToInclude + 'coco/';
-    ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm',
-      '_COCO_EQUATES_H', default(TStringDynArray));
-
-    ProcessSrcToPathWithEquates(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/disk.asm',
-      '_COCO_DISK_H',
+    ProcessSrcToPath(LDstPath, LSrcPath + 'equates.asm', '_COCO_EQUATES_H',
       default(TStringDynArray));
 
-    ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/cocodefs.asm', '_COCO_DEFS_H',
+    ProcessSrcToPath(LDstPath, LSrcPath + 'cb_equates.asm', '_COCO_CB_EQUATES_H',
       default(TStringDynArray));
-    ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'libcoco/asm/coco3defs.asm', '_COCO3_DEFS_H',
+
+    ProcessSrcToPath(LDstPath, LSrcPath + 'dragon_equivs.asm', '_COCO_DRAGON_EQUIVS_H',
+      default(TStringDynArray));
+
+    ProcessSrcToPathWithEquates(LDstPath, LSrcPath + 'disk.asm', '_COCO_DISK_H',
+      default(TStringDynArray));
+
+    ProcessSrcToPathWithEquates(LDstPath, LSrcPath + 'coco3.asm', '_COCO_COCO3_H',
+      default(TStringDynArray));
+
+    ProcessSrcToPath(LDstPath, LSrcPath + '../cocodefs.asm', '_COCO_DEFS_H',
+      default(TStringDynArray));
+    ProcessSrcToPath(LDstPath, LSrcPath + '../coco3defs.asm', '_COCO3_DEFS_H',
       default(TStringDynArray));
 
     LDstPath := OCmoc.PathToInclude + 'dragon/';
 
     // Note: we list the equates from coco which are the same as the dragon.
-    ProcessSrcToDst(LDstPath + '_equates.h', OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm',
-      OCmoc.PathToSrcLib + 'libcoco/asm/equates.asm',
-      '_DRAGON_COCO_EQUATES_H', TStringDynArray.Create('BS', 'CR', 'ESC', 'LF',
+    ProcessSrcToDst(LDstPath + '_equates.h', LSrcPath + 'equates.asm',
+      LSrcPath + 'equates.asm', '_DRAGON_COCO_EQUATES_H',
+      TStringDynArray.Create('BS', 'CR', 'ESC', 'LF',
       'FORMF', 'SPACE', 'TEMPTR', 'CURPOS', 'SNDTON', 'SNDDUR', 'TIMVAL',
       'VIDRAM', 'POTVAL', 'PMODE', 'ALLCOL', 'WCOLOR', 'FORCOL', 'BAKCOL',
       'USRADR', 'TRCFLG', 'ENDGRP', 'HORBYT', 'BEGGRP', 'GRPRAM', 'HORBEG',
@@ -255,10 +264,19 @@ begin
       'RSTVEC', 'TOPRAM', 'FILSTA', 'CINCTR', 'CINPTR', 'BLKTYP', 'BLKLEN'));
 
     LDstPath := OCmoc.PathToInclude + 'vectrex/';
+
     ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexdefs.asm',
       '_VECTREX_VECTREXDEFS_H', default(TStringDynArray));
     ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexbios.asm',
       '_VECTREX_VECTREXBIOS_H', default(TStringDynArray));
+
+    LDstPath := OCmoc.PathToInclude + 'superdos/';
+    LSrcPath := OCmoc.PathToSrcLib + 'libcoco/asm/superdos/';
+
+    ProcessSrcToPath(LDstPath, LSrcPath + 'romdefs.asm', '_SUPERDOS_ROMDEFS_H',
+      default(TStringDynArray));
+    ProcessSrcToPath(LDstPath, LSrcPath + 'dosdefs.asm', '_SUPERDOS_DOSDEFS_H',
+      default(TStringDynArray));
 
     Create6883;
 

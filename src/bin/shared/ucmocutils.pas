@@ -50,6 +50,7 @@ const
   FileExt_OBJ = '.obj';
   FileExt_C = '.c';
   FileExt_A = '.a';
+  FileExt_ROM = '.rom';
   FileExt_WAV = '.wav';
   FileExt_CAS = '.cas';
   FileExt_BIN = '.bin';
@@ -66,6 +67,9 @@ const
   Tool_LWLINK = 'lwlink';
   Tool_LWAR = 'lwar';
   Tool_ASTYLE = 'astyle';
+  Tool_WIMGTOOL = 'wimgtool';
+  Tool_CMOCIDE = 'cmocide';
+  Tool_F9DASM = 'f9dasm';
 
   Origin_DEFAULT = $2800;
 
@@ -73,6 +77,8 @@ const
   Target_DRAGON = 'dragon';
 
   Machine_COCOUS = 'cocous';
+  Machine_COCO3 = 'coco3';
+  Machine_DRAGON64 = 'dragon64';
 
   Format_OBJ = 'obj';
   Format_RAW = 'raw';
@@ -100,6 +106,8 @@ const
   Opt_LibInclude2 = '-l';
   Opt_Output2 = '-o';
   Opt_Target2 = '-t';
+  Opt_NoAddr1 = '-noaddr';
+  Opt_Out2 = '-out';
   Opt_Verbose1 = '-V';
   Opt_Werror1 = '-Werror';
   Opt_NoLineInfo1 = '-P';
@@ -108,6 +116,7 @@ const
   Opt_NoTapeFast1 = '-no-tape-fast';
   Opt_NoDos1 = '-nodos';
   Opt_NoExtBas1 = '-noextbas';
+  Opt_Offset2 = '-offset';
   Opt_Cart2 = '-cart';
   Opt_Bas2 = '-bas';
   Opt_Ram2 = '-ram';
@@ -115,6 +124,8 @@ const
   Opt_Dos2 = '-dos';
   Opt_Type2 = '-type';
   Opt_Load2 = '-load';
+  Opt_NoCode1 = '-nocode';
+  Opt_NoMaximize1 = '-nomaximize';
 
   Def_CMOC = '__CMOC__';
   Def_CMOC_VERSION = Def_CMOC + '=1.30';
@@ -228,7 +239,7 @@ type
     class procedure StringDynArrayAppendOptions(var A: TStringDynArray;
       const AOptions: TStrings; const AInclude: array of string);
   public
-    class procedure StringsInsertWinCMOCHeader(const A: TStrings);
+    class procedure StringsInsertWinCMOCHeader(const A: TStrings; const ANoDate: boolean = False);
   end;
 
 implementation
@@ -529,11 +540,15 @@ begin
   StringDynArrayAppend(A, AFileName);
 end;
 
-class procedure OCmoc.StringsInsertWinCMOCHeader(const A: TStrings);
+class procedure OCmoc.StringsInsertWinCMOCHeader(const A: TStrings; const ANoDate: boolean);
 begin
   A.Insert(0, EmptyStr);
   A.Insert(1, '// This file was created by WinCMOC (CMOC 6809 C Compiler for Windows)');
-  A.Insert(2, '// Created: ' + DateTimeToStr(Now));
+  if ANoDate then begin
+    A.Insert(2, '//');
+  end else begin
+    A.Insert(2, '// Created: ' + DateTimeToStr(Now));
+  end;
   A.Insert(3, '// WinCMOC:  https://sourceforge.net/projects/cmoc-win32/');
   A.Insert(4, '// CMOC:     http://perso.b2b2c.ca/~sarrazip/dev/cmoc.html');
   A.Insert(5, EmptyStr);

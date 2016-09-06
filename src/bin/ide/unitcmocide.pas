@@ -110,9 +110,10 @@ type
     MenuHelpVccEmulator: TMenuItem;
     MenuHelpWinCmocOnline: TMenuItem;
     MenuHelpXRoarEmulator: TMenuItem;
-    MenuItem1: TMenuItem;
-    MenuItem2: TMenuItem;
+    MenuHelpSep2: TMenuItem;
+    MenuHelpSep1: TMenuItem;
     MenuEmulatorsCoCo2: TMenuItem;
+    MenuHelpSep4: TMenuItem;
     MenuItem3: TMenuItem;
     MenuEmulatorsEDTASM: TMenuItem;
     MenuEmulatorsSep2: TMenuItem;
@@ -171,8 +172,8 @@ type
     procedure MenuFileOpenInNewWindowClick(ASender: TObject);
     procedure MenuEditUppercaseSelectionClick(ASender: TObject);
     procedure MenuHelpOpenRomFolderClick(ASender: TObject);
-    procedure MenuEmulatorsEDTASMClick(Sender: TObject);
-    procedure MenuToolsDisassembleClick(Sender: TObject);
+    procedure MenuEmulatorsEDTASMClick(ASender: TObject);
+    procedure MenuToolsDisassembleClick(ASender: TObject);
     procedure MenuRunCompileClick(ASender: TObject);
     procedure MenuRunBuildAndRunClick(ASender: TObject);
     procedure MenuEmulatorsClick(ASender: TObject);
@@ -247,15 +248,15 @@ begin
     Options := Options - [eoSmartTabs];
     TabWidth := 2;
     Font.Quality := fqCleartype;
-    Font.Name := 'Courier New';
+    Font.Name := FormCmocIDESynEdit.SynEdit.Font.Name;
     Font.Size := 8;
     BracketMatchColor.Background := clAqua;
     BracketMatchColor.Style := [];
-    LineHighlightColor.Background := $E6FFFA;
+    LineHighlightColor.Background := FormCmocIDESynEdit.SynEdit.LineHighlightColor.Background;
   end;
   OpenDialog.Filter := FormCmocIDESynEdit.SynAnySyn.DefaultFilter;
   SaveDialog.Filter := FormCmocIDESynEdit.SynAnySyn.DefaultFilter;
-  SaveDialog.DefaultExt := '.c';
+  SaveDialog.DefaultExt := FileExt_C;
 
   FormCmocIDESynEdit.Clear;
 
@@ -371,7 +372,7 @@ end;
 
 procedure TFormCmocIDE.MenuFileNewWindowClick(ASender: TObject);
 begin
-  ExecuteTool('cmocide', ['-nocode', '-nomaximize'], True);
+  ExecuteTool(Tool_CMOCIDE, [Opt_NoCode1, Opt_NoMaximize1], True);
 end;
 
 procedure TFormCmocIDE.MenuFileOpenClick(ASender: TObject);
@@ -390,7 +391,7 @@ end;
 procedure TFormCmocIDE.MenuFileOpenInNewWindowClick(ASender: TObject);
 begin
   if OpenDialog.Execute then begin
-    ExecuteTool('cmocide', ['-nomaximize', OpenDialog.FileName], True);
+    ExecuteTool(Tool_CMOCIDE, [Opt_NoMaximize1, OpenDialog.FileName], True);
   end else begin
     Abort;
   end;
@@ -612,7 +613,7 @@ var
   LIndex: integer;
   LMessage: string;
 begin
-  with FindAllFiles(OCmoc.PathToXroarRoms, '*.rom', False) do begin
+  with FindAllFiles(OCmoc.PathToXroarRoms, '*' + FileExt_ROM, False) do begin
     try
       if Count = 0 then begin
         LMessage := 'Unable to locate XRoar ROM files' + LineEnding +
@@ -651,12 +652,11 @@ begin
     RbsSaveToFile(RbsDecb(RbsVideo(
       UpperCase(Format('%-32s   BEG=$%.4x END=$%.4x LEN=$%.4x%s', [ExtractFileName(AFileName),
       RbsDecbBegin(LDecb), RbsDecbBegin(LDecb) + RbsDecbLength(LDecb),
-      RbsDecbLength(LDecb), StringOfChar(#131, 32)]))),
-      1024) + LDecb, LBinFile);
+      RbsDecbLength(LDecb), StringOfChar(#131, 32)]))), 1024) + LDecb, LBinFile);
     AFileName := LBinFile;
   end;
   LParams := default(TStringDynArray);
-  if SameText(FOptions.Values[Opt_Machine2], 'coco3') then begin
+  if SameText(FOptions.Values[Opt_Machine2], Machine_COCO3) then begin
     WriteLn('// Running Vcc emulator');
     try
       Execute(OCmoc.PathToVcc + 'Vcc.exe', [AFileName], True);
@@ -734,10 +734,10 @@ begin
   if FOptions.IndexOfName(Opt_Machine2) < 0 then begin
     case FTarget of
       Target_COCO: begin
-        FOptions.Values[Opt_Machine2] := 'coco3';
+        FOptions.Values[Opt_Machine2] := Machine_COCO3;
       end;
       Target_DRAGON: begin
-        FOptions.Values[Opt_Machine2] := 'dragon64';
+        FOptions.Values[Opt_Machine2] := Machine_DRAGON64;
       end;
     end;
   end;
@@ -759,7 +759,7 @@ end;
 
 procedure TFormCmocIDE.MenuToolsMessImageToolClick(ASender: TObject);
 begin
-  ExecuteTool('wimgtool', [OCmoc.FileNameTranslate((ASender as TMenuItem).Hint)], True);
+  ExecuteTool(Tool_WIMGTOOL, [OCmoc.FileNameTranslate((ASender as TMenuItem).Hint)], True);
 end;
 
 procedure TFormCmocIDE.MenuFileExitClick(ASender: TObject);
@@ -862,39 +862,19 @@ begin
   end;
 end;
 
-procedure TFormCmocIDE.MenuHelpAboutClick(ASender: TObject);
-begin
-  MessageDlg(
-    Application.Title + LineEnding +
-    'Copyright (C) 2015-2016 Derek John Evans' + LineEnding + LineEnding +
-    'http://www.wascal.com' + LineEnding + LineEnding +
-    'This source is free software; you can redistribute it and/or modify' + LineEnding +
-    'it under the terms of the GNU General Public License as published by' + LineEnding +
-    'the Free Software Foundation; either version 2 of the License, or' + LineEnding +
-    '(at your option) any later version.' + LineEnding + LineEnding +
-    'This code is distributed in the hope that it will be useful, but' + LineEnding +
-    'WITHOUT ANY WARRANTY; without even the implied warranty of' + LineEnding +
-    'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.' + LineEnding +
-    'See the GNU General Public License for more details.' + LineEnding + LineEnding +
-    'A copy of the GNU General Public License is available on the World' + LineEnding +
-    'Wide Web at <http://www.gnu.org/copyleft/gpl.html>. You can also' + LineEnding +
-    'obtain it by writing to the Free Software Foundation,' + LineEnding +
-    'Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.', mtInformation, [mbOK], 0);
-end;
-
 procedure TFormCmocIDE.MenuHelpOpenRomFolderClick(ASender: TObject);
 begin
   OpenBrowser(OCmoc.PathToXroarRoms);
 end;
 
-procedure TFormCmocIDE.MenuEmulatorsEDTASMClick(Sender: TObject);
+procedure TFormCmocIDE.MenuEmulatorsEDTASMClick(ASender: TObject);
 begin
   FOptions.Clear;
   FOptions.Values[Opt_Type2] := 'LOADM"EDTASM++:2":EXEC\n';
   ExecuteMachine('coco2d', default(string));
 end;
 
-procedure TFormCmocIDE.MenuToolsDisassembleClick(Sender: TObject);
+procedure TFormCmocIDE.MenuToolsDisassembleClick(ASender: TObject);
 var
   LOrigin: cardinal;
   LSrc, LDst: TFileName;
@@ -920,8 +900,9 @@ begin
       end;
     end;
     RbsSaveToFile(LRawBytes, LSrc);
-    ExecuteTool('f9dasm', ['-offset', IntToHex(LOrigin, 4), '-noaddr', '-out', LDst, LSrc], False);
-    ExecuteTool('cmocide', [LDst], True);
+    ExecuteTool(Tool_F9DASM, [Opt_Offset2, IntToHex(LOrigin, 4), Opt_NoAddr1,
+      Opt_Out2, LDst, LSrc], False);
+    ExecuteTool(Tool_CMOCIDE, [LDst], True);
   end;
 end;
 
@@ -935,6 +916,26 @@ begin
   with ASender as TToolBar do begin
     Canvas.GradientFill(ClientRect, clMenu, clBtnFace, gdVertical);
   end;
+end;
+
+procedure TFormCmocIDE.MenuHelpAboutClick(ASender: TObject);
+begin
+  MessageDlg(
+    Application.Title + LineEnding +
+    'Copyright (C) 2015-2016 Derek John Evans' + LineEnding + LineEnding +
+    'http://www.wascal.com' + LineEnding + LineEnding +
+    'This source is free software; you can redistribute it and/or modify' + LineEnding +
+    'it under the terms of the GNU General Public License as published by' + LineEnding +
+    'the Free Software Foundation; either version 2 of the License, or' + LineEnding +
+    '(at your option) any later version.' + LineEnding + LineEnding +
+    'This code is distributed in the hope that it will be useful, but' + LineEnding +
+    'WITHOUT ANY WARRANTY; without even the implied warranty of' + LineEnding +
+    'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.' + LineEnding +
+    'See the GNU General Public License for more details.' + LineEnding + LineEnding +
+    'A copy of the GNU General Public License is available on the World' + LineEnding +
+    'Wide Web at <http://www.gnu.org/copyleft/gpl.html>. You can also' + LineEnding +
+    'obtain it by writing to the Free Software Foundation,' + LineEnding +
+    'Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.', mtInformation, [mbOK], 0);
 end;
 
 end.

@@ -11,6 +11,7 @@
 #if defined(__COCO__)
 
 #include <coco/equates.h>
+#include <coco/cb_equates.h>
 
 #define JSR_CLS         _JSR($a928)
 #define JSR_CLS_B       _JSR($a928-12)

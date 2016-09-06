@@ -47,7 +47,7 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="../../../bin/asmtoh"/>
+      <Filename Value="..\..\..\bin\asmtoh"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir);..\shared"/>
