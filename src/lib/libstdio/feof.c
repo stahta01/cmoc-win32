@@ -3,6 +3,6 @@
 
 int feof(FILE* fp)
 {
-    return fp->cinbfl ? EOF : 0;
+    return fp->buffer == EOF;
 }
 

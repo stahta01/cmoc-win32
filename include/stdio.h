@@ -39,8 +39,8 @@
 #include <stdarg.h>
 
 typedef struct {
-    char devnum;
-    char cinbfl;
+    char    devnum;
+    int     buffer;
 } FILE;
 
 typedef unsigned int fpos_t;

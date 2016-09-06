@@ -25,11 +25,10 @@
       <Unit2>
         <Filename Value="..\shared\ucmocbitmap.pas"/>
         <UnitName Value="UCmocBitmap"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="79"/>
         <CursorPos X="54" Y="95"/>
         <UsageCount Value="20"/>
-        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\shared\ucmocasm.pas"/>
@@ -48,7 +47,7 @@
         <UsageCount Value="10"/>
       </Unit4>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="26" HistoryIndex="25">
       <Position1>
         <Filename Value="project.lpr"/>
         <Caret Line="18" Column="10" TopLine="10"/>
@@ -142,33 +141,17 @@
         <Caret Line="77" Column="18" TopLine="63"/>
       </Position23>
       <Position24>
-        <Filename Value="..\shared\ucmocbitmap.pas"/>
-        <Caret Line="74" Column="21" TopLine="68"/>
-      </Position24>
-      <Position25>
-        <Filename Value="..\shared\ucmocbitmap.pas"/>
-        <Caret Line="80" Column="50" TopLine="60"/>
-      </Position25>
-      <Position26>
-        <Filename Value="..\shared\ucmocbitmap.pas"/>
-        <Caret Line="88" Column="25" TopLine="79"/>
-      </Position26>
-      <Position27>
-        <Filename Value="..\shared\ucmocbitmap.pas"/>
-        <Caret Line="35" Column="82" TopLine="24"/>
-      </Position27>
-      <Position28>
         <Filename Value="project.lpr"/>
         <Caret Line="77" Column="18" TopLine="63"/>
-      </Position28>
-      <Position29>
+      </Position24>
+      <Position25>
         <Filename Value="project.lpr"/>
         <Caret Line="69" Column="86" TopLine="58"/>
-      </Position29>
-      <Position30>
+      </Position25>
+      <Position26>
         <Filename Value="project.lpr"/>
         <Caret Line="50" Column="50" TopLine="45"/>
-      </Position30>
+      </Position26>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

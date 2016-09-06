@@ -3,7 +3,6 @@
 
 int fputs(char* s, FILE* fp)
 {
-    assert(fp);
     if (fp->devnum) {
         while (*s) {
             if (fputc(*s++, fp) == EOF) {

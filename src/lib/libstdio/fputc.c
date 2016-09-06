@@ -3,12 +3,17 @@
 
 int fputc(int c, FILE* fp)
 {
-    assert(fp);
     if (fp->devnum) {
-        return EOF;
+        char a = (char)c, dn = _devnum;
+        _devnum = fp->devnum;
+        asm {
+            lda     a
+            jsr     _PUTCHR
+        }
+        _devnum = dn;
     } else {
         cputc((char)c);
-        return 0;
     }
+    return 0;
 }
 
