@@ -1,5 +1,5 @@
 
-#include <stdio.h>
+#include "_libc.h"
 
 int puts(char* s)
 {

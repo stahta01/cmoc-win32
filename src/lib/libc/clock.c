@@ -1,6 +1,5 @@
 
-#include <time.h>
-#include <equates.h>
+#include "_libc.h"
 
 clock_t clock(void)
 {

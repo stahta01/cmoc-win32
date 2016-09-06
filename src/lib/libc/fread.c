@@ -1,5 +1,5 @@
 
-#include <stdio.h>
+#include "_libc.h"
 
 size_t fread(void* buf, size_t size, size_t count, FILE* fp)
 {

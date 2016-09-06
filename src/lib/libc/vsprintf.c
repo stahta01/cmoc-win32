@@ -1,7 +1,5 @@
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "_libc.h"
 
 int vsprintf(char* dst, char* fmt, va_list args)
 {

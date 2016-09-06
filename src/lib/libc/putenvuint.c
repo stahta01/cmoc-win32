@@ -1,5 +1,5 @@
 
-#include <stdlib.h>
+#include "_libc.h"
 
 int putenvuint(char* name, unsigned value)
 {

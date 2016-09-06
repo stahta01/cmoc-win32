@@ -1,6 +1,5 @@
 
-#include <stdlib.h>
-#include <string.h>
+#include "_libc.h"
 
 int putenv(char* envptr)
 {

@@ -1,5 +1,5 @@
 
-#include <stdio.h>
+#include "_libc.h"
 
 int sprintf(char* dst, char* fmt, ...)
 {

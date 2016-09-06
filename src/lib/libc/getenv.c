@@ -1,5 +1,5 @@
 
-#include <stdlib.h>
+#include "_libc.h"
 
 char* getenv(char* name)
 {

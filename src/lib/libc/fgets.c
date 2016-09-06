@@ -1,7 +1,5 @@
 
-#include <stdio.h>
-#include <string.h>
-#include <conio.h>
+#include "_libc.h"
 
 char* fgets(char* s, size_t n, FILE* fp)
 {

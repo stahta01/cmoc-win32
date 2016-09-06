@@ -1,6 +1,5 @@
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "_libc.h"
 
 int fclose(FILE* fp)
 {

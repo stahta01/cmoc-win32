@@ -1,5 +1,5 @@
 
-#include <stdio.h>
+#include "_libc.h"
 
 size_t fwrite(void* buf, size_t size, size_t count, FILE* fp)
 {
