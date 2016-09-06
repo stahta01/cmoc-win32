@@ -28,7 +28,7 @@ void PrintFileToConsole(char* fn)
 // 13,536
 int main(void)
 {
-    bgcolor(1);
+    bgcolor(3);
     textmode2(MODE_H0_64X24, charset_atari_small);
     PrintFileToConsole("BASIC.TXT");
     cputs("\n\nPress any key to exit");

@@ -3,7 +3,7 @@
 
 char* fgets(char* s, size_t n, FILE* fp)
 {
-    if (fp) {
+    if (fp->devnum) {
         return NULL;
     } else {
         // Since char is signed, the max for cgets is most

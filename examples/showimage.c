@@ -3,12 +3,13 @@
 
 #include <string.h>
 #include <conio.h>
-#include <equates.h>
 #include <stdlib.h>
 #include <charset.h>
 #include <graph.h>
 
-#include "image256x192.c"
+#include <equates.h>
+
+#include "images/image256x192.c"
 
 void mmm(void* ptr, char value, size_t n)
 {
