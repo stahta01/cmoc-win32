@@ -4,12 +4,12 @@
 // WinCMOC:  https://sourceforge.net/projects/cmoc-win32/
 // CMOC:     http://perso.b2b2c.ca/~sarrazip/dev/cmoc.html
 
-// Translated from "equates.asm"
+// Translated from "coco3.asm"
 //
 // This file is in the public domain
 
-#ifndef _COCO_EQUATES_H
-#define _COCO_EQUATES_H
+#ifndef _COCO_COCO3_H
+#define _COCO_COCO3_H
 
 // Decimal 32768 (0x8000) [Value]
 #ifndef _EXBAS
@@ -2523,6 +2523,241 @@
 #endif
 #ifndef _resetv
 #define _resetv (*(unsigned*)_RESETV)
+#endif
+
+// Decimal 49372 (0xC0DC) [Value]
+#ifndef _DC0DC
+#define _DC0DC 49372
+#endif
+
+// Decimal 24 (0x18) [Value] - MAXIMUM NUMBER OF ROWS IN HI-RES PRINT MODE
+#ifndef _ROWMAX
+#define _ROWMAX 24
+#endif
+
+// Decimal 0 (0x0) [Value] - DUMMY RAM LINK VECTOR
+#ifndef _RAMLINK
+#define _RAMLINK 0
+#endif
+
+// Decimal 8192 (0x2000) [Value] - ADDRESS OF THE HI-RES SCREEN IN THE CPU'S MEMORY SPACE
+#ifndef _HRESSCRN
+#define _HRESSCRN 8192
+#endif
+
+// Decimal 49152 (0xC000) [Value] - ADDRESS OF THE GET/PUT BUFFERS IN THE CPU'S MEMORY SPACE
+#ifndef _HRESBUFF
+#define _HRESBUFF 49152
+#endif
+
+// Decimal 57343 (0xDFFF) [Value] - ADDRESS OF THE HI-RES GRAPHICS STACK IN THE CPU'S MEMORY SPACE
+#ifndef _TMPSTACK
+#define _TMPSTACK 57343
+#endif
+
+// Decimal 98 (0x62) [Value] - FIRST ENHANCED BASIC TOKEN NUMBER
+#ifndef _EBHITOK
+#define _EBHITOK 98
+#endif
+
+// Decimal 41 (0x29) [Value] - FIRST ENHANCED BASIC FUNCTION TOKEN NUMBER BUG - SHOULD BE $28
+#ifndef _EBHISTOK
+#define _EBHISTOK 41
+#endif
+
+// Decimal 32 (0x20) [Value] - HI-RES CURSOR CHARACTER
+#ifndef _CURCHAR
+#define _CURCHAR 32
+#endif
+
+// Decimal 0 (0x0) [Value] - ADDRESS OF THE NEXT BUFFER - 2 BYTES
+#ifndef _HB_ADDR
+#define _HB_ADDR 0
+#endif
+
+// Decimal 2 (0x2) [Value] - NUMBER OF THIS BUFFER - 1 BYTES
+#ifndef _HB_NUM
+#define _HB_NUM 2
+#endif
+
+// Decimal 3 (0x3) [Value] - NUMBER OF BYTES IN THE BUFFER - 2 BYTES
+#ifndef _HB_SIZE
+#define _HB_SIZE 3
+#endif
+
+// Decimal 5 (0x5) [Value] - NUMBER OF BYTES IN THIS HEADER
+#ifndef _HB_LEN
+#define _HB_LEN 5
+#endif
+
+// Decimal 128 (0x80) [Value] - 1 = Color Computer compatible
+#ifndef _COCO
+#define _COCO 128
+#endif
+
+// Decimal 64 (0x40) [Value] - 1 = MMU enabled
+#ifndef _MMUEN
+#define _MMUEN 64
+#endif
+
+// Decimal 32 (0x20) [Value] - 1 = GIME chip IRQ output enabled
+#ifndef _IEN
+#define _IEN 32
+#endif
+
+// Decimal 16 (0x10) [Value] - 1 = GIME chip FIRQ output enabled
+#ifndef _FEN
+#define _FEN 16
+#endif
+
+// Decimal 8 (0x8) [Value] - 1 = RAM at XFEXX is constant
+#ifndef _MC3
+#define _MC3 8
+#endif
+
+// Decimal 4 (0x4) [Value] - 1 = standard SCS
+#ifndef _MC2
+#define _MC2 4
+#endif
+
+// Decimal 2 (0x2) [Value] - ROM map control
+#ifndef _MC1
+#define _MC1 2
+#endif
+
+// Decimal 1 (0x1) [Value] - ROM map control
+#ifndef _MC0
+#define _MC0 1
+#endif
+
+// Decimal 32 (0x20) [Value] - TIMER
+#ifndef _TMR
+#define _TMR 32
+#endif
+
+// Decimal 16 (0x10) [Value] - HORIZONTAL BORDER
+#ifndef _HBORD
+#define _HBORD 16
+#endif
+
+// Decimal 8 (0x8) [Value] - VERTICAL BORDER
+#ifndef _VBORD
+#define _VBORD 8
+#endif
+
+// Decimal 4 (0x4) [Value] - SERIAL DATA
+#ifndef _EI2
+#define _EI2 4
+#endif
+
+// Decimal 2 (0x2) [Value] - KEYBOARD
+#ifndef _EI1
+#define _EI1 2
+#endif
+
+// Decimal 1 (0x1) [Value] - CARTRIDGE
+#ifndef _EI0
+#define _EI0 1
+#endif
+
+// Decimal 48 (0x30) [Value] - BLOCKS $30-$33 ARE THE HI-RES GRAPHICS SCREEN
+#ifndef _BLOCK6_0
+#define _BLOCK6_0 48
+#endif
+
+// Decimal 49 (0x31) [Value] - HI-RES GRAPHICS SCREEN
+#ifndef _BLOCK6_1
+#define _BLOCK6_1 49
+#endif
+
+// Decimal 50 (0x32) [Value] - HI-RES GRAPHICS SCREEN
+#ifndef _BLOCK6_2
+#define _BLOCK6_2 50
+#endif
+
+// Decimal 51 (0x33) [Value] - HI-RES GRAPHICS SCREEN
+#ifndef _BLOCK6_3
+#define _BLOCK6_3 51
+#endif
+
+// Decimal 52 (0x34) [Value] - GET/PUT BUFFER
+#ifndef _BLOCK6_4
+#define _BLOCK6_4 52
+#endif
+
+// Decimal 53 (0x35) [Value] - STACK AREA FOR HI-RES GRAPHICS COMMAND
+#ifndef _BLOCK6_5
+#define _BLOCK6_5 53
+#endif
+
+// Decimal 54 (0x36) [Value] - CHARACTER POINTERS
+#ifndef _BLOCK6_6
+#define _BLOCK6_6 54
+#endif
+
+// Decimal 55 (0x37) [Value] - UNUSED BY BASIC
+#ifndef _BLOCK6_7
+#define _BLOCK6_7 55
+#endif
+
+// Decimal 56 (0x38) [Value]
+#ifndef _BLOCK7_0
+#define _BLOCK7_0 56
+#endif
+
+// Decimal 57 (0x39) [Value]
+#ifndef _BLOCK7_1
+#define _BLOCK7_1 57
+#endif
+
+// Decimal 58 (0x3A) [Value]
+#ifndef _BLOCK7_2
+#define _BLOCK7_2 58
+#endif
+
+// Decimal 59 (0x3B) [Value]
+#ifndef _BLOCK7_3
+#define _BLOCK7_3 59
+#endif
+
+// Decimal 60 (0x3C) [Value]
+#ifndef _BLOCK7_4
+#define _BLOCK7_4 60
+#endif
+
+// Decimal 61 (0x3D) [Value]
+#ifndef _BLOCK7_5
+#define _BLOCK7_5 61
+#endif
+
+// Decimal 62 (0x3E) [Value]
+#ifndef _BLOCK7_6
+#define _BLOCK7_6 62
+#endif
+
+// Decimal 63 (0x3F) [Value]
+#ifndef _BLOCK7_7
+#define _BLOCK7_7 63
+#endif
+
+// Decimal 44771 (0xAEE3) [Value]
+#ifndef _ELSE
+#define _ELSE 44771
+#endif
+
+// Decimal 45677 (0xB26D) [Value]
+#ifndef _SYNCOMMA
+#define _SYNCOMMA 45677
+#endif
+
+// Decimal 46859 (0xB70B) [Value]
+#ifndef _EVALEXPB
+#define _EVALEXPB 46859
+#endif
+
+// Decimal 47516 (0xB99C) [Value]
+#ifndef _STRINOUT
+#define _STRINOUT 47516
 #endif
 
 

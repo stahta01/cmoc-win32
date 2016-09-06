@@ -150,8 +150,6 @@ int getche(void);
 int putch(int c);
 int ungetch(int c);
 
-extern int ungetch_buf;
-
 void putdn(void);
 void putup(void);
 void putlt(void);
