@@ -12,9 +12,9 @@ void putlt(void)
         struct _fontinfo* fi = _getfontinfo();
 
         if (fi->type) {
-            fi->base -= 128;
+            fi->base ^= 1;
         }
-        if (!fi->type || fi->base & 128) {
+        if (!fi->type || fi->base & 1) {
             if (_curpos & (_horbyt - 1)) {
                 _curpos--;
             } else {

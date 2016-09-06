@@ -5,7 +5,7 @@ void _settextpositionx(int x)
 {
     if (fontinfo.type) {
         _curpos = _curpos & ((unsigned)(_horbyt - 1) ^ -1) | (x >> 1);
-        fontinfo.base = x & 1 ? 128 : 0;
+        fontinfo.base = (fontinfo.base & 0xfe) | (x & 1);
     } else {
         _curpos = _curpos & ((unsigned)(_horbyt - 1) ^ -1) | x;
     }

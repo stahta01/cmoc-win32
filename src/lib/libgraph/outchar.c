@@ -3,13 +3,17 @@
 
 void _outchar(int c)
 {
-    unsigned char* src = fontinfo.data + (((unsigned)(c - 32) + fontinfo.base) << 3);
+    c -= 32;
+    if (fontinfo.type) {
+        c <<= 1;
+    }
+    unsigned char* src = fontinfo.data + (((unsigned)c + fontinfo.base) << 3);
     int bkcolor = _getbkcolor();
 
     if (bkcolor || fontinfo.type) {
         // First we clear the bits. (We could use clr for non-packed fonts)
 
-        unsigned char bits = fontinfo.type ? fontinfo.base & 128 ? 0xF0 : 0xF : 0x0;
+        unsigned char bits = fontinfo.type ? fontinfo.base & 1 ? 0xF0 : 0xF : 0x0;
 
 #define COPY_AND() asm{ lda ,x} asm{ anda bits} asm{ sta ,x} asm{ abx}
         asm {
@@ -30,7 +34,7 @@ void _outchar(int c)
 
         bits = _pset2_all[bkcolor];
         if (fontinfo.type) {
-            bits &= fontinfo.base & 128 ? 0xF : 0xF0;
+            bits &= fontinfo.base & 1 ? 0xF : 0xF0;
         }
 
 #define COPY_OR() asm{ lda ,x} asm{ ora bits} asm{ sta ,x} asm{ abx}

@@ -48,11 +48,9 @@ begin
   try
     try
       FileCopyPictureToCpp('../../lib/libcharset/charset_6x8.c', 'charset_6x8.bmp', 'charset_6x8');
-      //FileCopyPictureToCpp('../../../examples/image256x192.c', 'image256x192.png');
-      //Exit;
 
       LBitmap := TBitmap.Create;
-      LBitmap.SetSize(8, 256 * 8);
+      LBitmap.SetSize(8, 192 * 8);
       LBitmap.Canvas.Font.Height := 8;
       LBitmap.Canvas.Brush.Color := clBlack;
       LBitmap.Canvas.Font.Color := clWhite;
@@ -60,19 +58,20 @@ begin
 
 
       LBitmap.Canvas.Font.Name := 'Atari';
-      for LIndex := 0 to 127 do begin
-        LBitmap.Canvas.TextOut(0, LIndex * 8, CocoChar(char(LIndex)));
-      end;
-      for LIndex := 0 to 127 do begin
-        LBitmap.Canvas.TextOut(4, (LIndex + 128) * 8, CocoChar(char(LIndex)));
+      for LIndex := 0 to 191 do begin
+        if (LIndex and 1) = 0 then begin
+          LBitmap.Canvas.TextOut(0, LIndex * 8, CocoChar(char(LIndex shr 1)));
+        end else begin
+          LBitmap.Canvas.TextOut(4, LIndex * 8, CocoChar(char(LIndex shr 1)));
+        end;
       end;
       BitmapSaveToCpp(LBitmap, '../../lib/libcharset/charset_atari_small.c',
         'charset_atari_small');
 
-      LBitmap.SetSize(8, 128 * 8);
+      LBitmap.SetSize(8, 96 * 8);
       LBitmap.Canvas.Font.Name := 'C64 Pro';
       LBitmap.Canvas.FillRect(0, 0, LBitmap.Width, LBitmap.Height);
-      for LIndex := 0 to 127 do begin
+      for LIndex := 0 to 95 do begin
         LBitmap.Canvas.TextOut(1, LIndex * 8, CocoChar(char(LIndex)));
       end;
       BitmapSaveToCpp(LBitmap, '../../lib/libcharset/charset_c64.c', 'charset_c64');

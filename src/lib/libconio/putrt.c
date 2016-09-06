@@ -12,7 +12,7 @@ void putrt(void)
     } else {
         if (isgrpram()) {
             struct _fontinfo* fi = _getfontinfo();
-            if (!fi->type || fi->base & 128) {
+            if (!fi->type || fi->base & 1) {
                 _curpos++;
                 if ((_curpos & (_horbyt - 1)) == 0) {
                     _curpos += ((unsigned)_horbyt << 3) - _horbyt;
@@ -23,7 +23,7 @@ void putrt(void)
                 }
             }
             if (fi->type) {
-                fi->base += 128;
+                fi->base ^= 1;
             }
         }
     }
