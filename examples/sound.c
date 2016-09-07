@@ -8,7 +8,7 @@
 
 #define SIMPLE_EFFECT(X) for (unsigned i = 0; i < 256; i++) beep((unsigned char)(X), 0)
 
-void PlayEffect(char c)
+void PlayEffect(int c)
 {
     switch (c) {
     case '0':
@@ -93,7 +93,7 @@ int main(void)
 {
     PrintTitle();
     for (;;) {
-        char c = getch();
+        int c = getch();
         if (c == 'A') {
             PlayAll();
             PrintTitle();
