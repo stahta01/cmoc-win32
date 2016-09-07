@@ -60,6 +60,7 @@ byte attr(byte foreColor, byte backColor, byte blink, byte underline);
 byte locate(byte column, byte row);
 byte hscreen(byte mode);
 byte hset(word x, word y, byte color);
+void pcls(byte* buffer, byte byteToClearWith);
 
 // avalible from unistd.h
 //void sleep(int seconds);
