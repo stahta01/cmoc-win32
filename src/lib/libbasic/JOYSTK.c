@@ -1,14 +1,9 @@
 
-#include <basic.h>
-#include <equates.h>
+#include "_basic.h"
 
 byte JOYSTK(int j)
 {
-    asm {
-        pshs    u
-        JSR_JOYIN
-        puls    u
-    }
+    joyin();
     return ((byte*)_POTVAL)[j];
 }
 

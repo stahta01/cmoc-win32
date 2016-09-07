@@ -9,6 +9,7 @@
 #include <disk.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <system.h>
 
 extern int _filedesc[FOPEN_MAX];
 

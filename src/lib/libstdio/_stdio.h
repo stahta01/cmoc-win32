@@ -6,5 +6,6 @@
 #include <time.h>
 #include <equates.h>
 #include <assert.h>
+#include <system.h>
 #include <coco/disk.h>
 

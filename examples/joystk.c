@@ -20,7 +20,7 @@ int main(void)
     cc = VIDSEMI(cx,cy);
 
     for (;;) {
-        char c = INKEY();
+        int c = INKEY();
         if (isdigit(c)) {
             pen = c - '0';
         }

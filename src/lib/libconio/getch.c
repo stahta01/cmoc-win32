@@ -18,11 +18,7 @@ int ungetch(int c)
 unsigned char kbhit()
 {
     if (__buffersize == 0) {
-        unsigned char c;
-        asm {
-            jsr     [$a000] // POLCAT is always from the keyboard
-            sta     c
-        }
+        char c = polcat();
         if (c) {
             ungetch(c);
         }

@@ -10,6 +10,8 @@
 #define DEV_SERIAL      (-2)
 #define DEV_PRINTER     DEV_SERIAL
 
+// TODO: These should be removed. We now have system.h
+
 #define ROM_OPEN        [$015E]
 #define ROM_INPUT       $A390
 #define ROM_POLCAT      [$A000]

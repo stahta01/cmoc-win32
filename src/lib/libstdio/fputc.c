@@ -4,13 +4,7 @@
 int fputc(int c, FILE* fp)
 {
     if (fp->devnum) {
-        char a = (char)c, dn = _devnum;
-        _devnum = fp->devnum;
-        asm {
-            lda     a
-            jsr     _PUTCHR
-        }
-        _devnum = dn;
+        putchr((char)c, fp->devnum);
     } else {
         cputc((char)c);
     }

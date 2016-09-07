@@ -6,15 +6,6 @@
 int main(void)
 {
     FILE* fp;
-    /*
-    fp = fopen("BASIC.TXT", "r");
-    if (fp) {
-        while (!feof(fp)) {
-            printf("%d*", fgetc(fp));
-        }
-        fclose(fp);
-    }
-    */
     fp = fopen("BASIC.TXT", "r");
     if (fp) {
         while (!feof(fp)) {

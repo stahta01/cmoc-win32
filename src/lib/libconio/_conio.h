@@ -8,6 +8,7 @@
 #include <graph.h>
 #include <equates.h>
 #include <charset.h>
+#include <system.h>
 
 typedef struct {
     unsigned char cursor;

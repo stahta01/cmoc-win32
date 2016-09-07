@@ -6,7 +6,7 @@
 unsigned char asm inkey()
 {
     asm {
-        JSR_POLCAT
+        jsr     [$a000]
         tfr     a,b         // byte return value goes in B
     }
 }

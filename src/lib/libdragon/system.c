@@ -1,2 +1,2 @@
 
-#include "../libcoco/system.c"
+#include "../libsystem/system.c"
