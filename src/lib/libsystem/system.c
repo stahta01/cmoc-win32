@@ -21,7 +21,7 @@ void asm joyin(void)
 {
     asm {
         pshs    u
-        jsr     [$A00A]
+        jsr     [$a00a]
         puls    u
     }
 }
