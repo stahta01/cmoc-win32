@@ -76,6 +76,8 @@ begin
     OCmoc.SourcePragmas(LPre, LPre, FOrigin, FTarget, FOptions);
 
     LParams := TStringDynArray.Create(Opt_EmitUncalled1, Opt_DontLink1);
+    // Currently -O2 has some bugs. So, we must use -O1
+    OCmoc.StringDynArrayAppend(LParams, '-O1');
     if AWerror then begin
       OCmoc.StringDynArrayAppend(LParams, Opt_Werror1);
     end;
