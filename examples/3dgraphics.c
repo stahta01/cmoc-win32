@@ -11,6 +11,7 @@
 #include <string.h>
 
 #include <graph.h>
+#include <equates.h>
 
 typedef struct {
     char x, y, z;
@@ -87,10 +88,10 @@ void matmulnvec(char* m, vector_t* v, size_t n, projected_t* o)
         o->x=(int)v->x*m[0]+(int)v->y*m[1]+(int)v->z*m[2]+((int)m[3]<<8);
         o->y=(int)v->x*m[4]+(int)v->y*m[5]+(int)v->z*m[6]+((int)m[7]<<8);
         o->z=(int)v->x*m[8]+(int)v->y*m[9]+(int)v->z*m[10]+((int)m[11]<<8);
-        o->sz = (char)(o->z >> 5);
+        o->sz = (char)(o->z >> 4);
         if (o->sz > 0) {
-            o->sx = 128 + (o->x / o->sz);
-            o->sy = 96 - (o->y / o->sz);
+            o->sx = 64 + (o->x / o->sz);
+            o->sy = 48 - (o->y / o->sz);
         }
     }
 }
@@ -109,12 +110,26 @@ void objectdrawpoints(object_t* obj, projected_t* pv)
     }
 }
 
+void test(int x1, int y1, int x2, int y2)
+{
+    _allcol = -1;
+    _horbeg = x1;
+    _verbeg = y1;
+    _horend = x2;
+    _verend = y2;
+    asm {
+        pshs u
+        jsr $94A1
+        puls u
+    }
+}
+
 void objectdrawedges(object_t* obj, projected_t* pv)
 {
     edge_t* edges = obj->edges;
     for (unsigned char n = obj->nedges; n > 0; n--, edges++) {
         if (pv[edges->a].sz > 0) {
-            _line(pv[edges->a].sx, pv[edges->a].sy, pv[edges->b].sx, pv[edges->b].sy);
+            test(pv[edges->a].sx, pv[edges->a].sy, pv[edges->b].sx, pv[edges->b].sy);
         }
     }
 }
@@ -149,7 +164,7 @@ int main(void)
     char mat[12];
     projected_t pro[20];
 
-    system("PMODE4,1");
+    system("PMODE0,1");
     system("SCREEN1,1");
     system("PCLS");
 

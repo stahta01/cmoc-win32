@@ -31,6 +31,7 @@ typedef struct {
     data_t data;
 } cocopic_t;
 
+
 void ShowImage(cocopic_t* image)
 {
     systemf("PMODE%d,1", image->type & 2 ? 3 : 4);
