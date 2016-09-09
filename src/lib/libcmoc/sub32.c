@@ -4,7 +4,7 @@
 //
 // Converted to C for WinCMOC by Derek Evans 2016
 
-#include <cmoc.h>
+#include "_cmoc.h"
 
 // byte sub32(word *hi, word h, word l)
 // Subtracts 32-bit integer h:l from 32-bit unsigned integer
@@ -19,15 +19,15 @@ byte asm sub32(word* hi, word h, word l)
         leas    -1,S
         pshs    x,b
         pshs    u
-        ldx     4,U                     // variable hi
-        leau    6,U                     // variable h
+        ldx     4,U                         // variable hi
+        leau    6,U                         // variable h
         bsr     SUB32
         puls    u
         tfr     cc,b
         andb    #1
-        stb     -1,U                    // variable carry
+        stb     -1,U                        // variable carry
         puls    b,x
-        ldb     -1,U                    // variable carry
+        ldb     -1,U                        // variable carry
         tfr     U,S
         puls    U,PC
 
@@ -40,20 +40,20 @@ byte asm sub32(word* hi, word h, word l)
         SUB32:
         pshs    b,a
 
-        ldd     2,x                     // low word of first
-        subd    2,u                     // low word of second
-        pshs    cc                      // preserve carry bit
-        std     2,x                     // store in low word of first
+        ldd     2,x                         // low word of first
+        subd    2,u                         // low word of second
+        pshs    cc                          // preserve carry bit
+        std     2,x                         // store in low word of first
 
-        ldd     ,x                      // high word of first
-        puls    cc                      // restore carry bit from 1st sub
+        ldd     ,x                          // high word of first
+        puls    cc                          // restore carry bit from 1st sub
         sbcb    1,u
         sbca    ,u
-        pshs    cc                      // preserve carry bit
+        pshs    cc                          // preserve carry bit
         std     ,x
-        puls    cc                      // restore carry bit from last sub
+        puls    cc                          // restore carry bit from last sub
 
-        puls    a,b,pc                  // carry bit from last sub returned
+        puls    a,b,pc                      // carry bit from last sub returned
     }
 }
 

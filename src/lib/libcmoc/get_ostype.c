@@ -1,6 +1,5 @@
 
-#include <cmoc.h>
-#include <equates.h>
+#include "_cmoc.h"
 
 // Note: As far as I know, there is no easy way to identity a 64K CoCo.
 // The reason is, 32K CoCo's are often 64K with faulty upper memory.

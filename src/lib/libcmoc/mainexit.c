@@ -1,11 +1,5 @@
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <cmoc.h>
-
-extern int main(void);
-extern unsigned exitstack;
+#include "_cmoc.h"
 
 unsigned exitstack;
 unsigned char _get_ostype;
@@ -28,7 +22,7 @@ void exit(int status)
     //memset(0x2dd, 0, 250);
     asm {
         lds _exitstack,DAT
-        rts                             // Skip the user stack frame
+        rts                                 // Skip the user stack frame
     }
 }
 
