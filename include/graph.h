@@ -151,8 +151,10 @@ int _selectpalette(int);
 
 // Shape and Curve Drawing Functions
 
-void _lineto(int, int);
-void _rectangle(int, int, int, int, int);
+void _moveto(int x, int y);
+void _lineto(int x, int y);
+void _line(int x1, int y1, int x2, int y2);
+void _rectangle(int x1, int y1, int x2, int y2);
 //void _arc(int, int, int, int, int, int, int, int); // WATCOM
 void _arc(int x, int y, int w, int h, int s, int e); // CMOC
 
@@ -160,8 +162,8 @@ void _ellipse(int, int, int, int, int);
 void _pie(int, int, int, int, int, int, int, int, int);
 void _polygon(int, int, struct xycoord*);
 //void _floodfill(int, int, int);
-void _setpixel(int, int);
-int _getpixel(int, int);
+void _setpixel(int x, int y);
+int _getpixel(int x, int y);
 //void _getarcinfo(struct xycoord*, struct xycoord*, struct xycoord*);
 
 // Position Determination Functions
@@ -172,7 +174,6 @@ int _getpixel(int, int);
 //struct xycoord _getviewcoord_wxy(struct _wxycoord*);
 //struct xycoord _getphyscoord(int, int);
 //struct _wxycoord _getwindowcoord(int, int);
-void _moveto(int, int);
 //struct xycoord _setvieworg(int, int);
 
 #define _getlogcoord    _getviewcoord       // for compatibility

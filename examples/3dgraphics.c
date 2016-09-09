@@ -114,8 +114,7 @@ void objectdrawedges(object_t* obj, projected_t* pv)
     edge_t* edges = obj->edges;
     for (unsigned char n = obj->nedges; n > 0; n--, edges++) {
         if (pv[edges->a].sz > 0) {
-            _moveto(pv[edges->a].sx, pv[edges->a].sy);
-            _lineto(pv[edges->b].sx, pv[edges->b].sy);
+            _line(pv[edges->a].sx, pv[edges->a].sy, pv[edges->b].sx, pv[edges->b].sy);
         }
     }
 }
