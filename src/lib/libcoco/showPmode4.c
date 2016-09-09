@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_coco.h"
 
 // Set "PMODE 4 : SCREEN 1,colorset", where colorset is 0 (green/black)
 // or 1 (white/black).

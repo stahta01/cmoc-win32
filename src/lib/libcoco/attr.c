@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_coco.h"
 
 // Bits 0-2: background color (0-7)
 // Bits 3-5: foreground color (0-7)
@@ -31,5 +31,4 @@ byte attr(byte foreColor, byte backColor, byte blink, byte underline)
 
     return TRUE;
 }
-
 

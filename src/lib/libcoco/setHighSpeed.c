@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_coco.h"
 
 void setHighSpeed(byte fast)
 {
@@ -16,5 +16,4 @@ void setHighSpeed(byte fast)
         clr     ,x
     }
 }
-
 

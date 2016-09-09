@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_coco.h"
 
 // Easier interface when assuming an RGB monitor.
 // slot: 0..15.
@@ -20,5 +20,4 @@ void paletteRGB(byte slot, byte red, byte green, byte blue)
                                   | ((blue  & 2) << 2)
                                   | (blue  & 1);
 }
-
 

@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_coco.h"
 
 // samAddr: Base address to write to (0xFFC0 for screen mode,
 //          0xFFC6 for graphics page address).
@@ -23,6 +23,4 @@ void setSAMRegisters(byte* samAddr, byte value, byte numBits)
         samAddr += 2;
     }
 }
-
-
 

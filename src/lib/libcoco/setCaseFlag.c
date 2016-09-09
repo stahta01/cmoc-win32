@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_coco.h"
 
 void setCaseFlag(byte upperCase)
 {
@@ -8,5 +8,4 @@ void setCaseFlag(byte upperCase)
     }
     * (byte*) 0x11a = upperCase;
 }
-
 

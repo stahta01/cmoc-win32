@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_coco.h"
 
 byte hset(word x, word y, byte color)
 {
@@ -8,21 +8,20 @@ byte hset(word x, word y, byte color)
     }
     byte hrmode = * (byte*) 0x00E6;
     if (hrmode == 0) {
-        return FALSE;    // hi-res mode not enabled
+        return FALSE;                       // hi-res mode not enabled
     }
     if (hrmode <= 2)
         if (x >= 320) {
             return FALSE;
         }
-    * (byte*) 0x00C2 = 1;   // SETFLG: 1 = HSET, 0 = HRESET
-    * (word*) 0x00BD = x;   // HORBEG
-    * (word*) 0x00BF = y;   // VERBEG
-    asm("PSHS", "U,Y");  // protect against BASIC routine
+    * (byte*) 0x00C2 = 1;                   // SETFLG: 1 = HSET, 0 = HRESET
+    * (word*) 0x00BD = x;                   // HORBEG
+    * (word*) 0x00BF = y;                   // VERBEG
+    asm("PSHS", "U,Y");                     // protect against BASIC routine
     asm("LDB", color);
-    asm("JSR", "$E73B");  // save the working color
-    asm("JSR", "$E785");  // put the pixel on the screen
+    asm("JSR", "$E73B");                    // save the working color
+    asm("JSR", "$E785");                    // put the pixel on the screen
     asm("PULS", "Y,U");
     return TRUE;
 }
-
 

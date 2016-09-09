@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_coco.h"
 
 // Returns true for success, false if arg is invalid.
 //
@@ -13,9 +13,9 @@ byte width(byte columns)
         return FALSE;
     }
 
-    asm("PSHS", "U,Y");  // protect against BASIC routine
+    asm("PSHS", "U,Y");                     // protect against BASIC routine
     asm("LDB", columns);
-    asm("JSR", "$F643");  // inside the WIDTH command
+    asm("JSR", "$F643");                    // inside the WIDTH command
     asm("PULS", "Y,U");
 
     textScreenWidth = columns;
@@ -23,5 +23,4 @@ byte width(byte columns)
 
     return TRUE;
 }
-
 

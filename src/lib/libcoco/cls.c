@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_coco.h"
 
 // color: Argument that would be passed to BASIC's CLS command.
 //        Pass 255 to signify no argument.

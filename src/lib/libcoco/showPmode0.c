@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_coco.h"
 
 // Show the text mode.
 //

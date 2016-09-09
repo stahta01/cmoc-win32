@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_coco.h"
 
 // Returns 32, 40 or 80.
 //
@@ -16,5 +16,4 @@ byte getTextMode()
     }
     return 32;
 }
-
 

@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_coco.h"
 
 // slot: 0..15.
 // color: 0..63.
@@ -21,5 +21,4 @@ byte palette(byte slot, byte color)
     palette[slot] = color;
     return TRUE;
 }
-
 

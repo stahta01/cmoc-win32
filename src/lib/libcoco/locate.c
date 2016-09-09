@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_coco.h"
 
 byte locate(byte column, byte row)
 {
@@ -10,7 +10,7 @@ byte locate(byte column, byte row)
         hrwidth = 0;
     }
 
-    if (hrwidth == 0) { // if 32 col mode
+    if (hrwidth == 0) {                     // if 32 col mode
         if (column >= 32) {
             return FALSE;
         }
@@ -25,17 +25,16 @@ byte locate(byte column, byte row)
         if (row >= 24) {
             return FALSE;
         }
-        if (hrwidth == 1)  // if 40 col mode
+        if (hrwidth == 1)                   // if 40 col mode
             if (column >= 40) {
                 return FALSE;
             }
-        asm("PSHS", "U,Y");  // protect against BASIC routine
+        asm("PSHS", "U,Y");                 // protect against BASIC routine
         asm("LDA", column);
         asm("LDB", row);
-        asm("JSR", "$F8F7");  // inside the LOCATE command
+        asm("JSR", "$F8F7");                // inside the LOCATE command
         asm("PULS", "Y,U");
     }
     return TRUE;
 }
-
 

@@ -1,5 +1,5 @@
 
-#include <coco.h>
+#include "_coco.h"
 
 // Writes the given byte in the 6k PMODE 4 screen buffer (0x1800 bytes long)
 // starting at the address given by 'textScreenBuffer'.
@@ -33,6 +33,4 @@ void pcls(byte* buffer, byte byteToClearWith)
         bne     pcls_loop
     }
 }
-
-
 
