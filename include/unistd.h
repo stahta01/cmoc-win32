@@ -70,7 +70,6 @@ int getopt(int argc, char** argv, char* optstring);
 
 // Non standard
 int exec(char* progname, char* cmdline);
-void delay(unsigned ticks);                 // CMOC
 
 #endif
 

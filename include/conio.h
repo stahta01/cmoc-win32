@@ -144,20 +144,22 @@ void screensize(unsigned char* x, unsigned char* y);
 
 // Non-standard. Added for CMOC
 
-char* cgets(char* s);
-int getch(void);
-int getche(void);
-int putch(int c);
-int ungetch(int c);
+char* cgets(char* s);                       // Borland
+int getch(void);                            // Borland
+int getche(void);                           // Borland
+int putch(int c);                           // Borland
+int ungetch(int c);                         // Borland
 
-void putdn(void);
-void putup(void);
-void putlt(void);
-void putrt(void);
-void putlf(void);
+void putdn(void);                           // CMOC
+void putup(void);                           // CMOC
+void putlt(void);                           // CMOC
+void putrt(void);                           // CMOC
+void putlf(void);                           // CMOC
 
-void scrclr(void);                      // Clear screen without moving cursor
-void scrup(void);
+void scrclr(void);                          // CMOC - Clear screen without moving cursor
+void scrup(void);                           // CMOC
+
+void delay(unsigned ticks);                 // CMOC (Ticks are 60hz on a CoCo. Check time.h)
 
 // 1 bit for the color set
 
@@ -197,14 +199,14 @@ void scrup(void);
 #define MODE_H0_64X24 (MODE_CSS0 | MODE_HRES | MODE_FONT_PACKED)
 #define MODE_H1_64X24 (MODE_CSS1 | MODE_HRES | MODE_FONT_PACKED)
 
-void textmode(int newmode);
+void textmode(int newmode);                 // Watcom
 
 // You can save 2K by calling textmode2. textmode() refers to 2 fonts, when you
 // may only need 1. Calling textmode2 with the font you need, will prevent the
 // linker from adding the second, but, you must make sure you select a mode
 // which matchs the font. ie: packed vs unpacked fonts.
 
-void textmode2(int newmode, unsigned char* fontdata);
+void textmode2(int newmode, unsigned char* fontdata); // CMOC
 
 #endif
 
