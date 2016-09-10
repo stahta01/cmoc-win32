@@ -17,25 +17,14 @@ byte* scrnBuffer;                           // 1st PMODE 4 buffer
 //
 // Call closeCardGameScreenMode() to go back to text mode.
 //
-void openCardGameScreenMode(void* _scrnBuffer)
+void openCardGameScreenMode(void)
 {
-    //initCoCoSupport();
-
-    scrnBuffer = (byte*) _scrnBuffer;
-    //initTextMode = getTextMode();           // for restoreOriginalTextMode()
-    //width(32);
-    //pcls(scrnBuffer, 0);
-    //showGraphicsAddress((byte)(scrnBuffer >> 9)); // set SAM registers to show PMODE 4 at scrnBuffer
-    //showPmode4(1);                          // white/black
-
     // Hi-res text screen:
+    textmode(MODE_H1_32X24);
+    scrnBuffer = (byte*) _beggrp;
     gotoxy(0, 0);
-
     // Set screen dimensions for functions in coco.h.
     textScreenWidth  = BYTES_PER_SCREEN_ROW;
     textScreenHeight = TEXT_ROWS_PER_SCREEN;
-
-    // Redirect printf().
-    //oldCHROOT = setConsoleOutHook(hiResTextConsoleOutHook);
 }
 

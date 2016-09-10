@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
-#include <sys/byte.h>
+#include <cardgame.h>
 
 #define NDEBUG
 
@@ -46,11 +46,6 @@ void restoreOriginalTextMode();
 #define PIXEL_ROWS_PER_TEXT_ROW 8           // PIXEL_ROWS_PER_GLYPH plus one separator row
 #define BYTES_PER_TEXT_ROW      256         // 32 bytes per row of pixels, 8 rows of pixels per text row
 
-#define NUMCARDS                54
-#define BAD_CARD_SUIT           0xFF
-#define BAD_CARD_VALUE          0
-#define BAD_INDEX               0xFF
-
 #define ROWS_ABOVE_SUIT 2
 #define ROWS_BELOW_SUIT 6
 #define ROWS_PER_CARD_TOP 5
@@ -58,13 +53,6 @@ void restoreOriginalTextMode();
 #define BYTES_PER_CARD_WIDTH 4
 #define ROWS_PER_CARD_VALUE 10
 #define ROWS_PER_SUIT 7
-
-#define SUIT_HEARTS   0
-#define SUIT_SPADES   1
-#define SUIT_DIAMONDS 2
-#define SUIT_CLUBS    3
-#define SUIT_JOKER    4
-#define SUIT_NONE     255
 
 extern byte* scrnBuffer;                    // 1st PMODE 4 buffer
 
@@ -112,7 +100,7 @@ extern unsigned short blackJokerValue[10];
 extern unsigned short redJokerSuit[7];
 extern unsigned short blackJokerSuit[7];
 
+byte getNumPixelRowsPerCard();
 byte* drawCompiledPixMap(byte byteOffset, byte pixelRow, word* wordArray, byte numRows,
                          byte rowRepetitions);
-byte getNumPixelRowsPerCard();
 

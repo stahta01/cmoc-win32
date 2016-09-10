@@ -3,6 +3,6 @@
 
 void closeCardGameScreenMode()
 {
-//    restoreOriginalTextMode();
+    textmode(MODE_T0_32X16);
 }
 

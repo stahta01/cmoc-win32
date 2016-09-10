@@ -10,10 +10,7 @@
 #define TRUE  1
 #endif
 
-typedef unsigned char byte;
-typedef signed char   sbyte;
-typedef unsigned int  word;
-typedef signed int    sword;
+#include <sys/byte.h>
 
 #endif
 

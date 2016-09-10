@@ -10,10 +10,10 @@
 
 typedef unsigned int* va_list;
 
-extern char* __va_arg(va_list* app, unsigned int sizeInBytes);
+extern char* _va_arg(va_list* app, unsigned int sizeInBytes);
 
 #define va_start(ap, lastFixed) do { (ap) = ((unsigned *) &(lastFixed)) + 1; } while (0)
-#define va_arg(ap, type) (* (type *) __va_arg(&(ap), sizeof(type)))
+#define va_arg(ap, type) (* (type *) _va_arg(&(ap), sizeof(type)))
 #define va_end(ap) do {} while (0)
 
 
