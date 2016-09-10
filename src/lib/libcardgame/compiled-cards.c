@@ -7,6 +7,8 @@
     Version 0.1.1 - 2016-03-12 - First release in the public domain.
 */
 
+#include "_cardgame.h"
+
 unsigned short redCard_1[10] = {
     0x3EFF,  /* #  r     0011111011111111 */
     0x3ABF,  /* # rrr    0011101010111111 */
