@@ -2,7 +2,7 @@
 #include "_system.h"
 
 unsigned sysptr_polcat, sysptr_chrout, sysptr_csrdon, sysptr_blkin, sysptr_blkout,
-         sysptr_joyin, sysptr_wrtldr, sysptr_sound;
+         sysptr_joyin, sysptr_wrtldr, sysptr_sound, sysptr_line;
 
 unsigned char _get_ostype;
 
@@ -23,6 +23,7 @@ void system_init(void)
     case SYSTEM_MAC_COCO2:
     case SYSTEM_MAC_COCO3:
         sysptr_sound = 0xa951;
+        sysptr_line = 0x94A1;
         break;
     case SYSTEM_MAC_DRAGON32:
     case SYSTEM_MAC_DRAGON64:

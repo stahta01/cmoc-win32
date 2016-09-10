@@ -12,6 +12,7 @@
 
 #include <graph.h>
 #include <equates.h>
+#include <system.h>
 
 typedef struct {
     char x, y, z;
@@ -119,7 +120,7 @@ void test(int x1, int y1, int x2, int y2)
     _verend = y2;
     asm {
         pshs u
-        jsr $94A1
+        jsr [sysptr_line]
         puls u
     }
 }
@@ -170,7 +171,7 @@ int main(void)
 
     _setcolor(1);
     for (unsigned char a = 0; ; a += 5) {
-        matrotx(mat, (char)a);
+        matrotz(mat, (char)a);
         mat[11] = 1;
         objectrotate(&obj, mat, pro);
         _clearscreen(_GCLEARSCREEN);
