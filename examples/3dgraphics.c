@@ -15,6 +15,10 @@
 #include <system.h>
 
 typedef struct {
+    char x, y;
+} vec2_t;
+
+typedef struct {
     char x, y, z;
 } vector_t;
 
@@ -160,6 +164,8 @@ int main(void)
 {
     char mat[12];
     projected_t pro[20];
+
+    *(char*)65495 = 0;
 
     system("PMODE0,1");
     system("SCREEN1,1");
