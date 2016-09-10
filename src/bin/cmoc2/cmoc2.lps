@@ -70,9 +70,10 @@
       <Unit8>
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="473"/>
-        <CursorPos X="35" Y="488"/>
+        <TopLine Value="482"/>
+        <CursorPos X="5" Y="493"/>
         <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit8>
@@ -1363,7 +1364,6 @@
       </Unit188>
       <Unit189>
         <Filename Value="UCmocProcess_TOOLS.pas"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <TopLine Value="184"/>
         <CursorPos X="51" Y="194"/>

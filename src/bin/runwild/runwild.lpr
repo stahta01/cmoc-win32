@@ -137,5 +137,4 @@ begin
       Free;
     end;
   end;
-  ReadLn;
 end.

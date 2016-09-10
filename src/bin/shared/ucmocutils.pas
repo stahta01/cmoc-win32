@@ -470,6 +470,8 @@ end;
 
 class procedure OCmoc.StringDynArrayAppendLibs(var A: TStringDynArray);
 begin
+  StringDynArrayAppendLib(A, 'all');
+  (*
   StringDynArrayAppendLib(A, 'disk');
   StringDynArrayAppendLib(A, 'motorola');
   StringDynArrayAppendLib(A, 'cmoc');
@@ -488,6 +490,7 @@ begin
   StringDynArrayAppendLib(A, 'coco');
   StringDynArrayAppendLib(A, 'system');
   StringDynArrayAppendLib(A, 'c');
+  *)
 end;
 
 class procedure OCmoc.StringDynArrayAppendOptions(var A: TStringDynArray;
