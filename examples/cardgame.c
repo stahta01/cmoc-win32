@@ -12,13 +12,12 @@
 
 #pragma options -machine=cocous
 
-#include <cardgame.h>
-#include <unistd.h>
-#include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <cmoc.h>
+#include <unistd.h>
+#include <conio.h>
+#include <cardgame.h>
 
 #define PIXEL_ROWS_PER_SCREEN 192
 

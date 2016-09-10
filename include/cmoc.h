@@ -67,9 +67,5 @@ byte sub32(word* hi, word h, word l);
 
 sbyte dwcompare(word* a, word* b);
 
-// Blocks the execution for the specified time in 60ths of a second.
-//
-void delay(size_t sixtiethsOfASecond);
-
 #endif
 

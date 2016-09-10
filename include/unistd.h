@@ -61,7 +61,7 @@ int unlink(char* name);
 // Directories
 int chdir(char* name);
 char* getcwd(char* buf, size_t size);
-int mkdir(char* name, ...);             // May take a mode argument
+int mkdir(char* name, ...);                 // May take a mode argument
 int rmdir(char* name);
 
 // Others
@@ -70,6 +70,7 @@ int getopt(int argc, char** argv, char* optstring);
 
 // Non standard
 int exec(char* progname, char* cmdline);
+void delay(unsigned ticks);                 // CMOC
 
 #endif
 
