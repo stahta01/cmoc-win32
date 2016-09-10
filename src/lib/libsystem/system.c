@@ -11,9 +11,9 @@ int _system(void)
         ldx     #_LINBUF
         stx     _CHARAD
         jsr     _GETNCH
-        jsr     _CRUNCHLINE
+        jsr     [sysptr_crunch]
         jsr     _GETNCH
-        jsr     _PROCESSCOMMAND
+        jsr     [sysptr_execute]
         puls u
     }
     return 0;

@@ -1,7 +1,7 @@
 
 /*  compiled-cards.h - Playing card bitmaps for the Color Computer.
 
-    By Pierre Sarrazin <http:               //sarrazip.com/>.
+    By Pierre Sarrazin <http://sarrazip.com/>.
     This file is in the public domain.
 
     Version 0.1.1 - 2016-03-12 - First release in the public domain.

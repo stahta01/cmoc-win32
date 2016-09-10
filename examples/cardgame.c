@@ -3,7 +3,7 @@
     Skeleton CoCo program that draws playing cards.
     Assumes Disk Basic, i.e., the PMODE 4 screen starts at $0E00.
 
-    By Pierre Sarrazin <http:               //sarrazip.com/>.
+    By Pierre Sarrazin <http://sarrazip.com/>.
     This file is in the public domain.
 
     Version 0.1.0 - 2015-08-12 - First public release.

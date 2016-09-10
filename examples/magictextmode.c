@@ -20,7 +20,7 @@ int main(void)
     textmode2(MODE_H0_32X24, charset_6x8);
 
     _pmode = 3;
-    system("COLOR 2,1");
+    system("COLOR2,1");
     *(unsigned char*)0xff22 ^= 128;
 
     s[0] = 0;

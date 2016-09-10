@@ -32,7 +32,8 @@ unsigned char get_ostype(void);
 extern unsigned char _get_ostype;
 
 extern unsigned sysptr_polcat, sysptr_chrout, sysptr_csrdon, sysptr_blkin, sysptr_blkout,
-       sysptr_joyin, sysptr_wrtldr, sysptr_line, sysptr_getchr, sysptr_putchr, sysptr_sound;
+       sysptr_joyin, sysptr_wrtldr, sysptr_line, sysptr_getchr, sysptr_putchr, sysptr_sound,
+       sysptr_crunch, sysptr_execute;
 
 void system_init(void);
 char system_polcat(void);

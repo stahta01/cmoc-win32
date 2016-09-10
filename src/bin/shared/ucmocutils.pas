@@ -749,7 +749,7 @@ begin
             end;
             Inc(LPos);
           end;
-          if LPos[0] = '/' then begin
+          if (LPos[-1] = ' ') and (LPos[0] = '/') then begin
             LSep := LPos - PChar(LLine) + 1;
             Strings[LIndex] := PadRight(TrimRight(Copy(LLine, 1, LSep - 1)), 43) + #32 +
               Copy(LLine, LSep, MaxInt);
