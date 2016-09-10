@@ -7,7 +7,7 @@ void system_putchr(char c, char devnum)
     _devnum = devnum;
     asm {
         lda     c
-        jsr     _PUTCHR
+        jsr     [sysptr_putchr]
     }
     _devnum = dn;
 }

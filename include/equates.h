@@ -2,10 +2,6 @@
 #ifndef _EQUATES_H
 #define _EQUATES_H
 
-#define _JSR(A) jsr A
-
-#define JSR_JOYIN       _JSR([$a00a])
-
 #if defined(__COCO__)
 
 #include <coco/equates.h>

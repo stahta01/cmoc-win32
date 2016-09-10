@@ -32,7 +32,7 @@ unsigned char get_ostype(void);
 extern unsigned char _get_ostype;
 
 extern unsigned sysptr_polcat, sysptr_chrout, sysptr_csrdon, sysptr_blkin, sysptr_blkout,
-       sysptr_joyin, sysptr_wrtldr, sysptr_sound, sysptr_line;
+       sysptr_joyin, sysptr_wrtldr, sysptr_line, sysptr_getchr, sysptr_putchr, sysptr_sound;
 
 void system_init(void);
 char system_polcat(void);
@@ -40,7 +40,8 @@ void system_chrout(char c);
 void system_putchr(char c, char devnum);
 char system_getchr(char devnum);
 void system_joyin(void);
-void system_sound(unsigned char tone, unsigned duration);
+void system_sound(void);
+void system_line(void);
 
 #endif
 

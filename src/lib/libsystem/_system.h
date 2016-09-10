@@ -6,8 +6,8 @@
 #include <equates.h>
 #include <system.h>
 
-//#define JSR_POLCAT      _JSR([$a000])
-//#define JSR_CHROUT      _JSR([$a002])
+void system_init_coco(void);
+void system_init_dragon(void);
 
 #ifdef __COCO__
 #include <coco/cb_equates.h>

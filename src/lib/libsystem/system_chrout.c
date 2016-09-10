@@ -5,7 +5,7 @@ void system_chrout(char c)
 {
     asm {
         lda     c
-        jsr     [$a002]
+        jsr     [sysptr_chrout]
     }
 }
 

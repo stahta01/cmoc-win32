@@ -3,6 +3,8 @@
 
 void beep(unsigned char tone, unsigned duration)
 {
-    system_sound(tone, duration);
+    _sndton = tone;
+    _snddur = duration;
+    system_sound();
 }
 

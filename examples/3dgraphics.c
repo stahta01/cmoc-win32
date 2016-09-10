@@ -118,11 +118,7 @@ void test(int x1, int y1, int x2, int y2)
     _verbeg = y1;
     _horend = x2;
     _verend = y2;
-    asm {
-        pshs u
-        jsr [sysptr_line]
-        puls u
-    }
+    system_line();
 }
 
 void objectdrawedges(object_t* obj, projected_t* pv)

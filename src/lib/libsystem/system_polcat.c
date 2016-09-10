@@ -4,7 +4,7 @@
 char asm system_polcat(void)
 {
     asm {
-        jsr     [$a000]
+        jsr     [sysptr_polcat]
         tfr     a,b
     }
 }

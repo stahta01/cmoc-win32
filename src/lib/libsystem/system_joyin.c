@@ -5,7 +5,7 @@ void asm system_joyin(void)
 {
     asm {
         pshs    u
-        jsr     [$a00a]
+        jsr     [sysptr_joyin]
         puls    u
     }
 }
