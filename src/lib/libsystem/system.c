@@ -1,67 +1,6 @@
 
 #include "_system.h"
 
-char asm polcat(void)
-{
-    asm {
-        jsr     [$a000]
-        tfr     a,b
-    }
-}
-
-void chrout(char c)
-{
-    asm {
-        lda     c
-        jsr     [$a002]
-    }
-}
-
-void asm joyin(void)
-{
-    asm {
-        pshs    u
-        jsr     [$a00a]
-        puls    u
-    }
-}
-
-void putchr(char c, char devnum)
-{
-    char dn = _devnum;
-    _devnum = devnum;
-    asm {
-        lda     c
-        jsr     _PUTCHR
-    }
-    _devnum = dn;
-}
-
-char getchr(char devnum)
-{
-    char c, dn = _devnum;
-    _devnum = devnum;
-    asm {
-        jsr _LA176
-        sta c
-    }
-    _devnum = dn;
-    return c;
-}
-
-void beep(unsigned char tone, unsigned duration)
-{
-    asm {
-        pshs    u
-        lda     tone
-        sta     _SNDTON
-        ldd     duration
-        std     _SNDDUR
-        JSR_SOUND
-        puls    u
-    }
-}
-
 int _system(void)
 {
     //puts(_syscmdline);

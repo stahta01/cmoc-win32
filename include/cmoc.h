@@ -23,35 +23,6 @@
 
 #include <motorola/types.h>
 
-// 3 bits for the machine
-
-#define CMOC_MAC_UNKNOWN        0
-#define CMOC_MAC_COCO1          1
-#define CMOC_MAC_COCO2          2
-#define CMOC_MAC_COCO3          3
-#define CMOC_MAC_DRAGON32       4
-#define CMOC_MAC_DRAGON64       5
-#define CMOC_MAC_RESERVED       6
-#define CMOC_MAC_VECTREX        7
-
-#define CMOC_FLG_EXT            8
-
-// 3 bits for the memory size (blocks of 16K)
-
-#define CMOC_RAM_XXK            0
-#define CMOC_RAM_16K            16
-#define CMOC_RAM_32K            32
-#define CMOC_RAM_48K            48
-#define CMOC_RAM_64K            64
-#define CMOC_RAM_PAG            80
-
-#define CMOC_FLG_DOS            128
-
-unsigned char get_ostype(void);
-
-// OS type collected in _main().
-extern unsigned char _get_ostype;
-
 // Double-word to ASCII.
 // Converts the unsigned 32-bit integer formed by hi * 65536 + lo into
 // an ASCII decimal representation that gets written to 'out'.

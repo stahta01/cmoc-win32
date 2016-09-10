@@ -2,7 +2,7 @@
 // This is work in progress. Its the start of a minimal 3d maths library
 
 
-#pragma options -machine=cocous
+//#pragma options -machine=cocous
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -8,7 +8,7 @@ int fgetc(FILE* fp)
             return EOF;
         }
         int c = fp->buffer;
-        fp->buffer = getchr(fp->devnum);
+        fp->buffer = system_getchr(fp->devnum);
         if (_cinbfl) {
             fp->buffer = EOF;
             return EOF;

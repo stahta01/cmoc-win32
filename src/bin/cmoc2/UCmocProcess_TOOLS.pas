@@ -35,7 +35,7 @@ type
     FOrigin: cardinal;
     FTarget, FOptions: string;
   strict private
-    procedure LWLINK(const ADst, ASrc, AMap: TFileName; const ATarget, AFormat: string);
+    procedure LWLINK(const ADst, ASrc, AMap: TFileName; const AFormat: string);
   protected
     procedure MCCP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
     procedure CMOC(const ADst, ASrc: TFileName; const AWerror, AVerbose: boolean);
@@ -152,8 +152,7 @@ begin
   end;
 end;
 
-procedure CCmocProcess_TOOLS.LWLINK(const ADst, ASrc, AMap: TFileName;
-  const ATarget, AFormat: string);
+procedure CCmocProcess_TOOLS.LWLINK(const ADst, ASrc, AMap: TFileName; const AFormat: string);
 var
   LSrcLib: string;
   LParams: TStringDynArray;
@@ -162,7 +161,7 @@ begin
     LSrcLib := Copy(ChangeFileExt(ExtractFileName(ASrc), EmptyStr), 4, MaxInt);
     LParams := TStringDynArray.Create(Opt_Output2, ADst, Opt_LibPath2,
       OCmoc.PathToLib, Opt_LibPath2, ExtractFilePath(ASrc), Opt_LibInclude2,
-      LSrcLib, Opt_LibInclude2, ATarget);
+      LSrcLib);
     OCmoc.StringDynArrayAppendLibs(LParams);
     if Length(AFormat) = 0 then begin
       OCmoc.StringDynArrayAppendStrings(LParams, [Opt_Format2, Format_DECB]);
@@ -188,11 +187,11 @@ begin
     LWAR(Opt_Create1, LLibFile, ASrc);
     LMapFile := OCmoc.FileNameTemp('lwlinkmap', '.txt');
     try
-      LWLINK(ADst, LLibFile, LMapFile, ATarget, AFormat);
+      LWLINK(ADst, LLibFile, LMapFile, AFormat);
       LObjFile := LWASM_INITGL(LMapFile);
       try
         LWAR(Opt_Add1, LLibFile, TFileNames.Create(LObjFile));
-        LWLINK(ADst, LLibFile, LMapFile, ATarget, AFormat);
+        LWLINK(ADst, LLibFile, LMapFile, AFormat);
       finally
         DeleteFile(LObjFile);
       end;

@@ -3,7 +3,7 @@
 
 byte JOYSTK(int j)
 {
-    joyin();
+    system_joyin();
     return ((byte*)_POTVAL)[j];
 }
 

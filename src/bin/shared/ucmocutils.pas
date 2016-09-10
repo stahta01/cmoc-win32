@@ -485,6 +485,8 @@ begin
   StringDynArrayAppendLib(A, 'ctype');
   StringDynArrayAppendLib(A, 'stdio');
   StringDynArrayAppendLib(A, 'string');
+  StringDynArrayAppendLib(A, 'coco');
+  StringDynArrayAppendLib(A, 'system');
   StringDynArrayAppendLib(A, 'c');
 end;
 

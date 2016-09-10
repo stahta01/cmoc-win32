@@ -1,5 +1,0 @@
-Dont place any asm files here.
-
-They will be deleted after a compile/build.
-
-Place ALL asm files into the asm folder.

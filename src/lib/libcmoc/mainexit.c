@@ -2,7 +2,6 @@
 #include "_cmoc.h"
 
 unsigned exitstack;
-unsigned char _get_ostype;
 
 void _main(void)
 {
@@ -10,7 +9,7 @@ void _main(void)
         leax    0,s
         stx     _exitstack,DAT
     }
-    _get_ostype = get_ostype();
+    system_init();
     exit(main());
 }
 

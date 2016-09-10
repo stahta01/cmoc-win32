@@ -1,5 +1,5 @@
 
-#include "_cmoc.h"
+#include "_system.h"
 
 // Note: As far as I know, there is no easy way to identity a 64K CoCo.
 // The reason is, 32K CoCo's are often 64K with faulty upper memory.
@@ -20,30 +20,30 @@ unsigned char get_ostype(void)
 
     if (bas[0] == 'C' && bas[1] == 'O') {
         if (ext[0] == 'E' && ext[1] == 'X' && ext[21] == '2') {
-            ostype |= CMOC_MAC_COCO3;
-            ostype |= CMOC_FLG_EXT;
+            ostype |= SYSTEM_MAC_COCO3;
+            ostype |= SYSTEM_FLG_EXT;
             ostype |= 64;
         } else {
-            ostype |= bas[14] < '2' ? CMOC_MAC_COCO1 : CMOC_MAC_COCO2;
+            ostype |= bas[14] < '2' ? SYSTEM_MAC_COCO1 : SYSTEM_MAC_COCO2;
             if (ext[0] == 'E' && ext[1] == 'X') {
-                ostype |= CMOC_FLG_EXT;
+                ostype |= SYSTEM_FLG_EXT;
             }
             ostype |= (char)(((_topram >> 10) + 1) & 0x70);
         }
     } else {
         if (*((unsigned*)0x8000) == 0x7ebb) {
             if (*((char*)0x8002) == 0x3c) {
-                ostype |= CMOC_MAC_DRAGON64;
+                ostype |= SYSTEM_MAC_DRAGON64;
                 ostype |= 64;
             } else {
-                ostype |= CMOC_MAC_DRAGON32;
+                ostype |= SYSTEM_MAC_DRAGON32;
                 ostype |= 32;
             }
-            ostype |= CMOC_FLG_EXT;
+            ostype |= SYSTEM_FLG_EXT;
         }
     }
     if (_grpram > 6) {
-        ostype |= CMOC_FLG_DOS;
+        ostype |= SYSTEM_FLG_DOS;
     }
     return ostype;
 }
