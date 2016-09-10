@@ -21,13 +21,13 @@ int _system(void)
 
 int system(char* cmd)
 {
-    strcpy(_syscmdline, cmd);
+    strcpy(SYSTEM_CMDLINE, cmd);
     return _system();
 }
 
 int systemf(char* fmt, ...)
 {
-    vsprintf(_syscmdline, fmt, (va_list)&fmt);
+    vsprintf(SYSTEM_CMDLINE, fmt, (va_list)&fmt);
     return _system();
 }
 

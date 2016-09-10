@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="79">
+    <Units Count="80">
       <Unit0>
         <Filename Value="ide.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -620,6 +620,13 @@
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="C++"/>
       </Unit78>
+      <Unit79>
+        <Filename Value="..\..\lib\libc\getenv.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="42" Y="6"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit79>
     </Units>
     <JumpHistory Count="29" HistoryIndex="28">
       <Position1>

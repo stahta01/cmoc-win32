@@ -2,6 +2,8 @@
 #ifndef _SYSTEM_H
 #define _SYSTEM_H
 
+#define SYSTEM_CMDLINE ((char*)0x2dd)
+
 // 3 bits for the machine
 
 #define SYSTEM_MAC_UNKNOWN        0

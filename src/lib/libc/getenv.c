@@ -3,6 +3,6 @@
 
 char* getenv(char* name)
 {
-    return getenvstr(name, _syscmdline);
+    return getenvstr(name, SYSTEM_CMDLINE);
 }
 
