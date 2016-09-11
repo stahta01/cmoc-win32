@@ -1,6 +1,8 @@
 
-#define DECTAB _DECTAB,DAT *
 #define u pcr
+
+#define DECTAB _DECTAB,DAT *
+
 #define _FILE "alib/bin_dec.as"
 #include "_alib.h"
 
