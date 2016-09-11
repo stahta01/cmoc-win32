@@ -1,10 +1,13 @@
 
-// Enable main interrupt
+#define enable _enable
+#define disable _disable
+#define enablef _enablef
+#define disablef _disablef
 
-void asm enable(void)
+void asm __ENABLE_ASM(void)
 {
     asm {
-        andcc   #%11101111                  // Clear IRQ mask
+#include "asm/ENABLE.ASM"
     }
 }
 

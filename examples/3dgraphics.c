@@ -180,11 +180,6 @@ unsigned asm test(char a, char b)
 
 int main(void)
 {
-    char s[40];
-    strcpy(s, "DEREK evans");
-    printf("%s\n", to_lowrs(s));
-    //puts(s);
-    return 0;
     matrix_t matx, matz, mat;
     projected3_t pro1[10];
     projected3_t pro2[10];
@@ -200,15 +195,15 @@ int main(void)
         matrix_rotate_x(&matx, (char)a);
         matrix_rotate_z(&matz, (char)a * 3);
         matrix_multiply(&mat, &matx, &matz);
-        mat.v[0][3] = 3;
-        mat.v[2][3] = 4;
+        mat.v[0][3] = 0;
+        mat.v[2][3] = 3;
         model_rotate(&obj, &mat, pro1);
-        mat.v[0][3] = -3;
-        mat.v[2][3] = 4;
-        model_rotate(&obj, &mat, pro2);
+        //mat.v[0][3] = -3;
+        //mat.v[2][3] = 4;
+        //model_rotate(&obj, &mat, pro2);
         _clearscreen(_GCLEARSCREEN);
         model_draw_edges(&obj, pro1);
-        model_draw_edges(&obj, pro2);
+        //model_draw_edges(&obj, pro2);
     }
     return 0;
 }
