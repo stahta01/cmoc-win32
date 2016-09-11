@@ -1,5 +1,5 @@
 
-#include <sys/mman.h>
+#include "_unistd.h"
 
 unsigned _mlock_count = 0;
 

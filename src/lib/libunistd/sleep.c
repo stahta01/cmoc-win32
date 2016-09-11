@@ -1,6 +1,5 @@
 
-#include <unistd.h>
-#include <time.h>
+#include "_unistd.h"
 
 // seconds: 0..1092
 

@@ -1,8 +1,5 @@
 
-#include <fcntl.h>
-#include <disk.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include "_unistd.h"
 
 int close(int fd)
 {

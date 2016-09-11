@@ -1,6 +1,5 @@
 
-#include <unistd.h>
-#include <stdio.h>
+#include "_unistd.h"
 
 int unlink(char* fn)
 {

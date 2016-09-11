@@ -1,7 +1,5 @@
 
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
+#include "_unistd.h"
 
 size_t lgets(int fd, char* s, size_t n)
 {

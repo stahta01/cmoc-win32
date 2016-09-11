@@ -1,7 +1,5 @@
 
-#include <unistd.h>
-#include <fcntl.h>
-#include <cmoc.h>
+#include "_unistd.h"
 
 off_t lseek(int fd, off_t offset, int whence)
 {

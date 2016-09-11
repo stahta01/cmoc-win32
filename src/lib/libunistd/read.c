@@ -1,7 +1,5 @@
 
-#include <unistd.h>
-#include <fcntl.h>
-#include <disk.h>
+#include "_unistd.h"
 
 int read(int fd, void* buf, unsigned count)
 {

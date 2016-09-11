@@ -1,7 +1,5 @@
 
-#include <unistd.h>
-#include <stdio.h>
-#include <disk.h>
+#include "_unistd.h"
 
 size_t lsize(int fd)
 {

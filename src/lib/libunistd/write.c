@@ -1,6 +1,5 @@
 
-#include <fcntl.h>
-#include <stdlib.h>
+#include "_unistd.h"
 
 // Doesn't support \0 characters.
 

@@ -1,8 +1,5 @@
 
-#include <fcntl.h>
-#include <stdlib.h>
-#include <disk.h>
-#include <coco/disk.h>
+#include "_unistd.h"
 
 // Note: Disk only.
 

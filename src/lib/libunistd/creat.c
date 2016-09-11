@@ -1,5 +1,5 @@
 
-#include <fcntl.h>
+#include "_unistd.h"
 
 int creat(char* name, unsigned mode)
 {
