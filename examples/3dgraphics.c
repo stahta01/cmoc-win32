@@ -181,7 +181,7 @@ int main(void)
 
     char a = -10, b = 2;
 
-    printf("%d\n", a * b);
+    printf("%d\n", atoi("-10"));
 
     return 0;
 

@@ -431,7 +431,10 @@ end;
 
 class function OCmoc.SymbolIsPublic(const A: string): boolean;
 begin
-  Result := AnsiStartsStr('_', A) and not AnsiStartsStr('___', A);
+  Result := Length(A) >= 2;
+  if Result then begin
+    Result := (A[1] = '_') and (A[2] in CharSet_IdentHead) and not AnsiStartsStr('___', A);
+  end;
 end;
 
 class procedure OCmoc.StringDynArrayAppend(var A: TStringDynArray; const S: string);

@@ -70,10 +70,12 @@
       <Unit8>
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="212"/>
-        <CursorPos X="34" Y="221"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="30"/>
+        <CursorPos X="20" Y="43"/>
         <UsageCount Value="36"/>
+        <Loaded Value="True"/>
       </Unit8>
       <Unit9>
         <Filename Value="ucmocutils.pas"/>
@@ -1354,10 +1356,9 @@
       </Unit187>
       <Unit188>
         <Filename Value="UCmocProcess_ASM.pas"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="249"/>
-        <CursorPos X="20" Y="265"/>
+        <TopLine Value="135"/>
+        <CursorPos X="24" Y="152"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit188>
@@ -1429,7 +1430,7 @@
         <UsageCount Value="10"/>
       </Unit197>
     </Units>
-    <JumpHistory Count="11" HistoryIndex="10">
+    <JumpHistory Count="12" HistoryIndex="11">
       <Position1>
         <Filename Value="cmoc2.lpr"/>
         <Caret Line="37" Column="23" TopLine="28"/>
@@ -1474,6 +1475,10 @@
         <Filename Value="UCmocProcess_ASM.pas"/>
         <Caret Line="169" Column="60" TopLine="157"/>
       </Position11>
+      <Position12>
+        <Filename Value="UCmocProcess_ASM.pas"/>
+        <Caret Line="152" Column="24" TopLine="135"/>
+      </Position12>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
