@@ -1,5 +1,5 @@
 
 #define strlen _strlen
-#define _FILE "clib/LIB/LIB.A/strlen.a"
-#include "_kreider.h"
+#define _FILE "kreiderclib/strlen.as"
+#include "_kreiderclib.h"
 

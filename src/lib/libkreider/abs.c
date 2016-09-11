@@ -1,5 +1,5 @@
 
 #define abs _abs
-#define _FILE "clib/LIB/IMATH/abs.a"
-#include "_kreider.h"
+#define _FILE "kreiderclib/abs.as"
+#include "_kreiderclib.h"
 
