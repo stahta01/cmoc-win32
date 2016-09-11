@@ -11,6 +11,9 @@
 #define IS_UPPER _IS_UPPER
 #define IS_XDIGIT _IS_XDIGIT
 
+#define TO_UPPER _TO_UPPER
+#define TO_LOWER _TO_LOWER
+
 void asm __ALIB(void)
 {
     asm {

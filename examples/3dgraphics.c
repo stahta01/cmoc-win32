@@ -10,6 +10,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <ctype.h>
+#include <alib.h>
 
 #include <graph.h>
 #include <equates.h>
@@ -179,6 +180,11 @@ unsigned asm test(char a, char b)
 
 int main(void)
 {
+    char s[40];
+    strcpy(s, "DEREK evans");
+    printf("%s\n", to_lowrs(s));
+    //puts(s);
+    return 0;
     matrix_t matx, matz, mat;
     projected3_t pro1[10];
     projected3_t pro2[10];

@@ -64,10 +64,8 @@ type
     end else if FileExists(LParams[High(LParams)]) then begin
       LSrc := OCmoc.DosToUnix(LParams[High(LParams)]);
       LParams[High(LParams)] := LSrc + FileExt_I;
-      //if OCmoc.FileChanged(LParams[High(LParams)], LSrc) then begin
       ExecuteTool(Tool_MCPP, TStringDynArray.Create('-a', '-P',
-        '-W', '0', Opt_Output2, LParams[High(LParams)], Opt_Define2, 'DAT=PCR', LSrc));
-      //end;
+        '-W', '0', Opt_Output2, LParams[High(LParams)], Opt_Define2, 'DAT=pcr', LSrc));
     end;
     ExecuteTool(Tool_LWASM, LParams);
   end;
