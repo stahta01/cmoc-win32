@@ -2,7 +2,7 @@
 // This is work in progress. Its the start of a minimal 3d maths library
 
 
-//#pragma options -machine=cocous
+#pragma options -machine=coco
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -95,10 +95,10 @@ void matrix_process_vectors(matrix_t* mat, vector_t* v, size_t n, projected3_t* 
         o->x=(int)v->x*mat->v[0][0]+(int)v->y*mat->v[0][1]+(int)v->z*mat->v[0][2]+((int)mat->v[0][3]<<8);
         o->y=(int)v->x*mat->v[1][0]+(int)v->y*mat->v[1][1]+(int)v->z*mat->v[1][2]+((int)mat->v[1][3]<<8);
         o->z=(int)v->x*mat->v[2][0]+(int)v->y*mat->v[2][1]+(int)v->z*mat->v[2][2]+((int)mat->v[2][3]<<8);
-        o->sz = o->z >> 2;
+        o->sz = o->z >> 4;
         if (o->sz > 0) {
-            o->sx = 64 + ((o->x << 2) / o->sz);
-            o->sy = 48 - ((o->y << 2) / o->sz);
+            o->sx = 64 + o->x / o->sz;
+            o->sy = 48 - o->y / o->sz;
         }
     }
 }
@@ -143,7 +143,7 @@ void model_draw_edges(model_t* model, projected3_t* pv)
 }
 
 
-#define S 3
+#define S 64
 
 vector_t vectors[8] = {
     {+S, +S, +S},
@@ -181,22 +181,33 @@ unsigned asm test(char a, char b)
 int main(void)
 {
     matrix_t matx, matz, mat;
+    unsigned grp[2][2], page = 0;
     projected3_t pro1[10];
     projected3_t pro2[10];
 
     *(char*)65495 = 0;
 
-    system("PMODE0,1");
+    system("PMODE0");
     system("SCREEN1,1");
-    system("PCLS");
+
+    grp[0][0] = _beggrp;
+    grp[0][1] = _endgrp;
+    system("PMODE,2");
+    grp[1][0] = _beggrp;
+    grp[1][1] = _endgrp;
 
     _setcolor(1);
     for (unsigned char a = 0; ; a += 2) {
+        system_screen(1);
+        page ^= 1;
+        _beggrp = grp[page][0];
+        _endgrp = grp[page][1];
+        memset(_beggrp, 0, _endgrp - _beggrp);
         matrix_rotate_x(&matx, (char)a);
         matrix_rotate_z(&matz, (char)a * 3);
         matrix_multiply(&mat, &matx, &matz);
         mat.v[0][3] = 0;
-        mat.v[2][3] = 3;
+        mat.v[2][3] = S;
         model_rotate(&obj, &mat, pro1);
         //mat.v[0][3] = -3;
         //mat.v[2][3] = 4;

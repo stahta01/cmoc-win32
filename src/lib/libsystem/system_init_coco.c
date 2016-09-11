@@ -1,5 +1,5 @@
 
-#include <system.h>
+#include "_system.h"
 
 void system_init_coco(void)
 {
@@ -9,5 +9,6 @@ void system_init_coco(void)
     sysptr_sound    = 0xa951;
     sysptr_crunch   = 0xb821;
     sysptr_execute  = 0xadc6;
+    sysptr_screen   = 0x95aa;
 }
 

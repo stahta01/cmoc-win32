@@ -3,7 +3,7 @@
 
 unsigned sysptr_polcat, sysptr_chrout, sysptr_csrdon, sysptr_blkin, sysptr_blkout,
          sysptr_joyin, sysptr_wrtldr, sysptr_line, sysptr_getchr, sysptr_putchr, sysptr_sound,
-         sysptr_crunch, sysptr_execute;
+         sysptr_crunch, sysptr_execute, sysptr_screen;
 
 unsigned char _get_ostype;
 

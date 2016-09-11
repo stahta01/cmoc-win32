@@ -1,5 +1,5 @@
 
-#include <system.h>
+#include "_system.h"
 
 void system_init_dragon(void)
 {
@@ -9,5 +9,6 @@ void system_init_dragon(void)
     sysptr_sound    = 0xbaa0;
     sysptr_crunch   = 0x8f67;
     sysptr_execute  = 0x84dc;
+    sysptr_screen   = 0xa938;
 }
 
