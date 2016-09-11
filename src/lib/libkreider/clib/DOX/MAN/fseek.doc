@@ -1,0 +1,66 @@
+
+
+        FSEEK(3C)        Kreider OS-9 C Library        FSEEK(3C)
+
+
+        NNAAMMEE 
+
+             fseek, ftell, rewind - reposition a file pointer or report position
+
+        SSYYNNOOPPSSIISS 
+
+             #include <stdio.h>
+
+             fseek(fp, offset, place)
+             FILE *fp;
+             long offset;
+             int place;
+
+             long ftell(fp)
+             FILE *fp;
+
+             rewind(fp)
+             FILE *fp;
+
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             The FFSSEEEEKK function sets the position of the next input or 
+             output operation on the already opened file pointed to by 
+             _f_p.  The new position is at _o_f_f_s_e_t bytes from the 
+             beginning, the current position, or the beginning of the 
+             file if _p_l_a_c_e has the value 0, the current position if 1, 
+             or the end of the file if 2.  
+
+             The FFSSEEEEKK function undoes any effects of _u_n_g_e_t_c() and sorts 
+             out the problems associated with buffered I/O.  
+
+             NNOOTTEE: Using _l_s_e_e_k() on a buffered file will produce 
+             unpredictable results.  
+
+             The FFTTEELLLL function returns the current value of the offset 
+             relative to the beginning of the file associated with the 
+             file pointer _f_p.  It is measured in bytes and is the only 
+             foolproof way to obtain an _o_f_f_s_e_t for FFSSEEEEKK.  
+
+             The RREEWWIINNDD function is equivalent to _f_s_e_e_k(_f_p, _0_L, _0), 
+             except that no value is returned.  It returns the file 
+             pointer to the beginning of the file.  
+
+        DDIIAAGGNNOOSSTTIICCSS 
+
+             FFSSEEEEKK returns a -1 if the call is invalid, otherwise it 
+             returns zero.  
+
+        SSEEEE AALLSSOO 
+
+             lseek()
+
+
+
+
+
+
+                                                                
+
+

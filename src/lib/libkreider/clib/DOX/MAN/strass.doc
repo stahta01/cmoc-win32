@@ -1,0 +1,66 @@
+
+
+        STRASS(3S)       Kreider OS-9 C Library       STRASS(3S)
+
+
+        NNAAMMEE 
+
+             strass - byte by byte copy
+
+        SSYYNNOOPPSSIISS 
+
+             _strass(s1, s2, count)
+             char *s1, *s2;
+             int count;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             Until such time as the compiler can deal with structure 
+             assignment, this function is useful for copying one 
+             structure to another.  
+
+             _C_o_u_n_t bytes are copied from memory location _s_2 to memory 
+             location _s_1 regardless of the contents.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

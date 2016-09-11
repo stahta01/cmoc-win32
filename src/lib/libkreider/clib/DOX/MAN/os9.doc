@@ -1,0 +1,132 @@
+
+
+        _OS9(3S)         Kreider OS-9 C Library         _OS9(3S)
+
+
+        NNAAMMEE 
+
+             _os9 - system call interface from C programs
+
+        SSYYNNOOPPSSIISS 
+
+             #include <os9.h>
+
+             _os9(code, reg)
+             char code;
+             struct registers *reg;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             _OOSS99 enables the programmer to access virtually any OS-9 
+             system call directly from a C program without having to 
+             resort to assembly language routines.  
+
+             _C_o_d_e is one of the codes that are define in OOSS99.HH. OOSS99.HH 
+             contains codes for the F$ and I$ function/service requests, 
+             and also contains getstt, setstt, and error codes.  
+
+             The input registers (_r_e_g) for the system calls are accessed 
+             by the following structure that is defined in os9.h: 
+
+                  struct registers {
+                      char rg_cc, rg_a, rg_b, rg_dp;
+                      unsigned rg_x, rg_y, rg_u;
+                  };
+
+             An example program that uses _os9 is presented on the 
+             following page.  
+
+        DDIIAAGGNNOOSSTTIICCSS 
+
+             A -1 is returned if the OS-9 call fails.  0 (zero) is 
+             returned on success.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+
+
+
+        _OS9(3S)         Kreider OS-9 C Library         _OS9(3S)
+
+
+                                Program example:
+
+             #include <os9.h>
+             #include <modes.h>
+
+             /* This program does an I$GETSTT call to get file size */
+
+             main (argc, argv)
+             int argc;
+             char **argv;
+             {
+                 struct registers reg;
+                 int path;
+
+             /* Tell linker we need longs */
+
+                 pflinit();
+
+             /* low level open - filename is first command line param */
+
+                 path = open (*++argv, S_IREAD);
+
+             /* set up regs for call to OS-9 */
+
+                 reg.rg_a = path;
+                 reg.rg_b = SS_SIZE;
+
+                 if (_os9(I_GETSTT, &reg) == 0)
+                     printf ("filesize = %1x",
+                     (long) (reg.rg_x << 16) + reg.rg_u);
+                 else
+                     printf (OS9 error #%d, reg.rg_b & 0xff);
+
+                 dumpregs (&reg);
+             }
+
+             dumpregs(r)
+             register struct registers *r;
+             {
+                 printf("cc = %02x", r->rg_cc &0xff);
+                 printf(" a = %02x", r->rg_a &0xff);
+                 printf(" b = %02x", r->rg_b &0xff);
+                 printf("dp = %04x", r->rg_dp &0xff);
+                 printf(" x = %04x", r->rg_x);
+                 printf(" y = %04x", r->rg_y);
+                 printf(" u = %04x", r->rg_u);
+             }
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

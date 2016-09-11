@@ -1,0 +1,68 @@
+.so header
+.*
+.he /CREAT(3S)/Kreider OS-9 C Library/CREAT(3S)/
+.sh NAME
+.bb
+creat - create a new file
+.eb
+.sh SYNOPSIS
+.bb
+#include <modes.h>
+
+creat(fname, perms)
+char *fname;
+int perms;
+.eb
+.sh DESCRIPTION
+.db
+.bo
+CREAT
+returns a path number to a new file available for writing, giving it
+the permissions specified in the
+.ul
+perm
+variable and making the process user
+the owner of the file.  If, however,
+.ul
+fname
+is the name of an already
+existing file, the file is truncated to zero length and the ownership and
+permissions remain unchanged.  Note, that unlike the OS-9 assembler service
+request, CREAT DOES NOT return an error if the file already exists --
+.ul
+access()
+should be used to establish the existance of the file if it is important that
+a file should not be overwritten.
+.sp
+It is unnecessary to specifiy writing permissions in
+.ul
+perm
+in order to
+write to the file in the current process.
+.sp
+The following permissions are defined in the the include file as follows:
+.bb
+#define     S_IPRM      0xff    /* mask for permission bits */
+#define     S_IREAD     0x01    /* owner read */
+#define     S_IWRITE    0x02    /* owner write */
+#define     S_IEXEC     0x04    /* owner execute */
+#define     S_IOREAD    0x08    /* public read */
+#define     S_IOWRITE   0x10    /* public write */
+#define     S_IOEXEC    0x20    /* public execute */
+#define     S_ISHARE    0x40    /* sharable */
+.eb
+Directories may not be created with this call -- use
+.ul
+mknod()
+instead.
+.ed
+.sh DIAGNOSTICS
+.db
+This call returns -1 if there are too many files opened, if the pathname
+cannot be searched, if permission to write is denied, or of the file
+already exists and IS A DIRECTORY.
+.ed
+.sh SEE ALSO
+.bb
+write(), close(), chmod()
+.eb

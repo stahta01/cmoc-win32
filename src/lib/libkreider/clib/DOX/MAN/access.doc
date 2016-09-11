@@ -1,0 +1,66 @@
+
+
+        ACCESS(3S)       Kreider OS-9 C Library       ACCESS(3S)
+
+
+        NNAAMMEE 
+
+             access - give file accessibility
+
+        SSYYNNOOPPSSIISS 
+
+             #include <modes.h>
+
+             access(fname, perm)
+             char *fname;
+             int perm;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             AACCCCEESSSS returns zero if the access modes specified in _p_e_r_m 
+             are correct for the user to access _f_n_a_m_e.  A -1 is returned 
+             if the file cannot be accessed.  
+
+             The value for _p_e_r_m may be any legal OS-9 mode as used for 
+             _o_p_e_n() or _c_r_e_a_t(), or, it may be zero which then tests 
+             whether or not the file exists or the path to it may be 
+             searched.  
+
+             AACCCCEESSSS is useful to test the existance of a file without 
+             actually opening the file as would _o_p_e_n() or _f_o_p_e_n(), 
+             thereby changing the user permissions.  
+
+        CCAAVVEEAATTSS 
+
+             The values for _p_e_r_m are NOT compatible with other non-OS-9 
+             systems.  
+
+        DDIIAAGGNNOOSSTTIICCSS 
+
+             The returned error number, if a value of -1 is returned 
+             from this call, will be found in the global variable _e_r_r_n_o, 
+             and will indicate the reason that file cannot be accessed.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

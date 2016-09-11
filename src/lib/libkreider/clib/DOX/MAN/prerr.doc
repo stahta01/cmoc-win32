@@ -1,0 +1,66 @@
+
+
+        PRERR(3S)        Kreider OS-9 C Library        PRERR(3S)
+
+
+        NNAAMMEE 
+
+             prerr - print an error message
+
+        SSYYNNOOPPSSIISS 
+
+             prerr(filnum, errcode)
+             int filnum, errcode;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             PPRREERRRR prints an error message on the output path specified 
+             by _f_i_l_e_n_u_m, which must be the path number of an already 
+             opened file.  The message depends on _e_r_r_c_o_d_e which will 
+             normally be a standard OS-9 error code.  _F_i_l_e_n_u_m may also 
+             be the standard output or standard error paths which are 
+             always opened at program start.  
+
+        SSEEEE AALLSSOO 
+
+             errmsg()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

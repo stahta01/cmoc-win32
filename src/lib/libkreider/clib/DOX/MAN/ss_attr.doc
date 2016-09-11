@@ -1,0 +1,66 @@
+
+
+        SS_ATTR(2)       Kreider OS-9 C Library       SS_ATTR(2)
+
+
+        NNAAMMEE 
+
+             _ss_attr - set file attributes
+
+        SSYYNNOOPPSSIISS 
+
+             #include <modes.h>
+             
+             int _ss_attr(path, attr)
+             int path;
+             short attr;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             SSSS_AATTTTRR changes a disk file's attributes.  The current 
+             attributes of a file can be determined with the _GGSS_GGFFDD 
+             function.  The attributes of a file can be changed only by 
+             the owner of the file or the super user.  
+
+             The attributes as selected in the word _a_t_t_r are set in the 
+             file opened on _p_a_t_h.  The header file MMOODDEESS.HH defines the 
+             valid mode values used in _a_t_t_r.  
+
+             If an error occurs, the function returns the value -1 and 
+             the error code is placed in the global variable _e_r_r_n_o.  
+
+        NNOOTTEE 
+
+             This function is effective even if the owner or super user 
+             does not have write permission to the file.  It is not 
+             permitted to set the directory bit of a non-directory file, 
+             or to clear the directory bit of a directory that is not 
+             empty.  
+
+        SSEEEE AALLSSOO 
+
+             I$SetStt system call, Microware manual.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

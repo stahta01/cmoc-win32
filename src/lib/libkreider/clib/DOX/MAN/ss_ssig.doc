@@ -1,0 +1,66 @@
+
+
+        SS_SSIG(2)       Kreider OS-9 C Library       SS_SSIG(2)
+
+
+        NNAAMMEE 
+
+             _ss_ssig - set a signal 
+
+        SSYYNNOOPPSSIISS 
+
+             int _ss_ssig(path, sigcode)
+             int path;
+             short sigcode;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             SSSS_SSSSIIGG sets up a signal to be sent to the calling process 
+             when an interactive device has data ready.  When data is 
+             received on the device indicates by _p_a_t_h, the signal 
+             _s_i_g_c_o_d_e is sent to the calling process.  
+
+             SSSS_SSSSIIGG must be called each time the signal is sent if it 
+             is to be used again.  
+
+             The device is considered busy, and will return an error, if 
+             any read request arrives before the signal is sent.  Write 
+             requests are allowed to the device while in this state.  
+
+             If an error occurs, the function returns the value -1 and 
+             the error code is placed in the global variable _e_r_r_n_o.  
+
+        NNOOTTEE 
+
+             This feature exists only on SSCCFF devices.  
+
+        SSEEEE AALLSSOO 
+
+             I$SetStt system call, Microware manual, _ss_rel().
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

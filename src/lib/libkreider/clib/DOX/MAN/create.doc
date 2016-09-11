@@ -1,0 +1,66 @@
+
+
+        CREATE(3C)       Kreider OS-9 C Library       CREATE(3C)
+
+
+        NNAAMMEE 
+
+             create - creates and opens a file
+
+        SSYYNNOOPPSSIISS 
+
+             create(fname, mode, pmode)
+             char *fname;
+             int mode, pmode;
+
+             ocreat(fname, mode, pmode)
+             char *fname;
+             int mode, pmode;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             CCRREEAATTEE creates and opens the file named _f_n_a_m_e.  This call 
+             accepts the file mode and access permissions in the same 
+             function and is useful in setting up user permissions as 
+             soon as the file is opened.  
+
+             This function returns -1 if the file already exists.  
+
+             OOCCRREEAATT performs the same function, except it deletes the 
+             old file if it already exists when OOCCRREEAATTEE is called.  
+
+        SSEEEE AALLSSOO 
+
+             creat(), open(), fopen().
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

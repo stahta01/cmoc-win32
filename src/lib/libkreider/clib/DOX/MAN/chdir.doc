@@ -1,0 +1,66 @@
+
+
+        CHDIR(3S)        Kreider OS-9 C Library        CHDIR(3S)
+
+
+        NNAAMMEE 
+
+             chdir, chxdir - change directories
+
+        SSYYNNOOPPSSIISS 
+
+             chdir(dirname)
+             char *dirname;
+
+             chxdir(dirname)
+             char *dirname;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             These calls change the current data and execution 
+             directories respectively.  This change is only current as 
+             long as the process is running.  _D_i_r_n_a_m_e is a pointer to 
+             the directory pathlist string.  
+
+        DDIIAAGGNNOOSSIITTCCSS 
+
+             Each call returns zero after a succesful call, or -1 if 
+             _d_i_r_n_a_m_e is not a directory or its path is not searchable.  
+
+        SSEEEE AALLSSOO 
+
+             Shell commands chd and chx (cd, cx)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

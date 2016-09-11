@@ -1,0 +1,5 @@
+Latest version (04/15/91) of the Kreider enhanced ClibT. It is the
+same as the basic clib.l, except that all the math functions in
+this one are rewritten for a significant increase in speed but at
+the expense of program size. Also, there are several MORE math
+functions available in this library.

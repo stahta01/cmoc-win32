@@ -1,0 +1,132 @@
+
+
+        SIGNAL(3S)       Kreider OS-9 C Library       SIGNAL(3S)
+
+
+        NNAAMMEE 
+
+             signal - catch or ignore interrupts
+
+        SSYYNNOOPPSSIISS 
+
+             #include <signal.h>
+
+             (*signal(interrupt, address))()
+             (*address)();
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             This call is a comprehensive method of catching or ignoring 
+             signals sent to the current process.  Notice that KKIILLLL does 
+             the sending of signals and SSIIGGNNAALL does the catching.  
+
+             Normally, a signal sent to a process causes it to terminate 
+             with the status of the signal.  If, in advance of the 
+             signal, this system call is used, the program has the 
+             choise of ignoring the signal or designating a function to 
+             be executed when the signal is received.  Different 
+             functions may be designated for different signals.  
+
+             The values for _a_d_d_r_e_s_s have the following meanings: 
+
+                  0 = reset to the default, i.e., abort when received
+                  1 = ignore - this applies until reset to another value
+                  
+                  Otherwise: taken to be the address of a C function which
+                  is to be executed upon receipt of the signal.
+
+             If the latter case is chosen, when the signal is received 
+             by the process the _a_d_d_r_e_s_s is reset to 0, the default, 
+             before the function is executed.  This means that is the 
+             next signal received should be caught then another call to 
+             SSIIGGNNAALL must be made immediately.  This is normally the 
+             first action taken by the IINNTTEERRRRUUPPTT function.  The function 
+             may access the signal number which caused its execution by 
+             looking at its argument.  On completion fo this function 
+             the program resumes execution at the point where it was 
+             interrupted by the signal.  
+
+        EEXXAAMMPPLLEE 
+
+             Suppose a program needs to create a temporary file which 
+             should be deleted before exiting.  The body of the program 
+             might contain fragments like this: 
+
+                  pn = creat("temp",3);
+                  signal(2,intrupt);
+                  signal(3,intrupt);
+                  write(pn,string,count);
+                  close(pn);
+
+
+
+
+                                                                
+
+
+
+
+        SIGNAL(3S)       Kreider OS-9 C Library       SIGNAL(3S)
+
+
+                  unlink("temp");
+                  exit(0);
+
+             The call to _s_i_g_n_a_l() will insure that if a keyboard or quit 
+             signal is received then the function _i_n_t_r_u_p_t() will be 
+             executed and this might written as: 
+
+                  intrupt(sig)
+                  {
+                      close(pn);
+                      unlink("temp");
+                      exit(sig);
+                  }
+
+             In this case, as the function will be exiting before 
+             another signal is receive, it is unnecessary to call 
+             _s_i_g_n_a_l() again to reset its pointer.  Note that either the 
+             function _i_n_t_r_u_p_t() should appear in the source code before 
+             the call to _s_i_g_n_a_l(), or it should be pre-declared.  
+
+             The signals used by OS-9 are define in the header file 
+             SSIIGGNNAALL.HH as follows: 
+
+                  /* OS-9 Signals
+
+                  #define SIGKILL 0
+                  #define SIGWAKE 1
+                  #define SIGQUIT 2
+                  #define SIGINT  3
+
+                  /* special addresses */
+
+                  #define SIG_DFL 0
+                  #define SIG_IGN 1
+
+             Please note that there is another method of trapping 
+             signals, namely _i_n_t_e_r_c_e_p_t().  However, since _s_i_g_n_a_l() and 
+             _i_n_t_e_r_c_e_p_t() are mutually incompatible, calls to both of 
+             them must not appear in the same program.  The linker will 
+             prevent the creation of an executable program in which both 
+             are called by aborting with an _e_n_t_r_y _n_a_m_e _c_l_a_s_h error for 
+             __s_i_g_i_n_t.  
+
+        SSEEEE AALLSSOO 
+
+             intercept(), kill(), OS-9 Shell command "kill"
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

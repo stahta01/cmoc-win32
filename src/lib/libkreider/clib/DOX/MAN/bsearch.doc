@@ -1,0 +1,66 @@
+
+
+        BSEARCH(3C)      Kreider OS-9 C Library      BSEARCH(3C)
+
+
+        NNAAMMEE 
+
+             bsearch - binary search function
+
+        SSYYNNOOPPSSIISS 
+
+             char *bsearch(key, base, nel, width, compar)
+             char *key, *base;
+             int nel, width;
+             int (*compar) ();
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             This function performs a binary search on already sorted 
+             arrays of strings, finding the string matching _k_e_y, in the 
+             array of strings, beginning at the memory location pointed 
+             to by _b_a_s_e. _T_h_e _a_r_r_a_y _M_U_S_T _h_a_v_e _b_e_e_n _p_r_e_v_i_o_u_s_l_y _s_o_r_t_e_d, _i_n 
+             _a_s_s_e_n_d_i_n_g _o_r_d_e_r, according to the comparision function 
+             _c_o_m_p_a_r().  The total number of elements in the array is 
+             contained in _n_e_l, and the width of each string in the 
+             array, which must all be the same length, is held in 
+             _w_i_d_t_h.  
+
+             The function _c_o_m_p_a_r() is any user supplied function that 
+             will return whether the first argument is greater than, 
+             equal to, or less than, the second argument.  SSTTRRCCMMPP would 
+             be a good choice for string variables.  
+
+             BBSSEEAARRCCHH returns a pointer to the matching string upon 
+             success, or _n_u_l_l.  
+
+        SSEEEE AALLSSOO 
+
+             strcmp() (in STRINGS(3C))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

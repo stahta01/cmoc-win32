@@ -1,0 +1,198 @@
+
+
+        FOPEN(3S)        Kreider OS-9 C Library        FOPEN(3S)
+
+
+        NNAAMMEE 
+
+             fopen, freopen, fdopen - open a file
+
+        SSYYNNOOPPSSIISS 
+
+             #include <stdio.h>
+
+             FILE *fopen (filename, type)
+             char *filename, *type;
+
+             FILE *freopen (filename, type, stream)
+             char *filename, *type;
+             FILE *stream;
+
+             FILE *fdopen (fildes, type)
+             int fildes;
+             char *type;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             FFOOPPEENN opens a file and returns a file pointer to the file 
+             structure associated with that file.  The pointer _f_i_l_e_n_a_m_e 
+             points to a character string that contains the name of the 
+             file to be opened.  
+
+             The pointer _t_y_p_e is a character string having one of the 
+             following values: 
+
+                  "r"  - Open for reading
+
+                  "w"  - Truncate or create for writing
+
+                  "a"  - Append; open for writing at end of file,
+                         or create for writing
+
+                  "r+" - Open for reading and writing (update)
+
+                  "w+" - Truncate or create for reading and writing (update)
+
+                  "a+" - Append; open or create for reading and writing at
+                         end-of-file.
+
+                  "d"  - Open a directory file for reading ONLY
+
+             Any of the above types may have a "x" after the initial 
+             letter which indicates to FFOOPPEENN that is should look in the 
+             current execution directory if a full pathname is not given 
+             in _f_i_l_e_n_a_m_e.  The "x" also specifies that the file should 
+             have "execute" permissions.  
+
+             Opening for write will perform a _c_r_e_a_t() call.  If a file 
+             with the same name exists when the file is opened, it will 
+             be truncated to zero length.  Append means to open for 
+
+
+
+
+                                                                
+
+
+
+
+        FOPEN(3S)        Kreider OS-9 C Library        FOPEN(3S)
+
+
+             write and position the file pointer to the end of the 
+             file.  Writes to the file will then extend the file until 
+             _f_c_l_o_s_e() is called.  The file will only be created if it 
+             does not already exist.  All files created with FFOOPPEENN will 
+             have file permissions set for user read and write and read 
+             only for all others.  To set other combinations of file 
+             permissions, use _c_r_e_a_t_e().  
+
+             Three file pointers are available and considered open as 
+             soon as a program is run.  These are: 
+
+                  stdin  -  the standard input path (0)
+                  stdout -  the standard output path (1)
+                  stderr -  the standard error output path (2)
+
+             All files are automatically buffered except stderr unless 
+             it is made unbuffered by a call to _s_e_t_b_u_f().  
+
+             The FFRREEOOPPEENN routine substitutes the named file in place of 
+             the open stream.  The original stream is closed, regardless 
+             of whether the open ultimately succeeds.  The FFRREEOOPPEENN 
+             routine returns a pointer to the _f_i_l_e structure associated 
+             with pointer _s_t_r_e_a_m.  
+
+             The FFRREEOOPPEENN routine is typically used to attach the 
+             preopened _s_t_r_e_a_m_s associated with _s_t_d_i_n, _s_t_d_o_u_t, and _s_t_d_e_r_r 
+             to other files.  
+
+             The FFDDOOPPEENN routine associates a _s_t_r_e_a_m with a path 
+             descriptor.  Path descriptors are obtained from _o_p_e_n(), 
+             _d_u_p(), _c_r_e_a_t(), or _c_r_e_a_t_e(), which open files but do not 
+             return pointers to a _f_i_l_e structure.  Streams are necessary 
+             input for many of the Section 3s library routines.  The 
+             _t_y_p_e of _s_t_r_e_a_m (r,w,a) must agree with the mode of the open 
+             file.  
+
+             When a file is opened for update, both input and output may 
+             be done on the resulting _s_t_r_e_a_m.  However, output may not 
+             be directly followed by input without an intervening 
+             _f_s_e_e_k() or _r_e_w_i_n_d(), and input may not be directly followed 
+             by output without an intervening _f_s_e_e_k(), _r_e_w_i_n_d(), or an 
+             input operation which encounters end-of-file.  
+
+             All output is written at the end of the file and causes the 
+             file pointer to be repositioned at the end of the output 
+             regardless of its current position.  If two separate 
+             processes open the same file for append, each process may 
+             write freely to the file without fear of destroying output 
+             being written by the other.  The output from the two 
+             processes will be intermixed in the file in the order in 
+             which it is written.  
+
+
+
+
+
+
+
+                                                                
+
+
+
+
+        FOPEN(3S)        Kreider OS-9 C Library        FOPEN(3S)
+
+
+        CCAAVVEEAATTSS 
+
+             The _t_y_p_e passed as an argument to FFOOPPEENN must be a pointer 
+             to a string and NOT a character constant.  For example: 
+
+                  fp = fopen("foo", "r");  is correct
+                  fp = fopen("foo", 'r');  is not
+
+
+        DDIIAAGGNNOOSSTTIICCSS 
+
+             FOPEN returns null (0) if the call was not successful.
+
+        SSEEEE AALLSSOO
+
+             creat(), create(), dup(), open(), fclose(), fseek()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

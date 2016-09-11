@@ -1,0 +1,66 @@
+
+
+        UNIXTIME(3C)     Kreider OS-9 C Library     UNIXTIME(3C)
+
+
+        NNAAMMEE 
+
+             o2utime, u2otime - converts date and time from OS9 to UNIX format
+
+        SSYYNNOOPPSSIISS 
+
+             #include <utime.h>
+             #include <time.h>
+             
+             long o2utime(tp)
+             struct sgtbuf *tp;
+             
+             u2otime(tp,tmp)
+             struct sgtbuf *tp;
+             struct tm     *tmp;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             OO22UUTTIIMMEE converts a six character OS9 time into a UNIX style 
+             long as in the TTIIMMEE function.  
+
+             UU22OOTTIIMMEE copies a broken down UNIX style time from structure 
+             _t_m_p into the OS9 style _s_g_t_b_u_f structure.  
+
+        SSEEEE AALLSSOO 
+
+             time(), ctime()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

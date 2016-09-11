@@ -1,0 +1,70 @@
+.so header
+.he /MATH(3C)/Kreider OS-9 C Library/MATH(3C)/
+.sh NAME
+.bb
+rand, srand, sqrt, unmin, unmax, max, min - Math functions
+.eb
+.sh SYNOPSIS
+.bb
+rand(sf)
+int sf;
+
+srand(n)
+int n;
+
+int sqrt(n)
+int n;
+
+int max(v1, v2)
+int min(v1, v2)
+int v1, v2;
+
+int unmax(v1, v2)
+int unmin(v1, v2)
+unsigned v1, v2;
+.eb
+.sh DESCRIPTION
+.db
+.bo
+RAND
+returns a random number in the range of the scale factor
+.ul
+sf.
+.bo
+SRAND
+seeds the random number generator.
+.bo
+SRAND
+uses the dual table method
+proposed by Knuth.
+.sp
+.bo
+SQRT
+returns the square root of the number
+.ul
+n
+which must be a type INTEGER number.
+.sp
+.bo
+MAX
+and
+.bo
+MIN
+select either the larger of the smaller of variables
+.ul
+v1
+and
+.ul
+v2.
+.bo
+UNMAX
+and
+.bo
+UNMIN
+perform the same function, but on unsigned numbers. Each of
+these functions returns a type INTEGER number.
+.ed
+.sh SEE ALSO
+.bb
+clibt.l Transentental Math library.
+.eb

@@ -1,0 +1,330 @@
+
+
+        SETSTAT(3S)      Kreider OS-9 C Library      SETSTAT(3S)
+
+
+        NNAAMMEE 
+
+             OS-9 set status system calls.
+
+        SSYYNNOOPPSSIISS 
+
+             #include <os9.h>
+             #include <sgstat.h>
+             
+             setstat(SS_OPT, filenum, buffer)
+             int code, filenum;
+             struct sgbuf *buffer;
+             
+             setstat(SS_SIZE, filenum, size)
+             int code, filenum;
+             long *size;
+             
+             setstat(SS_RESET, filenum, code)
+             int code, filenum, code;
+             
+             setstat(SS_WTRK, filenum, buffer, track_number, side/density)
+             int code, filenum;
+             char *buffer;
+             int track_number, side/density;
+             
+             setstat(SS_FRZ, filenum)
+             int code, filenum;
+             
+             setstat(SS_SQD, filenum)
+             int code, filenum;
+             
+             setstat(SS_DCMD, code, filenum, parm1, parm2, parm3)
+             int code, code, filenum, parm1, parm2, parm3;
+             
+             #include <direct.h>
+             setstat(SS_FD, filenum, buffer)
+             int code, filenum;
+             struct fildes *buffer;
+             
+             setstat(SS_TICK, filenum, count)
+             int code, filenum, count;
+             
+             setstat(SS_LOCK, filenum, position)
+             int code, filenum;
+             long position;
+             
+             setstat(SS_RELEA, filenum)
+             int code, filenum;
+             
+             setstat(SS_BLKRD, filenum, buffer, track_sector, track_den)
+             int code, filenum;
+             char *buffer;
+             int track_sector, track_den/side/density;
+             
+
+
+
+
+                                                                
+
+
+
+
+        SETSTAT(3S)      Kreider OS-9 C Library      SETSTAT(3S)
+
+
+             setstat(SS_BLKWR, filenum, buffer, track_sector, track_den)
+             int code, filenum;
+             char *buffer;
+             int track_sector, track_den/side/density;
+             
+             setstat(SS_SSIG, filenum, code)
+             int code, filenum, code;
+
+        sh DESCRIPTION 
+
+             Most of these calls are equivalent to the _SSSS_XXXXXX calls 
+             described elsewhere in these documents.  While the _SSSS_XXXXXX 
+             calls are provided for compatibility with source code 
+             generated for OSK systems, the calls listed below are those 
+             normally used with 6809/OS-9.  
+
+             The following descriptions do not include the full syntax 
+             for each function call.  See the list above under 
+             Synopsis.  
+
+             SSEETTSSTTAATT(SSSS_OOPPTT) copies the buffer pointed to be _b_u_f_f_e_r into 
+             the options section of the path descriptor opened.  
+
+             Generally, a program will fetch the options with the 
+             GGEETTSSTTAATT(SSSS_OOPPTT) function, change the desired values, and 
+             then update the path options with the SSEETTSSTTAATT(SSSS_OOPPTT) 
+             function.  The structures SSGGBBUUFF ddeeccllaarreedd iinn _S_G_S_T_A_T._H 
+             provides a convenient means to access the individual option 
+             values.  
+
+             If an error occurs, a -1 is returned and the appropriate 
+             error code is placed in _e_r_r_n_o.  
+
+             It is a common practice to preserve a copy of the original 
+             path descriptor options so a program can restore them prior 
+             to exiting.  The option changes take effect on the 
+             currently open path and any path created with the II$DDUUPP 
+             system call.  
+
+             SSEETTSSTTAATT(SSSS_SSIIZZEE) is used to change the size of a file 
+             opened on _f_i_l_e_n_u_m.  The size change is immediate.  
+
+             If the size of the file is decreased, the freed sectors are 
+             returned to the system.  If the size is increased, sectors 
+             are added to the file with the contents of those sectors 
+             being undefined.  
+
+             If an error occurs, this function returns the value -1 and 
+             the error code is placed in the global variable _e_r_r_n_o.  
+
+             This function works only on RRBBFF devices.  
+
+             GGEETTSSTTAATT(SSSS_RREESSEETT) restores the disk drive head to Track 00 
+             in preparation for formatting and error recovery.  
+
+
+
+
+                                                                
+
+
+
+
+        SETSTAT(3S)      Kreider OS-9 C Library      SETSTAT(3S)
+
+
+             If an error occurs, this function returns -1 as its value 
+             and the error code is placed in the global variable _e_r_r_n_o.  
+
+             This call works only on RRBBFF devices.  
+
+             SSEETTSSTTAATT(SSSS_WWRRTTKK) performs a write-track operation on a disk 
+             drive.  It is essentially a direct hook into the driver's 
+             write-track entry point.  
+
+             _t_r_a_c_k__n_u_m_b_e_r is the desired track number to write, and 
+             _s_i_d_e/_d_e_n_s_i_t_y is the desired side of the disk upon which to 
+             write.  When the write is performed, the image contained in 
+             and pointed to by _b_u_f_f_e_r is written out to the disk.  
+
+             If an error occurs, the value -1 is returned and the error 
+             code is placed in the global variable _e_r_r_n_o.  
+
+             This function works only on RRBBFF devices.  Additional 
+             information on how it works can be obtained from examining 
+             the FORMAT utility or a device driver.  
+
+             WWAARRNNIINNGG!  If _t_r_a_c_k__n_u_m_b_e_r is set to zero when this function 
+             is called, the entire disk, floppy or hard disk, will be 
+             formatted.  
+
+             SSEETTSSTTAATT(SSSS_FFRRZZ) inhibits the reading of LSN 0 variables 
+             which define the disk format.  This enables the reading of 
+             non-standard disks.  
+
+             This is a very little used function that has been deleted 
+             from most new documentation and, in fact, is not supported 
+             by Microware any more.  It is included in this library 
+             solely for compatibility with older programs that may call 
+             it.  Consult your manuals for an explanation of its use.  
+
+             SSEETTSSTTAATT(SSSS_SSPPTT) sets a different number of tracks so that 
+             non-standard disks can be read.  This is not an often used 
+             call, as with SSSS_FFRRZZ above.  Consult your manual for more 
+             details.  
+
+             This call does not return any information.  
+
+             SSEETTSSTTAATT(SSSS_SSQQDD) starts the power down sequence for hard 
+             drives that have this feature.  Since this sequence is 
+             hardware dependent, consult your user documents for more 
+             details.  The device that is opened with _f_i_l_e_n_u_m will be 
+             the device the sequence works on.  
+
+             This call does not return any information.  
+
+             SSEETTSSTTAATT(SSSS_DDCCMMDD) sends direct commands to the disk 
+             controller for specific instructions.  Since parameters and 
+             commands are also hardware dependent, consult your disk 
+             controller's documentation and the specifications for the 
+
+
+
+
+                                                                
+
+
+
+
+        SETSTAT(3S)      Kreider OS-9 C Library      SETSTAT(3S)
+
+
+             disk controller chip.  
+
+             The exit conditions of this call vary depending on the 
+             hardware device.  
+
+             SSEETTSSTTAATT(SSSS_FFDD) places a copy of the RRBBFF file descriptor 
+             sector of the file opened into the buffer pointed to by 
+             _b_u_f_f_e_r.  A maximum of _c_o_u_n_t bytes are copied.  The 
+             structure FFIILLDDEESS, declared in DDIIRREECCTT.HH, provides a 
+             convenient method to access the file descriptor 
+             information.  
+
+             If and error occurs, this function returns -1 as its value 
+             and the error code is placed in the global variable _e_r_r_n_o.  
+             
+             Be sure the buffer is large enough to hold all the options, 
+             or at least _c_o_u_n_t bytes.  This call is effective only on 
+             RRBBFF devices.  Declaring the buffer as type "struct fildes" 
+             is perfectly safe as this structure is predefined to be 
+             large enough to hold all the file descriptor information.  
+
+             SSEETTSSTTAATT(SSSS_TTIICCKK) may be used to cause an error (E$LOCK) to 
+             be returned to the process if the conflict still exists 
+             after a specific number of clock ticks have elapsed.  
+
+             The argument _c_o_u_n_t specifies the number of ticks to wait if 
+             the record-lock conflict occurs with the file open on 
+             _p_a_t_h.  A tick count of zero (the default on RRBBFF devices), 
+             causes a sleep until the record is released.  A tick count 
+             of one means if the record is not released immediately, an 
+             error is to be returned.  
+
+             If an error occurs, the value -1 is returned and the error 
+             code is placed in the global variable _e_r_r_n_o.  
+
+             SSEETTSSTTAATT(SSSS_LLOOCCKK) locks out a file open on _f_i_l_e_n_u_m at the 
+             offset from the file beginning at offset _p_o_s_i_t_i_o_n, so 
+             another process cannot read past that point.  
+
+             If an error occurs, the function returns the value -1 and 
+             the error code is placed in the global variable _e_r_r_n_o.  
+
+             SSEETTSSTTAATT(SSSS_RREELLEEAA) releases a file that was locked using 
+             SSSS_LLOOCCKK above.  
+
+             SSEETTSSTTAATT(SSSS_BBLLKKRRDD) reads one block of data from a disk file 
+             opened on _f_i_l_e_n_u_m.  The parameters passed determine the 
+             actual sector number and side of the disk.  The data is 
+             read into a buffer pointed to by _b_u_f_f_e_r.  
+
+             This function is VERY hardware dependent and the user 
+             should know the size of a disk block on his/her system 
+             before using it.  Typically, on an 8-bit machine, the block 
+             size will be 256 bytes while a 16-bit machine will usually 
+
+
+
+
+                                                                
+
+
+
+
+        SETSTAT(3S)      Kreider OS-9 C Library      SETSTAT(3S)
+
+
+             have a block size of 512 bytes.  UNIX hardware has a block 
+             size of 1024 bytes.  In addition, not all device drivers 
+             support this call.  Again, be sure before you use it.  
+
+             Consult your hardware documentation for more details.  
+
+             
+             SETSTAT(SS_BLKWR) is the reverse of SSSS_BBLLKKRRDD above, writing 
+             out one block of data.  
+
+             SSEETTSSTTAATT(SSSS_SSSSIIGG) sets up a signal to be sent to the calling 
+             process when an interactive device has data ready.  When 
+             data is received on the device indicates by _f_i_l_e_n_u_m, the 
+             signal _c_o_d_e is sent to the calling process.  
+
+             SSSS_SSSSIIGG must be called each time the signal is sent if it 
+             is to be used again.  
+
+             The device is considered busy, and will return an error, if 
+             any read request arrives before the signal is sent.  Write 
+             requests are allowed to the device while in this state.  
+
+             If an error occurs, the function returns the value -1 and 
+             the error code is placed in the global variable _e_r_r_n_o.  
+
+        NNOOTTEE 
+
+             All the above calls require an OS-9 path number for 
+             _f_i_l_e_n_u_m, _a_n_d _N_O_T _a C iob file descriptor pointer.  
+
+        SSEEEE AALLSSOO 
+
+             I$GetStt system call - Microware Manual, _gs_xxx calls
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

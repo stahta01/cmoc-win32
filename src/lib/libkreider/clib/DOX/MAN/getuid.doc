@@ -1,0 +1,66 @@
+
+
+        getuid(3S)       Kreider OS-9 C Library       getuid(3S)
+
+
+        NNAAMMEE 
+
+             getuid - get a user ID
+
+        SSYYNNOOPPSSIISS 
+
+             getuid()
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             GGEETTUUIIDD returns the real user ID if the currently executing 
+             process as maintained in the password file 
+             /_d_d/_s_y_s/_p_a_s_s_w_o_r_d.  
+
+        SSEEEE AALLSSOO 
+
+             setuid(), asetuid()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

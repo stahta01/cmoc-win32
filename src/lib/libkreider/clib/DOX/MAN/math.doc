@@ -1,0 +1,66 @@
+
+
+        MATH(3C)         Kreider OS-9 C Library         MATH(3C)
+
+
+        NNAAMMEE 
+
+             rand, srand, sqrt, unmin, unmax, max, min - Math functions
+
+        SSYYNNOOPPSSIISS 
+
+             rand(sf)
+             int sf;
+             
+             srand(n)
+             int n;
+             
+             int sqrt(n)
+             int n;
+             
+             int max(v1, v2)
+             int min(v1, v2)
+             int v1, v2;
+             
+             int unmax(v1, v2)
+             int unmin(v1, v2)
+             unsigned v1, v2;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             RRAANNDD returns a random number in the range of the scale 
+             factor _s_f.  SSRRAANNDD seeds the random number generator.  SSRRAANNDD 
+             uses the dual table method proposed by Knuth.  
+
+             SSQQRRTT returns the square root of the number _n which must be 
+             a type INTEGER number.  
+
+             MMAAXX and MMIINN select either the larger of the smaller of 
+             variables _v_1 and _v_2.  UUNNMMAAXX and UUNNMMIINN perform the same 
+             function, but on unsigned numbers.  Each of these functions 
+             returns a type INTEGER number.  
+
+        SSEEEE AALLSSOO 
+
+             clibt.l Transentental Math library.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

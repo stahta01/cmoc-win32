@@ -1,0 +1,66 @@
+
+
+        HTOI(3C)         Kreider OS-9 C Library         HTOI(3C)
+
+
+        NNAAMMEE 
+
+             htoi, htol, itoa, utoa, ltoa -- type conversions
+
+        SSYYNNOOPPSSIISS 
+
+             int htoi(s)
+             char *s;
+
+             long htol(s)
+             char *s;
+
+             char *itoa(n, s)
+             int n;
+             char *s,
+
+             char utoa(n, s)
+             int n;
+             char *s;
+
+             char *ltoa(n, s)
+             long n;
+             char *s;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             HHTTOOII converts a string representing a hexadecimal number 
+             into an integer.  
+
+             HHTTOOLL converts a string representing a hexadecimal number 
+             into a long integer.  
+
+             IITTOOAA converts an integer number N to the corresponding 
+             AASSCCIIII characters and returns a pointer to the string _s.  
+
+             UUTTOOAA converts an unsigned integer number _n to the 
+             corresponding AASSCCIIII characters and returns a pointer to the 
+             string _s.  
+
+             LLTTOOAA converts a long number _n to the corresponding AASSCCIIII 
+             characters and returns a pointer to the string _s.  
+
+        NNOOTTEE 
+
+             These functions are extensions to the ATOF, ATOL, and ATOI 
+             functions.  They perform in the same manner, except for the 
+             type of conversion.  
+
+        SSEEEE AALLSSOO 
+
+             atof(), atoi(), atol()
+
+
+
+
+
+
+
+                                                                
+
+

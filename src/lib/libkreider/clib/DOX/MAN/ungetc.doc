@@ -1,0 +1,66 @@
+
+
+        UNGETC(3C)       Kreider OS-9 C Library       UNGETC(3C)
+
+
+        NNAAMMEE 
+
+             ungetc - put a character back into the input buffer
+
+        SSYYNNOOPPSSIISS 
+
+             #include <stdio.h>
+
+             ungetc (ch, fp)
+             char ch;
+             FILE *fp;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             This function alters the state of the input file buffer 
+             such that the next call of GGEETTCC returns the character _c_h.  
+
+             Only one character may be puched back, and at least one 
+             character must have been read from the file before a call 
+             to UUNNGGEETTCC is made.  
+
+             FFSSEEEEKK erases and characters pushed back.  
+
+        DDIIAAGGNNOOSSTTIICCSS 
+
+             UUNNGGEETTCC returns its character argument unless no pushback 
+             could occur, in which case EOF is returned.  
+
+        SSEEEE AALLSSOO 
+
+             getc(), fseek()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

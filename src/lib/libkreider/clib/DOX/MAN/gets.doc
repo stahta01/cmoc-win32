@@ -1,0 +1,66 @@
+
+
+        GETS(3C)         Kreider OS-9 C Library         GETS(3C)
+
+
+        NNAAMMEE 
+
+             gets, fgets - get a string from a file
+
+        SSYYNNOOPPSSIISS 
+
+             #include <stdio.h>
+
+             char *gets(s)
+             char *s;
+
+             char *fgets(s, n, fp)
+             FILE *fp;
+             char *s;
+             int n;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             The GGEETTSS routine reads a string into _s from the standard 
+             input path _s_t_d_i_n .  The string is terminated by a newline 
+             character, which is replaced in _s by a null character.  The 
+             GGEETTSS routine returns its argument.  
+
+             FFGGEETTSS routine reads _n-_1 characters, or up to a newline 
+             character, whichever comes first, from the file pointed to 
+             by _f_p into the string _s.  The last character read into _s is 
+             followed by a null character.  FFGGEETTSS routine returns its 
+             first argument.  
+
+        CCAAVVEEAATTSS 
+
+             The different treatment of the newline ("\n") character by 
+             these functions is retained here for portability reasons.  
+
+        DDIIAAGGNNOOSSTTIICCSS 
+
+             Both functions return _n_u_l_l on end-of-file or if an error 
+             occurs.  
+
+        SSEEEE AALLSSOO 
+
+             ferror(), fread(), getc(), puts(), scanf()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

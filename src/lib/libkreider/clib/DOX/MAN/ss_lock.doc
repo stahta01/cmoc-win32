@@ -1,0 +1,66 @@
+
+
+        SS_LOCK(2)       Kreider OS-9 C Library       SS_LOCK(2)
+
+
+        NNAAMMEE 
+
+             _ss_lock - set file lock status
+
+        SSYYNNOOPPSSIISS 
+
+             int _ss_lock(path, locksize)
+             int path;
+             long locksize;
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             SSSS_LLOOCCKK locks out a section of a file open on _p_a_t_h from the 
+             current file position up to the number of bytes specified 
+             by _l_o_c_k_s_i_z_e.  
+
+             If the locksize is zero, all locks (record lock, EOF lock, 
+             and file lock) are removed.  If a locksize of 0xFFFFFFFF is 
+             requested, the entire file is locked regardless of where in 
+             the file the file pointer is.  This is a special type of 
+             file lock that remains in effect until released by 
+             __s_s__l_o_c_k(_p_a_t_h,_0), a read or write of zero or more bytes, or 
+             the file is closed.  
+
+             If an error occurs, the function returns the value -1 and 
+             the error code is placed in the global variable _e_r_r_n_o.  
+
+        SSEEEE AALLSSOO 
+
+             I$SetStt system call, Microware manual.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+

@@ -1,0 +1,66 @@
+
+
+        SETIME(3S)       Kreider OS-9 C Library       SETIME(3S)
+
+
+        NNAAMMEE 
+
+             setime, getime - set and get system time
+
+        SSYYNNOOPPSSIISS 
+
+             #include <time.h>
+
+             setime(buffer)
+             getime(buffer)
+
+             struct sgtbuf *buffer;      /* defined in time.h */
+
+        DDEESSCCRRIIPPTTIIOONN 
+
+             SSEETTIIMMEE sets the system time depending on the values in the 
+             structure _b_u_f_f_e_r as defined in TTIIMMEE.HH.  These values must 
+             be set prior to calling SSEETTIIMMEE or the system time will be 
+             set to an unknown state.  
+
+             GGEETTIIMMEE reads the system time and returns the information in 
+             the structure _b_u_f_f_e_r.  Reading the structure elements will 
+             then yield the desired values.  
+
+             An example to read the time structure might be: 
+
+                  struct sgtbuf timepacket;
+
+                  getime(timepacket);
+                  printf("The year is: %d", timepacket.t_year);
+                  printf("The day is:  %d", timepacket.t_day);
+
+
+        SSEEEE AALLSSOO 
+
+             time(), ctime(), time(), o2utime(), u2otime()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                
+
+
