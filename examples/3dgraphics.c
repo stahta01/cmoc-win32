@@ -179,13 +179,6 @@ unsigned asm test(char a, char b)
 
 int main(void)
 {
-
-    char a = -10, b = 2;
-
-    printf("%c\n", toupper('z'));
-
-    return 0;
-
     matrix_t matx, matz, mat;
     projected3_t pro1[10];
     projected3_t pro2[10];
