@@ -2,21 +2,13 @@
 #ifndef _FIXPT_H
 #define _FIXPT_H
 
-#include <motorola/types.h>
-
-typedef struct {
-    int v;
-    union {
-        sbyte h;
-        byte l;
-    };
-} fixed_t;
-
 char fxsin(char x);
 char fxcos(char x);
 
-#define i2f(x) ((x)<<8)
-#define f2i(x) ((x)>>8)
+#define i2f(X) ((X)<<8)
+#define f2i(X) ((X)>>8)
+
+#define fxmul(X,Y) f2i((int)(X)*(int)(Y))
 
 // OLD!!!!
 #define _i2f(x) ((x)<<8)
