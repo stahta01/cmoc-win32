@@ -15,10 +15,10 @@ void asm __shiftRightUnsigned(void)
         shiftRightUnsigned: export
 
         shiftRightUnsigned:
-        addd    #0          // any shift to do?
+        addd    #0                          // any shift to do?
         beq     shiftRightUnsigned_no_change
 
-        cmpd    #16         // shifting all bits out?
+        cmpd    #16                         // shifting all bits out?
         blo     shiftRightUnsigned_general  // if not
 
 // Shifting >= 16 bits out.
@@ -27,25 +27,24 @@ void asm __shiftRightUnsigned(void)
         bra     shiftRightUnsigned_end
 
         shiftRightUnsigned_no_change:
-        ldd     2,s         // return left side of shift operator as is
+        ldd     2,s                         // return left side of shift operator as is
         bra     shiftRightUnsigned_end
 
         shiftRightUnsigned_general:
-        pshs    b           // save number of bits to shift
-        ldd     3,s         // get left side of shift operator
+        pshs    b                           // save number of bits to shift
+        ldd     3,s                         // get left side of shift operator
 
         shiftRightUnsigned_loop:
         lsra
         rorb
         dec     ,s
         bne     shiftRightUnsigned_loop
-        leas    1,s         // discard counter
+        leas    1,s                         // discard counter
 
         shiftRightUnsigned_end:
-        puls    x           // pop return value
-        leas    2,s         // pop left side
-        tfr     x,pc        // return from routine (with result in D)
+        puls    x                           // pop return value
+        leas    2,s                         // pop left side
+        tfr     x,pc                        // return from routine (with result in D)
     }
 }
-
 

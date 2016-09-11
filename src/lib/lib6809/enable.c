@@ -4,9 +4,7 @@
 void asm enable(void)
 {
     asm {
-        andcc   #%11101111 // Clear IRQ mask
+        andcc   #%11101111                  // Clear IRQ mask
     }
 }
-
-
 

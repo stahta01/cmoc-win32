@@ -15,11 +15,11 @@ void asm __shiftByteLeft(void)
         shiftByteLeft: export
 
         shiftByteLeft:
-        addd    #0                      // any shift to do?
+        addd    #0                          // any shift to do?
         beq     shiftByteLeft_no_change
 
-        cmpd    #8                      // shifting all bits out?
-        blo     shiftByteLeft_general   // if not
+        cmpd    #8                          // shifting all bits out?
+        blo     shiftByteLeft_general       // if not
 
 // Shifting >= 8 bits out.
 
@@ -27,12 +27,12 @@ void asm __shiftByteLeft(void)
         bra     shiftByteLeft_end
 
         shiftByteLeft_no_change:
-        ldb     2,s                     // return left side of shift operator as is
+        ldb     2,s                         // return left side of shift operator as is
         bra     shiftByteLeft_end
 
         shiftByteLeft_general:
-        tfr     b,a                     // use A for number of bits to shift
-        ldb     2,s                     // get left side of shift operator
+        tfr     b,a                         // use A for number of bits to shift
+        ldb     2,s                         // get left side of shift operator
 
         shiftByteLeft_loop:
         lslb
@@ -40,10 +40,9 @@ void asm __shiftByteLeft(void)
         bne     shiftByteLeft_loop
 
         shiftByteLeft_end:
-        puls    x                       // pop return value
-        leas    1,s                     // pop left side
-        tfr     x,pc                    // return from routine (with result in D)
+        puls    x                           // pop return value
+        leas    1,s                         // pop left side
+        tfr     x,pc                        // return from routine (with result in D)
     }
 }
-
 
