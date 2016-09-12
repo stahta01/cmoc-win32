@@ -1,11 +1,7 @@
 
 #define strchr __obsolete
 
-/*---------------------------------------------------------------------------*/
-/* strchr() - find a character in a string                                   */
-/*---------------------------------------------------------------------------*/
-
-#include <string.h>
+#include "_string.h"
 
 char* strchr(char* s, int c)
 {

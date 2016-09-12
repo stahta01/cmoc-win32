@@ -1,9 +1,5 @@
 
-/*---------------------------------------------------------------------------*/
-/* strncpy() - copy characters from one string to another                    */
-/*---------------------------------------------------------------------------*/
-
-#include <string.h>
+#include "_string.h"
 
 char* strncpy(char* string1, char* string2, size_t count)
 {

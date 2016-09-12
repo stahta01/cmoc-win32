@@ -1,11 +1,7 @@
 
 #define memmove __obsolete
 
-/*---------------------------------------------------------------------------*/
-/* memmove() - move one buffer to another                                    */
-/*---------------------------------------------------------------------------*/
-
-#include <string.h>
+#include "_string.h"
 
 void* memmove(void* dest, void* src, size_t count)
 {

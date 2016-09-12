@@ -1,10 +1,5 @@
 
-/*---------------------------------------------------------------------------*/
-/* strrchr() - find the last occurence of a character in a string            */
-/*---------------------------------------------------------------------------*/
-
-#include <string.h>
-#include <stdlib.h>
+#include "_string.h"
 
 char* strrchr(char* string, int c)
 {

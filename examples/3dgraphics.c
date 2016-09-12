@@ -2,7 +2,7 @@
 // This is work in progress. Its the start of a minimal 3d maths library
 
 
-#pragma options -machine=coco
+#pragma options -machine=coco3
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,7 +10,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <ctype.h>
-#include <alib.h>
+#include <rma.h>
 
 #include <graph.h>
 #include <equates.h>
@@ -167,8 +167,6 @@ model_t obj = {
     12, edges
 };
 
-
-
 unsigned asm test(char a, char b)
 {
     asm {
@@ -180,6 +178,13 @@ unsigned asm test(char a, char b)
 
 int main(void)
 {
+    char s[100];
+    char* p;
+
+    sprintf(s, "%-10s %06d %5s", "HELLO", 123, "SS");
+    puts(s);
+    return 0;
+
     matrix_t matx, matz, mat;
     unsigned grp[2][2], page = 0;
     projected3_t pro1[10];
@@ -202,7 +207,7 @@ int main(void)
         page ^= 1;
         _beggrp = grp[page][0];
         _endgrp = grp[page][1];
-        memset(_beggrp, 0, _endgrp - _beggrp);
+        memset((void*)_beggrp, 0, _endgrp - _beggrp);
         matrix_rotate_x(&matx, (char)a);
         matrix_rotate_z(&matz, (char)a * 3);
         matrix_multiply(&mat, &matx, &matz);

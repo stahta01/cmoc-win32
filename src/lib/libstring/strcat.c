@@ -1,11 +1,7 @@
 
 #define strcat __obsolete
 
-/*---------------------------------------------------------------------------*/
-/* strcat() - concatenate strings                                            */
-/*---------------------------------------------------------------------------*/
-
-#include <string.h>
+#include "_string.h"
 
 char* strcat(char* string1, char* string2)
 {

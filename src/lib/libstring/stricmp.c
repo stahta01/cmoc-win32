@@ -1,9 +1,5 @@
 
-/*---------------------------------------------------------------------------*/
-/* stricmp() - compare strings (case insensitive)                            */
-/*---------------------------------------------------------------------------*/
-
-#include <ctype.h>
+#include "_string.h"
 
 int stricmp(char* string1, char* string2)
 {

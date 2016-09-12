@@ -1,11 +1,7 @@
 
 #define strcmp __obsolete
 
-/*---------------------------------------------------------------------------*/
-/* strcmp() - compare strings                                                */
-/*---------------------------------------------------------------------------*/
-
-#include <string.h>
+#include "_string.h"
 
 int strcmp(char* string1, char* string2)
 {

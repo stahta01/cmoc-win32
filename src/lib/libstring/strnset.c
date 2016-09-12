@@ -1,9 +1,5 @@
 
-/*---------------------------------------------------------------------------*/
-/* strnset() - set characters in a string                                    */
-/*---------------------------------------------------------------------------*/
-
-#include <string.h>
+#include "_string.h"
 
 char* strnset(char* string, int c, size_t count)
 {

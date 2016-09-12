@@ -1,11 +1,7 @@
 
 #define memset __obsolete
 
-/*---------------------------------------------------------------------------*/
-/* memset() - set a buffer to a specified character                          */
-/*---------------------------------------------------------------------------*/
-
-#include <string.h>
+#include "_string.h"
 
 void* memset(void* dest, int c, size_t count)
 {

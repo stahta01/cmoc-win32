@@ -1,11 +1,7 @@
 
 #define memcmp __obsolete
 
-/*---------------------------------------------------------------------------*/
-/* memcpy() - copy characters from a buffer                                  */
-/*---------------------------------------------------------------------------*/
-
-#include <string.h>
+#include "_string.h"
 
 void* memcpy(void* dest, void* src, size_t count)
 {

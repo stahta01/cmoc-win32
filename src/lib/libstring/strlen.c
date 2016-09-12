@@ -1,11 +1,7 @@
 
 #define strlen __obsolete
 
-/*---------------------------------------------------------------------------*/
-/* strlen() - get the length of a string                                     */
-/*---------------------------------------------------------------------------*/
-
-#include <string.h>
+#include "_string.h"
 
 size_t strlen(char* string)
 {

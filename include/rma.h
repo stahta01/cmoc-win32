@@ -1,6 +1,6 @@
 
-#ifndef _ALIB_H
-#define _ALIB_H
+#ifndef _RMA_H
+#define _RMA_H
 
 char* bin_dec(int n, char* s);
 char* bin_hex(int n, char* s);

@@ -1,12 +1,7 @@
 
 #define memchr __obsolete
 
-/*---------------------------------------------------------------------------*/
-/* memchr() - find a character in a buffer                                   */
-/*---------------------------------------------------------------------------*/
-
-#include <string.h>
-#include <stdlib.h>
+#include "_string.h"
 
 void* memchr(void* buf, int c, size_t count)
 {

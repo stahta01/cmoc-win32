@@ -1,9 +1,5 @@
 
-/*---------------------------------------------------------------------------*/
-/* strcspn() - find any one of a set of characters within a string           */
-/*---------------------------------------------------------------------------*/
-
-#include <string.h>
+#include "_string.h"
 
 size_t strcspn(char* string1, char* string2)
 {

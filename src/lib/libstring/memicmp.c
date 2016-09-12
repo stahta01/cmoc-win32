@@ -1,10 +1,5 @@
 
-/*---------------------------------------------------------------------------*/
-/* memicmp() - compare characters in two buffers (case insensitive)          */
-/*---------------------------------------------------------------------------*/
-
-#include <ctype.h>
-#include <stdlib.h>
+#include "_string.h"
 
 int memicmp(void* buf1, void* buf2, unsigned int count)
 {

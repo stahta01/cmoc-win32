@@ -1,11 +1,7 @@
 
 #define strcpy __obsolete
 
-/*---------------------------------------------------------------------------*/
-/* strcpy() - copy a string to another                                       */
-/*---------------------------------------------------------------------------*/
-
-#include <string.h>
+#include "_string.h"
 
 char* strcpy(char* dst, char* src)
 {

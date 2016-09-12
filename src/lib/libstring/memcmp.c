@@ -1,11 +1,7 @@
 
 #define memcmp __obsolete
 
-/*---------------------------------------------------------------------------*/
-/* memcmp() - compare characters in two buffers                              */
-/*---------------------------------------------------------------------------*/
-
-#include <stdlib.h>
+#include "_string.h"
 
 int memcmp(void* buf1,  void* buf2, size_t count)
 {

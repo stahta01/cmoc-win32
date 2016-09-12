@@ -1,9 +1,5 @@
 
-/*---------------------------------------------------------------------------*/
-/* strncat() - concatenate characters to a string                            */
-/*---------------------------------------------------------------------------*/
-
-#include <string.h>
+#include "_string.h"
 
 char* strncat(char* string1, char* string2, size_t count)
 {

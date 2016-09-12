@@ -1,5 +1,5 @@
 
-#include <string.h>
+#include "_string.h"
 
 char* strsep(char** str, const char* sep)
 {

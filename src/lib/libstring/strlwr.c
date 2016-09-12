@@ -1,11 +1,7 @@
 
 #define strlwr __obsolete
 
-/*---------------------------------------------------------------------------*/
-/* strlwr() - convert a string to lower case                                 */
-/*---------------------------------------------------------------------------*/
-
-#include <ctype.h>
+#include "_string.h"
 
 char* strlwr(char* string)
 {
