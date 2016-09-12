@@ -1,6 +1,4 @@
 
-#define min _min
-#define max _max
-#define _FILE "clib/LIB/IMATH/minmax.a"
+#define _FILE "kreiderclib/minmax.as"
 #include "_kreider.h"
 

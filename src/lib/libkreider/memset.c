@@ -1,5 +1,4 @@
 
-#define memset _memset
-#define _FILE "clib/LIB/LIB.A/memset.a"
+#define _FILE "kreiderclib/memset.as"
 #include "_kreider.h"
 

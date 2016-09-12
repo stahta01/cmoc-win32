@@ -1,6 +1,4 @@
 
-#define strnucmp _strnucmp
-#define toupper _toupper
-#define _FILE "clib/LIB/LIB.A/strnucmp.a"
+#define _FILE "kreiderclib/strnucmp.as"
 #include "_kreider.h"
 

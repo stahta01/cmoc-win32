@@ -1,5 +1,4 @@
 
-#define memccpy _memccpy
-#define _FILE "clib/LIB/LIB.A/memccpy.a"
+#define _FILE "kreiderclib/memccpy.as"
 #include "_kreider.h"
 

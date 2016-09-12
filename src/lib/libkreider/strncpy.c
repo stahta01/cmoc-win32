@@ -1,5 +1,4 @@
 
-#define strncpy _strncpy
-#define _FILE "clib/LIB/LIB.A/strncpy.a"
+#define _FILE "kreiderclib/strncpy.as"
 #include "_kreider.h"
 

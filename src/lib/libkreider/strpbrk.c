@@ -1,6 +1,4 @@
 
-#define strpbrk _strpbrk
-#define index _index
-#define _FILE "clib/LIB/LIB.A/strpbrk.a"
+#define _FILE "kreiderclib/strpbrk.as"
 #include "_kreider.h"
 

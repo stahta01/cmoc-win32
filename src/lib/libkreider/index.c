@@ -1,8 +1,4 @@
 
-#define index _index
-#define rindex _rindex
-#define strchr _strchr
-#define strrchr _strrchr
-#define _FILE "clib/LIB/LIB.A/index.a"
+#define _FILE "kreiderclib/index.as"
 #include "_kreider.h"
 

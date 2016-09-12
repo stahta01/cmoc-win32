@@ -1,4 +1,4 @@
 
-#define _FILE "clib/LIB/LIB.A/strass.a"
+#define _FILE "kreiderclib/strass.as"
 #include "_kreider.h"
 

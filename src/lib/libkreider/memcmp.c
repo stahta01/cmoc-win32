@@ -1,5 +1,4 @@
 
-#define memcmp _memcmp
-#define _FILE "clib/LIB/LIB.A/memcmp.a"
+#define _FILE "kreiderclib/memcmp.as"
 #include "_kreider.h"
 
