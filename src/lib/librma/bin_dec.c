@@ -4,7 +4,7 @@
 #define DECTAB _DECTAB,DAT *
 
 #define _FILE "alib/bin_dec.as"
-#include "_alib.h"
+#include "_rma.h"
 
 unsigned asm bin_dec(int n, char* s)
 {

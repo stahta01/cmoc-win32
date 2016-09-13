@@ -1,6 +1,6 @@
 
 #define _FILE "alib/to_upprs.as"
-#include "_alib.h"
+#include "_rma.h"
 
 void asm to_upprs(char* s)
 {

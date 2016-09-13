@@ -1,6 +1,6 @@
 
 #define _FILE "alib/bin_rom.as"
-#include "_alib.h"
+#include "_rma.h"
 
 unsigned asm bin_rom(int n, char* s)
 {

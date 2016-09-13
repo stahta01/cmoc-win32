@@ -1,6 +1,6 @@
 
 #define _FILE "alib/to_lowrs.as"
-#include "_alib.h"
+#include "_rma.h"
 
 void asm to_lowrs(char* s)
 {

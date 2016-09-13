@@ -1,6 +1,6 @@
 
 #define _FILE "alib/hex_bin.as"
-#include "_alib.h"
+#include "_rma.h"
 
 unsigned asm hex_bin(char* s)
 {

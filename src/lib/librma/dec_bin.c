@@ -4,7 +4,7 @@
 #define DECTAB _DECTAB,pcr *
 
 #define _FILE "alib/dec_bin.as"
-#include "_alib.h"
+#include "_rma.h"
 
 int asm dec_bin(char* s)
 {
