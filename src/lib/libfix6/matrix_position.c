@@ -1,7 +1,7 @@
 
 #include "_fix6.h"
 
-void matrix_position(matrix_t* dst, char x, char y, char z)
+void matrix_position(matrix_t* dst, int x, int y, int z)
 {
     matrix_identity(dst);
     dst->v[0][3] = x;

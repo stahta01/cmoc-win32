@@ -33,15 +33,6 @@ model_t obj = {
     12, edges
 };
 
-unsigned asm test(char a, char b)
-{
-    asm {
-        lda 3,s
-        ldb 5,s
-        mul
-    }
-}
-
 int main(void)
 {
     matrix_t matx, matz, mat;
