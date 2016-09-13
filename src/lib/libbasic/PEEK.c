@@ -1,8 +1,8 @@
 
 #include <basic.h>
 
-byte PEEK(word addr)
+unsigned char PEEK(unsigned addr)
 {
-    return *(byte*)addr;
+    return *(unsigned char*)addr;
 }
 

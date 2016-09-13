@@ -1,8 +1,8 @@
 
 #include <basic.h>
 
-int UNLOAD(byte d)
+int UNLOAD(int d)
 {
-    return systemf("UNLOAD %d", d);
+    return systemf("UNLOAD%d", d);
 }
 

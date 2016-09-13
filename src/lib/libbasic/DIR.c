@@ -1,8 +1,8 @@
 
 #include <basic.h>
 
-int DIR(byte d)
+int DIR(int d)
 {
-    return systemf("DIR %d", d);
+    return systemf("DIR%d", d);
 }
 

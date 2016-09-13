@@ -1,7 +1,7 @@
 
 #include <basic.h>
 
-int BACKUP(byte d)
+int BACKUP(int d)
 {
     return systemf("BACKUP %d", d);
 }

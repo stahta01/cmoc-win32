@@ -27,12 +27,12 @@
 // Color BASIC
 
 int ABS(int numeric);
-byte PEEK(word addr);
-void POKE(word addr, byte value);
+byte PEEK(unsigned addr);
+void POKE(unsigned addr, byte value);
 void* VARPTR(char* s);
 size_t INPUT(int f, char* s);
 
-void SOUND(byte tone, byte duration);
+void SOUND(int tone, int duration);
 byte JOYSTK(int j);
 int INKEY(void);
 word TIMER(void);
@@ -55,24 +55,24 @@ void LINE_BF(int x1, int y1, int x2, int y2, int onoff);
 
 // Tape Functions
 
-int CLOADM(char* fn, void* offset);
+int CLOADM(char* fn, unsigned offset);
 int CSAVEM(char* fn, void* start, void* finish, void* exec);
 
 // Disk BASIC Functions
 
 int PRINT(int fd, char* fmt, ...);
-int BACKUP(byte dr);
-int BACKUP2(byte dr1, byte dr2);
-int DIR(byte dr);
-int DSKINI(byte dr);
-int DRIVE(byte dr);
+int BACKUP(int dr);
+int BACKUP2(int dr1, int dr2);
+int DIR(int dr);
+int DSKINI(int dr);
+int DRIVE(int dr);
 int KILL(char* fn);
-int LOADM(char* fn, void* offset);
+int LOADM(char* fn, unsigned offset);
 int SAVEM(char* fn, void* start, void* finish, void* exec);
 int COPY(char* fn1, char* fn2);
-int UNLOAD(byte dr);
+int UNLOAD(int dr);
 void CLOSE(int fd);
-int VERIFY(byte onoff);
+int VERIFY(int onoff);
 int VERIFY_ON(void);
 int VERIFY_OFF(void);
 int OPEN(char mode, int fd, char* fn, size_t len);

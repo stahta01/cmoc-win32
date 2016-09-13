@@ -7,6 +7,5 @@ void PMODE(int mode, int page)
     s[5] = '0' + (char)mode;
     s[7] = '0' + (char)page;
     system(s);
-    MCLIP(2, 2, 254, 190); // TODO: Set this correctly
 }
 

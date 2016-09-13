@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <basic.h>
 
-void SOUND(byte tone, byte duration)
+void SOUND(int tone, int duration)
 {
-    beep(tone, duration);
+    beep((char)tone, (char)duration);
 }
 

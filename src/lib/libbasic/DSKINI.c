@@ -1,8 +1,8 @@
 
 #include <basic.h>
 
-int DSKINI(byte d)
+int DSKINI(int d)
 {
-    return systemf("DSKINI %d", d);
+    return systemf("DSKINI%d", d);
 }
 
