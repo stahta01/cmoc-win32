@@ -1,7 +1,7 @@
 
 #define memcmp __obsolete
 
-#include "_string.h"
+#include "_memory.h"
 
 int memcmp(void* buf1,  void* buf2, size_t count)
 {

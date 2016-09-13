@@ -1,5 +1,5 @@
 
-#include "_string.h"
+#include "_memory.h"
 
 int memicmp(void* buf1, void* buf2, unsigned int count)
 {

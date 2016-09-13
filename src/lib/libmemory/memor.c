@@ -1,5 +1,5 @@
 
-#include "_string.h"
+#include "_memory.h"
 
 void* memor(void* ptr, int value, size_t n)
 {

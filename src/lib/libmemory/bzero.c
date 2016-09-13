@@ -1,5 +1,5 @@
 
-#include "_string.h"
+#include "_memory.h"
 
 void bzero(void* ptr, size_t n)
 {

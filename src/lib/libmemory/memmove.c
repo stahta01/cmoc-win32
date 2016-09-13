@@ -1,7 +1,7 @@
 
 #define memmove __obsolete
 
-#include "_string.h"
+#include "_memory.h"
 
 void* memmove(void* dest, void* src, size_t count)
 {

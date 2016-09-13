@@ -1,2 +1,2 @@
-section SECTION_ORIGIN load 2000
+section SECTION_ORIGIN 
 section SECTION_NAME

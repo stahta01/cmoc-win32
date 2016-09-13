@@ -1,7 +1,7 @@
 
 #define memset __obsolete
 
-#include "_string.h"
+#include "_memory.h"
 
 void* memset(void* dest, int c, size_t count)
 {

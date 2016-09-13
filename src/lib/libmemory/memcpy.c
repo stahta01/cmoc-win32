@@ -1,7 +1,7 @@
 
 #define memcmp __obsolete
 
-#include "_string.h"
+#include "_memory.h"
 
 void* memcpy(void* dest, void* src, size_t count)
 {

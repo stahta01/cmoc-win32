@@ -1,7 +1,7 @@
 
 #define memchr __obsolete
 
-#include "_string.h"
+#include "_memory.h"
 
 void* memchr(void* buf, int c, size_t count)
 {

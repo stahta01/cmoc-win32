@@ -1,5 +1,5 @@
 
-#include "_string.h"
+#include "_memory.h"
 
 void* memand(void* ptr, int value, size_t n)
 {

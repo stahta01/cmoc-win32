@@ -36,56 +36,42 @@
 #define _STRING_H
 
 #include <stddef.h>
+#include <memory.h>
 
-char* strcat(char* dest, char* src);        // ANSIC
-char* strchr(char* s, int c);               // ANSIC
-char* strend(char* s);                      // CMOC
-int strcmp(char* s1, char* s2);             // ANSIC
-int strcoll(char* s1, char* s2);            // ANSIC
-char* strcpy(char* dest, char* src);        // ANSIC
-size_t strcspn(char* s1, char* s2);         // ANSIC
-char* strerror(int errcode);                // ANSIC
-size_t strlen(char* s);                     // ANSIC
-char* strncat(char* s1, char* s2, size_t n); // ANSIC
-int strncmp(char* s1, char* s2, size_t n);  // ANSIC
+char* strcat(char* dest, char* src);            // ANSIC
+char* strchr(char* s, int c);                   // ANSIC
+char* strend(char* s);                          // CMOC
+int strcmp(char* s1, char* s2);                 // ANSIC
+int strcoll(char* s1, char* s2);                // ANSIC
+char* strcpy(char* dest, char* src);            // ANSIC
+size_t strcspn(char* s1, char* s2);             // ANSIC
+char* strerror(int errcode);                    // ANSIC
+size_t strlen(char* s);                         // ANSIC
+char* strncat(char* s1, char* s2, size_t n);    // ANSIC
+int strncmp(char* s1, char* s2, size_t n);      // ANSIC
 char* strncpy(char* dest, char* src, size_t n); // ANSIC
-char* strrchr(char* s, int c);              // ANSIC
-size_t strspn(char* s1, char* s2);          // ANSIC
-char* strstr(char* str, char* substr);      // ANSIC
-char* strtok(char* s1, char* s2);           // ANSIC
-size_t strxfrm(char* s1, char* s2, size_t n); // ANSIC
+char* strrchr(char* s, int c);                  // ANSIC
+size_t strspn(char* s1, char* s2);              // ANSIC
+char* strstr(char* str, char* substr);          // ANSIC
+char* strtok(char* s1, char* s2);               // ANSIC
+size_t strxfrm(char* s1, char* s2, size_t n);   // ANSIC
 
-int strtoi(char* s, char** endptr, int radix); // CMOC
+int strtoi(char* s, char** endptr, int radix);  // CMOC
 
-// Memory functions
+char* strdup(char* s);                          // SYSV/BSD
+int stricmp(char* s1, char* s2);                // DOS/Windows
+int strcasecmp(char* s1, char* s2);             // UNIX
+int strnicmp(char* s1, char* s2, size_t n);     // DOS/Windows
+int strncasecmp(char* s1, char* s2, size_t n);  // UNIX
 
-int memcmp(void* ptr1, void* ptr2, size_t n); // ANSIC
-void* memcpy(void* dst, void* src, size_t n); // ANSIC
-void* memmove(void* dst, void* src, size_t n); // ANSIC
+char* strlwr(char* s);                          // UNIX
+char* strlower(char* s);                        // UNIX
+char* strupr(char* s);                          // UNIX
+char* strupper(char* s);                        // UNIX
+char* strqtok(char* s1, char* s2);              // UNIX
 
-void* memchr(void* ptr, int value, size_t n); // ANSIC
-void* memset(void* ptr, int value, size_t n); // ANSIC
-void* memxor(void* ptr, int value, size_t n); // CMOC
-void* memand(void* ptr, int value, size_t n); // CMOC
-void* memor(void* ptr, int value, size_t n); // CMOC
-
-
-void bzero(void* ptr, size_t n);            // BSD
-
-char* strdup(char* s);                      // SYSV/BSD
-int stricmp(char* s1, char* s2);            // DOS/Windows
-int strcasecmp(char* s1, char* s2);         // UNIX
-int strnicmp(char* s1, char* s2, size_t n); // DOS/Windows
-int strncasecmp(char* s1, char* s2, size_t n); // UNIX
-
-char* strlwr(char* s);                      // UNIX
-char* strlower(char* s);                    // UNIX
-char* strupr(char* s);                      // UNIX
-char* strupper(char* s);                    // UNIX
-char* strqtok(char* s1, char* s2);          // UNIX
-
-char* strrev(char* s);                      // CMOC
-char* stpcpy(char* dest, char* src);        // CMOC
+char* strrev(char* s);                          // CMOC
+char* stpcpy(char* dest, char* src);            // CMOC
 
 // Map an operating system error number to an error message.
 char* _stroserror(unsigned char errcode);

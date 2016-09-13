@@ -754,7 +754,7 @@ begin
           end;
           if (LPos[-1] = ' ') and (LPos[0] = '/') then begin
             LSep := LPos - PChar(LLine) + 1;
-            Strings[LIndex] := PadRight(TrimRight(Copy(LLine, 1, LSep - 1)), 43) + #32 +
+            Strings[LIndex] := PadRight(TrimRight(Copy(LLine, 1, LSep - 1)), 47) + #32 +
               Copy(LLine, LSep, MaxInt);
           end;
         end;
