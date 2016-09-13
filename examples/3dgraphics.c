@@ -11,6 +11,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <rma.h>
+#include <time.h>
 
 #include <graph.h>
 #include <equates.h>
@@ -36,8 +37,7 @@ typedef struct {
 } model_t;
 
 typedef struct {
-    int x, y, z, sx, sy;
-    int sz;
+    int x, y, z;
 } projected3_t;
 
 void vector_set(vector_t* dst, char x, char y, char z)
@@ -71,34 +71,34 @@ void matrix_position(matrix_t* dst, char x, char y, char z)
 void matrix_rotate_x(matrix_t* dst, char a)
 {
     matrix_identity(dst);
-    dst->v[1][1] = +(dst->v[2][2] = fxcos(a));
-    dst->v[1][2] = -(dst->v[2][1] = fxsin(a));
+    dst->v[1][1] = +(dst->v[2][2] = fixcos(a));
+    dst->v[1][2] = -(dst->v[2][1] = fixsin(a));
 }
 
 void matrix_rotate_y(matrix_t* dst, char a)
 {
     matrix_identity(dst);
-    dst->v[0][0] = +(dst->v[2][2] = fxcos(a));
-    dst->v[0][2] = -(dst->v[2][0] = fxsin(a));
+    dst->v[0][0] = +(dst->v[2][2] = fixcos(a));
+    dst->v[0][2] = -(dst->v[2][0] = fixsin(a));
 }
 
 void matrix_rotate_z(matrix_t* dst, char a)
 {
     matrix_identity(dst);
-    dst->v[0][0] = +(dst->v[1][1] = fxcos(a));
-    dst->v[0][1] = -(dst->v[1][0] = fxsin(a));
+    dst->v[0][0] = +(dst->v[1][1] = fixcos(a));
+    dst->v[0][1] = -(dst->v[1][0] = fixsin(a));
 }
 
 void matrix_process_vectors(matrix_t* mat, vector_t* v, size_t n, projected3_t* o)
 {
     for (; n > 0; v++, o++, n--) {
-        o->x=(int)v->x*mat->v[0][0]+(int)v->y*mat->v[0][1]+(int)v->z*mat->v[0][2]+((int)mat->v[0][3]<<8);
-        o->y=(int)v->x*mat->v[1][0]+(int)v->y*mat->v[1][1]+(int)v->z*mat->v[1][2]+((int)mat->v[1][3]<<8);
-        o->z=(int)v->x*mat->v[2][0]+(int)v->y*mat->v[2][1]+(int)v->z*mat->v[2][2]+((int)mat->v[2][3]<<8);
-        o->sz = o->z >> 4;
-        if (o->sz > 0) {
-            o->sx = 64 + o->x / o->sz;
-            o->sy = 48 - o->y / o->sz;
+        o->x=v->x*mat->v[0][0]+v->y*mat->v[0][1]+v->z*mat->v[0][2]+(mat->v[0][3]<<7);
+        o->y=v->x*mat->v[1][0]+v->y*mat->v[1][1]+v->z*mat->v[1][2]+(mat->v[1][3]<<7);
+        o->z=v->x*mat->v[2][0]+v->y*mat->v[2][1]+v->z*mat->v[2][2]+(mat->v[2][3]<<7);
+        o->z = o->z >> 4;
+        if (o->z > 0) {
+            o->x = 64 + o->x / o->z;
+            o->y = 48 - o->y / o->z;
         }
     }
 }
@@ -106,10 +106,10 @@ void matrix_process_vectors(matrix_t* mat, vector_t* v, size_t n, projected3_t* 
 void matrix_multiply(matrix_t* a, matrix_t* b, matrix_t* c)
 {
     for (char i = 3; i--;) {
-        a->v[i][0] = ((int)c->v[i][0]*b->v[0][0]+(int)c->v[i][1]*b->v[1][0]+(int)c->v[i][2]*b->v[2][0])>>7;
-        a->v[i][1] = ((int)c->v[i][0]*b->v[0][1]+(int)c->v[i][1]*b->v[1][1]+(int)c->v[i][2]*b->v[2][1])>>7;
-        a->v[i][2] = ((int)c->v[i][0]*b->v[0][2]+(int)c->v[i][1]*b->v[1][2]+(int)c->v[i][2]*b->v[2][2])>>7;
-        a->v[i][3] = ((int)c->v[i][0]*b->v[0][3]+(int)c->v[i][1]*b->v[1][3]+(int)c->v[i][2]*b->v[2][3])>>7;
+        a->v[i][0] = (c->v[i][0]*b->v[0][0]+c->v[i][1]*b->v[1][0]+c->v[i][2]*b->v[2][0])>>7;
+        a->v[i][1] = (c->v[i][0]*b->v[0][1]+c->v[i][1]*b->v[1][1]+c->v[i][2]*b->v[2][1])>>7;
+        a->v[i][2] = (c->v[i][0]*b->v[0][2]+c->v[i][1]*b->v[1][2]+c->v[i][2]*b->v[2][2])>>7;
+        a->v[i][3] = (c->v[i][0]*b->v[0][3]+c->v[i][1]*b->v[1][3]+c->v[i][2]*b->v[2][3])>>7;
     }
 }
 
@@ -121,8 +121,8 @@ void model_rotate(model_t* model, matrix_t* mat, projected3_t* pro)
 void model_draw_points(model_t* model, projected3_t* pv)
 {
     for (unsigned char n = model->nvectors; n > 0; n--, pv++) {
-        if (pv->sz > 0) {
-            _setpixel(pv->sx, pv->sy);
+        if (pv->z > 0) {
+            _setpixel(pv->x, pv->y);
         }
     }
 }
@@ -132,18 +132,18 @@ void model_draw_edges(model_t* model, projected3_t* pv)
     _allcol = -1;
     edge_t* edges = model->edges;
     for (unsigned char n = model->nedges; n > 0; n--, edges++) {
-        if (pv[edges->a].sz > 0) {
-            _horbeg = pv[edges->a].sx;
-            _verbeg = pv[edges->a].sy;
-            _horend = pv[edges->b].sx;
-            _verend = pv[edges->b].sy;
+        if (pv[edges->a].z > 0 && pv[edges->b].z > 0) {
+            _horbeg = pv[edges->a].x;
+            _verbeg = pv[edges->a].y;
+            _horend = pv[edges->b].x;
+            _verend = pv[edges->b].y;
             system_line();
         }
     }
 }
 
 
-#define S 64
+#define S 32
 
 vector_t vectors[8] = {
     {+S, +S, +S},
@@ -176,15 +176,21 @@ unsigned asm test(char a, char b)
     }
 }
 
+int asm shl7(int a)
+{
+    asm {
+        ldd     2,s
+        rora
+        rorb
+        clra
+        rora
+        exg     a,b
+
+    }
+}
+
 int main(void)
 {
-    char s[100];
-    char* p;
-
-    sprintf(s, "%-10s %06d %5s", "HELLO", 123, "SS");
-    puts(s);
-    return 0;
-
     matrix_t matx, matz, mat;
     unsigned grp[2][2], page = 0;
     projected3_t pro1[10];
@@ -212,7 +218,7 @@ int main(void)
         matrix_rotate_z(&matz, (char)a * 3);
         matrix_multiply(&mat, &matx, &matz);
         mat.v[0][3] = 0;
-        mat.v[2][3] = S;
+        mat.v[2][3] = S<<1;
         model_rotate(&obj, &mat, pro1);
         //mat.v[0][3] = -3;
         //mat.v[2][3] = 4;

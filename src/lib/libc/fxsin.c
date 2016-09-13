@@ -9,12 +9,12 @@ char _sintable[128] = {
     42,39,36,33,30,27,24,21,18,15,12,9,6,3
 };
 
-char fxsin(char x)
+char fixsin(char x)
 {
     return x < 0 ? -_sintable[x - 128] : _sintable[x];
 }
 
-char fxcos(char x)
+char fixcos(char x)
 {
     x += 64;
     return x < 0 ? -_sintable[x - 128] : _sintable[x];
