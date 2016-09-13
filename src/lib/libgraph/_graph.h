@@ -5,7 +5,7 @@
 #include <string.h>
 #include <motorola.h>
 #include <equates.h>
-#include <fixpt.h>
+#include <fix6.h>
 
 typedef struct {
     int curx, cury;

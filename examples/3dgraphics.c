@@ -1,147 +1,13 @@
 
-// This is work in progress. Its the start of a minimal 3d maths library
-
-
 #pragma options -machine=coco3
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <fixpt.h>
-#include <stdint.h>
+#include <fix6.h>
 #include <string.h>
-#include <ctype.h>
-#include <rma.h>
-#include <time.h>
-
 #include <graph.h>
 #include <equates.h>
 #include <system.h>
-
-typedef struct {
-    int x, y, z;
-} vector_t;
-
-typedef struct {
-    int v[4][4];
-} matrix_t;
-
-typedef struct {
-    unsigned char a, b;
-} edge_t;
-
-typedef struct {
-    unsigned char nvectors;
-    vector_t* vectors;
-    unsigned char nedges;
-    edge_t* edges;
-} model_t;
-
-typedef struct {
-    int x, y, z;
-} projected3_t;
-
-void vector_set(vector_t* dst, char x, char y, char z)
-{
-    dst->x = x;
-    dst->y = y;
-    dst->z = z;
-}
-
-void matrix_scale(matrix_t* dst, char x, char y, char z)
-{
-    memset(dst, 0, sizeof(matrix_t));
-    dst->v[0][0] = x;
-    dst->v[1][1] = y;
-    dst->v[2][2] = z;
-}
-
-void matrix_identity(matrix_t* dst)
-{
-    matrix_scale(dst, 127, 127, 127);
-}
-
-void matrix_position(matrix_t* dst, char x, char y, char z)
-{
-    matrix_identity(dst);
-    dst->v[0][3] = x;
-    dst->v[1][3] = y;
-    dst->v[2][4] = z;
-}
-
-void matrix_rotate_x(matrix_t* dst, char a)
-{
-    matrix_identity(dst);
-    dst->v[1][1] = +(dst->v[2][2] = fixcos(a));
-    dst->v[1][2] = -(dst->v[2][1] = fixsin(a));
-}
-
-void matrix_rotate_y(matrix_t* dst, char a)
-{
-    matrix_identity(dst);
-    dst->v[0][0] = +(dst->v[2][2] = fixcos(a));
-    dst->v[0][2] = -(dst->v[2][0] = fixsin(a));
-}
-
-void matrix_rotate_z(matrix_t* dst, char a)
-{
-    matrix_identity(dst);
-    dst->v[0][0] = +(dst->v[1][1] = fixcos(a));
-    dst->v[0][1] = -(dst->v[1][0] = fixsin(a));
-}
-
-void matrix_process_vectors(matrix_t* mat, vector_t* v, size_t n, projected3_t* o)
-{
-    for (; n > 0; v++, o++, n--) {
-        o->x=v->x*mat->v[0][0]+v->y*mat->v[0][1]+v->z*mat->v[0][2]+(mat->v[0][3]<<7);
-        o->y=v->x*mat->v[1][0]+v->y*mat->v[1][1]+v->z*mat->v[1][2]+(mat->v[1][3]<<7);
-        o->z=v->x*mat->v[2][0]+v->y*mat->v[2][1]+v->z*mat->v[2][2]+(mat->v[2][3]<<7);
-        o->z = o->z >> 4;
-        if (o->z > 0) {
-            o->x = 64 + o->x / o->z;
-            o->y = 48 - o->y / o->z;
-        }
-    }
-}
-
-void matrix_multiply(matrix_t* a, matrix_t* b, matrix_t* c)
-{
-    for (char i = 3; i--;) {
-        a->v[i][0] = (c->v[i][0]*b->v[0][0]+c->v[i][1]*b->v[1][0]+c->v[i][2]*b->v[2][0])>>7;
-        a->v[i][1] = (c->v[i][0]*b->v[0][1]+c->v[i][1]*b->v[1][1]+c->v[i][2]*b->v[2][1])>>7;
-        a->v[i][2] = (c->v[i][0]*b->v[0][2]+c->v[i][1]*b->v[1][2]+c->v[i][2]*b->v[2][2])>>7;
-        a->v[i][3] = (c->v[i][0]*b->v[0][3]+c->v[i][1]*b->v[1][3]+c->v[i][2]*b->v[2][3])>>7;
-    }
-}
-
-void model_rotate(model_t* model, matrix_t* mat, projected3_t* pro)
-{
-    matrix_process_vectors(mat, model->vectors, model->nvectors, pro);
-}
-
-void model_draw_points(model_t* model, projected3_t* pv)
-{
-    for (unsigned char n = model->nvectors; n > 0; n--, pv++) {
-        if (pv->z > 0) {
-            _setpixel(pv->x, pv->y);
-        }
-    }
-}
-
-void model_draw_edges(model_t* model, projected3_t* pv)
-{
-    _allcol = -1;
-    edge_t* edges = model->edges;
-    for (unsigned char n = model->nedges; n > 0; n--, edges++) {
-        if (pv[edges->a].z > 0 && pv[edges->b].z > 0) {
-            _horbeg = pv[edges->a].x;
-            _verbeg = pv[edges->a].y;
-            _horend = pv[edges->b].x;
-            _verend = pv[edges->b].y;
-            system_line();
-        }
-    }
-}
-
 
 #define S 32
 
@@ -176,25 +42,11 @@ unsigned asm test(char a, char b)
     }
 }
 
-int asm shl7(int a)
-{
-    asm {
-        ldd     2,s
-        rora
-        rorb
-        clra
-        rora
-        exg     a,b
-
-    }
-}
-
 int main(void)
 {
     matrix_t matx, matz, mat;
     unsigned grp[2][2], page = 0;
-    projected3_t pro1[10];
-    projected3_t pro2[10];
+    vector_t pro1[10], pro2[10];
 
     *(char*)65495 = 0;
 

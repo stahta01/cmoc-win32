@@ -91,10 +91,10 @@ void _line(int x1, int y1, int x2, int y2)
         y = _abs(y2);
         byte length = (byte)_max(x, y);
         if (length) {
-            x1 = _i2f(x1);
-            y1 = _i2f(y1);
-            x2 = _i2f(x2) / length;
-            y2 = _i2f(y2) / length;
+            x1 = (x1 << 8);
+            y1 = (y1 << 8);
+            x2 = (x2 << 8) / length;
+            y2 = (y2 << 8) / length;
             if (_pmode & 1) {
                 for (; length--; x1 += x2, y1 += y2) {
                     sx = (byte)((word)x1 >> 8);

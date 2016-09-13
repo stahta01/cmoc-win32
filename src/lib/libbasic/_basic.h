@@ -3,7 +3,7 @@
 #define _BASIC_DEFS_H
 
 #include <basic.h>
-#include <fixpt.h>
+#include <fix6.h>
 #include <cmoc.h>
 #include <coco.h>
 #include <disk.h>

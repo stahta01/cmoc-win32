@@ -1,6 +1,5 @@
 
-#include <basic.h>
-#include <fixpt.h>
+#include "_basic.h"
 
 void BITMAPCOPYRECT(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src,
                     int u1, int v1, int u2, int v2)
@@ -8,8 +7,8 @@ void BITMAPCOPYRECT(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src,
     int w = x2 - x1, h = y2 - y1;
 
     if (w > 0 && h > 0) {
-        int uu = _i2f(u2 - u1) / w;
-        int vv = _i2f(v2 - v1) / h;
+        int uu = ((u2 - u1) << 8) / w;
+        int vv = ((v2 - v1) << 8) / h;
         if (x1 < 0) {
             u1 += -x1 * uu;
             x1 = 0;
@@ -32,16 +31,16 @@ void BITMAPCOPYRECT(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src,
             for (; y1 < y2; y1++, v1 += vv, dst1 += w, dst2 += dst->width) {
                 switch (src->width) {
                 case 16:
-                    src1 = src->data + _f2i(v1) << 4;
+                    src1 = src->data + (v1 >> 8) << 4;
                     break;
                 case 32:
-                    src1 = src->data + _f2i(v1) << 5;
+                    src1 = src->data + (v1 >> 8) << 5;
                     break;
                 default:
-                    src1 = src->data + _f2i(v1) * src->width;
+                    src1 = src->data + (v1 >> 8) * src->width;
                 }
                 for (int u = u1; dst1 < dst2; u += uu) {
-                    *dst1++ = src1[_f2i(u)];
+                    *dst1++ = src1[u >> 8];
                 }
             }
         }
