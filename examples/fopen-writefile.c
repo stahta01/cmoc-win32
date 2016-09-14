@@ -8,6 +8,7 @@
 
 int main(void)
 {
+    puts("WRITING FILE ...");
     FILE* fp = fopen("TEST.TXT", "w");
     if (fp) {
         fputs("THIS IS A TEST\n", fp);
@@ -15,6 +16,7 @@ int main(void)
         fputs("FILE COMMANDS.\n", fp);
         fclose(fp);
     }
+    puts("READING FILE ...");
     fp = fopen("TEST.TXT", "r");
     if (fp) {
         while (!feof(fp)) {
@@ -27,6 +29,7 @@ int main(void)
         fclose(fp);
     }
 
+    puts("\n\nBACK TO BASIC");
     return 0;
 }
 
