@@ -25,55 +25,50 @@ program runwild;
 
 uses
   Classes,
-  Process,
   StrUtils,
   SysUtils,
-  UCmocRbs;
+  Types,
+  UCmocRbs,
+  UCmocUtils;
 
 {$R *.res}
 
 type
 
-  TProcessRunWild = class(TProcess)
+  CRunWild = class
+  strict private
+    FExecutable: string;
   strict private
     procedure ValidateExitCode(const AExitCode: longint);
   public
-    constructor Create(AOwner: TComponent); override;
-    procedure Execute; override;
+    procedure Execute;
   end;
 
-  constructor TProcessRunWild.Create(AOwner: TComponent);
-  begin
-    inherited;
-    ShowWindow := swoHIDE;
-    Options := [poUsePipes, poStderrToOutput];
-  end;
-
-  procedure TProcessRunWild.ValidateExitCode(const AExitCode: longint);
+  procedure CRunWild.ValidateExitCode(const AExitCode: longint);
   begin
     if AExitCode <> 0 then begin
       raise Exception.CreateFmtHelp('%s failed with exit code #%d',
-        [Executable, AExitCode], AExitCode);
+        [FExecutable, AExitCode], AExitCode);
     end;
   end;
 
-  procedure TProcessRunWild.Execute;
+  procedure CRunWild.Execute;
   var
     LIndex: integer;
     LParameter, LNewCommandLine: string;
+    LParameters: TStringDynArray;
     LSearchRec: TSearchRec;
-    LBuffer: array[byte] of byte;
     LArgs: TStrings;
   begin
-    LBuffer[0] := 0;
+    LParameters := default(TStringDynArray);
     LArgs := TStringList.Create;
     try
       LArgs.CommaText := CmdLine;
       if LArgs.Count < 2 then begin
         WriteLn(RbsLoadFromResource('HELP'));
-        raise Exception.Create('missing executable parameter');
+        OCmoc.RaiseError('missing executable parameter');
       end;
-      Executable := LArgs[1];
+      FExecutable := LArgs[1];
       for LIndex := 2 to LArgs.Count - 1 do begin
         LParameter := LArgs[LIndex];
         if Length(LParameter) > 0 then begin
@@ -81,19 +76,20 @@ type
             if FindFirst(LParameter, 0, LSearchRec) = 0 then begin
               try
                 repeat
-                  Parameters.Add(ExtractFilePath(LParameter) + LSearchRec.Name);
+                  OCmoc.StringDynArrayAppend(LParameters, ExtractFilePath(LParameter) +
+                    LSearchRec.Name);
                 until FindNext(LSearchRec) <> 0;
               finally
                 FindClose(LSearchRec);
               end;
             end;
           end else begin
-            Parameters.Add(LParameter);
+            OCmoc.StringDynArrayAppend(LParameters, LParameter);
           end;
         end;
       end;
-      LNewCommandLine := ChangeFileExt(ExtractFileName(Executable), default(string));
-      for LParameter in Parameters do begin
+      LNewCommandLine := ChangeFileExt(ExtractFileName(FExecutable), default(string));
+      for LParameter in LParameters do begin
         if PosSet(AllowDirectorySeparators + [#32], LParameter) = 0 then begin
           LNewCommandLine += #32 + LParameter;
         end else begin
@@ -102,28 +98,17 @@ type
       end;
       WriteLn('>> ', LNewCommandLine);
       try
-        inherited Execute;
+        ValidateExitCode(ExecuteProcess(FExecutable, LParameters, [ExecInheritsHandles]));
       except
         ValidateExitCode(2);
       end;
-      Sleep(20);
-      while (Running or (Output.NumBytesAvailable > 0)) do begin
-        if Output.NumBytesAvailable > 0 then begin
-          while Output.NumBytesAvailable > 0 do begin
-            FileWrite(StdOutputHandle, LBuffer, Output.Read(LBuffer, SizeOf(LBuffer)));
-          end;
-        end else begin
-          Sleep(100);
-        end;
-      end;
-      ValidateExitCode(ExitCode);
     finally
       FreeAndNil(LArgs);
     end;
   end;
 
 begin
-  with TProcessRunWild.Create(nil) do begin
+  with CRunWild.Create do begin
     try
       try
         Execute;

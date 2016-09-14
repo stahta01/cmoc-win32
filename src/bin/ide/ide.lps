@@ -20,6 +20,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="509"/>
         <CursorPos X="25" Y="520"/>
         <UsageCount Value="96"/>
@@ -50,12 +51,10 @@
       <Unit4>
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="742"/>
         <CursorPos X="80" Y="757"/>
         <UsageCount Value="29"/>
-        <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="..\shared\ucmocparser.pas"/>

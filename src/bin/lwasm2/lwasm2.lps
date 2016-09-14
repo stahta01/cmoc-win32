@@ -8,8 +8,9 @@
       <Unit0>
         <Filename Value="lwasm2.lpr"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="54"/>
-        <CursorPos X="78" Y="69"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="47"/>
+        <CursorPos X="16" Y="67"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -18,8 +19,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCmocUtils"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="143"/>
-        <CursorPos X="3" Y="154"/>
+        <TopLine Value="549"/>
+        <CursorPos X="3" Y="678"/>
         <UsageCount Value="20"/>
       </Unit1>
       <Unit2>
@@ -130,12 +131,9 @@
       </Unit16>
       <Unit17>
         <Filename Value="..\..\lib\libkreider\_kreider.h"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="19"/>
-        <CursorPos X="30" Y="36"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="34" Y="38"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="C++"/>
       </Unit17>
       <Unit18>
@@ -146,7 +144,7 @@
         <DefaultSyntaxHighlighter Value="HTML"/>
       </Unit18>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="lwasm2.lpr"/>
         <Caret Line="53" Column="74" TopLine="44"/>
@@ -263,6 +261,10 @@
         <Filename Value="lwasm2.lpr"/>
         <Caret Line="63" Column="46" TopLine="51"/>
       </Position29>
+      <Position30>
+        <Filename Value="lwasm2.lpr"/>
+        <Caret Line="67" Column="16" TopLine="47"/>
+      </Position30>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
