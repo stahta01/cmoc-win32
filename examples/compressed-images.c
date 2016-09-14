@@ -10,7 +10,7 @@
 #include <conio.h>
 #include <equates.h>
 
-#include <crypt.h>
+#include <image.h>
 
 #include "images/1.c"
 #include "images/2.c"
@@ -19,16 +19,10 @@
 #include "images/6.c"
 #include "images/8.c"
 
-typedef struct {
-    unsigned char type;
-    unsigned width, height;
-    crypt_t crypt;
-} cocopic_t;
-
-void ShowImage(cocopic_t* image)
+void ShowImage(image_t* image)
 {
-    systemf("PMODE%d,1", image->type & 2 ? 3 : 4);
-    systemf("SCREEN1,%d", image->type & 1 ? 1 : 0);
+    systemf("PMODE%d,1", image->type & IMAGE_TYPE_COL ? 3 : 4);
+    systemf("SCREEN1,%d", image->type & IMAGE_TYPE_CSS ? 1 : 0);
     crypt_decode(&image->crypt, (void*)_beggrp, 0);
     sleep(4);
 }
@@ -36,12 +30,12 @@ void ShowImage(cocopic_t* image)
 int main(void)
 {
     for (;;) {
-        ShowImage((cocopic_t*)image1);
-        ShowImage((cocopic_t*)image2);
-        ShowImage((cocopic_t*)image3);
-        ShowImage((cocopic_t*)image4);
-        ShowImage((cocopic_t*)image6);
-        ShowImage((cocopic_t*)image8);
+        ShowImage((image_t*)image1);
+        ShowImage((image_t*)image2);
+        ShowImage((image_t*)image3);
+        ShowImage((image_t*)image4);
+        ShowImage((image_t*)image6);
+        ShowImage((image_t*)image8);
     }
     return 0;
 }

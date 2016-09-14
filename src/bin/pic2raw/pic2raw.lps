@@ -8,6 +8,7 @@
       <Unit0>
         <Filename Value="pic2raw.lpr"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="64"/>
         <CursorPos X="29" Y="77"/>
         <UsageCount Value="36"/>
@@ -190,9 +191,8 @@
       <Unit24>
         <Filename Value="..\shared\ucmocimage.pas"/>
         <UnitName Value="UCmocImage"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="185"/>
+        <TopLine Value="188"/>
         <CursorPos X="98" Y="206"/>
         <UsageCount Value="25"/>
         <Loaded Value="True"/>
