@@ -10,7 +10,7 @@
 #include <conio.h>
 #include <equates.h>
 
-#include <image.h>
+#include <crypt/image.h>
 
 #include "images/1.c"
 #include "images/2.c"
@@ -19,10 +19,10 @@
 #include "images/6.c"
 #include "images/8.c"
 
-void ShowImage(image_t* image)
+void ShowImage(crypt_image_t* image)
 {
-    systemf("PMODE%d,1", image->type & IMAGE_TYPE_COL ? 3 : 4);
-    systemf("SCREEN1,%d", image->type & IMAGE_TYPE_CSS ? 1 : 0);
+    systemf("PMODE%d,1", image->type & CRYPT_IMAGE_TYPE_COL ? 3 : 4);
+    systemf("SCREEN1,%d", image->type & CRYPT_IMAGE_TYPE_CSS ? 1 : 0);
     crypt_decode(&image->crypt, (void*)_beggrp, 0);
     sleep(4);
 }
@@ -30,12 +30,12 @@ void ShowImage(image_t* image)
 int main(void)
 {
     for (;;) {
-        ShowImage((image_t*)image1);
-        ShowImage((image_t*)image2);
-        ShowImage((image_t*)image3);
-        ShowImage((image_t*)image4);
-        ShowImage((image_t*)image6);
-        ShowImage((image_t*)image8);
+        ShowImage((crypt_image_t*)image1);
+        ShowImage((crypt_image_t*)image2);
+        ShowImage((crypt_image_t*)image3);
+        ShowImage((crypt_image_t*)image4);
+        ShowImage((crypt_image_t*)image6);
+        ShowImage((crypt_image_t*)image8);
     }
     return 0;
 }
