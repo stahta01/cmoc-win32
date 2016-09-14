@@ -4,7 +4,7 @@
 int close(int fd)
 {
     if (fd <= _fcbact) {
-        return systemf("CLOSE #%d", fd);
+        return systemf("CLOSE#%d", fd);
     }
     if (fd > FD_MAX) {
         _close((struct FileDesc*)fd);

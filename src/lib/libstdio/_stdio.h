@@ -7,5 +7,6 @@
 #include <equates.h>
 #include <assert.h>
 #include <system.h>
+#include <fcntl.h>
 #include <coco/disk.h>
 

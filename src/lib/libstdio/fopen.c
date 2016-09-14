@@ -24,7 +24,7 @@ FILE* fopen(char* name, char* m)
             }
         }
         if (devnum) {
-            systemf("OPEN \"%c\",#%d,\"%s\"", m[0] == 'r' ? 'I' : 'O', devnum, name);
+            systemf("OPEN\"%c\",#%d,\"%s\"", m[0] == 'r' ? 'I' : 'O', devnum, name);
             fp = (FILE*)calloc(sizeof(FILE), 1);
             fp->devnum = devnum;
             if (m[0] == 'r') {

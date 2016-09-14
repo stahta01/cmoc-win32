@@ -20,7 +20,7 @@ int open(char* name, int flags, ...)
             }
         }
         if (fd) {
-            systemf("OPEN \"O\",#%d,\"%s\"", fd, name);
+            systemf("OPEN\"O\",#%d,\"%s\"", fd, name);
         }
     }
     return fd;
