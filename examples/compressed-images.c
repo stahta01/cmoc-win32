@@ -10,8 +10,7 @@
 #include <conio.h>
 #include <equates.h>
 
-#include <lzss.h>
-#include <exodecr.h>
+#include <crypt.h>
 
 #include "images/1.c"
 #include "images/2.c"
@@ -22,31 +21,15 @@
 
 typedef struct {
     unsigned char type;
-    unsigned dstsize, srcsize;
-} data_t;
-
-typedef struct {
-    unsigned char type;
     unsigned width, height;
-    data_t data;
+    crypt_t crypt;
 } cocopic_t;
-
 
 void ShowImage(cocopic_t* image)
 {
     systemf("PMODE%d,1", image->type & 2 ? 3 : 4);
     systemf("SCREEN1,%d", image->type & 1 ? 1 : 0);
-    switch (image->data.type) {
-    case 0:
-        memcpy((void*)_beggrp, image + 1, image->data.srcsize);
-        break;
-    case 1:
-        exo_decrunch((char*)(image + 1) + image->data.srcsize, (char*)_endgrp);
-        break;
-    case 12:                                // 4096 ring buffer (1 << 12) = 4096
-        decompress_lzss((unsigned char*)_beggrp, (unsigned char*)(image + 1), image->data.srcsize);
-        break;
-    }
+    crypt_decode(&image->crypt, (void*)_beggrp, 0);
     sleep(4);
 }
 
