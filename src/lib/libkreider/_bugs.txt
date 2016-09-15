@@ -1,0 +1,2 @@
+memccpy was returning pointer to src. It should be ptr to dst.
+change "tfr u,d" to "tfr x,d"
