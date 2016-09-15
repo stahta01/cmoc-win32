@@ -3,6 +3,7 @@
 #include <dskcon.h>
 #include <string.h>
 #include <stdlib.h>
+#include <dirent.h>
 #include <equates.h>
 
 typedef struct {
@@ -57,24 +58,24 @@ void sector_close(sector_t* sect)
     free(sect);
 }
 
-typedef struct {
-    char name[8];
-    char ext[3];
-    unsigned char type, flag, granule, lastsize;
-    char reserved[17];
-} dskcon_filename_t;
-
-struct dirent {
-    char d_name[9];
-    char d_type;
-};
+void dskcon_dirent_get(dskcon_dirent_t* dirent, char* fn)
+{
+    char* pos = fn, *end;
+    end = (char*)memccpy(pos, dirent->name, ' ', 8);
+    end = end ? end - 1 : pos + 8;
+    *end++ = '.';
+    pos = end;
+    end = (char*)memccpy(pos, dirent->ext, ' ', 3);
+    end = end ? end - 1 : pos + 3;
+    *end = 0;
+}
 
 typedef struct {
     struct dirent dirent;
     sector_t* sector;
 } DIR;
 
-DIR* opendir(char* name)
+DIR* opendir(char* fn)
 {
     DIR* dir = (DIR*)calloc(sizeof(DIR), 1);
     dir->sector = sector_open(0, 17, 3, 0);
@@ -91,37 +92,19 @@ int closedir(DIR* dir)
 struct dirent* readdir(DIR* dir)
 {
     if (dir->sector) {
-        dskcon_filename_t fn;
+        dskcon_dirent_t dskcon_dirent;
         do {
-            sector_read(dir->sector, &fn, sizeof(fn));
-        } while (fn.name[0] == 0);
-        if (fn.name[0] == 255) {
+            sector_read(dir->sector, &dskcon_dirent, sizeof(dskcon_dirent));
+        } while (dskcon_dirent.name[0] == 0);
+        if (dskcon_dirent.name[0] == 255) {
             sector_close(dir->sector);
             dir->sector = nullptr;
         } else {
-            dir->dirent.d_name[8] = 0;
-            *(char*)memccpy(dir->dirent.d_name, fn.name, ' ', 8) = 0;
+            dskcon_dirent_get(&dskcon_dirent, dir->dirent.d_name);
             return &dir->dirent;
         }
     }
     return nullptr;
-}
-
-void showdir(int drive)
-{
-    sector_t* sect = sector_open(0, 17, 3, 0);
-    if (sect) {
-        dskcon_filename_t ent;
-        do {
-            sector_read(sect, &ent, sizeof(ent));
-            if (ent.name[0] > 0) {
-                fwrite(ent.name, 7, 1, stdout);
-                fwrite(ent.ext, 3, 1, stdout);
-                fputc('\n', stdout);
-            }
-        } while (ent.name[0] != -1);
-        sector_close(sect);
-    }
 }
 
 int main(void)
@@ -136,7 +119,6 @@ int main(void)
         }
         closedir(dir);
     }
-    showdir(0);
     return 0;
 }
 

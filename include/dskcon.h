@@ -16,6 +16,13 @@ typedef struct {
     unsigned char sta;                          // DSKCON STATUS BYTE
 } dskcon_t;
 
+typedef struct {
+    char name[8];
+    char ext[3];
+    unsigned char type, flag, granule, lastsize;
+    char reserved[17];
+} dskcon_dirent_t;
+
 int dskcon(int opc, int drv, int trk, int sec, void* bpt);
 
 #endif
