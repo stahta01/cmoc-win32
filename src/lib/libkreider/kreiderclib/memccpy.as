@@ -11,7 +11,7 @@ L000b lda   ,u+
  sta   ,x+ 
  cmpa  11,s 
  bne   L0017 
- tfr   x,d 
+ tfr   u,d 
  bra   L001d 
 L0017 leay  -1,y 
  bne   L000b 
