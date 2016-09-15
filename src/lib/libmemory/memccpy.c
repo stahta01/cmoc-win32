@@ -1,4 +1,6 @@
 
+#define memccpy __obsolete
+
 #include "_memory.h"
 
 void* memccpy(void* dest,  void* src, int c, unsigned int count)

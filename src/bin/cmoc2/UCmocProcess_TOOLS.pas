@@ -69,7 +69,7 @@ begin
 
     MCCP(LPre, ASrc, TStringDynArray.Create(Opt_Define2,
       Def_CMOC_VERSION, Opt_Define2, Def_6809, Opt_Define2, '__' + UpperCase(FTarget) + '__',
-      Opt_Define2, 'const=', Opt_Define2, '__fastcall__=', Opt_Define2,
+      Opt_Define2, 'nullptr=0', Opt_Define2, 'const=', Opt_Define2, '__fastcall__=', Opt_Define2,
       'long=int', Opt_Define2, 'restrict=', Opt_Include2,
       OCmoc.DosToUnix(OCmoc.PathToPackage + 'include')));
 
