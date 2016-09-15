@@ -20,7 +20,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="509"/>
         <CursorPos X="25" Y="520"/>
         <UsageCount Value="96"/>
@@ -43,10 +42,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDESynEdit"/>
-        <EditorIndex Value="-1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
         <TopLine Value="116"/>
-        <CursorPos X="64" Y="125"/>
+        <CursorPos X="22" Y="125"/>
         <UsageCount Value="87"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="..\shared\ucmocutils.pas"/>

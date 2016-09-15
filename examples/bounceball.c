@@ -4,7 +4,7 @@
 #include <basic.h>
 #include <unistd.h>
 #include <math.h>
-#include <fixpt.h>
+#include <fix6.h>
 
 void ClearBoard(void)
 {
@@ -21,28 +21,28 @@ void ClearBoard(void)
 
 void PlayGame(void)
 {
-    int ball_x = i2f(31), ball_xx = 150;
-    int ball_y = i2f(16), ball_yy = 150;
-    byte ball_sx = (byte)_f2i(ball_x);
-    byte ball_sy = (byte)_f2i(ball_y);
+    int ball_x = i2f6(31), ball_xx = 63;
+    int ball_y = i2f6(16), ball_yy = 60;
+    byte ball_sx = (byte)f2i6(ball_x);
+    byte ball_sy = (byte)f2i6(ball_y);
 
     byte paddle_x = 2, paddle_sx = 2;
 
     for (;;) {
         ball_x += ball_xx;
         ball_y += ball_yy;
-        if (_f2i(ball_x) < 2 || _f2i(ball_x) > 61) {
+        if (f2i6(ball_x) < 2 || f2i6(ball_x) > 61) {
             ball_x += ball_xx = -ball_xx;
             SOUND(100, 0);
         }
-        if (_f2i(ball_y) < 14 || _f2i(ball_y) > 30) {
+        if (f2i6(ball_y) < 14 || f2i6(ball_y) > 30) {
             ball_y += ball_yy = -ball_yy;
             SOUND(200, 0);
         }
-        if (_f2i(ball_x) != ball_sx || _f2i(ball_y) != ball_sy) {
+        if (f2i6(ball_x) != ball_sx || f2i6(ball_y) != ball_sy) {
             LSET(ball_sx, ball_sy, 0);
-            ball_sx = (byte)_f2i(ball_x);
-            ball_sy = (byte)_f2i(ball_y);
+            ball_sx = (byte)f2i6(ball_x);
+            ball_sy = (byte)f2i6(ball_y);
             LSET(ball_sx, ball_sy, 5);
         }
         paddle_x = (byte)(((unsigned)JOYSTK(0) * 205) >> 8) + 2;
