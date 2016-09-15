@@ -5,6 +5,7 @@
 #if defined(__COCO__)
 
 #include <coco/equates.h>
+#include <coco/disk.h>
 
 #else
 

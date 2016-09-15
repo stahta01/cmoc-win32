@@ -1,6 +1,5 @@
 
-#include <stdlib.h>
-#include <string.h>
+#include "_malloc.h"
 
 void* malloc(int size)
 {

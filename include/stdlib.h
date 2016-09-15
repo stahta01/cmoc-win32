@@ -2,7 +2,7 @@
 #ifndef _STDLIB_H
 #define _STDLIB_H
 
-#include <sys/size.h>
+#include <malloc.h>
 
 #define EXIT_SUCCESS    0
 #define EXIT_FAILURE    1
@@ -48,12 +48,6 @@ int max(int a, int b);
 int min(int a, int b);
 int abs(int n);
 
-void* malloc(int size);
-void* calloc(int num, int size);
-void free(void* mem);
-int _msize(void* mem);
-void* realloc(void* mem, int size);
-
 int atoi(char* string);
 //long atol(char* string);
 int atexit(void(*func)(void));
@@ -89,8 +83,6 @@ void uldiv(uldiv_t* result, unsigned long numer, unsigned long denom);
 char* ultoa(unsigned long value, char* string, int radix);
 
 void beep(unsigned char _Frequency, unsigned _Duration);
-
-extern int heap_memory[1]; // INTERNAL USE ONLY
 
 #endif
 

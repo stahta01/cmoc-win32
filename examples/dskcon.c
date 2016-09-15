@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <dirent.h>
+#include <dir.h>
 #include <equates.h>
 
 typedef struct {
@@ -115,7 +116,7 @@ int main(void)
     if (dir) {
         struct dirent* dirent;
         while (dirent = readdir(dir)) {
-            puts(dirent->d_name);
+            printf("%-16s", dirent->d_name);
         }
         closedir(dir);
     }
