@@ -36,35 +36,3 @@ void* malloc(int size)
     }
 }
 
-
-void free(void* m)
-{
-    if (m && ((int*)m)[-1] > 0) {
-        ((int*)m)[-1] = -((int*)m)[-1];
-    }
-}
-
-void* calloc(int n, int s)
-{
-    void* m = malloc(n *= s);
-    return m ? memset(m, 0, n) : (void*)0;
-}
-
-void* realloc(void* mem, int size)
-{
-    if (_msize(mem) != size) {
-        void* tmp = malloc(size);
-        if (tmp) {
-            memcpy(tmp, mem, _msize(mem) < size ? _msize(mem) : size);
-        }
-        free(mem);
-        mem = tmp;
-    }
-    return mem;
-}
-
-int _msize(void* m)
-{
-    return m ? ((int*)m)[-1] - sizeof(int) : 0;
-}
-
