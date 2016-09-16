@@ -9,5 +9,3 @@
 void system_init_coco(void);
 void system_init_dragon(void);
 
-
-

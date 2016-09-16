@@ -8,9 +8,9 @@
 #ifndef _STDARG_H
 #define _STDARG_H
 
-typedef unsigned int* va_list;
+typedef unsigned* va_list;
 
-extern char* _va_arg(va_list* app, unsigned int sizeInBytes);
+extern char* _va_arg(va_list* app, unsigned sizeInBytes);
 
 #define va_start(ap, lastFixed) do { (ap) = ((unsigned *) &(lastFixed)) + 1; } while (0)
 #define va_arg(ap, type) (* (type *) _va_arg(&(ap), sizeof(type)))

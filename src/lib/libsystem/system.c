@@ -3,10 +3,9 @@
 
 int _system(void)
 {
-    //puts(_syscmdline);
     asm {
-        pshs u
-        ldx     #0                          // Was -1
+        pshs    u
+        ldx     #0                              // Was -1
         stx     _CURLIN
         ldx     #_LINBUF
         stx     _CHARAD
@@ -14,7 +13,7 @@ int _system(void)
         jsr     [sysptr_crunch]
         jsr     _GETNCH
         jsr     [sysptr_execute]
-        puls u
+        puls    u
     }
     return 0;
 }
