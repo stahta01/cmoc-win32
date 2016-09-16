@@ -1,10 +1,11 @@
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 
-void _assert(char* _Message,  char* _File, unsigned _Line)
+void _assert(char* message, char* filename, unsigned line)
 {
-    printf("\nASSERT FAILED!\n\nFILE:%s\nLINE:%d\n%s\n", _File, _Line, _Message);
+    printf("\nASSERT FAILED!\n\nFILE:%s\nLINE:%u\n%s\n", filename, line, message);
     exit(-1);
 }
 

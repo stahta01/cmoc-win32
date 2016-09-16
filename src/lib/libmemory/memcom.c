@@ -1,7 +1,7 @@
 
 #include "_memory.h"
 
-void asm memcom(void* ptr, size_t n)
+void asm _memcom(void* ptr, size_t n)
 {
     asm {
         ldx     2,s

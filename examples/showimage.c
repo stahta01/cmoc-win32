@@ -23,7 +23,7 @@ int main(void)
     if (s[2] == 'y' || s[2] == 'Y') {
         memcpy((void*)_beggrp, image256x192, sizeof(image256x192));
         for (i = 0; i < 4; i++) {
-            memcom((void*)_beggrp, _endgrp - _beggrp);
+            _memcom((void*)_beggrp, _endgrp - _beggrp);
         }
         cputsxy(0, 22, "Yes, the CoCo just got sexy!\nWelcome to 2016 :-) ");
     } else {

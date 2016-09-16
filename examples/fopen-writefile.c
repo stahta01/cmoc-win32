@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <conio.h>
 
-#include <equates.h>
-
 int main(void)
 {
     puts("WRITING FILE ...");
