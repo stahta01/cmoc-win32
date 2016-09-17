@@ -1,33 +1,31 @@
 
-#define asm_argword(X) X*2,s
-#define asm_argbyte(X) X*2+1,s
-
 asm {
-    ldy     asm_argword(3)
-    beq     exit$
-    ldx     asm_argword(1)
-#ifdef IS_COPY
-    stu     asm_argword(-1)
-    ldu     asm_argword(2)
-#else
-    lda     asm_argbyte(2)
+    ldy     ANUM
+    beq     LEXIT
+    ldx     ADST
+#ifdef ASRC
+    stu     -2,s
+    ldu     ASRC
 #endif
-    ldb     asm_argbyte(3)
+#ifdef ACHR
+    lda     1+ACHR
+#endif
+    ldb     1+ANUM
     andb    #7
-    beq     copy8$
+    beq     LCOPY8
     negb
     leay    b,y
     negb
-copy1$:
+    LCOPY1:
     LOAD1
     SAVE1
     decb
-    bne     copy1$
+    bne     LCOPY1
     cmpy    #0
-    beq     exit$
-copy8$:
+    beq     LEXIT
+    LCOPY8:
     tfr     a,b
-loop8$:
+    LLOOP8:
     LOAD2
     SAVE2
     LOAD2
@@ -37,11 +35,11 @@ loop8$:
     LOAD2
     SAVE2
     leay    -8,y
-    bne     loop8$
-exit$:
-    ldd     2,s
-#ifdef IS_COPY
-    ldu     asm_argword(-1)
+    bne     LLOOP8
+    LEXIT:
+    ldd     ADST
+#ifdef ASRC
+    ldu     -2,s
 #endif
 }
 

@@ -5,14 +5,13 @@ void asm _memcom(void* ptr, size_t n)
 {
     asm {
         ldx     2,s
-        beq     memcom_exit
         ldy     4,s
-        beq     memcom_exit
-        memcom_loop:
+        beq     LEXIT
+        LLOOP:
         com     ,x+
         leay    -1,y
-        bne     memcom_loop
-        memcom_exit:
+        bne     LLOOP
+        LEXIT:
     }
 }
 
