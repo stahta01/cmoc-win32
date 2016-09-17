@@ -61,10 +61,10 @@ int main(void)
     char* contents;
     byte length = getStringVariableContents("A", &contents); // A$
 
-    if (contents) {                         // if A$ is defined
-        fwrite(contents, 1, length, stdout); // print A$
+    if (contents) {                             // if A$ is defined
+        fwrite(contents, 1, length, stdout);    // print A$
         fputc('\n', stdout);
-        memset(contents, '*', length);      // fill A$ with asterisks
+        memset(contents, '*', length);          // fill A$ with asterisks
         system("?\"A$=\"A$");
         PrintUsedSpace();
     }

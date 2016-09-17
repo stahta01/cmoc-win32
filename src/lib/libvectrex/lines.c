@@ -15,9 +15,9 @@ void lines(uint8_t nr_lines, int8_t* list)
 {
     asm {
         JSR     DP_to_D0
-        LDA     nr_lines
+        LDA     :nr_lines
         DECA
-        LDX     list
+        LDX     :list
         JSR     Draw_VL_a
     }
 }

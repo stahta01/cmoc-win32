@@ -8,7 +8,7 @@
 void music_set_flag(uint8_t flag)
 {
     asm {
-        LDA     flag
+        LDA     :flag
         STA     Vec_Music_Flag
     }
 }

@@ -6,7 +6,7 @@
 #define _FILE "alib/dec_bin.as"
 #include "_rma.h"
 
-int asm dec_bin(char* s)
+int asm dec_bin(char* str)
 {
     asm {
         ldx     2,s

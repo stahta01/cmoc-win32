@@ -8,7 +8,7 @@ void music_check(unsigned char* music)
     asm {
         PSHS    U
         JSR     DP_to_C8
-        LDU     music
+        LDU     :music
         JSR     Init_Music_chk
         PULS    U
     }

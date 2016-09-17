@@ -6,10 +6,10 @@ void print_str(int8_t y, int8_t x, char* string)
 {
     asm {
         JSR     DP_to_D0
-        LDA     y
-        LDB     x
+        LDA     :y
+        LDB     :x
         PSHS    U
-        LDU     string
+        LDU     :string
         JSR     Print_Str_d
         PULS    U
     }

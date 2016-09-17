@@ -16,46 +16,46 @@ uint8_t read_joystick(uint8_t joystick)
     asm {
         PSHS    X, DP
         JSR     DP_to_D0
-        LDA     joystick                // Which joystick?
+        LDA     :joystick                       // Which joystick?
         CMPA    #$02
         BEQ     read_joystick_2
 
         read_joystick_1:
-        LDA     #1                      // Joystick 1 set up
+        LDA     #1                              // Joystick 1 set up
         STA     Vec_Joy_Mux_1_X
         LDA     #3
         STA     Vec_Joy_Mux_1_Y
-        LDA     #0                      // No Joystick 2 - saves a lot of cycles
+        LDA     #0                              // No Joystick 2 - saves a lot of cycles
         STA     Vec_Joy_Mux_2_X
         STA     Vec_Joy_Mux_2_Y
 
-        JSR     Joy_Digital             // Read joystick
+        JSR     Joy_Digital                     // Read joystick
 
-        LDB     #$00                    // Clear direction mask
+        LDB     #$00                            // Clear direction mask
 
-        LDA     Vec_Joy_1_X             // Check X direction
+        LDA     Vec_Joy_1_X                     // Check X direction
         BSR     read_joystick_check_x
-        LDA     Vec_Joy_1_Y             // Check Y direction
+        LDA     Vec_Joy_1_Y                     // Check Y direction
         BSR     read_joystick_check_y
 
         BRA     read_joystick_end
 
         read_joystick_2:
-        LDA     #0                      // No Joystick 1 - saves a lot of cycles
+        LDA     #0                              // No Joystick 1 - saves a lot of cycles
         STA     Vec_Joy_Mux_1_X
         STA     Vec_Joy_Mux_1_Y
-        LDA     #5                      // Joystick 2 set up
+        LDA     #5                              // Joystick 2 set up
         STA     Vec_Joy_Mux_2_X
         LDA     #7
         STA     Vec_Joy_Mux_2_Y
 
-        JSR     Joy_Digital             // Read joystick
+        JSR     Joy_Digital                     // Read joystick
 
-        LDB     #$00                    // Clear direction mask
+        LDB     #$00                            // Clear direction mask
 
-        LDA     Vec_Joy_2_X             // Check X direction
+        LDA     Vec_Joy_2_X                     // Check X direction
         BSR     read_joystick_check_x
-        LDA     Vec_Joy_2_Y             // Check Y direction
+        LDA     Vec_Joy_2_Y                     // Check Y direction
         BSR     read_joystick_check_y
 
         BRA     read_joystick_end

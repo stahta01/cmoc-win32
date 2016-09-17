@@ -7,11 +7,11 @@ void pattern_lines(uint8_t pattern, uint8_t nr_lines, int8_t* list)
 {
     asm {
         JSR     DP_to_D0
-        LDA     pattern
+        LDA     :pattern
         STA     Vec_Pattern
-        LDA     nr_lines
+        LDA     :nr_lines
         DECA
-        LDX     list
+        LDX     :list
         JSR     Draw_Pat_VL_a
     }
 }

@@ -128,7 +128,7 @@ const
   Opt_NoMaximize1 = '-nomaximize';
 
   Def_CMOC = '__CMOC__';
-  Def_CMOC_VERSION = Def_CMOC + '=1.30';
+  Def_CMOC_VERSION = Def_CMOC + '=0.1.31';
   Def_DATE = '__DATE__';
   Def_FILE = '__FILE__';
   Def_6809 = '__6809__';
@@ -475,24 +475,29 @@ class procedure OCmoc.StringDynArrayAppendLibs(var A: TStringDynArray);
 begin
   StringDynArrayAppendLib(A, 'all');
   (*
-  StringDynArrayAppendLib(A, 'disk');
-  StringDynArrayAppendLib(A, 'motorola');
-  StringDynArrayAppendLib(A, 'cmoc');
-  StringDynArrayAppendLib(A, 'lzss');
-  StringDynArrayAppendLib(A, 'exomizer');
-  StringDynArrayAppendLib(A, 'varptr');
   StringDynArrayAppendLib(A, '6809');
   StringDynArrayAppendLib(A, 'basic');
+  StringDynArrayAppendLib(A, 'c');
   StringDynArrayAppendLib(A, 'charset');
-  StringDynArrayAppendLib(A, 'graph');
+  StringDynArrayAppendLib(A, 'cmoc');
+  StringDynArrayAppendLib(A, 'coco');
   StringDynArrayAppendLib(A, 'conio');
-  StringDynArrayAppendLib(A, 'unistd');
   StringDynArrayAppendLib(A, 'ctype');
+  StringDynArrayAppendLib(A, 'disk');
+  StringDynArrayAppendLib(A, 'exomizer');
+  StringDynArrayAppendLib(A, 'fast');
+  StringDynArrayAppendLib(A, 'graph');
+  StringDynArrayAppendLib(A, 'kreider');
+  StringDynArrayAppendLib(A, 'lzss');
+  StringDynArrayAppendLib(A, 'malloc');
+  StringDynArrayAppendLib(A, 'memory');
+  StringDynArrayAppendLib(A, 'motorola');
   StringDynArrayAppendLib(A, 'stdio');
   StringDynArrayAppendLib(A, 'string');
-  StringDynArrayAppendLib(A, 'coco');
   StringDynArrayAppendLib(A, 'system');
-  StringDynArrayAppendLib(A, 'c');
+  StringDynArrayAppendLib(A, 'unistd');
+  StringDynArrayAppendLib(A, 'varptr');
+  StringDynArrayAppendLib(A, 'rma');
   *)
 end;
 

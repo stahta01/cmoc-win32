@@ -5,7 +5,7 @@
 void intensity(uint8_t i)
 {
     asm {
-        LDA i
+        LDA :i
         JSR Intensity_a
     }
 }
