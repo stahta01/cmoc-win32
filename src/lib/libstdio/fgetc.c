@@ -11,7 +11,6 @@ int fgetc(FILE* fp)
         fp->buffer = system_getchr(fp->devnum);
         if (_cinbfl) {
             fp->buffer = EOF;
-            return EOF;
         }
         return c;
     } else {
