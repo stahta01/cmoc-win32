@@ -7,7 +7,18 @@
 		<Option compiler="gcc" />
 		<Option show_notes="0">
 			<notes>
-				<![CDATA[CMOC - A C-like 6809-targeting cross-compiler
+				<![CDATA[2 CHANGES FOR WINCMOC
+
+TranslationUnit.cpp
+
+LINE 216: Remove error for non declared functions
+//   it->second->errormsg("function %s() declared and called but not defined", funcId.c_str());
+
+LINE 1283: Remove ignore extern
+else if (0) //dsl->isExternDeclaration())
+
+
+CMOC - A C-like 6809-targeting cross-compiler
 
 Home page: http://sarrazip.com/dev/cmoc.html
 
@@ -40,7 +51,7 @@ Automake
 					<Add option="-m32" />
 					<Add option='-DPROGRAM=\&quot;cmoc\&quot;' />
 					<Add option='-DPACKAGE=\&quot;CMOC\&quot;' />
-					<Add option='-DVERSION=\&quot;1.30\&quot;' />
+					<Add option='-DVERSION=\&quot;0.1.31\&quot;' />
 					<Add option='-DPKGDATADIR=\&quot;PKGDATADIR_IS_UNDEFINED\&quot;' />
 				</Compiler>
 				<Linker>
@@ -52,89 +63,46 @@ Automake
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="src/ASMText.cpp" />
-		<Unit filename="src/ASMText.h" />
-		<Unit filename="src/AssemblerStmt.cpp" />
-		<Unit filename="src/AssemblerStmt.h" />
-		<Unit filename="src/BinaryOpExpr.cpp" />
-		<Unit filename="src/BinaryOpExpr.h" />
-		<Unit filename="src/CastExpr.cpp" />
-		<Unit filename="src/CastExpr.h" />
-		<Unit filename="src/ClassDef.cpp" />
-		<Unit filename="src/ClassDef.h" />
-		<Unit filename="src/CodeStatus.cpp" />
-		<Unit filename="src/CodeStatus.h" />
-		<Unit filename="src/CompoundStmt.h" />
-		<Unit filename="src/ConditionalExpr.cpp" />
-		<Unit filename="src/ConditionalExpr.h" />
-		<Unit filename="src/Declaration.cpp" />
-		<Unit filename="src/Declaration.h" />
-		<Unit filename="src/DeclarationSequence.cpp" />
-		<Unit filename="src/DeclarationSequence.h" />
-		<Unit filename="src/DeclarationSpecifierList.cpp" />
-		<Unit filename="src/DeclarationSpecifierList.h" />
-		<Unit filename="src/Declarator.cpp" />
-		<Unit filename="src/Declarator.h" />
-		<Unit filename="src/ExpressionTypeSetter.cpp" />
-		<Unit filename="src/ExpressionTypeSetter.h" />
-		<Unit filename="src/ForStmt.cpp" />
-		<Unit filename="src/ForStmt.h" />
-		<Unit filename="src/FormalParamList.h" />
-		<Unit filename="src/FormalParameter.cpp" />
-		<Unit filename="src/FormalParameter.h" />
-		<Unit filename="src/FunctionCallExpr.cpp" />
-		<Unit filename="src/FunctionCallExpr.h" />
-		<Unit filename="src/FunctionDef.cpp" />
-		<Unit filename="src/FunctionDef.h" />
-		<Unit filename="src/IdentifierExpr.cpp" />
-		<Unit filename="src/IdentifierExpr.h" />
-		<Unit filename="src/IfStmt.cpp" />
-		<Unit filename="src/IfStmt.h" />
-		<Unit filename="src/JumpStmt.cpp" />
-		<Unit filename="src/JumpStmt.h" />
-		<Unit filename="src/LabeledStmt.cpp" />
-		<Unit filename="src/LabeledStmt.h" />
-		<Unit filename="src/ObjectMemberExpr.cpp" />
-		<Unit filename="src/ObjectMemberExpr.h" />
-		<Unit filename="src/Pragma.cpp" />
-		<Unit filename="src/Pragma.h" />
-		<Unit filename="src/Pseudo6809.h" />
-		<Unit filename="src/Scope.cpp" />
-		<Unit filename="src/Scope.h" />
-		<Unit filename="src/ScopeCreator.cpp" />
-		<Unit filename="src/ScopeCreator.h" />
-		<Unit filename="src/SemanticsChecker.cpp" />
-		<Unit filename="src/SemanticsChecker.h" />
-		<Unit filename="src/StringLiteralExpr.cpp" />
-		<Unit filename="src/StringLiteralExpr.h" />
-		<Unit filename="src/SwitchStmt.cpp" />
-		<Unit filename="src/SwitchStmt.h" />
-		<Unit filename="src/TranslationUnit.cpp" />
-		<Unit filename="src/TranslationUnit.h" />
-		<Unit filename="src/Tree.cpp" />
-		<Unit filename="src/Tree.h" />
-		<Unit filename="src/TreeSequence.cpp" />
-		<Unit filename="src/TreeSequence.h" />
-		<Unit filename="src/TypeDesc.cpp" />
-		<Unit filename="src/TypeDesc.h" />
-		<Unit filename="src/TypeManager.cpp" />
-		<Unit filename="src/TypeManager.h" />
-		<Unit filename="src/UnaryOpExpr.cpp" />
-		<Unit filename="src/UnaryOpExpr.h" />
-		<Unit filename="src/VariableExpr.cpp" />
-		<Unit filename="src/VariableExpr.h" />
-		<Unit filename="src/WhileStmt.cpp" />
-		<Unit filename="src/WhileStmt.h" />
-		<Unit filename="src/WordConstantExpr.cpp" />
-		<Unit filename="src/WordConstantExpr.h" />
-		<Unit filename="src/lexer.cc" />
-		<Unit filename="src/lexer.ll" />
-		<Unit filename="src/main.cpp" />
-		<Unit filename="src/parser.cc" />
-		<Unit filename="src/parser.hh" />
-		<Unit filename="src/parser.yy" />
-		<Unit filename="src/util.cpp" />
-		<Unit filename="src/util.h" />
+		<Unit filename="cmoc/src/ASMText.cpp" />
+		<Unit filename="cmoc/src/AssemblerStmt.cpp" />
+		<Unit filename="cmoc/src/BinaryOpExpr.cpp" />
+		<Unit filename="cmoc/src/CastExpr.cpp" />
+		<Unit filename="cmoc/src/ClassDef.cpp" />
+		<Unit filename="cmoc/src/CodeStatus.cpp" />
+		<Unit filename="cmoc/src/ConditionalExpr.cpp" />
+		<Unit filename="cmoc/src/Declaration.cpp" />
+		<Unit filename="cmoc/src/DeclarationSequence.cpp" />
+		<Unit filename="cmoc/src/DeclarationSpecifierList.cpp" />
+		<Unit filename="cmoc/src/Declarator.cpp" />
+		<Unit filename="cmoc/src/ExpressionTypeSetter.cpp" />
+		<Unit filename="cmoc/src/ForStmt.cpp" />
+		<Unit filename="cmoc/src/FormalParameter.cpp" />
+		<Unit filename="cmoc/src/FunctionCallExpr.cpp" />
+		<Unit filename="cmoc/src/FunctionDef.cpp" />
+		<Unit filename="cmoc/src/IdentifierExpr.cpp" />
+		<Unit filename="cmoc/src/IfStmt.cpp" />
+		<Unit filename="cmoc/src/JumpStmt.cpp" />
+		<Unit filename="cmoc/src/LabeledStmt.cpp" />
+		<Unit filename="cmoc/src/ObjectMemberExpr.cpp" />
+		<Unit filename="cmoc/src/Pragma.cpp" />
+		<Unit filename="cmoc/src/Scope.cpp" />
+		<Unit filename="cmoc/src/ScopeCreator.cpp" />
+		<Unit filename="cmoc/src/SemanticsChecker.cpp" />
+		<Unit filename="cmoc/src/StringLiteralExpr.cpp" />
+		<Unit filename="cmoc/src/SwitchStmt.cpp" />
+		<Unit filename="cmoc/src/TranslationUnit.cpp" />
+		<Unit filename="cmoc/src/Tree.cpp" />
+		<Unit filename="cmoc/src/TreeSequence.cpp" />
+		<Unit filename="cmoc/src/TypeDesc.cpp" />
+		<Unit filename="cmoc/src/TypeManager.cpp" />
+		<Unit filename="cmoc/src/UnaryOpExpr.cpp" />
+		<Unit filename="cmoc/src/VariableExpr.cpp" />
+		<Unit filename="cmoc/src/WhileStmt.cpp" />
+		<Unit filename="cmoc/src/WordConstantExpr.cpp" />
+		<Unit filename="cmoc/src/lexer.cc" />
+		<Unit filename="cmoc/src/main.cpp" />
+		<Unit filename="cmoc/src/parser.cc" />
+		<Unit filename="cmoc/src/util.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
