@@ -25,7 +25,6 @@ void PrintFileToConsole(char* fn)
     }
 }
 
-// 13,536
 int main(void)
 {
     bgcolor(3);

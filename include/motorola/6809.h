@@ -5,13 +5,12 @@
 #include <motorola/types.h>
 
 // Enable main interrupt
-void asm enable(void);
+void enable(void);
 
 // Disable main interrupt
-void asm disable(void);
+void disable(void);
 
-typedef struct
-{
+typedef struct {
     byte cmd;
     void* addr;
 } _jmp6809_t;

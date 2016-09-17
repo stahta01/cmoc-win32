@@ -2,12 +2,15 @@
 #include <string.h>
 #include <stdio.h>
 #include <time.h>
+#include <conio.h>
 #include <equates.h>
 
 #define LOAD1   lda ,u+
 #define SAVE1   sta ,x+
 #define LOAD2   ldd ,u++
 #define SAVE2   std ,x++
+
+#define AWORD(X)    X*2,s
 
 #define ADST    2,s
 #define ASRC    4,s
@@ -65,9 +68,14 @@ void asm memcpy2(void* dst, void* src, unsigned n)
 
 int main(void)
 {
+    clrscr();
+    getch();
+    puts("abcdefghijklmnopqrstuvwxyz");
+    puts("--------------------------");
     clock_t t = clock();
-    for (unsigned i = 0; i < 1000; i++) {
-        memcpy2(0x400, 0x401, 32 * 16 - 1);
+    for (unsigned i = 0; i < 8000; i++) {
+        memcpy16(0x400, 0x400, 32);
+        //      printf("OUT=%u\n", *(unsigned*)_V42);
         //memset(0x400, i, 32 * 16);
     }
     printf("%d\n", clock() - t);

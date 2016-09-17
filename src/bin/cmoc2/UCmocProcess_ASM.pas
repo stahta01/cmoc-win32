@@ -261,8 +261,8 @@ begin
   for LSymbol in FExportSymbols do begin
     FAsmCode.Insert(0, Asm_EXPORT(LSymbol));
   end;
-  //FAsmCode.Insert(0, '#define RMB ZMB');
-  FAsmCode.Insert(0, Asm_SECTION);
+  FAsmCode.Insert(0, #9'PRAGMA 6809,6800compat,6809conv,m80ext,shadow');
+  FAsmCode.Insert(1, Asm_SECTION);
   FAsmCode.Add(Asm_ENDSECTION);
   OCmoc.StringsInsertWinCMOCHeader(FAsmCode);
   FAsmCode.SaveToFile(ADst);
