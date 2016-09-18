@@ -79,7 +79,7 @@ begin
 
     LParams := default(TStringDynArray);
 
-    LSingleEntry := True;
+    LSingleEntry := False;
 
     OStringDynArray.AddDefine(LParams, Def_CMOC, Ver_CMOC, LSingleEntry);
     OStringDynArray.AddDefine(LParams, Def_6809, EmptyStr, LSingleEntry);
@@ -91,7 +91,7 @@ begin
     OStringDynArray.AddDefine(LParams, 'restrict', EmptyStr, LSingleEntry);
     OStringDynArray.AddInclude(LParams, OCmoc.PathToPackage + 'include', LSingleEntry);
 
-    BCPP(LPre, ASrc, LParams);
+    MCPP(LPre, ASrc, LParams);
 
     OCmoc.SourcePragmas(LPre, LPre, FOrigin, FTarget, FOptions);
 

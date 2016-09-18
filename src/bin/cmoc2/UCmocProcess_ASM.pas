@@ -246,6 +246,108 @@ begin
   end;
 end;
 
+type
+  OParserFast = object
+  public
+    FBegin, FToken, FPos: pchar;
+  public
+    procedure SetParser(const A: pchar);
+  public
+    function Done: boolean;
+    procedure ParseWhileSpace;
+    procedure ParseUntilSpace;
+    procedure TokenClear;
+    function TokenAsString: string;
+  end;
+
+function OParserFast.Done: boolean;
+begin
+  Result := FPos^ = #0;
+end;
+
+procedure OParserFast.SetParser(const A: pchar);
+begin
+  FBegin := A;
+  FToken := FBegin;
+  FPos := FBegin;
+end;
+
+procedure OParserFast.ParseWhileSpace;
+begin
+  while FPos[0] in [#1..#32] do begin
+    Inc(FPos);
+  end;
+end;
+
+procedure OParserFast.ParseUntilSpace;
+begin
+  while not (FPos[0] in [#0..#32]) do begin
+    Inc(FPos);
+  end;
+end;
+
+procedure OParserFast.TokenClear;
+begin
+  FToken := FPos;
+end;
+
+function OParserFast.TokenAsString: string;
+begin
+  SetString(Result, FToken, FPos - FToken);
+end;
+
+procedure CleanAsm(const ASrc: TStrings);
+var
+  LIndex: integer;
+  LParser: OParserFast;
+  LString, LSymbol, LCommand, LParams: string;
+begin
+  for LIndex := ASrc.Count - 1 downto 0 do begin
+    LString := ASrc[LIndex];
+    LParser.SetParser(PChar(LString));
+    LParser.ParseWhileSpace;
+    if LParser.Done then begin
+      ASrc.Delete(LIndex);
+    end else begin
+      LParser.TokenClear;
+      LParser.ParseUntilSpace;
+      if (LParser.FToken > LParser.FBegin) and (LParser.FPos[-1] <> ':') then begin
+        LSymbol := EmptyStr;
+      end else begin
+        LSymbol := LParser.TokenAsString;
+        LParser.ParseWhileSpace;
+        LParser.TokenClear;
+        LParser.ParseUntilSpace;
+      end;
+      LCommand := LParser.TokenAsString;
+      LParser.ParseWhileSpace;
+      LParser.TokenClear;
+      if LParser.FPos^ = '"' then begin
+        repeat
+          Inc(LParser.FPos);
+        until LParser.FPos^ in [#0, '"'];
+        if LParser.FPos^ <> #0 then begin
+          Inc(LParser.FPos);
+        end;
+      end else begin
+        LParser.ParseUntilSpace;
+      end;
+      LParams := LParser.TokenAsString;
+      repeat
+        LParser.ParseWhileSpace;
+        if LParser.FPos^ = ',' then begin
+          LParser.TokenClear;
+          LParser.ParseUntilSpace;
+          LParams += LParser.TokenAsString;
+        end else begin
+          Break;
+        end;
+      until False;
+      ASrc[LIndex] := LSymbol + #9 + LCommand + #9 + LParams;
+    end;
+  end;
+end;
+
 procedure CCmocProcess_ASM.CMOC2(const ADst, ASrc: TFileName; const AInitSymbol: string);
 var
   LSymbol: string;
@@ -264,6 +366,7 @@ begin
   FAsmCode.Insert(0, Char_TAB + 'PRAGMA 6809,6800compat,6809conv,m80ext,shadow');
   FAsmCode.Insert(1, Asm_SECTION);
   FAsmCode.Add(Asm_ENDSECTION);
+  //CleanAsm(FAsmCode);
   OCmoc.StringsInsertWinCMOCHeader(FAsmCode);
   FAsmCode.SaveToFile(ADst);
 end;

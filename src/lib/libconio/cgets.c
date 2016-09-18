@@ -22,7 +22,7 @@ char* cgets(char* s)
             break;
         }
         switch (c) {
-        case 94:
+        case 21:
             if (p > s) {
                 p--;
                 putlt();

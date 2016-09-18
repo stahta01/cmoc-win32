@@ -16,5 +16,7 @@ void _assert(char* message, char* filename, unsigned line);
 #define assert(cond) if (!(cond)) _assert(#cond, __FILE__, __LINE__);
 #endif
 
+void assertf(int cond, char* fmt, ...);         // CMOC
+
 #endif
 

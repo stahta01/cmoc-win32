@@ -32,10 +32,10 @@ byte* drawCompiledPixMap(byte byteOffset, byte pixelRow, word* wordArray, byte n
     */
 
     byte* topLeft;
-    byte r;                                 // temp row counter
+    byte r;                                     // temp row counter
 
     asm {
-        pshs    y                           // per CMOC convention
+        pshs    y                               // per CMOC convention
 
         lda     pixelRow
         ldb     #BYTES_PER_SCREEN_ROW
@@ -43,18 +43,18 @@ byte* drawCompiledPixMap(byte byteOffset, byte pixelRow, word* wordArray, byte n
         addb    byteOffset
         adca    #0
         addd    scrnBuffer
-        tfr     d,x                         // make X point to first screen byte to write to
+        tfr     d,x                             // make X point to first screen byte to write to
         stx     topLeft
 
         ldy     wordArray
 
         drawCompiledPixMap_foreach_word:
-        ldb     rowRepetitions              // reinit rep counter
+        ldb     rowRepetitions                  // reinit rep counter
         stb     r
         ldd     ,y++
         drawCompiledPixMap_foreach_rep:
         std     ,x
-        leax    BYTES_PER_SCREEN_ROW,x      // move to next row down
+        leax    BYTES_PER_SCREEN_ROW,x          // move to next row down
 
         dec     r
         bne     drawCompiledPixMap_foreach_rep

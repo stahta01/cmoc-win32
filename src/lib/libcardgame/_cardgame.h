@@ -12,6 +12,7 @@
 */
 
 #include <coco.h>
+#include <assert.h>
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,17 +20,6 @@
 #include <cardgame.h>
 
 #define NDEBUG
-
-#ifndef NDEBUG
-void restoreOriginalTextMode();
-#define assertf(cond, ...) do { if (!(cond)) { \
-            restoreOriginalTextMode(); \
-            printf("***ASSERT FAILED (%s): %u: %s: ", __TIME__, __LINE__, #cond); \
-            printf(__VA_ARGS__); putchar('\n'); \
-            for (;;); } } while (0)
-#else
-#define assertf(cond, ...) ((void) 0)
-#endif
 
 // Standard addresses of 6k PMODE 4 screens. Must be divisible by 512.
 // To be put in scrnBuffer.
