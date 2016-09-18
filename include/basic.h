@@ -6,7 +6,6 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 #include <conio.h>
 
 #include <motorola/types.h>

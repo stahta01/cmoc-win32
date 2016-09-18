@@ -34,7 +34,6 @@ int main(void)
         screensize(&w, &h);
 
         for (unsigned i = 0; i < 1024; i += 8) {
-            beep((char)i, 0);
             gotox((char)((sin6((char)i) >> 5) + (w >> 1)));
             cputs("*<>*\n");
         }

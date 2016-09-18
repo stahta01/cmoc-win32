@@ -18,31 +18,31 @@ char* cgets(char* s)
     char* p = s;
     for (;;) {
         int c = getch();
-        if (c == _CR) {
+        if (c == ASCII_CR) {
             break;
         }
         switch (c) {
-        case 21:
+        case ASCII_NAK:                         // SHIFT+LEFT
             if (p > s) {
                 p--;
-                putlt();
+                cputs(VT52_LEFT);
             }
             break;
-        case 9:
+        case ASCII_HT:
             if (*p) {
                 p++;
-                putrt();
+                cputs(VT52_RIGHT);
             }
             break;
-        case _BS:
+        case ASCII_BS:
             if (p > s) {
                 p--;
                 memmove(p, p + 1, strlen(p) + 1);
-                putlt();
+                cputs(VT52_LEFT);
                 cputs(p);
                 putch(' ');
                 for (int i = strlen(p) + 1; i-- > 0;) {
-                    putlt();
+                    cputs(VT52_LEFT);
                 }
             }
             break;
@@ -52,7 +52,7 @@ char* cgets(char* s)
                 *p = (char)c;
                 cputs(p);
                 for (int i = strlen(p) - 1; i-- > 0;) {
-                    putlt();
+                    cputs(VT52_LEFT);
                 }
                 p++;
             }

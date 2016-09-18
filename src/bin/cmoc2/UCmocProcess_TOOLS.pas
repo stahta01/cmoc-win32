@@ -85,6 +85,9 @@ begin
     OStringDynArray.AddDefine(LParams, Def_6809, EmptyStr, LSingleEntry);
     OStringDynArray.AddDefine(LParams, '__' + UpperCase(FTarget) + '__', EmptyStr, LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'nullptr', '0', LSingleEntry);
+    OStringDynArray.AddDefine(LParams, 'bool', 'unsigned char', LSingleEntry);
+    OStringDynArray.AddDefine(LParams, 'false', '0', LSingleEntry);
+    OStringDynArray.AddDefine(LParams, 'true', '1', LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'const', EmptyStr, LSingleEntry);
     OStringDynArray.AddDefine(LParams, '__fastcall__', EmptyStr, LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'long', 'int', LSingleEntry);

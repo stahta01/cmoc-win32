@@ -3,7 +3,6 @@
 #define _CTYPE_H
 
 #include <stddef.h>
-#include <stdbool.h>
 
 bool isascii(int c);
 bool iscntrl(int c);

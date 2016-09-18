@@ -4,13 +4,13 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="201">
+    <Units Count="207">
       <Unit0>
         <Filename Value="cmoc2.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="28"/>
-        <CursorPos X="23" Y="37"/>
+        <CursorPos X="25" Y="37"/>
         <UsageCount Value="140"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -1364,22 +1364,22 @@
       <Unit189>
         <Filename Value="UCmocProcess_ASM.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="351"/>
-        <CursorPos X="5" Y="369"/>
+        <TopLine Value="22"/>
+        <CursorPos X="37" Y="33"/>
         <UsageCount Value="15"/>
       </Unit189>
       <Unit190>
         <Filename Value="UCmocProcess_TOOLS.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="181"/>
-        <CursorPos X="6" Y="94"/>
+        <TopLine Value="79"/>
+        <CursorPos X="62" Y="88"/>
         <UsageCount Value="14"/>
       </Unit190>
       <Unit191>
         <Filename Value="UCmocProcess_CMOC2.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="29"/>
-        <CursorPos X="38" Y="34"/>
+        <TopLine Value="23"/>
+        <CursorPos X="37" Y="34"/>
         <UsageCount Value="15"/>
       </Unit191>
       <Unit192>
@@ -1445,11 +1445,55 @@
       <Unit200>
         <Filename Value="..\..\..\bin\cmocide\keywords.txt"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="29"/>
-        <CursorPos X="4" Y="41"/>
+        <CursorPos X="6" Y="187"/>
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit200>
+      <Unit201>
+        <Filename Value="..\..\..\..\upascal\uchar.pas"/>
+        <UnitName Value="UChar"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="23"/>
+        <CursorPos Y="30"/>
+        <UsageCount Value="10"/>
+      </Unit201>
+      <Unit202>
+        <Filename Value="..\..\..\include\basic.h"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="22" Y="8"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit202>
+      <Unit203>
+        <Filename Value="..\..\..\include\cmoc.h"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="22" Y="14"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit203>
+      <Unit204>
+        <Filename Value="..\..\..\include\ctype.h"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="22" Y="5"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit204>
+      <Unit205>
+        <Filename Value="..\cmoc\cmoc\src\TranslationUnit.cpp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="959"/>
+        <CursorPos X="50" Y="982"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit205>
+      <Unit206>
+        <Filename Value="..\cmoc\cmoc\src\StringLiteralExpr.cpp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="179"/>
+        <CursorPos X="20" Y="220"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit206>
     </Units>
     <JumpHistory Count="2" HistoryIndex="1">
       <Position1>
@@ -1458,7 +1502,7 @@
       </Position1>
       <Position2>
         <Filename Value="cmoc2.lpr"/>
-        <Caret Line="37" Column="23" TopLine="28"/>
+        <Caret Line="37" Column="25" TopLine="28"/>
       </Position2>
     </JumpHistory>
   </ProjectSession>

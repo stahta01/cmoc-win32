@@ -12,7 +12,7 @@ int main(void)
 
     _atof(&pi, "3.14159");
 
-    printf("2XPI+2   =%f\n", _frpn(&r, 'd', 2, 'f', &pi, '*', 'd', 2, '+', 0));
+    printf("2XPI+2   =%f\n", _frpn(&r, 'd', 2, 'f', &pi, '*', 's', "2", '+', 0));
     printf(" 5.2 X 5 =%f\n", _fmul(&r, _atof(&a,  "5.2"), _itof(&b, 5)));
     printf("10.5 X 2 =%f\n", _fmul(&r, _atof(&a, "10.5"), _itof(&b, 2)));
     printf("1234 / 3 =%f\n", _fdiv(&r, _atof(&a, "1234"), _itof(&b, 3)));
