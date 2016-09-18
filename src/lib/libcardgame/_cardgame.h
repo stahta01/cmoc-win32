@@ -21,6 +21,17 @@
 
 #define NDEBUG
 
+#ifndef NDEBUG
+void restoreOriginalTextMode();
+#define assertf(cond, ...) do { if (!(cond)) { \
+            restoreOriginalTextMode(); \
+            printf("***ASSERT FAILED (%s): %u: %s: ", __TIME__, __LINE__, #cond); \
+            printf(__VA_ARGS__); putchar('\n'); \
+            for (;;); } } while (0)
+#else
+#define assertf(cond, ...) ((void) 0)
+#endif
+
 // Standard addresses of 6k PMODE 4 screens. Must be divisible by 512.
 // To be put in scrnBuffer.
 #define PMODE4_PAGE0            0x0E00
@@ -31,10 +42,10 @@
 #define TEXT_COLS_PER_ROW       32
 #define TEXT_ROWS_PER_SCREEN    24
 #define PIXEL_ROWS_PER_SCREEN   192
-#define BYTES_PER_SCREEN        0x1800      // 256 * 192 / 8 == 6144 == 6 kB
-#define PIXEL_ROWS_PER_GLYPH    7           // see 8-bit-wide-font.h
-#define PIXEL_ROWS_PER_TEXT_ROW 8           // PIXEL_ROWS_PER_GLYPH plus one separator row
-#define BYTES_PER_TEXT_ROW      256         // 32 bytes per row of pixels, 8 rows of pixels per text row
+#define BYTES_PER_SCREEN        0x1800          // 256 * 192 / 8 == 6144 == 6 kB
+#define PIXEL_ROWS_PER_GLYPH    7               // see 8-bit-wide-font.h
+#define PIXEL_ROWS_PER_TEXT_ROW 8               // PIXEL_ROWS_PER_GLYPH plus one separator row
+#define BYTES_PER_TEXT_ROW      256             // 32 bytes per row of pixels, 8 rows of pixels per text row
 
 #define ROWS_ABOVE_SUIT 2
 #define ROWS_BELOW_SUIT 6
@@ -44,7 +55,7 @@
 #define ROWS_PER_CARD_VALUE 10
 #define ROWS_PER_SUIT 7
 
-extern byte* scrnBuffer;                    // 1st PMODE 4 buffer
+extern byte* scrnBuffer;                        // 1st PMODE 4 buffer
 
 extern unsigned short redCard_1[10];
 extern unsigned short redCard_2[10];

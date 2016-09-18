@@ -19,6 +19,7 @@ void* _memor(void* dst, int value, size_t n);   // CMOC
 void _bzero(void* dst, size_t n);               // BSD
 
 void* _memccpy(void* dst, void* src, int c, size_t count); // CMOC
+void* _memcpy16(void* dst, void* src, size_t n); // CMOC
 
 #endif
 
