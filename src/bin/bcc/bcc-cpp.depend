@@ -1,0 +1,43 @@
+# depslib dependency file v1.0
+1383057937 source:c:\dev\cmoc-win32\src\bin\bcc\cpp\cpp.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<malloc.h>
+	"cc.h"
+
+1383057891 c:\dev\cmoc-win32\src\bin\bcc\cpp\cc.h
+
+1383057891 source:c:\dev\cmoc-win32\src\bin\bcc\cpp\hash.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<malloc.h>
+	"cc.h"
+
+1383057891 source:c:\dev\cmoc-win32\src\bin\bcc\cpp\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<malloc.h>
+	<ctype.h>
+	<string.h>
+	<time.h>
+	"cc.h"
+
+1383057891 source:c:\dev\cmoc-win32\src\bin\bcc\cpp\token1.c
+	<stdio.h>
+	<string.h>
+	"cc.h"
+	"token1.h"
+
+1383057891 c:\dev\cmoc-win32\src\bin\bcc\cpp\token1.h
+
+1383057891 source:c:\dev\cmoc-win32\src\bin\bcc\cpp\token2.c
+	<stdio.h>
+	<string.h>
+	"cc.h"
+	"token2.h"
+
+1383057891 c:\dev\cmoc-win32\src\bin\bcc\cpp\token2.h
+
