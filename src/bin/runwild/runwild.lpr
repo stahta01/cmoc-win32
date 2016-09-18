@@ -76,7 +76,7 @@ type
             if FindFirst(LParameter, 0, LSearchRec) = 0 then begin
               try
                 repeat
-                  OCmoc.StringDynArrayAppend(LParameters, ExtractFilePath(LParameter) +
+                  OStringDynArray.Add(LParameters, ExtractFilePath(LParameter) +
                     LSearchRec.Name);
                 until FindNext(LSearchRec) <> 0;
               finally
@@ -84,7 +84,7 @@ type
               end;
             end;
           end else begin
-            OCmoc.StringDynArrayAppend(LParameters, LParameter);
+            OStringDynArray.Add(LParameters, LParameter);
           end;
         end;
       end;

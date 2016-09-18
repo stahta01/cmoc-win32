@@ -30,6 +30,7 @@ uses
   StrUtils,
   SysUtils,
   Types,
+  UCmocDefs,
   UCmocUtils;
 
 {$R *.res}
@@ -57,10 +58,10 @@ type
   begin
     LParams := default(TStringDynArray);
     for LIndex := 1 to ParamCount do begin
-      OCmoc.StringDynArrayAppend(LParams, ParamStr(LIndex));
+      OStringDynArray.Add(LParams, ParamStr(LIndex));
     end;
     if Length(LParams) = 0 then begin
-      OCmoc.StringDynArrayAppend(LParams, Opt_Help1);
+      OStringDynArray.Add(LParams, Opt_Help1);
     end else if FileExists(LParams[High(LParams)]) then begin
       LSrc := OCmoc.DosToUnix(LParams[High(LParams)]);
       LParams[High(LParams)] := LSrc + FileExt_I;

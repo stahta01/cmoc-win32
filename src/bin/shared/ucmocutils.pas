@@ -26,119 +26,10 @@ unit UCmocUtils;
 interface
 
 uses
-  Classes, FileUtil, LazFileUtils, Process, StrUtils, SysUtils, Types, UCmocParser;
+  Classes, FileUtil, LazFileUtils, Process, StrUtils, SysUtils, Types, UCmocDefs, UCmocParser;
 
 type
   ECmocException = EAbort;
-
-const
-
-  Char_SPC = char(#32);
-  Char_TAB = char(#9);
-
-  CharSet_Space = [#0..#32, #127..#255];
-  CharSet_Alpha = ['a'..'z', 'A'..'Z'];
-  CharSet_Digit = ['0'..'9'];
-  CharSet_XDigit = CharSet_Digit + ['a'..'f', 'A'..'F'];
-  CharSet_IdentHead = CharSet_Alpha + ['_'];
-  CharSet_IdentBody = CharSet_IdentHead + CharSet_Digit;
-  CharSet_SymbolHead = CharSet_IdentHead + ['.'];
-  CharSet_SymbolBody = CharSet_IdentBody + ['.', '$'];
-
-  FileExt_O = '.o';
-  FileExt_I = '.i';
-  FileExt_OBJ = '.obj';
-  FileExt_C = '.c';
-  FileExt_A = '.a';
-  FileExt_ROM = '.rom';
-  FileExt_WAV = '.wav';
-  FileExt_CAS = '.cas';
-  FileExt_BIN = '.bin';
-  FileExt_ASM = '.asm';
-  FileExt_EXE = '.exe';
-  FileExt_RAW = '.raw';
-  FileExt_SREC = '.srec';
-
-  Tool_CMOC = 'cmoc';
-  Tool_CMOC2 = 'cmoc2';
-  Tool_MCPP = 'mcpp';
-  Tool_LWASM = 'lwasm';
-  Tool_LWASM2 = 'lwasm2';
-  Tool_LWLINK = 'lwlink';
-  Tool_LWAR = 'lwar';
-  Tool_ASTYLE = 'astyle';
-  Tool_WIMGTOOL = 'wimgtool';
-  Tool_CMOCIDE = 'cmocide';
-  Tool_F9DASM = 'f9dasm';
-
-  Origin_DEFAULT = $2800;
-
-  Target_COCO = 'coco';
-  Target_DRAGON = 'dragon';
-
-  Machine_COCOUS = 'cocous';
-  Machine_COCO3 = 'coco3';
-  Machine_DRAGON64 = 'dragon64';
-
-  Format_OBJ = 'obj';
-  Format_RAW = 'raw';
-  Format_DECB = 'decb';
-  Format_SREC = 'srec';
-  Format_WAV = 'wav';
-  Format_CAS = 'cas';
-
-  Opt_ScriptFile2 = '-s';
-  Opt_MapFile2 = '-m';
-  Opt_6809 = '--6809';
-  Opt_6800compat = '--6800compat';
-  Opt_DontLink1 = '-c';
-  Opt_Create1 = '--create';
-  Opt_Add1 = '--add';
-  Opt_Define2 = '-D';
-  Opt_EmitUncalled1 = '--emit-uncalled';
-  Opt_Entry2 = '-e';
-  Opt_Format2 = '-f';
-  Opt_Help1 = '--help';
-  Opt_Include2 = '-I';
-  Opt_Optimize0 = '-O0';
-  Opt_Origin2 = '--org';
-  Opt_LibPath2 = '-L';
-  Opt_LibInclude2 = '-l';
-  Opt_Output2 = '-o';
-  Opt_Target2 = '-t';
-  Opt_NoAddr1 = '-noaddr';
-  Opt_Out2 = '-out';
-  Opt_Verbose1 = '-V';
-  Opt_Werror1 = '-Werror';
-  Opt_NoLineInfo1 = '-P';
-  Opt_DontAssemble1 = '-S';
-  Opt_Machine2 = '-machine';
-  Opt_NoTapeFast1 = '-no-tape-fast';
-  Opt_NoDos1 = '-nodos';
-  Opt_NoExtBas1 = '-noextbas';
-  Opt_Offset2 = '-offset';
-  Opt_Cart2 = '-cart';
-  Opt_Bas2 = '-bas';
-  Opt_Ram2 = '-ram';
-  Opt_ExtBas2 = '-extbas';
-  Opt_Dos2 = '-dos';
-  Opt_Type2 = '-type';
-  Opt_Load2 = '-load';
-  Opt_NoCode1 = '-nocode';
-  Opt_NoMaximize1 = '-nomaximize';
-
-  Def_CMOC = '__CMOC__';
-  Def_CMOC_VERSION = Def_CMOC + '=0.1.31';
-  Def_DATE = '__DATE__';
-  Def_FILE = '__FILE__';
-  Def_6809 = '__6809__';
-
-  Sym_ProgramStart = 'program_start';
-  Sym_ProgramEnd = 'program_end';
-  Sym_FunctionsStart = 'functions_start';
-  Sym_WritableGlobalsStart = 'writable_globals_start';
-  Sym_INITGL = 'INITGL';
-  Sym_INITLIB = 'INITLIB';
 
 type
 
@@ -181,6 +72,23 @@ var
   TargetList: array[0..4] of string = ('coco', 'dragon', 'os9', 'flex', 'vectrex');
 
 type
+
+  OStringDynArray = object
+  public
+    class procedure Add(var A: TStringDynArray; const S: string);
+    class procedure Insert(var A: TStringDynArray; const I: integer; const S: string);
+    class procedure AddStrings(var A: TStringDynArray; const AStrings: array of string);
+    class procedure AddOption(var A: TStringDynArray; const AOption, AValue: string;
+      const ASingleEntry: boolean);
+    class procedure AddDefine(var A: TStringDynArray; const AName, AValue: string;
+      const ASingleEntry: boolean);
+    class procedure AddInclude(var A: TStringDynArray; const AFilePath: TFileName;
+      const ASingleEntry: boolean);
+    class procedure AddLib(var A: TStringDynArray; const AName: string);
+    class procedure AddLibs(var A: TStringDynArray);
+    class procedure AddOptions(var A: TStringDynArray; const AOptions: TStrings;
+      const AInclude: array of string);
+  end;
 
   OCmoc = object
   strict private
@@ -229,20 +137,133 @@ type
       const AMustExist: boolean);
     class procedure RaiseError(AMessage, ADetails: string; const AExitCode: integer = -1);
     class procedure RaiseError(AMessage: string; const AExitCode: integer = -1);
-    class procedure StringDynArrayAppend(var A: TStringDynArray; const S: string);
-    class procedure StringDynArrayInsert(var A: TStringDynArray; const I: integer;
-      const S: string);
-    class procedure StringDynArrayAppendStrings(var A: TStringDynArray;
-      const AStrings: array of string);
-    class procedure StringDynArrayAppendLib(var A: TStringDynArray; const AName: string);
-    class procedure StringDynArrayAppendLibs(var A: TStringDynArray);
-    class procedure StringDynArrayAppendOptions(var A: TStringDynArray;
-      const AOptions: TStrings; const AInclude: array of string);
   public
     class procedure StringsInsertWinCMOCHeader(const A: TStrings; const ANoDate: boolean = False);
   end;
 
 implementation
+
+class procedure OStringDynArray.Add(var A: TStringDynArray; const S: string);
+begin
+  SetLength(A, Length(A) + 1);
+  A[High(A)] := S;
+end;
+
+class procedure OStringDynArray.Insert(var A: TStringDynArray; const I: integer; const S: string);
+var
+  LIndex: integer;
+begin
+  SetLength(A, Length(A) + 1);
+  for LIndex := High(A) - 1 downto I do begin
+    A[LIndex + 1] := A[LIndex];
+  end;
+  A[I] := S;
+end;
+
+class procedure OStringDynArray.AddStrings(var A: TStringDynArray;
+  const AStrings: array of string);
+var
+  LString: string;
+begin
+  for LString in AStrings do begin
+    Add(A, LString);
+  end;
+end;
+
+class procedure OStringDynArray.AddOption(var A: TStringDynArray;
+  const AOption, AValue: string; const ASingleEntry: boolean);
+begin
+  if ASingleEntry then begin
+    Add(A, AOption + AValue);
+  end else begin
+    Add(A, AOption);
+    Add(A, AValue);
+  end;
+end;
+
+class procedure OStringDynArray.AddInclude(var A: TStringDynArray;
+  const AFilePath: TFileName; const ASingleEntry: boolean);
+begin
+  AddOption(A, Opt_Include2, AFilePath, ASingleEntry);
+end;
+
+class procedure OStringDynArray.AddDefine(var A: TStringDynArray;
+  const AName, AValue: string; const ASingleEntry: boolean);
+begin
+  AddOption(A, Opt_Define2, AName + '=' + AValue, ASingleEntry);
+end;
+
+class procedure OStringDynArray.AddLib(var A: TStringDynArray; const AName: string);
+begin
+  Add(A, Opt_LibInclude2);
+  Add(A, AName);
+end;
+
+class procedure OStringDynArray.AddLibs(var A: TStringDynArray);
+begin
+  AddLib(A, 'all');
+  (*
+  AddLib(A, '6809');
+  AddLib(A, 'basic');
+  AddLib(A, 'c');
+  AddLib(A, 'charset');
+  AddLib(A, 'cmoc');
+  AddLib(A, 'coco');
+  AddLib(A, 'conio');
+  AddLib(A, 'ctype');
+  AddLib(A, 'disk');
+  AddLib(A, 'exomizer');
+  AddLib(A, 'fast');
+  AddLib(A, 'graph');
+  AddLib(A, 'kreider');
+  AddLib(A, 'lzss');
+  AddLib(A, 'malloc');
+  AddLib(A, 'memory');
+  AddLib(A, 'motorola');
+  AddLib(A, 'stdio');
+  AddLib(A, 'string');
+  AddLib(A, 'system');
+  AddLib(A, 'unistd');
+  AddLib(A, 'varptr');
+  AddLib(A, 'rma');
+  *)
+end;
+
+class procedure OStringDynArray.AddOptions(var A: TStringDynArray;
+  const AOptions: TStrings; const AInclude: array of string);
+var
+  LIndex, LPos: integer;
+  LName, LValue: string;
+  LValues: TStrings;
+begin
+  LValues := TStringList.Create;
+  try
+    for LIndex := 0 to AOptions.Count - 1 do begin
+      LName := Trim(AOptions[LIndex]);
+      LPos := Pos('=', LName);
+      if LPos = 0 then begin
+        LPos := Length(LName) + 1;
+      end;
+      LValue := Trim(Copy(LName, LPos + 1, MaxInt));
+      LName := Trim(Copy(LName, 1, LPos - 1));
+      if AnsiMatchText(LName, AInclude) then begin
+        if Length(LValue) = 0 then begin
+          Add(A, LName);
+        end else begin
+          LValues.CommaText := LValue;
+          for LValue in LValues do begin
+            Add(A, LName);
+            if Length(LValue) > 0 then begin
+              Add(A, LValue);
+            end;
+          end;
+        end;
+      end;
+    end;
+  finally
+    FreeAndNil(LValues);
+  end;
+end;
 
 class function OCmoc.IsDev: boolean;
 begin
@@ -437,106 +458,6 @@ begin
   end;
 end;
 
-class procedure OCmoc.StringDynArrayAppend(var A: TStringDynArray; const S: string);
-begin
-  SetLength(A, Length(A) + 1);
-  A[High(A)] := S;
-end;
-
-class procedure OCmoc.StringDynArrayInsert(var A: TStringDynArray; const I: integer;
-  const S: string);
-var
-  LIndex: integer;
-begin
-  SetLength(A, Length(A) + 1);
-  for LIndex := High(A) - 1 downto I do begin
-    A[LIndex + 1] := A[LIndex];
-  end;
-  A[I] := S;
-end;
-
-class procedure OCmoc.StringDynArrayAppendStrings(var A: TStringDynArray;
-  const AStrings: array of string);
-var
-  LString: string;
-begin
-  for LString in AStrings do begin
-    StringDynArrayAppend(A, LString);
-  end;
-end;
-
-class procedure OCmoc.StringDynArrayAppendLib(var A: TStringDynArray; const AName: string);
-begin
-  StringDynArrayAppend(A, Opt_LibInclude2);
-  StringDynArrayAppend(A, AName);
-end;
-
-class procedure OCmoc.StringDynArrayAppendLibs(var A: TStringDynArray);
-begin
-  StringDynArrayAppendLib(A, 'all');
-  (*
-  StringDynArrayAppendLib(A, '6809');
-  StringDynArrayAppendLib(A, 'basic');
-  StringDynArrayAppendLib(A, 'c');
-  StringDynArrayAppendLib(A, 'charset');
-  StringDynArrayAppendLib(A, 'cmoc');
-  StringDynArrayAppendLib(A, 'coco');
-  StringDynArrayAppendLib(A, 'conio');
-  StringDynArrayAppendLib(A, 'ctype');
-  StringDynArrayAppendLib(A, 'disk');
-  StringDynArrayAppendLib(A, 'exomizer');
-  StringDynArrayAppendLib(A, 'fast');
-  StringDynArrayAppendLib(A, 'graph');
-  StringDynArrayAppendLib(A, 'kreider');
-  StringDynArrayAppendLib(A, 'lzss');
-  StringDynArrayAppendLib(A, 'malloc');
-  StringDynArrayAppendLib(A, 'memory');
-  StringDynArrayAppendLib(A, 'motorola');
-  StringDynArrayAppendLib(A, 'stdio');
-  StringDynArrayAppendLib(A, 'string');
-  StringDynArrayAppendLib(A, 'system');
-  StringDynArrayAppendLib(A, 'unistd');
-  StringDynArrayAppendLib(A, 'varptr');
-  StringDynArrayAppendLib(A, 'rma');
-  *)
-end;
-
-class procedure OCmoc.StringDynArrayAppendOptions(var A: TStringDynArray;
-  const AOptions: TStrings; const AInclude: array of string);
-var
-  LIndex, LPos: integer;
-  LName, LValue: string;
-  LValues: TStrings;
-begin
-  LValues := TStringList.Create;
-  try
-    for LIndex := 0 to AOptions.Count - 1 do begin
-      LName := Trim(AOptions[LIndex]);
-      LPos := Pos('=', LName);
-      if LPos = 0 then begin
-        LPos := Length(LName) + 1;
-      end;
-      LValue := Trim(Copy(LName, LPos + 1, MaxInt));
-      LName := Trim(Copy(LName, 1, LPos - 1));
-      if AnsiMatchText(LName, AInclude) then begin
-        if Length(LValue) = 0 then begin
-          StringDynArrayAppend(A, LName);
-        end else begin
-          LValues.CommaText := LValue;
-          for LValue in LValues do begin
-            StringDynArrayAppend(A, LName);
-            if Length(LValue) > 0 then begin
-              StringDynArrayAppend(A, LValue);
-            end;
-          end;
-        end;
-      end;
-    end;
-  finally
-    FreeAndNil(LValues);
-  end;
-end;
-
 class procedure OCmoc.FileNamesAppend(var A: TStringDynArray; AFileName: string;
   const AMustExist: boolean);
 var
@@ -551,7 +472,7 @@ begin
       RaiseError('Duplicate filename', AFileName);
     end;
   end;
-  StringDynArrayAppend(A, AFileName);
+  OStringDynArray.Add(A, AFileName);
 end;
 
 class procedure OCmoc.StringsInsertWinCMOCHeader(const A: TStrings; const ANoDate: boolean);

@@ -26,7 +26,7 @@ unit UCmocProcess_TOOLS;
 interface
 
 uses
-  Classes, StrUtils, SysUtils, Types, UCmocAsm, UCmocUtils;
+  Classes, StrUtils, SysUtils, Types, UCmocAsm, UCmocDefs, UCmocUtils;
 
 type
 
@@ -37,6 +37,7 @@ type
   strict private
     procedure LWLINK(const ADst, ASrc, AMap: TFileName; const AFormat: string);
   protected
+    procedure BCPP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
     procedure MCCP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
     procedure CMOC(const ADst, ASrc: TFileName; const AWerror, AVerbose: boolean);
     procedure LWAR(const AMode: string; const ADst: TFileName; ASrc: TFileNames);
@@ -49,43 +50,62 @@ type
 
 implementation
 
+procedure CCmocProcess_TOOLS.BCPP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
+begin
+  OStringDynArray.Add(AParams, ASrc);
+  OStringDynArray.Add(AParams, Opt_Output2);
+  OStringDynArray.Add(AParams, ADst);
+  ExecuteTool(Tool_BCPP, AParams);
+end;
+
 procedure CCmocProcess_TOOLS.MCCP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
 begin
-  OCmoc.StringDynArrayInsert(AParams, 0, Opt_Output2);
-  OCmoc.StringDynArrayInsert(AParams, 1, ADst);
-  OCmoc.StringDynArrayInsert(AParams, 2, Opt_NoLineInfo1);
-  OCmoc.StringDynArrayInsert(AParams, 3, '-a');
-  OCmoc.StringDynArrayAppend(AParams, ASrc);
+  OStringDynArray.Insert(AParams, 0, Opt_Output2);
+  OStringDynArray.Insert(AParams, 1, ADst);
+  OStringDynArray.Insert(AParams, 2, Opt_NoLineInfo1);
+  OStringDynArray.Insert(AParams, 3, '-a');
+  OStringDynArray.Add(AParams, ASrc);
   ExecuteTool(Tool_MCPP, AParams);
 end;
 
 procedure CCmocProcess_TOOLS.CMOC(const ADst, ASrc: TFileName; const AWerror, AVerbose: boolean);
 var
   LPre: TFileName;
+  LSingleEntry: boolean;
   LParams: TStringDynArray;
 begin
   if OCmoc.FileChanged(ADst, ASrc) then begin
     LPre := ASrc + FileExt_I;
 
-    MCCP(LPre, ASrc, TStringDynArray.Create(Opt_Define2,
-      Def_CMOC_VERSION, Opt_Define2, Def_6809, Opt_Define2, '__' + UpperCase(FTarget) + '__',
-      Opt_Define2, 'nullptr=0', Opt_Define2, 'const=', Opt_Define2, '__fastcall__=', Opt_Define2,
-      'long=int', Opt_Define2, 'restrict=', Opt_Include2,
-      OCmoc.DosToUnix(OCmoc.PathToPackage + 'include')));
+    LParams := default(TStringDynArray);
+
+    LSingleEntry := False;
+
+    OStringDynArray.AddDefine(LParams, Def_CMOC, Ver_CMOC, LSingleEntry);
+    OStringDynArray.AddDefine(LParams, Def_6809, EmptyStr, LSingleEntry);
+    OStringDynArray.AddDefine(LParams, '__' + UpperCase(FTarget) + '__', EmptyStr, LSingleEntry);
+    OStringDynArray.AddDefine(LParams, 'nullptr', '0', LSingleEntry);
+    OStringDynArray.AddDefine(LParams, 'const', EmptyStr, LSingleEntry);
+    OStringDynArray.AddDefine(LParams, '__fastcall__', EmptyStr, LSingleEntry);
+    OStringDynArray.AddDefine(LParams, 'long', 'int', LSingleEntry);
+    OStringDynArray.AddDefine(LParams, 'restrict', EmptyStr, LSingleEntry);
+    OStringDynArray.AddInclude(LParams, OCmoc.PathToPackage + 'include', LSingleEntry);
+
+    MCCP(LPre, ASrc, LParams);
 
     OCmoc.SourcePragmas(LPre, LPre, FOrigin, FTarget, FOptions);
 
     LParams := TStringDynArray.Create(Opt_EmitUncalled1, Opt_DontLink1);
     // Currently -O2 has some bugs. So, we must use -O1
-    OCmoc.StringDynArrayAppend(LParams, '-O1');
+    OStringDynArray.Add(LParams, '-O1');
     if AWerror then begin
-      OCmoc.StringDynArrayAppend(LParams, Opt_Werror1);
+      OStringDynArray.Add(LParams, Opt_Werror1);
     end;
     if AVerbose then begin
-      OCmoc.StringDynArrayAppend(LParams, Opt_Verbose1);
+      OStringDynArray.Add(LParams, Opt_Verbose1);
     end;
     //StringDynArrayAppend(LParams, Opt_Optimize0);
-    OCmoc.StringDynArrayAppend(LParams, ExtractFileName(LPre));
+    OStringDynArray.Add(LParams, ExtractFileName(LPre));
     ExecuteTool(Tool_CMOC, LParams, ExtractFilePath(LPre));
     DeleteFile(ADst);
     RenameFile(LPre + FileExt_ASM, ADst);
@@ -138,8 +158,8 @@ end;
 
 procedure CCmocProcess_TOOLS.LWAR(const AMode: string; const ADst: TFileName; ASrc: TFileNames);
 begin
-  OCmoc.StringDynArrayInsert(ASrc, 0, AMode);
-  OCmoc.StringDynArrayInsert(ASrc, 1, ADst);
+  OStringDynArray.Insert(ASrc, 0, AMode);
+  OStringDynArray.Insert(ASrc, 1, ADst);
   ExecuteTool(Tool_LWAR, ASrc);
 end;
 
@@ -147,7 +167,7 @@ procedure CCmocProcess_TOOLS.LWASM(const ADst, ASrc: TFileName; const APreproces
 begin
   if OCmoc.FileChanged(ADst, ASrc) then begin
     ExecuteTool(IfThen(APreprocess, Tool_LWASM2, Tool_LWASM),
-      TStringDynArray.Create(Opt_6809, Opt_Format2, Format_OBJ, Opt_Output2, ADst, ASrc));
+      TStringDynArray.Create(Opt_Format2, Format_OBJ, Opt_Output2, ADst, ASrc));
   end;
 end;
 
@@ -161,14 +181,13 @@ begin
     LParams := TStringDynArray.Create(Opt_Output2, ADst, Opt_LibPath2,
       OCmoc.PathToLib, Opt_LibPath2, ExtractFilePath(ASrc), Opt_LibInclude2,
       LSrcLib);
-    OCmoc.StringDynArrayAppendLibs(LParams);
+    OStringDynArray.AddLibs(LParams);
     if Length(AFormat) = 0 then begin
-      OCmoc.StringDynArrayAppendStrings(LParams, [Opt_Format2, Format_DECB]);
+      OStringDynArray.AddStrings(LParams, [Opt_Format2, Format_DECB]);
     end else begin
-      OCmoc.StringDynArrayAppendStrings(LParams, [Opt_Format2, AFormat]);
+      OStringDynArray.AddStrings(LParams, [Opt_Format2, AFormat]);
     end;
-    OCmoc.StringDynArrayAppendStrings(LParams, [Opt_ScriptFile2, OCmoc.PathToLib +
-      'linkscript.txt',
+    OStringDynArray.AddStrings(LParams, [Opt_ScriptFile2, OCmoc.PathToLib + 'linkscript.txt',
       Opt_MapFile2, AMap, OCmoc.PathToLib + 'program_start.o', OCmoc.PathToLib +
       'program_end.o']);
     ExecuteTool(Tool_LWLINK, LParams);

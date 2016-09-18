@@ -26,7 +26,8 @@ unit UCmocProcess_CMOC2;
 interface
 
 uses
-  Classes, FileUtil, LazFileUtils, StrUtils, SysUtils, Types, UCmocProcess_ASM, UCmocUtils;
+  Classes, FileUtil, LazFileUtils, StrUtils, SysUtils, Types, UCmocDefs,
+  UCmocProcess_ASM, UCmocUtils;
 
 type
 
@@ -250,7 +251,7 @@ begin
           LParams := TStringDynArray.Create('-r', '-c',
             '-o' + FOutFile, LTmpFile);
           if SameText(LFileExt, FileExt_CAS) then begin
-            OCmoc.StringDynArrayInsert(LParams, 0, '-k');
+            OStringDynArray.Insert(LParams, 0, '-k');
           end;
           ExecuteTool('makewav', LParams);
         finally

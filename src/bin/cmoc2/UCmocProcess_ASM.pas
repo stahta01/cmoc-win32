@@ -26,7 +26,7 @@ unit UCmocProcess_ASM;
 interface
 
 uses
-  Classes, StrUtils, SysUtils, UCmocAsm, UCmocProcess_TOOLS, UCmocUtils;
+  Classes, StrUtils, SysUtils, UCmocAsm, UCmocDefs, UCmocProcess_TOOLS, UCmocUtils;
 
 type
 
@@ -261,7 +261,7 @@ begin
   for LSymbol in FExportSymbols do begin
     FAsmCode.Insert(0, Asm_EXPORT(LSymbol));
   end;
-  FAsmCode.Insert(0, #9'PRAGMA 6809,6800compat,6809conv,m80ext,shadow');
+  FAsmCode.Insert(0, Char_TAB + 'PRAGMA 6809,6800compat,6809conv,m80ext,shadow');
   FAsmCode.Insert(1, Asm_SECTION);
   FAsmCode.Add(Asm_ENDSECTION);
   OCmoc.StringsInsertWinCMOCHeader(FAsmCode);

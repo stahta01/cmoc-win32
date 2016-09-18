@@ -29,6 +29,7 @@ uses
   StrUtils,
   SysUtils,
   Types,
+  UCmocDefs,
   UCmocUtils;
 
 {$R *.res}

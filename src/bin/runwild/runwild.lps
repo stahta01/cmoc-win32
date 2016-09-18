@@ -9,8 +9,8 @@
         <Filename Value="runwild.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="57"/>
-        <CursorPos X="52" Y="63"/>
+        <TopLine Value="68"/>
+        <CursorPos X="38" Y="79"/>
         <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -354,7 +354,7 @@
       </Position29>
       <Position30>
         <Filename Value="runwild.lpr"/>
-        <Caret Line="61" Column="35" TopLine="51"/>
+        <Caret Line="61" Column="30" TopLine="57"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

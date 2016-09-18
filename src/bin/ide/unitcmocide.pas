@@ -28,7 +28,7 @@ interface
 uses
   Classes, ComCtrls, Controls, Dialogs, ExtCtrls, FileUtil, Forms, Graphics, LCLIntf, Math,
   Menus, MouseAndKeyInput, process, StreamIO, StrUtils, SynEdit, SynHighlighterAny,
-  SysUtils, Types, UCmocIDE, UCmocRbs, UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
+  SysUtils, Types, UCmocDefs, UCmocIDE, UCmocRbs, UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
 
 type
 
@@ -667,20 +667,20 @@ begin
     CheckRoms;
     WriteLn('// Running XRoar emulator. Machine=', FOptions.Values[Opt_Machine2]);
     try
-      OCmoc.StringDynArrayAppendOptions(LParams, FOptions, [Opt_Machine2, Opt_Bas2,
+      OStringDynArray.AddOptions(LParams, FOptions, [Opt_Machine2, Opt_Bas2,
         Opt_ExtBas2, Opt_Dos2, Opt_Cart2, Opt_NoExtBas1, Opt_NoDos1, Opt_Ram2,
         Opt_NoTapeFast1, Opt_Type2]);
       if FOptions.IndexOfName(Opt_Load2) < 0 then begin
-        OCmoc.StringDynArrayAppendStrings(LParams, [Opt_Load2, OCmoc.PathToDsk + 'disk0.dsk']);
-        OCmoc.StringDynArrayAppendStrings(LParams, [Opt_Load2, OCmoc.PathToDsk + 'disk1.dsk']);
-        OCmoc.StringDynArrayAppendStrings(LParams, [Opt_Load2, OCmoc.PathToDsk + 'disk2.dsk']);
+        OStringDynArray.AddStrings(LParams, [Opt_Load2, OCmoc.PathToDsk + 'disk0.dsk']);
+        OStringDynArray.AddStrings(LParams, [Opt_Load2, OCmoc.PathToDsk + 'disk1.dsk']);
+        OStringDynArray.AddStrings(LParams, [Opt_Load2, OCmoc.PathToDsk + 'disk2.dsk']);
       end else begin
         with TStringList.Create do begin
           try
             Delimiter := PathSeparator;
             DelimitedText := FOptions.Values[Opt_Load2];
             for LIndex := 0 to Count - 1 do begin
-              OCmoc.StringDynArrayAppendStrings(LParams,
+              OStringDynArray.AddStrings(LParams,
                 [Opt_Load2, OCmoc.FileNameTranslate(Strings[LIndex])]);
             end;
           finally
@@ -689,7 +689,7 @@ begin
         end;
       end;
       if Length(AFileName) > 0 then begin
-        OCmoc.StringDynArrayAppendStrings(LParams, ['-run', AFileName]);
+        OStringDynArray.AddStrings(LParams, ['-run', AFileName]);
       end;
       Execute(OCmoc.PathToXroar + 'xroar.exe', LParams, True);
     except

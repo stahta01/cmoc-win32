@@ -26,7 +26,7 @@ unit UCmocAsm;
 interface
 
 uses
-  Classes, SysUtils, UCmocUtils;
+  Classes, SysUtils, UCmocDefs, UCmocUtils;
 
 const
 
