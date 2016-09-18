@@ -8,16 +8,16 @@ void cputc(int c)
 {
     if (_vt52mode) {
         switch (c) {
-        case 'a':
+        case 'A':
             putup();
             break;
-        case 'b':
+        case 'B':
             putdn();
             break;
-        case 'c':
+        case 'C':
             putrt();
             break;
-        case 'd':
+        case 'D':
             putlt();
             break;
         }
