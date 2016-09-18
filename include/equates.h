@@ -2,24 +2,14 @@
 #ifndef _EQUATES_H
 #define _EQUATES_H
 
-#if defined(__COCO__)
-
+#ifdef __COCO__
 #include <coco/equates.h>
 #include <coco/disk.h>
+#endif
 
-#else
-
-#if defined(__DRAGON__)
-
+#ifdef __DRAGON__
 #include <dragon/equates.h>
-
-#else
-
-#error unknown target
-
-#endif
 #endif
 
 #endif
-
 

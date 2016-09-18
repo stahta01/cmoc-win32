@@ -38,7 +38,7 @@ type
     procedure LWLINK(const ADst, ASrc, AMap: TFileName; const AFormat: string);
   protected
     procedure BCPP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
-    procedure MCCP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
+    procedure MCPP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
     procedure CMOC(const ADst, ASrc: TFileName; const AWerror, AVerbose: boolean);
     procedure LWAR(const AMode: string; const ADst: TFileName; ASrc: TFileNames);
     procedure LWASM(const ADst, ASrc: TFileName; const APreprocess: boolean);
@@ -58,7 +58,7 @@ begin
   ExecuteTool(Tool_BCPP, AParams);
 end;
 
-procedure CCmocProcess_TOOLS.MCCP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
+procedure CCmocProcess_TOOLS.MCPP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
 begin
   OStringDynArray.Insert(AParams, 0, Opt_Output2);
   OStringDynArray.Insert(AParams, 1, ADst);
@@ -79,7 +79,7 @@ begin
 
     LParams := default(TStringDynArray);
 
-    LSingleEntry := False;
+    LSingleEntry := True;
 
     OStringDynArray.AddDefine(LParams, Def_CMOC, Ver_CMOC, LSingleEntry);
     OStringDynArray.AddDefine(LParams, Def_6809, EmptyStr, LSingleEntry);
@@ -91,7 +91,7 @@ begin
     OStringDynArray.AddDefine(LParams, 'restrict', EmptyStr, LSingleEntry);
     OStringDynArray.AddInclude(LParams, OCmoc.PathToPackage + 'include', LSingleEntry);
 
-    MCCP(LPre, ASrc, LParams);
+    BCPP(LPre, ASrc, LParams);
 
     OCmoc.SourcePragmas(LPre, LPre, FOrigin, FTarget, FOptions);
 

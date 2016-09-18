@@ -73,7 +73,7 @@ static char * saved_def[MAX_DEFINE];
 static char * saved_start[MAX_DEFINE];
 static long   saved_unputc[MAX_DEFINE];
 static struct define_item * saved_ref[MAX_DEFINE];
- 
+
 static long unputc = 0;
 
 static int last_char = '\n';
@@ -119,7 +119,7 @@ gettok()
 {
    int ch;
 
-   for(;;) 
+   for(;;)
    {
       /* Tokenised C-Preprocessing */
       if (!quoted_str)
@@ -331,7 +331,7 @@ break_break:
 	    /* We have arguments to process so lets do so. */
 	    gen_substrings(ptr->name, ptr->value, ptr->arg_count, ptr->varargs);
 
-	    /* Don't mark macros with arguments as in use, it's very 
+	    /* Don't mark macros with arguments as in use, it's very
 	     * difficult to say what the correct result would be so
 	     * I'm letting the error happen. Also if I do block
 	     * recursion then it'll also block 'pseudo' recursion
@@ -479,7 +479,11 @@ pgetc()
       if( ch1 == '/' ) /* Double slash style comments */
       {
 	 do { ch = chget(); } while(ch != '\n' && ch != EOF);
-	 return ch;	/* Keep the return. */
+	    unchget(ch);
+      if (dialect == DI_ANSI)
+	   return ' ';	/* If comments become " " */
+      else return SYN;  /* Comments become nulls, but we need a
+			 * marker so I can do token concat properly. */
       }
 
       if( ch1 != '*' )
@@ -507,7 +511,7 @@ pgetc()
 }
 
 /* This function handles the first and second translation phases of Ansi-C */
-static int 
+static int
 chget()
 {
    int ch, ch1;
@@ -544,7 +548,7 @@ chget()
    }
 }
 
-static void 
+static void
 unchget(ch)
 {
 #if CPP_DEBUG
@@ -554,13 +558,13 @@ unchget(ch)
    if(ch == EOF) ch=EOT; /* EOF is pushed back as a normal character. */
    ch &= 0xFF;
 
-   if(unputc&0xFF000000) 
+   if(unputc&0xFF000000)
       cerror("Internal character pushback stack overflow");
    else       unputc = (unputc<<8) + (ch);
    if( ch == '\n' ) c_lineno--;
 }
 
-static int 
+static int
 chget_raw()
 #if CPP_DEBUG
 {
@@ -581,7 +585,7 @@ static int last_fi = 0;
    return ch;
 }
 
-static int 
+static int
 realchget()
 #endif
 {
@@ -625,7 +629,7 @@ realchget()
       else if( ch == '\n' ) c_lineno++;
 
       /* Treat all control characters, except the standard whitespace
-       * characters of TAB and NL as completely invisible. 
+       * characters of TAB and NL as completely invisible.
        */
       if( ch >= 0 && ch < ' ' && ch!='\n' && ch!='\t' && ch!=EOF ) continue;
 
@@ -683,7 +687,7 @@ do_preproc()
 	 } else if( strcmp(curword, "endasm") == 0 ) {
 	    alltok &= ~0x100;
             return do_proc_copy_hashline();
-	 } else 
+	 } else
 	    no_match=1;
       }
    } else if (!val) {
@@ -691,7 +695,7 @@ do_preproc()
         * the preprocessor in K&R. Do not complain if we got no token. */
        no_match=1;
    }
-   
+
    if( no_match )
    {
       if(!if_false) cerror("Unknown preprocessor directive");
@@ -786,7 +790,7 @@ do_proc_define()
       if(ptr)
       {
          set_entry(0, name, (void*)0); /* Unset var */
-         if (ptr->in_use) 
+         if (ptr->in_use)
 	    /* Eeeek! This shouldn't happen; so just let it leak. */
 	    cwarn("macro redefined while it was in use!?");
 	 else
@@ -796,7 +800,7 @@ do_proc_define()
       /* Skip blanks */
       for(ch=ch1=pgetc(); ch == ' ' || ch == '\t' ; ch=pgetc()) ;
 
-      len = WORDSIZE; 
+      len = WORDSIZE;
       ptr = malloc(sizeof(struct define_item) + WORDSIZE);
       if(ptr==0) cfatal("Preprocessor out of memory");
       ptr->value[cc=0] = '\0';
@@ -809,7 +813,7 @@ do_proc_define()
 	 {
 	    ch=gettok_nosub();
 	    if( ptr->arg_count==0 && ch == ')' ) break;
-	    if( ch == TK_WORD ) 
+	    if( ch == TK_WORD )
 	    {
 	       if( cc+strlen(curword)+4 >= len)
 	       {
@@ -864,10 +868,10 @@ do_proc_define()
       if (cc == 1)
 	 fprintf(stderr, "\n### Define '%s' as null\n", name);
       else if (ptr->arg_count<0)
-	 fprintf(stderr, "\n### Define '%s' as '%s'\n", 
+	 fprintf(stderr, "\n### Define '%s' as '%s'\n",
 		 name, ptr->value);
       else
-	 fprintf(stderr, "\n### Define '%s' as %d args '%s'\n", 
+	 fprintf(stderr, "\n### Define '%s' as %d args '%s'\n",
 		 name, ptr->arg_count, ptr->value);
 #endif
 
@@ -898,7 +902,7 @@ do_proc_undef()
       if(ptr)
       {
          set_entry(0, curword, (void*)0); /* Unset var */
-         if (ptr->in_use) 
+         if (ptr->in_use)
 	    /* Eeeek! This shouldn't happen; so just let it leak. */
 	    cwarn("macro undefined while it was in use!?");
 	 else
@@ -982,7 +986,7 @@ int type;
    return 0;
 }
 
-static void 
+static void
 do_proc_else()
 {
    if( if_hidden == 0 )
@@ -998,7 +1002,7 @@ do_proc_else()
    do_proc_tail();
 }
 
-static void 
+static void
 do_proc_endif()
 {
    if( if_hidden )
@@ -1298,7 +1302,7 @@ int is_vararg;
 	 if ( ch == '(' ) paren_count++;
 	 if ( ch == '"' || ch == '\'' ) { in_quote = 1; quote_char = ch; }
 	 if (paren_count == 0 && ch == ',' ) {
-	    commas_found++; 
+	    commas_found++;
 	    if (commas_found < arg_count)
 	       continue;
 	 }
@@ -1344,14 +1348,14 @@ int is_vararg;
 
    mac_text = insert_substrings(data_str, arg_list, arg_count);
 
-   /* 
+   /*
     * At this point 'mac_text' contains the full expansion of the macro.
     *
     * So we could scan this for calls to this macro and if we find one
     * that _exactly_ matches this call (including arguments) then we mark
     * this call's in_use flag.
-    * 
-    * OTOH, it would probably be best to throw away this expansion and 
+    *
+    * OTOH, it would probably be best to throw away this expansion and
     * pretend we never noticed this macro expansion in the first place.
     *
     * Still this is mostly academic as the error trapping works and
@@ -1380,7 +1384,7 @@ int is_vararg;
 #endif
 }
 
-static char * 
+static char *
 insert_substrings(data_str, arg_list, arg_count)
 char * data_str;
 struct arg_store *arg_list;
@@ -1398,7 +1402,7 @@ int arg_count;
 #if CPP_DEBUG
    fprintf(stderr, "\n### Macro substitution in '%s'\n", data_str);
    for (ac=0; ac<arg_count; ac++) {
-      fprintf(stderr, "### Argument %d (%s) = '%s'\n", 
+      fprintf(stderr, "### Argument %d (%s) = '%s'\n",
 	 ac+1, arg_list[ac].name, arg_list[ac].value);
    }
 #endif
@@ -1473,7 +1477,7 @@ int arg_count;
 	    if (ansi_stringize) {
 	       if (arg_list[ac].in_define) {
 		  struct define_item * ptr;
-                  if ((ptr = read_entry(0, s)) &&  
+                  if ((ptr = read_entry(0, s)) &&
 		       ptr->arg_count == -1) {
 		     s = ptr->value;
 		  }

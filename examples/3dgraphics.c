@@ -6,8 +6,8 @@
 #include <fix6.h>
 #include <string.h>
 #include <graph.h>
-#include <equates.h>
 #include <system.h>
+#include <equates.h>
 
 #define S 32
 
