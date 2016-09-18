@@ -10,6 +10,7 @@ void asm _ftoa(char* dst, float_t* src)
         ldu     4,s
         jsr     _LBDDC                          // CONVERT FP NUMBER TO ASCII STRING (U)
         puls    u
+        ldd     2,s
     }
 }
 

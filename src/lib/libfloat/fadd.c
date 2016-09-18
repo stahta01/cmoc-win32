@@ -12,6 +12,7 @@ void asm _fadd(float_t* dst, float_t* fp1, float_t* fp2)
         ldx     4,s
         jsr     _LBC35                          // PACK FPA0 AND MOVE IT TO ADDRESS IN X
         puls    u
+        ldd     2,s
     }
 }
 

@@ -10,6 +10,7 @@ void asm _itof(float_t* dst, int src)
         ldx     4,s
         jsr     _LBC35                          // PACK FPA0 AND MOVE IT TO ADDRESS IN X
         puls    u
+        ldd     2,s
     }
 }
 
