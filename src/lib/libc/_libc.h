@@ -8,5 +8,6 @@
 #include <equates.h>
 #include <assert.h>
 #include <system.h>
+#include <float.h>
 #include <coco/disk.h>
 

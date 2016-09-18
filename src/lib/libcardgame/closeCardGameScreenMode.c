@@ -1,7 +1,7 @@
 
 #include "_cardgame.h"
 
-void closeCardGameScreenMode()
+void _closeCardGameScreenMode()
 {
     textmode(MODE_T0_32X16);
 }

@@ -11,13 +11,13 @@
 //       memset(contents, '*', length);  // fill A$ with asterisks
 //   }
 //
-byte getStringVariableContents(char* name, char** contents)
+byte _getStringVariableContents(char* name, char** contents)
 {
-    byte* desc = (byte*) findSimpleVariable(name, TRUE);
+    byte* desc = (byte*) _findSimpleVariable(name, TRUE);
     if (!desc) {
         *contents = 0;
         return 0;
     }
-    return getStringContents(desc, contents);
+    return _getStringContents(desc, contents);
 }
 

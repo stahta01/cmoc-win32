@@ -1,6 +1,5 @@
 
-#include <stdlib.h>
-#include <string.h>
+#include "_libc.h"
 
 char* utoa(unsigned value, char* string, int radix)
 {

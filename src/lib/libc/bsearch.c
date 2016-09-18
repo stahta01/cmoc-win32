@@ -1,10 +1,5 @@
 
-/*---------------------------------------------------------------------------*/
-/* bsearch() - perform a binary search on an array                           */
-/*---------------------------------------------------------------------------*/
-
-#include <stdlib.h>
-#include <stddef.h>
+#include "_libc.h"
 
 void* bsearch(void* keyval,  void* base, size_t num, size_t width,
               int(*cmp)(void* keyval,  void* elem))
@@ -25,6 +20,6 @@ void* bsearch(void* keyval,  void* base, size_t num, size_t width,
             return ((void*)midptr);
         }
     }
-    return (NULL);
+    return NULL;
 }
 

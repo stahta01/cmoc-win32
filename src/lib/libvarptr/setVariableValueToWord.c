@@ -2,9 +2,9 @@
 #include "_varptr.h"
 
 //FIXME: doc
-char setVariableValueToWord(char* name, word newAbsValue, byte isNegative)
+char _setVariableValueToWord(char* name, word newAbsValue, byte isNegative)
 {
-    byte* desc = (byte*) findSimpleVariable(name, FALSE);
+    byte* desc = (byte*) _findSimpleVariable(name, FALSE);
     //printf("SET(%s, %u, %u): %p\n", name, newAbsValue, isNegative, desc);
     if (!desc) {
         return -1;

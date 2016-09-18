@@ -1,7 +1,7 @@
 
 #include "_cardgame.h"
 
-char* getSuitName(byte suit)
+char* _getSuitName(byte suit)
 {
     switch (suit) {
     case SUIT_HEARTS:

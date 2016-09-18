@@ -1,10 +1,5 @@
 
-/*---------------------------------------------------------------------------*/
-/* ltoa() - convert a signed long integer to a string                        */
-/*---------------------------------------------------------------------------*/
-
-#include <stdlib.h>
-#include <string.h>
+#include "_libc.h"
 
 char* ltoa(long value, char* string, int radix)
 {

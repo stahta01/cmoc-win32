@@ -17,7 +17,7 @@ byte* scrnBuffer;                           // 1st PMODE 4 buffer
 //
 // Call closeCardGameScreenMode() to go back to text mode.
 //
-void openCardGameScreenMode(void)
+void _openCardGameScreenMode(void)
 {
     // Hi-res text screen:
     textmode(MODE_H1_32X24);

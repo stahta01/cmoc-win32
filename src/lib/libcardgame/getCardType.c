@@ -1,7 +1,7 @@
 
 #include "_cardgame.h"
 
-byte getCardType(byte card)
+byte _getCardType(byte card)
 {
     if (card <= 13) {
         return SUIT_HEARTS;

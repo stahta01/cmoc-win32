@@ -1,10 +1,5 @@
 
-/*---------------------------------------------------------------------------*/
-/* ultoa() - convert an unsigned long integer to a string                    */
-/*---------------------------------------------------------------------------*/
-
-#include <stdlib.h>
-#include <string.h>
+#include "_libc.h"
 
 char* ultoa(unsigned long value, char* string, int radix)
 {

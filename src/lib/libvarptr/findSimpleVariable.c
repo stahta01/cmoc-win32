@@ -10,7 +10,7 @@
 // A null pointer is returned if the variable is not found.
 // See also: getStringContents(), getWordVariableValue().
 //
-void* findSimpleVariable(char* name, byte isString)
+void* _findSimpleVariable(char* name, byte isString)
 {
     char secondNameChar = name[1] | (isString ? 0x80 : 0x00);
     char* varStart = * (char**) VARTAB;

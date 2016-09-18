@@ -1,7 +1,7 @@
 
 #include "_varptr.h"
 
-word getSpaceUsedByProgram()
+word _getSpaceUsedByProgram()
 {
     return * (char**) VARTAB - * (char**) TXTTAB;
 }

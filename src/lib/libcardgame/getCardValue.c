@@ -1,7 +1,7 @@
 
 #include "_cardgame.h"
 
-byte getCardValue(byte card)
+byte _getCardValue(byte card)
 {
     if (card == 0) {
         return BAD_CARD_VALUE;

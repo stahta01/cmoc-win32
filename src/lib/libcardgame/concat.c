@@ -12,7 +12,7 @@
 // the concatenation stops at 'max'.
 // The returned string always finishes with a terminating '\0'.
 //
-void concat(char* out, unsigned max, ...)
+void _concat(char* out, unsigned max, ...)
 {
     va_list ap;
     va_start(ap, max);

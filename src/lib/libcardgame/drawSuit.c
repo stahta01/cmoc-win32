@@ -5,9 +5,9 @@
 // row: Pixel row where to draw top of suit.
 // suit: Index into suits[].
 //
-void drawSuit(byte col, byte row, byte suit)
+void _drawSuit(byte col, byte row, byte suit)
 {
-    byte* topLeft = drawCompiledPixMap(col, row, suits[suit], ROWS_PER_SUIT, 2);
+    byte* topLeft = _drawCompiledPixMap(col, row, suits[suit], ROWS_PER_SUIT, 2);
 
     // Draw a white horizontal line above and below the suit pixmap just drawn at topLeft:
     //

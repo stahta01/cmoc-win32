@@ -12,7 +12,7 @@
 //
 // Based on Color Basic routines at $B404 and $B4A0.
 //
-void* getArrayElement(void* arrayStorage, word indexArray[])
+void* _getArrayElement(void* arrayStorage, word indexArray[])
 {
     byte numDims = * (byte*) arrayStorage;
     byte* dimArrayEnd = (byte*) arrayStorage + 1 + (word) numDims * 2;

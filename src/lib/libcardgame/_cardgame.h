@@ -22,9 +22,9 @@
 #define NDEBUG
 
 #ifndef NDEBUG
-void restoreOriginalTextMode();
+void _restoreOriginalTextMode();
 #define assertf(cond, ...) do { if (!(cond)) { \
-            restoreOriginalTextMode(); \
+            _restoreOriginalTextMode(); \
             printf("***ASSERT FAILED (%s): %u: %s: ", __TIME__, __LINE__, #cond); \
             printf(__VA_ARGS__); putchar('\n'); \
             for (;;); } } while (0)
@@ -101,7 +101,7 @@ extern unsigned short blackJokerValue[10];
 extern unsigned short redJokerSuit[7];
 extern unsigned short blackJokerSuit[7];
 
-byte getNumPixelRowsPerCard();
-byte* drawCompiledPixMap(byte byteOffset, byte pixelRow, word* wordArray, byte numRows,
-                         byte rowRepetitions);
+byte _getNumPixelRowsPerCard();
+byte* _drawCompiledPixMap(byte byteOffset, byte pixelRow, word* wordArray, byte numRows,
+                          byte rowRepetitions);
 

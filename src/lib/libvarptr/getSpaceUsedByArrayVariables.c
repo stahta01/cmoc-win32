@@ -1,7 +1,7 @@
 
 #include "_varptr.h"
 
-word getSpaceUsedByArrayVariables()
+word _getSpaceUsedByArrayVariables()
 {
     return * (char**) ARYEND - * (char**) ARYTAB;
 }

@@ -7,7 +7,7 @@
 // (The "top" of a deck is at the highest valid index,
 // while the "bottom" is at index 0.)
 //
-byte pickCardFromDeck(byte deck[], byte* pNumCards)
+byte _pickCardFromDeck(byte deck[], byte* pNumCards)
 {
     if (*pNumCards == 0) {
         return BAD_CARD_VALUE;

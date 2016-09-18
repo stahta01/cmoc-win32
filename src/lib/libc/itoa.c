@@ -1,9 +1,5 @@
 
-/*---------------------------------------------------------------------------*/
-/* itoa() - convert a signed integer to a string                             */
-/*---------------------------------------------------------------------------*/
-
-#include <stdlib.h>
+#include "_libc.h"
 
 char* itoa(int value, char* string, int radix)
 {

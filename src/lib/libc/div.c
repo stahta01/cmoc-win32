@@ -1,9 +1,5 @@
 
-/*---------------------------------------------------------------------------*/
-/* div() - divide signed integers giving quotient and remainder              */
-/*---------------------------------------------------------------------------*/
-
-#include <stdlib.h>
+#include "_libc.h"
 
 void div(div_t* result, int numer, int denom)
 {

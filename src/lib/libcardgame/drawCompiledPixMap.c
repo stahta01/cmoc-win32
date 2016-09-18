@@ -9,7 +9,7 @@
 // Returns the address of the top left byte of the region that was modified.
 // Uses scrnBuffer as the start of the PMODE 4 screen buffer.
 //
-byte* drawCompiledPixMap(byte byteOffset, byte pixelRow, word* wordArray, byte numRows,
+byte* _drawCompiledPixMap(byte byteOffset, byte pixelRow, word* wordArray, byte numRows,
                          byte rowRepetitions)
 {
     assertf(byteOffset < BYTES_PER_SCREEN_ROW, "%u", byteOffset);

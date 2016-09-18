@@ -28,20 +28,20 @@ Version 0.1.2 - 2016-??-?? - setConsoleOutHook() and resetConsoleOutHook()
 #define SUIT_JOKER    4
 #define SUIT_NONE     255
 
-void closeCardGameScreenMode();
-void concat(char* out, unsigned max, ...);
-void drawCompiledCard(byte cardValue, byte cardSuit, byte byteColumn, byte pixelRow);
-void drawFaceDownCard(byte rowInPixels, byte colInBytes);
-void drawSuit(byte col, byte row, byte suit);
-void eraseCard(byte byteColumn, byte pixelRow);
-byte getCardType(byte card);
-byte getCardValue(byte card);
-char* getSuitName(byte suit);
-void openCardGameScreenMode(void);
-byte pickCardFromDeck(byte deck[], byte* pNumCards);
-byte printCentered(byte row, char* str);
-byte getNumPixelRowsPerCard();
-void shuffleDeck(byte deck[], byte numCards);
+void _closeCardGameScreenMode();
+void _concat(char* out, unsigned max, ...);
+void _drawCompiledCard(byte cardValue, byte cardSuit, byte byteColumn, byte pixelRow);
+void _drawFaceDownCard(byte rowInPixels, byte colInBytes);
+void _drawSuit(byte col, byte row, byte suit);
+void _eraseCard(byte byteColumn, byte pixelRow);
+byte _getCardType(byte card);
+byte _getCardValue(byte card);
+char* _getSuitName(byte suit);
+void _openCardGameScreenMode(void);
+byte _pickCardFromDeck(byte deck[], byte* pNumCards);
+byte _printCentered(byte row, char* str);
+byte _getNumPixelRowsPerCard();
+void _shuffleDeck(byte deck[], byte numCards);
 
 #endif
 

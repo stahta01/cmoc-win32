@@ -1,11 +1,7 @@
 
 #define abs __obsolete
 
-/*---------------------------------------------------------------------------*/
-/* abs() - calculate the absolute value of an integer                       */
-/*---------------------------------------------------------------------------*/
-
-#include <stdlib.h>
+#include "_libc.h"
 
 int abs(int n)
 {

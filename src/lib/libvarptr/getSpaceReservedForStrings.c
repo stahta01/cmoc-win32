@@ -1,7 +1,7 @@
 
 #include "_varptr.h"
 
-word getSpaceReservedForStrings()
+word _getSpaceReservedForStrings()
 {
     return * (char**) MEMSIZ - * (char**) FRETOP;
 }

@@ -5,7 +5,7 @@
 // A null pointer is returned if the variable is not found.
 // See also: getArrayNumberOfDimension(), getArrayDimensions(), getArrayElement().
 //
-void* findArrayVariable(char* name, byte isString)
+void* _findArrayVariable(char* name, byte isString)
 {
     char secondNameChar = name[1] | (isString ? 0x80 : 0x00);
     char* arrayStart = * (char**) ARYTAB;

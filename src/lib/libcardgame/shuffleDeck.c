@@ -1,7 +1,7 @@
 
 #include "_cardgame.h"
 
-void shuffleDeck(byte deck[], byte numCards)
+void _shuffleDeck(byte deck[], byte numCards)
 {
     for (byte i = 1; i < numCards; ++i) {
         byte other = (byte)(rand() % (numCards - i) + i);

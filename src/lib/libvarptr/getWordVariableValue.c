@@ -8,9 +8,9 @@
 // Returns -1 if the variable is not found.
 // Returns -2 if the variable's value does not fit in 16 bits.
 //
-char getWordVariableValue(char* name, word* absValue, byte* isNegative)
+char _getWordVariableValue(char* name, word* absValue, byte* isNegative)
 {
-    byte* desc = (byte*) findSimpleVariable(name, FALSE);
+    byte* desc = (byte*) _findSimpleVariable(name, FALSE);
     if (!desc) {
         return -1;
     }

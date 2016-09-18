@@ -1,6 +1,5 @@
 
-#include <stdlib.h>
-#include <equates.h>
+#include "_libc.h"
 
 unsigned __rand_seed = 0;
 

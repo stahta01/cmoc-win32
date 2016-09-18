@@ -10,7 +10,7 @@
 //          If the Basic is run a second time after this, it will not READ the
 //          same data as the first time.
 //
-byte getStringContents(void* variableStorage, char** contents)
+byte _getStringContents(void* variableStorage, char** contents)
 {
     *contents = * (char**)(variableStorage + 2);
     return ((byte*) variableStorage)[0];

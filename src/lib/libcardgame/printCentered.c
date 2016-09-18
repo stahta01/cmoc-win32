@@ -5,7 +5,7 @@
 //      Must not be more than 'textScreenWidth' characters.
 // Returns the text column where 'str' gets printed.
 //
-byte printCentered(byte row, char* str)
+byte _printCentered(byte row, char* str)
 {
     word len = strlen(str);
     if (len > textScreenWidth) {

@@ -3,7 +3,7 @@
 
 // Returns the number of dimensions in an array found by findArrayVariable().
 //
-byte getArrayNumberOfDimension(void* arrayStorage)
+byte _getArrayNumberOfDimension(void* arrayStorage)
 {
     return * (byte*) arrayStorage;
 }

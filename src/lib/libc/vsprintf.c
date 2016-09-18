@@ -72,6 +72,10 @@ int vsprintf(char* dst, char* fmt, va_list args)
                 s = strpcpy_pad(s, utoa(*args, s, 10), width, padchar);
                 args += step;
                 break;
+            case 'f':
+                s = strpcpy_pad(s, _ftoa(s, (float_t*)*args), width, padchar);
+                args += step;
+                break;
             default:
                 *s++ = fmt[-1];
                 break;

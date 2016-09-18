@@ -1,7 +1,7 @@
 
 #include "_varptr.h"
 
-word getSpaceUsedBySimpleVariables()
+word _getSpaceUsedBySimpleVariables()
 {
     return * (char**) ARYTAB - * (char**) VARTAB;
 }
