@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="200">
+    <Units Count="201">
       <Unit0>
         <Filename Value="cmoc2.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -1442,6 +1442,14 @@
         <CursorPos X="49" Y="29"/>
         <UsageCount Value="20"/>
       </Unit199>
+      <Unit200>
+        <Filename Value="..\..\..\bin\cmocide\keywords.txt"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="29"/>
+        <CursorPos X="4" Y="41"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit200>
     </Units>
     <JumpHistory Count="2" HistoryIndex="1">
       <Position1>

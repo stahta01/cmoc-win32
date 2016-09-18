@@ -5,6 +5,7 @@
 #ifdef __COCO__
 #include <coco/equates.h>
 #include <coco/disk.h>
+#include <coco/cb_equates.h>
 #endif
 
 #ifdef __DRAGON__
