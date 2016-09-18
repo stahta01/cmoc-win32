@@ -2,6 +2,12 @@
 #ifndef _FLOAT_H
 #define _FLOAT_H
 
+#define M_2_PI  ((float_t*)0xbfbd)
+#define M_1     ((float_t*)0xbac5)
+#define M_1_2   ((float_t*)0xbec0)
+#define M_1_4   ((float_t*)0xbfc2)
+#define M_10    ((float_t*)0xbb7d)
+
 typedef struct {
     char a[5];
 } float_t;

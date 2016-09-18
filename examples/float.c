@@ -1,16 +1,7 @@
 
 #include <string.h>
 #include <stdio.h>
-#include <equates.h>
 #include <float.h>
-
-/*
-#define M_2PI (*(float_t*)_LBFBD)
-*/
-
-
-
-// LBAC5 = ONE?
 
 int main(void)
 {
@@ -23,7 +14,7 @@ int main(void)
 
     //_fmul(&b, &a, &a);
     //_fdiv(&b, &b, &c);
-    _ftoa(s, &b);
+    _ftoa(s, M_1_4);
     puts(s);
 
     return 0;
