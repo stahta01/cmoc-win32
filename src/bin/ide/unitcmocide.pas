@@ -28,7 +28,8 @@ interface
 uses
   Classes, ComCtrls, Controls, Dialogs, ExtCtrls, FileUtil, Forms, Graphics, LCLIntf, Math,
   Menus, MouseAndKeyInput, process, StreamIO, StrUtils, SynEdit, SynHighlighterAny,
-  SysUtils, Types, UCmocDefs, UCmocIDE, UCmocRbs, UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
+  SysUtils, Types, UCmocDefs, UCmocIDE, UCmocRbs, UCmocStringDynArray,
+  UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
 
 type
 

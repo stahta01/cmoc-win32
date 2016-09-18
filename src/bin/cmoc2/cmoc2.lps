@@ -4,13 +4,13 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="199">
+    <Units Count="200">
       <Unit0>
         <Filename Value="cmoc2.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="13"/>
-        <CursorPos X="16" Y="29"/>
+        <TopLine Value="28"/>
+        <CursorPos X="23" Y="37"/>
         <UsageCount Value="135"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -79,8 +79,8 @@
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="12"/>
-        <CursorPos X="81" Y="29"/>
+        <TopLine Value="19"/>
+        <CursorPos X="35" Y="30"/>
         <UsageCount Value="37"/>
       </Unit9>
       <Unit10>
@@ -1363,20 +1363,22 @@
       <Unit189>
         <Filename Value="UCmocProcess_ASM.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="9"/>
-        <CursorPos X="84" Y="29"/>
+        <TopLine Value="25"/>
+        <CursorPos X="39" Y="33"/>
         <UsageCount Value="13"/>
       </Unit189>
       <Unit190>
         <Filename Value="UCmocProcess_TOOLS.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos X="71" Y="29"/>
+        <TopLine Value="14"/>
+        <CursorPos X="92" Y="29"/>
         <UsageCount Value="12"/>
       </Unit190>
       <Unit191>
         <Filename Value="UCmocProcess_CMOC2.pas"/>
         <EditorIndex Value="-1"/>
+        <TopLine Value="22"/>
+        <CursorPos X="53" Y="30"/>
         <UsageCount Value="13"/>
       </Unit191>
       <Unit192>
@@ -1431,12 +1433,24 @@
         <TopLine Value="145"/>
         <UsageCount Value="10"/>
       </Unit198>
+      <Unit199>
+        <Filename Value="..\shared\ucmocstringdynarray.pas"/>
+        <UnitName Value="UCmocStringDynArray"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="12"/>
+        <CursorPos X="49" Y="29"/>
+        <UsageCount Value="20"/>
+      </Unit199>
     </Units>
-    <JumpHistory Count="1">
+    <JumpHistory Count="2" HistoryIndex="1">
       <Position1>
         <Filename Value="cmoc2.lpr"/>
         <Caret Line="29" Column="16" TopLine="13"/>
       </Position1>
+      <Position2>
+        <Filename Value="cmoc2.lpr"/>
+        <Caret Line="37" Column="23" TopLine="28"/>
+      </Position2>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

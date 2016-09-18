@@ -27,7 +27,7 @@ interface
 
 uses
   Classes, FileUtil, LazFileUtils, StrUtils, SysUtils, Types, UCmocDefs,
-  UCmocProcess_ASM, UCmocUtils;
+  UCmocProcess_ASM, UCmocStringDynArray, UCmocUtils;
 
 type
 

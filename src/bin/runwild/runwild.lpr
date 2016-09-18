@@ -29,6 +29,7 @@ uses
   SysUtils,
   Types,
   UCmocRbs,
+  UCmocStringDynArray,
   UCmocUtils;
 
 {$R *.res}

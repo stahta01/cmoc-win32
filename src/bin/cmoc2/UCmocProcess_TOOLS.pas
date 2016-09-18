@@ -26,7 +26,7 @@ unit UCmocProcess_TOOLS;
 interface
 
 uses
-  Classes, StrUtils, SysUtils, Types, UCmocAsm, UCmocDefs, UCmocUtils;
+  Classes, StrUtils, SysUtils, Types, UCmocAsm, UCmocDefs, UCmocStringDynArray, UCmocUtils;
 
 type
 
