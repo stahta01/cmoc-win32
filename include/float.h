@@ -3,6 +3,7 @@
 #define _FLOAT_H
 
 #include <sys/float.h>
+#include <stdarg.h>
 
 #define M_2_PI  ((float_t*)0xbfbd)
 #define M_1     ((float_t*)0xbac5)
@@ -20,6 +21,9 @@ float_t* _fsub(float_t* dst, float_t* fp1, float_t* fp2);
 float_t* _fmul(float_t* dst, float_t* fp1, float_t* fp2);
 float_t* _fdiv(float_t* dst, float_t* fp1, float_t* fp2);
 float_t* _fdiv10(float_t* dst, float_t* src);
+
+float_t* _vfrpn(float_t* dst, va_list args);
+float_t* _frpn(float_t* dst, ...);
 
 #endif
 
