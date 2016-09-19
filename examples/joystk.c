@@ -1,6 +1,4 @@
 
-#pragma target coco
-#pragma options -machine=coco
 
 #include <basic.h>
 #include <ctype.h>

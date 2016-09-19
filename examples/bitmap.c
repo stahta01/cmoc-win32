@@ -1,5 +1,4 @@
 
-#pragma target coco
 
 #include <stdlib.h>
 #include <stdint.h>

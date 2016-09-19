@@ -28,8 +28,27 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; 
 
 [Files]
-Source: "bin\*.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\astyle.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\bin2c.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\cmoc2.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\cmoc.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\cmocide.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\console.bat"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\cpp.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\exomizer.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\f9dasm.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\lwar.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\lwasm2.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\lwasm.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\lwlink.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\lwobjdump.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\lzss.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\mcpp.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\pic2raw.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\runwild.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\wimgtool.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\writecocofile.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+
 Source: "bin\cmocide\*.txt"; DestDir: "{app}\bin\cmocide"; Flags: ignoreversion onlyifdoesntexist
 
 Source: "lib\*.a"; DestDir: "{app}\lib"; Flags: ignoreversion
