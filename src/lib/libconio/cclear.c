@@ -1,9 +1,9 @@
 
 #include "_conio.h"
 
-void cclear(unsigned char length)
+void cclear(int length)
 {
-    for (; length; length--) {
+    for (; length > 0; length--) {
         cputc(' ');
     }
 }

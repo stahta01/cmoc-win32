@@ -1,8 +1,8 @@
 
 #include "_conio.h"
 
-unsigned char wherex(void)
+int wherex(void)
 {
-    return isvidram() ? (unsigned char)(_curpos & 31) : (unsigned char)_gettextpositionx();
+    return isvidram() ? _curpos & 31 : _gettextpositionx();
 }
 

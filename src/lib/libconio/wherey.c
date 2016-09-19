@@ -1,8 +1,8 @@
 
 #include "_conio.h"
 
-unsigned char wherey(void)
+int wherey(void)
 {
-    return isvidram() ? (unsigned char)(_curpos >> 5) & 15 : (unsigned char)_gettextpositiony();
+    return isvidram() ? (_curpos >> 5) & 15 : _gettextpositiony();
 }
 

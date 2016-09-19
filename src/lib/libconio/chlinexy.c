@@ -1,7 +1,7 @@
 
 #include "_conio.h"
 
-void chlinexy(unsigned char x, unsigned char y, unsigned char length)
+void chlinexy(int x, int y, int length)
 {
     gotoxy(x, y);
     chline(length);

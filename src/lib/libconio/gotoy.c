@@ -1,7 +1,7 @@
 
 #include "_conio.h"
 
-void gotoy(unsigned char y)
+void gotoy(int y)
 {
     if (isvidram()) {
         _curpos = (_curpos & 0xfe1f) | (((unsigned)y) << 5);

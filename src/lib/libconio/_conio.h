@@ -13,9 +13,9 @@
 #include <vt52.h>
 
 typedef struct {
-    unsigned char cursor;
-    unsigned char revers;
-    unsigned char bordercolor;
+    bool cursor;
+    bool revers;
+    int bordercolor;
 } _conio_t;
 
 extern _conio_t _conio;

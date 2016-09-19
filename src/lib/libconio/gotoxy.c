@@ -1,7 +1,7 @@
 
 #include "_conio.h"
 
-void gotoxy(unsigned char x, unsigned char y)
+void gotoxy(int x, int y)
 {
     gotox(x);
     gotoy(y);

@@ -1,7 +1,7 @@
 
 #include "_conio.h"
 
-void cputsxy(unsigned char x, unsigned char y, char* s)
+void cputsxy(int x, int y, char* s)
 {
     gotoxy(x, y);
     cputs(s);

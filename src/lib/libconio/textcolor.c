@@ -1,9 +1,9 @@
 
 #include "_conio.h"
 
-unsigned char textcolor(unsigned char color)
+int textcolor(int color)
 {
-    unsigned char result = _forcol;
+    int result = _forcol;
     _forcol = color;
     return result;
 }

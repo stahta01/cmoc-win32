@@ -1,7 +1,7 @@
 
 #include "_conio.h"
 
-void gotox(unsigned char x)
+void gotox(int x)
 {
     if (isvidram()) {
         _curpos = (_curpos & -32) | x;

@@ -1,8 +1,8 @@
 
 #include "_conio.h"
 
-unsigned char bgcolor(unsigned char color)
+int bgcolor(int color)
 {
-    return (unsigned char)_setbkcolor(color);
+    return _setbkcolor(color);
 }
 

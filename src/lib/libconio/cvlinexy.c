@@ -1,7 +1,7 @@
 
 #include "_conio.h"
 
-void cvlinexy(unsigned char x, unsigned char y, unsigned char length)
+void cvlinexy(int x, int y, int length)
 {
     gotoxy(x, y);
     cvline(length);

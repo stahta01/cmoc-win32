@@ -1,9 +1,9 @@
 
 #include "_conio.h"
 
-unsigned char revers(unsigned char onoff)
+bool revers(bool onoff)
 {
-    unsigned char result = _conio.revers;
+    bool result = _conio.revers;
     _conio.revers = onoff;
     return result;
 }

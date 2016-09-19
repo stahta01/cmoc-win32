@@ -1,9 +1,9 @@
 
 #include "_conio.h"
 
-unsigned char cursor(unsigned char onoff)
+bool cursor(bool onoff)
 {
-    unsigned char result = _conio.cursor;
+    bool result = _conio.cursor;
     _conio.cursor = onoff;
     return result;
 }

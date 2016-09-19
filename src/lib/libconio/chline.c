@@ -1,9 +1,9 @@
 
 #include "_conio.h"
 
-void chline(unsigned char length)
+void chline(int length)
 {
-    for (; length; length--) {
+    for (; length > 0; length--) {
         cputc('-');
     }
 }

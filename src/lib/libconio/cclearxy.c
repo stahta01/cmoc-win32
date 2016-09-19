@@ -1,7 +1,7 @@
 
 #include "_conio.h"
 
-void cclearxy(unsigned char x, unsigned char y, unsigned char length)
+void cclearxy(int x, int y, int length)
 {
     gotoxy(x, y);
     cclear(length);

@@ -1,11 +1,11 @@
 
 #include "_conio.h"
 
-unsigned char _cursor_onoff = 1;
+bool _cursor_onoff = true;
 
-unsigned char cursor(unsigned char onoff)
+bool cursor(bool onoff)
 {
-    unsigned char result = _cursor_onoff;
+    bool result = _cursor_onoff;
     _cursor_onoff = onoff;
     return result;
 }
