@@ -1,49 +1,4 @@
 
-/*****************************************************************************/
-/*                                                                           */
-/*                                  conio.h                                  */
-/*                                                                           */
-/*                            Direct console I/O                             */
-/*                                                                           */
-/*                                                                           */
-/*                                                                           */
-/* (C) 1998-2007 Ullrich von Bassewitz                                       */
-/*               Roemerstrasse 52                                            */
-/*               D-70794 Filderstadt                                         */
-/* EMail:        uz@cc65.org                                                 */
-/*                                                                           */
-/*                                                                           */
-/* This software is provided 'as-is', without any expressed or implied       */
-/* warranty.  In no event will the authors be held liable for any damages    */
-/* arising from the use of this software.                                    */
-/*                                                                           */
-/* Permission is granted to anyone to use this software for any purpose,     */
-/* including commercial applications, and to alter it and redistribute it    */
-/* freely, subject to the following restrictions:                            */
-/*                                                                           */
-/* 1. The origin of this software must not be misrepresented; you must not   */
-/*    claim that you wrote the original software. If you use this software   */
-/*    in a product, an acknowledgment in the product documentation would be  */
-/*    appreciated but is not required.                                       */
-/* 2. Altered source versions must be plainly marked as such, and must not   */
-/*    be misrepresented as being the original software.                      */
-/* 3. This notice may not be removed or altered from any source              */
-/*    distribution.                                                          */
-/*                                                                           */
-/*****************************************************************************/
-
-// This is the direct console interface for cmoc. I do not like the function
-// names very much, but the first version started as a rewrite of Borland's
-// conio, and, even if the interface has changed, the names did not.
-//
-// The interface does direct screen I/O, so it is fast enough for most
-// programs. I did not implement text windows, since many applications do
-// not need them and should not pay for the additional overhead. It should
-// be easy to add text windows on a higher level if needed,
-//
-// Most routines do not check the parameters. This may be unfortunate but is
-// also related to speed. The coordinates are always 0/0 based.
-
 #ifndef _CONIO_H
 #define _CONIO_H
 
@@ -56,37 +11,37 @@ void clrscr(void);
 unsigned char kbhit(void);
 
 // Set the cursor to the specified X position, leave the Y position untouched
-void gotox(unsigned char x);
+void gotox(int x);
 
 // Set the cursor to the specified Y position, leave the X position untouched
-void gotoy(unsigned char y);
+void gotoy(int y);
 
 // Set the cursor to the specified position
-void gotoxy(unsigned char x, unsigned char y);
+void gotoxy(int x, int y);
 
 // Return the X position of the cursor
-unsigned char wherex(void);
+int wherex(void);
 
 // Return the Y position of the cursor
-unsigned char wherey(void);
+int wherey(void);
 
 // Output one character at the current cursor position
 void cputc(int c);
 
 // Same as "gotoxy (x, y); cputc (c);"
-void cputcxy(unsigned char x, unsigned char y, int c);
+void cputcxy(int x, int y, int c);
 
 // Output a NUL-terminated string at the current cursor position
-void cputs(const char* s);
+void cputs(char* s);
 
 // Same as "gotoxy (x, y); puts (s);"
-void cputsxy(unsigned char x, unsigned char y, const char* s);
+void cputsxy(int x, int y, char* s);
 
 // Like printf(), but uses direct screen output
-int cprintf(const char* format, ...);
+int cprintf(char* fmt, ...);
 
 // Like vprintf(), but uses direct screen output
-int vcprintf(const char* format, va_list ap);
+int vcprintf(char* fmt, va_list ap);
 
 // Return a character from the keyboard. If there is no character available,
 // the function waits until the user does press a key. If cursor is set to
@@ -94,72 +49,72 @@ int vcprintf(const char* format, va_list ap);
 int cgetc(void);
 
 // Like scanf(), but uses direct keyboard input
-int cscanf(const char* format, ...);
+int cscanf(char* format, ...);
 
 // Like vscanf(), but uses direct keyboard input
-int vcscanf(const char* format, va_list ap);
+int vcscanf(char* format, va_list ap);
 
 // If onoff is 1, a cursor is displayed when waiting for keyboard input. If
 // onoff is 0, the cursor is hidden when waiting for keyboard input. The
 // function returns the old cursor setting.
-unsigned char cursor(unsigned char onoff);
+bool cursor(bool onoff);
 
 // Enable/disable reverse character display. This may not be supported by
 // the output device. Return the old setting.
-unsigned char revers(unsigned char onoff);
+bool revers(bool onoff);
 
 // Set the color for text output. The old color setting is returned.
-unsigned char textcolor(unsigned char color);
+int textcolor(int color);
 
 // Set the color for the background. The old color setting is returned.
-unsigned char bgcolor(unsigned char color);
+int bgcolor(int color);
 
 // Set the color for the border. The old color setting is returned.
-unsigned char bordercolor(unsigned char color);
+int bordercolor(int color);
 
 // Output a horizontal line with the given length starting at the current
 // cursor position.
-void chline(unsigned char length);
+void chline(int length);
 
 // Same as "gotoxy (x, y); chline (length);"
-void chlinexy(unsigned char x, unsigned char y, unsigned char length);
+void chlinexy(int x, int y, int length);
 
 // Output a vertical line with the given length at the current cursor
 // position.
-void cvline(unsigned char length);
+void cvline(int length);
 
 // Same as "gotoxy (x, y); cvline (length);"
-void cvlinexy(unsigned char x, unsigned char y, unsigned char length);
+void cvlinexy(int x, int y, int length);
 
 
 // Clear part of a line (write length spaces).
-void cclear(unsigned char length);
+void cclear(int length);
 
 // Same as "gotoxy (x, y); cclear (length);"
-void cclearxy(unsigned char x, unsigned char y, unsigned char length);
+void cclearxy(int x, int y, int length);
 
 // Return the current screen size.
-void screensize(unsigned char* x, unsigned char* y);
+void screensize(int* x, int* y);
 
 
 // Non-standard. Added for CMOC
 
-char* cgets(char* s);                       // Borland
-int getch(void);                            // Borland
-int getche(void);                           // Borland
-int putch(int c);                           // Borland
-int ungetch(int c);                         // Borland
+char* cgets(char* s);                           // Borland
+int getch(void);                                // Borland
+int getche(void);                               // Borland
+int putch(int c);                               // Borland
+int ungetch(int c);                             // Borland
 
-void putdn(void);                           // CMOC
-void putup(void);                           // CMOC
-void putlt(void);                           // CMOC
-void putrt(void);                           // CMOC
-void putlf(void);                           // CMOC
+void putdn(void);                               // CMOC
+void putup(void);                               // CMOC
+void putlt(void);                               // CMOC
+void putrt(void);                               // CMOC
+void putlf(void);                               // CMOC
 
-void scrclr(void);                          // CMOC - Clear screen without moving cursor
-void scrup(void);                           // CMOC
+void scrclr(void);                              // CMOC - Clear screen without moving cursor
+void scrup(void);                               // CMOC
 
-void delay(unsigned ticks);                 // CMOC (Ticks are 60hz on a CoCo. Check time.h)
+void delay(unsigned ticks);                     // CMOC (Ticks are 60hz on a CoCo. Check time.h)
 
 // 1 bit for the color set
 
@@ -199,7 +154,7 @@ void delay(unsigned ticks);                 // CMOC (Ticks are 60hz on a CoCo. C
 #define MODE_H0_64X24 (MODE_CSS0 | MODE_HRES | MODE_FONT_PACKED)
 #define MODE_H1_64X24 (MODE_CSS1 | MODE_HRES | MODE_FONT_PACKED)
 
-void textmode(int newmode);                 // Watcom
+void textmode(int newmode);                     // Watcom
 
 // You can save 2K by calling textmode2. textmode() refers to 2 fonts, when you
 // may only need 1. Calling textmode2 with the font you need, will prevent the

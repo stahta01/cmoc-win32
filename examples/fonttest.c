@@ -13,9 +13,9 @@
 
 void cputs_center(char* s)
 {
-    unsigned char w, h;
+    int w, h;
     screensize(&w, &h);
-    gotox((unsigned char)((w - strlen(s)) >> 1));
+    gotox((w - strlen(s)) >> 1);
     cputs(s);
     cputc('\n');
 }
@@ -24,7 +24,7 @@ int main(void)
 {
     int mode = MODE_L0_16X12;
     char s[100];
-    unsigned char w, h;
+    int w, h;
 
     MCLIP(0, 0, 256, 192);
 
@@ -34,7 +34,7 @@ int main(void)
         screensize(&w, &h);
 
         for (unsigned i = 0; i < 1024; i += 8) {
-            gotox((char)((sin6((char)i) >> 5) + (w >> 1)));
+            gotox((sin6((char)i) >> 5) + (w >> 1));
             cputs("*<>*\n");
         }
         clrscr();

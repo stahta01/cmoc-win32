@@ -43,6 +43,7 @@ void cputc(int c)
         _vt52mode = ASCII_NUL;
         break;
     default:
+        _vt52mode = ASCII_NUL;
         switch (c) {
         case ASCII_ESC:
             _vt52mode = ASCII_ESC;
