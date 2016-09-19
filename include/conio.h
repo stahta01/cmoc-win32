@@ -41,7 +41,7 @@ void cputsxy(int x, int y, char* s);
 int cprintf(char* fmt, ...);
 
 // Like vprintf(), but uses direct screen output
-int vcprintf(char* fmt, va_list ap);
+int vcprintf(char* fmt, va_list args);
 
 // Return a character from the keyboard. If there is no character available,
 // the function waits until the user does press a key. If cursor is set to
