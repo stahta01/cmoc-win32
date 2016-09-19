@@ -108,6 +108,10 @@ float_t* _vfrpn(float_t* dst, va_list args)
 
 float_t* _frpn(float_t* dst, ...)
 {
-    return _vfrpn(dst, (va_list)&dst + 1);
+    va_list args;
+    va_start(args, dst);
+    float_t* result = _vfrpn(dst, args);
+    va_end();
+    return result;
 }
 

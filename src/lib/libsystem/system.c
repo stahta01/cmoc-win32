@@ -26,7 +26,10 @@ int system(char* cmd)
 
 int systemf(char* fmt, ...)
 {
-    vsprintf(SYSTEM_CMDLINE, fmt, (va_list)&fmt);
+    va_list args;
+    va_start(args, fmt);
+    vsprintf(SYSTEM_CMDLINE, fmt, args);
+    va_end();
     return _system();
 }
 

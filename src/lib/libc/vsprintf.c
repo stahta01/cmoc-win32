@@ -24,7 +24,6 @@ int vsprintf(char* dst, char* fmt, va_list args)
 {
     int step = (va_list)&fmt - (va_list)&dst;
     char* s = dst;
-    args += step;
     while (*fmt) {
         if (*fmt++ == '%') {
             char isneg = *fmt == '-';

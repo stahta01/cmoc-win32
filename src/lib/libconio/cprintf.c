@@ -3,9 +3,12 @@
 
 int cprintf(char* fmt, ...)
 {
-    char s[BUFSIZ];
-    int result = vsprintf(s, fmt, (va_list)&fmt);
-    cputs(s);
+    char buf[BUFSIZ];
+    va_list args;
+    va_start(args, fmt);
+    int result = vsprintf(buf, fmt, args);
+    va_end();
+    cputs(buf);
     return result;
 }
 

@@ -4,11 +4,10 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="207">
+    <Units Count="216">
       <Unit0>
         <Filename Value="cmoc2.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="28"/>
         <CursorPos X="25" Y="37"/>
         <UsageCount Value="140"/>
@@ -1494,8 +1493,76 @@
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="C++"/>
       </Unit206>
+      <Unit207>
+        <Filename Value="..\..\lib\libbasic\PRINT.c"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="5" Y="9"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit207>
+      <Unit208>
+        <Filename Value="..\..\lib\libc\sprintf.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos Y="6"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit208>
+      <Unit209>
+        <Filename Value="..\..\lib\libc\vsprintf.c"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="16"/>
+        <CursorPos X="5" Y="23"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit209>
+      <Unit210>
+        <Filename Value="..\..\lib\libc\pending\vsprintf.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="8" Y="9"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit210>
+      <Unit211>
+        <Filename Value="..\..\lib\libcoco\backup\system.c.bak"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="23"/>
+        <CursorPos X="32" Y="39"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit211>
+      <Unit212>
+        <Filename Value="..\..\lib\libconio\cprintf.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos Y="7"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit212>
+      <Unit213>
+        <Filename Value="..\..\lib\libstdio\fprintf.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos Y="7"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit213>
+      <Unit214>
+        <Filename Value="..\..\lib\libstdio\printf.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="41" Y="9"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit214>
+      <Unit215>
+        <Filename Value="..\..\lib\libsystem\system.c"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="13"/>
+        <CursorPos X="35" Y="31"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit215>
     </Units>
-    <JumpHistory Count="2" HistoryIndex="1">
+    <JumpHistory Count="4" HistoryIndex="3">
       <Position1>
         <Filename Value="cmoc2.lpr"/>
         <Caret Line="29" Column="16" TopLine="13"/>
@@ -1504,6 +1571,13 @@
         <Filename Value="cmoc2.lpr"/>
         <Caret Line="37" Column="25" TopLine="28"/>
       </Position2>
+      <Position3>
+        <Filename Value="..\..\lib\libbasic\PRINT.c"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\..\lib\libbasic\PRINT.c"/>
+        <Caret Line="7"/>
+      </Position4>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

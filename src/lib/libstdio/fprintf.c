@@ -4,7 +4,10 @@
 int fprintf(FILE* fp, char* fmt, ...)
 {
     char buf[BUFSIZ];
-    int result = vsprintf(buf, fmt, (va_list)&fmt);
+    va_list args;
+    va_start(args, fmt);
+    int result = vsprintf(buf, fmt, args);
+    va_end();
     fputs(buf, fp);
     return result;
 }
