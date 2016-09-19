@@ -79,6 +79,7 @@ Source: "xroar\xroar.conf"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\README"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\COPYING.GPL"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\ChangeLog"; DestDir: "{app}\xroar"; Flags: ignoreversion
+Source: "xroar\roms\*.rom"; DestDir: "{app}\xroar\roms"; Flags: ignoreversion
 Source: "xroar\roms\readme.txt"; DestDir: "{app}\xroar\roms"; Flags: ignoreversion
 
 [Icons]
