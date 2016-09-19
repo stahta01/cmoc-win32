@@ -1,12 +1,11 @@
 
-#pragma target coco
 
 #include <conio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <basic.h>
 
-#define SIMPLE_EFFECT(X) for (unsigned i = 0; i < 256; i++) beep((unsigned char)(X), 0)
+#define SIMPLE_EFFECT(X) for (unsigned i = 0; i < 256; i++) beep(X, 0)
 
 void PlayEffect(int c)
 {
@@ -67,10 +66,10 @@ void PlayAll(void)
     char s[] = "0123456789QWERTY";
     for (;;) {
         for (int i = 0; i < strlen(s); i++) {
-            CLS((byte)i);
-            gotoxy(0, 6);
-            cputs("      PLAYING ALL EFFECTS\n");
-            cputs("     PRESS ANY KEY TO STOP\n");
+            CLS(i & 7);
+            gotoxy(0, 7);
+            cputs("      PLAYING ALL EFFECTS       ");
+            cputs("     PRESS ANY KEY TO STOP      ");
             if (kbhit()) {
                 getch();
                 return;
