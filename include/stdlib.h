@@ -48,7 +48,7 @@ int max(int a, int b);
 int min(int a, int b);
 int abs(int n);
 
-int atoi(char* string);
+int atoi(char* s);
 //long atol(char* string);
 int atexit(void(*func)(void));
 void* bsearch(void* keyval, void* base, size_t num, size_t width,
@@ -57,13 +57,13 @@ void* bsearch(void* keyval, void* base, size_t num, size_t width,
 void div(div_t* result, int numer, int denom);
 void exit(int status);
 char* _getcmd(void);
-char* itoa(int value, char* string, int radix);
-char* utoa(unsigned value, char* string, int radix);
+char* itoa(int value, char* s, int radix);
+char* utoa(unsigned value, char* s, int radix);
 void ldiv(ldiv_t* result, long numer, long denom);
 char* ltoa(long value, char* string, int radix);
 void qsort(void* base, size_t num, size_t width, int(*cmp)(void* elem1, void* elem2));
 int rand(void);
-void srand(unsigned int seed);
+void srand(unsigned seed);
 long strtol(char* nptr, char** endptr, int base);
 unsigned long strtoul(char* nptr, char** endptr, int base);
 
@@ -82,7 +82,7 @@ unsigned getenvuint(char* name);
 void uldiv(uldiv_t* result, unsigned long numer, unsigned long denom);
 char* ultoa(unsigned long value, char* string, int radix);
 
-void beep(unsigned char _Frequency, unsigned _Duration);
+void beep(int frequency, int duration);
 
 #endif
 

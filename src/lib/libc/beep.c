@@ -1,10 +1,10 @@
 
 #include "_libc.h"
 
-void beep(unsigned char tone, unsigned duration)
+void beep(int tone, int duration)
 {
-    _sndton = tone;
-    _snddur = duration;
+    _sndton = (char)tone;
+    _snddur = (char)duration;
     system_sound();
 }
 

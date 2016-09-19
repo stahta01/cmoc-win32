@@ -12,5 +12,8 @@ void* realloc(void* mem, int size);
 
 extern int heap_memory[1];                      // INTERNAL USE ONLY
 
+#define new(A)     ((A*)calloc(sizeof(A), 1))
+#define delete(A)  free(A)
+
 #endif
 
