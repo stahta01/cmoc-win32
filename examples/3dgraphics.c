@@ -1,5 +1,4 @@
 
-#pragma options -machine=coco3
 
 #include <stdio.h>
 #include <stdlib.h>

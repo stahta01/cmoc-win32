@@ -70,17 +70,21 @@ end;
 
 procedure CCmocProcess_TOOLS.CMOC(const ADst, ASrc: TFileName; const AWerror, AVerbose: boolean);
 var
-  LPre: TFileName;
   LSingleEntry: boolean;
   LParams: TStringDynArray;
 begin
   if OCmoc.FileChanged(ADst, ASrc) then begin
-    LPre := ASrc + FileExt_I;
-
     LParams := default(TStringDynArray);
-
-    LSingleEntry := False;
-
+    OCmoc.SourcePragmas(ASrc, ASrc, FOrigin, FTarget, FOptions);
+    // Currently -O2 has some bugs. So, we must use -O1
+    LParams := TStringDynArray.Create(Opt_EmitUncalled1, Opt_DontLink1, '-O1');
+    if AWerror then begin
+      OStringDynArray.Add(LParams, Opt_Werror1);
+    end;
+    if AVerbose then begin
+      OStringDynArray.Add(LParams, Opt_Verbose1);
+    end;
+    LSingleEntry := True;
     OStringDynArray.AddDefine(LParams, Def_CMOC, Ver_CMOC, LSingleEntry);
     OStringDynArray.AddDefine(LParams, Def_6809, EmptyStr, LSingleEntry);
     OStringDynArray.AddDefine(LParams, '__' + UpperCase(FTarget) + '__', EmptyStr, LSingleEntry);
@@ -93,25 +97,10 @@ begin
     OStringDynArray.AddDefine(LParams, 'long', 'int', LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'restrict', EmptyStr, LSingleEntry);
     OStringDynArray.AddInclude(LParams, OCmoc.PathToPackage + 'include', LSingleEntry);
-
-    MCPP(LPre, ASrc, LParams);
-
-    OCmoc.SourcePragmas(LPre, LPre, FOrigin, FTarget, FOptions);
-
-    LParams := TStringDynArray.Create(Opt_EmitUncalled1, Opt_DontLink1);
-    // Currently -O2 has some bugs. So, we must use -O1
-    OStringDynArray.Add(LParams, '-O1');
-    if AWerror then begin
-      OStringDynArray.Add(LParams, Opt_Werror1);
-    end;
-    if AVerbose then begin
-      OStringDynArray.Add(LParams, Opt_Verbose1);
-    end;
-    //StringDynArrayAppend(LParams, Opt_Optimize0);
-    OStringDynArray.Add(LParams, ExtractFileName(LPre));
-    ExecuteTool(Tool_CMOC, LParams, ExtractFilePath(LPre));
+    OStringDynArray.Add(LParams, ExtractFileName(ASrc));
+    ExecuteTool(Tool_CMOC, LParams, ExtractFilePath(ASrc));
     DeleteFile(ADst);
-    RenameFile(LPre + FileExt_ASM, ADst);
+    RenameFile(ChangeFileExt(ASrc, FileExt_ASM), ADst);
   end;
 end;
 

@@ -444,10 +444,16 @@ begin
 end;
 
 constructor CCmocProcess.Create(AOwner: TComponent);
+var
+  LIndex: integer;
 begin
   inherited;
   ShowWindow := swoHIDE;
   Options := [poUsePipes, poStderrToOutput];
+  for LIndex := 0 to GetEnvironmentVariableCount - 1 do begin
+    Environment.Add(GetEnvironmentString(LIndex));
+  end;
+  Environment.Values['path'] := OCmoc.PathToBin + PathSeparator + Environment.Values['path'];
 end;
 
 procedure CCmocProcess.CheckExitCode(const AExitCode: longint);
