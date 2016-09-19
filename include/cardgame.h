@@ -14,8 +14,6 @@ Version 0.1.2 - 2016-??-?? - setConsoleOutHook() and resetConsoleOutHook()
 #ifndef _CARDGAME_H
 #define _CARDGAME_H
 
-#include <sys/byte.h>
-
 #define NUMCARDS                54
 #define BAD_CARD_SUIT           0xFF
 #define BAD_CARD_VALUE          0

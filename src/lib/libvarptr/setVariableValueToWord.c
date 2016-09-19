@@ -4,7 +4,7 @@
 //FIXME: doc
 char _setVariableValueToWord(char* name, word newAbsValue, byte isNegative)
 {
-    byte* desc = (byte*) _findSimpleVariable(name, FALSE);
+    byte* desc = (byte*) _findSimpleVariable(name, false);
     //printf("SET(%s, %u, %u): %p\n", name, newAbsValue, isNegative, desc);
     if (!desc) {
         return -1;

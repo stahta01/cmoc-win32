@@ -10,7 +10,5 @@
 #define TRUE  1
 #endif
 
-#include <sys/byte.h>
-
 #endif
 

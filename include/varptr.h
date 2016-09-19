@@ -25,8 +25,6 @@
 #ifndef _VARPTR_H
 #define _VARPTR_H
 
-#include <sys/byte.h>
-
 // Similar to findSimpleVariable(), but only searches the array variables.
 // A null pointer is returned if the variable is not found.
 // See also: getArrayNumberOfDimension(), getArrayDimensions(), getArrayElement().

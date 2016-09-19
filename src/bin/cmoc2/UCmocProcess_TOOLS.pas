@@ -90,6 +90,10 @@ begin
     OStringDynArray.AddDefine(LParams, '__' + UpperCase(FTarget) + '__', EmptyStr, LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'nullptr', '0', LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'bool', 'unsigned char', LSingleEntry);
+    OStringDynArray.AddDefine(LParams, 'byte', 'unsigned char', LSingleEntry);
+    OStringDynArray.AddDefine(LParams, 'sbyte', 'char', LSingleEntry);
+    OStringDynArray.AddDefine(LParams, 'word', 'unsigned', LSingleEntry);
+    OStringDynArray.AddDefine(LParams, 'sword', 'int', LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'false', '0', LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'true', '1', LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'const', EmptyStr, LSingleEntry);

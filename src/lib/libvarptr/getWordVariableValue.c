@@ -10,7 +10,7 @@
 //
 char _getWordVariableValue(char* name, word* absValue, byte* isNegative)
 {
-    byte* desc = (byte*) _findSimpleVariable(name, FALSE);
+    byte* desc = (byte*) _findSimpleVariable(name, false);
     if (!desc) {
         return -1;
     }

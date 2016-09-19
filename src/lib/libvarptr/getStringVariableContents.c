@@ -13,7 +13,7 @@
 //
 byte _getStringVariableContents(char* name, char** contents)
 {
-    byte* desc = (byte*) _findSimpleVariable(name, TRUE);
+    byte* desc = (byte*) _findSimpleVariable(name, true);
     if (!desc) {
         *contents = 0;
         return 0;
