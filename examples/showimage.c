@@ -1,5 +1,4 @@
 
-#pragma options -machine=cocous -f=decb
 
 #include <string.h>
 #include <conio.h>
