@@ -20,8 +20,8 @@ void ClearBoard(void)
 
 void PlayGame(void)
 {
-    int ball_x = i2f6(31), ball_xx = 63;
-    int ball_y = i2f6(16), ball_yy = 60;
+    int ball_x = i2f6(31), ball_xx = 53;
+    int ball_y = i2f6(16), ball_yy = 50;
     byte ball_sx = (byte)f2i6(ball_x);
     byte ball_sy = (byte)f2i6(ball_y);
 

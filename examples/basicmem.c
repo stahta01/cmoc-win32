@@ -1,5 +1,4 @@
 
-#pragma options -machine=coco
 
 #include <stdio.h>
 #include <equates.h>
