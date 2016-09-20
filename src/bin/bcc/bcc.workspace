@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="Workspace">
+		<Project filename="bcc-cc1.cbp" />
+		<Project filename="bcc.cbp" />
+		<Project filename="bcc-cpp.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>

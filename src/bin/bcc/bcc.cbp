@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="bcc" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="../../../bin/bcc" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-ansi" />
+					<Add option="-m32" />
+					<Add option="-DMC6809" />
+					<Add option="-DMSDOS" />
+					<Add directory=".." />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-m32" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="bcc/align.h" />
+		<Unit filename="bcc/assign.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/bcc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/bcc.h" />
+		<Unit filename="bcc/byteord.h" />
+		<Unit filename="bcc/codefrag.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/condcode.h" />
+		<Unit filename="bcc/const.h" />
+		<Unit filename="bcc/dbnode.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/dbprintf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/debug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/debug.h" />
+		<Unit filename="bcc/declare.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/express.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/exptree.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/floatop.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/function.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/gencode.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/gencode.h" />
+		<Unit filename="bcc/genloads.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/glogcode.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/hardop.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/hashcmd.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/input.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/input.h" />
+		<Unit filename="bcc/label.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/label.h" />
+		<Unit filename="bcc/loadexp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/longop.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/os.h" />
+		<Unit filename="bcc/output.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/output.h" />
+		<Unit filename="bcc/parse.h" />
+		<Unit filename="bcc/preproc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/preserve.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/proto.h" />
+		<Unit filename="bcc/reg.h" />
+		<Unit filename="bcc/sc.h" />
+		<Unit filename="bcc/scan.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/scan.h" />
+		<Unit filename="bcc/sizes.h" />
+		<Unit filename="bcc/softop.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/state.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/sysproto.h" />
+		<Unit filename="bcc/table.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/table.h" />
+		<Unit filename="bcc/type.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bcc/type.h" />
+		<Unit filename="bcc/types.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
