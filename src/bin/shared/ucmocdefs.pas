@@ -27,7 +27,8 @@ interface
 
 const
 
-  Ver_CMOC = '0.1.31';
+  Ver_CMOC = '0.1.32';
+  Ver_LWTOOLS = '4.13';
 
   Char_SPC = char(#32);
   Char_TAB = char(#9);
@@ -135,6 +136,9 @@ const
   Sym_WritableGlobalsStart = 'writable_globals_start';
   Sym_INITGL = 'INITGL';
   Sym_INITLIB = 'INITLIB';
+
+  Env_PATH = 'PATH';
+  Env_PKGDATADIR = 'PKGDATADIR';
 
 implementation
 

@@ -7,13 +7,13 @@
 		<Option compiler="gcc" />
 		<Option show_notes="0">
 			<notes>
-				<![CDATA[2 CHANGES FOR WINCMOC
+				<![CDATA[3 CHANGES FOR WINCMOC
 
-TranslationUnit.cpp
-
+FILE: main.c
+LINE: 49 // Remove. We have a PROGRAM define.
+FILE: TranslationUnit.cpp
 LINE 216: Remove error for non declared functions
 //   it->second->errormsg("function %s() declared and called but not defined", funcId.c_str());
-
 LINE 1283: Remove ignore extern
 else if (0) //dsl->isExternDeclaration())
 
@@ -51,7 +51,7 @@ Automake
 					<Add option="-m32" />
 					<Add option='-DPROGRAM=\&quot;cmoc\&quot;' />
 					<Add option='-DPACKAGE=\&quot;CMOC\&quot;' />
-					<Add option='-DVERSION=\&quot;0.1.31\&quot;' />
+					<Add option='-DVERSION=\&quot;0.1.32\&quot;' />
 					<Add option='-DPKGDATADIR=\&quot;PKGDATADIR_IS_UNDEFINED\&quot;' />
 				</Compiler>
 				<Linker>

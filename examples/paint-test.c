@@ -1,5 +1,4 @@
 
-#pragma target coco
 
 #include <basic.h>
 #include <unistd.h>

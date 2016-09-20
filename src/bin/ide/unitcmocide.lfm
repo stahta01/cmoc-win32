@@ -2586,9 +2586,6 @@ object FormCmocIDE: TFormCmocIDE
         ImageIndex = 26
         OnClick = MenuHelpClick
       end
-      object MenuHelpSep4: TMenuItem
-        Enabled = False
-      end
       object MenuHelpColorBasicSummary: TMenuItem
         Caption = 'Color Basic Summary ...'
         Bitmap.Data = {

@@ -114,7 +114,6 @@ type
     MenuHelpSep2: TMenuItem;
     MenuHelpSep1: TMenuItem;
     MenuEmulatorsCoCo2: TMenuItem;
-    MenuHelpSep4: TMenuItem;
     MenuItem3: TMenuItem;
     MenuEmulatorsEDTASM: TMenuItem;
     MenuEmulatorsSep2: TMenuItem;
@@ -285,7 +284,8 @@ begin
     WindowState := wsMaximized;
   end;
 
-  WriteLn('// Welcome to ' + Application.Title);
+  WriteLn('// Welcome to ', Application.Title);
+  WriteLn('// Using: CMOC v', Ver_CMOC, ' + LWTOOLS v', Ver_LWTOOLS);
 end;
 
 procedure TFormCmocIDE.FormCloseQuery(ASender: TObject; var ACanClose: boolean);

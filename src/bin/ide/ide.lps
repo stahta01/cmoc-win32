@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="84">
+    <Units Count="85">
       <Unit0>
         <Filename Value="ide.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -21,8 +21,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="11"/>
-        <CursorPos X="48" Y="32"/>
+        <TopLine Value="270"/>
+        <CursorPos X="36" Y="288"/>
         <UsageCount Value="96"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -659,8 +659,16 @@
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="C++"/>
       </Unit83>
+      <Unit84>
+        <Filename Value="..\shared\ucmocdefs.pas"/>
+        <UnitName Value="UCmocDefs"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="21" Y="30"/>
+        <UsageCount Value="10"/>
+      </Unit84>
     </Units>
-    <JumpHistory Count="10" HistoryIndex="9">
+    <JumpHistory Count="11" HistoryIndex="10">
       <Position1>
         <Filename Value="unitcmocide.pas"/>
         <Caret Line="244" Column="16" TopLine="235"/>
@@ -701,6 +709,10 @@
         <Filename Value="unitcmocide.pas"/>
         <Caret Line="23" Column="29" TopLine="19"/>
       </Position10>
+      <Position11>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="288" Column="36" TopLine="270"/>
+      </Position11>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

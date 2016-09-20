@@ -39,8 +39,6 @@ type
       const ASingleEntry: boolean);
     class procedure AddDefine(var A: TStringDynArray; const AName, AValue: string;
       const ASingleEntry: boolean);
-    class procedure AddInclude(var A: TStringDynArray; const AFilePath: TFileName;
-      const ASingleEntry: boolean);
     class procedure AddLib(var A: TStringDynArray; const AName: string);
     class procedure AddLibs(var A: TStringDynArray);
     class procedure AddOptions(var A: TStringDynArray; const AOptions: TStrings;
@@ -85,12 +83,6 @@ begin
     Add(A, AOption);
     Add(A, AValue);
   end;
-end;
-
-class procedure OStringDynArray.AddInclude(var A: TStringDynArray;
-  const AFilePath: TFileName; const ASingleEntry: boolean);
-begin
-  AddOption(A, Opt_Include2, AFilePath, ASingleEntry);
 end;
 
 class procedure OStringDynArray.AddDefine(var A: TStringDynArray;

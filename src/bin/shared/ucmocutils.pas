@@ -453,7 +453,8 @@ begin
   for LIndex := 0 to GetEnvironmentVariableCount - 1 do begin
     Environment.Add(GetEnvironmentString(LIndex));
   end;
-  Environment.Values['path'] := OCmoc.PathToBin + PathSeparator + Environment.Values['path'];
+  Environment.Values[Env_PATH] := OCmoc.PathToBin + PathSeparator + Environment.Values[Env_PATH];
+  Environment.Values[Env_PKGDATADIR] := OCmoc.PathToInclude;
 end;
 
 procedure CCmocProcess.CheckExitCode(const AExitCode: longint);

@@ -2746,7 +2746,7 @@
 1468170709 source:c:\dev\cmoc-win32\src\bin\cmoc\src\semanticschecker.cpp
 	"SemanticsChecker.h"
 
-1473612207 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\asmtext.cpp
+1473904250 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\asmtext.cpp
 	"ASMText.h"
 	"Pseudo6809.h"
 	"TranslationUnit.h"
@@ -2798,14 +2798,14 @@
 	"util.h"
 	<stack>
 
-1472172185 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\translationunit.h
+1473898348 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\translationunit.h
 	"util.h"
 	"Scope.h"
 
-1458867609 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\scope.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\scope.h
 	"Tree.h"
 
-1469401387 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\tree.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\tree.h
 	"util.h"
 	"CodeStatus.h"
 	"ASMText.h"
@@ -2813,13 +2813,13 @@
 1437853408 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\codestatus.h
 	"util.h"
 
-1468170709 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\functiondef.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\functiondef.h
 	"FormalParamList.h"
 
 1437853408 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\formalparamlist.h
 	"TreeSequence.h"
 
-1462506176 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\treesequence.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\treesequence.h
 	"Tree.h"
 
 1473619587 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\assemblerstmt.cpp
@@ -2828,16 +2828,16 @@
 	"SemanticsChecker.h"
 	"ASMText.h"
 
-1473619587 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\assemblerstmt.h
+1473910496 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\assemblerstmt.h
 	"Declaration.h"
 
-1472271268 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\declaration.h
+1473910496 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\declaration.h
 	"Tree.h"
 
 1468132582 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\semanticschecker.h
 	"FunctionDef.h"
 
-1471142317 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\binaryopexpr.cpp
+1473911037 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\binaryopexpr.cpp
 	"BinaryOpExpr.h"
 	"TranslationUnit.h"
 	"VariableExpr.h"
@@ -2849,27 +2849,28 @@
 	"CastExpr.h"
 	"ClassDef.h"
 	"ObjectMemberExpr.h"
+	"FunctionCallExpr.h"
 	<assert.h>
 
-1469500738 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\binaryopexpr.h
+1473911037 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\binaryopexpr.h
 	"Tree.h"
 
-1469401387 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\variableexpr.h
+1473910498 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\variableexpr.h
 	"Tree.h"
 
-1462506176 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\wordconstantexpr.h
+1473910498 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\wordconstantexpr.h
 	"Tree.h"
 
-1469401386 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\identifierexpr.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\identifierexpr.h
 	"Tree.h"
 
-1469498039 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\unaryopexpr.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\unaryopexpr.h
 	"Tree.h"
 
-1473379033 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\castexpr.h
+1473910496 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\castexpr.h
 	"Tree.h"
 
-1447614019 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\classdef.h
+1473910496 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\classdef.h
 	"Tree.h"
 	"Declarator.h"
 	"util.h"
@@ -2878,7 +2879,7 @@
 	<string>
 	"util.h"
 
-1462506175 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\objectmemberexpr.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\objectmemberexpr.h
 	"ClassDef.h"
 
 1473379033 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\castexpr.cpp
@@ -2903,7 +2904,7 @@
 	"ConditionalExpr.h"
 	"TranslationUnit.h"
 
-1466483332 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\conditionalexpr.h
+1473910496 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\conditionalexpr.h
 	"Tree.h"
 
 1472696641 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\declaration.cpp
@@ -2919,7 +2920,7 @@
 	"SemanticsChecker.h"
 	<assert.h>
 
-1471916098 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\stringliteralexpr.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\stringliteralexpr.h
 	"Tree.h"
 
 1466230658 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\expressiontypesetter.h
@@ -2958,7 +2959,7 @@
 	"FormalParamList.h"
 	"DeclarationSpecifierList.h"
 
-1469401386 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\formalparameter.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\formalparameter.h
 	"Tree.h"
 
 1469498111 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\expressiontypesetter.cpp
@@ -2974,7 +2975,7 @@
 	"VariableExpr.h"
 	"IdentifierExpr.h"
 
-1469498112 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\functioncallexpr.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\functioncallexpr.h
 	"Tree.h"
 
 1469401386 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\formalparameter.cpp
@@ -2988,10 +2989,10 @@
 	"UnaryOpExpr.h"
 	"BinaryOpExpr.h"
 
-1462506174 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\forstmt.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\forstmt.h
 	"Tree.h"
 
-1469498112 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\functioncallexpr.cpp
+1473910378 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\functioncallexpr.cpp
 	"FunctionCallExpr.h"
 	"TranslationUnit.h"
 	"TreeSequence.h"
@@ -3006,7 +3007,7 @@
 	"FormalParameter.h"
 	"UnaryOpExpr.h"
 
-1472172185 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\functiondef.cpp
+1473898417 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\functiondef.cpp
 	"FunctionDef.h"
 	"Scope.h"
 	"DeclarationSequence.h"
@@ -3037,13 +3038,13 @@
 	"Declarator.h"
 	"Declaration.h"
 
-1462506176 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\whilestmt.h
+1473910498 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\whilestmt.h
 	"Tree.h"
 
-1466270135 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\jumpstmt.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\jumpstmt.h
 	"Tree.h"
 
-1466273660 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\labeledstmt.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\labeledstmt.h
 	"Declaration.h"
 
 1469401386 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\identifierexpr.cpp
@@ -3057,7 +3058,7 @@
 	"TranslationUnit.h"
 	"BinaryOpExpr.h"
 
-1462506175 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\ifstmt.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\ifstmt.h
 	"Tree.h"
 
 1473379033 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\jumpstmt.cpp
@@ -3234,4 +3235,27 @@
 1462506176 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\wordconstantexpr.cpp
 	"WordConstantExpr.h"
 	"TranslationUnit.h"
+
+1474163386 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\lexer.cc
+	<stdio.h>
+	<string.h>
+	<errno.h>
+	<stdlib.h>
+	<inttypes.h>
+	<string.h>
+	<string>
+	"DeclarationSequence.h"
+	"CompoundStmt.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"TranslationUnit.h"
+	"FunctionDef.h"
+	"ClassDef.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"DeclarationSpecifierList.h"
+	"parser.hh"
+	<unistd.h>
+
+1472258656 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\parser.hh
 

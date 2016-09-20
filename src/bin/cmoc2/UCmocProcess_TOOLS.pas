@@ -100,7 +100,6 @@ begin
     OStringDynArray.AddDefine(LParams, '__fastcall__', EmptyStr, LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'long', 'int', LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'restrict', EmptyStr, LSingleEntry);
-    OStringDynArray.AddInclude(LParams, OCmoc.PathToPackage + 'include', LSingleEntry);
     OStringDynArray.Add(LParams, ExtractFileName(ASrc));
     ExecuteTool(Tool_CMOC, LParams, ExtractFilePath(ASrc));
     DeleteFile(ADst);

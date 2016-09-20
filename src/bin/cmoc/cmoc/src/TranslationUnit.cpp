@@ -213,7 +213,7 @@ public:
             if (! TranslationUnit::instance().isStandardFunction(funcId)
                     && calledFunctions.find(funcId) != calledFunctions.end())
             {
-                it->second->errormsg("function %s() declared and called but not defined", funcId.c_str());
+//                it->second->errormsg("function %s() declared and called but not defined", funcId.c_str());
             }
         }
     }
@@ -1280,7 +1280,7 @@ TranslationUnit::createDeclarationSequence(DeclarationSpecifierList *dsl,
                 (void) tm.addTypeDef(td, *it);  // destroys the Declarator object
         ds = NULL;
     }
-    else if (dsl->isExternDeclaration())
+    else if (0) //dsl->isExternDeclaration())
     {
         // Ignore the declarators in a 'extern' declaration because
         // separate compilation is not supported.

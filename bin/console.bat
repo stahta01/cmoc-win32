@@ -4,6 +4,7 @@ color A0
 set PATH=%CD%\;%PATH%
 set PATH=%CD%\..\xroar;%PATH%
 set PATH=%CD%\..\vcc;%PATH%
+set PKGDATADIR=%CD%\..\include\
 
 echo WinCMOC Build Environment
 echo -------------------------
