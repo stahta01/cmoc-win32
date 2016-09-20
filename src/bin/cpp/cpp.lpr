@@ -50,7 +50,7 @@ uses
     while not LParser.Done do begin
       LParser.ParseUntil(OCharSet.Graph);
       LParser.TokenClear;
-      LParser.ParseParamater;
+      LParser.ParseParameter;
       if LIndex > 0 then begin
         LParam := LParser.TokenAsString;
         if Length(LParam) > 0 then begin

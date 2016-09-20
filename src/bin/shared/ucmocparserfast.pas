@@ -44,7 +44,7 @@ type
     procedure ParseWhile(A: TSysCharSet);
     procedure ParseUntil(A: TSysCharSet);
   public
-    procedure ParseParamater;
+    procedure ParseParameter;
   end;
 
 implementation
@@ -92,7 +92,7 @@ begin
   end;
 end;
 
-procedure TParserFast.ParseParamater;
+procedure TParserFast.ParseParameter;
 begin
   while FPos^ in OCharSet.Graph do begin
     if FPos^ = '''' then begin
