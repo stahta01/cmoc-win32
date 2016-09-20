@@ -23,8 +23,8 @@ int toascii(int c);
 int toupper(int c);
 int tolower(int c);
 
-#define _isascii(_c) ((_c) > 0 && (_c) <= 0x7f)
-#define _iscntrl(_c) (((_c) > 0) && (((_c) < ' ') || ((_c) == 0x7f)))
+#define _isascii(_c) ((_c) >= 0 && (_c) <= 0x7f)
+#define _iscntrl(_c) (((_c) >= 0) && (((_c) < ' ') || ((_c) == 0x7f)))
 #define _isdigit(_c) ((_c) >= '0' && (_c) <= '9')
 #define _isupper(_c) ((_c) >= 'A' && (_c) <= 'Z')
 #define _islower(_c) ((_c) >= 'a' && (_c) <= 'z')

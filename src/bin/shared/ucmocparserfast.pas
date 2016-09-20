@@ -19,56 +19,93 @@
  ***************************************************************************
 }
 
-program cpp;
+unit UCmocParserFast;
 
 {$INCLUDE cmoc.inc}
 
+interface
+
 uses
-  Classes,
-  FileUtil,
-  SysUtils,
-  Types,
-  UCmocCharSet,
-  UCmocDefs,
-  UCmocParserFast,
-  UCmocStringDynArray;
-
-{$R *.res}
+  SysUtils, UCmocCharSet;
 
 
-  procedure Main;
-  var
-    LIndex: integer;
-    LParam: string;
-    LParams: TStringDynArray;
-    LParser: TParserFast;
-  begin
-    LParser := default(TParserFast);
-    LParams := TStringDynArray.Create('-P', '-a', '-W', '0');
-    LParser.SetParser(CmdLine);
-    LIndex := 0;
-    while not LParser.Done do begin
-      LParser.ParseUntil(OCharSet.Graph);
-      LParser.TokenClear;
-      LParser.ParseParamater;
-      if LIndex > 0 then begin
-        LParam := LParser.TokenAsString;
-        if Length(LParam) > 0 then begin
-          if LParam[1] = '-' then begin
-            if (Length(LParam) > 1) and (LParam[2] in ['D', 'I', 'U']) then begin
-              OStringDynArray.Add(LParams, '-' + LParam[2]);
-              OStringDynArray.Add(LParams, AnsiDequotedStr(Copy(LParam, 3, MaxInt), ''''));
-            end;
-          end else begin
-            OStringDynArray.Add(LParams, LParam);
-          end;
-        end;
-      end;
-      Inc(LIndex);
-    end;
-    ExecuteProcess(ProgramDirectory + Tool_MCPP, LParams, [ExecInheritsHandles]);
+
+type
+  TParserFast = object
+  strict private
+    FBeg, FTok, FPos: pchar;
+  public
+    procedure SetParser(const A: pchar);
+    procedure Rewind;
+    procedure TokenClear;
+    function Done: boolean;
+    function TokenAsString: string;
+  public
+    procedure ParseWhile(A: TSysCharSet);
+    procedure ParseUntil(A: TSysCharSet);
+  public
+    procedure ParseParamater;
   end;
 
+implementation
+
+procedure TParserFast.SetParser(const A: pchar);
 begin
-  Main;
+  FBeg := A;
+  Rewind;
+end;
+
+procedure TParserFast.Rewind;
+begin
+  FPos := FBeg;
+  TokenClear;
+end;
+
+procedure TParserFast.TokenClear;
+begin
+  FTok := FPos;
+end;
+
+function TParserFast.Done: boolean;
+begin
+  Result := FPos^ = #0;
+end;
+
+function TParserFast.TokenAsString: string;
+begin
+  SetString(Result, FTok, FPos - FTok);
+end;
+
+procedure TParserFast.ParseWhile(A: TSysCharSet);
+begin
+  Exclude(A, #0);
+  while FPos^ in A do begin
+    Inc(FPos);
+  end;
+end;
+
+procedure TParserFast.ParseUntil(A: TSysCharSet);
+begin
+  Include(A, #0);
+  while not (FPos^ in A) do begin
+    Inc(FPos);
+  end;
+end;
+
+procedure TParserFast.ParseParamater;
+begin
+  while FPos^ in OCharSet.Graph do begin
+    if FPos^ = '''' then begin
+      repeat
+        Inc(FPos);
+      until FPos^ in [#0, ''''];
+      if FPos^ <> #0 then begin
+        Inc(FPos);
+      end;
+    end else begin
+      Inc(FPos);
+    end;
+  end;
+end;
+
 end.

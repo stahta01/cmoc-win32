@@ -44,10 +44,10 @@
 
 void PrintUsedSpace(void)
 {
-    printf("PROGRAM          %d\n", getSpaceUsedByProgram());
-    printf("SIMPLE VARIABLES %d\n", getSpaceUsedBySimpleVariables());
-    printf("ARRAY VARIABLES  %d\n", getSpaceUsedByArrayVariables());
-    printf("STRING RESERVE   %d\n", getSpaceReservedForStrings());
+    printf("PROGRAM          %d\n", _getSpaceUsedByProgram());
+    printf("SIMPLE VARIABLES %d\n", _getSpaceUsedBySimpleVariables());
+    printf("ARRAY VARIABLES  %d\n", _getSpaceUsedByArrayVariables());
+    printf("STRING RESERVE   %d\n", _getSpaceReservedForStrings());
     puts("PRESS ANY KEY");
     getch();
 }
@@ -59,7 +59,7 @@ int main(void)
     system("A$=\"THIS IS A BASIC STRING\"");
 
     char* contents;
-    byte length = getStringVariableContents("A", &contents); // A$
+    byte length = _getStringVariableContents("A", &contents); // A$
 
     if (contents) {                             // if A$ is defined
         fwrite(contents, 1, length, stdout);    // print A$
@@ -71,17 +71,17 @@ int main(void)
 
     system("A=4321");
     system("?\"A=\"A");
-    setVariableValueToWord("A", 1234, 1);
+    _setVariableValueToWord("A", 1234, 1);
     system("?\"A=\"A");
     PrintUsedSpace();
 
     unsigned value;
     unsigned char sign;
-    getWordVariableValue("A", &value, &sign);
+    _getWordVariableValue("A", &value, &sign);
     printf("VALUE OF A=%c%d\n", sign ? '-' : '+', value);
 
-    setVariableValueToWord("A", 5432, 0);
-    getWordVariableValue("A", &value, &sign);
+    _setVariableValueToWord("A", 5432, 0);
+    _getWordVariableValue("A", &value, &sign);
     printf("VALUE OF A=%c%d\n", sign ? '-' : '+', value);
 
     puts("BACK TO BASIC");
