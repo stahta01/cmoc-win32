@@ -4,13 +4,12 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="11">
+    <Units Count="18">
       <Unit0>
         <Filename Value="cpp.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="50"/>
-        <CursorPos X="16" Y="48"/>
+        <TopLine Value="44"/>
+        <CursorPos X="37" Y="51"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -74,10 +73,12 @@
       <Unit9>
         <Filename Value="..\shared\ucmoccharset.pas"/>
         <UnitName Value="UCmocCharSet"/>
-        <EditorIndex Value="-1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
         <TopLine Value="26"/>
-        <CursorPos X="10" Y="42"/>
+        <CursorPos X="5" Y="43"/>
         <UsageCount Value="20"/>
+        <Loaded Value="True"/>
       </Unit9>
       <Unit10>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\amunits\src\coreunits\locale.pas"/>
@@ -86,100 +87,145 @@
         <CursorPos X="17" Y="280"/>
         <UsageCount Value="10"/>
       </Unit10>
+      <Unit11>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\gtk2\src\glib\glib2.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1071"/>
+        <CursorPos X="32" Y="1085"/>
+        <UsageCount Value="10"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\gtk2\src\glib\gstrfuncs.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="20"/>
+        <CursorPos X="4" Y="31"/>
+        <UsageCount Value="10"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="C:\lazarus\components\aggpas\src\platform\linux\file_utils_.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="189"/>
+        <CursorPos X="7" Y="199"/>
+        <UsageCount Value="10"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="C:\lazarus\components\codetools\basiccodetools.pas"/>
+        <UnitName Value="BasicCodeTools"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1948"/>
+        <CursorPos X="3" Y="1958"/>
+        <UsageCount Value="10"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="C:\lazarus\components\codetools\ctxmlfixfragment.pas"/>
+        <UnitName Value="CTXMLFixFragment"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="254"/>
+        <CursorPos X="5" Y="263"/>
+        <UsageCount Value="10"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\fv\src\stddlg.pas"/>
+        <UnitName Value="StdDlg"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="693"/>
+        <CursorPos X="36" Y="702"/>
+        <UsageCount Value="10"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="C:\lazarus\lcl\maskedit.pp"/>
+        <UnitName Value="MaskEdit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="961"/>
+        <CursorPos X="70" Y="968"/>
+        <UsageCount Value="10"/>
+      </Unit17>
     </Units>
-    <JumpHistory Count="23" HistoryIndex="22">
+    <JumpHistory Count="21" HistoryIndex="20">
       <Position1>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="11" Column="19"/>
+        <Caret Line="57" Column="20" TopLine="36"/>
       </Position1>
       <Position2>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="20" Column="26" TopLine="4"/>
+        <Caret Line="29" Column="17" TopLine="13"/>
       </Position2>
       <Position3>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="8" Column="13"/>
+        <Caret Line="24" Column="13" TopLine="17"/>
       </Position3>
       <Position4>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="57" Column="20" TopLine="36"/>
+        <Caret Line="48" Column="28" TopLine="34"/>
       </Position4>
       <Position5>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="29" Column="17" TopLine="13"/>
+        <Caret Line="30" Column="14" TopLine="26"/>
       </Position5>
       <Position6>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="24" Column="13" TopLine="17"/>
+        <Caret Line="29" Column="15" TopLine="17"/>
       </Position6>
       <Position7>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="48" Column="28" TopLine="34"/>
+        <Caret Line="49" Column="44" TopLine="40"/>
       </Position7>
       <Position8>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="30" Column="14" TopLine="26"/>
+        <Caret Line="87" Column="33" TopLine="71"/>
       </Position8>
       <Position9>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="29" Column="15" TopLine="17"/>
+        <Caret Line="86" Column="84" TopLine="73"/>
       </Position9>
       <Position10>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="49" Column="44" TopLine="40"/>
+        <Caret Line="28" Column="11" TopLine="17"/>
       </Position10>
       <Position11>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="87" Column="33" TopLine="71"/>
+        <Caret Line="46" Column="12" TopLine="33"/>
       </Position11>
       <Position12>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="86" Column="84" TopLine="73"/>
+        <Caret Line="45" Column="37" TopLine="37"/>
       </Position12>
       <Position13>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="28" Column="11" TopLine="17"/>
+        <Caret Line="47" Column="32" TopLine="36"/>
       </Position13>
       <Position14>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="46" Column="12" TopLine="33"/>
+        <Caret Line="49" Column="27" TopLine="38"/>
       </Position14>
       <Position15>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="45" Column="37" TopLine="37"/>
+        <Caret Line="51" Column="29" TopLine="40"/>
       </Position15>
       <Position16>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="47" Column="32" TopLine="36"/>
+        <Caret Line="51" Column="22" TopLine="44"/>
       </Position16>
       <Position17>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="49" Column="27" TopLine="38"/>
+        <Caret Line="52" Column="21" TopLine="43"/>
       </Position17>
       <Position18>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="51" Column="29" TopLine="40"/>
+        <Caret Line="32" Column="14" TopLine="25"/>
       </Position18>
       <Position19>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="51" Column="22" TopLine="44"/>
+        <Caret Line="51" Column="38" TopLine="39"/>
       </Position19>
       <Position20>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="52" Column="21" TopLine="43"/>
+        <Caret Line="51" Column="21" TopLine="41"/>
       </Position20>
       <Position21>
         <Filename Value="cpp.lpr"/>
-        <Caret Line="32" Column="14" TopLine="25"/>
+        <Caret Line="51" Column="37" TopLine="44"/>
       </Position21>
-      <Position22>
-        <Filename Value="cpp.lpr"/>
-        <Caret Line="51" Column="38" TopLine="39"/>
-      </Position22>
-      <Position23>
-        <Filename Value="cpp.lpr"/>
-        <Caret Line="51" Column="21" TopLine="41"/>
-      </Position23>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

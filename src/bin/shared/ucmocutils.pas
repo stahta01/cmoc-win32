@@ -359,6 +359,7 @@ var
   LParser: OAsmParser;
 begin
   LParser := default(OAsmParser);
+  AOptions.Clear;
   if Assigned(ADst) then begin
     ADst.Clear;
   end;
