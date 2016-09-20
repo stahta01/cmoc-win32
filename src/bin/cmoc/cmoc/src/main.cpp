@@ -46,7 +46,7 @@ extern int numErrors;
 extern int numWarnings;
 
 
-//static const char *PROGRAM = "cmoc";
+static const char *PROGRAM = "cmoc";
 
 // Argument for the ORG directive.
 // The default is 512 bytes past the default start of a Basic program
@@ -692,7 +692,7 @@ main(int argc, char *argv[])
 
     if (asmCmd)
     {
-        // Write asmCommand in a .cmd file.
+        // Write asmCommand in a .cmd file. 
         const string asmCmdFilename = programName + ".cmd";
         if (verbose)
             cout << "Writing assembly command in " << asmCmdFilename << endl;
