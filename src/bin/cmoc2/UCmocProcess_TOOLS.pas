@@ -77,7 +77,7 @@ begin
     LParams := default(TStringDynArray);
     OCmoc.SourcePragmas(ASrc, ASrc, FOrigin, FTarget, FOptions);
     // Currently -O2 has some bugs. So, we must use -O1
-    LParams := TStringDynArray.Create(Opt_EmitUncalled1, Opt_DontLink1, '-O1');
+    LParams := TStringDynArray.Create(Opt_EmitUncalled1, Opt_DontLink1, '-O2');
     if AWerror then begin
       OStringDynArray.Add(LParams, Opt_Werror1);
     end;
@@ -90,15 +90,15 @@ begin
     OStringDynArray.AddDefine(LParams, '__' + UpperCase(FTarget) + '__', EmptyStr, LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'nullptr', '0', LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'bool', 'unsigned char', LSingleEntry);
+    OStringDynArray.AddDefine(LParams, 'false', '0', LSingleEntry);
+    OStringDynArray.AddDefine(LParams, 'true', '1', LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'byte', 'unsigned char', LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'sbyte', 'char', LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'word', 'unsigned', LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'sword', 'int', LSingleEntry);
-    OStringDynArray.AddDefine(LParams, 'false', '0', LSingleEntry);
-    OStringDynArray.AddDefine(LParams, 'true', '1', LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'const', EmptyStr, LSingleEntry);
-    OStringDynArray.AddDefine(LParams, '__fastcall__', EmptyStr, LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'long', 'int', LSingleEntry);
+    OStringDynArray.AddDefine(LParams, '__fastcall__', EmptyStr, LSingleEntry);
     OStringDynArray.AddDefine(LParams, 'restrict', EmptyStr, LSingleEntry);
     OStringDynArray.Add(LParams, ExtractFileName(ASrc));
     ExecuteTool(Tool_CMOC, LParams, ExtractFilePath(ASrc));
