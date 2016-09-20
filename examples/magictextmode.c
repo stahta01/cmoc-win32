@@ -2,6 +2,7 @@
 // This demo only works for pre-coco2b machines.
 // Go figure!
 
+#pragma options -machine=cocous
 
 #include <stdio.h>
 #include <stdlib.h>

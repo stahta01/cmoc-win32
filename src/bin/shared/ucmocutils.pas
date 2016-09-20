@@ -113,9 +113,9 @@ type
     class function SymbolIsPublic(const A: string): boolean;
   public
     class procedure ExtractPragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
-      var ATarget: string; var AOptions: string);
+      var ATarget: string; const AOptions: TStrings);
     class procedure ExtractPragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
-      var ATarget: string; var AOptions: string);
+      var ATarget: string; const AOptions: TStrings);
   public
     class procedure FileNamesAppend(var A: TStringDynArray; AFileName: TFileName;
       const AMustExist: boolean);
@@ -352,7 +352,7 @@ begin
 end;
 
 class procedure OCmoc.ExtractPragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
-  var ATarget: string; var AOptions: string);
+  var ATarget: string; const AOptions: TStrings);
 var
   LIndex: integer;
   LName: string;
@@ -373,7 +373,7 @@ begin
           AOrigin := OCmoc.StringToInteger(LParser.Token);
         end;
         'options': begin
-          AOptions := Trim(LParser.Remaining);
+          AOptions.CommaText := Trim(LParser.Remaining);
         end;
         'target': begin
           LParser.Next;
@@ -393,8 +393,8 @@ begin
   end;
 end;
 
-class procedure OCmoc.ExtractPragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
-  var ATarget: string; var AOptions: string);
+class procedure OCmoc.ExtractPragmas(const ADst, ASrc: TFileName;
+  var AOrigin: cardinal; var ATarget: string; const AOptions: TStrings);
 var
   LDst, LSrc: TStrings;
 begin

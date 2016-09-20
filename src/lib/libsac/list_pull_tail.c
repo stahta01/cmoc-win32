@@ -3,6 +3,7 @@
 
 node_t* list_pull_tail(list_t* list)
 {
-    return node_remove(list_tail(list));
+    node_t* node = list_tail(list);
+    return node ? node_remove(node) : (node_t*)nullptr;
 }
 

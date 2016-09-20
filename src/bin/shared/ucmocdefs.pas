@@ -98,8 +98,11 @@ const
   Opt_Format2 = '-f';
   Opt_Help1 = '--help';
   Opt_Include2 = '-I';
-  Opt_Optimize0 = '-O0';
-  Opt_Optimize2 = '-O2';
+  Opt_Optimize = '--optimize';
+  Opt_O = '-O';
+  Opt_O0 = Opt_O + '0';
+  Opt_O1 = Opt_O + '1';
+  Opt_O2 = Opt_O + '2';
   Opt_Origin2 = '--org';
   Opt_LibPath2 = '-L';
   Opt_LibInclude2 = '-l';

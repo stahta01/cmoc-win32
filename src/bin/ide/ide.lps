@@ -8,10 +8,11 @@
       <Unit0>
         <Filename Value="ide.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="2"/>
         <TopLine Value="3"/>
-        <CursorPos Y="25"/>
+        <CursorPos X="62" Y="6"/>
         <UsageCount Value="96"/>
+        <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="unitcmocide.pas"/>
@@ -20,9 +21,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="571"/>
-        <CursorPos X="23" Y="582"/>
+        <TopLine Value="568"/>
+        <CursorPos X="19" Y="579"/>
         <UsageCount Value="96"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -51,9 +51,10 @@
       <Unit4>
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="357"/>
-        <CursorPos X="20" Y="368"/>
+        <TopLine Value="104"/>
+        <CursorPos X="30" Y="115"/>
         <UsageCount Value="29"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -669,7 +670,7 @@
         <UsageCount Value="10"/>
       </Unit84>
     </Units>
-    <JumpHistory Count="15" HistoryIndex="14">
+    <JumpHistory Count="18" HistoryIndex="17">
       <Position1>
         <Filename Value="unitcmocide.pas"/>
         <Caret Line="244" Column="16" TopLine="235"/>
@@ -719,17 +720,29 @@
         <Caret Line="582" Column="18" TopLine="574"/>
       </Position12>
       <Position13>
-        <Filename Value="..\shared\ucmocutils.pas"/>
-        <Caret Line="367" Column="16" TopLine="361"/>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="582" Column="19" TopLine="571"/>
       </Position13>
       <Position14>
-        <Filename Value="..\shared\ucmocutils.pas"/>
-        <Caret Line="368" Column="20" TopLine="362"/>
+        <Filename Value="ide.lpr"/>
+        <Caret Line="25" TopLine="3"/>
       </Position14>
       <Position15>
-        <Filename Value="unitcmocide.pas"/>
-        <Caret Line="582" Column="18" TopLine="574"/>
+        <Filename Value="..\shared\ucmocutils.pas"/>
+        <Caret Line="397" Column="61" TopLine="385"/>
       </Position15>
+      <Position16>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="582" Column="19" TopLine="571"/>
+      </Position16>
+      <Position17>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="574" Column="63" TopLine="571"/>
+      </Position17>
+      <Position18>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="579" Column="19" TopLine="568"/>
+      </Position18>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

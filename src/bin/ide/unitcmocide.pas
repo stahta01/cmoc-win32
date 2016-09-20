@@ -572,15 +572,11 @@ begin
 end;
 
 procedure TFormCmocIDE.MenuRunCompileClick(ASender: TObject);
-var
-  LOptions: string;
 begin
   SynEditLog.Clear;
   FTarget := Target_COCO;
   FOrigin := Origin_DEFAULT;
-  LOptions := default(string);
-  OCmoc.ExtractPragmas(nil, FormCmocIDESynEdit.SynEdit.Lines, FOrigin, FTarget, LOptions);
-  FOptions.CommaText := LOptions;
+  OCmoc.ExtractPragmas(nil, FormCmocIDESynEdit.SynEdit.Lines, FOrigin, FTarget, FOptions);
   if FOptions.IndexOfName(Opt_Format2) < 0 then begin
     FOptions.Values[Opt_Format2] := Format_DECB;
   end;
