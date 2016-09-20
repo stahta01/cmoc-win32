@@ -10,6 +10,7 @@
     Version 0.1.1 - 2016-03-12 - Adaptation to cardgame.h v0.1.1.
 */
 
+#pragma options -machine=cocous
 
 #include <stdio.h>
 #include <stdlib.h>

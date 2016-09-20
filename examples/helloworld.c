@@ -1,4 +1,5 @@
 
+#pragma target dragon
 
 #include <stdio.h>
 #include <stdlib.h>

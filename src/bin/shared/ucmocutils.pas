@@ -112,9 +112,9 @@ type
     class function StringToInteger(const A: string): longint;
     class function SymbolIsPublic(const A: string): boolean;
   public
-    class procedure SourcePragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
+    class procedure ExtractPragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
       var ATarget: string; var AOptions: string);
-    class procedure SourcePragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
+    class procedure ExtractPragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
       var ATarget: string; var AOptions: string);
   public
     class procedure FileNamesAppend(var A: TStringDynArray; AFileName: TFileName;
@@ -351,7 +351,7 @@ begin
   A.Insert(5, EmptyStr);
 end;
 
-class procedure OCmoc.SourcePragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
+class procedure OCmoc.ExtractPragmas(const ADst, ASrc: TStrings; var AOrigin: cardinal;
   var ATarget: string; var AOptions: string);
 var
   LIndex: integer;
@@ -393,7 +393,7 @@ begin
   end;
 end;
 
-class procedure OCmoc.SourcePragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
+class procedure OCmoc.ExtractPragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
   var ATarget: string; var AOptions: string);
 var
   LDst, LSrc: TStrings;
@@ -403,7 +403,7 @@ begin
     LSrc.LoadFromFile(ASrc);
     LDst := TStringList.Create;
     try
-      SourcePragmas(LDst, LSrc, AOrigin, ATarget, AOptions);
+      ExtractPragmas(LDst, LSrc, AOrigin, ATarget, AOptions);
       LDst.SaveToFile(ADst);
     finally
       FreeAndNil(LDst);

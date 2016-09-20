@@ -21,8 +21,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="270"/>
-        <CursorPos X="36" Y="288"/>
+        <TopLine Value="571"/>
+        <CursorPos X="23" Y="582"/>
         <UsageCount Value="96"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -51,17 +51,18 @@
       <Unit4>
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="742"/>
-        <CursorPos X="80" Y="757"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="357"/>
+        <CursorPos X="20" Y="368"/>
         <UsageCount Value="29"/>
+        <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="..\shared\ucmocparser.pas"/>
         <UnitName Value="UCmocParser"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="21"/>
-        <CursorPos X="14" Y="33"/>
+        <TopLine Value="101"/>
+        <CursorPos X="15" Y="38"/>
         <UsageCount Value="19"/>
       </Unit5>
       <Unit6>
@@ -668,7 +669,7 @@
         <UsageCount Value="10"/>
       </Unit84>
     </Units>
-    <JumpHistory Count="11" HistoryIndex="10">
+    <JumpHistory Count="15" HistoryIndex="14">
       <Position1>
         <Filename Value="unitcmocide.pas"/>
         <Caret Line="244" Column="16" TopLine="235"/>
@@ -713,6 +714,22 @@
         <Filename Value="unitcmocide.pas"/>
         <Caret Line="288" Column="36" TopLine="270"/>
       </Position11>
+      <Position12>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="582" Column="18" TopLine="574"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\shared\ucmocutils.pas"/>
+        <Caret Line="367" Column="16" TopLine="361"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\shared\ucmocutils.pas"/>
+        <Caret Line="368" Column="20" TopLine="362"/>
+      </Position14>
+      <Position15>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="582" Column="18" TopLine="574"/>
+      </Position15>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

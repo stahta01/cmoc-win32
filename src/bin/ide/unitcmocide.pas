@@ -579,7 +579,7 @@ begin
   FTarget := Target_COCO;
   FOrigin := Origin_DEFAULT;
   LOptions := default(string);
-  OCmoc.SourcePragmas(nil, FormCmocIDESynEdit.SynEdit.Lines, FOrigin, FTarget, LOptions);
+  OCmoc.ExtractPragmas(nil, FormCmocIDESynEdit.SynEdit.Lines, FOrigin, FTarget, LOptions);
   FOptions.CommaText := LOptions;
   if FOptions.IndexOfName(Opt_Format2) < 0 then begin
     FOptions.Values[Opt_Format2] := Format_DECB;

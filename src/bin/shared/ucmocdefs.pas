@@ -99,6 +99,7 @@ const
   Opt_Help1 = '--help';
   Opt_Include2 = '-I';
   Opt_Optimize0 = '-O0';
+  Opt_Optimize2 = '-O2';
   Opt_Origin2 = '--org';
   Opt_LibPath2 = '-L';
   Opt_LibInclude2 = '-l';
