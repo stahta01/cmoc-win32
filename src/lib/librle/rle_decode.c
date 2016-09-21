@@ -2,7 +2,7 @@
 #include <rle.h>
 #include <memory.h>
 
-// Amiga Stype RLE Memory Decoding
+// Amiga Style RLE Memory Decoding
 // https://en.wikipedia.org/wiki/ILBM#BODY:_Image_data
 
 void rle_decode(byte* dst, byte* src, size_t len)
