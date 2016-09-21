@@ -17,9 +17,9 @@
 <p>Distributed under the <strong>GNU General Public License</strong>,
 <strong>version 3 or later</strong> (see the License section).</p>
 
-<p>Version of CMOC covered by this manual: <strong>0.1.30</strong></p>
+<p>Version of CMOC covered by this manual: <strong>0.1.32</strong></p>
 
-<p>Date of this manual: 2016-08-21</p>
+<p>Date of this manual: 2016-09-17</p>
 
 <h2>Table of Contents</h2>
 <small>
@@ -62,28 +62,29 @@
 <li><a href="#t28">Dynamic memory allocation with sbrk()</a></li> <!--4-->
 </ul>
 <li><a href="#t29">Inline assembly</a></li> <!--3-->
-<li><a href="#t30">Preprocessor identifiers in inline assembly</a></li> <!--3-->
-<li><a href="#t31">Assembly-only functions</a></li> <!--3-->
 <ul>
-<li><a href="#t32">Functions that are only called by assembly code</a></li> <!--4-->
+<li><a href="#t30">Preprocessor identifiers in inline assembly</a></li> <!--4-->
+<li><a href="#t31">Referring to variables whose name is that of a register</a></li> <!--4-->
+<li><a href="#t32">Assembly-only functions</a></li> <!--4-->
+<li><a href="#t33">Functions that are only called by assembly code</a></li> <!--4-->
 </ul>
-<li><a href="#t33">Interrupt Service Routines</a></li> <!--3-->
-<li><a href="#t34">Function pointers</a></li> <!--3-->
-<li><a href="#t35">Array initializers</a></li> <!--3-->
+<li><a href="#t34">Interrupt Service Routines</a></li> <!--3-->
+<li><a href="#t35">Function pointers</a></li> <!--3-->
+<li><a href="#t36">Array initializers</a></li> <!--3-->
 <ul>
-<li><a href="#t36">Local vs. global array</a></li> <!--4-->
-<li><a href="#t37">Execution of global array initializers</a></li> <!--4-->
+<li><a href="#t37">Local vs. global array</a></li> <!--4-->
+<li><a href="#t38">Execution of global array initializers</a></li> <!--4-->
 </ul>
-<li><a href="#t38">Enumerations (enum)</a></li> <!--3-->
-<li><a href="#t39">Compiling a ROM image for a cartridge</a></li> <!--3-->
-<li><a href="#t40">Detecting null pointer accesses at run time</a></li> <!--3-->
-<li><a href="#t41">Detecting stack overflows at run time</a></li> <!--3-->
-<li><a href="#t42">Single-execution programs</a></li> <!--3-->
-<li><a href="#t43">Calling convention</a></li> <!--3-->
-<li><a href="#t44">Compiling a program executable by the DOS command</a></li> <!--3-->
-<li><a href="#t45">Unused functions</a></li> <!--3-->
+<li><a href="#t39">Enumerations (enum)</a></li> <!--3-->
+<li><a href="#t40">Compiling a ROM image for a cartridge</a></li> <!--3-->
+<li><a href="#t41">Detecting null pointer accesses at run time</a></li> <!--3-->
+<li><a href="#t42">Detecting stack overflows at run time</a></li> <!--3-->
+<li><a href="#t43">Single-execution programs</a></li> <!--3-->
+<li><a href="#t44">Calling convention</a></li> <!--3-->
+<li><a href="#t45">Compiling a program executable by the DOS command</a></li> <!--3-->
+<li><a href="#t46">Unused functions</a></li> <!--3-->
 </ul>
-<li><a href="#t46">License</a></li> <!--2-->
+<li><a href="#t47">License</a></li> <!--2-->
 </ul>
 </small>
 <h2><a name="t1"></a>Introduction</h2>
@@ -168,7 +169,8 @@ A function's return type can be void.</p></li>
 i.e., for (int i = 0; ...) {}.</p></li>
 <li><p>Declaring more than one variable on the same line, i.e., int a = 0, b = 1;</p></li>
 <li><p><a href="https://en.wikipedia.org/wiki/Variadic_function">Variadic functions</a>,
-i.e., void foo(const char *format, ...);</p></li>
+i.e., void foo(const char *format, ...). There must be at least one named
+argument before the ellipsis (...), as in ISO C.</p></li>
 <li><p>Ending an initializer list with a comma.</p></li>
 <li><p>Use of the <a href="https://en.wikipedia.org/wiki/C_preprocessor">C preprocessor</a>
 (the system's cpp is invoked): #include, #define, #ifdef, etc.
@@ -690,7 +692,7 @@ be relocatable.</p>
 and if the called function is too far from the call, the assembly
 step will fail.</p>
 
-<h3><a name="t30"></a>Preprocessor identifiers in inline assembly</h3>
+<h4><a name="t30"></a>Preprocessor identifiers in inline assembly</h4>
 
 <p>The GNU C preprocessor can add spaces in surprising ways, which makes its
 use slightly problematic in inline assembly. For example:</p>
@@ -716,7 +718,36 @@ No space gets added before the identifier.</p>
 <p>Therefore, preprocessor identifiers should be used with caution in
 inline assembly.</p>
 
-<h3><a name="t31"></a>Assembly-only functions</h3>
+<h4><a name="t31"></a>Referring to variables whose name is that of a register</h4>
+
+<p>Before version 0.1.31, bad assembly language text could be emitted
+if inline assembly referred to a C variable that has the name of a
+register. To help resolve this ambiguity, version 0.1.31 introduced
+a <em>C variable escape character</em>, which is a colon that is put in
+front of the C variable name.</p>
+
+<p>For example:</p>
+
+<pre><code>char b;
+asm
+{
+    inc     :b
+    ldb     :b
+    leax    b,x
+}
+</code></pre>
+
+<p>Here, <code>:b</code> refers to variable <em>b</em> of the C program, while the <em>b</em>
+in <em>b,x</em> refers to the register.</p>
+
+<p>This change may break inline assembly code in programs that were
+written for versions of CMOC preceding 0.1.31. Adding a colon at
+the right places will resolve the issue.</p>
+
+<p>Note that the escape character is not necessary on variable names
+that are not also register names.</p>
+
+<h4><a name="t32"></a>Assembly-only functions</h4>
 
 <p>When a function is written entirely in assembly language for
 performance reasons, the stack frame may not be necessary.
@@ -748,7 +779,7 @@ for the rules to observe. In particular, note that byte arguments
 are promoted to words, which are pushed onto the stack in the big
 endian byte ordering.</p>
 
-<h4><a name="t32"></a>Functions that are only called by assembly code</h4>
+<h4><a name="t33"></a>Functions that are only called by assembly code</h4>
 
 <p>Normally, CMOC does not emit code for a function that is never
 called and whose address is never taken. But such a function
@@ -759,7 +790,7 @@ is not defined.</p>
 <p>CMOC can be forced to emit all functions by passing it the
 <code>--emit-uncalled</code> option.</p>
 
-<h3><a name="t33"></a>Interrupt Service Routines</h3>
+<h3><a name="t34"></a>Interrupt Service Routines</h3>
 
 <p>CMOC supports the <code>interrupt</code> function modifier, which tells the
 compiler to end the function with an RTI instruction instead of
@@ -784,7 +815,7 @@ irqISR_end:
 }
 </code></pre>
 
-<h3><a name="t34"></a>Function pointers</h3>
+<h3><a name="t35"></a>Function pointers</h3>
 
 <p>The address of a function can be taken and stored in order to be
 called through that pointer later. However, unlike in the C language,
@@ -830,9 +861,9 @@ effective type of such a pointer is still <code>void *</code>. This full
 notation can be used to declare a variable but also a function
 parameter.</p>
 
-<h3><a name="t35"></a>Array initializers</h3>
+<h3><a name="t36"></a>Array initializers</h3>
 
-<h4><a name="t36"></a>Local vs. global array</h4>
+<h4><a name="t37"></a>Local vs. global array</h4>
 
 <p>When only a single function needs to use a read-only array of
 integers, this array could be defined locally to that function,
@@ -852,7 +883,7 @@ void f()
 }
 </code></pre>
 
-<h4><a name="t37"></a>Execution of global array initializers</h4>
+<h4><a name="t38"></a>Execution of global array initializers</h4>
 
 <p>A global array initializer containing only integer values (not
 string literals) is treated specially. It is initialized
@@ -876,7 +907,7 @@ because array <code>a</code> is <em>not</em> reinitialized upon entry.</p>
 <p>This is meant to save memory by not including a second copy
 of the initializer just for run-time initialization purposes.</p>
 
-<h3><a name="t38"></a>Enumerations (enum)</h3>
+<h3><a name="t39"></a>Enumerations (enum)</h3>
 
 <p>Enumerations are supported, with the restriction that an enum must
 be declared at the global scope. In particular, an enum with an
@@ -890,7 +921,7 @@ parameter of a function, nor as its return type.</p>
 <code>enum { SCREEN = 0x0400, BIT5 = 1 &lt;&lt; 5 }</code>. Such a value must be
 a constant expression.</p>
 
-<h3><a name="t39"></a>Compiling a ROM image for a cartridge</h3>
+<h3><a name="t40"></a>Compiling a ROM image for a cartridge</h3>
 
 <p>To help support the ROM cartridge format, CMOC supports directives
 that allow telling it to assemble the code, the string literals
@@ -975,7 +1006,7 @@ put this at the beginning of the main() function:</p>
 }
 </code></pre>
 
-<h3><a name="t40"></a>Detecting null pointer accesses at run time</h3>
+<h3><a name="t41"></a>Detecting null pointer accesses at run time</h3>
 
 <p>Accessing a value through a null pointer is a common bug.
 To help detect such accesses, CMOC has the --check-null command-line
@@ -1014,7 +1045,7 @@ in which function that null pointer was detected.</p>
 during debugging. An alternative is to define an <code>assert()</code> macro that
 expands to nothing when <code>NDEBUG</code> is defined.</p>
 
-<h3><a name="t41"></a>Detecting stack overflows at run time</h3>
+<h3><a name="t42"></a>Detecting stack overflows at run time</h3>
 
 <p>Runaway recursion or excessively long local arrays can cause corruption
 that is difficult to investigate. To help detect stack overflows,
@@ -1052,7 +1083,7 @@ during debugging.</p>
 with the default layout, the stack is preceded by the memory managed
 by sbrk() (see elsewhere in this manual).</p>
 
-<h3><a name="t42"></a>Single-execution programs</h3>
+<h3><a name="t43"></a>Single-execution programs</h3>
 
 <p>If a program is intended to be executable only once, i.e., that
 reloading it or rebooting the CoCo is required to run it again,
@@ -1065,7 +1096,7 @@ break" used by sbrk() (see the previous section) is placed at
 the start of the routine. This makes the memory of that routine
 available to be allocated by sbrk().</p>
 
-<h3><a name="t43"></a>Calling convention</h3>
+<h3><a name="t44"></a>Calling convention</h3>
 
 <p>CMOC follows the C convention of passing the parameters in the stack
 in the reverse order.</p>
@@ -1109,7 +1140,7 @@ pointer. Such a function starts with these instructions:</p>
     PULS    U,PC
 </code></pre>
 
-<h3><a name="t44"></a>Compiling a program executable by the DOS command</h3>
+<h3><a name="t45"></a>Compiling a program executable by the DOS command</h3>
 
 <p>Disk Basic 1.1 has a DOS command that loads track 34 at $2600
 and if the contents start with the bytes 'O' and 'S', the interpreter
@@ -1135,7 +1166,7 @@ option that will install the boot leader despite that.</p>
 <pre><code>install-coco-boot-loader --uninstall foo.dsk
 </code></pre>
 
-<h3><a name="t45"></a>Unused functions</h3>
+<h3><a name="t46"></a>Unused functions</h3>
 
 <p>A C function that is not called and whose address is not taken will
 not have assembly language generated for it by CMOC.</p>
@@ -1144,7 +1175,7 @@ not have assembly language generated for it by CMOC.</p>
 containing several functions, without having to worry about bloating
 an executable that would only use some of those functions.</p>
 
-<h2><a name="t46"></a>License</h2>
+<h2><a name="t47"></a>License</h2>
 
 <p><strong>EXCEPT FOR THE FILES UNDER src/usim-0.91-cmoc in the CMOC source archive,
 CMOC is distributed under the following license:</strong></p>
