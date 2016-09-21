@@ -1,13 +1,20 @@
 
 #include "_heman.h"
 
+// Note: For some strange reason, this code will not work on Vcc unless we use -O2 or -O0.
+// The code works fone with XRoar, but I don't know about real hardware.
+// To me, it looks like Vcc has a 6809 emulation issue, but I couldn't find it, and I've
+// spent too long looking.
+
+#pragma options --optimize=2
+
 void* heman_alloc(int* heap, int size)
 {
     if (size) {
-        int* block = heap;
+        int* block = heap + 1;
         size += sizeof(int);
         for (;;) {
-            int mfree = 32768 - (int)block;
+            int mfree = *heap - (int)block;
             if (mfree <= 0) {
                 return 0;
             }

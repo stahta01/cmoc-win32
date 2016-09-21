@@ -6,6 +6,3 @@
 #include <equates.h>
 #include <system.h>
 
-extern int main(void);
-extern unsigned exitstack;
-

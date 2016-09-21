@@ -1,4 +1,6 @@
 
+#pragma options --optimize=2
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -11,7 +13,7 @@ char* AllocMem(uint8_t size)
     uint8_t i;
 
     if (!m) {
-        puts("alloc error");
+        printf("alloc error %d\n", size);
         exit(-1);
     }
     for (i = 0; i < _msize(m); i++) {
@@ -36,7 +38,7 @@ void FreeMem(char* m)
 void Test()
 {
     uint8_t i;
-    char*   m[5];
+    char* m[5];
     for (i = 0; i < 5; i++) {
         m[i] = AllocMem((uint8_t)((rand() & 127) + 1));
     }
@@ -50,7 +52,6 @@ int main()
     while (!kbhit()) {
         Test();
     }
-
     puts("MEMORY TEST COMPLETE");
 
     return 0;

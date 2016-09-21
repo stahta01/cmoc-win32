@@ -1,7 +1,34 @@
 
+#include <stdio.h>
 #include <stdlib.h>
+#include <system.h>
+#include <heman.h>
 
-extern int _main(void);
+extern int main(void);
+
+unsigned exitstack;
+
+void _main(void)
+{
+    asm {
+        sts     exitstack
+    }
+    system_init();
+    heman_init(heap_memory, 0x7c00);
+    exit(main());
+}
+
+void exit(int status)
+{
+    if (status) {
+        printf("EXIT STATUS: %d\n", status);
+    }
+    //memset(0x2dd, 0, 250);
+    asm {
+        lds exitstack
+        rts                                     // Skip the user stack frame
+    }
+}
 
 void asm __program_start(void)
 {
@@ -21,23 +48,17 @@ void asm __program_start(void)
         section SECTION_ORIGIN
 
         INITGL:         extern
-
         program_start:  export
-
         program_start:
-        lbsr    INILIB                  // initialize global variables
-        lbsr    __main                  // call _main()
 
-        nop_handler:
-        rts
-
-        INILIB:
-        leax    nop_handler,DAT
+        leax    nop_handler,DAT                 // initialize global variables
         stx     null_ptr_handler,DAT
         ldx     #0
         stx     stack_overflow_handler,DAT
-        lbra    INITGL                  // initialize global variables
-
+        lbsr    INITGL                          // initialize global variables
+        lbsr    __main                          // call _main()
+        nop_handler:
+        rts
         stack_overflow_handler:
         rmb 2
         null_ptr_handler:

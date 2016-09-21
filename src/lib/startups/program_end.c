@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 
-int heap_memory[100];
+int heap_memory[2];
 
 void asm __program_end(void)
 {

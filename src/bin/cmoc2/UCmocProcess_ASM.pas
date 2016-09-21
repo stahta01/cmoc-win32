@@ -363,7 +363,7 @@ begin
   for LSymbol in FExportSymbols do begin
     FAsmCode.Insert(0, Asm_EXPORT(LSymbol));
   end;
-  FAsmCode.Insert(0, Char_TAB + 'PRAGMA 6809,6800compat,6809conv,m80ext,shadow');
+  FAsmCode.Insert(0, Char_TAB + 'PRAGMA 6809,6800compat,6809conv,m80ext,shadow,autobranchlength');
   FAsmCode.Insert(1, Asm_SECTION);
   FAsmCode.Add(Asm_ENDSECTION);
   //CleanAsm(FAsmCode);
