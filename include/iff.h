@@ -7,12 +7,15 @@
 typedef struct {
     char type[4];
     long_t size;
-} iff_chunk_t;
+} iff_head_t;
 
 typedef struct {
-    iff_chunk_t chunk;
+    iff_head_t head;
     char type[4];
 } iff_form_t;
+
+bool iff_head_is(iff_head_t* head, char* type);
+bool iff_head_read(iff_head_t* head, FILE* fp);
 
 #endif
 
