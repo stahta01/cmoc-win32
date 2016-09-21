@@ -41,7 +41,7 @@ void system_init(void);
 char system_polcat(void);
 void system_chrout(char c);
 void system_putchr(char c, char devnum);
-char system_getchr(char devnum);
+int system_getchr(char devnum);
 void system_joyin(void);
 void system_sound(void);
 void system_line(void);

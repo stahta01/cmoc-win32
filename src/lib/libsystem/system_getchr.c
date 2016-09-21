@@ -1,9 +1,9 @@
 
 #include "_system.h"
 
-char system_getchr(char devnum)
+int system_getchr(char devnum)
 {
-    char c, dn = _devnum;
+    byte c, dn = _devnum;
     _devnum = devnum;
     asm {
         jsr     [sysptr_getchr]

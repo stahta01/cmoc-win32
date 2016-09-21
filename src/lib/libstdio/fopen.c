@@ -3,7 +3,8 @@
 
 FILE* fopen(char* name, char* m)
 {
-    FILE* fp = NULL;
+    FILE* fp = nullptr;
+
     if (m[0] == 'r' || m[0] == 'w') {
         char devnum;
         if (name[0] == 'C' && name[1] == 'O' && name[2] == 'N' && name[3] == ':') {
