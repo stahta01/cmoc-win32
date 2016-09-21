@@ -4,7 +4,8 @@
 
 #include <sys/size.h>
 
-void rle_decode(byte* dst, byte* src, size_t n);
+byte* rle_decode(byte* dst, byte* src, size_t dstlen);
+byte* rle_encode(byte* dst, byte* src, size_t srclen);
 
 #endif
 

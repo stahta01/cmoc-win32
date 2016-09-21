@@ -3,8 +3,16 @@
 // using Paintshop PRO. The code expects a 256x192, single plane (2 color)
 // compressed image. I dont check for any errors.
 
+// UPDATE
+// I wrote a quick RLE compressor. This example now displays the compressed data, then
+// re-compresses the image, and then re-displays.
+// The size of the new compressed data, and the size of the original are shown.
+// For some reason, my compressor produces smaller sizes. Im unsure why... But, its better
+// than bigger sizes.
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <conio.h>
 #include <equates.h>
 #include <iff.h>
@@ -29,7 +37,11 @@ int main(void)
                     }
                     system("PMODE4,1");
                     system("SCREEN1,1");
-                    rle_decode((byte*)_beggrp, buf, head.size.lo);
+                    rle_decode((byte*)_beggrp, buf, _endgrp - _beggrp);
+                    byte* end = rle_encode(buf, (byte*)_beggrp, _endgrp - _beggrp);
+                    system("PCLS");
+                    rle_decode((byte*)_beggrp, buf, _endgrp - _beggrp);
+                    printf("SIZES: NEW=%d OLD=%d\n", end - buf, head.size.lo);
                     break;
                 }
             }

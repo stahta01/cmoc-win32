@@ -12,6 +12,15 @@
 #define _lmove      lmove
 #define _litol      litol
 #define _lutol      lutol
+#define _lcmpr      lcmpr
+#define _land       land
+#define _lor        lor
+#define _lxor       lxor
+#define _lnot       lnot
+#define _ladd       ladd
+#define _lsub       lsub
+#define _ldiv       ldiv
+#define _lmod       lmod
 
 #define abs         _abs
 #define atoi        _atoi
@@ -60,6 +69,7 @@ void asm __libkreider(void)
         lmul: extern
         lbexit: extern
         ltoacc: extern
+        lnegx: extern
 
 #define section *
 #define endsect *
