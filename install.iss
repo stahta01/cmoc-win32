@@ -30,6 +30,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "bin\astyle.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\bin2c.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\cas2wav.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\cmoc2.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\cmoc.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\cmocide.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
@@ -47,6 +48,7 @@ Source: "bin\mcpp.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\pic2raw.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\runwild.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\wimgtool.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\imgtool.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\writecocofile.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 
 Source: "bin\cmocide\*.txt"; DestDir: "{app}\bin\cmocide"; Flags: ignoreversion onlyifdoesntexist
@@ -74,6 +76,8 @@ Source: "vcc\fd502.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
 
 Source: "xroar\xroar.exe"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\coco.bat"; DestDir: "{app}\xroar"; Flags: ignoreversion
+Source: "xroar\dragon32.bat"; DestDir: "{app}\xroar"; Flags: ignoreversion
+Source: "xroar\dragon64.bat"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\xroar.pdf"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\xroar.conf"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\README"; DestDir: "{app}\xroar"; Flags: ignoreversion
