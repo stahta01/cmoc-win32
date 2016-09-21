@@ -1,4 +1,4 @@
 
-#define _FILE "kreiderclib/uminmax.as"
-#include "_kreider.h"
+#define _FILE "uminmax.as"
+#include "../kreiderclib/_kreider.h"
 

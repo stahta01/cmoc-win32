@@ -1,4 +1,4 @@
 
-#define _FILE "kreiderclib\reverse.as"
-#include "_kreider.h"
+#define _FILE "reverse.as"
+#include "../kreiderclib/_kreider.h"
 

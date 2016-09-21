@@ -1,6 +1,6 @@
 
-#ifndef _LONG_H
-#define _LONG_H
+#ifndef _SYS_LONG_H
+#define _SYS_LONG_H
 
 typedef struct {
     int hi;

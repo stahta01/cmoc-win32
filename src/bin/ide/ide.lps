@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="85">
+    <Units Count="86">
       <Unit0>
         <Filename Value="ide.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -667,6 +667,13 @@
         <CursorPos X="3" Y="128"/>
         <UsageCount Value="10"/>
       </Unit84>
+      <Unit85>
+        <Filename Value="..\..\lib\kreiderclib\clcommon.as"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="14" Y="9"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit85>
     </Units>
     <JumpHistory Count="20" HistoryIndex="19">
       <Position1>

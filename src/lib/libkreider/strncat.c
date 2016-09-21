@@ -1,4 +1,4 @@
 
-#define _FILE "kreiderclib/strncat.as"
-#include "_kreider.h"
+#define _FILE "strncat.as"
+#include "../kreiderclib/_kreider.h"
 

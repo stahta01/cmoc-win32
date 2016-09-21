@@ -1,4 +1,4 @@
 
-#define _FILE "kreiderclib/atoi.as"
-#include "_kreider.h"
+#define _FILE "atoi.as"
+#include "../kreiderclib/_kreider.h"
 

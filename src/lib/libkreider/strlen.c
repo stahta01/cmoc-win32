@@ -1,4 +1,4 @@
 
-#define _FILE "kreiderclib/strlen.as"
-#include "_kreider.h"
+#define _FILE "strlen.as"
+#include "../kreiderclib/_kreider.h"
 

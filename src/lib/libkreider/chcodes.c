@@ -1,4 +1,4 @@
 
-#define _FILE "kreiderclib\chcodes.as"
-#include "_kreider.h"
+#define _FILE "chcodes.as"
+#include "../kreiderclib/_kreider.h"
 

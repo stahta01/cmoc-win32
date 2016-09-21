@@ -1,4 +1,4 @@
 
-#define _FILE "kreiderclib/stringsu.as"
-#include "_kreider.h"
+#define _FILE "stringsu.as"
+#include "../kreiderclib/_kreider.h"
 

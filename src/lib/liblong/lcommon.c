@@ -1,5 +1,6 @@
 
-#define y pcr
-#define _FILE "strtok.as"
-#include "../kreiderclib/_kreider.h"
+#include "_long.h"
 
+#define y pcr
+#define _FILE  "clcommon.as"
+#include "../kreiderclib/_kreider.h"

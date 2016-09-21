@@ -1,5 +1,5 @@
 
 #define y pcr
-#define _FILE "kreiderclib/case.as"
-#include "_kreider.h"
+#define _FILE "case.as"
+#include "../kreiderclib/_kreider.h"
 

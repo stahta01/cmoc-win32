@@ -1,4 +1,4 @@
 
-#define _FILE "strnucmp.as"
+#define _FILE "swab.as"
 #include "../kreiderclib/_kreider.h"
 

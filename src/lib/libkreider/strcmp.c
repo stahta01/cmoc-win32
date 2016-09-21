@@ -1,4 +1,4 @@
 
-#define _FILE "kreiderclib/strcmp.as"
-#include "_kreider.h"
+#define _FILE "strcmp.as"
+#include "../kreiderclib/_kreider.h"
 

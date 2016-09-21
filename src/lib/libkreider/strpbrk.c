@@ -1,4 +1,4 @@
 
-#define _FILE "kreiderclib/strpbrk.as"
-#include "_kreider.h"
+#define _FILE "strpbrk.as"
+#include "../kreiderclib/_kreider.h"
 
