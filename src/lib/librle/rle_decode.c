@@ -2,12 +2,15 @@
 #include <rle.h>
 #include <memory.h>
 
-void rle_decode(byte* dst, byte* src, size_t n)
+// Amiga Stype RLE Memory Decoding
+// https://en.wikipedia.org/wiki/ILBM#BODY:_Image_data
+
+void rle_decode(byte* dst, byte* src, size_t len)
 {
-    for (byte len; n--; dst += len) {
+    for (byte* end = src + len; src < end; dst += len) {
         len = *src++;
         if (len > 128) {
-            memset(dst, *src++, len = 1 - len);
+            memset(dst, *src++, len = 257 - len);
         } else if (len < 128) {
             memcpy(dst, src, ++len);
             src += len;
