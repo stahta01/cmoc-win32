@@ -51,7 +51,7 @@ Source: "bin\writecocofile.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 
 Source: "bin\cmocide\*.txt"; DestDir: "{app}\bin\cmocide"; Flags: ignoreversion onlyifdoesntexist
 
-Source: "lib\*.a"; DestDir: "{app}\lib"; Flags: ignoreversion
+Source: "lib\liball.a"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "lib\*.o"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "lib\*.txt"; DestDir: "{app}\lib"; Flags: ignoreversion
 

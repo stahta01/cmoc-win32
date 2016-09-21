@@ -216,7 +216,7 @@ int main(void)
 
     DIR(0);
 
-    puts("Done");
+    puts("DONE");
 
     return 0;
 }

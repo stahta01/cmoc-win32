@@ -1,4 +1,5 @@
 
+#pragma options -machine=cocous
 
 #include <string.h>
 #include <conio.h>
