@@ -7,6 +7,11 @@
 #define _lneg       lneg
 #define _lnegx      lnegx
 #define _lcompl     lcompl
+#define _lshl       lshl
+#define _lshr       lshr
+#define _lmove      lmove
+#define _litol      litol
+#define _lutol      lutol
 
 #define abs         _abs
 #define atoi        _atoi

@@ -11,8 +11,8 @@ asm long_t* _lmul(long_t* dst, long_t* src1, long_t* src2)
         pshs    d,y
         bsr     lmul
         ldy     2,s
-        ldd     ,x
-        std     ,y
+        ldd     0,x
+        std     0,y
         ldd     2,x
         std     2,y
         tfr     y,d
@@ -20,5 +20,5 @@ asm long_t* _lmul(long_t* dst, long_t* src1, long_t* src2)
 }
 #define y pcr
 #define _FILE  "clmul.as"
-#include "../src/lib/kreiderclib/_kreider.h"
+#include "../kreiderclib/_kreider.h"
 

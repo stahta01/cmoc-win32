@@ -4,22 +4,22 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="223">
+    <Units Count="226">
       <Unit0>
         <Filename Value="cmoc2.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="28"/>
-        <CursorPos X="22" Y="37"/>
-        <UsageCount Value="142"/>
+        <CursorPos X="25" Y="37"/>
+        <UsageCount Value="145"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="..\shared\ucmocdefs.pas"/>
         <UnitName Value="UCmocDefs"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="19"/>
-        <CursorPos Y="24"/>
+        <TopLine Value="26"/>
+        <CursorPos X="16" Y="36"/>
         <UsageCount Value="20"/>
       </Unit1>
       <Unit2>
@@ -80,8 +80,8 @@
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="366"/>
-        <CursorPos X="3" Y="401"/>
+        <TopLine Value="315"/>
+        <CursorPos X="3" Y="317"/>
         <UsageCount Value="39"/>
       </Unit9>
       <Unit10>
@@ -1364,9 +1364,9 @@
       <Unit189>
         <Filename Value="UCmocProcess_ASM.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="351"/>
-        <CursorPos X="20" Y="367"/>
-        <UsageCount Value="16"/>
+        <TopLine Value="136"/>
+        <CursorPos X="25" Y="180"/>
+        <UsageCount Value="17"/>
       </Unit189>
       <Unit190>
         <Filename Value="UCmocProcess_TOOLS.pas"/>
@@ -1378,9 +1378,9 @@
       <Unit191>
         <Filename Value="UCmocProcess_CMOC2.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="23"/>
+        <TopLine Value="269"/>
         <CursorPos X="36" Y="34"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="17"/>
       </Unit191>
       <Unit192>
         <Filename Value="C:\Program Files\Borland\CBuilder5\Include\tom.h"/>
@@ -1452,8 +1452,8 @@
         <Filename Value="..\..\..\..\upascal\uchar.pas"/>
         <UnitName Value="UChar"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="23"/>
-        <CursorPos Y="30"/>
+        <TopLine Value="35"/>
+        <CursorPos X="7" Y="46"/>
         <UsageCount Value="10"/>
       </Unit201>
       <Unit202>
@@ -1594,8 +1594,8 @@
         <Filename Value="..\shared\ucmoccharset.pas"/>
         <UnitName Value="UCmocCharSet"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="26"/>
-        <CursorPos X="18" Y="43"/>
+        <TopLine Value="16"/>
+        <CursorPos Y="24"/>
         <UsageCount Value="10"/>
       </Unit220>
       <Unit221>
@@ -1613,6 +1613,30 @@
         <CursorPos X="63" Y="176"/>
         <UsageCount Value="10"/>
       </Unit222>
+      <Unit223>
+        <Filename Value="..\shared\ucmocparser.pas"/>
+        <UnitName Value="UCmocParser"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="101"/>
+        <CursorPos X="3" Y="118"/>
+        <UsageCount Value="10"/>
+      </Unit223>
+      <Unit224>
+        <Filename Value="..\..\..\..\upascal\ucharset.pas"/>
+        <UnitName Value="UCharSet"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="31"/>
+        <CursorPos X="28" Y="48"/>
+        <UsageCount Value="10"/>
+      </Unit224>
+      <Unit225>
+        <Filename Value="..\shared\ucmocasmsplit.pas"/>
+        <UnitName Value="UCmocAsmSplit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="29"/>
+        <CursorPos X="12" Y="29"/>
+        <UsageCount Value="20"/>
+      </Unit225>
     </Units>
     <JumpHistory Count="5" HistoryIndex="4">
       <Position1>
@@ -1633,7 +1657,7 @@
       </Position4>
       <Position5>
         <Filename Value="cmoc2.lpr"/>
-        <Caret Line="37" Column="22" TopLine="28"/>
+        <Caret Line="37" Column="25" TopLine="28"/>
       </Position5>
     </JumpHistory>
   </ProjectSession>

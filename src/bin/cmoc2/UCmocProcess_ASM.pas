@@ -26,7 +26,7 @@ unit UCmocProcess_ASM;
 interface
 
 uses
-  Classes, StrUtils, SysUtils, UCmocAsm, UCmocDefs, UCmocProcess_TOOLS, UCmocUtils;
+  Classes, StrUtils, SysUtils, UCmocAsm, UCmocAsmSplit, UCmocDefs, UCmocProcess_TOOLS, UCmocUtils;
 
 type
 
@@ -139,11 +139,22 @@ end;
 procedure CCmocProcess_ASM.ExtractSymbols;
 var
   LIndex: integer;
-  LToken: string;
-  LParser, LParser2: OAsmParser;
+  LParser: OAsmParser;
+  LSym, LCmd, LPar: string;
 begin
+  for  LIndex := 0 to FAsmCode.Count - 1 do begin
+    if AsmSplit(FAsmCode[LIndex], LSym, LCmd, LPar) then begin
+      if OCmoc.SymbolIsPublic(LSym) then begin
+        AddExport(LSym);
+      end;
+      if SameText(LCmd, 'RMB') then begin
+        FAsmCode[LIndex] := LSym + Char_TAB + 'ZMB' + Char_TAB + LPar;
+      end;
+    end;
+  end;
+  (*
   LParser := default(OAsmParser);
-  LParser2 := default(OAsmParser);
+
   for LIndex := 0 to FAsmCode.Count - 1 do begin
     LParser.SetString(FAsmCode[LIndex]);
     if LParser.Next then begin
@@ -159,15 +170,14 @@ begin
       end;
     end;
   end;
+  *)
   for LIndex := 0 to FAsmCode.Count - 1 do begin
-    LParser.SetString(FAsmCode[LIndex]);
-    if LParser.Next and LParser.Next then begin
-      LParser.IncludeUntil(CharSet_Space);
-      LParser2.SetString(LParser.Token);
-      while LParser2.Next do begin
-        LToken := LParser2.Token;
-        if OCmoc.SymbolIsPublic(LToken) and (FExportSymbols.IndexOf(LToken) < 0) then begin
-          AddImport(LToken);
+    if AsmSplit(FAsmCode[LIndex], LSym, LCmd, LPar) then begin
+      LParser.SetString(LPar);
+      while LParser.Next do begin
+        LSym := LParser.Token;
+        if OCmoc.SymbolIsPublic(LSym) and (FExportSymbols.IndexOf(LSym) < 0) then begin
+          AddImport(LSym);
         end;
       end;
     end;
@@ -246,108 +256,6 @@ begin
   end;
 end;
 
-type
-  OParserFast = object
-  public
-    FBegin, FToken, FPos: pchar;
-  public
-    procedure SetParser(const A: pchar);
-  public
-    function Done: boolean;
-    procedure ParseWhileSpace;
-    procedure ParseUntilSpace;
-    procedure TokenClear;
-    function TokenAsString: string;
-  end;
-
-function OParserFast.Done: boolean;
-begin
-  Result := FPos^ = #0;
-end;
-
-procedure OParserFast.SetParser(const A: pchar);
-begin
-  FBegin := A;
-  FToken := FBegin;
-  FPos := FBegin;
-end;
-
-procedure OParserFast.ParseWhileSpace;
-begin
-  while FPos[0] in [#1..#32] do begin
-    Inc(FPos);
-  end;
-end;
-
-procedure OParserFast.ParseUntilSpace;
-begin
-  while not (FPos[0] in [#0..#32]) do begin
-    Inc(FPos);
-  end;
-end;
-
-procedure OParserFast.TokenClear;
-begin
-  FToken := FPos;
-end;
-
-function OParserFast.TokenAsString: string;
-begin
-  SetString(Result, FToken, FPos - FToken);
-end;
-
-procedure CleanAsm(const ASrc: TStrings);
-var
-  LIndex: integer;
-  LParser: OParserFast;
-  LString, LSymbol, LCommand, LParams: string;
-begin
-  for LIndex := ASrc.Count - 1 downto 0 do begin
-    LString := ASrc[LIndex];
-    LParser.SetParser(PChar(LString));
-    LParser.ParseWhileSpace;
-    if LParser.Done then begin
-      ASrc.Delete(LIndex);
-    end else begin
-      LParser.TokenClear;
-      LParser.ParseUntilSpace;
-      if (LParser.FToken > LParser.FBegin) and (LParser.FPos[-1] <> ':') then begin
-        LSymbol := EmptyStr;
-      end else begin
-        LSymbol := LParser.TokenAsString;
-        LParser.ParseWhileSpace;
-        LParser.TokenClear;
-        LParser.ParseUntilSpace;
-      end;
-      LCommand := LParser.TokenAsString;
-      LParser.ParseWhileSpace;
-      LParser.TokenClear;
-      if LParser.FPos^ = '"' then begin
-        repeat
-          Inc(LParser.FPos);
-        until LParser.FPos^ in [#0, '"'];
-        if LParser.FPos^ <> #0 then begin
-          Inc(LParser.FPos);
-        end;
-      end else begin
-        LParser.ParseUntilSpace;
-      end;
-      LParams := LParser.TokenAsString;
-      repeat
-        LParser.ParseWhileSpace;
-        if LParser.FPos^ = ',' then begin
-          LParser.TokenClear;
-          LParser.ParseUntilSpace;
-          LParams += LParser.TokenAsString;
-        end else begin
-          Break;
-        end;
-      until False;
-      ASrc[LIndex] := LSymbol + #9 + LCommand + #9 + LParams;
-    end;
-  end;
-end;
-
 procedure CCmocProcess_ASM.CMOC2(const ADst, ASrc: TFileName; const AInitSymbol: string);
 var
   LSymbol: string;
@@ -366,7 +274,6 @@ begin
   FAsmCode.Insert(0, Char_TAB + 'PRAGMA 6809,6800compat,6809conv,m80ext,shadow,autobranchlength');
   FAsmCode.Insert(1, Asm_SECTION);
   FAsmCode.Add(Asm_ENDSECTION);
-  //CleanAsm(FAsmCode);
   OCmoc.StringsInsertWinCMOCHeader(FAsmCode);
   FAsmCode.SaveToFile(ADst);
 end;

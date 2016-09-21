@@ -19,31 +19,67 @@
  ***************************************************************************
 }
 
-unit UCmocCharSet;
+unit UCmocAsmSplit;
 
 {$INCLUDE cmoc.inc}
 
 interface
 
-type
-  OCharSet = object
-  const
-    All = [#0..#255];
-    Ascii = [#0..#127];
-    Cntrl = [#0..#31, #127];
-    Digit = ['0'..'9'];
-    Space = [#9, #10, #11, #12, #13, #32];
-    XLower = Digit + ['a'..'f'];
-    XUpper = Digit + ['A'.. 'F'];
-    XDigit = XLower + XUpper;
-    Lower = ['a'..'z'];
-    Upper = ['A'..'Z'];
-    Alpha = Lower + Upper;
-    Alnum = Alpha + Digit;
-    Graph = [#33..#126, #128..#255];
-    Print = Graph + [' '];
-  end;
+uses
+  SysUtils;
+
+function AsmSplit(const ALine: string; var ASym, ACmd, APar: string): boolean;
 
 implementation
+
+const
+  CharSetEOL = ['#', '*', ';', #0];
+
+function AsmSplit(const ALine: string; var ASym, ACmd, APar: string): boolean;
+var
+  LBeg, LEnd, LTok: pchar;
+
+  procedure LNextToken;
+  begin
+    while LEnd^ in [#1..#32] do begin
+      Inc(LEnd);
+    end;
+    LTok := LEnd;
+    if LTok^ in ['''', '"'] then begin
+      repeat
+        Inc(LEnd);
+      until LEnd^ in [#0, LTok^];
+      if LEnd^ <> #0 then begin
+        Inc(LEnd);
+      end;
+    end else begin
+      while not (LEnd^ in [#0..#32]) do begin
+        Inc(LEnd);
+      end;
+    end;
+  end;
+
+begin
+  ASym := EmptyStr;
+  ACmd := EmptyStr;
+  APar := EmptyStr;
+  LBeg := PChar(ALine);
+  LEnd := LBeg;
+  LNextToken;
+  Result := not (LTok^ in CharSetEOL);
+  if Result then begin
+    if (LTok = LBeg) or (LEnd[-1] = ':') then begin
+      SetString(ASym, LTok, LEnd - LTok);
+      LNextToken;
+    end;
+    if not (LTok^ in CharSetEOL) then begin
+      SetString(ACmd, LTok, LEnd - LTok);
+      LNextToken;
+      if not (LTok^ in CharSetEOL) then begin
+        SetString(APar, LTok, LEnd - LTok);
+      end;
+    end;
+  end;
+end;
 
 end.
