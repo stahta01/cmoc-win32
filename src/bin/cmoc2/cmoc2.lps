@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="220">
+    <Units Count="223">
       <Unit0>
         <Filename Value="cmoc2.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -1590,6 +1590,29 @@
         <CursorPos X="18" Y="22"/>
         <UsageCount Value="20"/>
       </Unit219>
+      <Unit220>
+        <Filename Value="..\shared\ucmoccharset.pas"/>
+        <UnitName Value="UCmocCharSet"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="26"/>
+        <CursorPos X="18" Y="43"/>
+        <UsageCount Value="10"/>
+      </Unit220>
+      <Unit221>
+        <Filename Value="C:\lazarus\components\aggpas\src\platform\win\file_utils_.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="236"/>
+        <CursorPos X="36" Y="200"/>
+        <UsageCount Value="10"/>
+      </Unit221>
+      <Unit222>
+        <Filename Value="C:\lazarus\components\bgrabitmap8.9.2\bgrasvgtype.pas"/>
+        <UnitName Value="BGRASVGType"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="332"/>
+        <CursorPos X="63" Y="176"/>
+        <UsageCount Value="10"/>
+      </Unit222>
     </Units>
     <JumpHistory Count="5" HistoryIndex="4">
       <Position1>
