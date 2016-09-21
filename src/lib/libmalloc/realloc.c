@@ -1,7 +1,7 @@
 
 #include "_malloc.h"
 
-void* realloc(void* mem, int size)
+void* realloc(void* mem, size_t size)
 {
     if (_msize(mem) != size) {
         void* tmp = malloc(size);

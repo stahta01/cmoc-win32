@@ -4,11 +4,11 @@
 
 #include <sys/size.h>
 
-void* malloc(int size);
-void* calloc(int num, int size);
+void* malloc(size_t size);
+void* calloc(size_t num, size_t size);
 void free(void* mem);
-int _msize(void* mem);
-void* realloc(void* mem, int size);
+size_t _msize(void* mem);
+void* realloc(void* mem, size_t size);
 
 extern int heap_memory[1];                      // INTERNAL USE ONLY
 
