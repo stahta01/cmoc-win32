@@ -1,7 +1,7 @@
 
 #include "_float.h"
 
-void asm _ftoa(char* dst, float_t* src)
+asm char* _ftoa(char* dst, float_t* src)
 {
     asm {
         pshs    u

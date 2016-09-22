@@ -1,7 +1,7 @@
 
 #include "_float.h"
 
-void asm _itof(float_t* dst, int src)
+asm float_t* _itof(float_t* dst, int src)
 {
     asm {
         pshs    u

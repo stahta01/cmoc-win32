@@ -1,26 +1,26 @@
 
-#define _linc       linc
-#define _ldec       ldec
-#define _lmul       lmul
-#define _lbexit     lbexit
-#define _ltoacc     ltoacc
-#define _lneg       lneg
-#define _lnegx      lnegx
-#define _lcompl     lcompl
-#define _lshl       lshl
-#define _lshr       lshr
-#define _lmove      lmove
-#define _litol      litol
-#define _lutol      lutol
-#define _lcmpr      lcmpr
-#define _land       land
-#define _lor        lor
-#define _lxor       lxor
-#define _lnot       lnot
-#define _ladd       ladd
-#define _lsub       lsub
-#define _ldiv       ldiv
-#define _lmod       lmod
+#define _linc       ___linc
+#define _ldec       ___ldec
+#define _lmul       ___lmul
+#define _lbexit     ___lbexit
+#define _ltoacc     ___ltoacc
+#define _lneg       ___lneg
+#define _lnegx      ___lnegx
+#define _lcompl     ___lcompl
+#define _lshl       ___lshl
+#define _lshr       ___lshr
+#define _lmove      ___lmove
+#define _litol      ___litol
+#define _lutol      ___lutol
+#define _lcmpr      ___lcmpr
+#define _land       ___land
+#define _lor        ___lor
+#define _lxor       ___lxor
+#define _lnot       ___lnot
+#define _ladd       ___ladd
+#define _lsub       ___lsub
+#define _ldiv       ___ldiv
+#define _lmod       ___lmod
 
 #define abs         _abs
 #define atoi        _atoi
@@ -61,7 +61,7 @@
 #define umin        _umin
 #define _chcodes    __chcodes
 
-void asm __libkreider(void)
+void asm _static_libkreider(void)
 {
     asm {
         linc: extern

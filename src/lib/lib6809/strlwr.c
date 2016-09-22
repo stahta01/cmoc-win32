@@ -4,7 +4,7 @@
 //
 // Converted to C for WinCMOC by Derek Evans 2016
 
-unsigned asm strlwr(char* str)
+asm char* strlwr(char* str)
 {
     asm {
         pshs    x

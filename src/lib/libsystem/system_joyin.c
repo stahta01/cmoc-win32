@@ -1,7 +1,7 @@
 
 #include "_system.h"
 
-void asm system_joyin(void)
+asm void system_joyin(void)
 {
     asm {
         pshs    u

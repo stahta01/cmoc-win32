@@ -5,7 +5,7 @@ asm long_t* _linc(long_t* l)
 {
     asm {
         ldx     2,s
-        bsr     linc
+        bsr     ___linc
         ldd     2,s
     }
 }
@@ -14,7 +14,7 @@ asm long_t* _ldec(long_t* l)
 {
     asm {
         ldx     2,s
-        bsr     ldec
+        bsr     ___ldec
         ldd     2,s
     }
 }

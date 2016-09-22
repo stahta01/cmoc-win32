@@ -9,7 +9,7 @@
 // Result left in B.
 // CAUTION: Trashes X and pops the 8-bit value off the stack.
 
-void asm __shiftByteRightUnsigned(void)
+asm void _static_shiftByteRightUnsigned(void)
 {
     asm {
         shiftByteRightUnsigned: export

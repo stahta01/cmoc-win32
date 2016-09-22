@@ -3,7 +3,7 @@
 #define _FILE "alib/bin_hex.as"
 #include "_rma.h"
 
-unsigned asm bin_hex(int n, char* str)
+asm char* bin_hex(int n, char* str)
 {
     asm {
         ldd     2,s

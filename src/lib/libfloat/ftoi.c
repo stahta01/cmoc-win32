@@ -1,7 +1,7 @@
 
 #include "_float.h"
 
-int asm _ftoi(float_t* f)
+asm int _ftoi(float_t* f)
 {
     asm {
         ldx     2,s

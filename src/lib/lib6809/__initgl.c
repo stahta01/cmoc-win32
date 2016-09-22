@@ -7,7 +7,7 @@
 // and added to the projects archive. The second link will find the
 // real autocreated INITGL first, and link to that.
 
-void asm __initgl()
+asm void _static_initgl()
 {
     asm {
         INITGL: export

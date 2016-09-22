@@ -13,7 +13,7 @@
 // where a = higher five bits and b = lower three bits
 // Source: DIVIDE7 on http://mirrors.apple2.org.za/ground.icaen.uiowa.edu/MiscInfo/Programming/div7
 
-void asm __DIV8BY7(void)
+asm void _static_DIV8BY7(void)
 {
     asm {
         DIV8BY7: export

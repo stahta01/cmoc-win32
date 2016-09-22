@@ -7,7 +7,7 @@
 // Divide A by B, unsigned; return quotient in B, remainder in A.
 // Does not preserve X.
 
-void asm __DIV8(void)
+asm void _static_DIV8(void)
 {
     asm {
         DIV8: export

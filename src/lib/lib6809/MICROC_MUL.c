@@ -1,7 +1,7 @@
 
 // Converted to C for WinCMOC by Derek Evans 2016
 
-void asm __MICROC_MUL(void)
+asm void _static_MICROC_MUL(void)
 {
     asm {
         MICROC_MUL: export

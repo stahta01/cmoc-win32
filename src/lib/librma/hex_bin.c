@@ -2,7 +2,7 @@
 #define _FILE "alib/hex_bin.as"
 #include "_rma.h"
 
-unsigned asm hex_bin(char* str)
+asm unsigned hex_bin(char* str)
 {
     asm {
         ldx     2,s

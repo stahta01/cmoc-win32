@@ -5,7 +5,7 @@
 
 // Return SQUARE ROOT of argument
 
-int asm sqrt(int a)
+asm int sqrt(int a)
 {
     asm {
         MICROC_MUL: extern

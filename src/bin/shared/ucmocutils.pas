@@ -316,7 +316,7 @@ class function OCmoc.SymbolIsPublic(const A: string): boolean;
 begin
   Result := Length(A) >= 2;
   if Result then begin
-    Result := (A[1] = '_') and (A[2] in CharSet_IdentHead) and not AnsiStartsStr('___', A);
+    Result := (A[1] = '_') and (A[2] in CharSet_IdentHead) and not AnsiStartsStr('__static_', A);
   end;
 end;
 

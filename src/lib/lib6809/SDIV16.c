@@ -7,7 +7,7 @@
 // Divide X by D, signed; return quotient in X, remainder in D.
 // Non-zero remainder is negative iff dividend is negative.
 
-void asm __SDIV16(void)
+asm void _static_SDIV16(void)
 {
     asm {
         SDIV16: export

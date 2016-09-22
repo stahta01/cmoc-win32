@@ -9,7 +9,7 @@
 // Result left in D.
 // CAUTION: Trashes X and pops the 16-bit value off the stack.
 
-void asm __shiftRightUnsigned(void)
+asm void _static_shiftRightUnsigned(void)
 {
     asm {
         shiftRightUnsigned: export

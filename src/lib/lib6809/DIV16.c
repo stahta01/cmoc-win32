@@ -6,7 +6,7 @@
 
 // Divide X by D, unsigned; return quotient in X, remainder in D.
 
-void asm __DIV16(void)
+asm void _static_DIV16(void)
 {
     asm {
         DIV16: export

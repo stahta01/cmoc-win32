@@ -8,7 +8,7 @@
 // Non-zero remainder is negative iff dividend is negative.
 // Does not preserve X.
 
-void asm __SDIV8(void)
+asm void _static_SDIV8(void)
 {
     asm {
         SDIV8: export

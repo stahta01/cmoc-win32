@@ -10,7 +10,7 @@
 // Source: Hacker's Delight (Addison-Wesley, 2003, 2012)
 //         http://www.hackersdelight.org/divcMore.pdf
 
-void asm __DIV16BY10(void)
+asm void _static_DIV16BY10(void)
 {
     asm {
         DIV16BY10: export

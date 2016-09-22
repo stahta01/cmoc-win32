@@ -1,7 +1,7 @@
 
 #include "_float.h"
 
-void asm _fadd(float_t* dst, float_t* fp1, float_t* fp2)
+asm float_t* _fadd(float_t* dst, float_t* fp1, float_t* fp2)
 {
     asm {
         pshs    u

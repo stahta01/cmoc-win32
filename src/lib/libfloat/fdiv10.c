@@ -1,7 +1,7 @@
 
 #include "_float.h"
 
-void asm _fdiv10(float_t* dst, float_t* src)
+asm float_t* _fdiv10(float_t* dst, float_t* src)
 {
     asm {
         pshs    u

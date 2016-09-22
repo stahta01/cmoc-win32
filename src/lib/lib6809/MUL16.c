@@ -6,7 +6,7 @@
 
 // Multiply D by X, unsigned; return result in D; preserve X.
 
-void asm __MUL16(void)
+asm void _static_MUL16(void)
 {
     asm {
         MUL16: export

@@ -1,7 +1,7 @@
 
 #include "_system.h"
 
-void asm system_line(void)
+asm void system_line(void)
 {
     asm {
         pshs    u

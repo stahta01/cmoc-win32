@@ -1,7 +1,7 @@
 
 #include "_system.h"
 
-void asm system_sound(void)
+asm void system_sound(void)
 {
     asm {
         pshs    u

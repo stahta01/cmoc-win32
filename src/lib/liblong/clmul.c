@@ -9,7 +9,7 @@ asm long_t* _lmul(long_t* dst, long_t* src1, long_t* src2)
         ldd     0,y
         ldy     2,y
         pshs    d,y
-        bsr     lmul
+        bsr     ___lmul
         ldy     2,s
         ldd     0,x
         std     0,y

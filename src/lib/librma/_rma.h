@@ -14,7 +14,7 @@
 #define TO_UPPER _TO_UPPER
 #define TO_LOWER _TO_LOWER
 
-void asm __ALIB(void)
+asm void _static_librma(void)
 {
     asm {
 #ifdef _NAME

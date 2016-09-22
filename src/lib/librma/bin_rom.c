@@ -2,7 +2,7 @@
 #define _FILE "alib/bin_rom.as"
 #include "_rma.h"
 
-unsigned asm bin_rom(int n, char* str)
+asm char* bin_rom(int n, char* str)
 {
     asm {
         ldd     2,s

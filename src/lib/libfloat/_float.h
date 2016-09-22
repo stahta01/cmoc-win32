@@ -1,5 +1,5 @@
 
 #include <stdarg.h>
-#include <sys/float.h>
+#include <float.h>
 #include <equates.h>
 
