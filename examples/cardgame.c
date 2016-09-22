@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <conio.h>
+#include <os9.h>
 #include <cardgame.h>
 
 #define PIXEL_ROWS_PER_SCREEN 192
@@ -60,9 +61,9 @@ int main()
 
     // Erase the jokers over a short delay, as an example of erasing cards.
     _eraseCard(28, cardHeight + 4);
-    delay(30);
+    _tsleep(30);
     _eraseCard(28, 0);
-    delay(30);
+    _tsleep(30);
 
     // Go back to the text screen.
     _closeCardGameScreenMode();

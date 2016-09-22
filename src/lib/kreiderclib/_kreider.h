@@ -1,4 +1,7 @@
 
+// Raw Kreider asm. These can not be called from CMOC C.
+// ie: They need a C wrapper.
+
 #define _linc       ___linc
 #define _ldec       ___ldec
 #define _lmul       ___lmul
@@ -22,55 +25,62 @@
 #define _ldiv       ___ldiv
 #define _lmod       ___lmod
 
+// ANSIC Functions
+
 #define abs         _abs
 #define atoi        _atoi
-#define index       _index
 #define max         _max
-#define memccpy     __memccpy
 #define memchr      _memchr
 #define memcmp      _memcmp
 #define memcpy      _memcpy
 #define memset      _memset
 #define min         _min
-#define pffloat     __pffloat
-#define pflong      __pflong
 #define putc        _putc
-#define reverse     __reverse
-#define rindex      _rindex
 #define strcat      _strcat
 #define strchr      _strchr
 #define strcmp      _strcmp
 #define strcpy      _strcpy
-#define strend      _strend
-#define strhcpy     _strhcpy
 #define strlen      _strlen
-#define strncat     __strncat
 #define strncmp     _strncmp
 #define strncpy     _strncpy
-#define strnucmp    __strnucmp
 #define strpbrk     _strpbrk
 #define strrchr     _strrchr
 #define strspn      _strspn
 #define strtok      _strtok
-#define strucat     __strucat
-#define strucpy     __strucpy
-#define swab        __swab
 #define tolower     _tolower
 #define toupper     _toupper
-#define umax        _umax
-#define umin        _umin
+
+// POSIX functions which have moved to the _ namespace
+
+#define strncat     __strncat
+#define memccpy     __memccpy
+
+// Functions defined in os9.h
+
+#define swab        __swab
+#define umax        __umax
+#define umin        __umin
+#define strucat     __strucat
+#define strucpy     __strucpy
+#define strnucmp    __strnucmp
+#define reverse     __reverse
+#define strhcpy     __strhcpy
+#define strend      __strend
+
+// Table for OS9 char type functions
+
 #define _chcodes    __chcodes
+
+// Unsure if these are used
+
+#define index       __index
+#define rindex      __rindex
+#define pffloat     __pffloat
+#define pflong      __pflong
 
 void asm _static_libkreider(void)
 {
     asm {
-        linc: extern
-        ldec: extern
-        lmul: extern
-        lbexit: extern
-        ltoacc: extern
-        lnegx: extern
-
 #define section *
 #define endsect *
 #include _FILE

@@ -1,7 +1,7 @@
 
-#include "_unistd.h"
+#include "_os9.h"
 
-void tsleep(clock_t ticks)
+void _tsleep(clock_t ticks)
 {
     if (ticks) {
         clock_t start = clock();
