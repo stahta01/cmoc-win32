@@ -3,12 +3,12 @@
 
 int fgetc(FILE* fp)
 {
-    if (fp->devnum) {
+    if (fp->dev) {
         if (fp->buffer == EOF) {
             return EOF;
         }
         int c = fp->buffer;
-        fp->buffer = system_getchr(fp->devnum);
+        fp->buffer = system_getchr(fp->dev);
         if (_cinbfl) {
             fp->buffer = EOF;
         }

@@ -2,6 +2,8 @@
 #ifndef _SYSTEM_H
 #define _SYSTEM_H
 
+#include <sys/dev.h>
+
 #define SYSTEM_CMDLINE ((char*)0x2dd)
 
 // 3 bits for the machine
@@ -38,10 +40,10 @@ extern unsigned sysptr_polcat, sysptr_chrout, sysptr_csrdon, sysptr_blkin, syspt
        sysptr_crunch, sysptr_execute, sysptr_screen;
 
 void system_init(void);
-char system_polcat(void);
-void system_chrout(char c);
-void system_putchr(char c, char devnum);
-int system_getchr(char devnum);
+int system_polcat(void);
+void system_chrout(int c);
+void system_putchr(int c, dev_t dev);
+int system_getchr(dev_t dev);
 void system_joyin(void);
 void system_sound(void);
 void system_line(void);

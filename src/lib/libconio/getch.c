@@ -18,7 +18,7 @@ int ungetch(int c)
 bool kbhit()
 {
     if (__buffersize == 0) {
-        char c = system_polcat();
+        int c = system_polcat();
         if (c) {
             ungetch(c);
         }

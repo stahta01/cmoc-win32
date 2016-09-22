@@ -9,7 +9,5 @@
 #define DEV_SERIAL      (-2)
 #define DEV_PRINTER     DEV_SERIAL
 
-dev_t dev_avaliable_disk_file(void);
-
 #endif
 

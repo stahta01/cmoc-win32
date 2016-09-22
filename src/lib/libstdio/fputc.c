@@ -3,10 +3,10 @@
 
 int fputc(int c, FILE* fp)
 {
-    if (fp->devnum) {
-        system_putchr((char)c, fp->devnum);
+    if (fp->dev) {
+        system_putchr(c, fp->dev);
     } else {
-        cputc((char)c);
+        cputc(c);
     }
     return 0;
 }

@@ -3,7 +3,7 @@
 
 int fclose(FILE* fp)
 {
-    close(fp->devnum);
+    close(fp->dev);
     free(fp);
     return 0;
 }

@@ -4,7 +4,7 @@
 
 // Device can be neg on a CoCo (-1=Cas -2=Printer)
 
-typedef sbyte dev_t;
+typedef int dev_t;
 
 #endif
 

@@ -1,7 +1,7 @@
 
 #include "_system.h"
 
-int _system(void)
+asm int _system(void)
 {
     asm {
         pshs    u
@@ -14,8 +14,8 @@ int _system(void)
         jsr     _GETNCH
         jsr     [sysptr_execute]
         puls    u
+        clrd
     }
-    return 0;
 }
 
 int system(char* cmd)

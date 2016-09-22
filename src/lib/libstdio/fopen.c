@@ -16,7 +16,7 @@ FILE* fopen(char* name, char* mode)
                 if (!hasdisk()) {
                     return nullptr;
                 }
-                dev = dev_avaliable_disk_file();
+                dev = fcb_aval() + 1;
                 drive = *name - 'A';
                 if (!dev) {
                     return nullptr;
@@ -36,7 +36,7 @@ FILE* fopen(char* name, char* mode)
             }
             name += 2;
         } else {
-            dev = dev_avaliable_disk_file();
+            dev = fcb_aval() + 1;
             drive = getdisk();
             if (!dev || drive < DRIVE_A) {
                 return nullptr;
@@ -47,7 +47,7 @@ FILE* fopen(char* name, char* mode)
                 dev, name, drive);
         fp = new(FILE);
         if (fp) {
-            fp->devnum = dev;
+            fp->dev = dev;
             if (*mode == 'r') {
                 fgetc(fp);
             }

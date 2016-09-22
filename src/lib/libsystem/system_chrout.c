@@ -1,10 +1,10 @@
 
 #include "_system.h"
 
-void system_chrout(char c)
+asm void system_chrout(int c)
 {
     asm {
-        lda     c
+        lda     3,s
         jsr     [sysptr_chrout]
     }
 }

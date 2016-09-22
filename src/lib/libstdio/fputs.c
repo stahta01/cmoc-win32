@@ -3,7 +3,7 @@
 
 int fputs(char* s, FILE* fp)
 {
-    if (fp->devnum) {
+    if (fp->dev) {
         while (*s) {
             if (fputc(*s++, fp) == EOF) {
                 return EOF;

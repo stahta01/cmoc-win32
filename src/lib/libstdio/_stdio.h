@@ -10,5 +10,6 @@
 #include <fcntl.h>
 #include <dev.h>
 #include <dir.h>
+#include <fcb.h>
 #include <coco/disk.h>
 

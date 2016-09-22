@@ -3,7 +3,7 @@
 
 char* fgets(char* s, size_t n, FILE* fp)
 {
-    if (fp->devnum) {
+    if (fp->dev) {
         char* start = s;
         int c = EOF;
         while (n-- > 1) {

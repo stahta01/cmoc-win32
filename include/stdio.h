@@ -41,7 +41,7 @@
 #include <stdarg.h>
 
 typedef struct {
-    dev_t   devnum;
+    dev_t   dev;
     int     buffer;
 } FILE;
 
