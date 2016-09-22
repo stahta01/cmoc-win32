@@ -11,5 +11,7 @@
 #include <dev.h>
 #include <dir.h>
 #include <fcb.h>
+#include <fat.h>
+#include <drive.h>
 #include <coco/disk.h>
 

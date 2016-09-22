@@ -4,15 +4,11 @@
 int fgetc(FILE* fp)
 {
     if (fp->dev) {
-        if (fp->buffer == EOF) {
-            return EOF;
+        // TODO: We need to check for R/W and tape/printer
+        if (fp->eof || fcb_get(fp->dev - 1)->cnt.seq.dfl) {
+            return fp->eof = EOF;
         }
-        int c = fp->buffer;
-        fp->buffer = system_getchr(fp->dev);
-        if (_cinbfl) {
-            fp->buffer = EOF;
-        }
-        return c;
+        return system_getchr(fp->dev);
     } else {
         return cgetc();
     }

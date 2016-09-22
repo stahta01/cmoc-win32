@@ -38,7 +38,7 @@ FILE* fopen(char* name, char* mode)
         } else {
             dev = fcb_aval() + 1;
             drive = getdisk();
-            if (!dev || drive < DRIVE_A) {
+            if (!dev || drive < DRIVE_MIN) {
                 return nullptr;
             }
         }
@@ -48,9 +48,6 @@ FILE* fopen(char* name, char* mode)
         fp = new(FILE);
         if (fp) {
             fp->dev = dev;
-            if (*mode == 'r') {
-                fgetc(fp);
-            }
         }
     }
     return fp;

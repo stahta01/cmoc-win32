@@ -19,11 +19,6 @@ void fnmerge(char* path, char* drive, char* dir, char* name, char* ext);
 
 // A drive number < 0 indicates a non-disk system.
 
-#define DRIVE_A     0
-#define DRIVE_B     1
-#define DRIVE_C     2
-#define DRIVE_D     3
-
 void setdisk(int drive);
 int getdisk(void);
 bool hasdisk(void);

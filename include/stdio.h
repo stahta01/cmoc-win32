@@ -42,7 +42,7 @@
 
 typedef struct {
     dev_t   dev;
-    int     buffer;
+    int     eof;
 } FILE;
 
 typedef unsigned fpos_t;
@@ -110,9 +110,11 @@ int vscanf(char* format, va_list ap);
 int vsscanf(char* s, char* format, va_list ap);
 int vfscanf(FILE* f, char* format, va_list ap);
 
+size_t _fsize(FILE* fp);                        // CMOC
+
 // Masking macros for some functions
-#define getc(_f)        fgetc(_f)           // ANSI
-#define putc(_c,_f)     fputc(_c,_f)        // ANSI
+#define getc(_f)        fgetc(_f)               // ANSI
+#define putc(_c,_f)     fputc(_c,_f)            // ANSI
 
 #endif
 

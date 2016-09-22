@@ -4,6 +4,8 @@
 #ifndef _FCB_H
 #define _FCB_H
 
+#ifdef __COCO__
+
 // THE FILE STRUCTURE OF COLOR TRS DOS IS CONTROLLED BY A FILE CONTROL BLOCK (FCB)
 // THE FCB CONTAINS 26 CONTROL BYTES AND A SECTOR LONG (256 BYTES) DATA BUFFER.
 // THE CONTROL BYTES CONTROL THE ORDERLY FLOW OF DATA FROM THE COMPUTER'S RAM TO
@@ -13,7 +15,6 @@
 // TABLES OF OFFSETS TO FCB CONTROL BYTES
 
 typedef struct fcb_t {
-    // COMMON
     byte typ;                                   // FILE TYPE: $40=RANDOM/DIRECT, 0=CLOSED
     byte drv;                                   // DRIVE NUMBER
     byte fgr;                                   // FIRST GRANULE IN FILE
@@ -50,6 +51,8 @@ typedef struct fcb_t {
 int fcb_act(void);
 fcb_t* fcb_get(int index);
 int fcb_aval(void);
+
+#endif
 
 #endif
 

@@ -3,6 +3,6 @@
 
 int feof(FILE* fp)
 {
-    return fp->buffer == EOF;
+    return fp->eof;
 }
 
