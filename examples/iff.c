@@ -1,4 +1,6 @@
 
+#pragma options -machine=cocous
+
 // This is a _simple_ example of loading an IFF file. The image was created
 // using Paintshop PRO. The code expects a 256x192, single plane (2 color)
 // compressed image. I dont check for any errors.
@@ -40,6 +42,7 @@ int main(void)
                     rle_decode((byte*)_beggrp, buf, _endgrp - _beggrp);
                     byte* end = rle_encode(buf, (byte*)_beggrp, _endgrp - _beggrp);
                     system("PCLS");
+                    system("SCREEN,0");
                     rle_decode((byte*)_beggrp, buf, _endgrp - _beggrp);
                     printf("SIZES: NEW=%d OLD=%d\n", end - buf, head.size.lo);
                     break;

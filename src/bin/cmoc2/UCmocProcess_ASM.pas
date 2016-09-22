@@ -152,25 +152,6 @@ begin
       end;
     end;
   end;
-  (*
-  LParser := default(OAsmParser);
-
-  for LIndex := 0 to FAsmCode.Count - 1 do begin
-    LParser.SetString(FAsmCode[LIndex]);
-    if LParser.Next then begin
-      LToken := LParser.Token;
-      if LToken[1] = '_' then begin
-        if OCmoc.SymbolIsPublic(LToken) then begin
-          AddExport(LToken);
-        end;
-      end else if SameText(LToken, 'RMB') then begin
-        FAsmCode[LIndex] := Char_TAB + 'ZMB' + Char_TAB + Trim(LParser.Remaining);
-      end else if LParser.Next and SameText(LToken, 'RMB') then begin
-        FAsmCode[LIndex] := LToken + Char_TAB + 'ZMB' + Char_TAB + Trim(LParser.Remaining);
-      end;
-    end;
-  end;
-  *)
   for LIndex := 0 to FAsmCode.Count - 1 do begin
     if AsmSplit(FAsmCode[LIndex], LSym, LCmd, LPar) then begin
       LParser.SetString(LPar);
