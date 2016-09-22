@@ -21,8 +21,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="665"/>
-        <CursorPos X="52" Y="671"/>
+        <TopLine Value="265"/>
+        <CursorPos X="24" Y="267"/>
         <UsageCount Value="96"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -663,8 +663,8 @@
         <Filename Value="..\shared\ucmocdefs.pas"/>
         <UnitName Value="UCmocDefs"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="33"/>
-        <CursorPos X="3" Y="128"/>
+        <TopLine Value="119"/>
+        <CursorPos X="70" Y="130"/>
         <UsageCount Value="10"/>
       </Unit84>
       <Unit85>
@@ -675,7 +675,7 @@
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit85>
     </Units>
-    <JumpHistory Count="20" HistoryIndex="19">
+    <JumpHistory Count="21" HistoryIndex="20">
       <Position1>
         <Filename Value="unitcmocide.pas"/>
         <Caret Line="244" Column="16" TopLine="235"/>
@@ -756,6 +756,10 @@
         <Filename Value="unitcmocide.pas"/>
         <Caret Line="671" Column="52" TopLine="665"/>
       </Position20>
+      <Position21>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="673" Column="53" TopLine="668"/>
+      </Position21>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

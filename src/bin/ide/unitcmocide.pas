@@ -264,6 +264,7 @@ begin
     FormCmocIDESynEdit.LoadFromFile(ParamStr(ParamCount));
   end else if not Application.HasOption('nocode') then begin
     with FormCmocIDESynEdit.SynEdit.Lines do begin
+      Add(EmptyStr);
       Add('#include <math.h>');
       Add('#include <ctype.h>');
       Add('#include <stdio.h>');
@@ -686,7 +687,7 @@ begin
         end;
       end;
       if Length(AFileName) > 0 then begin
-        OStringDynArray.AddStrings(LParams, ['-run', AFileName]);
+        OStringDynArray.AddStrings(LParams, [Opt_Run2, AFileName]);
       end;
       Execute(OCmoc.PathToXroar + 'xroar.exe', LParams, True);
     except
