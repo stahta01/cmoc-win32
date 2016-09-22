@@ -25,7 +25,8 @@ int main(void)
     byte buf[4000];                             // Must be big enough for BODY data
     clrscr();
     puts("LOADING IFF IMAGE ...");
-    FILE* fp = fopen("WINCMOC.IFF:1", "r");
+    // stdio now uses DOS style devices. A-D=disk,T=tape,P=Printer,S=Screen.
+    FILE* fp = fopen("B:WINCMOC.IFF", "r");
     if (fp) {
         iff_head_t head;
         if (iff_head_read(&head, fp) && iff_head_is(&head, "FORM")) {

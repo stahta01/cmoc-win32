@@ -5,11 +5,6 @@
 #include <motorola/types.h>
 #include <coco/equates.h>
 
-#define DEV_SCREEN      ( 0)
-#define DEV_CASSETTE    (-1)
-#define DEV_SERIAL      (-2)
-#define DEV_PRINTER     DEV_SERIAL
-
 // TODO: These should be removed. We now have system.h
 
 #define ROM_OPEN        [$015E]

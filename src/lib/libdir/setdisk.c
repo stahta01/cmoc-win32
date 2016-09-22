@@ -3,6 +3,8 @@
 
 void setdisk(int drive)
 {
-    _defdrv = (char)drive;
+    if (hasdisk()) {
+        _defdrv = (char)drive;
+    }
 }
 

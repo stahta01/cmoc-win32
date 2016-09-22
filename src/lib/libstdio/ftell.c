@@ -1,7 +1,7 @@
 
 #include "_stdio.h"
 
-long ftell(FILE* fp)
+int ftell(FILE* fp)
 {
     return 0;
 }

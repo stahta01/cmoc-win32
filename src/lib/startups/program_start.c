@@ -30,7 +30,7 @@ void exit(int status)
     }
 }
 
-void asm __program_start(void)
+asm void _static_program_start(void)
 {
     asm {
         // Note: endsection not required but LWTools recommends it.

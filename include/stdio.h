@@ -35,15 +35,17 @@
 #ifndef _STDIO_H
 #define _STDIO_H
 
+#include <sys/dev.h>
+
 #include <stddef.h>
 #include <stdarg.h>
 
 typedef struct {
-    char    devnum;
+    dev_t   devnum;
     int     buffer;
 } FILE;
 
-typedef unsigned int fpos_t;
+typedef unsigned fpos_t;
 
 // Standard file descriptors
 extern FILE* stdin;
@@ -82,7 +84,7 @@ FILE* freopen(char* name, char* mode, FILE* f);
 size_t fwrite(void* buf, size_t size, size_t count, FILE* f);
 int fgetpos(FILE* f, fpos_t* pos);
 int fsetpos(FILE* f, fpos_t* pos);
-long ftell(FILE* f);
+int ftell(FILE* f);
 int fseek(FILE* f, long offset, int whence);
 void rewind(FILE* f);
 int getchar(void);

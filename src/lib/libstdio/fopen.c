@@ -1,34 +1,54 @@
 
 #include "_stdio.h"
 
-FILE* fopen(char* name, char* m)
+FILE* fopen(char* name, char* mode)
 {
     FILE* fp = nullptr;
-
-    if (m[0] == 'r' || m[0] == 'w') {
-        char devnum;
-        if (name[0] == 'C' && name[1] == 'O' && name[2] == 'N' && name[3] == ':') {
-            devnum = 0;
-            name += 4;
-        }  else if (name[0] == 'C' && name[1] == 'A' && name[2] == 'S' && name[3] == ':') {
-            devnum = -1;
-            name += 4;
-        }  else if (name[0] == 'P' && name[1] == 'R' && name[2] == 'T' && name[3] == ':') {
-            devnum = -2;
-            name += 4;
-        } else {
-            for (devnum = _fcbact; devnum > 0; devnum--) {
-                unsigned char* fcb = (unsigned char*)((unsigned*)_FCBV1)[devnum - 1];
-                if (!fcb[_FCBTYP]) {
-                    break;
+    if (name && mode && *name && (*mode == 'r' || *mode == 'w')) {
+        int drive = -1;
+        dev_t dev = 0;
+        if (name[1] == ':') {
+            switch (*name) {
+            case 'A':
+            case 'B':
+            case 'C':
+            case 'D':
+                if (!hasdisk()) {
+                    return nullptr;
                 }
+                dev = dev_avaliable_disk_file();
+                drive = *name - 'A';
+                if (!dev) {
+                    return nullptr;
+                }
+                break;
+            case 'S':
+                dev = DEV_SCREEN;
+                break;
+            case 'T':
+                dev = DEV_CASSETTE;
+                break;
+            case 'P':
+                dev = DEV_PRINTER;
+                break;
+            default:
+                return nullptr;
+            }
+            name += 2;
+        } else {
+            dev = dev_avaliable_disk_file();
+            drive = getdisk();
+            if (!dev || drive < DRIVE_A) {
+                return nullptr;
             }
         }
-        if (devnum) {
-            systemf("OPEN\"%c\",#%d,\"%s\"", m[0] == 'r' ? 'I' : 'O', devnum, name);
-            fp = (FILE*)calloc(sizeof(FILE), 1);
-            fp->devnum = devnum;
-            if (m[0] == 'r') {
+        systemf(dev <= DEV_SCREEN ? "OPEN\"%c\",#%d,\"%s\"" : "OPEN\"%c\",#%d,\"%s:%u\"",
+                *mode == 'r' ? 'I' : 'O',
+                dev, name, drive);
+        fp = new(FILE);
+        if (fp) {
+            fp->devnum = dev;
+            if (*mode == 'r') {
                 fgetc(fp);
             }
         }

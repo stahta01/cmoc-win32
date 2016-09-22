@@ -8,5 +8,7 @@
 #include <assert.h>
 #include <system.h>
 #include <fcntl.h>
+#include <dev.h>
+#include <dir.h>
 #include <coco/disk.h>
 

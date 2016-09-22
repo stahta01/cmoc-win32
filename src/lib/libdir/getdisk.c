@@ -3,6 +3,6 @@
 
 int getdisk(void)
 {
-    return _defdrv;
+    return hasdisk() ? _defdrv : -1;
 }
 

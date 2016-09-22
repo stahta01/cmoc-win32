@@ -1,16 +1,4 @@
 
-// Name: dir.h
-// Desc: Defines Borland style directory functions
-// Auth: Derek John Evans
-//
-// This file is part of the WinCMOC/CMOC Compiler
-//
-// https://sourceforge.net/projects/cmoc-win32/
-// http://perso.b2b2c.ca/~sarrazip/dev/cmoc.html
-//
-// This file is in the public domain
-
-
 #ifndef _DIR_H
 #define _DIR_H
 
@@ -29,8 +17,16 @@
 int fnsplit(char* path, char* drive, char* dir, char* name, char* ext);
 void fnmerge(char* path, char* drive, char* dir, char* name, char* ext);
 
+// A drive number < 0 indicates a non-disk system.
+
+#define DRIVE_A     0
+#define DRIVE_B     1
+#define DRIVE_C     2
+#define DRIVE_D     3
+
 void setdisk(int drive);
 int getdisk(void);
+bool hasdisk(void);
 
 #endif
 
