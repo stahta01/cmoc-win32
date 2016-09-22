@@ -1,8 +1,9 @@
 
 #include "_stdio.h"
 
-int ftell(FILE* fp)
+size_t ftell(FILE* fp)
 {
-    return 0;
+    fcb_t* fcb = fcb_get(fp->dev - 1);
+    return (fcb->rec << 8) + fcb->cpt - 257;
 }
 
