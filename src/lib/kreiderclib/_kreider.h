@@ -51,6 +51,8 @@
 #define strtok      _strtok
 #define tolower     _tolower
 #define toupper     _toupper
+#define setjmp      _setjmp
+#define longjmp     _longjmp
 
 // POSIX functions which have moved to the _ namespace
 
