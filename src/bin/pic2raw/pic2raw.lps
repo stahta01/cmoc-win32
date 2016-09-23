@@ -4,13 +4,13 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="41">
+    <Units Count="43">
       <Unit0>
         <Filename Value="pic2raw.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="63"/>
-        <CursorPos X="9" Y="84"/>
+        <TopLine Value="37"/>
+        <CursorPos X="11" Y="48"/>
         <UsageCount Value="36"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -192,16 +192,16 @@
         <Filename Value="..\shared\ucmocimage.pas"/>
         <UnitName Value="UCmocImage"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="188"/>
-        <CursorPos X="98" Y="206"/>
+        <TopLine Value="42"/>
+        <CursorPos X="41" Y="44"/>
         <UsageCount Value="25"/>
       </Unit24>
       <Unit25>
         <Filename Value="..\shared\ucmocparser.pas"/>
         <UnitName Value="UCmocParser"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="16"/>
-        <CursorPos Y="24"/>
+        <TopLine Value="12"/>
+        <CursorPos X="6" Y="34"/>
         <UsageCount Value="10"/>
       </Unit25>
       <Unit26>
@@ -215,16 +215,16 @@
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="18"/>
-        <CursorPos X="83" Y="29"/>
+        <TopLine Value="37"/>
+        <CursorPos X="75" Y="43"/>
         <UsageCount Value="10"/>
       </Unit27>
       <Unit28>
         <Filename Value="..\shared\ucmocparams.pas"/>
         <UnitName Value="UCmocParams"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="36"/>
-        <CursorPos X="14" Y="46"/>
+        <TopLine Value="27"/>
+        <CursorPos X="36" Y="43"/>
         <UsageCount Value="20"/>
       </Unit28>
       <Unit29>
@@ -252,8 +252,8 @@
         <Filename Value="..\shared\ucmocrbs.pas"/>
         <UnitName Value="UCmocRbs"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="180"/>
-        <CursorPos X="3" Y="186"/>
+        <TopLine Value="12"/>
+        <CursorPos X="6" Y="34"/>
         <UsageCount Value="13"/>
       </Unit32>
       <Unit33>
@@ -302,8 +302,8 @@
         <Filename Value="..\shared\ucmocmain.pas"/>
         <UnitName Value="UCmocMain"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="18"/>
-        <CursorPos X="26" Y="29"/>
+        <TopLine Value="12"/>
+        <CursorPos X="6" Y="34"/>
         <UsageCount Value="10"/>
       </Unit39>
       <Unit40>
@@ -314,8 +314,24 @@
         <CursorPos X="15" Y="28"/>
         <UsageCount Value="10"/>
       </Unit40>
+      <Unit41>
+        <Filename Value="..\shared\ucmocstringdynarray.pas"/>
+        <UnitName Value="UCmocStringDynArray"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="12"/>
+        <CursorPos X="6" Y="34"/>
+        <UsageCount Value="10"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="..\shared\ucmocdefs.pas"/>
+        <UnitName Value="UCmocDefs"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="12"/>
+        <CursorPos X="6" Y="34"/>
+        <UsageCount Value="10"/>
+      </Unit42>
     </Units>
-    <JumpHistory Count="11" HistoryIndex="10">
+    <JumpHistory Count="14" HistoryIndex="13">
       <Position1>
         <Filename Value="pic2raw.lpr"/>
         <Caret Line="47" Column="31" TopLine="32"/>
@@ -360,6 +376,18 @@
         <Filename Value="pic2raw.lpr"/>
         <Caret Line="84" Column="9" TopLine="63"/>
       </Position11>
+      <Position12>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="46" Column="8" TopLine="37"/>
+      </Position12>
+      <Position13>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="47" Column="8" TopLine="37"/>
+      </Position13>
+      <Position14>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="48" Column="11" TopLine="37"/>
+      </Position14>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

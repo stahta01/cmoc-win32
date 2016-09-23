@@ -9,8 +9,8 @@
         <Filename Value="cpp.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="52"/>
-        <CursorPos X="37" Y="51"/>
+        <TopLine Value="42"/>
+        <CursorPos X="7" Y="45"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -52,8 +52,6 @@
         <Filename Value="..\shared\ucmocparserfast.pas"/>
         <UnitName Value="UCmocParserFast"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="83"/>
-        <CursorPos X="37" Y="95"/>
         <UsageCount Value="20"/>
       </Unit6>
       <Unit7>
@@ -75,8 +73,6 @@
         <Filename Value="..\shared\ucmoccharset.pas"/>
         <UnitName Value="UCmocCharSet"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="27"/>
-        <CursorPos X="5" Y="43"/>
         <UsageCount Value="20"/>
       </Unit9>
       <Unit10>
@@ -140,7 +136,7 @@
         <UsageCount Value="10"/>
       </Unit17>
     </Units>
-    <JumpHistory Count="21" HistoryIndex="20">
+    <JumpHistory Count="23" HistoryIndex="22">
       <Position1>
         <Filename Value="cpp.lpr"/>
         <Caret Line="57" Column="20" TopLine="36"/>
@@ -225,6 +221,14 @@
         <Filename Value="cpp.lpr"/>
         <Caret Line="51" Column="37" TopLine="44"/>
       </Position21>
+      <Position22>
+        <Filename Value="cpp.lpr"/>
+        <Caret Line="47" Column="14" TopLine="42"/>
+      </Position22>
+      <Position23>
+        <Filename Value="cpp.lpr"/>
+        <Caret Line="45" Column="7" TopLine="42"/>
+      </Position23>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

@@ -66,7 +66,7 @@ type
     try
       LArgs.CommaText := CmdLine;
       if LArgs.Count < 2 then begin
-        WriteLn(RbsLoadFromResource('HELP'));
+        WriteLn(RbsLoadFromResource('USAGE'));
         OCmoc.RaiseError('missing executable parameter');
       end;
       FExecutable := LArgs[1];

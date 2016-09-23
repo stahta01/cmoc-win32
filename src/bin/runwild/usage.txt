@@ -1,12 +1,6 @@
 Usage: runwild EXECUTABLE [PARAMETERS...]
 runwild expands commandline wild card filenames.
 
-Copyright (C) 2016 Derek John Evans
-
-This program is free software; you may redistribute it under the terms of
-the GNU General Public License, either version 3 or later.
-This program comes with absolutely no warranty.
-
 RunWild will execute another program with the given paramaters. Any
 parameter with wild card characters (which doesnt start with '-')
 will be treated as a wild card filename, and expanded to seperate
