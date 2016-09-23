@@ -36,6 +36,7 @@
 #define _STDIO_H
 
 #include <sys/dev.h>
+#include <sys/fpos.h>
 
 #include <stddef.h>
 #include <stdarg.h>
@@ -44,8 +45,6 @@ typedef struct {
     dev_t   dev;
     int     eof;
 } FILE;
-
-typedef unsigned fpos_t;
 
 // Standard file descriptors
 extern FILE* stdin;

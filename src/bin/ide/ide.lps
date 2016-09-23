@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="88">
+    <Units Count="89">
       <Unit0>
         <Filename Value="ide.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -20,7 +20,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="659"/>
         <CursorPos X="15" Y="661"/>
         <UsageCount Value="97"/>
@@ -690,6 +689,16 @@
         <CursorPos X="40" Y="44"/>
         <UsageCount Value="20"/>
       </Unit87>
+      <Unit88>
+        <Filename Value="..\..\..\include\conio.h"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="38"/>
+        <CursorPos X="34" Y="48"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit88>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
