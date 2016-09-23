@@ -5,7 +5,7 @@ asm int system_execute(char* cmd)
 {
     asm {
         ldx     2,s
-        leax    -1,x                            // charad must be set to the pev char
+        leax    -1,x                            // charad must be set to the prev char
         stx     _CHARAD
         pshs    u
         execute_loop:
