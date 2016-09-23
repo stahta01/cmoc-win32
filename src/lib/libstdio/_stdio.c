@@ -1,10 +1,10 @@
 
 #include "_stdio.h"
 
-FILE __stdin;
-FILE __stdout;
+FILE _static_stdin;
+FILE _static_stdout;
 
-FILE* stdin = &__stdin;
-FILE* stdout = &__stdout;
+FILE* stdin = &_static_stdin;
+FILE* stdout = &_static_stdout;
 
 

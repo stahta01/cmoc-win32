@@ -8,7 +8,7 @@
 void clrscr(void);
 
 // Return true if there's a key waiting, return false if not
-unsigned char kbhit(void);
+bool kbhit(void);
 
 // Set the cursor to the specified X position, leave the Y position untouched
 void gotox(int x);
