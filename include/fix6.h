@@ -37,6 +37,8 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _FIX6_H
 #define _FIX6_H
 
+#include <sys/size.h>
+
 typedef struct {
     int x, y, z;
 } vector_t;
@@ -63,19 +65,20 @@ char sin6(int x);
 char cos6(int x);
 
 void vector_set(vector_t* dst, int x, int y, int z);
+void vector_rotate(vector_t* dst, vector_t* src, size_t n, matrix_t* mat);
+void vector_project(vector_t* dst, vector_t* src, size_t n, int x, int y);
 
 void matrix_scale(matrix_t* dst, int x, int y, int z);
 void matrix_identity(matrix_t* dst);
 void matrix_position(matrix_t* dst, int x, int y, int z);
-void matrix_rotate_x(matrix_t* dst, int a);
-void matrix_rotate_y(matrix_t* dst, int a);
-void matrix_rotate_z(matrix_t* dst, int a);
-void matrix_multiply(matrix_t* a, matrix_t* b, matrix_t* c);
-void matrix_process_vectors(matrix_t* mat, vector_t* v, int n, vector_t* o);
+void matrix_rotate_x(matrix_t* dst, int x);
+void matrix_rotate_y(matrix_t* dst, int y);
+void matrix_rotate_z(matrix_t* dst, int z);
+void matrix_multiply(matrix_t* dst, matrix_t* mat1, matrix_t* mat2);
 
-void model_rotate(model_t* model, matrix_t* mat, vector_t* pro);
-void model_draw_points(model_t* model, vector_t* pv);
-void model_draw_edges(model_t* model, vector_t* pv);
+void model_rotate(model_t* model, matrix_t* mat, vector_t* vec, int x, int y);
+void model_draw_points(model_t* model, vector_t* vec);
+void model_draw_edges(model_t* model, vector_t* vec);
 
 #endif
 
