@@ -30,7 +30,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <http://unlicense.org/>
 */
-#pragma options -machine=coco
+#pragma options -machine=coco --optimize=2
 
 #include <sac.h>
 #include <conio.h>

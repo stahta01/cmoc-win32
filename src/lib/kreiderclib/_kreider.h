@@ -27,6 +27,8 @@
 
 // ANSIC Functions
 
+#define rand        _rand
+#define srand       _srand
 #define abs         _abs
 #define atoi        _atoi
 #define max         _max
