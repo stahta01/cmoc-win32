@@ -78,8 +78,6 @@ type
   strict private
     class function PathToTemp: TFileName;
   public
-    class function IsDev: boolean;
-  public
     class function DosToUnix(const A: TFileName): TFileName;
     class function UnixToDos(const A: TFileName): TFileName;
   public
@@ -126,11 +124,6 @@ type
   end;
 
 implementation
-
-class function OCmoc.IsDev: boolean;
-begin
-  Result := AnsiStartsText('c:\dev\', ParamStr(0));
-end;
 
 class function OCmoc.IntegerToDisplay(const A: integer): string;
 begin

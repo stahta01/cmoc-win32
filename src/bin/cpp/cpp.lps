@@ -8,7 +8,8 @@
       <Unit0>
         <Filename Value="cpp.lpr"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="44"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="52"/>
         <CursorPos X="37" Y="51"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
@@ -73,12 +74,10 @@
       <Unit9>
         <Filename Value="..\shared\ucmoccharset.pas"/>
         <UnitName Value="UCmocCharSet"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="26"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="27"/>
         <CursorPos X="5" Y="43"/>
         <UsageCount Value="20"/>
-        <Loaded Value="True"/>
       </Unit9>
       <Unit10>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\amunits\src\coreunits\locale.pas"/>

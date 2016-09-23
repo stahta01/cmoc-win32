@@ -28,7 +28,8 @@ interface
 uses
   Classes, ComCtrls, Controls, Dialogs, ExtCtrls, FileUtil, Forms, Graphics, LCLIntf, Math,
   Menus, MouseAndKeyInput, process, StreamIO, StrUtils, SynEdit, SynHighlighterAny,
-  SysUtils, Types, UCmocDefs, UCmocIDE, UCmocRbs, UCmocStringDynArray,
+  SysUtils, Types, UCmocDefs, UCmocIDE, UCmocMenuItem, UCmocPlatform, UCmocRbs,
+  UCmocStringDynArray,
   UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
 
 type
@@ -233,6 +234,11 @@ begin
   Rewrite(StdErr);
 
   SetBounds(Left, Top, 640, 480);
+
+  MenuEmulatorsCoCo3._SetVisible(OPlatform.IsWindows);
+  MenuToolsConsole._SetVisible(OPlatform.IsWindows);
+  MenuToolsDisassemble._SetVisible(OPlatform.IsWindows);
+  MenuToolsMessImageTool._SetVisible(OPlatform.IsWindows);
 end;
 
 procedure TFormCmocIDE.FormShow(ASender: TObject);
@@ -655,6 +661,9 @@ begin
   end;
   LParams := default(TStringDynArray);
   if SameText(FOptions.Values[Opt_Machine2], Machine_COCO3) then begin
+    if not OPlatform.IsWindows then begin
+      OCmoc.RaiseError('CoCo 3 emulation is Windows only. Try CoCo 2 emulation via XRoar.');
+    end;
     WriteLn('// Running Vcc emulator');
     try
       Execute(OCmoc.PathToVcc + 'Vcc.exe', [AFileName], True);
@@ -732,7 +741,11 @@ begin
   if FOptions.IndexOfName(Opt_Machine2) < 0 then begin
     case FTarget of
       Target_COCO: begin
-        FOptions.Values[Opt_Machine2] := Machine_COCO3;
+        if OPlatform.IsWindows then begin
+          FOptions.Values[Opt_Machine2] := Machine_COCO3;
+        end else begin
+          FOptions.Values[Opt_Machine2] := Machine_COCOUS;
+        end;
       end;
       Target_DRAGON: begin
         FOptions.Values[Opt_Machine2] := Machine_DRAGON64;
