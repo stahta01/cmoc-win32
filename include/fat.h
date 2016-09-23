@@ -15,16 +15,16 @@
 // OFFSETS TO FAT CONTROL BYTES
 
 typedef struct {
-    // ACTIVE FILE COUNTER : DISK TO RAM FAT IMAGE DISABLE
-    byte fat0;
+    byte afc;                                   // ACTIVE FILE COUNTER : DISK TO RAM FAT IMAGE DISABLE
     // VALID DATA FLAG: 0=DISK DATA VALID, <> 0 = NEW FAT
     // DATA - DISK DATA INVALID
-    byte fat1;
+    byte mod;                                   // FAT MODIFIED FLAG
     byte reserved[4];                           // NOT USED
     byte dat[68];
 } fat_t;
 
-fat_t* fat_get(int drv);
+fat_t* fat_get(int drive);
+void fat_load(int drive);
 
 #endif
 

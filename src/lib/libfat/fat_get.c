@@ -1,8 +1,8 @@
 
 #include "_fat.h"
 
-fat_t* fat_get(int drv)
+fat_t* fat_get(int drive)
 {
-    return drv >= DRIVE_MIN && drv <= DRIVE_MAX ? &((fat_t*)_FATBL0)[drv] : (fat_t*)nullptr;
+    return drive >= DRIVE_MIN && drive <= DRIVE_MAX ? &((fat_t*)_FATBL0)[drive] : (fat_t*)nullptr;
 }
 

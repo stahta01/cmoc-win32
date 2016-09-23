@@ -30,7 +30,9 @@ uses
 
 type
   TStringsHelper = class helper for TStrings
+  public
     function _GetString(const AName, ADefault: string): string;
+    procedure _InsertStrings(const AIndex: integer; const AStrings: array of string);
   end;
 
 implementation
@@ -44,6 +46,15 @@ begin
     Result := ADefault;
   end else begin
     Result := ValueFromIndex[LIndex];
+  end;
+end;
+
+procedure TStringsHelper._InsertStrings(const AIndex: integer; const AStrings: array of string);
+var
+  LIndex: integer;
+begin
+  for LIndex := 0 to High(AStrings) do begin
+    Insert(AIndex + LIndex, AStrings[LIndex]);
   end;
 end;
 
