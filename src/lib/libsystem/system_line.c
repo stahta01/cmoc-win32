@@ -3,10 +3,6 @@
 
 asm void system_line(void)
 {
-    asm {
-        pshs    u
-        jsr     [sysptr_line]
-        puls    u
-    }
+    asm_jsr_basic([sysptr_line]);
 }
 

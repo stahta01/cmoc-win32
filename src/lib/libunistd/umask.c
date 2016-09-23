@@ -1,13 +1,12 @@
 
 #include "_unistd.h"
 
-int __umask = 0;
+int _static_umask = 0;
 
-int umask(int pmode)
+int umask(int mode)
 {
-    int ppmode;
-    ppmode = __umask;
-    __umask = pmode;
-    return ppmode;
+    int result = _static_umask;
+    _static_umask = mode;
+    return result;
 }
 

@@ -37,11 +37,11 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _ASM_H
 #define _ASM_H
 
-//#define CLI   ANDCC #%10101111
-//#define SEI   ORCC  #%01010000
+// Note: These are experimental, and may change.
 
-#define _asm_romoff()   asm{ orcc #$50} asm{ sta $ffdf}
-#define _asm_romon()    asm{ sta $ffde} asm{ andcc #$af}
+#define asm_rom_off()      asm("orcc","#$50"); asm("sta","$ffdf")
+#define asm_rom_on()       asm("sta","$ffde"); asm("andcc","$af")
+#define asm_jsr_basic(A)   asm("pshs","u"); asm{ jsr A} asm("puls","u")
 
 #endif
 

@@ -5,6 +5,7 @@
 #include <stdarg.h>
 #include <equates.h>
 #include <system.h>
+#include <asm.h>
 
 void system_init_coco(void);
 void system_init_dragon(void);
