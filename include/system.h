@@ -38,6 +38,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define _SYSTEM_H
 
 #include <sys/dev.h>
+#include <handle.h>
 
 #define SYSTEM_CMDLINE ((char*)0x2dd)
 
@@ -65,14 +66,10 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 #define SYSTEM_FLG_DOS            128
 
-unsigned char get_ostype(void);
+byte get_ostype(void);
 
 // OS type collected by system_init().
-extern unsigned char _get_ostype;
-
-extern unsigned sysptr_polcat, sysptr_chrout, sysptr_csrdon, sysptr_blkin, sysptr_blkout,
-       sysptr_joyin, sysptr_wrtldr, sysptr_line, sysptr_getchr, sysptr_putchr, sysptr_sound,
-       sysptr_crunch, sysptr_execute, sysptr_screen;
+extern byte _get_ostype;
 
 void system_init(void);
 int system_polcat(void);

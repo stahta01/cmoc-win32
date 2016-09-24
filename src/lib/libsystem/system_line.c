@@ -3,6 +3,6 @@
 
 asm void system_line(void)
 {
-    asm_jsr_basic([sysptr_line]);
+    asm_jsr_basic([handle_line]);
 }
 

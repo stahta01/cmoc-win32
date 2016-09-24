@@ -4,7 +4,7 @@
 asm int system_polcat(void)
 {
     asm {
-        jsr     [sysptr_polcat]
+        jsr     [handle_polcat]
         tfr     a,b
         clra
     }

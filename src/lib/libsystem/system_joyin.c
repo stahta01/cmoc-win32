@@ -3,6 +3,6 @@
 
 asm void system_joyin(void)
 {
-    asm_jsr_basic([sysptr_joyin]);
+    asm_jsr_basic([handle_joyin]);
 }
 

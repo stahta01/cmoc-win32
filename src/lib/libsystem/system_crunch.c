@@ -11,7 +11,7 @@ asm char* system_crunch(char* cmd)
         stx     _CURLIN
         pshs    u
         jsr     _GETNCH
-        jsr     [sysptr_crunch]
+        jsr     [handle_crunch]
         puls    u
         ldd     #_LINBUF
     }

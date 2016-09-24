@@ -10,7 +10,7 @@ asm int system_execute(char* cmd)
         pshs    u
         execute_loop:
         jsr     _GETNCH
-        jsr     [sysptr_execute]
+        jsr     [handle_execute]
         lda     [_CHARAD]
         cmpa    #':'
         beq     execute_loop

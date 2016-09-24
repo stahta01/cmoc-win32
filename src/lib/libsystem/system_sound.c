@@ -3,6 +3,6 @@
 
 asm void system_sound(void)
 {
-    asm_jsr_basic([sysptr_sound]);
+    asm_jsr_basic([handle_sound]);
 }
 

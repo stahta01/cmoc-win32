@@ -11,7 +11,7 @@ asm void system_putchr(int chr, dev_t dev)
         lda     5,s
         sta     _DEVNUM
         lda     3,s
-        jsr     [sysptr_putchr]
+        jsr     [handle_putchr]
         lda     _static_dev
         sta     _DEVNUM
     }
