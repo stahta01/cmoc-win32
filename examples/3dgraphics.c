@@ -33,35 +33,29 @@ model_t obj = {
 
 int main(void)
 {
+    int page = 0;
     matrix_t matx, matz, mat;
-    word grp[2][2], page = 0;
     vector_t tmp[20];
 
+    // Speed poke. We are using ROM's line draw routine, so this will speed
+    // up rendering.
     *(byte*)65495 = 0;
 
     _setvideomode(0, 1);
-
-    grp[0][0] = _beggrp;
-    grp[0][1] = _endgrp;
-    system("PMODE,2");
-    grp[1][0] = _beggrp;
-    grp[1][1] = _endgrp;
-
     _setcolor(1);
+
     for (byte a = 0; ; a += 2) {
-        system_screen(1);
         page ^= 1;
-        _beggrp = grp[page][0];
-        _endgrp = grp[page][1];
-        memset((void*)_beggrp, 0, _endgrp - _beggrp);
+        _setactivepage(page + 1);
+        _clearscreen(_GCLEARSCREEN);
         matrix_rotate_x(&matx, a);
         matrix_rotate_z(&matz, a * 3);
         matrix_multiply(&mat, &matx, &matz);
         mat.v[0][3] = 0;
         mat.v[2][3] = S<<1;
         model_rotate(&obj, &mat, tmp, 64, 48);
-        _clearscreen(_GCLEARSCREEN);
         model_draw_edges(&obj, tmp);
+        _setvisualpage(page + 1);
     }
     return 0;
 }

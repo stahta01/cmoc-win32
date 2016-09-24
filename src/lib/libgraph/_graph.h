@@ -4,11 +4,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <equates.h>
+#include <system.h>
 #include <fix6.h>
 
 typedef struct {
     int curx, cury;
     int clipx1, clipy1, clipx2, clipy2;
+    int visualpage;
 } _graph_t;
 
 extern _graph_t _graph;

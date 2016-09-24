@@ -33,16 +33,11 @@ void DrawDemo(void)
 int main(void)
 {
     PMODE(4, 1);
-    //PSECT(64);
     SCREEN(1, 1);
     PCLS(0);
-
-    //ROM_OFF();
     _pmode = 3;
 
     DrawDemo();
-
-    //ROM_ON();
 
     while (!kbhit()) {
     }

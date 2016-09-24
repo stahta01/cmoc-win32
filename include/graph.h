@@ -85,9 +85,9 @@ void _setvideomode(int mode, int css);
 struct videoconfig* _getvideoconfig(struct videoconfig*);
 //int _setvideomoderows(int, int);
 //int _grstatus(void);
-int _setactivepage(int);
+int _setactivepage(int page);
 int _getactivepage(void);
-int _setvisualpage(int);
+int _setvisualpage(int page);
 int _getvisualpage(void);
 
 /*

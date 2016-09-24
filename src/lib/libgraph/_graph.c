@@ -1,7 +1,7 @@
 
 #include "_graph.h"
 
-_graph_t _graph = {0, 0, 0, 0, 256, 192};
+_graph_t _graph = {0, 0, 0, 0, 256, 192, 1};
 struct _fontinfo fontinfo;
 
 unsigned char _pset1_set[8] = {128, 64, 32, 16, 8, 4, 2, 1};
