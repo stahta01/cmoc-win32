@@ -73,23 +73,24 @@ struct textsettings {                           // structure for _gettextsetting
 };
 
 struct _fontinfo {                              // structure for _getfontinfo
-    unsigned char   type;                       // 0=unpacked 1=packed
-    unsigned char   base;
-    unsigned char*  data;
+    byte   type;                                // 0=unpacked 1=packed
+    word   base;
+    byte*  data;
 };
 
 
 // Video Setup and Query Functions
 
-int _setvideomode(int);
+void _setvideomode(int mode, int css);
+struct videoconfig* _getvideoconfig(struct videoconfig*);
 //int _setvideomoderows(int, int);
-//struct videoconfig* _getvideoconfig(struct videoconfig*);
 //int _grstatus(void);
 int _setactivepage(int);
 int _getactivepage(void);
 int _setvisualpage(int);
 int _getvisualpage(void);
 
+/*
 #define _MAXRESMODE     (-3)                    // graphics mode with highest res.
 #define _MAXCOLORMODE   (-2)                    // graphics mode with most colours
 #define _DEFAULTMODE    (-1)                    // restore screen to original mode
@@ -116,15 +117,14 @@ int _getvisualpage(void);
 #define _SVTEXTC132X43  0x10A                   // 132 x 43 text
 #define _SVTEXTC132X50  0x10B                   // 132 x 50 text
 #define _SVTEXTC132X60  0x10C                   // 132 x 60 text
+*/
 
 #define _NODISPLAY      (-1)                    // no display device
 #define _UNKNOWN        0                       // unknown adapter/monitor type
 
+// These will match the bits per pixel
 #define _MONO           1                       // regular monochrome
 #define _COLOR          2                       // regular color
-#define _ENHANCED       3                       // enhanced color
-#define _ANALOGMONO     5                       // analog monochrome
-#define _ANALOGCOLOR    6                       // analog color
 
 #define _GROK                   0               // no error
 #define _GRERROR                (-1)            // graphics error
@@ -216,15 +216,15 @@ int _getpixel(int x, int y);
 
 // Output Determination Functions
 
-void _setfillmask(unsigned char*);
-unsigned char* _getfillmask(unsigned char*);
-void _setlinestyle(unsigned int);
-unsigned int _getlinestyle(void);
-int _setplotaction(int);
-int _getplotaction(void);
+//void _setfillmask(byte*);
+//byte* _getfillmask(byte*);
+//void _setlinestyle(unsigned);
+//unsigned _getlinestyle(void);
+//int _setplotaction(int);
+//int _getplotaction(void);
 
-#define _setwritemode   _setplotaction          // for compatibility
-#define _getwritemode   _getplotaction
+//#define _setwritemode   _setplotaction          // for compatibility
+//#define _getwritemode   _getplotaction
 
 enum {                                          // plotting action
     _GOR, _GAND, _GPRESET, _GPSET, _GXOR

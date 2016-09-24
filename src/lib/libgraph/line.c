@@ -76,15 +76,14 @@ void _line(int x1, int y1, int x2, int y2)
                 y2 = y;
             }
         }
-        if (_pmode < 4)  {
+        if (_pmode != 4)  {
             x1 >>= 1;
             x2 >>= 1;
-            if (_pmode < 2) {
-                y1 >>= 1;
-                y2 >>= 1;
-            }
         }
-
+        if (_pmode < 2) {
+            y1 >>= 1;
+            y2 >>= 1;
+        }
         x2 -= x1;
         y2 -= y1;
         x = _abs(x2);

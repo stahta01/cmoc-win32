@@ -3,11 +3,11 @@
 
 byte _getpixel2(int x, int y)
 {
-    if (_pmode < 4)  {
+    if (_pmode != 4)  {
         x >>= 1;
-        if (_pmode < 2) {
-            y >>= 1;
-        }
+    }
+    if (_pmode < 2) {
+        y >>= 1;
     }
     byte* p;
     switch (_horbyt) {

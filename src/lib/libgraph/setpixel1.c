@@ -3,11 +3,11 @@
 
 void _setpixel1(int x, int y, byte c)
 {
-    if (_pmode < 4)  {
+    if (_pmode != 4)  {
         x >>= 1;
-        if (_pmode < 2) {
-            y >>= 1;
-        }
+    }
+    if (_pmode < 2) {
+        y >>= 1;
     }
     switch (_horbyt) {
     case 16:

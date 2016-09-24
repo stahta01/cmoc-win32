@@ -39,8 +39,7 @@ int main(void)
 
     *(byte*)65495 = 0;
 
-    system("PMODE0");
-    system("SCREEN1,1");
+    _setvideomode(0, 1);
 
     grp[0][0] = _beggrp;
     grp[0][1] = _endgrp;

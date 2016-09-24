@@ -4,7 +4,7 @@
 int _setbkcolor(int bkcolor)
 {
     int result = _bakcol;
-    _bakcol = (unsigned char)bkcolor;
+    _bakcol = (byte)bkcolor;
     return result;
 }
 

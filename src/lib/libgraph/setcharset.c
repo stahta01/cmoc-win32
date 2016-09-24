@@ -1,10 +1,10 @@
 
 #include "_graph.h"
 
-void _setcharset(int type, int base, unsigned char* data)
+void _setcharset(int type, int base, byte* data)
 {
-    fontinfo.type = (char)type;
-    fontinfo.base = (char)base;
+    fontinfo.type = (byte)type;
+    fontinfo.base = (byte)base;
     fontinfo.data = data;
 }
 
