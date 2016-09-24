@@ -1,5 +1,5 @@
 
-// This example requires the coco2b (6847t1 support)
+// This example requires the coco2b (6847t1 support) or CoCo3
 #pragma options -machine=coco2b
 
 #include <conio.h>
