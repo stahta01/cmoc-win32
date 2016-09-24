@@ -47,5 +47,10 @@ ftypedef(int)     fint_t;
 ftypedef(byte)    fbyte_t;
 ftypedef(word)    fword_t;
 
+void _fmemget(void* dst, fvoid_t* src, size_t n);
+void _fmemput(fvoid_t* dst, void* src, size_t n);
+void _fstrget(char* dst, fchar_t* src);
+void _fstrput(fchar_t* dst, char* src);
+
 #endif
 
