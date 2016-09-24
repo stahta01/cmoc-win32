@@ -4,6 +4,7 @@
 
 typedef void* handle_t;
 
+extern handle_t handle_vidram;
 extern handle_t handle_polcat;
 extern handle_t handle_chrout;
 extern handle_t handle_csrdon;

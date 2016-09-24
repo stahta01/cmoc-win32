@@ -234,6 +234,9 @@ begin
     ProcessSrcToPath(LDstPath, LSrcPath + 'cb_equates.asm', '_COCO_CB_EQUATES_H',
       default(TStringDynArray));
 
+    ProcessSrcToPath(LDstPath, LSrcPath + 'ecb_equates.asm', '_COCO_ECB_EQUATES_H',
+      default(TStringDynArray));
+
     ProcessSrcToPath(LDstPath, LSrcPath + 'dragon_equivs.asm', '_COCO_DRAGON_EQUIVS_H',
       default(TStringDynArray));
 

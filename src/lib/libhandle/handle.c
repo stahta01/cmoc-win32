@@ -1,6 +1,7 @@
 
 #include "_handle.h"
 
+handle_t handle_vidram;
 handle_t handle_polcat;
 handle_t handle_chrout;
 handle_t handle_csrdon;

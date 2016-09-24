@@ -1,15 +1,21 @@
 
 #include "_handle.h"
 
+#include <coco/dragon_equivs.h>
+
+// TODO: What is line?
+#define _L94A1 0
+#define _LB821 0x8f67
+
 void handle_init_dragon(void)
 {
     handle_init_common();
-    handle_line     = 0;
-    handle_getchr   = 0xb50a;
-    handle_putchr   = 0xb54a;
-    handle_sound    = 0xbaa0;
-    handle_crunch   = 0x8f67;
-    handle_execute  = 0x84dc;
-    handle_screen   = 0xa938;
+    handle_line     = _L94A1;
+    handle_getchr   = _LA176;
+    handle_putchr   = _PUTCHR;
+    handle_sound    = _LA951;
+    handle_crunch   = _LB821;
+    handle_execute  = _LADC6;
+    handle_screen   = _L95AA;
 }
 

@@ -1,15 +1,17 @@
 
 #include "_handle.h"
 
+#include <coco/ecb_equates.h>
+
 void handle_init_coco(void)
 {
     handle_init_common();
-    handle_line     = 0x94A1;
-    handle_getchr   = 0xa176;
-    handle_putchr   = 0xa282;
-    handle_sound    = 0xa951;
-    handle_crunch   = 0xb821;
-    handle_execute  = 0xadc6;
-    handle_screen   = 0x95aa;
+    handle_line     = _L94A1;
+    handle_getchr   = _LA176;
+    handle_putchr   = _PUTCHR;
+    handle_sound    = _LA951;
+    handle_crunch   = _LB821;
+    handle_execute  = _LADC6;
+    handle_screen   = _L95AA;
 }
 
