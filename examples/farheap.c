@@ -1,36 +1,31 @@
 
-#pragma options -machine=coco
-
-#include <far.h>
-#include <heman.h>
 #include <stdio.h>
-#include <bank.h>
 #include <string.h>
-
-#define type_cast(A) *(A*)&
-
-far_void_t nullptr16 = {16, 0};
-#define nullstr16 (type_cast(far_char_t)nullptr16)
+#include <far.h>
 
 #define STRING_COUNT 100
 
 int main(void)
 {
     char s[100];
-    far_init(16);
+    // Setup three 512 byte banks.
+    far_bank(0, 512);
+    far_bank(12, 512);
+    far_bank(13, 512);
 
     far_char_t names[STRING_COUNT];
-
+    size_t size = 0;
     for (int i = 0; i < STRING_COUNT; i++) {
-        names[i] = nullstr16;
         sprintf(s, "FAR STRING #%d", i);
+        size += strlen(s) + 1;
         far_strdup(&names[i], s);
     }
     for (int i = 0; i < STRING_COUNT; i++) {
         far_strget(s, &names[i]);
-        puts(s);
+        printf("BANK:%u DATA:%s\n", names[i].bank, s);
         far_free((far_void_t*)&names[i]);
     }
+    printf("MEMORY REQUESTED: %d\n", size);
     return 0;
 }
 

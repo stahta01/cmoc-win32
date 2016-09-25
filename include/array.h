@@ -34,30 +34,10 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 */
 
-#ifndef _FAR_H
-#define _FAR_H
+#ifndef _ARRAY_H
+#define _ARRAY_H
 
-#include <sys/size.h>
-#include <bank.h>
-
-#define far_type(TYPE) typedef struct {bank_t bank; TYPE* ptr;}
-
-far_type(void)  far_void_t;
-far_type(char)  far_char_t;
-far_type(int)   far_int_t;
-far_type(byte)  far_byte_t;
-far_type(word)  far_word_t;
-
-void far_bank(bank_t bank, size_t size);
-far_void_t* far_alloc(far_void_t* memory, size_t size);
-void far_free(far_void_t* memory);
-size_t far_size(far_void_t* memory);
-
-void far_memget(void* dst, far_void_t* src, size_t n);
-void far_memput(far_void_t* dst, void* src, size_t n);
-void far_strget(char* dst, far_char_t* src);
-void far_strput(far_char_t* dst, char* src);
-void far_strdup(far_char_t* dst, char* src);
+#define array(_TYPE,_SIZE) struct {_TYPE data[_SIZE]; size_t size;}
 
 #endif
 

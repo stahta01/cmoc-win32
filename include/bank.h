@@ -37,30 +37,34 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _BANK_H
 #define _BANK_H
 
-// These functions provide a 32k banked memory model.
-// Add memory is visable at $8000
+// Banks are always located at $8000 (32768)
+#define BANK_MEMORY 32768
 
-// bank  0 = GIME $00000 (page $00) [512K only]
-// bank  1 = GIME $08000 (page $04) [512K only]
-// bank  2 = GIME $10000 (page $08) [512K only]
-// bank  3 = GIME $18000 (page $0C) [512K only]
+// Bank 0  is the only bank common to 64K CoCo's, Dragons & CoCo 3's
+// Bank 15 is the default BASIC ROM bank.
+// Bank 14 is a copy of memory $0000.
 
-// bank  4 = GIME $20000 (page $10) [512K only]
-// bank  5 = GIME $28000 (page $14) [512K only]
-// bank  6 = GIME $30000 (page $18) [512K only]
-// bank  7 = GIME $38000 (page $1C) [512K only]
+// These functions provide 15 32k banks.
 
-// bank  8 = GIME $40000 (page $20) [512K only]
-// bank  9 = GIME $48000 (page $24) [512K only]
-// bank 10 = GIME $50000 (page $28) [512K only]
-// bank 11 = GIME $58000 (page $2C) [512K only]
+// Bank  0 = GIME $00000 (page $00) (Also RAM under BASIC ROM)
+// Bank  1 = GIME $08000 (page $04) [512K CoCo3]
+// Bank  2 = GIME $10000 (page $08) [512K CoCo3]
+// Bank  3 = GIME $18000 (page $0C) [512K CoCo3]
 
-// bank 12 = GIME $60000 (page $30) [128K only]
-// bank 13 = GIME $68000 (page $34) [128K only]
-// bank 14 = $0000 RAM (first 32K)  [128K only]
-// bank 15 = $8000 BASIC ROM
+// Bank  4 = GIME $20000 (page $10) [512K CoCo3]
+// Bank  5 = GIME $28000 (page $14) [512K CoCo3]
+// Bank  6 = GIME $30000 (page $18) [512K CoCo3]
+// Bank  7 = GIME $38000 (page $1C) [512K CoCo3]
 
-// bank 16 = $8000 RAM UNDER ROM
+// Bank  8 = GIME $40000 (page $20) [512K CoCo3]
+// Bank  9 = GIME $48000 (page $24) [512K CoCo3]
+// Bank 10 = GIME $50000 (page $28) [512K CoCo3]
+// Bank 11 = GIME $58000 (page $2C) [512K CoCo3]
+
+// Bank 12 = GIME $60000 (page $30) [128K CoCo3]
+// Bank 13 = GIME $68000 (page $34) [128K CoCo3]
+// Bank 14 = $0000 RAM (first 32K)  [128K CoCo3]
+// Bank 15 = $8000 BASIC ROM
 
 typedef int bank_t;
 

@@ -20,7 +20,7 @@ bank_t bank_set(bank_t bank)
         asm {
             clif
         }
-    } else if (bank == 16) {
+    } else if (bank == 0) {
         *(byte*)0xffdf = true;
     }
     return result;
