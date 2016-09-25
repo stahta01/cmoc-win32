@@ -10,7 +10,7 @@ int main(void)
 {
     *(unsigned char*)65314 |= 16;
     puts("READING FILE ...");
-    FILE* fp = fopen("BASIC.TXT", "r");
+    FILE* fp = fopen("B:BASIC.TXT", "r");
     if (fp) {
         while (!feof(fp)) {
             char s[33];

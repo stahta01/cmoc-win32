@@ -8,7 +8,7 @@ int main(void)
 {
     clrscr();
     cputs("LOADING FILE ...\n");
-    FILE* fp = fopen("ALPHA.TXT", "r");
+    FILE* fp = fopen("B:ALPHA.TXT", "r");
     cprintf("FILE SIZE: %d BYTES\n", _fsize(fp));
     cputs("READING FILE ...\n");
     if (fp) {
