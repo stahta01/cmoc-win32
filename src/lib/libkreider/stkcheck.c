@@ -1,0 +1,4 @@
+
+asm void stkcheck(void)
+{
+}

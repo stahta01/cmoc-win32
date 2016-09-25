@@ -25,6 +25,10 @@
 #define _ldiv       ___ldiv
 #define _lmod       ___lmod
 
+#define ccmult      ___ccmult
+#define ccdiv       ___ccdiv
+
+
 // ANSIC Functions
 
 #define rand        _rand
@@ -53,6 +57,7 @@
 #define toupper     _toupper
 #define setjmp      _setjmp
 #define longjmp     _longjmp
+#define qsort       _qsort
 
 // POSIX functions which have moved to the _ namespace
 
@@ -85,9 +90,17 @@
 void asm _static_libkreider(void)
 {
     asm {
+#define psect *
+#define vsect *
+#define ends  *
 #define section *
 #define endsect *
+
 #include _FILE
+
+#undef psect
+#undef vsect
+#undef ends
 #undef section
 #undef endsect
     }

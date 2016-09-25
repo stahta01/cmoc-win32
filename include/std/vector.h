@@ -39,5 +39,8 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 #define std_vector(_TYPE) struct {size_t size; _TYPE* data;}
 
+#define std_vector_resize(A,B)  {(A)->data=realloc((A)->data,((A)->size=(B))*sizeof(*(A)->data));}
+#define std_vector_add(A,B)     {std_vector_resize(A,(A)->size+1);(A)->data[(A)->size-1]=*(B);}
+
 #endif
 

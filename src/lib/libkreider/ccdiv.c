@@ -1,5 +1,4 @@
 
-#define y pcr
-#define _FILE "qsort.a"
+#define _FILE "ccdiv.as"
 #include "../kreiderclib/_kreider.h"
 

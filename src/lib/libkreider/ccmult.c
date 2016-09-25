@@ -1,5 +1,4 @@
 
-#define y pcr
-#define _FILE "qsort.a"
+#define _FILE "ccmult.as"
 #include "../kreiderclib/_kreider.h"
 
