@@ -35,10 +35,10 @@
 #ifndef _PEEKPOKE_H
 #define _PEEKPOKE_H
 
-#define POKE(addr,val)     (*(unsigned char*) (addr) = (val))
-#define POKEW(addr,val)    (*(unsigned*) (addr) = (val))
-#define PEEK(addr)         (*(unsigned char*) (addr))
-#define PEEKW(addr)        (*(unsigned*) (addr))
+#define POKE(addr,val)     (*(byte*)(addr)=(val))
+#define POKEW(addr,val)    (*(word*)(addr)=(val))
+#define PEEK(addr)         (*(byte*)(addr))
+#define PEEKW(addr)        (*(word*)(addr))
 
 #endif
 

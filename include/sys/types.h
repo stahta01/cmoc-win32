@@ -10,6 +10,5 @@ typedef unsigned mode_t;
 typedef unsigned useconds_t;
 typedef unsigned pid_t;
 
-
 #endif
 
