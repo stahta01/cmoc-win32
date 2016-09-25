@@ -34,10 +34,10 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 */
 
-#ifndef _VECTOR_H
-#define _VECTOR_H
+#ifndef _STD_VECTOR_H
+#define _STD_VECTOR_H
 
-#define vector(_TYPE) struct {_TYPE* data; size_t size;}
+#define std_vector(_TYPE) struct {size_t size; _TYPE* data;}
 
 #endif
 

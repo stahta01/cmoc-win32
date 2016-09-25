@@ -34,10 +34,10 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 */
 
-#ifndef _ARRAY_H
-#define _ARRAY_H
+#ifndef _STD_ARRAY_H
+#define _STD_ARRAY_H
 
-#define array(_TYPE,_SIZE) struct {_TYPE data[_SIZE]; size_t size;}
+#define std_array(_TYPE,_SIZE) struct {size_t size; _TYPE data[_SIZE];}
 
 #endif
 
