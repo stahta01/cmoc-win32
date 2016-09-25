@@ -46,6 +46,7 @@ int bgcolor(int color);
 int bordercolor(int color);
 int cgetc(void);
 int cprintf(char* fmt, ...);
+int cprintfxy(int x, int y, char* fmt, ...);    // CMOC
 int cscanf(char* fmt, ...);                     // TODO
 int textcolor(int color);
 int vcprintf(char* fmt, va_list args);

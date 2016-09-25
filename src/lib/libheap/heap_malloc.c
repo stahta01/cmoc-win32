@@ -11,35 +11,25 @@
 void* heap_malloc(heap_t* heap, int size)
 {
     if (size) {
-        int* block = heap + 1;
         size += sizeof(int);
-        for (;;) {
-            int mfree = *heap - (int)block;
-            if (mfree <= 0) {
-                return nullptr;
+        for (int last = *heap++; heap < last; heap = (int*)((int)heap + (*heap < 0 ? -*heap : *heap))) {
+            int spot = *heap;
+            if (spot < 0) {
+                spot = 0;
+                for (int* p = heap; p < last && *p < 0; spot += *p, p = (int*)((int)p - *p));
+            } else if (!spot) {
+                spot = (int)heap - last;
             }
-            if (*block < 0) {
-                int size = 0, *ptr = block;
-                do {
-                    size += *ptr;
-                    ptr = (int*)((int)ptr - *ptr);
-                } while (ptr < *heap && *ptr < 0);
-                *block = size;
-            } else if (*block == 0) {
-                *block = -mfree;
+            *heap = spot;
+            if (size <= -spot - 2) {
+                if (size < -spot) {
+                    *(int*)((int)heap + size) = spot + size;
+                }
+                *heap++ = size;
+                return (void*)heap;
             }
-            if (size <= -*block) {
-                break;
-            }
-            block = (int*)((int)block + (*block < 0 ? -*block : *block));
         }
-        if (size != -*block) {
-            *(int*)((int)block + size) = *block + size;
-        }
-        *block++ = size;
-        return (void*)block;
-    } else {
-        return nullptr;
     }
+    return nullptr;
 }
 

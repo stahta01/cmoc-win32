@@ -2,55 +2,68 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-
+#include <string.h>
 #include <conio.h>
+#include <heap.h>
 
-char* AllocMem(uint8_t size)
+//#pragma options -machine=coco
+
+char* AllocMem(size_t size)
 {
-    char* m = (char*) malloc(size);
-    uint8_t i;
+    char* memory = (char*) malloc(size);
 
-    if (!m) {
-        printf("alloc error %d\n", size);
+    if (!memory) {
+        cprintfxy(0, 2, "alloc error %d\n", size);
         exit(-1);
     }
-    for (i = 0; i < _msize(m); i++) {
-        m[i] = i;
+    for (char i = 0; i < _msize(memory); i++) {
+        memory[i] = i;
     }
-    printf("SIZE:%d MSIZE:%d\n", size, _msize(m));
-    return m;
+    cprintfxy(0, 0, "%p: SIZE:%3d REQUESTED:%3d", memory, _msize(memory), size);
+    return memory;
 }
 
-void FreeMem(char* m)
+void FreeMem(char* memory)
 {
-    int i;
-    for (i = 0; i < _msize(m); i++) {
-        if (m[i] != i) {
-            puts("data error");
+    cprintfxy(0, 1, "%p: SIZE:%3d", memory, _msize(memory));
+    for (char i = 0; i < _msize(memory); i++) {
+        if (memory[i] != i) {
+            cprintfxy(0, 2, "\ndata error P=%d SIZE=%u\n", i, _msize(memory));
             exit(-1);
         }
     }
-    free(m);
+    free(memory);
 }
+
+char* memory[32];
 
 void Test()
 {
-    uint8_t i;
-    char* m[5];
-    for (i = 0; i < 5; i++) {
-        m[i] = AllocMem((uint8_t)((rand() & 127) + 1));
+    int i, j;
+    gotoxy(0, 0);
+    for (j = 0; j < 4; j++) {
+        i = rand() & 31;
+        if (!memory[i]) {
+            memory[i] = AllocMem((rand() & 127) + 4);
+        }
     }
-    for (i = 0; i < 5; i++) {
-        FreeMem(m[i]);
+    for (j = 0; j < 2; j++) {
+        i = rand() & 31;
+        if (memory[i]) {
+            FreeMem(memory[i]);
+            memory[i] = nullptr;
+        }
     }
 }
 
 int main()
 {
+    clrscr();
     while (!kbhit()) {
         Test();
     }
     puts("MEMORY TEST COMPLETE");
+    puts("BACK TO BASIC");
 
     return 0;
 }
