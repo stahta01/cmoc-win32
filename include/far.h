@@ -49,7 +49,6 @@ far_type(int)   far_int_t;
 far_type(byte)  far_byte_t;
 far_type(word)  far_word_t;
 
-hank_t* far_hank(heap_t* heap, bank_t bank, size_t size);
 far_void_t* far_malloc(far_void_t* dst, size_t size);
 far_void_t* far_calloc(far_void_t* dst, size_t count, size_t size);
 far_void_t* far_realloc(far_void_t* memory, size_t size);

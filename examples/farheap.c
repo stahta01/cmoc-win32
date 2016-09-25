@@ -1,10 +1,12 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <string.h>
+#include <stdlib.h>
 #include <far.h>
 
 #define STRING_COUNT 100
+
+#pragma options --optimize=2
 
 int main(void)
 {
@@ -12,9 +14,9 @@ int main(void)
     // Setup three 512 byte hanks (banked heaps).
     // Note: I am choosing small sizes to make sure the code handles
     // low memory situations.
-    far_hank(0x8000, 0, 512);
-    far_hank(0x8000, 12, 512);
-    far_hank(0x8000, 13, 512);
+    hank_create(0x8000, 0, 512);
+    hank_create(0x8000, 12, 512);
+    hank_create(0x8000, 13, 512);
 
     far_char_t names[STRING_COUNT];
     size_t size = 0;

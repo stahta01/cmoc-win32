@@ -45,5 +45,8 @@ typedef struct {
     bank_t bank;
 } hank_t;
 
+hank_t* hank_create(heap_t* heap, bank_t bank, size_t size);
+hank_t* hank_malloc(void** data, size_t size);
+
 #endif
 

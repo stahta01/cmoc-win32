@@ -1,7 +1,7 @@
 
-#include "_far.h"
+#include "_hank.h"
 
-hank_t* far_hank(heap_t* heap, bank_t bank, size_t size)
+hank_t* hank_create(heap_t* heap, bank_t bank, size_t size)
 {
     bank = bank_set(bank);
     heap_init(heap, size);

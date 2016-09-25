@@ -16,14 +16,14 @@ void* heap_malloc(heap_t* heap, int size)
         for (;;) {
             int mfree = *heap - (int)block;
             if (mfree <= 0) {
-                return 0;
+                return nullptr;
             }
             if (*block < 0) {
                 int size = 0, *ptr = block;
                 do {
                     size += *ptr;
                     ptr = (int*)((int)ptr - *ptr);
-                } while (*ptr < 0);
+                } while (ptr < *heap && *ptr < 0);
                 *block = size;
             } else if (*block == 0) {
                 *block = -mfree;
