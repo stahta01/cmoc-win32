@@ -3,15 +3,17 @@
 
 far_void_t* far_malloc(far_void_t* dst, size_t size)
 {
-    dst->data = nullptr;
-    for (int i = 0; i < far_banks.size; i++) {
-        bank_t bank = bank_set(far_banks.data[i]);
-        dst->data = heman_alloc(BANK_MEMORY, size);
-        dst->bank = bank_set(bank);
+    for (int i = 0; i < hanks.size; i++) {
+        dst->hank = &hanks.data[i];
+        bank_t bank = bank_set(dst->bank = dst->hank->bank);
+        dst->data = heap_malloc(dst->hank->heap, size);
+        bank_set(bank);
         if (dst->data) {
-            break;
+            return dst;
         }
     }
+    dst->hank = nullptr;
+    dst->data = nullptr;
     return dst;
 }
 

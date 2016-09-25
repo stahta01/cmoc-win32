@@ -1,15 +1,15 @@
 
-#include "_heman.h"
+#include "_heap.h"
 
-void* heman_realloc(int* heap, void* memory, int newsize)
+void* heap_realloc(heap_t* heap, void* memory, int newsize)
 {
-    int oldsize = heman_size(memory);
+    int oldsize = heap_msize(memory);
     if (oldsize != newsize) {
-        void* newmem = heman_alloc(heap, newsize);
+        void* newmem = heap_malloc(heap, newsize);
         if (newmem) {
             memcpy(newmem, memory, oldsize < newsize ? oldsize : newsize);
         }
-        heman_free(memory);
+        heap_free(memory);
         memory = newmem;
     }
     return memory;

@@ -14,7 +14,7 @@ void _main(void)
         sts     _static_exitstack
     }
     system_init();
-    heman_init(heap_memory, 0x7c00);
+    heap_init(heap_memory, 0x7c00 - (int)heap_memory);
     asm {
         INITGL__STDIO_O: extern
         lbsr    INITGL__STDIO_O                 // stdio needs to init stdin/stdout

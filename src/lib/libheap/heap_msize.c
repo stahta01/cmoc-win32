@@ -1,7 +1,7 @@
 
-#include "_heman.h"
+#include "_heap.h"
 
-int heman_size(void* memory)
+int heap_msize(void* memory)
 {
     return memory ? ((int*)memory)[-1] - sizeof(int) : 0;
 }

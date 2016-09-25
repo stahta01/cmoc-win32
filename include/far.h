@@ -38,9 +38,10 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define _FAR_H
 
 #include <sys/size.h>
-#include <bank.h>
 
-#define far_type(TYPE) typedef struct {bank_t bank; TYPE* data;}
+#include <hank.h>
+
+#define far_type(TYPE) typedef struct {hank_t* hank; TYPE* data; bank_t bank;}
 
 far_type(void)  far_void_t;
 far_type(char)  far_char_t;
@@ -48,7 +49,7 @@ far_type(int)   far_int_t;
 far_type(byte)  far_byte_t;
 far_type(word)  far_word_t;
 
-void far_bank(bank_t bank, size_t size);
+hank_t* far_hank(heap_t* heap, bank_t bank, size_t size);
 far_void_t* far_malloc(far_void_t* dst, size_t size);
 far_void_t* far_calloc(far_void_t* dst, size_t count, size_t size);
 far_void_t* far_realloc(far_void_t* memory, size_t size);

@@ -3,6 +3,6 @@
 
 void free(void* memory)
 {
-    heman_free(memory);
+    heap_free(memory);
 }
 

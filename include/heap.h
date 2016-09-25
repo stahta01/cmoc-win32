@@ -34,10 +34,16 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 */
 
-#ifndef _HEMAN_H
-#define _HEMAN_H
+#ifndef _HEAP_H
+#define _HEAP_H
 
-#include <heap.h>
+typedef int heap_t;
+
+void heap_init(heap_t* heap, int size);
+void* heap_malloc(heap_t* heap, int size);
+void* heap_realloc(heap_t* heap, void* memory, int size);
+void heap_free(void* memory);
+int heap_msize(void* memory);
 
 #endif
 

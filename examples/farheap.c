@@ -9,12 +9,12 @@
 int main(void)
 {
     char s[100];
-    // Setup three 512 byte banks.
+    // Setup three 512 byte hanks (banked heaps).
     // Note: I am choosing small sizes to make sure the code handles
     // low memory situations.
-    far_bank(0, 512);
-    far_bank(12, 512);
-    far_bank(13, 512);
+    far_hank(0x8000, 0, 512);
+    far_hank(0x8000, 12, 512);
+    far_hank(0x8000, 13, 512);
 
     far_char_t names[STRING_COUNT];
     size_t size = 0;

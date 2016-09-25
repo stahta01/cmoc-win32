@@ -3,6 +3,6 @@
 
 size_t _msize(void* memory)
 {
-    return heman_size(memory);
+    return heap_msize(memory);
 }
 

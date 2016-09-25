@@ -34,10 +34,16 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 */
 
-#ifndef _HEMAN_H
-#define _HEMAN_H
+#ifndef _HANK_H
+#define _HANK_H
 
 #include <heap.h>
+#include <bank.h>
+
+typedef struct {
+    heap_t* heap;
+    bank_t bank;
+} hank_t;
 
 #endif
 

@@ -1,5 +1,5 @@
 
-#include "_heman.h"
+#include "_heap.h"
 
 // Note: For some strange reason, this code will not work on Vcc unless we use -O2 or -O0.
 // The code works fine with XRoar, but I don't know about real hardware.
@@ -8,7 +8,7 @@
 
 #pragma options --optimize=2
 
-void* heman_alloc(int* heap, int size)
+void* heap_malloc(heap_t* heap, int size)
 {
     if (size) {
         int* block = heap + 1;
