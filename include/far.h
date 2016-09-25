@@ -40,7 +40,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #include <sys/size.h>
 #include <bank.h>
 
-#define far_type(TYPE) typedef struct {bank_t bank; TYPE* ptr;}
+#define far_type(TYPE) typedef struct {bank_t bank; TYPE* data;}
 
 far_type(void)  far_void_t;
 far_type(char)  far_char_t;
@@ -52,6 +52,7 @@ void far_bank(bank_t bank, size_t size);
 far_void_t* far_alloc(far_void_t* memory, size_t size);
 void far_free(far_void_t* memory);
 size_t far_size(far_void_t* memory);
+void* far_zoom(far_void_t* memory);
 
 void far_memget(void* dst, far_void_t* src, size_t n);
 void far_memput(far_void_t* dst, void* src, size_t n);

@@ -21,8 +21,8 @@ int main(void)
         far_strdup(&names[i], s);
     }
     for (int i = 0; i < STRING_COUNT; i++) {
-        far_strget(s, &names[i]);
-        printf("BANK:%u DATA:%s\n", names[i].bank, s);
+        printf("DATA:%s BANK:%u\n", far_zoom((far_void_t*)&names[i]), names[i].bank);
+        far_zoom((far_void_t*)&names[i]);
         far_free((far_void_t*)&names[i]);
     }
     printf("MEMORY REQUESTED: %d\n", size);
