@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <string.h>
 #include <far.h>
 
 #define STRING_COUNT 100
@@ -18,7 +19,7 @@ int main(void)
     for (int i = 0; i < STRING_COUNT; i++) {
         sprintf(s, "FAR STRING #%d", i);
         size += strlen(s) + 1;
-        far_strdup(&names[i], s);
+        far_strnew(&names[i], s);
     }
     for (int i = 0; i < STRING_COUNT; i++) {
         printf("DATA:%s BANK:%u\n", far_zoom((far_void_t*)&names[i]), names[i].bank);
