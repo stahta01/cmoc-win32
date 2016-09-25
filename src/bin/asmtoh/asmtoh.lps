@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="37">
+    <Units Count="38">
       <Unit0>
         <Filename Value="asmtoh.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -276,6 +276,14 @@
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="C++"/>
       </Unit36>
+      <Unit37>
+        <Filename Value="..\..\..\bin\cmocide\objects.txt"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="7"/>
+        <CursorPos X="5" Y="46"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit37>
     </Units>
     <JumpHistory Count="29" HistoryIndex="28">
       <Position1>

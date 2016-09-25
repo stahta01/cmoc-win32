@@ -1,10 +1,10 @@
 
 #include "_far.h"
 
-void _fmemget(void* dst, fvoid_t* src, size_t n)
+void far_strget(char* dst, far_char_t* src)
 {
     bank_t bank = bank_set(src->bank);
-    memcpy(dst, src->ptr, n);
+    strcpy(dst, src->ptr);
     bank_set(bank);
 }
 

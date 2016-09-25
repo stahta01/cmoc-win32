@@ -38,19 +38,26 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define _FAR_H
 
 #include <sys/size.h>
+#include <bank.h>
 
-#define ftypedef(TYPE) typedef struct {byte bank; TYPE* ptr;}
+#define far_type(TYPE) typedef struct {bank_t bank; TYPE* ptr;}
 
-ftypedef(void)    fvoid_t;
-ftypedef(char)    fchar_t;
-ftypedef(int)     fint_t;
-ftypedef(byte)    fbyte_t;
-ftypedef(word)    fword_t;
+far_type(void)  far_void_t;
+far_type(char)  far_char_t;
+far_type(int)   far_int_t;
+far_type(byte)  far_byte_t;
+far_type(word)  far_word_t;
 
-void _fmemget(void* dst, fvoid_t* src, size_t n);
-void _fmemput(fvoid_t* dst, void* src, size_t n);
-void _fstrget(char* dst, fchar_t* src);
-void _fstrput(fchar_t* dst, char* src);
+void far_init(bank_t bank);
+far_void_t* far_alloc(far_void_t* memory, size_t size);
+void far_free(far_void_t* memory);
+size_t far_size(far_void_t* memory);
+
+void far_memget(void* dst, far_void_t* src, size_t n);
+void far_memput(far_void_t* dst, void* src, size_t n);
+void far_strget(char* dst, far_char_t* src);
+void far_strput(far_char_t* dst, char* src);
+void far_strdup(far_char_t* dst, char* src);
 
 #endif
 
