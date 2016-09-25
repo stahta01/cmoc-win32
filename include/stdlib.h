@@ -94,13 +94,13 @@ void exit(int status);
 char* _getcmd(void);
 char* itoa(int value, char* s, int radix);
 char* utoa(unsigned value, char* s, int radix);
-void ldiv(ldiv_t* result, long numer, long denom);
-char* ltoa(long value, char* string, int radix);
+//void ldiv(ldiv_t* result, long numer, long denom);
+//char* ltoa(long value, char* string, int radix);
 void qsort(void* base, size_t num, size_t width, int(*cmp)(void* elem1, void* elem2));
 int rand(void);
 void srand(unsigned seed);
-long strtol(char* nptr, char** endptr, int base);
-unsigned long strtoul(char* nptr, char** endptr, int base);
+//long strtol(char* nptr, char** endptr, int base);
+//unsigned long strtoul(char* nptr, char** endptr, int base);
 
 int system(char* cmd);
 int systemf(char* fmt, ...);

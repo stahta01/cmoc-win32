@@ -27,7 +27,8 @@
 
 #define ccmult      ___ccmult
 #define ccdiv       ___ccdiv
-
+#define ccumod      ___ccumod
+#define ccudiv      ___ccudiv
 
 // ANSIC Functions
 
@@ -59,6 +60,8 @@
 #define setjmp      _setjmp
 #define longjmp     _longjmp
 #define qsort       _qsort
+//#define utoa        _utoa
+//#define itoa        _itoa
 
 // POSIX functions which have moved to the _ namespace
 
