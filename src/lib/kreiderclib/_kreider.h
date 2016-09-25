@@ -32,6 +32,7 @@
 // ANSIC Functions
 
 #define rand        _rand
+#define bsearch     _bsearch
 #define srand       _srand
 #define abs         _abs
 #define atoi        _atoi
