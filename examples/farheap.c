@@ -19,7 +19,7 @@ int main(void)
     far_char_t names[STRING_COUNT];
     size_t size = 0;
     for (int i = 0; i < STRING_COUNT; i++) {
-        if (far_alloc((far_void_t*)&names[i], 20)->data) {
+        if (far_malloc((far_void_t*)&names[i], 20)->data) {
             far_sprintf(&names[i], "FAR STRING #%d", i);
         }
         size += far_size((far_void_t*)&names[i]);

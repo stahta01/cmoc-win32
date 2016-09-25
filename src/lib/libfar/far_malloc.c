@@ -1,7 +1,7 @@
 
 #include "_far.h"
 
-far_void_t* far_alloc(far_void_t* dst, size_t size)
+far_void_t* far_malloc(far_void_t* dst, size_t size)
 {
     dst->data = nullptr;
     for (int i = 0; i < far_banks.size; i++) {

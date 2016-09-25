@@ -65,10 +65,10 @@ node_t* node_remove(node_t* node);
 
 typedef struct {
     size_t count, isize;
-    unsigned char* items;
+    byte* items;
 } array_t;
 
-unsigned char* array_at(array_t* array, size_t index);
+byte* array_at(array_t* array, size_t index);
 array_t* array_clear(array_t* array);
 array_t* array_create(size_t isize);
 void array_free(array_t* array);

@@ -29,8 +29,8 @@ typedef struct {
 int main(void)
 {
     int i;
-    //array_test();
-    //return 0;
+    array_test();
+    return 0;
     while (!kbhit()) {
         list_t* list = list_create();
         if (list) {

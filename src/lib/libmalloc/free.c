@@ -1,8 +1,8 @@
 
 #include "_malloc.h"
 
-void free(void* m)
+void free(void* memory)
 {
-    heman_free(m);
+    heman_free(memory);
 }
 

@@ -40,15 +40,15 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #include <sys/size.h>
 
 void* malloc(size_t size);
-void* calloc(size_t num, size_t size);
-void free(void* mem);
-size_t _msize(void* mem);
-void* realloc(void* mem, size_t size);
+void* calloc(size_t count, size_t size);
+void free(void* memory);
+size_t _msize(void* memory);
+void* realloc(void* memory, size_t size);
+
+#define new(_TYPE)     ((_TYPE*)calloc(sizeof(_TYPE), 1))
+#define delete(_ADDR)  free(_ADDR)
 
 extern int heap_memory[1];                      // INTERNAL USE ONLY
-
-#define new(A)     ((A*)calloc(sizeof(A), 1))
-#define delete(A)  free(A)
 
 #endif
 

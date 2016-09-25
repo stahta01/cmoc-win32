@@ -1,8 +1,8 @@
 
 #include "_malloc.h"
 
-size_t _msize(void* m)
+size_t _msize(void* memory)
 {
-    return heman_size(m);
+    return heman_size(memory);
 }
 

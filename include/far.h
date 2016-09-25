@@ -49,7 +49,9 @@ far_type(byte)  far_byte_t;
 far_type(word)  far_word_t;
 
 void far_bank(bank_t bank, size_t size);
-far_void_t* far_alloc(far_void_t* dst, size_t size);
+far_void_t* far_malloc(far_void_t* dst, size_t size);
+far_void_t* far_calloc(far_void_t* dst, size_t count, size_t size);
+far_void_t* far_realloc(far_void_t* memory, size_t size);
 void far_free(far_void_t* memory);
 size_t far_size(far_void_t* memory);
 void* far_zoom(far_void_t* memory);

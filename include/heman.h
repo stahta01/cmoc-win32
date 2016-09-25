@@ -39,8 +39,9 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 void heman_init(int* heap, void* end);
 void* heman_alloc(int* heap, int size);
-void heman_free(void* m);
-int heman_size(void* m);
+void* heman_realloc(int* heap, void* memory, int newsize);
+void heman_free(void* memory);
+int heman_size(void* memory);
 
 #endif
 
