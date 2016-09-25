@@ -1,3 +1,4 @@
+
 /*****************************************************************************/
 /*                                                                           */
 /*                                 iso646.h                                  */
@@ -31,14 +32,11 @@
 /*                                                                           */
 /*****************************************************************************/
 
-
-
 #ifndef _ISO646_H
 #define _ISO646_H
 
+// Operator tokens
 
-
-/* Operator tokens */
 #define and     &&
 #define and_eq  &=
 #define bitand  &
@@ -51,10 +49,5 @@
 #define xor     ^
 #define xor_eq  ^=
 
-
-
-/* End of iso646.h */
 #endif
-
-
 
