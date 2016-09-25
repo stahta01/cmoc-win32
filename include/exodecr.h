@@ -1,3 +1,4 @@
+
 #ifndef EXO_DECR_ALREADY_INCLUDED
 #define EXO_DECR_ALREADY_INCLUDED
 
@@ -27,6 +28,7 @@
  *   specific prior written permission.
  */
 
-char *exo_decrunch(const char *in, char *out);
+char* exo_decrunch(const char* in, char* out);
 
 #endif /* EXO_DECRUNCH_ALREADY_INCLUDED */
+
