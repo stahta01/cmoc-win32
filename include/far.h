@@ -62,6 +62,7 @@ void far_memput(far_void_t* dst, void* src, size_t size);
 int far_strlen(far_char_t* str);
 far_char_t* far_strcpy(far_char_t* dst, far_char_t* src);
 far_char_t* far_strdup(far_char_t* dst, far_char_t* src);
+int far_sprintf(far_char_t* dst, char* fmt, ...);
 
 void far_strget(char* dst, far_char_t* src);
 void far_strput(far_char_t* dst, char* src);

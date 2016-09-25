@@ -1,6 +1,8 @@
 
 #include "_libc.h"
 
+#include <far.h>
+
 char* strpcpy_pad(char* dst, char* src, int width, char padchar)
 {
     int srclen = strlen(src);
@@ -22,8 +24,7 @@ char* strpcpy_pad(char* dst, char* src, int width, char padchar)
 
 int vsprintf(char* dst, char* fmt, va_list args)
 {
-    int step = (va_list)&fmt - (va_list)&dst;
-    char* s = dst;
+    char* pos = dst;
     while (*fmt) {
         if (*fmt++ == '%') {
             char isneg = *fmt == '-';
@@ -42,48 +43,52 @@ int vsprintf(char* dst, char* fmt, va_list args)
             if (isneg) {
                 width = -width;
             }
+            if (*fmt == 'F' || *fmt == 'N') {
+                fmt++;
+            }
             switch (*fmt++) {
             case 'c':
-                *s++ = (char)*args;
-                args += step;
+                *pos++ = (char)*args++;
                 break;
             case 's':
-                s = strpcpy_pad(s, (char*)*args, width, padchar);
-                args += step;
+                if (fmt[-2] == 'F') {
+                    pos = strpcpy_pad(pos, (char*)far_zoom((far_void_t*)*args), width, padchar);
+                    far_zoom((far_void_t*)*args++);
+                } else {
+                    pos = strpcpy_pad(pos, (char*)*args++, width, padchar);
+                }
                 break;
             case 'd':
-                s = strpcpy_pad(s, itoa(*args, s, 10), width, padchar);
-                args += step;
+            case 'i':
+                pos = strpcpy_pad(pos, itoa(*args++, pos, 10), width, padchar);
                 break;
             case 'o':
-                s = strpcpy_pad(s, utoa(*args, s, 8), width, padchar);
-                args += step;
+                pos = strpcpy_pad(pos, utoa(*args++, pos, 8), width, padchar);
                 break;
             case 'x':
-                s = strpcpy_pad(s, strlwr(utoa(*args, s, 16)), width, padchar);
-                args += step;
+                pos = strpcpy_pad(pos, strlwr(utoa(*args++, pos, 16)), width, padchar);
                 break;
             case 'X':
-                s = strpcpy_pad(s, utoa(*args, s, 16), width, padchar);
-                args += step;
+                pos = strpcpy_pad(pos, utoa(*args++, pos, 16), width, padchar);
+                break;
+            case 'p':
+                pos = strpcpy_pad(pos, utoa(*args++, pos, 16), 4, '0');
                 break;
             case 'u':
-                s = strpcpy_pad(s, utoa(*args, s, 10), width, padchar);
-                args += step;
+                pos = strpcpy_pad(pos, utoa(*args++, pos, 10), width, padchar);
                 break;
             case 'f':
-                s = strpcpy_pad(s, _ftoa(s, (float_t*)*args), width, padchar);
-                args += step;
+                pos = strpcpy_pad(pos, _ftoa(pos, (float_t*)*args++), width, padchar);
                 break;
             default:
-                *s++ = fmt[-1];
+                *pos++ = fmt[-1];
                 break;
             }
         } else {
-            *s++ = fmt[-1];
+            *pos++ = fmt[-1];
         }
     }
-    *s = 0;
-    return s - dst;
+    *pos = 0;
+    return pos - dst;
 }
 

@@ -1,7 +1,9 @@
 
+#include <stdio.h>
+#include <string.h>
+#include <stdarg.h>
 #include <far.h>
 #include <bank.h>
-#include <string.h>
 #include <heman.h>
 #include <std/array.h>
 
