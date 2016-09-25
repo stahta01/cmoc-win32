@@ -3,8 +3,7 @@
 
 void far_free(far_void_t* memory)
 {
-    bank_t bank = bank_set(memory->bank);
-    heman_free(memory->data);
-    bank_set(bank);
+    heman_free(far_zoom(memory));
+    far_zoom(memory);
 }
 

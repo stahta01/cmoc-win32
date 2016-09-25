@@ -3,8 +3,7 @@
 
 void far_strget(char* dst, far_char_t* src)
 {
-    bank_t bank = bank_set(src->bank);
-    strcpy(dst, src->data);
-    bank_set(bank);
+    strcpy(dst, (char*)far_zoom((far_void_t*)src));
+    far_zoom((far_void_t*)src);
 }
 
