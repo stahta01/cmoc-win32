@@ -7,21 +7,23 @@ void* heap_malloc(heap_t* heap, int size)
 {
     if (size) {
         size += sizeof(int);
-        for (int len, last = *heap++; heap < last; heap = (int*)((int)heap + (len < 0 ? -len : len))) {
-            if ((len = *heap) < 0) {
-                len = 0;
-                for (int* p = heap; p < last && *p < 0; len += *p, p = (int*)((int)p - *p));
-            } else if (!len) {
-                len = (int)heap - last;
+        while (*heap) {
+            int block_size = *heap;
+            if (block_size < 0) {
+                block_size = 0;
+                for (int* block = heap; *block < 0; block = (int*)((int)block - *block)) {
+                    block_size += *block;
+                }
+                *heap = block_size;
             }
-            *heap = len;
-            if (size <= -len - 2) {
-                if (size < -len) {
-                    *(int*)((int)heap + size) = len + size;
+            if (size <= (-block_size - sizeof(int))) {
+                if (size < -block_size) {
+                    *(int*)((int)heap + size) = block_size + size;
                 }
                 *heap++ = size;
                 return (void*)heap;
             }
+            heap = (int*)((int)heap + (block_size < 0 ? -block_size : block_size));
         }
     }
     return nullptr;

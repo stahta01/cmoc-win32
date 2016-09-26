@@ -1,9 +1,13 @@
 
 #include "_heap.h"
 
-void heap_init(heap_t* heap, int size)
+heap_t* heap_init(heap_t* heap, int size)
 {
-    heap[0] = (byte*)heap + size;
-    heap[1] = 0;
+    if (size < HEAP_SIZE_MIN || size > HEAP_SIZE_MAX) {
+        return nullptr;
+    }
+    *heap = sizeof(int) - size;
+    *(int*)((int)heap - *heap) = 0;
+    return heap;
 }
 

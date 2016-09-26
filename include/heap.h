@@ -37,13 +37,53 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _HEAP_H
 #define _HEAP_H
 
+// Heap blocks are 2 bytes (sizeof(int)) larger than the requested memory size.
+// These two 2 bytes are the _signed_ size of the block.
+// eg: If you request 10 bytes, then the heap block size is 12.
+// If the size is negitive, then the block is unused. Positive means used.
+// A zero value indicates the end of the heap.
+// Since the smallest block size is 2, sizes of -1/1 are also invalid, and
+// therefore indicate an invalid block. These are currently not checked for
+// during a heap traverse. It indicates a possible buffer overflow.
+// Since the size is signed, the maxium "theoretical" block size is under 32K.
+// Something like 32768 - 3, but! I have set the max heap size to 0x7f00,
+// incase the heap header/footer is changed. Note, the main heap
+// at the end of your binary, must leave space for the stack anyway,
+
+// You must take care if you split a heap block, since a split requires an
+// extra two bytes for the new block size, so a block of 32 bytes, holds
+// 30 bytes, you loose 2 bytes durring a split. ie: 28 bytes after a split.
+// eg: split in half = 14 + 14 + 2 (size1) + 2 (size2) = a 32 byte block.
+
+#define HEAP_SIZE_MIN   7
+#define HEAP_SIZE_MAX   0x7f00
+
 typedef int heap_t;
 
-void heap_init(heap_t* heap, int size);
+heap_t* heap_init(heap_t* heap, int size);
 void* heap_malloc(heap_t* heap, int size);
 void* heap_realloc(heap_t* heap, void* memory, int size);
 void heap_free(void* memory);
 int heap_msize(void* memory);
+
+// A heap block is the same as a heap. I wanted heaps to be ultra simple, so, no tree's, struct's,
+// or hash tables, etc. This type is here just to better document code.
+
+typedef int heap_block_t;
+
+// Note: The way the heaps work, you are able to split heap blocks into
+// other heaps. I cant see this being required (or safe). You should always create
+// your heaps at startup, and leave them be.
+
+// Note: These functions are here mainly to document the heap structure. If you look
+// at the code for these, you will see that the structure is very simple, and these
+// are not required. They could even be written as macros...
+
+int heap_block_size(heap_block_t* block);
+heap_block_t* heap_block_next(heap_block_t* block);
+bool heap_block_is_free(heap_block_t* block);
+bool heap_block_is_used(heap_block_t* block);
+bool heap_block_is_last(heap_block_t* block);
 
 #endif
 

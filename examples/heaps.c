@@ -19,7 +19,7 @@ char* mem[16][4];
 int main(void)
 {
     int i, j, k;
-    clrscr();
+    system("CLS1");
     for (i = 0; i < 16; i++) {
         heap_init((int*)(1024 + i * 32), 32);
     }
@@ -33,7 +33,7 @@ int main(void)
                         exit(-1);
                     }
                 }
-                free((void*)mem[i][j]);
+                heap_free((void*)mem[i][j]);
             }
             int* heap = (int*)(1024 + i * 32);
             mem[i][j] = (char*)heap_malloc(heap, (rand() & 5) + 1);
