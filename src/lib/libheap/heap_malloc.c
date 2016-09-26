@@ -3,27 +3,25 @@
 
 #pragma options --optimize=2
 
-void* heap_malloc(heap_t* heap, int size)
+void* heap_malloc(heap_t* heap, size_t size)
 {
     if (size) {
         size += sizeof(int);
-        while (*heap) {
-            int block_size = *heap;
-            if (block_size < 0) {
-                block_size = 0;
+        for (int bsize; bsize = *heap; heap = (int*)((int)heap + (bsize < 0 ? -bsize : bsize))) {
+            if (bsize < 0) {
+                bsize = 0;
                 for (int* block = heap; *block < 0; block = (int*)((int)block - *block)) {
-                    block_size += *block;
+                    bsize += *block;
                 }
-                *heap = block_size;
+                *heap = bsize;
             }
-            if (size <= (-block_size - sizeof(int))) {
-                if (size < -block_size) {
-                    *(int*)((int)heap + size) = block_size + size;
+            if ((int)size <= (-bsize - sizeof(int))) {
+                if ((int)size < -bsize) {
+                    *(int*)((int)heap + size) = bsize + size;
                 }
                 *heap++ = size;
                 return (void*)heap;
             }
-            heap = (int*)((int)heap + (block_size < 0 ? -block_size : block_size));
         }
     }
     return nullptr;

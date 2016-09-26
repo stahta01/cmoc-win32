@@ -37,6 +37,8 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _HEAP_H
 #define _HEAP_H
 
+#include <sys/size.h>
+
 // Heap blocks are 2 bytes (sizeof(int)) larger than the requested memory size.
 // These two 2 bytes are the _signed_ size of the block.
 // eg: If you request 10 bytes, then the heap block size is 12.
@@ -60,11 +62,11 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 typedef int heap_t;
 
-heap_t* heap_init(heap_t* heap, int size);
-void* heap_malloc(heap_t* heap, int size);
-void* heap_realloc(heap_t* heap, void* memory, int size);
+heap_t* heap_init(heap_t* heap, size_t size);
+void* heap_malloc(heap_t* heap, size_t size);
+void* heap_realloc(heap_t* heap, void* memory, size_t size);
 void heap_free(void* memory);
-int heap_msize(void* memory);
+size_t heap_msize(void* memory);
 
 // A heap block is the same as a heap. I wanted heaps to be ultra simple, so, no tree's, struct's,
 // or hash tables, etc. This type is here just to better document code.
@@ -79,7 +81,7 @@ typedef int heap_block_t;
 // at the code for these, you will see that the structure is very simple, and these
 // are not required. They could even be written as macros...
 
-int heap_block_size(heap_block_t* block);
+size_t heap_block_size(heap_block_t* block);
 heap_block_t* heap_block_next(heap_block_t* block);
 bool heap_block_is_free(heap_block_t* block);
 bool heap_block_is_used(heap_block_t* block);

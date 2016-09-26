@@ -19,7 +19,7 @@ char* mem[16][4];
 int main(void)
 {
     int i, j, k;
-    system("CLS1");
+    system("CLS0");
     for (i = 0; i < 16; i++) {
         heap_init((int*)(1024 + i * 32), 32);
     }

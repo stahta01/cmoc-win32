@@ -1,7 +1,7 @@
 
 #include "_heap.h"
 
-heap_t* heap_init(heap_t* heap, int size)
+heap_t* heap_init(heap_t* heap, size_t size)
 {
     if (size < HEAP_SIZE_MIN || size > HEAP_SIZE_MAX) {
         return nullptr;
