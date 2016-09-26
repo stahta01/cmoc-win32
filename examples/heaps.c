@@ -14,16 +14,24 @@
 #include <stdlib.h>
 #include <heap.h>
 
+#pragma options --optimize=2
+
+heap_t* heaps[16];
 char* mem[16][4];
 
 int main(void)
 {
     int i, j, k;
-    system("CLS0");
+
+    clrscr();
+    cursor(false);                              // The cursor corrupts our heaps.
+
     for (i = 0; i < 16; i++) {
-        heap_init((int*)(1024 + i * 32), 32);
+        heaps[i] = (int*)(1024 + i * 32);
+        heap_init(heaps[i], 24);
     }
-    while (true) {
+
+    while (!kbhit()) {
         for (i = 0; i < 16; i++) {
             j = rand() & 3;
             if (mem[i][j]) {
@@ -44,6 +52,7 @@ int main(void)
             }
         }
     }
+    cputs("BACK TO BASIC\n");
     return 0;
 }
 

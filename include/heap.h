@@ -51,13 +51,15 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 // Something like 32768 - 3, but! I have set the max heap size to 0x7f00,
 // incase the heap header/footer is changed. Note, the main heap
 // at the end of your binary, must leave space for the stack anyway,
-
+//
 // You must take care if you split a heap block, since a split requires an
 // extra two bytes for the new block size, so a block of 32 bytes, holds
 // 30 bytes, you loose 2 bytes durring a split. ie: 28 bytes after a split.
 // eg: split in half = 14 + 14 + 2 (size1) + 2 (size2) = a 32 byte block.
+//
+// The min heap size is 4, which allows no data.
 
-#define HEAP_SIZE_MIN   7
+#define HEAP_SIZE_MIN   4
 #define HEAP_SIZE_MAX   0x7f00
 
 typedef int heap_t;
@@ -67,6 +69,21 @@ void* heap_malloc(heap_t* heap, size_t size);
 void* heap_realloc(heap_t* heap, void* memory, size_t size);
 void heap_free(void* memory);
 size_t heap_msize(void* memory);
+
+// Heap Walkers
+
+// These functions return the sum size of memory blocks. Therefore:
+// heap_total_free + heap_total_used = heap size.
+// The free value, should only be used as an indication of how much of
+// the heap is unused, not how much can be allocated.
+
+size_t heap_total_free(heap_t* heap);
+size_t heap_total_used(heap_t* heap);
+
+// The total size of the heap is not stored by the heap, because the heap can grow without
+// knowing the heap start. Therefore, this function walks the heap.
+
+size_t heap_total_size(heap_t* heap);
 
 // A heap block is the same as a heap. I wanted heaps to be ultra simple, so, no tree's, struct's,
 // or hash tables, etc. This type is here just to better document code.
