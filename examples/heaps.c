@@ -22,7 +22,6 @@ int main(void)
     int i, j, k;
 
     clrscr();
-    cursor(false);                              // The cursor corrupts our heaps.
 
     for (i = 0; i < 16; i++) {
         heaps[i] = (int*)(1024 + i * 32);

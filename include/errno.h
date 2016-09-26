@@ -1,53 +1,201 @@
+/**
+ * This file has no copyright assigned and is placed in the Public Domain.
+ * This file is part of the mingw-w64 runtime package.
+ * No warranty is given; refer to the file DISCLAIMER.PD within this package.
+ */
+#ifndef _INC_ERRNO
+#define _INC_ERRNO
 
-// TODO: This needs work.
+#include <crtdefs.h>
 
-#ifndef _ERRNO_H
-#define _ERRNO_H
-
-extern int errno;
-extern int _doserrno;
-extern int _sys_nerr;
-extern char* _sys_errlist[10];
-
-#define EZERO           0
-#define EDOM            1
-#define ERANGE          2
-#define EPERM           3
-#define ENOENT          4
-#define ESRCH           5
-#define EINTR           6
-#define EIO             7
-#define ENXIO           8
-#define E2BIG           9
-#define ENOEXEC        10
-#define EBADF          11
-#define ECHILD         12
-#define EAGAIN         13
-#define ENOMEM         14
-#define EACCES         15
-#define EFAULT         16
-#define ENOTBLK        17
-#define EBUSY          18
-#define EEXIST         19
-#define EXDEV          20
-#define ENODEV         21
-#define ENOTDIR        22
-#define EISDIR         23
-#define EINVAL         24
-#define ENFILE         25
-#define EMFILE         26
-#define ENOTTY         27
-#define ETXTBSY        28
-#define EFBIG          29
-#define ENOSPC         30
-#define ESPIPE         31
-#define EROFS          32
-#define EMLINK         33
-#define EPIPE          34
-#define EUCLEAN        35
-#define EDEADLOCK      36
-#define ENOTEXIST      37
-#define EUNKNOWN       38
-
+#ifdef __cplusplus
+extern "C" {
 #endif
 
+#ifndef _CRT_ERRNO_DEFINED
+#define _CRT_ERRNO_DEFINED
+_CRTIMP extern int *__cdecl _errno(void);
+#define errno (*_errno())
+
+errno_t __cdecl _set_errno(int _Value);
+errno_t __cdecl _get_errno(int *_Value);
+#endif /* _CRT_ERRNO_DEFINED */
+
+#define EPERM 1
+#define ENOENT 2
+#define ENOFILE ENOENT
+#define ESRCH 3
+#define EINTR 4
+#define EIO 5
+#define ENXIO 6
+#define E2BIG 7
+#define ENOEXEC 8
+#define EBADF 9
+#define ECHILD 10
+#define EAGAIN 11
+#define ENOMEM 12
+#define EACCES 13
+#define EFAULT 14
+#define EBUSY 16
+#define EEXIST 17
+#define EXDEV 18
+#define ENODEV 19
+#define ENOTDIR 20
+#define EISDIR 21
+#define ENFILE 23
+#define EMFILE 24
+#define ENOTTY 25
+#define EFBIG 27
+#define ENOSPC 28
+#define ESPIPE 29
+#define EROFS 30
+#define EMLINK 31
+#define EPIPE 32
+#define EDOM 33
+#define EDEADLK 36
+#define ENAMETOOLONG 38
+#define ENOLCK 39
+#define ENOSYS 40
+#define ENOTEMPTY 41
+
+#ifndef RC_INVOKED
+#if !defined(_SECURECRT_ERRCODE_VALUES_DEFINED)
+#define _SECURECRT_ERRCODE_VALUES_DEFINED
+#define EINVAL 22
+#define ERANGE 34
+#define EILSEQ 42
+#define STRUNCATE 80
+#endif
+#endif
+
+#define EDEADLOCK EDEADLK
+
+/* Posix thread extensions.  */
+
+#ifndef ENOTSUP
+#define ENOTSUP         129
+#endif
+
+/* Extension defined as by report VC 10+ defines error-numbers.  */
+
+#ifndef EAFNOSUPPORT
+#define EAFNOSUPPORT 102
+#endif
+
+#ifndef EADDRINUSE
+#define EADDRINUSE 100
+#endif
+
+#ifndef EADDRNOTAVAIL
+#define EADDRNOTAVAIL 101
+#endif
+
+#ifndef EISCONN
+#define EISCONN 113
+#endif
+
+#ifndef ENOBUFS
+#define ENOBUFS 119
+#endif
+
+#ifndef ECONNABORTED
+#define ECONNABORTED 106
+#endif
+
+#ifndef EALREADY
+#define EALREADY 103
+#endif
+
+#ifndef ECONNREFUSED
+#define ECONNREFUSED 107
+#endif
+
+#ifndef ECONNRESET
+#define ECONNRESET 108
+#endif
+
+#ifndef EDESTADDRREQ
+#define EDESTADDRREQ 109
+#endif
+
+#ifndef EHOSTUNREACH
+#define EHOSTUNREACH 110
+#endif
+
+#ifndef EMSGSIZE
+#define EMSGSIZE 115
+#endif
+
+#ifndef ENETDOWN
+#define ENETDOWN 116
+#endif
+
+#ifndef ENETRESET
+#define ENETRESET 117
+#endif
+
+#ifndef ENETUNREACH
+#define ENETUNREACH 118
+#endif
+
+#ifndef ENOPROTOOPT
+#define ENOPROTOOPT 123
+#endif
+
+#ifndef ENOTSOCK
+#define ENOTSOCK 128
+#endif
+
+#ifndef ENOTCONN
+#define ENOTCONN 126
+#endif
+
+#ifndef ECANCELED
+#define ECANCELED 105
+#endif
+
+#ifndef EINPROGRESS
+#define EINPROGRESS 112
+#endif
+
+#ifndef EOPNOTSUPP
+#define EOPNOTSUPP 130
+#endif
+
+#ifndef EWOULDBLOCK
+#define EWOULDBLOCK 140
+#endif
+
+#ifndef EOWNERDEAD
+#define EOWNERDEAD 133
+#endif
+
+#ifndef EPROTO
+#define EPROTO 134
+#endif
+
+#ifndef EPROTONOSUPPORT
+#define EPROTONOSUPPORT 135
+#endif
+
+/* Defined as WSAETIMEDOUT.  */
+#ifndef ETIMEDOUT
+#define ETIMEDOUT 138
+#endif
+
+#ifndef ELOOP
+#define ELOOP 114
+#endif
+
+#ifndef EPROTOTYPE
+#define EPROTOTYPE 136
+#endif
+
+#ifndef EOVERFLOW
+#define EOVERFLOW 132
+#endif
+
+#ifdef __cplusplus
+}
+#endif
+#endif

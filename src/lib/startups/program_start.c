@@ -18,7 +18,7 @@ void _main(void)
     asm {
         INITGL__STDIO_O: extern
         lbsr    INITGL__STDIO_O                 // stdio needs to init stdin/stdout
-         // other important lib calls should be placed here
+        // other priority lib calls should be placed here
         lbsr    INITGL                          // initialize global variables
     }
     exit(main());
@@ -27,7 +27,7 @@ void _main(void)
 void exit(int status)
 {
     if (status) {
-        printf("EXIT STATUS: %d\n", status);
+        printf(status < 1024 ? "EXIT STATUS: %d\n" : "EXIT MESSAGE: %s\n", status);
     }
     //memset(0x2dd, 0, 250);
     asm {

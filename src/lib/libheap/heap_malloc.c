@@ -8,7 +8,7 @@ void* heap_malloc(heap_t* heap, size_t size)
     if (size) {
         size += sizeof(int);
         for (int bsize; bsize = *heap; heap = (heap_t*)((word)heap + bsize)) {
-            if (bsize < 0) {
+            if (bsize <= -sizeof(int)) {
                 bsize = 0;
                 heap_block_t* block = heap;
                 do {
@@ -24,6 +24,8 @@ void* heap_malloc(heap_t* heap, size_t size)
                 if (size == bsize) {
                     goto success;
                 }
+            } else if (bsize < sizeof(int)) {
+                exit("corrupted heap");
             }
         }
     }
