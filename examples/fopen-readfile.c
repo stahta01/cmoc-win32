@@ -8,7 +8,7 @@
 
 int main(void)
 {
-    *(unsigned char*)65314 |= 16;
+    *(byte*)65314 |= 16;                        // lower case letters
     puts("READING FILE ...");
     FILE* fp = fopen("B:BASIC.TXT", "r");
     if (fp) {

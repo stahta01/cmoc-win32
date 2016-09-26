@@ -49,12 +49,13 @@ far_type(int)   far_int_t;
 far_type(byte)  far_byte_t;
 far_type(word)  far_word_t;
 
+void* far_zoom(far_void_t* memory);
+
 far_void_t* far_malloc(far_void_t* dst, size_t size);
 far_void_t* far_calloc(far_void_t* dst, size_t count, size_t size);
 far_void_t* far_realloc(far_void_t* memory, size_t size);
+size_t far_msize(far_void_t* memory);
 void far_free(far_void_t* memory);
-size_t far_size(far_void_t* memory);
-void* far_zoom(far_void_t* memory);
 
 far_void_t* far_memcpy(far_void_t* dst, far_void_t* src, size_t size);
 far_void_t* far_memset(far_void_t* dst, int data, size_t size);

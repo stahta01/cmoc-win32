@@ -14,7 +14,7 @@ int main(void)
     // Setup three 512 byte hanks (banked heaps).
     // Note: I am choosing small sizes to make sure the code handles
     // low memory situations.
-    hank_create(0x8000, 0, 512);
+    hank_create(0x8000,  0, 512);
     hank_create(0x8000, 12, 512);
     hank_create(0x8000, 13, 512);
 
@@ -24,7 +24,7 @@ int main(void)
         if (far_malloc((far_void_t*)&names[i], 20)->data) {
             far_sprintf(&names[i], "FAR STRING #%d", i);
         }
-        size += far_size((far_void_t*)&names[i]);
+        size += far_msize((far_void_t*)&names[i]);
     }
     for (int i = 0; i < STRING_COUNT; i++) {
         printf("DATA:%Fs BANK:%u\n", &names[i], names[i].bank);
