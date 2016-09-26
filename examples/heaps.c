@@ -14,8 +14,6 @@
 #include <stdlib.h>
 #include <heap.h>
 
-#pragma options --optimize=2
-
 heap_t* heaps[16];
 char* mem[16][4];
 
@@ -28,7 +26,7 @@ int main(void)
 
     for (i = 0; i < 16; i++) {
         heaps[i] = (int*)(1024 + i * 32);
-        heap_init(heaps[i], 24);
+        heap_init(heaps[i], 32);
     }
 
     while (!kbhit()) {
