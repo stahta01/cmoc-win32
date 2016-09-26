@@ -2,7 +2,7 @@
 #include <vectrex.h>
 
 // Produce a random value using the BIOS Random function.
-int8_t random()
+int8_t vectrex_random()
 {
     int8_t rnd;
     asm {

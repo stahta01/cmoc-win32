@@ -7,7 +7,7 @@
 //   do stuff when joystick one button one is pressed
 //   ...
 // }
-uint8_t read_buttons()
+uint8_t vectrex_read_buttons()
 {
     uint8_t buttons;
     asm {

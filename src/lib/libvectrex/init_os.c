@@ -1,10 +1,10 @@
 
 #include <vectrex.h>
 
-void asm init_os()
+asm void vectrex_init_os()
 {
     asm {
-        JSR Init_OS
+        jsr Init_OS
     }
 }
 

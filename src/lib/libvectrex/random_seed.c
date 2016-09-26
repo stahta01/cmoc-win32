@@ -2,7 +2,7 @@
 #include <vectrex.h>
 
 // The Vectrex uses three bytes for the random seed.
-void random_seed(uint8_t seed1, uint8_t seed2, uint8_t seed3)
+void vectrex_random_seed(uint8_t seed1, uint8_t seed2, uint8_t seed3)
 {
     asm {
         LDA  :seed1

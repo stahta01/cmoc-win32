@@ -2,10 +2,10 @@
 #include <vectrex.h>
 
 // Call this in the main loop to play the music.
-void music_play()
+void vectrex_music_play()
 {
     asm {
-        JSR     Do_Sound
+        jsr     Do_Sound
     }
 }
 

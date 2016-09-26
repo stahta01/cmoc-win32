@@ -1,10 +1,10 @@
 
 #include <vectrex.h>
 
-void asm init_os_ram()
+asm void vectrex_init_os_ram()
 {
     asm {
-        JSR   Init_OS_RAM
+        jsr   Init_OS_RAM
     }
 }
 

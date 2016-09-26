@@ -9,7 +9,7 @@
 //   ...
 //   yn, xn
 // };
-void rotate(int8_t angle, uint8_t nr_points, int8_t* points, int8_t* out_points)
+void vectrex_rotate(int8_t angle, uint8_t nr_points, int8_t* points, int8_t* out_points)
 {
     asm {
         PSHS    U,D

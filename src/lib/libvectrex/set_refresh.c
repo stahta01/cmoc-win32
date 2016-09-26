@@ -1,7 +1,7 @@
 
 #include <vectrex.h>
 
-void set_refresh(uint16_t value)
+void vectrex_set_refresh(uint16_t value)
 {
     asm {
         JSR     DP_to_D0

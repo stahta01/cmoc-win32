@@ -2,7 +2,7 @@
 #include <vectrex.h>
 
 // Set the scale. With this you can zoom in and out objects.
-void set_scale(int8_t scale)
+void vectrex_set_scale(int8_t scale)
 {
     asm {
         LDA     :scale

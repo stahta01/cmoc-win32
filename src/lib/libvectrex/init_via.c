@@ -1,10 +1,10 @@
 
 #include <vectrex.h>
 
-void asm init_via()
+asm void vectrex_init_via()
 {
     asm {
-        JSR   Init_VIA
+        jsr   Init_VIA
     }
 }
 

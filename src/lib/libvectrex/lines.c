@@ -11,14 +11,14 @@
 //    xn, yn
 // };
 // Make note that these are not absolute, but relative coordinates.
-void lines(uint8_t nr_lines, int8_t* list)
+void vectrex_lines(uint8_t nr_lines, int8_t* list)
 {
     asm {
-        JSR     DP_to_D0
-        LDA     :nr_lines
-        DECA
-        LDX     :list
-        JSR     Draw_VL_a
+        jsr     DP_to_D0
+        lda     :nr_lines
+        deca
+        ldx     :list
+        jsr     Draw_VL_a
     }
 }
 

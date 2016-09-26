@@ -5,11 +5,11 @@
 // The music flag has 3 states: 0, 1 and 0x80.
 // State 0 means no music is playing. A 1 means we are about to start the music.
 // And 0x80 means the music is currently playing.
-void music_set_flag(uint8_t flag)
+void vectrex_music_set_flag(uint8_t flag)
 {
     asm {
-        LDA     :flag
-        STA     Vec_Music_Flag
+        lda     :flag
+        sta     Vec_Music_Flag
     }
 }
 

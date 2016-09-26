@@ -10,7 +10,7 @@
 //   do joystick up stuff
 //   ...
 // }
-uint8_t read_joystick(uint8_t joystick)
+uint8_t vectrex_read_joystick(uint8_t joystick)
 {
     uint8_t result;
     asm {
