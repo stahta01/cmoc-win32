@@ -1,4 +1,2 @@
-define basesympat __basesym_%s
-define lensympat __lensym_%s
 section SECTION_ORIGIN 
 section SECTION_NAME
