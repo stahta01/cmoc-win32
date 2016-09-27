@@ -3,9 +3,9 @@
 #define _SYS_LONG_H
 
 typedef struct {
-    int hi;
-    unsigned lo;
-} long_t;
+    sword hi;
+    word lo;
+} _CRT_LONG, long_t;
 
 #endif
 

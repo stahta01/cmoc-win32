@@ -34,17 +34,13 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 */
 
-#ifndef _LONG_H
-#define _LONG_H
+#ifndef _SEARCH_H
+#define _SEARCH_H
 
-#include <sys/long.h>
+void* bsearch(void* keyval, void* base, size_t num, size_t width,
+              int(*cmp)(void* keyval, void* elem));
 
-long_t* _linc(long_t* l);
-long_t* _ldec(long_t* l);
-
-long_t* _lmul(long_t* dst, long_t* src1, long_t* src2);
-
-extern long_t __flacc;
+void qsort(void* base, size_t num, size_t width, int(*cmp)(void* elem1, void* elem2));
 
 #endif
 

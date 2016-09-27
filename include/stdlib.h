@@ -38,6 +38,12 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define _STDLIB_H
 
 #include <malloc.h>
+#include <search.h>
+
+#include <sys/long.h>
+#include <sys/ulong.h>
+#include <sys/div.h>
+#include <sys/ldiv.h>
 
 #define EXIT_SUCCESS    0
 #define EXIT_FAILURE    1
@@ -59,21 +65,6 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 // max. length of extension component
 #define _MAX_EXT        3
 
-// Return type of the div function
-typedef struct {
-    int rem;
-    int quot;
-} div_t;
-
-typedef struct _ldiv_t {
-    long quot;
-    long rem;
-} ldiv_t;
-
-typedef struct _uldiv_t {
-    unsigned long quot;
-    unsigned long rem;
-} uldiv_t;
 
 #define _max(_a,_b)     (((_a) > (_b)) ? (_a) : (_b))
 #define _min(_a,_b)     (((_a) < (_b)) ? (_a) : (_b))
@@ -84,21 +75,19 @@ int min(int a, int b);
 int abs(int n);
 
 int atoi(char* s);
-//long atol(char* string);
+long_t* atol(long_t* dst, char* src);
 int atexit(void(*func)(void));
-void* bsearch(void* keyval, void* base, size_t num, size_t width,
-              int(*cmp)(void* keyval, void* elem));
 
 void div(div_t* result, int numer, int denom);
 void exit(int status);
 char* _getcmd(void);
 char* itoa(int value, char* s, int radix);
 char* utoa(unsigned value, char* s, int radix);
-//void ldiv(ldiv_t* result, long numer, long denom);
-//char* ltoa(long value, char* string, int radix);
-void qsort(void* base, size_t num, size_t width, int(*cmp)(void* elem1, void* elem2));
+void ldiv(ldiv_t* result, long_t* numer, long_t* denom);
+char* ltoa(long_t* value, char* string, int radix);
 int rand(void);
 void srand(unsigned seed);
+
 //long strtol(char* nptr, char** endptr, int base);
 //unsigned long strtoul(char* nptr, char** endptr, int base);
 

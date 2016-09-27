@@ -40,10 +40,15 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 // Due to a bug in CMOC, we cant define jmp_buf as an array. Im sure
 // it will be fixed soon.
 
-typedef struct {
+#define _JBLEN      1
+#define _JBTYPE     _JUMP_BUFFER
+
+typedef struct __JUMP_BUFFER {
 // I think these are correct for kreider lib.
     word s, pc, u, y;
-} jmp_buf;
+} _JUMP_BUFFER;
+
+typedef _JBTYPE jmp_buf;
 
 int setjmp(jmp_buf* buf);
 void longjmp(jmp_buf* buf, int value);

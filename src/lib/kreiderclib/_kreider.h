@@ -80,9 +80,10 @@
 #define strhcpy     __strhcpy
 #define strend      __strend
 
-// Table for OS9 char type functions
+// Variables for kreider lib functions
 
-#define _chcodes    __chcodes
+#define _chcodes    ___chcodes
+#define _flacc      ___flacc
 
 // Unsure if these are used
 

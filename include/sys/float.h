@@ -11,7 +11,7 @@ typedef struct {
     char        exp;                            // EXPONENT
     int         msb;                            // SIGN + MSB's
     unsigned    lsb;                            // LSB's
-} float_t;
+} _CRT_FLOAT, float_t;
 
 #endif
 
