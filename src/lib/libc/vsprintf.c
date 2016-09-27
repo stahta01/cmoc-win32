@@ -66,13 +66,14 @@ int vsprintf(char* dst, char* fmt, va_list args)
                 pos = strpcpy_pad(pos, utoa(*args++, pos, 8), width, padchar);
                 break;
             case 'x':
-                pos = strpcpy_pad(pos, strlwr(utoa(*args++, pos, 16)), width, padchar);
-                break;
-            case 'X':
                 pos = strpcpy_pad(pos, utoa(*args++, pos, 16), width, padchar);
                 break;
+            case 'X':
+                pos = strpcpy_pad(pos, _strupr(utoa(*args++, pos, 16)), width, padchar);
+                break;
             case 'p':
-                pos = strpcpy_pad(pos, utoa(*args++, pos, 16), 4, '0');
+                // This isn't correct, but it will do for now.
+                pos = strpcpy_pad(pos, _strupr(utoa(*args++, pos, 16)), 4, '0');
                 break;
             case 'u':
                 pos = strpcpy_pad(pos, utoa(*args++, pos, 10), width, padchar);

@@ -38,18 +38,17 @@
 #include <stddef.h>
 #include <memory.h>
 
-char* strcat(char* dest, char* src);            // ANSIC
+char* strcat(char* dst, char* src);             // ANSIC
 char* strchr(char* s, int c);                   // ANSIC
-char* strend(char* s);                          // CMOC
 int strcmp(char* s1, char* s2);                 // ANSIC
 int strcoll(char* s1, char* s2);                // ANSIC
-char* strcpy(char* dest, char* src);            // ANSIC
+char* strcpy(char* dst, char* src);             // ANSIC
 size_t strcspn(char* s1, char* s2);             // ANSIC
 char* strerror(int errcode);                    // ANSIC
 size_t strlen(char* s);                         // ANSIC
 char* strncat(char* s1, char* s2, size_t n);    // ANSIC
 int strncmp(char* s1, char* s2, size_t n);      // ANSIC
-char* strncpy(char* dest, char* src, size_t n); // ANSIC
+char* strncpy(char* dst, char* src, size_t n);  // ANSIC
 char* strrchr(char* s, int c);                  // ANSIC
 size_t strspn(char* s1, char* s2);              // ANSIC
 char* strstr(char* str, char* substr);          // ANSIC
@@ -59,21 +58,22 @@ size_t strxfrm(char* s1, char* s2, size_t n);   // ANSIC
 int strtoi(char* s, char** endptr, int radix);  // CMOC
 
 char* strdup(char* s);                          // SYSV/BSD
-int stricmp(char* s1, char* s2);                // DOS/Windows
 int strcasecmp(char* s1, char* s2);             // UNIX
-int strnicmp(char* s1, char* s2, size_t n);     // DOS/Windows
 int strncasecmp(char* s1, char* s2, size_t n);  // UNIX
+int stricmp(char* s1, char* s2);                // DOS/Windows
+int strnicmp(char* s1, char* s2, size_t n);     // DOS/Windows
 
-char* strlwr(char* s);                          // UNIX
-char* strlower(char* s);                        // UNIX
-char* strupr(char* s);                          // UNIX
-char* strupper(char* s);                        // UNIX
-char* strqtok(char* s1, char* s2);              // UNIX
+char* _strlwr(char* s);                         // UNIX
+char* _strlower(char* s);                       // UNIX
+char* _strupr(char* s);                         // UNIX
+char* _strupper(char* s);                       // UNIX
+char* _strqtok(char* s1, char* s2);             // UNIX
 
-char* strrev(char* s);                          // CMOC
-char* stpcpy(char* dest, char* src);            // CMOC
+char* _strrev(char* s);                         // CMOC
+char* _stpcpy(char* dst, char* src);            // CMOC
 
 // Map an operating system error number to an error message.
+
 char* _stroserror(unsigned char errcode);
 
 #endif

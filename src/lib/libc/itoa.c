@@ -3,33 +3,24 @@
 
 char* itoa(int value, char* string, int radix)
 {
-    uldiv_t result;
-    int sign = 0;
     char* p = string;
     if (radix >= 2 && radix <= 36) {
-        if ((value < 0) && (radix == 10)) {
+        bool sign = value < 0 && radix == 10;
+        if (sign) {
             value = -value;
-            sign++;
         }
         do {
-            uldiv(&result, value, (unsigned)radix);
-            value = result.quot;
-            if (result.rem < 10) {
-                *p = (char)((char)(result.rem) + (char)'0');
-            } else {
-                *p = (char)((char)(result.rem - 10) + (char)'a');
-            }
-            p++;
+            word rem = (word)value % radix;
+            value = (word)value / radix;
+            *p++ = (char)(rem < 10 ? rem + '0' : rem + 'W');
         } while (value > 0);
         if (sign) {
-            *p = '-';
-            p++;
+            *p++ = '-';
         }
     } else {
-        *p = '0';
-        p++;
+        *p++ = '0';
     }
-    *p = '\0';
-    return strrev(string);
+    *p = 0;
+    return _strrev(string);
 }
 

@@ -1,26 +1,19 @@
 
 #include "_libc.h"
 
-char* utoa(unsigned value, char* string, int radix)
+char* utoa(word value, char* string, int radix)
 {
-    unsigned rem;
     char* p = string;
     if (radix >= 2 && radix <= 36) {
         do {
-            rem = value % radix;
+            word rem = value % radix;
             value = value / radix;
-            if (rem < 10) {
-                *p = (char)((char)(rem) + (char)'0');
-            } else {
-                *p = (char)((char)(rem - 10) + (char)'A');
-            }
-            p++;
-        } while (value > 0);
+            *p++ = (char)(rem < 10 ? rem + '0' : rem + 'W');
+        } while (value);
     } else {
-        *p = '0';
-        p++;
+        *p++ = '0';
     }
-    *p = '\0';
-    return strrev(string);
+    *p = 0;
+    return _strrev(string);
 }
 
