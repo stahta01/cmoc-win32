@@ -61,8 +61,8 @@ typedef struct {
 #define i2f6(X) (((int)(X))<<6)
 #define f2i6(X) (((int)(X))>>6)
 
-char sin6(int x);
-char cos6(int x);
+int sin6(int x);
+int cos6(int x);
 
 void vector_set(vector_t* dst, int x, int y, int z);
 void vector_rotate(vector_t* dst, vector_t* src, size_t n, matrix_t* mat);

@@ -1,10 +1,10 @@
 
 #include "_graph.h"
 
+#pragma options --optimize=2
+
 void _line(int x1, int y1, int x2, int y2)
 {
-    byte sx, *p;
-    word sy;
     int x = x2 - x1, y = y2 - y1;
     if (_abs(x) > 120 || _abs(y) > 120) {
         x = (x1 + x2) >> 1;
@@ -96,8 +96,9 @@ void _line(int x1, int y1, int x2, int y2)
             y2 = (y2 << 8) / length;
             if (_pmode & 1) {
                 for (; length--; x1 += x2, y1 += y2) {
-                    sx = (byte)((word)x1 >> 8);
-                    sy = ((word)y1 >> 8);
+                    byte sx = (byte)((word)x1 >> 8);
+                    word sy = ((word)y1 >> 8);
+                    byte* p;
                     switch (_horbyt) {
                     case 16:
                         p = (byte*)_beggrp + (sy << 4) + (sx >> 2);
@@ -114,8 +115,8 @@ void _line(int x1, int y1, int x2, int y2)
                 }
             } else {
                 for (; length--; x1 += x2, y1 += y2) {
-                    sx = (byte)((word)x1 >> 8);
-                    sy = ((word)y1 >> 8);
+                    byte sx = (byte)((word)x1 >> 8);
+                    word sy = ((word)y1 >> 8);
                     switch (_horbyt) {
                     case 16:
                         if (_forcol) {

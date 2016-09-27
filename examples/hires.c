@@ -5,7 +5,6 @@
 
 #include <basic.h>
 #include <unistd.h>
-#include <motorola.h>
 
 void DrawGraphics(void)
 {

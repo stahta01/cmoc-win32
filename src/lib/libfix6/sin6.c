@@ -8,13 +8,13 @@ char _sintable[128] = {
     39,38,37,36,34,33,32,30,29,27,26,24,23,22,20,19,17,16,14,12,11,9,8,6,5,3,2
 };
 
-char sin6(int x)
+int sin6(int x)
 {
     char xx = (char)x;
     return xx < 0 ? -_sintable[xx - 128] : _sintable[xx];
 }
 
-char cos6(int x)
+int cos6(int x)
 {
     char xx = (char)x + 64;
     return xx < 0 ? -_sintable[xx - 128] : _sintable[xx];
