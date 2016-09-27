@@ -38,6 +38,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define _OS9_H
 
 #include <sys/clock.h>
+#include <sys/size.h>
 
 char* _strend(char* str);
 char* _strass(char* s1, char* s2, size_t count);
@@ -49,6 +50,7 @@ char* _utoa(unsigned val, char* str);
 unsigned _umin(unsigned a, unsigned b);
 unsigned _umax(unsigned a, unsigned b);
 void _tsleep(clock_t ticks);
+word _swab(word val);
 
 #endif
 

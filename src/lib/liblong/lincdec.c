@@ -19,6 +19,3 @@ asm long_t* _ldec(long_t* l)
     }
 }
 
-#define _FILE  "clincdec.as"
-#include "../kreiderclib/_kreider.h"
-
