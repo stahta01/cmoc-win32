@@ -45,7 +45,7 @@ int main(void)
                     system("PCLS");
                     system("SCREEN,0");
                     rle_decode((byte*)_beggrp, buf, _endgrp - _beggrp);
-                    printf("SIZES: NEW=%d OLD=%d\n", end - buf, head.size.lo);
+                    printf("SIZES: NEW=%d OLD=%ld\n", end - buf, &head.size);
                     break;
                 }
             }

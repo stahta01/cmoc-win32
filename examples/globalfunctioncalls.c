@@ -10,7 +10,7 @@
 void* mem = malloc(200);
 
 int g[] = {
-    puts("WOW! CMOC ALLOC FUNCTION CALLS"),
+    puts("WOW! CMOC ALLOWS FUNCTION CALLS"),
     puts("IN GLOBAL ARRAYS. I AM KINDA"),
     puts("SHOCKED ATM. I HAD TO ADJUST"),
     puts("WINCMOC TO ALLOW THIS TO WORK\n")
