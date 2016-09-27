@@ -11,6 +11,7 @@ void _main(void)
     system_init();
     heap_init((heap_t*)program_end, 0x7c00 - (int)program_end);
     malloc_heap((heap_t*)program_end);
+    hank_create_clear(0, 0x8000, HEAP_SIZE_MAX);
     asm {
         INITGL__STDIO_O: extern
         lbsr    INITGL__STDIO_O                 // stdio needs to init stdin/stdout
