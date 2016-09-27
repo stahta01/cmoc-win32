@@ -75,7 +75,6 @@ int min(int a, int b);
 int abs(int n);
 
 int atoi(char* s);
-long_t* atol(long_t* dst, char* src);
 int atexit(void(*func)(void));
 
 div_t* div(div_t* result, int numer, int denom);
@@ -83,7 +82,7 @@ void exit(int status);
 char* _getcmd(void);
 char* itoa(int value, char* s, int radix);
 char* utoa(unsigned value, char* s, int radix);
-void ldiv(ldiv_t* result, long_t* numer, long_t* denom);
+//void ldiv(ldiv_t* result, long_t* numer, long_t* denom);
 char* ltoa(long_t* value, char* string, int radix);
 int rand(void);
 void srand(unsigned seed);

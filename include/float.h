@@ -46,11 +46,6 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define M_1_4   ((float_t*)0xbfc2)
 #define M_10    ((float_t*)0xbb7d)
 
-int _ftoi(float_t* src);
-char* _ftoa(char* dst, float_t* src);
-float_t* _itof(float_t* dst, int src);
-float_t* _atof(float_t* dst, char* src);
-
 float_t* _fadd(float_t* dst, float_t* fp1, float_t* fp2);
 float_t* _fsub(float_t* dst, float_t* fp1, float_t* fp2);
 float_t* _fmul(float_t* dst, float_t* fp1, float_t* fp2);
@@ -59,6 +54,11 @@ float_t* _fdiv10(float_t* dst, float_t* src);
 
 float_t* _vfrpn(float_t* dst, va_list args);
 float_t* _frpn(float_t* dst, ...);
+
+int _ftoi(float_t* src);
+char* _ftoa(float_t* src, char* dst);
+float_t* _itof(int src, float_t* dst);
+float_t* _atof(char* src, float_t* dst);
 
 #endif
 

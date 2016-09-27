@@ -13,7 +13,7 @@ int main(void)
     b.hi = 0;
     b.lo = 10;
 
-    printf("%li\n", _lmul(&r, &a, &b));
+    printf("%li\n", _atol("1234", &a));//_lmul(&r, &a, &b));
 
 
     return 0;

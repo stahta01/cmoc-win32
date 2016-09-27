@@ -6,7 +6,7 @@ asm long_t* _CNAME(long_t* dst, long_t* slx, long_t* sly)
     asm {
         ldx     6,s                             // load x with pointer to sly
         ldy     4,s                             // load y with pointer to slx
-        ldd     0,y                             // load d,y with src2
+        ldd     0,y                             // load d,y with slx
         ldy     2,y
         pshs    d,y                             // push slx onto the stack
         bsr     _ANAME                          // returns x pointing to result

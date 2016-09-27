@@ -142,7 +142,7 @@ int main(void)
                 else if (strval[0] == 'N' && stacksz > 0)
                 {
                     elem = (stackelem_t*)list_head(stack);
-                    _atof(&fp2,"-1");
+                    _atof("-1", &fp2);
                     fp1 = elem->floatval;
                     _fmul(&elem->floatval, &fp1, &fp2);
                 }
@@ -150,7 +150,7 @@ int main(void)
                 else if (strval[0] == 'R' && stacksz > 0)
                 {
                     elem = (stackelem_t*)list_head(stack);
-                    _atof(&fp1,"1");
+                    _atof("1", &fp1);
                     fp2 = elem->floatval;
                     _fdiv(&elem->floatval, &fp1, &fp2);
                 }
@@ -228,7 +228,7 @@ int main(void)
             else
             {
                 /* Push float value to the stack */
-                _atof(&dst, strval);
+                _atof(strval, &dst);
                 pushdst();
             }
         }

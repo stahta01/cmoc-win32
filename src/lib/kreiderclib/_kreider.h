@@ -26,6 +26,7 @@
 #define _lmod       ___lmod
 
 #define ltoa        ___ltoa
+#define atol        ___atol
 #define ccdiv       ___ccdiv
 #define ccmod       ___ccmod
 #define ccudiv      ___ccudiv

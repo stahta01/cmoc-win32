@@ -81,7 +81,7 @@ int vsprintf(char* dst, char* fmt, va_list args)
                 pos = strpcpy_pad(pos, _utoa(*args++, pos), width, padchar);
                 break;
             case 'f':
-                pos = strpcpy_pad(pos, _ftoa(pos, (float_t*)*args++), width, padchar);
+                pos = strpcpy_pad(pos, _ftoa((float_t*)*args++, pos), width, padchar);
                 break;
             default:
                 *pos++ = fmt[-1];
