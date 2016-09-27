@@ -1,7 +1,7 @@
 
 #include "_string.h"
 
-char* stpcpy(char* dst, char* src)
+char* _stpcpy(char* dst, char* src)
 {
     while (*src) {
         *dst++ = *src++;

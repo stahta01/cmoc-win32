@@ -1,13 +1,12 @@
 
 #include "_string.h"
 
-char* strdup(const char* string)
+char* strdup(char* src)
 {
-    char* p;
-    size_t slen;
-    slen = strlen(string);
-    p = (char*) malloc(slen + 1);
-    strcpy(p, string);
-    return (p);
+    char* dst = (char*)malloc(strlen(src) + 1);
+    if (dst) {
+        strcpy(dst, src);
+    }
+    return dst;
 }
 

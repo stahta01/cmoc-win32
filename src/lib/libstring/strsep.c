@@ -1,11 +1,11 @@
 
 #include "_string.h"
 
-char* strsep(char** str, const char* sep)
+char* strsep(char** str, char* sep)
 {
     char* s = *str, *end;
     if (!s) {
-        return NULL;
+        return nullptr;
     }
     end = s + strcspn(s, sep);
     if (*end) {
