@@ -1,20 +1,18 @@
 
-#include <stdio.h>
+#include <conio.h>
 #include <string.h>
-#include <os9.h>
 #include <long.h>
 
 int main(void)
 {
     long_t a, b, r;
 
-    a.hi = 0;
-    a.lo = 100;
-    b.hi = 0;
-    b.lo = 10;
+    cputs("CMOC 32BIT LONG FUNCTIONS\n\n");
 
-    printf("%li\n", _atol("1234", &a));//_lmul(&r, &a, &b));
-
+    cprintf("1234 X 1234    = %li\n", _lmul(&r, _atol("1234", &a), _atol("1234", &b)));
+    cprintf("1000000 / 1234 = %li\n", _ldiv(&r, _atol("1000000", &a), _atol("1234", &b)));
+    cprintf("1000000 + 1234 = %li\n", _ladd(&r, _atol("1000000", &a), _atol("1234", &b)));
+    cprintf("1234 - 1000000 = %li\n", _lsub(&r, _atol("1234", &a), _atol("1000000", &b)));
 
     return 0;
 }
