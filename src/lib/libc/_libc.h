@@ -9,5 +9,6 @@
 #include <assert.h>
 #include <system.h>
 #include <float.h>
+#include <os9.h>
 #include <coco/disk.h>
 

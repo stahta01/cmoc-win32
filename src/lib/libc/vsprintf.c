@@ -13,11 +13,11 @@ char* strpcpy_pad(char* dst, char* src, int width, char padchar)
             *dst++ = padchar;
         }
         dst += srclen;
-    } else if (width < 0) {
-        dst = (char*)memcpy(dst, src, srclen) + srclen;
-        for (width += srclen; width++ < 0; *dst++ = padchar);
     } else {
-        dst = (char*)memcpy(dst, src, srclen) + srclen;
+        if (dst != src) {
+            dst = (char*)memcpy(dst, src, srclen);
+        }
+        for (dst += srclen, width += srclen; width++ < 0; *dst++ = padchar);
     }
     return dst;
 }
@@ -60,7 +60,7 @@ int vsprintf(char* dst, char* fmt, va_list args)
                 break;
             case 'd':
             case 'i':
-                pos = strpcpy_pad(pos, itoa(*args++, pos, 10), width, padchar);
+                pos = strpcpy_pad(pos, _itoa(*args++, pos), width, padchar);
                 break;
             case 'o':
                 pos = strpcpy_pad(pos, utoa(*args++, pos, 8), width, padchar);
@@ -76,7 +76,7 @@ int vsprintf(char* dst, char* fmt, va_list args)
                 pos = strpcpy_pad(pos, _strupr(utoa(*args++, pos, 16)), 4, '0');
                 break;
             case 'u':
-                pos = strpcpy_pad(pos, utoa(*args++, pos, 10), width, padchar);
+                pos = strpcpy_pad(pos, _utoa(*args++, pos), width, padchar);
                 break;
             case 'f':
                 pos = strpcpy_pad(pos, _ftoa(pos, (float_t*)*args++), width, padchar);
