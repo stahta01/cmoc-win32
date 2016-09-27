@@ -1,14 +1,10 @@
 
-#include <stdlib.h>
+#include "_program.h"
 
-int heap_memory[2];
-
-asm void _static_program_end(void)
+asm void _static_(void)
 {
     asm {
-        program_end: export
-        program_end:
+        _program_end:
     }
 }
-
 

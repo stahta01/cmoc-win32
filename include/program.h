@@ -34,23 +34,11 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 */
 
-#ifndef _MALLOC_H
-#define _MALLOC_H
+#ifndef _PROGRAM_H
+#define _PROGRAM_H
 
-#include <heap.h>
-
-void* malloc(size_t size);
-void* calloc(size_t count, size_t size);
-void free(void* memory);
-size_t _msize(void* memory);
-void* realloc(void* memory, size_t size);
-
-#define new(_TYPE)     ((_TYPE*)calloc(sizeof(_TYPE), 1))
-#define delete(_ADDR)  free(_ADDR)
-
-// Changes heap & returns current heap. Send nullptr to get the current heap.
-
-heap_t* malloc_heap(heap_t* heap);              // CMOC
+extern byte program_start[1];
+extern byte program_end[1];
 
 #endif
 

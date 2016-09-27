@@ -5,6 +5,7 @@
 #include <string.h>
 #include <conio.h>
 #include <heap.h>
+#include <program.h>
 
 //#pragma options -machine=coco
 
@@ -19,13 +20,13 @@ char* AllocMem(size_t size)
     for (char i = 0; i < _msize(memory); i++) {
         memory[i] = i;
     }
-    cprintfxy(0, 0, "%p: SIZE:%3d REQUESTED:%3d", memory, _msize(memory), size);
+    cprintfxy(0, 8, "%p: SIZE:%3d REQUESTED:%3d", memory, _msize(memory), size);
     return memory;
 }
 
 void FreeMem(char* memory)
 {
-    cprintfxy(0, 1, "%p: SIZE:%3d", memory, _msize(memory));
+    cprintfxy(0, 9, "%p: SIZE:%3d", memory, _msize(memory));
     for (char i = 0; i < _msize(memory); i++) {
         if (memory[i] != i) {
             cprintfxy(0, 2, "\ndata error P=%d SIZE=%u\n", i, _msize(memory));
@@ -40,7 +41,6 @@ char* memory[32];
 void Test()
 {
     int i, j;
-    gotoxy(0, 0);
     for (j = 0; j < 4; j++) {
         i = rand() & 31;
         if (!memory[i]) {
@@ -59,6 +59,14 @@ void Test()
 int main()
 {
     clrscr();
+    heap_t* heap = malloc_heap(nullptr);
+
+    cprintf("PROGRAM START: %d\n", program_start);
+    cprintf("PROGRAM END  : %d\n", program_end);
+    cprintf("PROGRAM SIZE : %d\n\n", program_end - program_start);
+    cprintf("HEAP START   : %d\n", heap);
+    cprintf("HEAP SIZE    : %d\n", heap_total_size(heap));
+
     while (!kbhit()) {
         Test();
     }

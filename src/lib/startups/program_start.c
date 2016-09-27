@@ -1,12 +1,7 @@
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <system.h>
-#include <heman.h>
+#include "_program.h"
 
-extern int main(void);
-
-unsigned _static_exitstack;
+void* _static_exitstack;
 
 void _main(void)
 {
@@ -14,7 +9,8 @@ void _main(void)
         sts     _static_exitstack
     }
     system_init();
-    heap_init(heap_memory, 0x7c00 - (int)heap_memory);
+    heap_init((heap_t*)program_end, 0x7c00 - (int)program_end);
+    malloc_heap((heap_t*)program_end);
     asm {
         INITGL__STDIO_O: extern
         lbsr    INITGL__STDIO_O                 // stdio needs to init stdin/stdout
@@ -36,7 +32,7 @@ void exit(int status)
     }
 }
 
-asm void _static_program_start(void)
+asm void _static_(void)
 {
     asm {
         // Note: endsection not required but LWTools recommends it.
@@ -54,8 +50,8 @@ asm void _static_program_start(void)
         section SECTION_ORIGIN
 
         INITGL:         extern
-        program_start:  export
-        program_start:
+
+        _program_start:
 
         leax    nop_handler,DAT
         stx     null_ptr_handler,DAT
