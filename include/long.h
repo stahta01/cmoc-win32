@@ -51,6 +51,9 @@ long_t* _lmul(long_t* dst, long_t* slx, long_t* sly);
 long_t* _ldiv(long_t* dst, long_t* slx, long_t* sly);
 long_t* _lmod(long_t* dst, long_t* slx, long_t* sly);
 
+// Also defined in os9.h since thats where _itoa is.
+char* _ltoa(long_t* src, char* dst);
+
 extern long_t __flacc;
 
 #endif

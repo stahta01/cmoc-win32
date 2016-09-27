@@ -1,8 +1,6 @@
 
 #include "_libc.h"
 
-#include <far.h>
-
 char* strpcpy_pad(char* dst, char* src, int width, char padchar)
 {
     int srclen = strlen(src);
@@ -43,7 +41,7 @@ int vsprintf(char* dst, char* fmt, va_list args)
             if (isneg) {
                 width = -width;
             }
-            if (*fmt == 'F' || *fmt == 'N') {
+            if (*fmt == 'F' || *fmt == 'N' || *fmt == 'l' || *fmt == 'h') {
                 fmt++;
             }
             switch (*fmt++) {
@@ -60,7 +58,11 @@ int vsprintf(char* dst, char* fmt, va_list args)
                 break;
             case 'd':
             case 'i':
-                pos = strpcpy_pad(pos, _itoa(*args++, pos), width, padchar);
+                if (fmt[-2] == 'l') {
+                    pos = strpcpy_pad(pos, _ltoa((long_t*)*args++, pos), width, padchar);
+                } else {
+                    pos = strpcpy_pad(pos, _itoa(*args++, pos), width, padchar);
+                }
                 break;
             case 'o':
                 pos = strpcpy_pad(pos, utoa(*args++, pos, 8), width, padchar);

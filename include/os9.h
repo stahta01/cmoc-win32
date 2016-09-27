@@ -39,14 +39,16 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 #include <sys/clock.h>
 #include <sys/size.h>
+#include <sys/long.h>
 
 char* _strend(char* str);
 char* _strass(char* s1, char* s2, size_t count);
 char* _strhcpy(char* s1, char* s2);
 char* _strclr(char* str);
 char* _reverse(char* str);
-char* _itoa(int val, char* str);
-char* _utoa(unsigned val, char* str);
+char* _itoa(int src, char* dst);
+char* _utoa(unsigned src, char* dst);
+char* _ltoa(long_t* src, char* dst);
 unsigned _umin(unsigned a, unsigned b);
 unsigned _umax(unsigned a, unsigned b);
 void _tsleep(clock_t ticks);

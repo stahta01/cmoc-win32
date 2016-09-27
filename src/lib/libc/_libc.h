@@ -10,5 +10,6 @@
 #include <system.h>
 #include <float.h>
 #include <os9.h>
+#include <far.h>
 #include <coco/disk.h>
 
