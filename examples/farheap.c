@@ -14,9 +14,9 @@ int main(void)
     // Setup three 512 byte hanks (banked heaps).
     // Note: I am choosing small sizes to make sure the code handles
     // low memory situations.
-    hank_create(0x8000,  0, 512);
-    hank_create(0x8000, 12, 512);
-    hank_create(0x8000, 13, 512);
+    hank_create_clear( 0, 0x8000, 512);
+    hank_create_clear(12, 0x8000, 512);
+    hank_create_clear(13, 0x8000, 512);
 
     far_char_t names[STRING_COUNT];
     size_t size = 0;

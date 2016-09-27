@@ -45,8 +45,20 @@ typedef struct {
     bank_t bank;
 } hank_t;
 
-hank_t* hank_create(heap_t* heap, bank_t bank, size_t size);
+hank_t* hank_create_clear(bank_t bank, heap_t* heap, size_t size);
 hank_t* hank_malloc(void** data, size_t size);
+
+// Low level hank functions. These should only be used if you have read the
+// hank library code. I split these off in the even that you want to add
+// pre-existing heaps. eg: You may have a number of heaps in 32K ram,
+// which you want to include in your far allocations. This would allow
+// a system to use existing ram, before using banked ram, but it might also
+// take ram away from the default malloc/free functions. So, you need
+// to understand how to manage heaps within heaps.
+
+hank_t* hank_init(hank_t* hank, bank_t bank, heap_t* heap);
+hank_t* hank_clear(hank_t* hank, size_t size);
+hank_t* hank_create(bank_t bank, heap_t* heap);
 
 #endif
 
