@@ -37,9 +37,9 @@
 
 #include <sys/null.h>
 #include <sys/size.h>
+#include <sys/clock.h>
 
-typedef unsigned time_t;
-typedef unsigned clock_t;
+typedef word time_t;
 
 // Structure for broken down time
 

@@ -25,10 +25,11 @@
 #define _ldiv       ___ldiv
 #define _lmod       ___lmod
 
-#define ccmult      ___ccmult
 #define ccdiv       ___ccdiv
-#define ccumod      ___ccumod
+#define ccmod       ___ccmod
 #define ccudiv      ___ccudiv
+#define ccumod      ___ccumod
+#define ccmult      ___ccmult
 
 // ANSIC Functions
 
@@ -60,8 +61,6 @@
 #define setjmp      _setjmp
 #define longjmp     _longjmp
 #define qsort       _qsort
-//#define utoa        _utoa
-//#define itoa        _itoa
 
 // POSIX functions which have moved to the _ namespace
 
@@ -79,6 +78,8 @@
 #define reverse     __reverse
 #define strhcpy     __strhcpy
 #define strend      __strend
+#define utoa        __utoa
+#define itoa        __itoa
 
 // Variables for kreider lib functions
 
