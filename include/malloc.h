@@ -52,6 +52,7 @@ void* realloc(void* memory, size_t size);
 // High level far memory support
 
 far_void_t* _falloc(size_t size);
+far_void_t* _fcalloc(size_t count, size_t size);
 void _ffree(far_void_t* memory);
 
 // Changes heap & returns current heap. Send nullptr to get the current heap.
