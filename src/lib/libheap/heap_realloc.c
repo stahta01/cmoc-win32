@@ -8,9 +8,11 @@ void* heap_realloc(heap_t* heap, void* memory, size_t newsize)
         void* newmem = heap_malloc(heap, newsize);
         if (newmem) {
             memcpy(newmem, memory, oldsize < newsize ? oldsize : newsize);
+            heap_free(memory);
+            memory = newmem;
+        } else {
+            return nullptr;
         }
-        heap_free(memory);
-        memory = newmem;
     }
     return memory;
 }

@@ -38,6 +38,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define _MALLOC_H
 
 #include <heap.h>
+#include <far.h>
 
 void* malloc(size_t size);
 void* calloc(size_t count, size_t size);
@@ -47,6 +48,11 @@ void* realloc(void* memory, size_t size);
 
 #define new(_TYPE)     ((_TYPE*)calloc(sizeof(_TYPE), 1))
 #define delete(_ADDR)  free(_ADDR)
+
+// High level far memory support
+
+far_void_t* _falloc(size_t size);
+void _ffree(far_void_t* memory);
 
 // Changes heap & returns current heap. Send nullptr to get the current heap.
 
