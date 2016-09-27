@@ -45,6 +45,8 @@ long_t* _ldec(long_t* dsl);
 long_t* _lshr(long_t* dst, long_t* src, word count);
 long_t* _lshl(long_t* dst, long_t* src, word count);
 
+long_t* _ladd(long_t* dst, long_t* slx, long_t* sly);
+long_t* _lsub(long_t* dst, long_t* slx, long_t* sly);
 long_t* _lmul(long_t* dst, long_t* slx, long_t* sly);
 long_t* _ldiv(long_t* dst, long_t* slx, long_t* sly);
 long_t* _lmod(long_t* dst, long_t* slx, long_t* sly);

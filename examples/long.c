@@ -7,11 +7,11 @@ int main(void)
     long_t a, b, r;
 
     a.hi = 0;
-    a.lo = 20;
+    a.lo = 12;
     b.hi = 0;
     b.lo = 10;
 
-    printf("%u\n", _lshl(&a, &a, 2)->lo);
+    printf("%u\n", _lsub(&r, &a, &b)->lo);
 
 
     return 0;
