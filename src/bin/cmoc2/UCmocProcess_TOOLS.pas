@@ -52,11 +52,9 @@ type
   strict private
     procedure LWLINK(const ADst, ASrc, AMap: TFileName; const AFormat: string);
   protected
-    procedure BCPP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
-    procedure MCPP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
     procedure CMOC(const ADst, ASrc: TFileName; const AWerror, AVerbose: boolean);
     procedure LWAR(const AMode: string; const ADst: TFileName; ASrc: TFileNames);
-    procedure LWASM(const ADst, ASrc: TFileName; const APreprocess: boolean);
+    procedure LWASM(const ADst, ASrc: TFileName);
     procedure LWLINK(const ADst: TFileName; const ASrc: TFileNames;
       const ATarget: string; const AOrigin: cardinal; const AFormat: string);
   public
@@ -64,24 +62,6 @@ type
   end;
 
 implementation
-
-procedure CCmocProcess_TOOLS.BCPP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
-begin
-  OStringDynArray.Add(AParams, ASrc);
-  OStringDynArray.Add(AParams, Opt_Output2);
-  OStringDynArray.Add(AParams, ADst);
-  ExecuteTool(Tool_BCPP, AParams);
-end;
-
-procedure CCmocProcess_TOOLS.MCPP(const ADst, ASrc: TFileName; AParams: TStringDynArray);
-begin
-  OStringDynArray.Insert(AParams, 0, Opt_Output2);
-  OStringDynArray.Insert(AParams, 1, ADst);
-  OStringDynArray.Insert(AParams, 2, Opt_NoLineInfo1);
-  OStringDynArray.Insert(AParams, 3, '-a');
-  OStringDynArray.Add(AParams, ASrc);
-  ExecuteTool(Tool_MCPP, AParams);
-end;
 
 procedure CCmocProcess_TOOLS.CMOC(const ADst, ASrc: TFileName; const AWerror, AVerbose: boolean);
 var
@@ -168,7 +148,7 @@ begin
         LAsmFile.Add(Char_TAB + 'RTS');
         LAsmFile.Add(Asm_ENDSECTION);
         LAsmFile.SaveToFile(LTmpFile);
-        LWASM(Result, LTmpFile, False);
+        LWASM(Result, LTmpFile);
       finally
         FreeAndNil(LAsmFile);
       end;
@@ -187,11 +167,11 @@ begin
   ExecuteTool(Tool_LWAR, ASrc);
 end;
 
-procedure CCmocProcess_TOOLS.LWASM(const ADst, ASrc: TFileName; const APreprocess: boolean);
+procedure CCmocProcess_TOOLS.LWASM(const ADst, ASrc: TFileName);
 begin
   if OCmoc.FileChanged(ADst, ASrc) then begin
-    ExecuteTool(IfThen(APreprocess, Tool_LWASM, Tool_LWASM),
-      TStringDynArray.Create(Opt_Format2, Format_OBJ, Opt_Output2, ADst, ASrc));
+    ExecuteTool(Tool_LWASM, TStringDynArray.Create(Opt_Format2, Format_OBJ,
+      Opt_Output2, ADst, ASrc));
   end;
 end;
 

@@ -194,7 +194,7 @@ begin
   LTmp := OCmoc.FileNameTemp(FileExt_ASM);
   try
     CMOC(LTmp, ASrc, FWerror, FVerbose);
-    CMOC2(ADst, LTmp, AInitGL);
+    AMOC(ADst, LTmp, AInitGL);
     OCmoc.FileNamesAppend(FAsmFiles, ADst, True);
   finally
     DeleteFile(LTmp);
@@ -203,7 +203,7 @@ end;
 
 procedure CCmocProcess_CMOC2.DoAssemble(const ADst, ASrc: TFileName);
 begin
-  LWASM(ADst, ASrc, True);
+  LWASM(ADst, ASrc);
   OCmoc.FileNamesAppend(FObjFiles, ADst, True);
 end;
 

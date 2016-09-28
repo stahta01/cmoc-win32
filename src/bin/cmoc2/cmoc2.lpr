@@ -39,10 +39,7 @@ program cmoc2;
 
 uses
   SysUtils,
-  UCmocPipe,
-  UCmocProcess_ASM,
   UCmocProcess_CMOC2,
-  UCmocProcess_TOOLS,
   UCmocUtils;
 
 {$R *.res}

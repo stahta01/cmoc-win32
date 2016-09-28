@@ -10,7 +10,7 @@
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="38"/>
-        <CursorPos X="11" Y="42"/>
+        <CursorPos X="25" Y="52"/>
         <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -19,17 +19,19 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="AmocProcess"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="43"/>
-        <CursorPos X="42" Y="43"/>
+        <TopLine Value="37"/>
+        <CursorPos X="39" Y="48"/>
         <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\shared\ucmocpreprocessor.pas"/>
         <UnitName Value="UCmocPreprocessor"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="73"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="36"/>
+        <CursorPos X="3" Y="47"/>
         <UsageCount Value="21"/>
+        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\inc\systemh.inc"/>
@@ -72,7 +74,7 @@
       <Unit8>
         <Filename Value="ucmocasmparser.pas"/>
         <UnitName Value="UCmocAsmParser"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="145"/>
         <CursorPos X="32" Y="157"/>
         <UsageCount Value="12"/>
@@ -103,11 +105,19 @@
         <UsageCount Value="10"/>
       </Unit11>
     </Units>
-    <JumpHistory Count="1">
+    <JumpHistory Count="3" HistoryIndex="2">
       <Position1>
         <Filename Value="ucmocasmparser.pas"/>
         <Caret Line="179" Column="74" TopLine="169"/>
       </Position1>
+      <Position2>
+        <Filename Value="amoc.lpr"/>
+        <Caret Line="52" Column="25" TopLine="38"/>
+      </Position2>
+      <Position3>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="48" Column="39" TopLine="37"/>
+      </Position3>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

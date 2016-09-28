@@ -46,12 +46,12 @@ type
 
   CCmocProcess_ASM = class(CCmocProcess_TOOLS)
   public
-    procedure CMOC2(const ADst, ASrc: TFileName; const AInitSymbol: string);
+    procedure AMOC(const ADst, ASrc: TFileName; const AInitSymbol: string);
   end;
 
 implementation
 
-procedure CCmocProcess_ASM.CMOC2(const ADst, ASrc: TFileName; const AInitSymbol: string);
+procedure CCmocProcess_ASM.AMOC(const ADst, ASrc: TFileName; const AInitSymbol: string);
 var
   LSrc, LDst: TMemoryStream;
 begin
