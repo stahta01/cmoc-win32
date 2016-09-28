@@ -39,8 +39,7 @@ program app;
 
 uses
   Classes,
-  UCmocAPP,
-  UCmocPreprocessor;
+  UCmocAPP;
 
 {$R *.res}
 
@@ -50,7 +49,7 @@ var
 begin
   GParams := TStringList.Create;
   GParams.CommaText := CmdLine;
-  with CCmocAPP.Create(nil) do begin
+  with CCmocPreprocessor_ASM.Create(nil) do begin
     try
       FInitSymbol := GParams.Values['--initgl'];
       Preprocess(System.Output, System.Input);

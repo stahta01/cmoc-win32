@@ -40,21 +40,20 @@ unit UCmocAPP;
 interface
 
 uses
-  Classes, StrUtils, SysUtils, UCmocAsm, UCmocAsmSplit, UCmocDefs, UCmocPreprocessor,
-  UCmocStrings, UCmocUtils;
+  Classes, StrUtils, SysUtils, UCmocAsmParser, UCmocDefs, UCmocPreprocessor,
+  UCmocUtils;
 
 type
 
-
-  CCmocAPP = class(CCmocPreprocessorBase)
+  CCmocPreprocessor_ASM = class(CCmocPreprocessorBase)
   strict private
-    FAsmCode, FExportSymbols, FExternSymbols: TStrings;
+    FItems: OAsmItems;
+    FExportSymbols, FExternSymbols: TStrings;
   strict private
     procedure AddImport(const ASymbol: string);
     procedure AddExport(const ASymbol: string);
     procedure TrimSource;
     procedure ExtractSymbols;
-    function FindGlobalValues(const ASymbol: string): TCmocGlobalValues;
     procedure SetGlobalInitSymbol(const AName: string);
     procedure ResetSymbols;
   protected
@@ -68,7 +67,7 @@ type
 
 implementation
 
-constructor CCmocAPP.Create(AOwner: TComponent);
+constructor CCmocPreprocessor_ASM.Create(AOwner: TComponent);
 begin
   inherited;
   FExportSymbols := TStringList.Create;
@@ -85,14 +84,14 @@ begin
   end;
 end;
 
-destructor CCmocAPP.Destroy;
+destructor CCmocPreprocessor_ASM.Destroy;
 begin
   FreeAndNil(FExportSymbols);
   FreeAndNil(FExternSymbols);
   inherited;
 end;
 
-procedure CCmocAPP.ResetSymbols;
+procedure CCmocPreprocessor_ASM.ResetSymbols;
 begin
   FExportSymbols.Clear;
   FExternSymbols.Clear;
@@ -115,138 +114,72 @@ begin
   AddImport('shiftRightSigned');
   AddImport('shiftRightSigned');
   AddImport('shiftRightUnsigned');
-
 end;
 
-procedure CCmocAPP.AddImport(const ASymbol: string);
+procedure CCmocPreprocessor_ASM.AddImport(const ASymbol: string);
 begin
   FExternSymbols.Add(ASymbol);
 end;
 
-procedure CCmocAPP.AddExport(const ASymbol: string);
+procedure CCmocPreprocessor_ASM.AddExport(const ASymbol: string);
 begin
   FExportSymbols.Add(ASymbol);
 end;
 
-procedure CCmocAPP.TrimSource;
+procedure CCmocPreprocessor_ASM.TrimSource;
 var
   LIndex: integer;
-  LLine: string;
 begin
-  for LIndex := FAsmCode.Count - 1 downto 0 do begin
-    LLine := TrimLeft(FAsmCode[LIndex]);
-    if (Length(LLine) = 0) or (LLine[1] in ['#', '*']) then begin
-      FAsmCode.Delete(LIndex);
+  for LIndex := 0 to FItems.Count - 1 do begin
+    FItems.Items[LIndex].Deleted := not FItems.Items[LIndex].IsSym(Sym_FunctionsStart);
+    if not FItems.Items[LIndex].Deleted then begin
+      break;
     end;
   end;
-  if FAsmCode.Count > 0 then begin
-    repeat
-      LLine := FAsmCode[0];
-      FAsmCode.Delete(0);
-    until (FAsmCode.Count = 0) or AnsiContainsStr(LLine, Sym_FunctionsStart);
-  end;
-  if FAsmCode.Count > 0 then begin
-    repeat
-      LLine := FAsmCode[FAsmCode.Count - 1];
-      FAsmCode.Delete(FAsmCode.Count - 1);
-    until (FAsmCode.Count = 0) or AnsiContainsStr(LLine, Sym_ProgramEnd);
+  for LIndex := FItems.Count - 1 downto 0 do begin
+    FItems.Items[LIndex].Deleted := not FItems.Items[LIndex].IsSym(Sym_ProgramEnd);
+    if not FItems.Items[LIndex].Deleted then begin
+      break;
+    end;
   end;
 end;
 
-procedure CCmocAPP.ExtractSymbols;
+procedure CCmocPreprocessor_ASM.ExtractSymbols;
 var
   LIndex: integer;
+  LString: string;
   LParser: OAsmParser;
-  LSym, LCmd, LPar: string;
 begin
-  for  LIndex := 0 to FAsmCode.Count - 1 do begin
-    if AsmSplit(FAsmCode[LIndex], LSym, LCmd, LPar) then begin
-      if OCmoc.SymbolIsPublic(LSym) then begin
-        AddExport(LSym);
-      end;
-      if SameText(LCmd, 'RMB') then begin
-        FAsmCode[LIndex] := LSym + Char_TAB + 'ZMB' + Char_TAB + LPar;
-      end;
+  for LIndex := 0 to FItems.Count - 1 do begin
+    if SymbolIsPublic(FItems.Items[LIndex].Sym) then begin
+      AddExport(FItems.Items[LIndex].Sym);
+    end;
+    if FItems.Items[LIndex].IsCmd('RMB') then begin
+      FItems.Items[LIndex].Cmd := 'ZMB';
     end;
   end;
-  for LIndex := 0 to FAsmCode.Count - 1 do begin
-    if AsmSplit(FAsmCode[LIndex], LSym, LCmd, LPar) then begin
-      LParser.SetString(LPar);
-      while LParser.Next do begin
-        LSym := LParser.Token;
-        if OCmoc.SymbolIsPublic(LSym) and (FExportSymbols.IndexOf(LSym) < 0) then begin
-          AddImport(LSym);
-        end;
+  for LIndex := 0 to FItems.Count - 1 do begin
+    LParser.SetString(FItems.Items[LIndex].Par);
+    while LParser.Next do begin
+      LString := LParser.Token;
+      if SymbolIsPublic(LString) and (FExportSymbols.IndexOf(LString) < 0) then begin
+        AddImport(LString);
       end;
     end;
   end;
 end;
 
-function CCmocAPP.FindGlobalValues(const ASymbol: string): TCmocGlobalValues;
-var
-  LIndex: integer;
-  LParser: OAsmParser;
-  LVar: TCmocGlobalValue;
-begin
-  LParser := default(OAsmParser);
-  Result := default(TCmocGlobalValues);
-  for LIndex := 0 to FAsmCode.Count - 1 do begin
-    LParser.SetString(FAsmCode[LIndex]);
-    if LParser.Next then begin
-      LVar := default(TCmocGlobalValue);
-      case LParser.Token of
-        'STB': begin
-          LVar.Type_ := 'FCB';
-        end;
-        'STD', 'STX': begin
-          LVar.Type_ := 'FDB';
-        end;
-      end;
-      if LParser.NextAndTokenIs(ASymbol) and LParser.NextAndTokenIs('+') then begin
-        LParser.Next;
-        LVar.Offset := LParser.Token;
-        LParser.SetString(FAsmCode[LIndex - 1]);
-        LParser.Next;
-        if LParser.SameText('LEAX') then begin
-          if LParser.Next then begin
-            LVar.Value := LParser.Token;
-            Assert(LParser.NextAndTokenIs('+') and LParser.Next);
-            LVar.Value := LVar.Value + '+' + LParser.Token;
-          end;
-        end else if LParser.SameText('TFR') then begin
-          LParser.SetString(FAsmCode[LIndex - 2]);
-          if LParser.NextAndTokenIs('LEAX') and LParser.Next then begin
-            LVar.Value := LParser.Token;
-            Assert(LParser.NextAndTokenIs('+') and LParser.Next);
-            LVar.Value := LVar.Value + '+' + LParser.Token;
-          end;
-        end else if (LParser.SameText('LDB') or LParser.SameText('LDD')) then begin
-          if LParser.NextAndTokenIs('#') and LParser.NextAndTokenIs('$') then begin
-            if LParser.Next then begin
-              LVar.Value := '$' + LParser.Token;
-            end;
-          end;
-        end;
-        if Length(LVar.Value) > 0 then begin
-          SetLength(Result, Length(Result) + 1);
-          Result[High(Result)] := LVar;
-        end;
-      end;
-    end;
-  end;
-end;
-
-procedure CCmocAPP.SetGlobalInitSymbol(const AName: string);
+procedure CCmocPreprocessor_ASM.SetGlobalInitSymbol(const AName: string);
 var
   LIndex: integer;
 begin
-  for LIndex := FAsmCode.Count - 2 downto 0 do begin
-    if AnsiStartsStr(Sym_INITGL, FAsmCode[LIndex]) then begin
-      if AnsiStartsStr('RTS', TrimLeft(FAsmCode[LIndex + 1])) then begin
-        FAsmCode.Delete(LIndex);
-        FAsmCode.Delete(LIndex);
+  for LIndex := FItems.Count - 2 downto 0 do begin
+    if AnsiStartsStr(Sym_INITGL, FItems.Items[LIndex].Sym) then begin
+      if FItems.Items[LIndex + 1].IsCmd('RTS') then begin
+        FItems.Items[LIndex].Deleted := True;
+        FItems.Items[LIndex + 1].Deleted := True;
       end else begin
-        FAsmCode[LIndex] := Asm_SYMBOL(AName);
+        FItems.Items[LIndex].Sym := AName;
         AddExport(AName);
       end;
       Break;
@@ -254,29 +187,31 @@ begin
   end;
 end;
 
-procedure CCmocAPP.Preprocess(const ADst, ASrc: TStrings);
+procedure CCmocPreprocessor_ASM.Preprocess(const ADst, ASrc: TStrings);
 var
   LSymbol: string;
 begin
-  FAsmCode := ASrc;
+  FItems.AddSourceLines(ASrc);
   TrimSource;
   ResetSymbols;
   SetGlobalInitSymbol(FInitSymbol);
   ExtractSymbols;
   for LSymbol in FExternSymbols do begin
-    FAsmCode.Insert(0, Asm_EXTERN(LSymbol));
+    FItems.Insert(0, LSymbol, 'EXTERN', EmptyStr);
   end;
   for LSymbol in FExportSymbols do begin
-    FAsmCode.Insert(0, Asm_EXPORT(LSymbol));
+    FItems.Insert(0, LSymbol, 'EXPORT', EmptyStr);
   end;
-  FAsmCode._InsertStrings(0, [Char_TAB +
-    'PRAGMA' + Char_TAB + '6809,6800compat,6809conv,m80ext,shadow,autobranchlength',
-    'jsrbas' + Char_TAB + 'MACRO', Char_TAB + 'pshs u', Char_TAB + 'jsr \1',
-    Char_TAB + 'puls u', Char_TAB + 'ENDM',
-    Asm_SECTION]);
-  FAsmCode.Add(Asm_ENDSECTION);
-  OCmoc.StringsInsertWinCMOCHeader(FAsmCode);
-  ADst.Assign(FAsmCode);
+  FItems.Insert(0, EmptyStr, 'PRAGMA', '6809,6800compat,6809conv,m80ext,shadow,autobranchlength');
+  FItems.Insert(1, 'jsrbas', 'MACRO', EmptyStr);
+  FItems.Insert(2, EmptyStr, 'pshs', 'u');
+  FItems.Insert(3, EmptyStr, 'jsr', '\1');
+  FItems.Insert(4, EmptyStr, 'puls', 'u');
+  FItems.Insert(5, EmptyStr, 'ENDM', EmptyStr);
+  FItems.Insert(6, EmptyStr, 'SECTION', 'SECTION_NAME');
+  FItems.Add(EmptyStr, 'ENDSECTION', EmptyStr);
+
+  FItems.SaveToStrings(ADst);
 end;
 
 end.

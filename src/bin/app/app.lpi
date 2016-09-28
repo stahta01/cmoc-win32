@@ -36,7 +36,7 @@
         <PackageName Value="LazUtils"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="3">
+    <Units Count="2">
       <Unit0>
         <Filename Value="app.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -46,11 +46,6 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCmocAPP"/>
       </Unit1>
-      <Unit2>
-        <Filename Value="..\shared\ucmocpreprocessor.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="UCmocPreprocessor"/>
-      </Unit2>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

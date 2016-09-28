@@ -52,14 +52,6 @@ type
 
 type
 
-  TCmocGlobalValue = object
-    Type_, Value, Offset: string;
-  end;
-
-  TCmocGlobalValues = array of TCmocGlobalValue;
-
-type
-
   OAsmParser = object(OCmocParser)
   public
     function Next: boolean;
@@ -122,7 +114,6 @@ type
     class function StringQuoted(const A: string): string;
     class function StringToIdent(const A: string): string;
     class function StringToInteger(const A: string): longint;
-    class function SymbolIsPublic(const A: string): boolean;
   public
     class procedure ExtractPragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
       var ATarget: string; const AOptions: TStrings);
@@ -317,14 +308,6 @@ end;
 class function OCmoc.FileNameToInitGlobals(const A: TFileName): string;
 begin
   Result := Sym_INITGL + '_' + FileNameToIdent(A);
-end;
-
-class function OCmoc.SymbolIsPublic(const A: string): boolean;
-begin
-  Result := Length(A) >= 2;
-  if Result then begin
-    Result := (A[1] = '_') and (A[2] in CharSet_IdentHead) and not AnsiStartsStr('__static_', A);
-  end;
 end;
 
 class procedure OCmoc.FileNamesAppend(var A: TStringDynArray; AFileName: string;
