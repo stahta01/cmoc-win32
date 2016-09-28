@@ -10,7 +10,7 @@
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
-      <Title Value="app"/>
+      <Title Value="amoc"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
     </General>
@@ -38,13 +38,13 @@
     </RequiredPackages>
     <Units Count="2">
       <Unit0>
-        <Filename Value="app.lpr"/>
+        <Filename Value="amoc.lpr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="ucmocapp.pas"/>
+        <Filename Value="amocprocess.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="UCmocAPP"/>
+        <UnitName Value="AmocProcess"/>
       </Unit1>
     </Units>
   </ProjectOptions>
@@ -52,7 +52,7 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="../../../bin/app"/>
+      <Filename Value="../../../bin/amoc"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir);..\shared"/>

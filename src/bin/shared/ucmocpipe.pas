@@ -44,7 +44,7 @@ uses
 
 procedure PipeExecute(const AExecutable: TFileName; const AParameters: array of string;
   const ACurrentDirectory: TFileName; const AInput, AOutput, AStderr: TStream;
-  const ASleep: cardinal = 50);
+  const ASleep: cardinal = 20);
 
 implementation
 
@@ -84,7 +84,9 @@ begin
             AOutput.Write(LBuffer, LCount);
           end;
         end;
-        Sleep(ASleep);
+        if (Stderr.NumBytesAvailable = 0) and (Output.NumBytesAvailable = 0) then begin
+          Sleep(ASleep);
+        end;
       end;
     finally
       Free;

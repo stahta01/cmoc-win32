@@ -151,10 +151,10 @@ var
       Inc(LEnd);
     end;
     LTok := LEnd;
-    if LTok^ = '"' then begin
+    if LTok^ in ['"'] then begin
       repeat
         Inc(LEnd);
-      until LEnd^ in [#0, '"'];
+      until LEnd^ in [#0, LTok^];
       if LEnd^ <> #0 then begin
         Inc(LEnd);
       end;
@@ -165,12 +165,19 @@ var
     end;
   end;
 
+  function LTokenEmpty: boolean;
+  begin
+    Result := (LTok^ in [#0, '#', ';']) or
+      ((LTok[0] = '/') and (LTok[1] = '/')) or
+      ((LTok[0] = '*') and not (LTok[1] in [#0..#32]));
+  end;
+
 begin
   LItem := default(OAsmItem);
   LBeg := PChar(A);
   LEnd := LBeg;
   LNextToken;
-  if not (LTok^ in ['#', '*', ';', '/', #0]) then begin
+  if not LTokenEmpty then begin
     if (LTok = LBeg) or (LEnd[-1] = ':') then begin
       if LEnd[-1] = ':' then begin
         SetString(LItem.Sym, LTok, LEnd - LTok - 1);
@@ -179,11 +186,10 @@ begin
       end;
       LNextToken;
     end;
-    if LTok^ in ['a'..'z', 'A'..'Z'] then begin
+    if LTok^ in ['a'..'z', 'A'..'Z', '.'] then begin
       SetString(LItem.Cmd, LTok, LEnd - LTok);
       LNextToken;
-      if ((LTok[0] = '*') and (LTok[1] in [#0..#32])) or not (LTok^ in [';', '*', '/', #0]) then
-      begin
+      if (LTok^ = '#') or not LTokenEmpty then begin
         SetString(LItem.Par, LTok, LEnd - LTok);
       end;
     end;

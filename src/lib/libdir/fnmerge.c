@@ -4,25 +4,25 @@
 void fnmerge(char* path, char* drive, char* dir, char* name, char* ext)
 {
     if (drive) {
-        path = stpcpy(path, drive);
+        path = _stpcpy(path, drive);
         if (path[-1] != ':') {
             *path++ = ':';
         }
     }
     if (dir) {
-        path = stpcpy(path, dir);
+        path = _stpcpy(path, dir);
         if (path[-1] != '/') {
             *path++ = '/';
         }
     }
     if (name) {
-        path = stpcpy(path, name);
+        path = _stpcpy(path, name);
     }
     if (ext) {
         if (ext[0] != '.') {
             *path++ = '.';
         }
-        path = stpcpy(path, ext);
+        path = _stpcpy(path, ext);
     }
     *path = 0;
 }

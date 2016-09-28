@@ -60,7 +60,7 @@ begin
     LSrc.LoadFromFile(ASrc);
     LDst := TMemoryStream.Create;
     try
-      PipeExecute(OCmoc.FileNameTool(Tool_APP), ['--initgl=' + AInitSymbol],
+      PipeExecute(OCmoc.FileNameTool(Tool_AMOC), ['--initgl=' + AInitSymbol],
         EmptyStr, LSrc, LDst, nil);
       LDst.SaveToFile(ADst);
     finally

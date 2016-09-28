@@ -33,13 +33,13 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 *)
 
-program app;
+program amoc;
 
 {$INCLUDE cmoc.inc}
 
 uses
-  Classes,
-  UCmocAPP;
+  AmocProcess,
+  Classes;
 
 {$R *.res}
 
