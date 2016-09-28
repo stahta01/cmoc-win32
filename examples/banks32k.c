@@ -11,6 +11,8 @@ int main(void)
     char* s2 = 0x8100;
 
     // Note: Bank 0 is the 32k under ROM.
+    // Bank 15 is the default RAM/ROM mode, but you should always
+    // use the return value from bank_set().
     // All banks are 32k mapped to memory $8000
 
     bank_t bank = bank_set(0);

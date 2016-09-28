@@ -33,32 +33,63 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 *)
 
-program cmoc2;
+unit UCmocPipe;
 
 {$INCLUDE cmoc.inc}
 
+interface
+
 uses
-  SysUtils,
-  UCmocProcess_ASM,
-  UCmocProcess_CMOC2,
-  UCmocProcess_TOOLS,
-  UCmocUtils, UCmocPipe;
+  Classes, Process, SysUtils;
 
-{$R *.res}
+procedure PipeExecute(const AExecutable: TFileName; const AParameters: array of string;
+  const ACurrentDirectory: TFileName; const AInput, AOutput, AStderr: TStream;
+  const ASleep: cardinal = 50);
 
+implementation
+
+procedure PipeExecute(const AExecutable: TFileName; const AParameters: array of string;
+  const ACurrentDirectory: TFileName; const AInput, AOutput, AStderr: TStream;
+  const ASleep: cardinal);
+var
+  LBuffer: array[word] of byte;
+  LCount: longint;
 begin
-  try
-    with CCmocProcess_CMOC2.Create(nil) do begin
-      try
-        DoBuild;
-      finally
-        Free;
+  LBuffer[0] := 0;
+  with TProcess.Create(nil) do begin
+    try
+      Options := [poUsePipes];
+      ShowWindow := swoHIDE;
+      Executable := AExecutable;
+      CurrentDirectory := ACurrentDirectory;
+      Parameters.AddStrings(AParameters);
+      Execute;
+      if Assigned(AInput) then begin
+        while Running and (Input.Write(LBuffer, AInput.Read(LBuffer, SizeOf(LBuffer))) > 0) do
+        begin
+          Sleep(ASleep);
+        end;
       end;
-    end;
-  except
-    on LException: Exception do begin
-      WriteLn(StdErr, 'Error: Exception ', OCmoc.StringQuoted(OCmoc.DosToUnix(ParamStr(0))));
-      ExitCode := LException.HelpContext;
+      CloseInput;
+      while Running or (Output.NumBytesAvailable > 0) or (Stderr.NumBytesAvailable > 0) do begin
+        if Stderr.NumBytesAvailable > 0 then begin
+          LCount := Stderr.Read(LBuffer, SizeOf(LBuffer));
+          if Assigned(AStderr) then begin
+            AStderr.Write(LBuffer, LCount);
+          end;
+        end;
+        if Output.NumBytesAvailable > 0 then begin
+          LCount := Output.Read(LBuffer, SizeOf(LBuffer));
+          if Assigned(AOutput) then begin
+            AOutput.Write(LBuffer, LCount);
+          end;
+        end;
+        Sleep(ASleep);
+      end;
+    finally
+      Free;
     end;
   end;
+end;
+
 end.

@@ -1,5 +1,6 @@
 
 #include "_bank.h"
+#include <coco/coco3.h>
 
 bank_t _static_bank = 15;
 
@@ -11,17 +12,17 @@ bank_t bank_set(bank_t bank)
         seif
     }
     byte page = (byte)(bank << 2) & 63;
-    *(byte*)0xffa4 = page++;
-    *(byte*)0xffa5 = page++;
-    *(byte*)0xffa6 = page++;
-    *(byte*)0xffa7 = page++;
+    _mmureg[4] = page + 0;
+    _mmureg[5] = page + 1;
+    _mmureg[6] = page + 2;
+    _mmureg[7] = page + 3;
     if (bank == 15) {
-        *(byte*)0xffde = true;
+        _romclr = true;
         asm {
             clif
         }
     } else if (bank == 0) {
-        *(byte*)0xffdf = true;
+        _romset = true;
     }
     return result;
 }

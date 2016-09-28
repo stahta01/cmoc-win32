@@ -36,11 +36,16 @@
         <PackageName Value="LazUtils"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="1">
+    <Units Count="2">
       <Unit0>
         <Filename Value="cmoc2.lpr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
+      <Unit1>
+        <Filename Value="..\shared\ucmocpipe.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UCmocPipe"/>
+      </Unit1>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

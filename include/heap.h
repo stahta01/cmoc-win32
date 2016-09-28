@@ -48,9 +48,12 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 // therefore indicate an invalid block. These are currently not checked for
 // during a heap traverse. It indicates a possible buffer overflow.
 // Since the size is signed, the maxium "theoretical" block size is under 32K.
-// Something like 32768 - 3, but! I have set the max heap size to 0x7f00,
+// Something like 32768 - 3, but! I have set the max heap size to 0x7e00,
 // incase the heap header/footer is changed. Note, the main heap
 // at the end of your binary, must leave space for the stack anyway,
+//
+// NOTE: I now leave 512 bytes at the top of the max heap for the hardware
+// interface addresses.
 //
 // You must take care if you split a heap block, since a split requires an
 // extra two bytes for the new block size, so a block of 32 bytes, holds
@@ -60,7 +63,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 // The min heap size is 4, which allows no data.
 
 #define HEAP_SIZE_MIN   4
-#define HEAP_SIZE_MAX   0x7f00
+#define HEAP_SIZE_MAX   0x7e00
 
 typedef int heap_t;
 

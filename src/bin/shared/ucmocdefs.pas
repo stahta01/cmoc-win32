@@ -72,6 +72,7 @@ const
 
   Tool_CMOC = 'cmoc';
   Tool_CMOC2 = 'cmoc2';
+  Tool_APP = 'app';
   Tool_BCPP = 'bcc-cpp';
   Tool_MCPP = 'mcpp';
   Tool_LWASM = 'lwasm';
