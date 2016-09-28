@@ -17,7 +17,9 @@ void _main(void)
         // other priority lib calls should be placed here
         lbsr    INITGL                          // initialize global variables
     }
-    hank_create_clear(0, 0x8000, HEAP_SIZE_MAX);
+    // hanks take up too much memory, and if you dont use it, its wasted memory.
+    // So, this line is taken out.
+    //hank_create_clear(0, 0x8000, HEAP_SIZE_MAX);
     exit(main());
 }
 

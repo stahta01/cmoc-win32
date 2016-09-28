@@ -21,14 +21,17 @@
 
 void ShowImage(crypt_image_t* image)
 {
-    systemf("PMODE%d,1", image->type & CRYPT_IMAGE_TYPE_COL ? 3 : 4);
-    systemf("SCREEN1,%d", image->type & CRYPT_IMAGE_TYPE_CSS ? 1 : 0);
+    // vsprintf has grow in size due to 32bit & float support, so
+    // this code was removed to save memory.
+    //systemf("PMODE%d,1", image->type & CRYPT_IMAGE_TYPE_COL ? 3 : 4);
+    //systemf("SCREEN1,%d", image->type & CRYPT_IMAGE_TYPE_CSS ? 1 : 0);
     crypt_decode(&image->crypt, (void*)_beggrp, 0);
     sleep(4);
 }
 
 int main(void)
 {
+    system("PMODE4,1:SCREEN1,1");
     for (;;) {
         ShowImage((crypt_image_t*)image1);
         ShowImage((crypt_image_t*)image2);
