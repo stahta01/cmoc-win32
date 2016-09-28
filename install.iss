@@ -40,7 +40,6 @@ Source: "bin\cpp.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\exomizer.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\f9dasm.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\lwar.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
-Source: "bin\lwasm2.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\lwasm.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\lwlink.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\lwobjdump.exe"; DestDir: "{app}\bin"; Flags: ignoreversion

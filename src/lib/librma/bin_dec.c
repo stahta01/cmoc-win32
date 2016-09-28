@@ -1,7 +1,9 @@
 
 #define u pcr
 
-#define DECTAB _DECTAB,DAT *
+// The symbol name DECTAB$ was causing trouble. So this
+// define changes it to _DECTAB
+#define DECTAB _DECTAB,pcr *
 
 #define _FILE "alib/bin_dec.as"
 #include "_rma.h"

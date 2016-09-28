@@ -190,7 +190,7 @@ end;
 procedure CCmocProcess_TOOLS.LWASM(const ADst, ASrc: TFileName; const APreprocess: boolean);
 begin
   if OCmoc.FileChanged(ADst, ASrc) then begin
-    ExecuteTool(IfThen(APreprocess, Tool_LWASM2, Tool_LWASM),
+    ExecuteTool(IfThen(APreprocess, Tool_LWASM, Tool_LWASM),
       TStringDynArray.Create(Opt_Format2, Format_OBJ, Opt_Output2, ADst, ASrc));
   end;
 end;

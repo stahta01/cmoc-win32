@@ -76,7 +76,7 @@ const
   Tool_BCPP = 'bcc-cpp';
   Tool_MCPP = 'mcpp';
   Tool_LWASM = 'lwasm';
-  Tool_LWASM2 = 'lwasm2';
+  //Tool_LWASM2 = 'lwasm2';
   Tool_LWLINK = 'lwlink';
   Tool_LWAR = 'lwar';
   Tool_ASTYLE = 'astyle';
