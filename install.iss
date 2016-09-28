@@ -29,7 +29,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "bin\astyle.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
-Source: "bin\app.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "bin\amoc.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\bin2c.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\cas2wav.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\cmoc2.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
