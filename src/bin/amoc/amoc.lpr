@@ -49,7 +49,7 @@ var
 begin
   GParams := TStringList.Create;
   GParams.CommaText := CmdLine;
-  with CCmocPreprocessor_ASM.Create(nil) do begin
+  with CAmoc.Create(nil) do begin
     try
       FInitSymbol := GParams.Values['--initgl'];
       Preprocess(System.Output, System.Input);

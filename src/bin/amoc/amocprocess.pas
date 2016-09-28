@@ -45,9 +45,9 @@ uses
 
 type
 
-  CCmocPreprocessor_ASM = class(CCmocPreprocessorBase)
+  CAmoc = class(CCmocPreprocessorBase)
   strict private
-    FItems: OAsmItems;
+    FAsmLines: OAsmLines;
     FExportSymbols, FExternSymbols: TStrings;
   strict private
     procedure AddImport(const ASymbol: string);
@@ -67,7 +67,7 @@ type
 
 implementation
 
-constructor CCmocPreprocessor_ASM.Create(AOwner: TComponent);
+constructor CAmoc.Create(AOwner: TComponent);
 begin
   inherited;
   FExportSymbols := TStringList.Create;
@@ -84,14 +84,14 @@ begin
   end;
 end;
 
-destructor CCmocPreprocessor_ASM.Destroy;
+destructor CAmoc.Destroy;
 begin
   FreeAndNil(FExportSymbols);
   FreeAndNil(FExternSymbols);
   inherited;
 end;
 
-procedure CCmocPreprocessor_ASM.ResetSymbols;
+procedure CAmoc.ResetSymbols;
 begin
   FExportSymbols.Clear;
   FExternSymbols.Clear;
@@ -116,50 +116,57 @@ begin
   AddImport('shiftRightUnsigned');
 end;
 
-procedure CCmocPreprocessor_ASM.AddImport(const ASymbol: string);
+procedure CAmoc.AddImport(const ASymbol: string);
 begin
   FExternSymbols.Add(ASymbol);
 end;
 
-procedure CCmocPreprocessor_ASM.AddExport(const ASymbol: string);
+procedure CAmoc.AddExport(const ASymbol: string);
 begin
   FExportSymbols.Add(ASymbol);
 end;
 
-procedure CCmocPreprocessor_ASM.TrimSource;
+procedure CAmoc.TrimSource;
 var
   LIndex: integer;
 begin
-  for LIndex := 0 to FItems.Count - 1 do begin
-    FItems.Items[LIndex].Deleted := not FItems.Items[LIndex].IsSym(Sym_FunctionsStart);
-    if not FItems.Items[LIndex].Deleted then begin
+  for LIndex := 0 to FAsmLines.Count - 1 do begin
+    FAsmLines.Line[LIndex].Deleted := not FAsmLines.Line[LIndex].IsSym(Sym_FunctionsStart);
+    if not FAsmLines.Line[LIndex].Deleted then begin
       break;
     end;
   end;
-  for LIndex := FItems.Count - 1 downto 0 do begin
-    FItems.Items[LIndex].Deleted := not FItems.Items[LIndex].IsSym(Sym_ProgramEnd);
-    if not FItems.Items[LIndex].Deleted then begin
+  for LIndex := FAsmLines.Count - 1 downto 0 do begin
+    FAsmLines.Line[LIndex].Deleted := not FAsmLines.Line[LIndex].IsSym(Sym_ProgramEnd);
+    if not FAsmLines.Line[LIndex].Deleted then begin
       break;
+    end;
+  end;
+  for LIndex := 0 to FAsmLines.Count - 1 do begin
+    if AnsiMatchText(FAsmLines.Line[LIndex].Sym, ['program_end', 'functions_start', 'functions_end',
+      'string_literals_start', 'string_literals_end', 'writable_globals_start',
+      'writable_globals_end']) then begin
+      FAsmLines.Line[LIndex].Deleted := True;
     end;
   end;
 end;
 
-procedure CCmocPreprocessor_ASM.ExtractSymbols;
+procedure CAmoc.ExtractSymbols;
 var
   LIndex: integer;
   LString: string;
   LParser: OAsmParser;
 begin
-  for LIndex := 0 to FItems.Count - 1 do begin
-    if SymbolIsPublic(FItems.Items[LIndex].Sym) then begin
-      AddExport(FItems.Items[LIndex].Sym);
+  for LIndex := 0 to FAsmLines.Count - 1 do begin
+    if SymbolIsPublic(FAsmLines.Line[LIndex].Sym) then begin
+      AddExport(FAsmLines.Line[LIndex].Sym);
     end;
-    if FItems.Items[LIndex].IsCmd('RMB') then begin
-      FItems.Items[LIndex].Cmd := 'ZMB';
+    if FAsmLines.Line[LIndex].IsIns('RMB') then begin
+      FAsmLines.Line[LIndex].Ins := 'ZMB';
     end;
   end;
-  for LIndex := 0 to FItems.Count - 1 do begin
-    LParser.SetString(FItems.Items[LIndex].Par);
+  for LIndex := 0 to FAsmLines.Count - 1 do begin
+    LParser.SetString(FAsmLines.Line[LIndex].Par);
     while LParser.Next do begin
       LString := LParser.Token;
       if SymbolIsPublic(LString) and (FExportSymbols.IndexOf(LString) < 0) then begin
@@ -169,17 +176,17 @@ begin
   end;
 end;
 
-procedure CCmocPreprocessor_ASM.SetGlobalInitSymbol(const AName: string);
+procedure CAmoc.SetGlobalInitSymbol(const AName: string);
 var
   LIndex: integer;
 begin
-  for LIndex := FItems.Count - 2 downto 0 do begin
-    if AnsiStartsStr(Sym_INITGL, FItems.Items[LIndex].Sym) then begin
-      if FItems.Items[LIndex + 1].IsCmd('RTS') then begin
-        FItems.Items[LIndex].Deleted := True;
-        FItems.Items[LIndex + 1].Deleted := True;
+  for LIndex := FAsmLines.Count - 2 downto 0 do begin
+    if AnsiStartsStr(Sym_INITGL, FAsmLines.Line[LIndex].Sym) then begin
+      if FAsmLines.Line[LIndex + 1].IsIns('rts') then begin
+        FAsmLines.Line[LIndex + 0].Deleted := True;
+        FAsmLines.Line[LIndex + 1].Deleted := True;
       end else begin
-        FItems.Items[LIndex].Sym := AName;
+        FAsmLines.Line[LIndex].Sym := AName;
         AddExport(AName);
       end;
       Break;
@@ -187,31 +194,32 @@ begin
   end;
 end;
 
-procedure CCmocPreprocessor_ASM.Preprocess(const ADst, ASrc: TStrings);
+procedure CAmoc.Preprocess(const ADst, ASrc: TStrings);
 var
   LSymbol: string;
 begin
-  FItems.AddSourceLines(ASrc);
+  FAsmLines.AddSourceLines(ASrc);
   TrimSource;
   ResetSymbols;
   SetGlobalInitSymbol(FInitSymbol);
   ExtractSymbols;
   for LSymbol in FExternSymbols do begin
-    FItems.Insert(0, LSymbol, 'EXTERN', EmptyStr);
+    FAsmLines.Insert(0, LSymbol, 'extern', EmptyStr);
   end;
   for LSymbol in FExportSymbols do begin
-    FItems.Insert(0, LSymbol, 'EXPORT', EmptyStr);
+    FAsmLines.Insert(0, LSymbol, 'export', EmptyStr);
   end;
-  FItems.Insert(0, EmptyStr, 'PRAGMA', '6809,6800compat,6809conv,m80ext,shadow,autobranchlength');
-  FItems.Insert(1, 'jsrbas', 'MACRO', EmptyStr);
-  FItems.Insert(2, EmptyStr, 'pshs', 'u');
-  FItems.Insert(3, EmptyStr, 'jsr', '\1');
-  FItems.Insert(4, EmptyStr, 'puls', 'u');
-  FItems.Insert(5, EmptyStr, 'ENDM', EmptyStr);
-  FItems.Insert(6, EmptyStr, 'SECTION', 'SECTION_NAME');
-  FItems.Add(EmptyStr, 'ENDSECTION', EmptyStr);
+  FAsmLines.Insert(0, EmptyStr, 'pragma',
+    '6809,6800compat,6809conv,m80ext,shadow,autobranchlength');
+  FAsmLines.Insert(1, 'jsrbas', 'macro', EmptyStr);
+  FAsmLines.Insert(2, EmptyStr, 'pshs', 'u');
+  FAsmLines.Insert(3, EmptyStr, 'jsr', '\1');
+  FAsmLines.Insert(4, EmptyStr, 'puls', 'u');
+  FAsmLines.Insert(5, EmptyStr, 'endm', EmptyStr);
+  FAsmLines.Insert(6, EmptyStr, 'section', 'SECTION_NAME');
+  FAsmLines.Add(EmptyStr, 'endsection', EmptyStr);
 
-  FItems.SaveToStrings(ADst);
+  FAsmLines.SaveToStrings(ADst);
 end;
 
 end.

@@ -8,30 +8,29 @@
       <Unit0>
         <Filename Value="amoc.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="38"/>
-        <CursorPos X="25" Y="52"/>
-        <UsageCount Value="26"/>
+        <CursorPos X="13" Y="52"/>
+        <UsageCount Value="27"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="amocprocess.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="AmocProcess"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="37"/>
-        <CursorPos X="39" Y="48"/>
-        <UsageCount Value="26"/>
+        <TopLine Value="146"/>
+        <CursorPos X="41" Y="165"/>
+        <UsageCount Value="27"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\shared\ucmocpreprocessor.pas"/>
         <UnitName Value="UCmocPreprocessor"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="36"/>
         <CursorPos X="3" Y="47"/>
         <UsageCount Value="21"/>
-        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\inc\systemh.inc"/>
@@ -74,11 +73,10 @@
       <Unit8>
         <Filename Value="ucmocasmparser.pas"/>
         <UnitName Value="UCmocAsmParser"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="145"/>
-        <CursorPos X="32" Y="157"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="215"/>
+        <CursorPos X="15" Y="93"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit8>
       <Unit9>
         <Filename Value="..\shared\ucmocstringdynarray.pas"/>
@@ -105,19 +103,67 @@
         <UsageCount Value="10"/>
       </Unit11>
     </Units>
-    <JumpHistory Count="3" HistoryIndex="2">
+    <JumpHistory Count="15" HistoryIndex="14">
       <Position1>
-        <Filename Value="ucmocasmparser.pas"/>
-        <Caret Line="179" Column="74" TopLine="169"/>
-      </Position1>
-      <Position2>
         <Filename Value="amoc.lpr"/>
         <Caret Line="52" Column="25" TopLine="38"/>
-      </Position2>
-      <Position3>
+      </Position1>
+      <Position2>
         <Filename Value="amocprocess.pas"/>
         <Caret Line="48" Column="39" TopLine="37"/>
+      </Position2>
+      <Position3>
+        <Filename Value="amoc.lpr"/>
+        <Caret Line="52" Column="24" TopLine="38"/>
       </Position3>
+      <Position4>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="194" Column="16" TopLine="194"/>
+      </Position4>
+      <Position5>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="158" Column="31" TopLine="146"/>
+      </Position5>
+      <Position6>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="178" Column="37" TopLine="167"/>
+      </Position6>
+      <Position7>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="210" Column="35" TopLine="196"/>
+      </Position7>
+      <Position8>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="200" Column="12" TopLine="184"/>
+      </Position8>
+      <Position9>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="50" Column="20" TopLine="39"/>
+      </Position9>
+      <Position10>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="140" Column="57" TopLine="123"/>
+      </Position10>
+      <Position11>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="157" Column="22" TopLine="143"/>
+      </Position11>
+      <Position12>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="162" Column="37" TopLine="152"/>
+      </Position12>
+      <Position13>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="178" Column="22" TopLine="166"/>
+      </Position13>
+      <Position14>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="195" Column="12" TopLine="181"/>
+      </Position14>
+      <Position15>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="138" Column="35" TopLine="133"/>
+      </Position15>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

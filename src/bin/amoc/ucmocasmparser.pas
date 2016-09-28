@@ -44,24 +44,27 @@ uses
 
 type
 
-  OAsmItem = object
+  OAsmLine = object
   public
-    Deleted: boolean;
-    Sym, Cmd, Par: string;
+    Sym, Ins, Par: string;
+  public
+    procedure SetLine(const ASym, AIns, APar: string);
   public
     function IsSym(const A: string): boolean;
-    function IsCmd(const A: string): boolean;
+    function IsIns(const A: string): boolean;
     function AsString: string;
+  public
+    Deleted: boolean;
   end;
 
-  OAsmItems = object
+  OAsmLines = object
   public
-    Items: array of OAsmItem;
+    Line: array of OAsmLine;
   public
     function Count: integer;
   public
-    procedure Insert(const APos: integer; const ASym, ACmd, APar: string);
-    procedure Add(const ASym, ACmd, APar: string);
+    procedure Insert(const APos: integer; const ASym, AIns, APar: string);
+    procedure Add(const ASym, AIns, APar: string);
   public
     procedure AddSource(const A: string);
     procedure AddSourceLines(const A: TStrings);
@@ -83,66 +86,64 @@ begin
   end;
 end;
 
-function OAsmItem.IsSym(const A: string): boolean;
+procedure OAsmLine.SetLine(const ASym, AIns, APar: string);
+begin
+  Deleted := False;
+  Sym := ASym;
+  Ins := UpperCase(AIns);
+  Par := APar;
+end;
+
+function OAsmLine.IsSym(const A: string): boolean;
 begin
   Result := AnsiSameStr(A, Sym);
 end;
 
-function OAsmItem.IsCmd(const A: string): boolean;
+function OAsmLine.IsIns(const A: string): boolean;
 begin
-  Result := AnsiSameText(A, Cmd);
+  Result := AnsiSameText(A, Ins);
 end;
 
-function OAsmItem.AsString: string;
+function OAsmLine.AsString: string;
 begin
   if Length(Sym) = 0 then begin
     Result := EmptyStr;
   end else begin
     Result := Sym;
   end;
-  if Length(Cmd) > 0 then begin
-    Result += #9 + Cmd;
+  if Length(Ins) > 0 then begin
+    Result += #9 + Ins;
     if Length(Par) > 0 then begin
       Result += #9 + Par;
     end;
   end;
 end;
 
-function OAsmItems.Count: integer;
+function OAsmLines.Count: integer;
 begin
-  Result := Length(Items);
+  Result := Length(Line);
 end;
 
-procedure OAsmItems.Insert(const APos: integer; const ASym, ACmd, APar: string);
+procedure OAsmLines.Insert(const APos: integer; const ASym, AIns, APar: string);
 var
   LIndex: integer;
 begin
-  SetLength(Items, Length(Items) + 1);
-  for LIndex := High(Items) - 1 downto APos do begin
-    Items[LIndex + 1] := Items[LIndex];
+  SetLength(Line, Length(Line) + 1);
+  for LIndex := High(Line) - 1 downto APos do begin
+    Line[LIndex + 1] := Line[LIndex];
   end;
-  with Items[APos] do begin
-    Deleted := False;
-    Sym := ASym;
-    Cmd := ACmd;
-    Par := APar;
-  end;
+  Line[APos].SetLine(ASym, AIns, APar);
 end;
 
-procedure OAsmItems.Add(const ASym, ACmd, APar: string);
+procedure OAsmLines.Add(const ASym, AIns, APar: string);
 begin
-  SetLength(Items, Length(Items) + 1);
-  with Items[High(Items)] do begin
-    Deleted := False;
-    Sym := ASym;
-    Cmd := ACmd;
-    Par := APar;
-  end;
+  SetLength(Line, Length(Line) + 1);
+  Line[High(Line)].SetLine(ASym, AIns, APar);
 end;
 
-procedure OAsmItems.AddSource(const A: string);
+procedure OAsmLines.AddSource(const A: string);
 var
-  LItem: OAsmItem;
+  LLine: OAsmLine;
   LBeg, LEnd, LTok: pchar;
 
   procedure LNextToken;
@@ -165,40 +166,41 @@ var
     end;
   end;
 
-  function LTokenEmpty: boolean;
+  function LIsComment: boolean;
   begin
-    Result := (LTok^ in [#0, '#', ';']) or
+    Result := (LTok^ in [#0, ';']) or
       ((LTok[0] = '/') and (LTok[1] = '/')) or
+      ((LTok[0] = '#') and (LTok[1] in [#0..#32])) or
       ((LTok[0] = '*') and not (LTok[1] in [#0..#32]));
   end;
 
 begin
-  LItem := default(OAsmItem);
+  LLine := default(OAsmLine);
   LBeg := PChar(A);
   LEnd := LBeg;
   LNextToken;
-  if not LTokenEmpty then begin
+  if not ((LTok^ in ['*', '#']) or LIsComment) then begin
     if (LTok = LBeg) or (LEnd[-1] = ':') then begin
       if LEnd[-1] = ':' then begin
-        SetString(LItem.Sym, LTok, LEnd - LTok - 1);
+        SetString(LLine.Sym, LTok, LEnd - LTok - 1);
       end else begin
-        SetString(LItem.Sym, LTok, LEnd - LTok);
+        SetString(LLine.Sym, LTok, LEnd - LTok);
       end;
       LNextToken;
     end;
     if LTok^ in ['a'..'z', 'A'..'Z', '.'] then begin
-      SetString(LItem.Cmd, LTok, LEnd - LTok);
+      SetString(LLine.Ins, LTok, LEnd - LTok);
       LNextToken;
-      if (LTok^ = '#') or not LTokenEmpty then begin
-        SetString(LItem.Par, LTok, LEnd - LTok);
+      if not LIsComment then begin
+        SetString(LLine.Par, LTok, LEnd - LTok);
       end;
     end;
-    SetLength(Items, Length(Items) + 1);
-    Items[High(Items)] := LItem;
+    SetLength(Line, Length(Line) + 1);
+    Line[High(Line)].SetLine(LLine.Sym, LLine.Ins, LLine.Par);
   end;
 end;
 
-procedure OAsmItems.AddSourceLines(const A: TStrings);
+procedure OAsmLines.AddSourceLines(const A: TStrings);
 var
   LIndex: integer;
 begin
@@ -207,19 +209,19 @@ begin
   end;
 end;
 
-procedure OAsmItems.SaveToStrings(const A: TStrings);
+procedure OAsmLines.SaveToStrings(const A: TStrings);
 var
   LIndex: integer;
 begin
   A.Clear;
-  for LIndex := Low(Items) to High(Items) do begin
-    if not Items[LIndex].Deleted then begin
-      A.Add(Items[LIndex].AsString);
+  for LIndex := Low(Line) to High(Line) do begin
+    if not Line[LIndex].Deleted then begin
+      A.Add(Line[LIndex].AsString);
     end;
   end;
 end;
 
-procedure OAsmItems.SaveToFile(const A: TFileName);
+procedure OAsmLines.SaveToFile(const A: TFileName);
 var
   LStrings: TStrings;
 begin

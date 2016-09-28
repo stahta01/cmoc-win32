@@ -54,10 +54,10 @@ asm void _static_(void)
 
         _program_start:
 
-        leax    nop_handler,DAT
-        stx     null_ptr_handler,DAT
+        leax    nop_handler,pcr
+        stx     null_ptr_handler,pcr
         ldx     #0
-        stx     stack_overflow_handler,DAT
+        stx     stack_overflow_handler,pcr
         lbsr    __main                          // call _main()
         rts                                     // Return to BASIC
 
