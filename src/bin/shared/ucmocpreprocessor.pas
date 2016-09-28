@@ -44,7 +44,7 @@ uses
 
 type
 
-  CCmocPreprocessorBase = class
+  CCmocPreprocessorBase = class(TComponent)
   protected
     procedure Preprocess(const ADst, ASrc: TStrings); virtual; abstract;
   public
