@@ -33,52 +33,30 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 *)
 
-unit UCmocProcess_ASM;
+unit UCmocProcess;
 
 {$INCLUDE cmoc.inc}
 
 interface
 
 uses
-  Classes, SysUtils, UCmocDefs, UCmocPipe, UCmocProcess_TOOLS, UCmocUtils;
+  Process, SysUtils, UCmocUtils;
 
 type
 
-  CCmocProcess_ASM = class(CCmocProcess_TOOLS)
+  TProcessHelper = class helper for TProcess
   public
-    procedure AMOC(const ADst, ASrc: TFileName; const AInitSymbol: string);
+    procedure _CheckExitCode(const AExitCode: longint);
   end;
 
 implementation
 
-procedure CCmocProcess_ASM.AMOC(const ADst, ASrc: TFileName; const AInitSymbol: string);
-var
-  LSrc, LDst: TMemoryStream;
-  LErr: TStringStream;
+procedure TProcessHelper._CheckExitCode(const AExitCode: longint);
 begin
-  LErr := TStringStream.Create(EmptyStr);
-  try
-    LSrc := TMemoryStream.Create;
-    try
-      LSrc.LoadFromFile(ASrc);
-      LDst := TMemoryStream.Create;
-      try
-        try
-          PipeExecute(OCmoc.FileNameTool(Tool_AMOC), ['--initgl=' + AInitSymbol],
-            EmptyStr, LSrc, LDst, LErr);
-        except
-          on LException: Exception do OCmoc.RaiseError(Tool_AMOC, Trim(LErr.DataString));
-        end;
-        LDst.SaveToFile(ADst);
-      finally
-        FreeAndNil(LDst);
-      end;
-    finally
-      FreeAndNil(LSrc);
-    end;
-  finally
-    FreeAndNil(LErr);
+  if AExitCode <> 0 then begin
+    OCmoc.RaiseError(Format('Failed with exit code #%d', [AExitCode]), Executable, AExitCode);
   end;
 end;
 
 end.
+

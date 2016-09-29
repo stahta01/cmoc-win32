@@ -39,7 +39,9 @@ program amoc;
 
 uses
   AmocProcess,
-  Classes, U6502;
+  Classes,
+  SysUtils,
+  U6502;
 
 {$R *.res}
 
@@ -49,12 +51,15 @@ var
 begin
   GParams := TStringList.Create;
   GParams.CommaText := CmdLine;
-  with CAmoc.Create(nil) do begin
-    try
-      FInitSymbol := GParams.Values['--initgl'];
-      Preprocess(System.Output, System.Input);
-    finally
-      Free;
+  try
+    with CAmoc.Create(nil) do begin
+      try
+        FInitSymbol := GParams.Values['--initgl'];
+        Preprocess(System.Output, System.Input);
+      finally
+        Free;
+      end;
     end;
+  except
   end;
 end.

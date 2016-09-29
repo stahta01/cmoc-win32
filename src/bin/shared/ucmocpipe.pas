@@ -40,7 +40,7 @@ unit UCmocPipe;
 interface
 
 uses
-  Classes, Process, SysUtils;
+  Classes, Process, SysUtils, UCmocProcess, UCmocUtils;
 
 procedure PipeExecute(const AExecutable: TFileName; const AParameters: array of string;
   const ACurrentDirectory: TFileName; const AInput, AOutput, AStderr: TStream;
@@ -63,7 +63,11 @@ begin
       Executable := AExecutable;
       CurrentDirectory := ACurrentDirectory;
       Parameters.AddStrings(AParameters);
-      Execute;
+      try
+        Execute;
+      except
+        _CheckExitCode(2);
+      end;
       if Assigned(AInput) then begin
         while Running and (Input.Write(LBuffer, AInput.Read(LBuffer, SizeOf(LBuffer))) > 0) do
         begin
@@ -88,6 +92,7 @@ begin
           Sleep(ASleep);
         end;
       end;
+      _CheckExitCode(ExitCode);
     finally
       Free;
     end;

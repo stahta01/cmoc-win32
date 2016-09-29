@@ -61,8 +61,6 @@ type
 type
 
   CCmocProcess = class(TProcess)
-  strict private
-    procedure CheckExitCode(const AExitCode: longint);
   public
     constructor Create(AOwner: TComponent); override;
   public
@@ -130,6 +128,8 @@ type
 
 implementation
 
+uses UCmocProcess;
+
 class function OCmoc.IntegerToDisplay(const A: integer): string;
 begin
   Result := '$' + IntToHex(A, 4) + '(' + IntToStr(A) + ')';
@@ -163,13 +163,14 @@ end;
 
 class procedure OCmoc.RaiseError(AMessage: string; const AExitCode: integer);
 begin
-  WriteLn('Error: ' + AMessage);
+  WriteLn(StdErr, AMessage);
+  ExitCode := AExitCode;
   raise ECmocException.CreateHelp(AMessage, AExitCode);
 end;
 
 class procedure OCmoc.RaiseError(AMessage, ADetails: string; const AExitCode: integer);
 begin
-  RaiseError(AMessage + ' -> ' + StringQuoted(ADetails), AExitCode);
+  RaiseError(AMessage + ' -> ' + ADetails, AExitCode);
 end;
 
 class function OCmoc.FileChanged(const ADst, ASrc: TFileName): boolean;
@@ -448,13 +449,6 @@ begin
   Environment.Values[Env_PKGDATADIR] := OCmoc.PathToInclude;
 end;
 
-procedure CCmocProcess.CheckExitCode(const AExitCode: longint);
-begin
-  if AExitCode <> 0 then begin
-    OCmoc.RaiseError(Format('Failed with exit code #%d', [AExitCode]), Executable, AExitCode);
-  end;
-end;
-
 procedure CCmocProcess.Execute(const AExecutable: TFileName; const AParams: array of string;
   const ACurrentDirectory: TFileName);
 var
@@ -482,7 +476,7 @@ begin
   try
     inherited Execute;
   except
-    CheckExitCode(2);
+    _CheckExitCode(2);
   end;
   Sleep(20);
   while Running or (Output.NumBytesAvailable > 0) do begin
@@ -491,7 +485,7 @@ begin
     end;
     Sleep(100);
   end;
-  CheckExitCode(ExitCode);
+  _CheckExitCode(ExitCode);
 end;
 
 procedure CCmocProcess.ExecuteTool(const ATool: string; const AParams: array of string;

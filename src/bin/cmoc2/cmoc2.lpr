@@ -54,9 +54,5 @@ begin
       end;
     end;
   except
-    on LException: Exception do begin
-      WriteLn(StdErr, 'Error: Exception ', OCmoc.StringQuoted(OCmoc.DosToUnix(ParamStr(0))));
-      ExitCode := LException.HelpContext;
-    end;
   end;
 end.

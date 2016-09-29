@@ -40,18 +40,25 @@ unit U6502;
 interface
 
 uses
-  StrUtils, SysUtils, UCmocAsmParser;
+  StrUtils, SysUtils, UCmocAsmParser, UCmocUtils;
 
 procedure M6502Translate(var ALines: OAsmLines);
 
 implementation
 
+const
+
+  TCharSetRegA = ['a', 'A'];
+  TCharSetRegX = ['x', 'X'];
+  TCharSetRegY = ['y', 'Y'];
+
 type
 
   TAsmLanguage = (al6809, al6502, alSweet16);
-  TAddrMode6502 = (amError, amImpl, amAccu, amImme, amAbsM, amAbsX, amAbsY, amIndX, amIndY);
+  T6502Mode = (amError, amImpl, amIndi, amAccu, amImme, amAbsM, amAbsX, amAbsY, amIndX, amIndY);
+  T6502Modes = set of T6502Mode;
 
-function M6502AddrMode(const AParam: string; var LValue: string): TAddrMode6502;
+function M6502AddrMode(const AParam: string; var LValue: string): T6502Mode;
 var
   LLength: integer;
 begin
@@ -61,27 +68,34 @@ begin
     if AParam[1] = '#' then begin
       LValue := Copy(AParam, 2, MaxInt);
       Result := amImme;
-    end else if SameText(AParam, 'A') then begin
+    end else if (Length(AParam) = 1) and (AParam[1] in TCharSetRegA) then begin
       LValue := AParam;
       Result := amAccu;
     end else if LLength >= 4 then begin
       if (AParam[1] = '(') then begin
-        if (AParam[LLength] = ')') and (AParam[LLength - 1] in ['x', 'X']) and
-          (AParam[LLength - 2] = ',') then begin
-          Result := amIndX;
-        end else if (AParam[LLength] in ['y', 'Y']) and (AParam[LLength - 1] = ',') and
+        if (AParam[LLength] = ')') then begin
+          if (AParam[LLength - 1] in TCharSetRegX) and (AParam[LLength - 2] = ',') then begin
+            Result := amIndX;
+          end else begin
+            Result := amIndi;
+          end;
+        end else if (AParam[LLength] in TCharSetRegY) and (AParam[LLength - 1] = ',') and
           (AParam[LLength - 2] = ')') then begin
           Result := amIndY;
         end else begin
           Result := amError;
         end;
         if Result <> amError then begin
-          LValue := Copy(AParam, 2, Length(AParam) - 4);
+          if Result = amIndi then begin
+            LValue := Copy(AParam, 2, Length(AParam) - 2);
+          end else begin
+            LValue := Copy(AParam, 2, Length(AParam) - 4);
+          end;
         end;
       end else if AParam[LLength - 1] = ',' then begin
-        if AParam[LLength] in ['x', 'X'] then begin
+        if AParam[LLength] in TCharSetRegX then begin
           Result := amAbsX;
-        end else if AParam[LLength] in ['y', 'Y'] then begin
+        end else if AParam[LLength] in TCharSetRegY then begin
           Result := amAbsY;
         end else begin
           Result := amError;
@@ -103,15 +117,18 @@ begin
   end;
 end;
 
-function M6502Insert(var ALines: OAsmLines; const AInsertPos: integer;
-  const A: array of variant; const AVal: string = ''): integer;
+function M6502Insert(const AModes: T6502Modes; var ALines: OAsmLines;
+  const AInsertPos: integer; const A: array of variant; const AMeta: string = ''): integer;
 var
   LIndex, LPos, LEnd: integer;
   LString, LPar: string;
-  LMode: TAddrMode6502;
+  LMode: T6502Mode;
 begin
   Result := AInsertPos;
   LMode := M6502AddrMode(ALines.Lines[Result].Par, LPar);
+  if not (LMode in AModes) then begin
+    OCmoc.RaiseError('invalid instruction mode');
+  end;
   ALines.Lines[Result].Deleted := True;
   LIndex := 0;
   while LIndex < High(A) do begin
@@ -125,7 +142,7 @@ begin
         end;
         if ALines.AsmInsert(Result, #9 +
           AnsiReplaceStr(AnsiReplaceStr(Copy(LString, LPos, LEnd - LPos),
-          '?', LPar), '###', AVal)) then begin
+          '?', LPar), '###', AMeta)) then begin
           ALines.Lines[Result].Ignore := True;
           Inc(Result);
         end;
@@ -137,17 +154,72 @@ begin
   end;
 end;
 
+function M6502InsertStore(const AModes: T6502Modes; var ALines: OAsmLines;
+  const AIndex: integer; const AInstruction: string): integer;
+begin
+  Result := M6502Insert(AModes, ALines, AIndex, [
+    amImme, 'LDA #?:STA _regz+1:### _regz',
+    amAbsM, 'LDA ?:STA _regz+1:### _regz',
+    amAbsX, 'LDA ?,x:STA _regz+1:### _regz',
+    amAbsY, 'LDA ?,y:STA _regz+1:### _regz'],
+    AInstruction[Length(AInstruction)]);
+end;
+
+function M6502InsertLoad(const AModes: T6502Modes; var ALines: OAsmLines;
+  const AIndex: integer; const AInstruction: string): integer;
+begin
+  Result := M6502Insert(AModes, ALines, AIndex, [
+    amImme, 'LDA #?:STA _regz+1:### _regz',
+    amAbsM, 'LDA ?:STA _regz+1:### _regz',
+    amAbsX, 'LDA ?,x:STA _regz+1:### _regz',
+    amAbsY, 'LDA ?,y:STA _regz+1:### _regz'],
+    AInstruction);
+end;
+
+function M6502InsertCalc(const AModes: T6502Modes; var ALines: OAsmLines;
+  const AIndex: integer; const AInstruction: string): integer;
+begin
+  Result := M6502Insert(AModes, ALines, AIndex, [
+    amAccu, '###', amImme, '### #?', amAbsM, '### ?',
+    amAbsX, '### <?,x', amAbsY, '### <?,y', amIndX, '### [<?,x]',
+    amIndY, 'PSHS b:LDD ?:EXG a,b:STD _regz:TFR y,d:ADDD _regz:STD _regz:PULS b:### [_regz]'],
+    AInstruction);
+end;
+
+function M6502InsertPush(var ALines: OAsmLines; const AIndex: integer;
+  const ARegister: string): integer;
+begin
+  Result := M6502Insert([amImpl], ALines, AIndex, [amImpl, 'PSHS ###'], ARegister);
+end;
+
+function M6502InsertPull(var ALines: OAsmLines; const AIndex: integer;
+  const ARegister: string): integer;
+begin
+  Result := M6502Insert([amImpl], ALines, AIndex, [amImpl, 'PULS ###'], ARegister);
+end;
+
+function M6502InsertBranch(var ALines: OAsmLines; const AIndex: integer;
+  const AInstruction: string): integer;
+begin
+  Result := M6502Insert([amAbsM], ALines, AIndex, [amAbsM, '### ?'], AInstruction);
+end;
+
+function M6502InsertImplied(var ALines: OAsmLines; const AIndex: integer;
+  const AInstruction: string): integer;
+begin
+  Result := M6502Insert([amImpl], ALines, AIndex, [amImpl, '###'], AInstruction);
+end;
+
 procedure M6502Translate(var ALines: OAsmLines);
 var
   LIndex: integer;
-  LMeta: string;
   LLanguage: TAsmLanguage;
 begin
   LLanguage := al6809;
   LIndex := 0;
   while LIndex < Length(ALines.Lines) do begin
     with ALines.Lines[LIndex] do begin
-      if not (Deleted or Ignore) then begin
+      if not (Deleted or Ignore or (Length(Ins) = 0)) then begin
         if IsIns('LANG') then begin
           Deleted := True;
           case UpperCase(Par) of
@@ -169,73 +241,73 @@ begin
             al6502: begin
               case Ins of
                 'SEI', 'CLI', 'SEC', 'CLC', 'NOP', 'RTS', 'RTI': begin
-                  LIndex := M6502Insert(ALines, LIndex, [amImpl, '###'], Ins);
+                  LIndex := M6502InsertImplied(ALines, LIndex, Ins);
                 end;
                 'BCC', 'BCS', 'BEQ', 'BMI', 'BNE', 'BPL', 'BVC', 'BVS': begin
-                  LIndex := M6502Insert(ALines, LIndex, [amAbsM, '### ?'], Ins);
+                  LIndex := M6502InsertBranch(ALines, LIndex, Ins);
                 end;
                 'INX', 'INY': begin
-                  LIndex := M6502Insert(ALines, LIndex,
-                    [amImpl, 'EXG ###,d:INCB:EXG ###,d'], Ins[3]);
+                  LIndex := M6502Insert([amImpl], ALines, LIndex,
+                    [amImpl, 'EXG ###,d:ADDB #1:EXG ###,d'], Ins[3]);
                 end;
                 'DEX', 'DEY': begin
-                  LIndex := M6502Insert(ALines, LIndex,
-                    [amImpl, 'EXG ###,d:DECB:EXG ###,d'], Ins[3]);
+                  LIndex := M6502Insert([amImpl], ALines, LIndex,
+                    [amImpl, 'EXG ###,d:SUBB #1:EXG ###,d'], Ins[3]);
                 end;
                 'TAX', 'TAY': begin
-                  LIndex := M6502Insert(ALines, LIndex, [amImpl, 'CLR a:TFR d,###'], Ins[3]);
+                  LIndex := M6502Insert([amImpl], ALines,
+                    LIndex, [amImpl, 'CLR a:TFR d,###'], Ins[3]);
                 end;
                 'TXA', 'TYA': begin
-                  LIndex := M6502Insert(ALines, LIndex, [amImpl, 'TFR ###,d'], Ins[2]);
+                  LIndex := M6502Insert([amImpl], ALines, LIndex, [amImpl, 'TFR ###,d'], Ins[2]);
                 end;
                 'PHA': begin
-                  LIndex := M6502Insert(ALines, LIndex, [amImpl, 'PSHS b']);
+                  LIndex := M6502InsertPush(ALines, LIndex, 'b');
                 end;
                 'PLA': begin
-                  LIndex := M6502Insert(ALines, LIndex, [amImpl, 'PULS b']);
+                  LIndex := M6502InsertPull(ALines, LIndex, 'b');
+                end;
+                'PHP': begin
+                  LIndex := M6502InsertPush(ALines, LIndex, 'cc');
+                end;
+                'PLP': begin
+                  LIndex := M6502InsertPull(ALines, LIndex, 'cc');
                 end;
                 'JSR': begin
-                  LIndex := M6502Insert(ALines, LIndex, [amAbsM, 'BSR ?']);
+                  LIndex := M6502Insert([amAbsM, amIndi], ALines, LIndex,
+                    [amAbsM, 'BSR ?', amIndi, 'BSR [?]']);
                 end;
                 'JMP': begin
-                  LIndex := M6502Insert(ALines, LIndex, [amAbsM, 'BRA ?']);
+                  LIndex := M6502Insert([amAbsM, amIndi], ALines, LIndex,
+                    [amAbsM, 'BRA ?', amIndi, 'BRA [?]']);
                 end;
-                'STX', 'STY': begin
-                  LIndex := M6502Insert(ALines, LIndex, [
-                    amImme, 'EXG d,###:STB #?:EXG d,###',
-                    amAbsM, 'EXG d,###:STB ?:EXG d,###',
-                    amAbsX, 'EXG d,###:STB ?,x:EXG d,###',
-                    amAbsY, 'EXG d,###:STB ?,y:EXG d,###'],
-                    Ins[Length(Ins)]);
+                'STX': begin
+                  LIndex := M6502InsertStore([amAbsM, amAbsY], ALines, LIndex, Ins);
                 end;
-                'LDX', 'LDY': begin
-                  LIndex := M6502Insert(ALines, LIndex, [
-                    amImme, 'LDA #?:STA _regz+1:### _regz',
-                    amAbsM, 'LDA ?:STA _regz+1:### _regz',
-                    amAbsX, 'LDA ?,x:STA _regz+1:### _regz',
-                    amAbsY, 'LDA ?,y:STA _regz+1:### _regz'],
-                    Ins);
+                'STY': begin
+                  LIndex := M6502InsertStore([amAbsM, amAbsX], ALines, LIndex, Ins);
                 end;
-                'LDA', 'STA', 'ADC', 'SBC', 'ORA', 'AND', 'ROL', 'ROR', 'LSR', 'ASL',
-                'INC', 'DEC', 'EOR': begin
-                  LMeta := Ins;
-                  case LMeta of
-                    'LDA', 'STA', 'ORA': begin
-                      LMeta[Length(LMeta)] := 'B';
-                    end;
-                    'ADC', 'SBC', 'AND', 'EOR', 'ROL', 'ROR', 'LSR', 'ASL': begin
-                      LMeta := Ins + 'B';
-                    end;
-                  end;
-                  LIndex := M6502Insert(ALines, LIndex, [
-                    amAccu, '###B', amImme, '### #?', amAbsM, '### ?',
-                    amAbsX, '### <?,x',
-                    amAbsY, '### <?,y',
-                    amIndX, '### [<?,x]',
-                    amIndY,
-                    'PSHS b:LDD ?:EXG a,b:STD _regz:TFR y,d:ADDD _regz:STD _regz:PULS b:### [_regz]'],
-                    LMeta);
+                'LDX': begin
+                  LIndex := M6502InsertLoad([amImme, amAbsM, amAbsY], ALines, LIndex, Ins);
+                end;
+                'LDY': begin
+                  LIndex := M6502InsertLoad([amImme, amAbsM, amAbsX], ALines, LIndex, Ins);
+                end;
+                'ASL', 'ROL', 'ROR', 'LSR': begin
+                  LIndex := M6502InsertCalc([amAccu, amAbsM, amAbsX], ALines, LIndex, Ins + 'B');
+                end;
+                'LDA', 'STA', 'ORA': begin
+                  LIndex := M6502InsertCalc([amImme, amAbsM, amAbsX, amAbsY, amIndX, amIndY],
+                    ALines, LIndex, Copy(Ins, 1, 2) + 'B');
+                end;
+                'ADC', 'SBC', 'AND', 'EOR': begin
+                  LIndex := M6502InsertCalc([amImme, amAbsM, amAbsX, amAbsY, amIndX, amIndY],
+                    ALines, LIndex, Ins + 'B');
+                end;
+                'INC', 'DEC': begin
+                  LIndex := M6502InsertCalc([amAbsM, amAbsX], ALines, LIndex, Ins);
                 end else begin
+                  OCmoc.RaiseError('unknown 6502 mnemonic', Ins);
                 end;
               end;
             end;
