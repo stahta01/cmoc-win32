@@ -9,26 +9,6 @@ word regz = 0, value = 0;
 
 #pragma options --optimize=0 -machine=coco
 
-void test0(void)
-{
-    asm {
-        .p02
-
-        lda     #0
-        sta     _value,pcr
-        lda     #$04
-        sta     _value+1,pcr
-
-        ldy     #0
-        loop:
-        lda     #0
-        sta     (_value,pcr),y
-        iny
-        bne     loop
-
-        .p09
-    }
-}
 /*
 asm void test1(void)
 {
@@ -122,6 +102,18 @@ asm void test3(void)
     }
 }
 */
+
+void test0(void)
+{
+    asm {
+        .p02
+
+        ldx    1024,y
+
+        .p09
+    }
+}
+
 int main(void)
 {
     test0();

@@ -157,7 +157,7 @@ begin
   end;
 end;
 
-function M6502InsertStore(const AModes: T6502Modes; var ALines: OAsmLines;
+function M6502InsertStoreXY(const AModes: T6502Modes; var ALines: OAsmLines;
   const AIndex: integer; const AInstruction: string): integer;
 begin
   Result := M6502Insert(AModes, ALines, AIndex, [
@@ -168,14 +168,14 @@ begin
     AInstruction[Length(AInstruction)]);
 end;
 
-function M6502InsertLoad(const AModes: T6502Modes; var ALines: OAsmLines;
+function M6502InsertLoadXY(const AModes: T6502Modes; var ALines: OAsmLines;
   const AIndex: integer; const AInstruction: string): integer;
 begin
   Result := M6502Insert(AModes, ALines, AIndex, [
     amImme, 'LDA #?:STA _regz+1,pcr:### _regz,pcr',
-    amAbsM, 'LDA ?:STA _regz+1,pcr:### _regz,pcr',
-    amAbsX, 'LDA ?,x:STA _regz+1,pcr:### _regz,pcr',
-    amAbsY, 'LDA ?,y:STA _regz+1,pcr:### _regz,pcr'],
+    amAbsM, 'LDA ?,pcr:STA _regz+1,pcr:### _regz,pcr',
+    amAbsX, 'PSHS x:EXG x,d:LEAX ?,pcr:ABX:EXG x,d:### ,x:PULS x',
+    amAbsY, 'PSHS b:TFR y,d:ADDD ?:TFR d,x:LDB ,x:CLRA:TFR d,x:PULS b'],
     AInstruction);
 end;
 
@@ -282,16 +282,16 @@ begin
                     [amAbsM, 'BRA ?', amIndi, 'BRA [?]']);
                 end;
                 'STX': begin
-                  LIndex := M6502InsertStore([amAbsM, amAbsY], ALines, LIndex, Ins);
+                  LIndex := M6502InsertStoreXY([amAbsM, amAbsY], ALines, LIndex, Ins);
                 end;
                 'STY': begin
-                  LIndex := M6502InsertStore([amAbsM, amAbsX], ALines, LIndex, Ins);
+                  LIndex := M6502InsertStoreXY([amAbsM, amAbsX], ALines, LIndex, Ins);
                 end;
                 'LDX': begin
-                  LIndex := M6502InsertLoad([amImme, amAbsM, amAbsY], ALines, LIndex, Ins);
+                  LIndex := M6502InsertLoadXY([amImme, amAbsM, amAbsY], ALines, LIndex, Ins);
                 end;
                 'LDY': begin
-                  LIndex := M6502InsertLoad([amImme, amAbsM, amAbsX], ALines, LIndex, Ins);
+                  LIndex := M6502InsertLoadXY([amImme, amAbsM, amAbsX], ALines, LIndex, Ins);
                 end;
                 'ASL', 'ROL', 'ROR', 'LSR': begin
                   LIndex := M6502InsertCalc([amImpl, amAccu, amAbsM, amAbsX],
