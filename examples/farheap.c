@@ -49,6 +49,10 @@ int main(void)
     char s[100];
     far_char_t* names[STRING_COUNT];
     size_t size = 0;
+
+    // You must create the far heaps first.
+    hank_create_clear(0, 0x8000, HEAP_SIZE_MAX);
+
     for (int i = 0; i < STRING_COUNT; i++) {
         if (names[i] = _falloc(300)) {
             far_sprintf(names[i], "FAR STRING #%d", i);

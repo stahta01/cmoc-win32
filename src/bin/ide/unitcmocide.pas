@@ -128,6 +128,7 @@ type
     MenuHelpSep2: TMenuItem;
     MenuHelpSep1: TMenuItem;
     MenuEmulatorsCoCo2: TMenuItem;
+    MenuEditSep6: TMenuItem;
     MenuItem3: TMenuItem;
     MenuEmulatorsEDTASM: TMenuItem;
     MenuEmulatorsSep2: TMenuItem;

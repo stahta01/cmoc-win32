@@ -1498,6 +1498,9 @@ object FormCmocIDE: TFormCmocIDE
         ShortCut = 32808
         OnClick = MenuEditLowercaseSelectionClick
       end
+      object MenuEditSep6: TMenuItem
+        Caption = '-'
+      end
       object MenuEditFormatSourceCode: TMenuItem
         Caption = 'Format Source Code (astyle)'
         Bitmap.Data = {

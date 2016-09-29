@@ -501,7 +501,8 @@ var
   LPos: pchar;
   LLine: string;
 begin
-  ExecuteTool(Tool_ASTYLE, ['-A8', '-xC100', '-k1', '-w', '-U', '-H', '-j',
+  // Removed -U because it messed up 6502 code.
+  ExecuteTool(Tool_ASTYLE, ['-A8', '-xC100', '-k1', '-w', (*'-U',*) '-H', '-j',
     '-s' + IntToStr(ATabWidth), ASrc]);
   with TStringList.Create do begin
     try

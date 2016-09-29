@@ -10,27 +10,29 @@
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="43"/>
-        <CursorPos X="16" Y="49"/>
-        <UsageCount Value="40"/>
+        <CursorPos X="13" Y="55"/>
+        <UsageCount Value="41"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="amocprocess.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="AmocProcess"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="205"/>
-        <CursorPos X="17" Y="222"/>
-        <UsageCount Value="40"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="184"/>
+        <CursorPos X="73" Y="134"/>
+        <UsageCount Value="41"/>
+        <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="u6502.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="U6502"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="218"/>
-        <CursorPos X="30" Y="226"/>
-        <UsageCount Value="30"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="231"/>
+        <CursorPos X="92" Y="185"/>
+        <UsageCount Value="31"/>
+        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\shared\ucmocpreprocessor.pas"/>
@@ -81,10 +83,11 @@
       <Unit9>
         <Filename Value="ucmocasmparser.pas"/>
         <UnitName Value="UCmocAsmParser"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="217"/>
-        <CursorPos X="5" Y="45"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="111"/>
+        <CursorPos X="18" Y="49"/>
         <UsageCount Value="19"/>
+        <Loaded Value="True"/>
       </Unit9>
       <Unit10>
         <Filename Value="..\shared\ucmocstringdynarray.pas"/>
@@ -111,6 +114,15 @@
         <UsageCount Value="9"/>
       </Unit12>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory Count="2" HistoryIndex="1">
+      <Position1>
+        <Filename Value="amoc.lpr"/>
+        <Caret Line="55" Column="13" TopLine="43"/>
+      </Position1>
+      <Position2>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="50" Column="19" TopLine="37"/>
+      </Position2>
+    </JumpHistory>
   </ProjectSession>
 </CONFIG>
