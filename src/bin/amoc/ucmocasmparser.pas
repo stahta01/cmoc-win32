@@ -55,7 +55,7 @@ type
     function IsPar(const A: string): boolean;
     function AsString: string;
   public
-    Deleted, Ignore: boolean;
+    Deleted, Is6502: boolean;
   end;
 
   OAsmLines = object
