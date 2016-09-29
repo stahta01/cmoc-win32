@@ -36,7 +36,7 @@
         <PackageName Value="LazUtils"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="2">
+    <Units Count="3">
       <Unit0>
         <Filename Value="amoc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -46,6 +46,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="AmocProcess"/>
       </Unit1>
+      <Unit2>
+        <Filename Value="u6502.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="U6502"/>
+      </Unit2>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

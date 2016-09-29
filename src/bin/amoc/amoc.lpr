@@ -39,7 +39,7 @@ program amoc;
 
 uses
   AmocProcess,
-  Classes;
+  Classes, U6502;
 
 {$R *.res}
 

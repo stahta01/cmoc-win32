@@ -40,7 +40,7 @@ unit AmocProcess;
 interface
 
 uses
-  Classes, StrUtils, SysUtils, UCmocAsmParser, UCmocDefs, UCmocPreprocessor,
+  Classes, StrUtils, SysUtils, U6502, UCmocAsmParser, UCmocDefs, UCmocPreprocessor,
   UCmocUtils;
 
 type
@@ -131,22 +131,23 @@ var
   LIndex: integer;
 begin
   for LIndex := 0 to FAsmLines.Count - 1 do begin
-    FAsmLines.Line[LIndex].Deleted := not FAsmLines.Line[LIndex].IsSym(Sym_FunctionsStart);
-    if not FAsmLines.Line[LIndex].Deleted then begin
+    FAsmLines.Lines[LIndex].Deleted := not FAsmLines.Lines[LIndex].IsSym(Sym_FunctionsStart);
+    if not FAsmLines.Lines[LIndex].Deleted then begin
       break;
     end;
   end;
   for LIndex := FAsmLines.Count - 1 downto 0 do begin
-    FAsmLines.Line[LIndex].Deleted := not FAsmLines.Line[LIndex].IsSym(Sym_ProgramEnd);
-    if not FAsmLines.Line[LIndex].Deleted then begin
+    FAsmLines.Lines[LIndex].Deleted := not FAsmLines.Lines[LIndex].IsSym(Sym_ProgramEnd);
+    if not FAsmLines.Lines[LIndex].Deleted then begin
       break;
     end;
   end;
   for LIndex := 0 to FAsmLines.Count - 1 do begin
-    if AnsiMatchText(FAsmLines.Line[LIndex].Sym, ['program_end', 'functions_start', 'functions_end',
+    if AnsiMatchText(FAsmLines.Lines[LIndex].Sym, ['program_end', 'functions_start',
+      'functions_end',
       'string_literals_start', 'string_literals_end', 'writable_globals_start',
       'writable_globals_end']) then begin
-      FAsmLines.Line[LIndex].Deleted := True;
+      FAsmLines.Lines[LIndex].Deleted := True;
     end;
   end;
 end;
@@ -158,15 +159,15 @@ var
   LParser: OAsmParser;
 begin
   for LIndex := 0 to FAsmLines.Count - 1 do begin
-    if SymbolIsPublic(FAsmLines.Line[LIndex].Sym) then begin
-      AddExport(FAsmLines.Line[LIndex].Sym);
+    if SymbolIsPublic(FAsmLines.Lines[LIndex].Sym) then begin
+      AddExport(FAsmLines.Lines[LIndex].Sym);
     end;
-    if FAsmLines.Line[LIndex].IsIns('RMB') then begin
-      FAsmLines.Line[LIndex].Ins := 'ZMB';
+    if FAsmLines.Lines[LIndex].IsIns('RMB') then begin
+      FAsmLines.Lines[LIndex].Ins := 'ZMB';
     end;
   end;
   for LIndex := 0 to FAsmLines.Count - 1 do begin
-    LParser.SetString(FAsmLines.Line[LIndex].Par);
+    LParser.SetString(FAsmLines.Lines[LIndex].Par);
     while LParser.Next do begin
       LString := LParser.Token;
       if SymbolIsPublic(LString) and (FExportSymbols.IndexOf(LString) < 0) then begin
@@ -181,12 +182,12 @@ var
   LIndex: integer;
 begin
   for LIndex := FAsmLines.Count - 2 downto 0 do begin
-    if AnsiStartsStr(Sym_INITGL, FAsmLines.Line[LIndex].Sym) then begin
-      if FAsmLines.Line[LIndex + 1].IsIns('rts') then begin
-        FAsmLines.Line[LIndex + 0].Deleted := True;
-        FAsmLines.Line[LIndex + 1].Deleted := True;
+    if AnsiStartsStr(Sym_INITGL, FAsmLines.Lines[LIndex].Sym) then begin
+      if FAsmLines.Lines[LIndex + 1].IsIns('rts') then begin
+        FAsmLines.Lines[LIndex + 0].Deleted := True;
+        FAsmLines.Lines[LIndex + 1].Deleted := True;
       end else begin
-        FAsmLines.Line[LIndex].Sym := AName;
+        FAsmLines.Lines[LIndex].Sym := AName;
         AddExport(AName);
       end;
       Break;
@@ -198,7 +199,7 @@ procedure CAmoc.Preprocess(const ADst, ASrc: TStrings);
 var
   LSymbol: string;
 begin
-  FAsmLines.AddSourceLines(ASrc);
+  FAsmLines.AsmAddStrings(ASrc);
   TrimSource;
   ResetSymbols;
   SetGlobalInitSymbol(FInitSymbol);
@@ -218,7 +219,7 @@ begin
   FAsmLines.Insert(5, EmptyStr, 'endm', EmptyStr);
   FAsmLines.Insert(6, EmptyStr, 'section', 'SECTION_NAME');
   FAsmLines.Add(EmptyStr, 'endsection', EmptyStr);
-
+  M6502Translate(FAsmLines);
   FAsmLines.SaveToStrings(ADst);
 end;
 

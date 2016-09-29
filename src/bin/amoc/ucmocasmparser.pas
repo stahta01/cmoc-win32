@@ -52,22 +52,26 @@ type
   public
     function IsSym(const A: string): boolean;
     function IsIns(const A: string): boolean;
+    function IsPar(const A: string): boolean;
     function AsString: string;
   public
-    Deleted: boolean;
+    Deleted, Ignore: boolean;
   end;
 
   OAsmLines = object
   public
-    Line: array of OAsmLine;
+    Lines: array of OAsmLine;
   public
     function Count: integer;
   public
     procedure Insert(const APos: integer; const ASym, AIns, APar: string);
     procedure Add(const ASym, AIns, APar: string);
   public
-    procedure AddSource(const A: string);
-    procedure AddSourceLines(const A: TStrings);
+    function AsmParse(const A: string; var AOutput: OAsmLine): boolean;
+    function AsmAdd(const A: string): boolean;
+    function AsmInsert(const APos: integer; const A: string): boolean;
+  public
+    procedure AsmAddStrings(const A: TStrings);
   public
     procedure SaveToStrings(const A: TStrings);
     procedure SaveToFile(const A: TFileName);
@@ -104,6 +108,11 @@ begin
   Result := AnsiSameText(A, Ins);
 end;
 
+function OAsmLine.IsPar(const A: string): boolean;
+begin
+  Result := AnsiSameText(A, Par);
+end;
+
 function OAsmLine.AsString: string;
 begin
   if Length(Sym) = 0 then begin
@@ -121,29 +130,28 @@ end;
 
 function OAsmLines.Count: integer;
 begin
-  Result := Length(Line);
+  Result := Length(Lines);
 end;
 
 procedure OAsmLines.Insert(const APos: integer; const ASym, AIns, APar: string);
 var
   LIndex: integer;
 begin
-  SetLength(Line, Length(Line) + 1);
-  for LIndex := High(Line) - 1 downto APos do begin
-    Line[LIndex + 1] := Line[LIndex];
+  SetLength(Lines, Length(Lines) + 1);
+  for LIndex := High(Lines) - 1 downto APos do begin
+    Lines[LIndex + 1] := Lines[LIndex];
   end;
-  Line[APos].SetLine(ASym, AIns, APar);
+  Lines[APos].SetLine(ASym, AIns, APar);
 end;
 
 procedure OAsmLines.Add(const ASym, AIns, APar: string);
 begin
-  SetLength(Line, Length(Line) + 1);
-  Line[High(Line)].SetLine(ASym, AIns, APar);
+  SetLength(Lines, Length(Lines) + 1);
+  Lines[High(Lines)].SetLine(ASym, AIns, APar);
 end;
 
-procedure OAsmLines.AddSource(const A: string);
+function OAsmLines.AsmParse(const A: string; var AOutput: OAsmLine): boolean;
 var
-  LLine: OAsmLine;
   LBeg, LEnd, LTok: pchar;
 
   procedure LNextToken;
@@ -175,37 +183,58 @@ var
   end;
 
 begin
-  LLine := default(OAsmLine);
+  Result := False;
+  AOutput := default(OAsmLine);
   LBeg := PChar(A);
   LEnd := LBeg;
   LNextToken;
   if not ((LTok^ in ['*', '#']) or LIsComment) then begin
     if (LTok = LBeg) or (LEnd[-1] = ':') then begin
+      Result := True;
       if LEnd[-1] = ':' then begin
-        SetString(LLine.Sym, LTok, LEnd - LTok - 1);
+        SetString(AOutput.Sym, LTok, LEnd - LTok - 1);
       end else begin
-        SetString(LLine.Sym, LTok, LEnd - LTok);
+        SetString(AOutput.Sym, LTok, LEnd - LTok);
       end;
       LNextToken;
     end;
     if LTok^ in ['a'..'z', 'A'..'Z', '.'] then begin
-      SetString(LLine.Ins, LTok, LEnd - LTok);
+      Result := True;
+      SetString(AOutput.Ins, LTok, LEnd - LTok);
       LNextToken;
       if not LIsComment then begin
-        SetString(LLine.Par, LTok, LEnd - LTok);
+        SetString(AOutput.Par, LTok, LEnd - LTok);
       end;
     end;
-    SetLength(Line, Length(Line) + 1);
-    Line[High(Line)].SetLine(LLine.Sym, LLine.Ins, LLine.Par);
   end;
 end;
 
-procedure OAsmLines.AddSourceLines(const A: TStrings);
+function OAsmLines.AsmAdd(const A: string): boolean;
+var
+  LLine: OAsmLine;
+begin
+  Result := AsmParse(A, LLine);
+  if Result then begin
+    Add(LLine.Sym, LLine.Ins, LLine.Par);
+  end;
+end;
+
+function OAsmLines.AsmInsert(const APos: integer; const A: string): boolean;
+var
+  LLine: OAsmLine;
+begin
+  Result := AsmParse(A, LLine);
+  if Result then begin
+    Insert(APos, LLine.Sym, LLine.Ins, LLine.Par);
+  end;
+end;
+
+procedure OAsmLines.AsmAddStrings(const A: TStrings);
 var
   LIndex: integer;
 begin
   for LIndex := 0 to A.Count - 1 do begin
-    AddSource(A[LIndex]);
+    AsmAdd(A[LIndex]);
   end;
 end;
 
@@ -214,9 +243,9 @@ var
   LIndex: integer;
 begin
   A.Clear;
-  for LIndex := Low(Line) to High(Line) do begin
-    if not Line[LIndex].Deleted then begin
-      A.Add(Line[LIndex].AsString);
+  for LIndex := Low(Lines) to High(Lines) do begin
+    if not Lines[LIndex].Deleted then begin
+      A.Add(Lines[LIndex].AsString);
     end;
   end;
 end;
