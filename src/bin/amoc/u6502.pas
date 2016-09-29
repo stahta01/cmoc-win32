@@ -220,21 +220,12 @@ begin
   while LIndex < Length(ALines.Lines) do begin
     with ALines.Lines[LIndex] do begin
       if not (Deleted or Ignore or (Length(Ins) = 0)) then begin
-        if IsIns('LANG') then begin
+        if IsIns('.p09') then begin
           Deleted := True;
-          case UpperCase(Par) of
-            '6502': begin
-              LLanguage := al6502;
-            end;
-            '6809': begin
-              LLanguage := al6809;
-            end;
-            'SWEET16': begin
-              LLanguage := alSweet16;
-            end else begin
-              LLanguage := al6809;
-            end;
-          end;
+          LLanguage := al6809;
+        end else if IsIns('.p02') then begin
+          Deleted := True;
+          LLanguage := al6502;
         end else begin
           Ins := UpperCase(Ins);
           case LLanguage of
