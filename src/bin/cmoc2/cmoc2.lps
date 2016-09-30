@@ -4,14 +4,14 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="238">
+    <Units Count="243">
       <Unit0>
         <Filename Value="cmoc2.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="36"/>
-        <CursorPos X="25" Y="49"/>
-        <UsageCount Value="149"/>
+        <CursorPos X="18" Y="49"/>
+        <UsageCount Value="150"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -88,8 +88,8 @@
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="171"/>
-        <CursorPos X="42" Y="173"/>
+        <TopLine Value="51"/>
+        <CursorPos X="3" Y="63"/>
         <UsageCount Value="39"/>
       </Unit10>
       <Unit11>
@@ -1372,15 +1372,15 @@
       <Unit190>
         <Filename Value="UCmocProcess_ASM.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="54"/>
-        <CursorPos X="51" Y="70"/>
+        <TopLine Value="36"/>
+        <CursorPos X="38" Y="47"/>
         <UsageCount Value="19"/>
       </Unit190>
       <Unit191>
         <Filename Value="UCmocProcess_TOOLS.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="37"/>
-        <CursorPos X="27" Y="44"/>
+        <TopLine Value="170"/>
+        <CursorPos X="52" Y="173"/>
         <UsageCount Value="16"/>
       </Unit191>
       <Unit192>
@@ -1731,6 +1731,46 @@
         <CursorPos X="33" Y="52"/>
         <UsageCount Value="20"/>
       </Unit237>
+      <Unit238>
+        <Filename Value="..\lwtools\src\lwasm\pass1.c"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="138"/>
+        <CursorPos X="19" Y="149"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit238>
+      <Unit239>
+        <Filename Value="..\lwtools\src\lwasm\lwasm.c"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="895"/>
+        <CursorPos X="6" Y="903"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit239>
+      <Unit240>
+        <Filename Value="..\lwtools\src\lwlib\lw_expr.c"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1103"/>
+        <CursorPos X="5" Y="1114"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit240>
+      <Unit241>
+        <Filename Value="..\lwtools\src\lwlib\lw_expr.h"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="75"/>
+        <CursorPos X="22" Y="86"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit241>
+      <Unit242>
+        <Filename Value="..\lwtools\src\lwasm\insn_gen.c"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="187"/>
+        <CursorPos X="20" Y="198"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit242>
     </Units>
     <JumpHistory Count="18" HistoryIndex="17">
       <Position1>
@@ -1803,7 +1843,7 @@
       </Position17>
       <Position18>
         <Filename Value="cmoc2.lpr"/>
-        <Caret Line="49" Column="25" TopLine="36"/>
+        <Caret Line="49" Column="18" TopLine="36"/>
       </Position18>
     </JumpHistory>
   </ProjectSession>

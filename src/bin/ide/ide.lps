@@ -20,6 +20,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="587"/>
         <CursorPos X="18" Y="600"/>
         <UsageCount Value="97"/>
@@ -49,21 +50,18 @@
       <Unit4>
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="358"/>
         <CursorPos X="19" Y="359"/>
         <UsageCount Value="29"/>
-        <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="..\shared\ucmocparser.pas"/>
         <UnitName Value="UCmocParser"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="71"/>
         <CursorPos X="15" Y="52"/>
         <UsageCount Value="19"/>
-        <Loaded Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="..\..\..\LazHelpers\usyneditfinddialog.pas"/>
@@ -709,13 +707,12 @@
       <Unit90>
         <Filename Value="..\shared\ucmocparserfast.pas"/>
         <UnitName Value="UCmocParserFast"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="94"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit90>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="28" HistoryIndex="27">
       <Position1>
         <Filename Value="unitcmocide.pas"/>
         <Caret Line="582" Column="19" TopLine="571"/>
@@ -828,14 +825,6 @@
         <Filename Value="unitcmocide.pas"/>
         <Caret Line="600" Column="18" TopLine="587"/>
       </Position28>
-      <Position29>
-        <Filename Value="..\shared\ucmocutils.pas"/>
-        <Caret Line="398" Column="18" TopLine="388"/>
-      </Position29>
-      <Position30>
-        <Filename Value="..\shared\ucmocutils.pas"/>
-        <Caret Line="359" Column="19" TopLine="345"/>
-      </Position30>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

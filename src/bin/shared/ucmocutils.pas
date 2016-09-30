@@ -472,7 +472,7 @@ begin
       LCommandLine += Char_SPC + OCmoc.StringQuoted(LParam);
     end;
   end;
-  WriteLn(LCommandLine);
+  WriteLn('> ', LCommandLine);
   try
     inherited Execute;
   except
