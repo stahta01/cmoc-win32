@@ -9,6 +9,15 @@
 // memory on the stack as well. This is handy for other functions which
 // use _msize(). Its an extra 2 bytes per allocation, but I like the idea.
 
+// Note: Unlike the standard alloca(), its safe to call free() with stack
+// memory. This is due to the way libheap is written. There is no fancy
+// heap data structure. freeing stack memory will simply negate the size,
+// making _msize() return 0.
+
+// The downsize to libheap is, alloc's are slow for lots of small blocks,
+// but free's are fast. But, if you have lots of small blocks, you are
+// better off using memory pooling.
+
 #include <conio.h>
 #include <string.h>
 #include <malloc.h>
