@@ -184,42 +184,45 @@ begin
 end;
 
 const
-  GOffsetX = 'EXG x,d|ADDD ?,pcr|STD 15|EXG x,d|';
-  GOffsetY = 'EXG y,d|ADDD ?,pcr|STD 15|EXG y,d|';
+  LEAZX = 'EXG x,d|ADDD ?,pcr|STD 15|EXG x,d|';
+  LEAZY = 'EXG y,d|ADDD ?,pcr|STD 15|EXG y,d|';
+  STXB_Z = 'EXG x,d|STB [15]|EXG x,d|';
+  STYB_Z = 'EXG y,d|STB [15]|EXG y,d|';
+  LDXB_Z = 'EXG x,d|LDB [15]|EXG x,d|';
+  LDYB_Z = 'EXG y,d|LDB [15]|EXG y,d|';
 
 procedure M6502InsertStoreXY(const AAddrModes: T6502AddrModes; var ASource: OAsmSource;
   var AIndex: integer; const AInstruction: string);
 begin
   M6502Insert(AAddrModes, ASource, AIndex, [
-    amAbsM, 'EXG ###,d|STB ?|EXG ###,d', amAbsM_PID, 'EXG ###,d|STB ?,pcr|EXG ###,d',
+    amAbsM, 'EXG ###,d|STB ?|EXG ###,d',
     amAbsX, 'EXG y,d|STB ?,x|EXG y,d', amAbsY, 'EXG x,d|STB ?,y|EXG x,d',
-    amAbsX_PID, GOffsetX + 'EXG y,d|STB [15]|EXG y,d',
-    amAbsY_PID, GOffsetY + 'EXG x,d|STB [15]|EXG x,d'],
-    AInstruction[Length(AInstruction)]);
+    amAbsM_PID, 'EXG ###,d|STB ?,pcr|EXG ###,d',
+    amAbsX_PID, LEAZX + STYB_Z,
+    amAbsY_PID, LEAZY + STXB_Z], AInstruction[Length(AInstruction)]);
 end;
 
 procedure M6502InsertLoadXY(const AAddrModes: T6502AddrModes; var ASource: OAsmSource;
   var AIndex: integer; const AInstruction: string);
 begin
   M6502Insert(AAddrModes, ASource, AIndex, [
-    amImme, 'LDA #?|STA 16|LD### 15',
-    amAbsM, 'LDA ?|STA 16|LD### 15', amAbsM_PID, 'LDA ?,pcr|STA 16|LD### 15',
+    amImme, 'LDA #?|STA 16|LD### 15', amAbsM, 'LDA ?|STA 16|LD### 15',
     amAbsX, 'LDA ?,x|STA 16|LDY 15', amAbsY, 'LDA ?,y|STA 16|LDX 15',
-    amAbsX_PID, GOffsetX + 'EXG y,d|LDB [15]|EXG y,d',
-    amAbsY_PID, GOffsetY + 'EXG x,d|LDB [15]|EXG x,d'],
-    AInstruction[Length(AInstruction)]);
+    amAbsM_PID, 'LDA ?,pcr|STA 16|LD### 15',
+    amAbsX_PID, LEAZX + 'EXG y,d|LDB [15]|EXG y,d',
+    amAbsY_PID, LEAZY + 'EXG x,d|LDB [15]|EXG x,d'], AInstruction[Length(AInstruction)]);
 end;
 
 procedure M6502InsertLoadStoreA(const AAddrModes: T6502AddrModes; var ASource: OAsmSource;
   var AIndex: integer; const AInstruction: string);
 begin
   M6502Insert(AAddrModes, ASource, AIndex, [
-    amAccu, '###', amImme, '### #?',
-    amAbsM, '### ?', amAbsM_PID, '### ?,pcr',
-    amAbsX, '### ?,x', amAbsY, '### ?,y',
-    amAbsX_PID, GOffsetX + '### [15]', amAbsY_PID, GOffsetY + '### [15]',
-    amIndX, '### [?,x]', amIndX_PID, GOffsetX + '### [15,x]',
+    amAccu, '###', amImme, '### #?', amAbsM, '### ?', amAbsX, '### ?,x', amAbsY, '### ?,y',
+    amIndX, '### [?,x]',
     amIndY, 'PSHS b|LDD ?|EXG a,b|STD 15|TFR y,d|ADDD 15|STD 15|PULS b|### [15]',
+    amAbsM_PID, '### ?,pcr',
+    amAbsX_PID, LEAZX + '### [15]', amAbsY_PID, LEAZY + '### [15]',
+    amIndX_PID, LEAZX + '### [15,x]',
     amIndY_PID, 'PSHS b|LDD ?,pcr|EXG a,b|STD 15|TFR y,d|ADDD 15|STD 15|PULS b|### [15]'],
     AInstruction);
 end;
@@ -237,7 +240,8 @@ end;
 procedure M6502InsertBranch(var ASource: OAsmSource; var AIndex: integer;
   const AInstruction: string);
 begin
-  M6502Insert([amAbsM], ASource, AIndex, [amAbsM, '### ?'], AInstruction);
+  M6502Insert([amAbsM, amAbsM_PID], ASource, AIndex, [amAbsM, '### ?', amAbsM_PID, '### ?'],
+    AInstruction);
 end;
 
 procedure M6502InsertImplied(var ASource: OAsmSource; var AIndex: integer;
@@ -282,11 +286,13 @@ begin
     'PLP': begin
       M6502InsertPull(ASrc, AIndex, 'cc');
     end;
-    'JSR': begin
-      M6502Insert([amAbsM, amIndi], ASrc, AIndex, [amAbsM, 'BSR ?', amIndi, 'BSR [?]']);
-    end;
     'JMP': begin
-      M6502Insert([amAbsM, amIndi], ASrc, AIndex, [amAbsM, 'BRA ?', amIndi, 'BRA [?]']);
+      M6502Insert([amAbsM, amAbsM_PID, amIndi, amIndi_PID], ASrc, AIndex,
+        [amAbsM, 'JMP ?', amAbsM_PID, 'BRA ?', amIndi, 'JMP [?]', amIndi_PID, 'BRA [?]']);
+    end;
+    'JSR': begin
+      M6502Insert([amAbsM, amAbsM_PID, amIndi, amIndi_PID], ASrc, AIndex,
+        [amAbsM, 'JSR ?', amAbsM_PID, 'BSR ?', amIndi, 'JSR [?]', amIndi_PID, 'BSR [?]']);
     end;
     'STX': begin
       M6502InsertStoreXY([amAbsM, amAbsM_PID, amAbsY, amAbsY_PID], ASrc, AIndex, S);
@@ -323,4 +329,3 @@ begin
 end;
 
 end.
-

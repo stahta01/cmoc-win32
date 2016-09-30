@@ -105,16 +105,18 @@ byte memory;
 void test0(void)
 {
     asm {
-        ldd     =0
+        ldd     #0
         std     15
         .p02
-        lda     =$00
+        lda     #$00
         sta     0
-        lda     =$04
+        lda     #$04
         sta     1
-        ldy     =0
-        lda     =0
-        ldx     :memory
+        ldy     #0
+        loop:
+        sta     (0),y
+        iny
+        bne     loop
         .p09
     }
 }
