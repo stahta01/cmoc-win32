@@ -34,41 +34,12 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 */
 
-#ifndef _MALLOC_H
-#define _MALLOC_H
+#ifndef _ALLOCA_H
+#define _ALLOCA_H
 
-#include <heap.h>
-#include <far.h>
+#include <sys/size.h>
 
-void* malloc(size_t size);                      // ANSIC
-void* calloc(size_t count, size_t size);        // ANSIC
-void free(void* memory);                        // ANSIC
-size_t _msize(void* memory);                    // ANSIC
-void* realloc(void* memory, size_t size);       // ANSIC
-
-// high level far memory support
-
-far_void_t* _falloc(size_t size);               // CMOC
-far_void_t* _fcalloc(size_t numb, size_t size); // CMOC
-void _ffree(far_void_t* memory);                // CMOC
-
-#define _fmsize(A)  far_msize(A)
-#define _fmemcpy(A) far_memcpy(A)
-#define _fstrcpy(A) far_strcpy(A)
-#define _fstrlen(A) far_strlen(A)
-
-// changes heap & returns current heap. pass nullptr to get the current heap.
-
-heap_t* malloc_heap(heap_t* heap);              // CMOC
-
-// useful type allocation macros
-
-#define new(_TYPE)     ((_TYPE*)calloc(sizeof(_TYPE), 1))
-#define delete(_ADDR)  free(_ADDR)
-
-// alloca is deprecated, but is useful if you take care.
-
-#include <alloca.h>
+void* _alloca(size_t size);                     // BSD
 
 #endif
 
