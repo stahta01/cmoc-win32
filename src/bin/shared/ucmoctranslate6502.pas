@@ -57,11 +57,11 @@ const
 
 type
 
-  T6502AddrMode = (amImpl, amAccu, amImme, amIndi, amIndi_PID, amAbsM,
+  TAddrMode6502 = (amImpl, amAccu, amImme, amIndi, amIndi_PID, amAbsM,
     amAbsM_PID, amAbsX, amAbsX_PID, amAbsY, amAbsY_PID, amIndX, amIndX_PID, amIndY, amIndY_PID);
-  T6502AddrModes = set of T6502AddrMode;
+  TAddrMode6502s = set of TAddrMode6502;
 
-function M6502AddrMode(const AParam: string; var LValue: string): T6502AddrMode;
+function GetAddrMode(const AParam: string; var LValue: string): TAddrMode6502;
 
   function LIsPositionIndependant: boolean;
   begin
@@ -145,14 +145,14 @@ begin
   end;
 end;
 
-procedure M6502Insert(const AModes: T6502AddrModes; var ASource: OAsmSource;
+procedure Insert_ASM(const AModes: TAddrMode6502s; var ASource: OAsmSource;
   var AInsertPos: integer; const ARules: array of variant; const AMeta: string = '');
 var
   LRuleIndex, LPos, LEnd: integer;
   LString, LValue: string;
-  LMode: T6502AddrMode;
+  LMode: TAddrMode6502;
 begin
-  LMode := M6502AddrMode(ASource.Lines[AInsertPos].Parameters, LValue);
+  LMode := GetAddrMode(ASource.Lines[AInsertPos].Parameters, LValue);
   if not (LMode in AModes) then begin
     OCmoc.RaiseError(SInvalidInstructionMode);
   end;
@@ -191,10 +191,10 @@ const
   LDXB_Z = 'EXG x,d|LDB [15]|EXG x,d|';
   LDYB_Z = 'EXG y,d|LDB [15]|EXG y,d|';
 
-procedure M6502InsertStoreXY(const AAddrModes: T6502AddrModes; var ASource: OAsmSource;
+procedure Insert_STXY(const AAddrModes: TAddrMode6502s; var ASource: OAsmSource;
   var AIndex: integer; const AInstruction: string);
 begin
-  M6502Insert(AAddrModes, ASource, AIndex, [
+  Insert_ASM(AAddrModes, ASource, AIndex, [
     amAbsM, 'EXG ###,d|STB ?|EXG ###,d',
     amAbsX, 'EXG y,d|STB ?,x|EXG y,d', amAbsY, 'EXG x,d|STB ?,y|EXG x,d',
     amAbsM_PID, 'EXG ###,d|STB ?,pcr|EXG ###,d',
@@ -202,10 +202,10 @@ begin
     amAbsY_PID, LEAZY + STXB_Z], AInstruction[Length(AInstruction)]);
 end;
 
-procedure M6502InsertLoadXY(const AAddrModes: T6502AddrModes; var ASource: OAsmSource;
+procedure Insert_LDXY(const AAddrModes: TAddrMode6502s; var ASource: OAsmSource;
   var AIndex: integer; const AInstruction: string);
 begin
-  M6502Insert(AAddrModes, ASource, AIndex, [
+  Insert_ASM(AAddrModes, ASource, AIndex, [
     amImme, 'LDA #?|STA 16|LD### 15', amAbsM, 'LDA ?|STA 16|LD### 15',
     amAbsX, 'LDA ?,x|STA 16|LDY 15', amAbsY, 'LDA ?,y|STA 16|LDX 15',
     amAbsM_PID, 'LDA ?,pcr|STA 16|LD### 15',
@@ -213,10 +213,10 @@ begin
     amAbsY_PID, LEAZY + 'EXG x,d|LDB [15]|EXG x,d'], AInstruction[Length(AInstruction)]);
 end;
 
-procedure M6502InsertLoadStoreA(const AAddrModes: T6502AddrModes; var ASource: OAsmSource;
+procedure Insert_LSA(const AAddrModes: TAddrMode6502s; var ASource: OAsmSource;
   var AIndex: integer; const AInstruction: string);
 begin
-  M6502Insert(AAddrModes, ASource, AIndex, [
+  Insert_ASM(AAddrModes, ASource, AIndex, [
     amAccu, '###', amImme, '### #?', amAbsM, '### ?', amAbsX, '### ?,x', amAbsY, '### ?,y',
     amIndX, '### [?,x]',
     amIndY, 'PSHS b|LDD ?|EXG a,b|STD 15|TFR y,d|ADDD 15|STD 15|PULS b|### [15]',
@@ -227,27 +227,14 @@ begin
     AInstruction);
 end;
 
-procedure M6502InsertPush(var ASource: OAsmSource; var AIndex: integer; const ARegister: string);
+procedure Insert_PH(var ASource: OAsmSource; var AIndex: integer; const ARegister: string);
 begin
-  M6502Insert([amImpl], ASource, AIndex, [amImpl, 'PSHS ###'], ARegister);
+  Insert_ASM([amImpl], ASource, AIndex, [amImpl, 'PSHS ###'], ARegister);
 end;
 
-procedure M6502InsertPull(var ASource: OAsmSource; var AIndex: integer; const ARegister: string);
+procedure Insert_PL(var ASource: OAsmSource; var AIndex: integer; const ARegister: string);
 begin
-  M6502Insert([amImpl], ASource, AIndex, [amImpl, 'PULS ###'], ARegister);
-end;
-
-procedure M6502InsertBranch(var ASource: OAsmSource; var AIndex: integer;
-  const AInstruction: string);
-begin
-  M6502Insert([amAbsM, amAbsM_PID], ASource, AIndex, [amAbsM, '### ?', amAbsM_PID, '### ?'],
-    AInstruction);
-end;
-
-procedure M6502InsertImplied(var ASource: OAsmSource; var AIndex: integer;
-  const AInstruction: string);
-begin
-  M6502Insert([amImpl], ASource, AIndex, [amImpl, '###'], AInstruction);
+  Insert_ASM([amImpl], ASource, AIndex, [amImpl, 'PULS ###'], ARegister);
 end;
 
 procedure SourceTranslate6502(var ASrc: OAsmSource; var AIndex: integer);
@@ -257,69 +244,68 @@ begin
   S := UpperCase(ASrc.Lines[AIndex].Instruction);
   case S of
     'SEI', 'CLI', 'SEC', 'CLC', 'NOP', 'RTS', 'RTI': begin
-      M6502InsertImplied(ASrc, AIndex, S);
+      Insert_ASM([amImpl], ASrc, AIndex, [amImpl, '###'], S);
     end;
     'BCC', 'BCS', 'BEQ', 'BMI', 'BNE', 'BPL', 'BVC', 'BVS': begin
-      M6502InsertBranch(ASrc, AIndex, S);
+      Insert_ASM([amAbsM, amAbsM_PID], ASrc, AIndex, [amAbsM, '### ?', amAbsM_PID, '### ?'], S);
     end;
     'INX', 'INY': begin
-      M6502Insert([amImpl], ASrc, AIndex, [amImpl, 'EXG ###,d|ADDB #1|EXG ###,d'], S[3]);
+      Insert_ASM([amImpl], ASrc, AIndex, [amImpl, 'EXG ###,d|ADDB #1|EXG ###,d'], S[3]);
     end;
     'DEX', 'DEY': begin
-      M6502Insert([amImpl], ASrc, AIndex, [amImpl, 'EXG ###,d|SUBB #1|EXG ###,d'], S[3]);
+      Insert_ASM([amImpl], ASrc, AIndex, [amImpl, 'EXG ###,d|SUBB #1|EXG ###,d'], S[3]);
     end;
     'TAX', 'TAY': begin
-      M6502Insert([amImpl], ASrc, AIndex, [amImpl, 'CLRA|TFR d,###'], S[3]);
+      Insert_ASM([amImpl], ASrc, AIndex, [amImpl, 'CLRA|TFR d,###'], S[3]);
     end;
     'TXA', 'TYA': begin
-      M6502Insert([amImpl], ASrc, AIndex, [amImpl, 'TFR ###,d'], S[2]);
+      Insert_ASM([amImpl], ASrc, AIndex, [amImpl, 'TFR ###,d'], S[2]);
     end;
     'PHA': begin
-      M6502InsertPush(ASrc, AIndex, 'b');
+      Insert_PH(ASrc, AIndex, 'b');
     end;
     'PLA': begin
-      M6502InsertPull(ASrc, AIndex, 'b');
+      Insert_PL(ASrc, AIndex, 'b');
     end;
     'PHP': begin
-      M6502InsertPush(ASrc, AIndex, 'cc');
+      Insert_PH(ASrc, AIndex, 'cc');
     end;
     'PLP': begin
-      M6502InsertPull(ASrc, AIndex, 'cc');
+      Insert_PL(ASrc, AIndex, 'cc');
     end;
     'JMP': begin
-      M6502Insert([amAbsM, amAbsM_PID, amIndi, amIndi_PID], ASrc, AIndex,
+      Insert_ASM([amAbsM, amAbsM_PID, amIndi, amIndi_PID], ASrc, AIndex,
         [amAbsM, 'JMP ?', amAbsM_PID, 'BRA ?', amIndi, 'JMP [?]', amIndi_PID, 'BRA [?]']);
     end;
     'JSR': begin
-      M6502Insert([amAbsM, amAbsM_PID, amIndi, amIndi_PID], ASrc, AIndex,
+      Insert_ASM([amAbsM, amAbsM_PID, amIndi, amIndi_PID], ASrc, AIndex,
         [amAbsM, 'JSR ?', amAbsM_PID, 'BSR ?', amIndi, 'JSR [?]', amIndi_PID, 'BSR [?]']);
     end;
     'STX': begin
-      M6502InsertStoreXY([amAbsM, amAbsM_PID, amAbsY, amAbsY_PID], ASrc, AIndex, S);
+      Insert_STXY([amAbsM, amAbsM_PID, amAbsY, amAbsY_PID], ASrc, AIndex, S);
     end;
     'STY': begin
-      M6502InsertStoreXY([amAbsM, amAbsM_PID, amAbsX, amAbsX_PID], ASrc, AIndex, S);
+      Insert_STXY([amAbsM, amAbsM_PID, amAbsX, amAbsX_PID], ASrc, AIndex, S);
     end;
     'LDX': begin
-      M6502InsertLoadXY([amImme, amAbsM, amAbsM_PID, amAbsY, amAbsY_PID], ASrc, AIndex, S);
+      Insert_LDXY([amImme, amAbsM, amAbsM_PID, amAbsY, amAbsY_PID], ASrc, AIndex, S);
     end;
     'LDY': begin
-      M6502InsertLoadXY([amImme, amAbsM, amAbsM_PID, amAbsX, amAbsX_PID], ASrc, AIndex, S);
+      Insert_LDXY([amImme, amAbsM, amAbsM_PID, amAbsX, amAbsX_PID], ASrc, AIndex, S);
     end;
     'ASL', 'ROL', 'ROR', 'LSR': begin
-      M6502InsertLoadStoreA([amImpl, amAccu, amAbsM, amAbsM_PID, amAbsX, amAbsX_PID],
-        ASrc, AIndex, S + 'B');
+      Insert_LSA([amImpl, amAccu, amAbsM, amAbsM_PID, amAbsX, amAbsX_PID], ASrc, AIndex, S + 'B');
     end;
     'LDA', 'STA', 'ORA': begin
-      M6502InsertLoadStoreA([amImme, amAbsM, amAbsM_PID, amAbsX, amAbsX_PID, amAbsY,
-        amAbsY_PID, amIndX, amIndX_PID, amIndY, amIndY_PID], ASrc, AIndex, S[1] + S[2] + 'B');
+      Insert_LSA([amImme, amAbsM, amAbsM_PID, amAbsX, amAbsX_PID, amAbsY, amAbsY_PID,
+        amIndX, amIndX_PID, amIndY, amIndY_PID], ASrc, AIndex, S[1] + S[2] + 'B');
     end;
     'ADC', 'SBC', 'AND', 'EOR': begin
-      M6502InsertLoadStoreA([amImme, amAbsM, amAbsM_PID, amAbsX, amAbsX_PID, amAbsY,
-        amAbsY_PID, amIndX, amIndX_PID, amIndY, amIndY_PID], ASrc, AIndex, S + 'B');
+      Insert_LSA([amImme, amAbsM, amAbsM_PID, amAbsX, amAbsX_PID, amAbsY, amAbsY_PID,
+        amIndX, amIndX_PID, amIndY, amIndY_PID], ASrc, AIndex, S + 'B');
     end;
     'INC', 'DEC': begin
-      M6502InsertLoadStoreA([amAbsM, amAbsM_PID, amAbsX, amAbsX_PID], ASrc, AIndex, S);
+      Insert_LSA([amAbsM, amAbsM_PID, amAbsX, amAbsX_PID], ASrc, AIndex, S);
     end;
     'FCB', 'FDB': begin
     end else begin
