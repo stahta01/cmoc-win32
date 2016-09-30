@@ -15,21 +15,24 @@
 
 void alloca_test(void)
 {
-    char* fmt = "STKMEM: $%X\nSTKSTR: '%s'\nSOURCE: '%s'\nMEMSIZ: %d\n";
+    char* fmt = "MEMORY: $%X MSIZE: %d\nSTKSTR: '%s'\nSOURCE: '%s'\n";
     char* s1 = "FIRST STRING";
     char* s2 = "SECOND STRING";
     char* s3 = "THIRD STRING";
     char* m1 = (char*)_alloca(strlen(s1) + 1);
     char* m2 = (char*)_alloca(strlen(s2) + 1);
     char* m3 = (char*)_alloca(strlen(s3) + 1);
-    int a, b, c, d;
+    int a = 10, b = 20, c = 30, d = 40;         // dummy variables
     strcpy(m1, s1);
     strcpy(m2, s2);
     strcpy(m3, s3);
-    char dummy[100];
-    cprintf(fmt, m1, m1, s1, _msize(m1));
-    cprintf(fmt, m2, m2, s2, _msize(m2));
-    cprintf(fmt, m3, m3, s3, _msize(m3));
+    char dummy[32];                             // dummy array
+    strcpy(dummy, "CMOC STACK ALLOC");
+    cprintf(fmt, m1, _msize(m1), m1, s1);
+    cprintf(fmt, m2, _msize(m2), m2, s2);
+    cprintf(fmt, m3, _msize(m3), m3, s3);
+    cprintf("DUMMY VARS: %d %d %d %d\n", a, b, c, d);
+    cprintf("DUMMY ARRAY: %s\n", dummy);
 }
 
 int main(void)
