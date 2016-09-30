@@ -46,19 +46,23 @@ uses
 {$R *.res}
 
 var
-  GParams: TStrings;
+  GCmdLine: TStrings;
 
 begin
-  GParams := TStringList.Create;
-  GParams.CommaText := CmdLine;
   try
-    with CAmoc.Create(nil) do begin
-      try
-        FInitSymbol := GParams.Values['--initgl'];
-        Preprocess(System.Output, System.Input);
-      finally
-        Free;
+    GCmdLine := TStringList.Create;
+    try
+      GCmdLine.CommaText := CmdLine;
+      with CAmoc.Create(nil) do begin
+        try
+          FInitSymbol := GCmdLine.Values['--initgl'];
+          Preprocess(System.Output, System.Input);
+        finally
+          Free;
+        end;
       end;
+    finally
+      FreeAndNil(GCmdLine);
     end;
   except
   end;

@@ -87,6 +87,36 @@ begin
   end;
 end;
 
+function OAsmLine.SameSymbol(const A: string): boolean;
+begin
+  Result := A = Symbol;
+end;
+
+function OAsmLine.SameInstruction(const A: string): boolean;
+begin
+  Result := SameText(A, Instruction);
+end;
+
+function OAsmLine.SameParameters(const A: string): boolean;
+begin
+  Result := SameText(A, Parameters);
+end;
+
+function OAsmLine.AsString: string;
+begin
+  if Length(Symbol) = 0 then begin
+    Result := EmptyStr;
+  end else begin
+    Result := Symbol;
+  end;
+  if Length(Instruction) > 0 then begin
+    Result += #9 + Instruction;
+    if Length(Parameters) > 0 then begin
+      Result += #9 + Parameters;
+    end;
+  end;
+end;
+
 function OAsmLine.SetLine(const ASrcLine: string): boolean;
 var
   LBeg, LTok, LPos: pchar;
@@ -142,36 +172,6 @@ begin
       if not LIsComment then begin
         SetString(Parameters, LTok, LPos - LTok);
       end;
-    end;
-  end;
-end;
-
-function OAsmLine.SameSymbol(const A: string): boolean;
-begin
-  Result := A = Symbol;
-end;
-
-function OAsmLine.SameInstruction(const A: string): boolean;
-begin
-  Result := SameText(A, Instruction);
-end;
-
-function OAsmLine.SameParameters(const A: string): boolean;
-begin
-  Result := SameText(A, Parameters);
-end;
-
-function OAsmLine.AsString: string;
-begin
-  if Length(Symbol) = 0 then begin
-    Result := EmptyStr;
-  end else begin
-    Result := Symbol;
-  end;
-  if Length(Instruction) > 0 then begin
-    Result += #9 + Instruction;
-    if Length(Parameters) > 0 then begin
-      Result += #9 + Parameters;
     end;
   end;
 end;

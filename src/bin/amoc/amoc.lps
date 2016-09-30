@@ -8,8 +8,9 @@
       <Unit0>
         <Filename Value="amoc.lpr"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="43"/>
-        <CursorPos X="13" Y="55"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="45"/>
+        <CursorPos X="36" Y="55"/>
         <UsageCount Value="51"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -83,8 +84,8 @@
         <Filename Value="..\shared\ucmocasmsource.pas"/>
         <UnitName Value="UCmocAsmSource"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="85"/>
-        <CursorPos X="6" Y="75"/>
+        <TopLine Value="30"/>
+        <CursorPos X="38" Y="111"/>
         <UsageCount Value="19"/>
         <Loaded Value="True"/>
       </Unit9>
@@ -112,10 +113,9 @@
       <Unit13>
         <Filename Value="..\shared\ucmocasmline.pas"/>
         <UnitName Value="UCmocAsmLine"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="150"/>
-        <CursorPos X="13" Y="161"/>
+        <TopLine Value="97"/>
+        <CursorPos Y="119"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit13>
@@ -142,7 +142,7 @@
         <UsageCount Value="10"/>
       </Unit16>
     </Units>
-    <JumpHistory Count="19" HistoryIndex="18">
+    <JumpHistory Count="20" HistoryIndex="19">
       <Position1>
         <Filename Value="amoc.lpr"/>
         <Caret Line="55" Column="12" TopLine="43"/>
@@ -219,6 +219,10 @@
         <Filename Value="..\shared\ucmocasmline.pas"/>
         <Caret Line="156" Column="15" TopLine="150"/>
       </Position19>
+      <Position20>
+        <Filename Value="..\shared\ucmocasmsource.pas"/>
+        <Caret Line="123" Column="37" TopLine="109"/>
+      </Position20>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

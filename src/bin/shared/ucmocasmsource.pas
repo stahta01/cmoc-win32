@@ -48,7 +48,7 @@ type
   public
     Lines: array of OAsmLine;
   public
-    function Count: integer;
+    function Count: integer; inline;
   public
     procedure Insert(const AIndex: integer; const ASymbol, AInstruction, AParameters: string);
     procedure Add(const ASymbol, AInstruction, AParameters: string);
@@ -56,17 +56,17 @@ type
     function AddSourceLine(const ASrcLine: string): boolean;
     function InsertSourceLine(const AIndex: integer; const ASrcLine: string): boolean;
   public
-    procedure AddSource(const A: TStrings);
+    procedure AddSource(const AStrings: TStrings);
   public
-    procedure SaveToStrings(const A: TStrings);
-    procedure SaveToFile(const A: TFileName);
+    procedure SaveToStrings(const AStrings: TStrings);
+    procedure SaveToFile(const AFileName: TFileName);
   end;
 
 implementation
 
 function OAsmSource.Count: integer;
 begin
-  Result := Length(Lines);
+  Result := System.Length(Lines);
 end;
 
 procedure OAsmSource.Insert(const AIndex: integer;
@@ -74,8 +74,8 @@ procedure OAsmSource.Insert(const AIndex: integer;
 var
   LIndex: integer;
 begin
-  SetLength(Lines, Length(Lines) + 1);
-  for LIndex := High(Lines) - 1 downto AIndex do begin
+  System.SetLength(Lines, Count + 1);
+  for LIndex := Count - 2 downto AIndex do begin
     Lines[LIndex + 1] := Lines[LIndex];
   end;
   Lines[AIndex].SetLine(ASymbol, AInstruction, AParameters);
@@ -83,8 +83,7 @@ end;
 
 procedure OAsmSource.Add(const ASymbol, AInstruction, AParameters: string);
 begin
-  SetLength(Lines, Length(Lines) + 1);
-  Lines[High(Lines)].SetLine(ASymbol, AInstruction, AParameters);
+  Insert(Count, ASymbol, AInstruction, AParameters);
 end;
 
 function OAsmSource.AddSourceLine(const ASrcLine: string): boolean;
@@ -109,35 +108,35 @@ begin
   end;
 end;
 
-procedure OAsmSource.AddSource(const A: TStrings);
+procedure OAsmSource.AddSource(const AStrings: TStrings);
 var
   LIndex: integer;
 begin
-  for LIndex := 0 to A.Count - 1 do begin
-    AddSourceLine(A[LIndex]);
+  for LIndex := 0 to AStrings.Count - 1 do begin
+    AddSourceLine(AStrings[LIndex]);
   end;
 end;
 
-procedure OAsmSource.SaveToStrings(const A: TStrings);
+procedure OAsmSource.SaveToStrings(const AStrings: TStrings);
 var
   LIndex: integer;
 begin
-  A.Clear;
-  for LIndex := Low(Lines) to High(Lines) do begin
+  AStrings.Clear;
+  for LIndex := 0 to Count - 1 do begin
     if not Lines[LIndex].IsDeleted then begin
-      A.Add(Lines[LIndex].AsString);
+      AStrings.Add(Lines[LIndex].AsString);
     end;
   end;
 end;
 
-procedure OAsmSource.SaveToFile(const A: TFileName);
+procedure OAsmSource.SaveToFile(const AFileName: TFileName);
 var
   LStrings: TStrings;
 begin
   LStrings := TStringList.Create;
   try
     SaveToStrings(LStrings);
-    LStrings.SaveToFile(A);
+    LStrings.SaveToFile(AFileName);
   finally
     FreeAndNil(LStrings);
   end;
