@@ -41,7 +41,7 @@ uses
   AmocProcess,
   Classes,
   SysUtils,
-  U6502;
+  UCmoc6502;
 
 {$R *.res}
 

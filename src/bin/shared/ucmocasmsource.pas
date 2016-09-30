@@ -33,30 +33,16 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 *)
 
-unit UCmocAsmParser;
+unit UCmocAsmSource;
 
 {$INCLUDE cmoc.inc}
 
 interface
 
 uses
-  Classes, StrUtils, SysUtils;
+  Classes, StrUtils, SysUtils, UCmocAsmLine;
 
 type
-
-  OAsmLine = object
-  public
-    Sym, Ins, Par: string;
-  public
-    procedure SetLine(const ASym, AIns, APar: string);
-  public
-    function IsSym(const A: string): boolean;
-    function IsIns(const A: string): boolean;
-    function IsPar(const A: string): boolean;
-    function AsString: string;
-  public
-    Deleted, Is6502: boolean;
-  end;
 
   OAsmSource = object
   public
@@ -77,62 +63,7 @@ type
     procedure SaveToFile(const A: TFileName);
   end;
 
-function SymbolIsPublic(const A: string): boolean;
-
 implementation
-
-function SymbolIsPublic(const A: string): boolean;
-begin
-  Result := Length(A) >= 2;
-  if Result then begin
-    Result := (A[1] = '_') and (A[2] in ['a'..'z', 'A'..'Z', '_']) and not
-      AnsiStartsStr('__static_', A);
-  end;
-end;
-
-procedure OAsmLine.SetLine(const ASym, AIns, APar: string);
-begin
-  Deleted := False;
-  Sym := Trim(ASym);
-  Ins := UpperCase(Trim(AIns));
-  Par := Trim(APar);
-  if Length(Par) > 0 then begin
-    // Compatiblity with the BBC assembler
-    if Par[1] = '=' then begin
-      Par[1] := '#';
-    end;
-  end;
-end;
-
-function OAsmLine.IsSym(const A: string): boolean;
-begin
-  Result := A = Sym;
-end;
-
-function OAsmLine.IsIns(const A: string): boolean;
-begin
-  Result := AnsiSameText(A, Ins);
-end;
-
-function OAsmLine.IsPar(const A: string): boolean;
-begin
-  Result := AnsiSameText(A, Par);
-end;
-
-function OAsmLine.AsString: string;
-begin
-  if Length(Sym) = 0 then begin
-    Result := EmptyStr;
-  end else begin
-    Result := Sym;
-  end;
-  if Length(Ins) > 0 then begin
-    Result += #9 + Ins;
-    if Length(Par) > 0 then begin
-      Result += #9 + Par;
-    end;
-  end;
-end;
 
 function OAsmSource.Count: integer;
 begin
@@ -198,18 +129,18 @@ begin
     if (LTok = LBeg) or (LEnd[-1] = ':') then begin
       Result := True;
       if LEnd[-1] = ':' then begin
-        SetString(ADst.Sym, LTok, LEnd - LTok - 1);
+        SetString(ADst.Symbol, LTok, LEnd - LTok - 1);
       end else begin
-        SetString(ADst.Sym, LTok, LEnd - LTok);
+        SetString(ADst.Symbol, LTok, LEnd - LTok);
       end;
       LNextToken;
     end;
     if LTok^ in ['a'..'z', 'A'..'Z', '.'] then begin
       Result := True;
-      SetString(ADst.Ins, LTok, LEnd - LTok);
+      SetString(ADst.Instruction, LTok, LEnd - LTok);
       LNextToken;
       if not LIsComment then begin
-        SetString(ADst.Par, LTok, LEnd - LTok);
+        SetString(ADst.Parameters, LTok, LEnd - LTok);
       end;
     end;
   end;
@@ -221,7 +152,7 @@ var
 begin
   Result := AsmParse(A, LLine);
   if Result then begin
-    Add(LLine.Sym, LLine.Ins, LLine.Par);
+    Add(LLine.Symbol, LLine.Instruction, LLine.Parameters);
   end;
 end;
 
@@ -231,7 +162,7 @@ var
 begin
   Result := AsmParse(A, LLine);
   if Result then begin
-    Insert(APos, LLine.Sym, LLine.Ins, LLine.Par);
+    Insert(APos, LLine.Symbol, LLine.Instruction, LLine.Parameters);
   end;
 end;
 
@@ -250,7 +181,7 @@ var
 begin
   A.Clear;
   for LIndex := Low(Lines) to High(Lines) do begin
-    if not Lines[LIndex].Deleted then begin
+    if not Lines[LIndex].IsDeleted then begin
       A.Add(Lines[LIndex].AsString);
     end;
   end;

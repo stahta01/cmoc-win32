@@ -47,9 +47,9 @@
         <UnitName Value="AmocProcess"/>
       </Unit1>
       <Unit2>
-        <Filename Value="u6502.pas"/>
+        <Filename Value="..\shared\ucmoc6502.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="U6502"/>
+        <UnitName Value="UCmoc6502"/>
       </Unit2>
     </Units>
   </ProjectOptions>

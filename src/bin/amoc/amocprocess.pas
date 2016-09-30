@@ -40,7 +40,7 @@ unit AmocProcess;
 interface
 
 uses
-  Classes, StrUtils, SysUtils, U6502, UCmocAsmParser, UCmocDefs, UCmocPreprocessor,
+  Classes, StrUtils, SysUtils, UCmoc6502, UCmocAsmLine, UCmocAsmSource, UCmocDefs, UCmocPreprocessor,
   UCmocUtils;
 
 type
@@ -131,23 +131,23 @@ var
   LIndex: integer;
 begin
   for LIndex := 0 to FSource.Count - 1 do begin
-    FSource.Lines[LIndex].Deleted := not FSource.Lines[LIndex].IsSym(Sym_FunctionsStart);
-    if not FSource.Lines[LIndex].Deleted then begin
+    FSource.Lines[LIndex].IsDeleted := not FSource.Lines[LIndex].SameSymbol(Sym_FunctionsStart);
+    if not FSource.Lines[LIndex].IsDeleted then begin
       break;
     end;
   end;
   for LIndex := FSource.Count - 1 downto 0 do begin
-    FSource.Lines[LIndex].Deleted := not FSource.Lines[LIndex].IsSym(Sym_ProgramEnd);
-    if not FSource.Lines[LIndex].Deleted then begin
+    FSource.Lines[LIndex].IsDeleted := not FSource.Lines[LIndex].SameSymbol(Sym_ProgramEnd);
+    if not FSource.Lines[LIndex].IsDeleted then begin
       break;
     end;
   end;
   for LIndex := 0 to FSource.Count - 1 do begin
-    if AnsiMatchText(FSource.Lines[LIndex].Sym, ['program_end', 'functions_start',
+    if AnsiMatchText(FSource.Lines[LIndex].Symbol, ['program_end', 'functions_start',
       'functions_end',
       'string_literals_start', 'string_literals_end', 'writable_globals_start',
       'writable_globals_end']) then begin
-      FSource.Lines[LIndex].Deleted := True;
+      FSource.Lines[LIndex].IsDeleted := True;
     end;
   end;
 end;
@@ -159,15 +159,15 @@ var
   LParser: OAsmParser;
 begin
   for LIndex := 0 to FSource.Count - 1 do begin
-    if SymbolIsPublic(FSource.Lines[LIndex].Sym) then begin
-      AddExport(FSource.Lines[LIndex].Sym);
+    if SymbolIsPublic(FSource.Lines[LIndex].Symbol) then begin
+      AddExport(FSource.Lines[LIndex].Symbol);
     end;
-    if FSource.Lines[LIndex].IsIns('RMB') then begin
-      FSource.Lines[LIndex].Ins := 'ZMB';
+    if FSource.Lines[LIndex].SameInstruction('RMB') then begin
+      FSource.Lines[LIndex].Instruction := 'ZMB';
     end;
   end;
   for LIndex := 0 to FSource.Count - 1 do begin
-    LParser.SetString(FSource.Lines[LIndex].Par);
+    LParser.SetString(FSource.Lines[LIndex].Parameters);
     while LParser.Next do begin
       LString := LParser.Token;
       if SymbolIsPublic(LString) and (FExportSymbols.IndexOf(LString) < 0) then begin
@@ -182,12 +182,12 @@ var
   LIndex: integer;
 begin
   for LIndex := FSource.Count - 2 downto 0 do begin
-    if AnsiStartsStr(Sym_INITGL, FSource.Lines[LIndex].Sym) then begin
-      if FSource.Lines[LIndex + 1].IsIns('rts') then begin
-        FSource.Lines[LIndex + 0].Deleted := True;
-        FSource.Lines[LIndex + 1].Deleted := True;
+    if AnsiStartsStr(Sym_INITGL, FSource.Lines[LIndex].Symbol) then begin
+      if FSource.Lines[LIndex + 1].SameInstruction('rts') then begin
+        FSource.Lines[LIndex + 0].IsDeleted := True;
+        FSource.Lines[LIndex + 1].IsDeleted := True;
       end else begin
-        FSource.Lines[LIndex].Sym := AName;
+        FSource.Lines[LIndex].Symbol := AName;
         AddExport(AName);
       end;
       Break;

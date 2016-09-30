@@ -33,14 +33,14 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 *)
 
-unit U6502;
+unit UCmoc6502;
 
 {$INCLUDE cmoc.inc}
 
 interface
 
 uses
-  StrUtils, SysUtils, UCmocAsmParser, UCmocUtils;
+  StrUtils, SysUtils, UCmocAsmSource, UCmocUtils;
 
 procedure M6502Translate(var ASource: OAsmSource);
 
@@ -155,11 +155,11 @@ var
   LMode: T6502Mode;
 begin
   Result := AInsertPos;
-  LMode := M6502AddrMode(ASource.Lines[Result].Par, LValue);
+  LMode := M6502AddrMode(ASource.Lines[Result].Parameters, LValue);
   if not (LMode in AModes) then begin
     OCmoc.RaiseError('invalid instruction mode');
   end;
-  ASource.Lines[Result].Deleted := True;
+  ASource.Lines[Result].IsDeleted := True;
   LIndex := 0;
   while LIndex < High(A) do begin
     if A[LIndex] = LMode then begin
@@ -175,7 +175,7 @@ begin
           '?', LValue), '###', AMeta)) then begin
           ASource.Lines[Result].Is6502 := True;
           if Result = AInsertPos then begin
-            ASource.Lines[Result].Sym := ASource.Lines[Result + 1].Sym;
+            ASource.Lines[Result].Symbol := ASource.Lines[Result + 1].Symbol;
           end;
           Inc(Result);
         end;
@@ -261,38 +261,39 @@ begin
   LIndex := 0;
   while LIndex < Length(ASource.Lines) do begin
     with ASource.Lines[LIndex] do begin
-      if not (Deleted or Is6502 or (Length(Ins) = 0)) then begin
-        if IsIns('.p09') then begin
-          Deleted := True;
+      if not (IsDeleted or Is6502 or (Length(Instruction) = 0)) then begin
+        if SameInstruction('.p09') then begin
+          IsDeleted := True;
           LLanguage := al6809;
-        end else if IsIns('.p02') then begin
-          Deleted := True;
+        end else if SameInstruction('.p02') then begin
+          IsDeleted := True;
           LLanguage := al6502;
         end else begin
-          Ins := UpperCase(Ins);
+          Instruction := UpperCase(Instruction);
           case LLanguage of
             al6502: begin
-              case Ins of
+              case Instruction of
                 'SEI', 'CLI', 'SEC', 'CLC', 'NOP', 'RTS', 'RTI': begin
-                  LIndex := M6502InsertImplied(ASource, LIndex, Ins);
+                  LIndex := M6502InsertImplied(ASource, LIndex, Instruction);
                 end;
                 'BCC', 'BCS', 'BEQ', 'BMI', 'BNE', 'BPL', 'BVC', 'BVS': begin
-                  LIndex := M6502InsertBranch(ASource, LIndex, Ins);
+                  LIndex := M6502InsertBranch(ASource, LIndex, Instruction);
                 end;
                 'INX', 'INY': begin
                   LIndex := M6502Insert([amImpl], ASource, LIndex,
-                    [amImpl, 'EXG ###,d|ADDB #1|EXG ###,d'], Ins[3]);
+                    [amImpl, 'EXG ###,d|ADDB #1|EXG ###,d'], Instruction[3]);
                 end;
                 'DEX', 'DEY': begin
                   LIndex := M6502Insert([amImpl], ASource, LIndex,
-                    [amImpl, 'EXG ###,d|SUBB #1|EXG ###,d'], Ins[3]);
+                    [amImpl, 'EXG ###,d|SUBB #1|EXG ###,d'], Instruction[3]);
                 end;
                 'TAX', 'TAY': begin
                   LIndex := M6502Insert([amImpl], ASource,
-                    LIndex, [amImpl, 'CLRA|TFR d,###'], Ins[3]);
+                    LIndex, [amImpl, 'CLRA|TFR d,###'], Instruction[3]);
                 end;
                 'TXA', 'TYA': begin
-                  LIndex := M6502Insert([amImpl], ASource, LIndex, [amImpl, 'TFR ###,d'], Ins[2]);
+                  LIndex := M6502Insert([amImpl], ASource, LIndex,
+                    [amImpl, 'TFR ###,d'], Instruction[2]);
                 end;
                 'PHA': begin
                   LIndex := M6502InsertPush(ASource, LIndex, 'b');
@@ -316,41 +317,41 @@ begin
                 end;
                 'STX': begin
                   LIndex := M6502InsertStoreXY([amAbsM, amAbsM_PID, amAbsY, amAbsY_PID],
-                    ASource, LIndex, Ins);
+                    ASource, LIndex, Instruction);
                 end;
                 'STY': begin
                   LIndex := M6502InsertStoreXY([amAbsM, amAbsM_PID, amAbsX, amAbsX_PID],
-                    ASource, LIndex, Ins);
+                    ASource, LIndex, Instruction);
                 end;
                 'LDX': begin
                   LIndex := M6502InsertLoadXY([amImme, amAbsM, amAbsM_PID, amAbsY, amAbsY_PID],
-                    ASource, LIndex, Ins);
+                    ASource, LIndex, Instruction);
                 end;
                 'LDY': begin
                   LIndex := M6502InsertLoadXY([amImme, amAbsM, amAbsM_PID, amAbsX, amAbsX_PID],
-                    ASource, LIndex, Ins);
+                    ASource, LIndex, Instruction);
                 end;
                 'ASL', 'ROL', 'ROR', 'LSR': begin
                   LIndex := M6502InsertLoadStoreA([amImpl, amAccu, amAbsM,
-                    amAbsM_PID, amAbsX, amAbsX_PID], ASource, LIndex, Ins + 'B');
+                    amAbsM_PID, amAbsX, amAbsX_PID], ASource, LIndex, Instruction + 'B');
                 end;
                 'LDA', 'STA', 'ORA': begin
                   LIndex := M6502InsertLoadStoreA([amImme, amAbsM, amAbsM_PID, amAbsX, amAbsX_PID,
                     amAbsY, amAbsY_PID, amIndX, amIndX_PID, amIndY, amIndY_PID], ASource,
-                    LIndex, Copy(Ins, 1, 2) + 'B');
+                    LIndex, Copy(Instruction, 1, 2) + 'B');
                 end;
                 'ADC', 'SBC', 'AND', 'EOR': begin
                   LIndex := M6502InsertLoadStoreA([amImme, amAbsM, amAbsM_PID, amAbsX, amAbsX_PID,
                     amAbsY, amAbsY_PID, amIndX, amIndX_PID, amIndY, amIndY_PID],
-                    ASource, LIndex, Ins + 'B');
+                    ASource, LIndex, Instruction + 'B');
                 end;
                 'INC', 'DEC': begin
                   LIndex := M6502InsertLoadStoreA([amAbsM, amAbsM_PID, amAbsX, amAbsX_PID],
-                    ASource, LIndex, Ins);
+                    ASource, LIndex, Instruction);
                 end;
                 'FCB', 'FDB': begin
                 end else begin
-                  OCmoc.RaiseError('unknown 6502 mnemonic', Ins);
+                  OCmoc.RaiseError('unknown 6502 mnemonic', Instruction);
                 end;
               end;
             end;

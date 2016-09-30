@@ -33,7 +33,7 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 *)
 
-unit UCmocAsm;
+unit UCmocAsmDefs;
 
 {$INCLUDE cmoc.inc}
 

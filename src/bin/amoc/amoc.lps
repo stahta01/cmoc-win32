@@ -4,13 +4,13 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="13">
+    <Units Count="15">
       <Unit0>
         <Filename Value="amoc.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="43"/>
-        <CursorPos X="13" Y="55"/>
+        <TopLine Value="31"/>
+        <CursorPos X="47" Y="38"/>
         <UsageCount Value="50"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -19,25 +19,25 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="AmocProcess"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="142"/>
-        <CursorPos X="29" Y="161"/>
+        <TopLine Value="39"/>
+        <CursorPos X="102" Y="43"/>
         <UsageCount Value="50"/>
       </Unit1>
       <Unit2>
-        <Filename Value="u6502.pas"/>
+        <Filename Value="..\shared\ucmoc6502.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="U6502"/>
+        <UnitName Value="UCmoc6502"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="58"/>
-        <CursorPos X="44" Y="68"/>
+        <TopLine Value="238"/>
+        <CursorPos X="25" Y="251"/>
         <UsageCount Value="40"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\shared\ucmocpreprocessor.pas"/>
         <UnitName Value="UCmocPreprocessor"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="41"/>
-        <CursorPos X="15" Y="52"/>
+        <TopLine Value="25"/>
+        <CursorPos X="17" Y="47"/>
         <UsageCount Value="19"/>
       </Unit3>
       <Unit4>
@@ -66,51 +66,77 @@
         <Filename Value="..\shared\ucmocutils.pas"/>
         <UnitName Value="UCmocUtils"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="36"/>
-        <CursorPos X="3" Y="47"/>
+        <TopLine Value="34"/>
+        <CursorPos X="27" Y="44"/>
         <UsageCount Value="10"/>
       </Unit7>
       <Unit8>
-        <Filename Value="..\shared\ucmocasm.pas"/>
-        <UnitName Value="UCmocAsm"/>
+        <Filename Value="..\shared\ucmocasmdefs.pas"/>
+        <UnitName Value="UCmocAsmDefs"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="50"/>
-        <CursorPos X="38" Y="68"/>
-        <UsageCount Value="8"/>
+        <TopLine Value="36"/>
+        <CursorPos X="18" Y="36"/>
+        <UsageCount Value="10"/>
       </Unit8>
       <Unit9>
-        <Filename Value="ucmocasmparser.pas"/>
-        <UnitName Value="UCmocAsmParser"/>
+        <Filename Value="..\shared\ucmocasmsource.pas"/>
+        <UnitName Value="UCmocAsmSource"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="192"/>
-        <CursorPos X="33" Y="201"/>
+        <TopLine Value="34"/>
+        <CursorPos X="28" Y="36"/>
         <UsageCount Value="19"/>
       </Unit9>
       <Unit10>
         <Filename Value="..\shared\ucmocstringdynarray.pas"/>
         <UnitName Value="UCmocStringDynArray"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="68"/>
-        <CursorPos X="25" Y="68"/>
-        <UsageCount Value="8"/>
+        <TopLine Value="31"/>
+        <UsageCount Value="10"/>
       </Unit10>
       <Unit11>
         <Filename Value="..\shared\ucmocdefs.pas"/>
         <UnitName Value="UCmocDefs"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="143"/>
-        <CursorPos X="3" Y="154"/>
-        <UsageCount Value="8"/>
+        <TopLine Value="43"/>
+        <UsageCount Value="10"/>
       </Unit11>
       <Unit12>
         <Filename Value="..\shared\ucmocparser.pas"/>
         <UnitName Value="UCmocParser"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="49"/>
-        <CursorPos X="3" Y="47"/>
-        <UsageCount Value="8"/>
+        <TopLine Value="31"/>
+        <UsageCount Value="10"/>
       </Unit12>
+      <Unit13>
+        <Filename Value="..\shared\ucmocasmline.pas"/>
+        <UnitName Value="UCmocAsmLine"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="32"/>
+        <CursorPos X="39" Y="56"/>
+        <UsageCount Value="20"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="..\shared\ucmocasm.pas"/>
+        <UnitName Value="UCmocAsm"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="25"/>
+        <CursorPos X="6" Y="36"/>
+        <UsageCount Value="10"/>
+      </Unit14>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory Count="3" HistoryIndex="2">
+      <Position1>
+        <Filename Value="amoc.lpr"/>
+        <Caret Line="55" Column="12" TopLine="43"/>
+      </Position1>
+      <Position2>
+        <Filename Value="amoc.lpr"/>
+        <Caret Line="41" Column="9" TopLine="31"/>
+      </Position2>
+      <Position3>
+        <Filename Value="amoc.lpr"/>
+        <Caret Line="44" Column="6" TopLine="31"/>
+      </Position3>
+    </JumpHistory>
   </ProjectSession>
 </CONFIG>
