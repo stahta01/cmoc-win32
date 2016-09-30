@@ -2,11 +2,6 @@
 // Note: These are not working rountines. Its only the start of a 6502->6809 translator.
 // Im just testing that the code is actually converting to something.
 
-extern word regz;
-extern word value;
-
-word regz = 0, value = 0;
-
 #pragma options --optimize=0 -machine=coco
 
 /*
@@ -110,16 +105,16 @@ byte memory;
 void test0(void)
 {
     asm {
-        ldd     #0
+        ldd     =0
         std     15
         .p02
-        lda     #$00
+        lda     =$00
         sta     0
-        lda     #$04
+        lda     =$04
         sta     1
-        ldy     #0
-        lda     #0
-        sta     (0),y
+        ldy     =0
+        lda     =0
+        ldx     memory
         .p09
     }
 }

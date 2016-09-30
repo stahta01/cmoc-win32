@@ -10,8 +10,8 @@
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="43"/>
-        <CursorPos X="16" Y="58"/>
-        <UsageCount Value="49"/>
+        <CursorPos X="13" Y="55"/>
+        <UsageCount Value="50"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -19,18 +19,18 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="AmocProcess"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="204"/>
-        <CursorPos X="12" Y="222"/>
-        <UsageCount Value="49"/>
+        <TopLine Value="142"/>
+        <CursorPos X="29" Y="161"/>
+        <UsageCount Value="50"/>
       </Unit1>
       <Unit2>
         <Filename Value="u6502.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="U6502"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="92"/>
-        <CursorPos X="38" Y="212"/>
-        <UsageCount Value="39"/>
+        <TopLine Value="58"/>
+        <CursorPos X="44" Y="68"/>
+        <UsageCount Value="40"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\shared\ucmocpreprocessor.pas"/>
@@ -82,8 +82,8 @@
         <Filename Value="ucmocasmparser.pas"/>
         <UnitName Value="UCmocAsmParser"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="47"/>
-        <CursorPos X="20" Y="58"/>
+        <TopLine Value="192"/>
+        <CursorPos X="33" Y="201"/>
         <UsageCount Value="19"/>
       </Unit9>
       <Unit10>

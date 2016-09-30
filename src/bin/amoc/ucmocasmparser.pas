@@ -58,7 +58,7 @@ type
     Deleted, Is6502: boolean;
   end;
 
-  OAsmLines = object
+  OAsmSource = object
   public
     Lines: array of OAsmLine;
   public
@@ -67,7 +67,7 @@ type
     procedure Insert(const APos: integer; const ASym, AIns, APar: string);
     procedure Add(const ASym, AIns, APar: string);
   public
-    function AsmParse(const A: string; var AOutput: OAsmLine): boolean;
+    function AsmParse(const ASrc: string; var ADst: OAsmLine): boolean;
     function AsmAdd(const A: string): boolean;
     function AsmInsert(const APos: integer; const A: string): boolean;
   public
@@ -93,14 +93,20 @@ end;
 procedure OAsmLine.SetLine(const ASym, AIns, APar: string);
 begin
   Deleted := False;
-  Sym := ASym;
-  Ins := UpperCase(AIns);
-  Par := APar;
+  Sym := Trim(ASym);
+  Ins := UpperCase(Trim(AIns));
+  Par := Trim(APar);
+  if Length(Par) > 0 then begin
+    // Compatiblity with the BBC assembler
+    if Par[1] = '=' then begin
+      Par[1] := '#';
+    end;
+  end;
 end;
 
 function OAsmLine.IsSym(const A: string): boolean;
 begin
-  Result := AnsiSameStr(A, Sym);
+  Result := A = Sym;
 end;
 
 function OAsmLine.IsIns(const A: string): boolean;
@@ -128,12 +134,12 @@ begin
   end;
 end;
 
-function OAsmLines.Count: integer;
+function OAsmSource.Count: integer;
 begin
   Result := Length(Lines);
 end;
 
-procedure OAsmLines.Insert(const APos: integer; const ASym, AIns, APar: string);
+procedure OAsmSource.Insert(const APos: integer; const ASym, AIns, APar: string);
 var
   LIndex: integer;
 begin
@@ -144,13 +150,13 @@ begin
   Lines[APos].SetLine(ASym, AIns, APar);
 end;
 
-procedure OAsmLines.Add(const ASym, AIns, APar: string);
+procedure OAsmSource.Add(const ASym, AIns, APar: string);
 begin
   SetLength(Lines, Length(Lines) + 1);
   Lines[High(Lines)].SetLine(ASym, AIns, APar);
 end;
 
-function OAsmLines.AsmParse(const A: string; var AOutput: OAsmLine): boolean;
+function OAsmSource.AsmParse(const ASrc: string; var ADst: OAsmLine): boolean;
 var
   LBeg, LEnd, LTok: pchar;
 
@@ -184,32 +190,32 @@ var
 
 begin
   Result := False;
-  AOutput := default(OAsmLine);
-  LBeg := PChar(A);
+  ADst := default(OAsmLine);
+  LBeg := PChar(ASrc);
   LEnd := LBeg;
   LNextToken;
   if not ((LTok^ in ['*', '#']) or LIsComment) then begin
     if (LTok = LBeg) or (LEnd[-1] = ':') then begin
       Result := True;
       if LEnd[-1] = ':' then begin
-        SetString(AOutput.Sym, LTok, LEnd - LTok - 1);
+        SetString(ADst.Sym, LTok, LEnd - LTok - 1);
       end else begin
-        SetString(AOutput.Sym, LTok, LEnd - LTok);
+        SetString(ADst.Sym, LTok, LEnd - LTok);
       end;
       LNextToken;
     end;
     if LTok^ in ['a'..'z', 'A'..'Z', '.'] then begin
       Result := True;
-      SetString(AOutput.Ins, LTok, LEnd - LTok);
+      SetString(ADst.Ins, LTok, LEnd - LTok);
       LNextToken;
       if not LIsComment then begin
-        SetString(AOutput.Par, LTok, LEnd - LTok);
+        SetString(ADst.Par, LTok, LEnd - LTok);
       end;
     end;
   end;
 end;
 
-function OAsmLines.AsmAdd(const A: string): boolean;
+function OAsmSource.AsmAdd(const A: string): boolean;
 var
   LLine: OAsmLine;
 begin
@@ -219,7 +225,7 @@ begin
   end;
 end;
 
-function OAsmLines.AsmInsert(const APos: integer; const A: string): boolean;
+function OAsmSource.AsmInsert(const APos: integer; const A: string): boolean;
 var
   LLine: OAsmLine;
 begin
@@ -229,7 +235,7 @@ begin
   end;
 end;
 
-procedure OAsmLines.AsmAddStrings(const A: TStrings);
+procedure OAsmSource.AsmAddStrings(const A: TStrings);
 var
   LIndex: integer;
 begin
@@ -238,7 +244,7 @@ begin
   end;
 end;
 
-procedure OAsmLines.SaveToStrings(const A: TStrings);
+procedure OAsmSource.SaveToStrings(const A: TStrings);
 var
   LIndex: integer;
 begin
@@ -250,7 +256,7 @@ begin
   end;
 end;
 
-procedure OAsmLines.SaveToFile(const A: TFileName);
+procedure OAsmSource.SaveToFile(const A: TFileName);
 var
   LStrings: TStrings;
 begin
