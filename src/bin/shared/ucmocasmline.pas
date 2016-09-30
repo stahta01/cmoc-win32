@@ -49,6 +49,7 @@ type
     Symbol, Instruction, Parameters: string;
   public
     procedure SetLine(const ASymbol, AInstruction, AParameters: string);
+    function SetLine(const ASrcLine: string): boolean;
   public
     function SameSymbol(const A: string): boolean;
     function SameInstruction(const A: string): boolean;
@@ -86,6 +87,65 @@ begin
   end;
 end;
 
+function OAsmLine.SetLine(const ASrcLine: string): boolean;
+var
+  LBeg, LTok, LPos: pchar;
+
+  procedure LNextToken;
+  begin
+    while LPos^ in [#1..#32] do begin
+      Inc(LPos);
+    end;
+    LTok := LPos;
+    // Todo: what about /bla bla/ style strings?
+    if LTok^ in ['"'] then begin
+      repeat
+        Inc(LPos);
+      until LPos^ in [#0, LTok^];
+      if LPos^ <> #0 then begin
+        Inc(LPos);
+      end;
+    end else begin
+      while not (LPos^ in [#0..#32]) do begin
+        Inc(LPos);
+      end;
+    end;
+  end;
+
+  function LIsComment: boolean;
+  begin
+    Result := (LTok^ in [#0, ';']) or
+      ((LTok[0] = '/') and (LTok[1] = '/')) or
+      ((LTok[0] = '#') and (LTok[1] in [#0..#32])) or
+      ((LTok[0] = '*') and not (LTok[1] in [#0..#32]));
+  end;
+
+begin
+  Result := False;
+  LBeg := PChar(ASrcLine);
+  LPos := LBeg;
+  LNextToken;
+  if not ((LTok^ in ['*', '#']) or LIsComment) then begin
+    if (LTok = LBeg) or (LPos[-1] = ':') then begin
+      Result := True;
+      if LPos[-1] = ':' then begin
+        SetString(Symbol, LTok, LPos - LTok - 1);
+      end else begin
+        SetString(Symbol, LTok, LPos - LTok);
+      end;
+      LNextToken;
+    end;
+    if LTok^ in ['a'..'z', 'A'..'Z', '.'] then begin
+      Result := True;
+      SetString(Instruction, LTok, LPos - LTok);
+      LNextToken;
+      if not LIsComment then begin
+        SetString(Parameters, LTok, LPos - LTok);
+      end;
+    end;
+  end;
+end;
+
 function OAsmLine.SameSymbol(const A: string): boolean;
 begin
   Result := A = Symbol;
@@ -93,12 +153,12 @@ end;
 
 function OAsmLine.SameInstruction(const A: string): boolean;
 begin
-  Result := AnsiSameText(A, Instruction);
+  Result := SameText(A, Instruction);
 end;
 
 function OAsmLine.SameParameters(const A: string): boolean;
 begin
-  Result := AnsiSameText(A, Parameters);
+  Result := SameText(A, Parameters);
 end;
 
 function OAsmLine.AsString: string;

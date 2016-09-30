@@ -40,7 +40,7 @@ unit UCmocAsmSource;
 interface
 
 uses
-  Classes, StrUtils, SysUtils, UCmocAsmLine;
+  Classes, SysUtils, UCmocAsmLine;
 
 type
 
@@ -50,14 +50,13 @@ type
   public
     function Count: integer;
   public
-    procedure Insert(const APos: integer; const ASym, AIns, APar: string);
-    procedure Add(const ASym, AIns, APar: string);
+    procedure Insert(const AIndex: integer; const ASymbol, AInstruction, AParameters: string);
+    procedure Add(const ASymbol, AInstruction, AParameters: string);
   public
-    function AsmParse(const ASrc: string; var ADst: OAsmLine): boolean;
-    function AsmAdd(const A: string): boolean;
-    function AsmInsert(const APos: integer; const A: string): boolean;
+    function AddSourceLine(const ASrcLine: string): boolean;
+    function InsertSourceLine(const AIndex: integer; const ASrcLine: string): boolean;
   public
-    procedure AsmAddStrings(const A: TStrings);
+    procedure AddSource(const A: TStrings);
   public
     procedure SaveToStrings(const A: TStrings);
     procedure SaveToFile(const A: TFileName);
@@ -70,108 +69,52 @@ begin
   Result := Length(Lines);
 end;
 
-procedure OAsmSource.Insert(const APos: integer; const ASym, AIns, APar: string);
+procedure OAsmSource.Insert(const AIndex: integer;
+  const ASymbol, AInstruction, AParameters: string);
 var
   LIndex: integer;
 begin
   SetLength(Lines, Length(Lines) + 1);
-  for LIndex := High(Lines) - 1 downto APos do begin
+  for LIndex := High(Lines) - 1 downto AIndex do begin
     Lines[LIndex + 1] := Lines[LIndex];
   end;
-  Lines[APos].SetLine(ASym, AIns, APar);
+  Lines[AIndex].SetLine(ASymbol, AInstruction, AParameters);
 end;
 
-procedure OAsmSource.Add(const ASym, AIns, APar: string);
+procedure OAsmSource.Add(const ASymbol, AInstruction, AParameters: string);
 begin
   SetLength(Lines, Length(Lines) + 1);
-  Lines[High(Lines)].SetLine(ASym, AIns, APar);
+  Lines[High(Lines)].SetLine(ASymbol, AInstruction, AParameters);
 end;
 
-function OAsmSource.AsmParse(const ASrc: string; var ADst: OAsmLine): boolean;
+function OAsmSource.AddSourceLine(const ASrcLine: string): boolean;
 var
-  LBeg, LEnd, LTok: pchar;
-
-  procedure LNextToken;
-  begin
-    while LEnd^ in [#1..#32] do begin
-      Inc(LEnd);
-    end;
-    LTok := LEnd;
-    if LTok^ in ['"'] then begin
-      repeat
-        Inc(LEnd);
-      until LEnd^ in [#0, LTok^];
-      if LEnd^ <> #0 then begin
-        Inc(LEnd);
-      end;
-    end else begin
-      while not (LEnd^ in [#0..#32]) do begin
-        Inc(LEnd);
-      end;
-    end;
-  end;
-
-  function LIsComment: boolean;
-  begin
-    Result := (LTok^ in [#0, ';']) or
-      ((LTok[0] = '/') and (LTok[1] = '/')) or
-      ((LTok[0] = '#') and (LTok[1] in [#0..#32])) or
-      ((LTok[0] = '*') and not (LTok[1] in [#0..#32]));
-  end;
-
+  LAsmLine: OAsmLine;
 begin
-  Result := False;
-  ADst := default(OAsmLine);
-  LBeg := PChar(ASrc);
-  LEnd := LBeg;
-  LNextToken;
-  if not ((LTok^ in ['*', '#']) or LIsComment) then begin
-    if (LTok = LBeg) or (LEnd[-1] = ':') then begin
-      Result := True;
-      if LEnd[-1] = ':' then begin
-        SetString(ADst.Symbol, LTok, LEnd - LTok - 1);
-      end else begin
-        SetString(ADst.Symbol, LTok, LEnd - LTok);
-      end;
-      LNextToken;
-    end;
-    if LTok^ in ['a'..'z', 'A'..'Z', '.'] then begin
-      Result := True;
-      SetString(ADst.Instruction, LTok, LEnd - LTok);
-      LNextToken;
-      if not LIsComment then begin
-        SetString(ADst.Parameters, LTok, LEnd - LTok);
-      end;
-    end;
-  end;
-end;
-
-function OAsmSource.AsmAdd(const A: string): boolean;
-var
-  LLine: OAsmLine;
-begin
-  Result := AsmParse(A, LLine);
+  LAsmLine := default(OAsmLine);
+  Result := LAsmLine.SetLine(ASrcLine);
   if Result then begin
-    Add(LLine.Symbol, LLine.Instruction, LLine.Parameters);
+    Add(LAsmLine.Symbol, LAsmLine.Instruction, LAsmLine.Parameters);
   end;
 end;
 
-function OAsmSource.AsmInsert(const APos: integer; const A: string): boolean;
+function OAsmSource.InsertSourceLine(const AIndex: integer; const ASrcLine: string): boolean;
 var
-  LLine: OAsmLine;
+  LAsmLine: OAsmLine;
 begin
-  Result := AsmParse(A, LLine);
+  LAsmLine := default(OAsmLine);
+  Result := LAsmLine.SetLine(ASrcLine);
   if Result then begin
-    Insert(APos, LLine.Symbol, LLine.Instruction, LLine.Parameters);
+    Insert(AIndex, LAsmLine.Symbol, LAsmLine.Instruction, LAsmLine.Parameters);
   end;
 end;
 
-procedure OAsmSource.AsmAddStrings(const A: TStrings);
+procedure OAsmSource.AddSource(const A: TStrings);
 var
   LIndex: integer;
 begin
   for LIndex := 0 to A.Count - 1 do begin
-    AsmAdd(A[LIndex]);
+    AddSourceLine(A[LIndex]);
   end;
 end;
 

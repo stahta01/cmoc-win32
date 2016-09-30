@@ -199,7 +199,7 @@ procedure CAmoc.Preprocess(const ADst, ASrc: TStrings);
 var
   LSymbol: string;
 begin
-  FSource.AsmAddStrings(ASrc);
+  FSource.AddSource(ASrc);
   TrimSource;
   ResetSymbols;
   SetGlobalInitSymbol(FInitSymbol);

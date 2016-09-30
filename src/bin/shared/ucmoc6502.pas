@@ -170,7 +170,7 @@ begin
         if LEnd = 0 then begin
           Break;
         end;
-        if ASource.AsmInsert(Result, #9 +
+        if ASource.InsertSourceLine(Result, #9 +
           AnsiReplaceStr(AnsiReplaceStr(Copy(LString, LPos, LEnd - LPos),
           '?', LValue), '###', AMeta)) then begin
           ASource.Lines[Result].Is6502 := True;
