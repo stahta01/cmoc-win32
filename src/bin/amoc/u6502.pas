@@ -55,10 +55,20 @@ const
 type
 
   TAsmLanguage = (al6809, al6502, alSweet16);
-  T6502Mode = (amError, amImpl, amIndi, amAccu, amImme, amAbsM, amAbsX, amAbsY, amIndX, amIndY);
+  T6502Mode = (amError, amImpl, amAccu, amImme, amIndi, amIndi_PID, amAbsM,
+    amAbsM_PID, amAbsX, amAbsX_PID, amAbsY, amAbsY_PID, amIndX, amIndX_PID, amIndY, amIndY_PID);
   T6502Modes = set of T6502Mode;
 
 function M6502AddrMode(const AParam: string; var LValue: string): T6502Mode;
+
+  function LIsPositionIndependant: boolean;
+  begin
+    Result := (Length(LValue) > 0) and (LValue[1] = '&');
+    if Result then begin
+      Delete(LValue, 1, 1);
+    end;
+  end;
+
 var
   LLength: integer;
 begin
@@ -88,8 +98,18 @@ begin
         if Result <> amError then begin
           if Result = amIndi then begin
             LValue := Copy(AParam, 2, Length(AParam) - 2);
+            if LIsPositionIndependant then begin
+              Result := amIndi_PID;
+            end;
           end else begin
             LValue := Copy(AParam, 2, Length(AParam) - 4);
+            if LIsPositionIndependant then begin
+              if Result = amIndX then begin
+                Result := amIndX_PID;
+              end else begin
+                Result := amIndY_PID;
+              end;
+            end;
           end;
         end;
       end else if AParam[LLength - 1] = ',' then begin
@@ -102,6 +122,13 @@ begin
         end;
         if Result <> amError then begin
           LValue := Copy(AParam, 1, Length(AParam) - 2);
+          if LIsPositionIndependant then begin
+            if Result = amAbsX then begin
+              Result := amAbsX_PID;
+            end else begin
+              Result := amAbsY_PID;
+            end;
+          end;
         end;
       end else begin
         Result := amAbsM;
@@ -114,6 +141,9 @@ begin
   end else begin
     Result := amImpl;
     LValue := EmptyStr;
+  end;
+  if (Result = amAbsM) and LIsPositionIndependant then begin
+    Result := amAbsM_PID;
   end;
 end;
 
@@ -161,31 +191,42 @@ function M6502InsertStoreXY(const AModes: T6502Modes; var ALines: OAsmLines;
   const AIndex: integer; const AInstruction: string): integer;
 begin
   Result := M6502Insert(AModes, ALines, AIndex, [
-    amImme, 'LDA #?:STA _regz+1,pcr:### _regz,pcr',
-    amAbsM, 'LDA ?,pcr:STA _regz+1,pcr:### _regz,pcr',
-    amAbsX, 'LDA ?,x:STA _regz+1,pcr:### _regz,pcr',
-    amAbsY, 'LDA ?,y:STA _regz+1,pcr:### _regz,pcr'],
+    amAbsM, 'EXG ###,d:STB ?:EXG ###,d',
+    amAbsM_PID, 'EXG ###,d:STB ?,pcr:EXG ###,d',
+    amAbsX, 'EXG y,d:STB ?,x:EXG y,d',
+    amAbsY, 'EXG x,d:STB ?,y:EXG x,d',
+    amAbsX_PID, 'EXG x,d:ADDD ?,pcr:STD 15:EXG x,d:EXG y,d:STB [15]:EXG y,d',
+    amAbsY_PID, 'EXG y,d:ADDD ?,pcr:STD 15:EXG y,d:EXG x,d:STB [15]:EXG x,d'],
     AInstruction[Length(AInstruction)]);
 end;
+
+const
+  OffsetX = 'EXG x,d:ADDD ?,pcr:STD 15:EXG x,d:';
+  OffsetY = 'EXG y,d:ADDD ?,pcr:STD 15:EXG y,d:';
 
 function M6502InsertLoadXY(const AModes: T6502Modes; var ALines: OAsmLines;
   const AIndex: integer; const AInstruction: string): integer;
 begin
   Result := M6502Insert(AModes, ALines, AIndex, [
-    amImme, 'LDA #?:STA _regz+1,pcr:### _regz,pcr',
-    amAbsM, 'LDA ?,pcr:STA _regz+1,pcr:### _regz,pcr',
-    amAbsX, 'PSHS x:EXG x,d:LEAX ?,pcr:ABX:EXG x,d:### ,x:PULS x',
-    amAbsY, 'PSHS b:TFR y,d:ADDD ?:TFR d,x:LDB ,x:CLRA:TFR d,x:PULS b'],
-    AInstruction);
+    amImme, 'LDA #?:STA 16:LD### 15',
+    amAbsM, 'LDA ?:STA 16:LD### 15', amAbsM_PID, 'LDA ?,pcr:STA 16:LD### 15',
+    amAbsX, 'LDA ?,x:STA 16:LDY 15', amAbsY, 'LDA ?,y:STA 16:LDX 15',
+    amAbsX_PID, OffsetX + 'EXG y,d:LDB [15]:EXG y,d',
+    amAbsY_PID, OffsetY + 'EXG x,d:LDB [15]:EXG x,d'],
+    AInstruction[Length(AInstruction)]);
 end;
 
-function M6502InsertCalc(const AModes: T6502Modes; var ALines: OAsmLines;
+function M6502InsertLoadStoreA(const AModes: T6502Modes; var ALines: OAsmLines;
   const AIndex: integer; const AInstruction: string): integer;
 begin
   Result := M6502Insert(AModes, ALines, AIndex, [
-    amAccu, '###', amImme, '### #?', amAbsM, '### ?',
-    amAbsX, '### <?,x', amAbsY, '### <?,y', amIndX, '### [<?,x]',
-    amIndY, 'PSHS b:LDD ?:EXG a,b:STD _regz,pcr:TFR y,d:ADDD _regz,pcr:STD _regz,pcr:PULS b:### [_regz,pcr]'],
+    amAccu, '###', amImme, '### #?',
+    amAbsM, '### ?', amAbsM_PID, '### ?,pcr',
+    amAbsX, '### ?,x', amAbsY, '### ?,y',
+    amAbsX_PID, OffsetX + '### [15]', amAbsY_PID, OffsetY + '### [15]',
+    amIndX, '### [?,x]', amIndX_PID, OffsetX + '### [15,x]',
+    amIndY, 'PSHS b:LDD ?:EXG a,b:STD 15:TFR y,d:ADDD 15:STD 15:PULS b:### [15]',
+    amIndY_PID, 'PSHS b:LDD ?,pcr:EXG a,b:STD 15:TFR y,d:ADDD 15:STD 15:PULS b:### [15]'],
     AInstruction);
 end;
 
@@ -282,31 +323,38 @@ begin
                     [amAbsM, 'BRA ?', amIndi, 'BRA [?]']);
                 end;
                 'STX': begin
-                  LIndex := M6502InsertStoreXY([amAbsM, amAbsY], ALines, LIndex, Ins);
+                  LIndex := M6502InsertStoreXY([amAbsM, amAbsM_PID, amAbsY, amAbsY_PID],
+                    ALines, LIndex, Ins);
                 end;
                 'STY': begin
-                  LIndex := M6502InsertStoreXY([amAbsM, amAbsX], ALines, LIndex, Ins);
+                  LIndex := M6502InsertStoreXY([amAbsM, amAbsM_PID, amAbsX, amAbsX_PID],
+                    ALines, LIndex, Ins);
                 end;
                 'LDX': begin
-                  LIndex := M6502InsertLoadXY([amImme, amAbsM, amAbsY], ALines, LIndex, Ins);
+                  LIndex := M6502InsertLoadXY([amImme, amAbsM, amAbsM_PID, amAbsY, amAbsY_PID],
+                    ALines, LIndex, Ins);
                 end;
                 'LDY': begin
-                  LIndex := M6502InsertLoadXY([amImme, amAbsM, amAbsX], ALines, LIndex, Ins);
+                  LIndex := M6502InsertLoadXY([amImme, amAbsM, amAbsM_PID, amAbsX, amAbsX_PID],
+                    ALines, LIndex, Ins);
                 end;
                 'ASL', 'ROL', 'ROR', 'LSR': begin
-                  LIndex := M6502InsertCalc([amImpl, amAccu, amAbsM, amAbsX],
-                    ALines, LIndex, Ins + 'B');
+                  LIndex := M6502InsertLoadStoreA([amImpl, amAccu, amAbsM,
+                    amAbsM_PID, amAbsX, amAbsX_PID], ALines, LIndex, Ins + 'B');
                 end;
                 'LDA', 'STA', 'ORA': begin
-                  LIndex := M6502InsertCalc([amImme, amAbsM, amAbsX, amAbsY, amIndX, amIndY],
-                    ALines, LIndex, Copy(Ins, 1, 2) + 'B');
+                  LIndex := M6502InsertLoadStoreA([amImme, amAbsM, amAbsM_PID, amAbsX, amAbsX_PID,
+                    amAbsY, amAbsY_PID, amIndX, amIndX_PID, amIndY, amIndY_PID], ALines,
+                    LIndex, Copy(Ins, 1, 2) + 'B');
                 end;
                 'ADC', 'SBC', 'AND', 'EOR': begin
-                  LIndex := M6502InsertCalc([amImme, amAbsM, amAbsX, amAbsY, amIndX, amIndY],
+                  LIndex := M6502InsertLoadStoreA([amImme, amAbsM, amAbsM_PID, amAbsX, amAbsX_PID,
+                    amAbsY, amAbsY_PID, amIndX, amIndX_PID, amIndY, amIndY_PID],
                     ALines, LIndex, Ins + 'B');
                 end;
                 'INC', 'DEC': begin
-                  LIndex := M6502InsertCalc([amAbsM, amAbsX], ALines, LIndex, Ins);
+                  LIndex := M6502InsertLoadStoreA([amAbsM, amAbsM_PID, amAbsX, amAbsX_PID],
+                    ALines, LIndex, Ins);
                 end;
                 'FCB', 'FDB': begin
                 end else begin

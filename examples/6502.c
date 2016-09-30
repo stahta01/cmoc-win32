@@ -103,13 +103,23 @@ asm void test3(void)
 }
 */
 
+extern byte memory;
+
+byte memory;
+
 void test0(void)
 {
     asm {
+        ldd     #0
+        std     15
         .p02
-
-        ldx    1024,y
-
+        lda     #$00
+        sta     0
+        lda     #$04
+        sta     1
+        ldy     #0
+        lda     #0
+        sta     (0),y
         .p09
     }
 }
