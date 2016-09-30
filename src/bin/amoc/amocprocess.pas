@@ -40,7 +40,7 @@ unit AmocProcess;
 interface
 
 uses
-  Classes, StrUtils, SysUtils, UCmoc6502, UCmocAsmLine, UCmocAsmSource, UCmocDefs, UCmocPreprocessor,
+  Classes, StrUtils, SysUtils, UCmocTranslate, UCmocAsmLine, UCmocAsmSource, UCmocDefs, UCmocPreprocessor,
   UCmocUtils;
 
 type
@@ -219,7 +219,7 @@ begin
   FSource.Insert(5, EmptyStr, 'endm', EmptyStr);
   FSource.Insert(6, EmptyStr, 'section', 'SECTION_NAME');
   FSource.Add(EmptyStr, 'endsection', EmptyStr);
-  M6502Translate(FSource);
+  SourceTranslate(FSource);
   FSource.SaveToStrings(ADst);
 end;
 

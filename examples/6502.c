@@ -114,7 +114,7 @@ void test0(void)
         sta     1
         ldy     =0
         lda     =0
-        ldx     memory
+        ldx     :memory
         .p09
     }
 }

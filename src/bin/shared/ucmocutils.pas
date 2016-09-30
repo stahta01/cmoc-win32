@@ -259,7 +259,7 @@ end;
 
 class function OCmoc.FileNameTool(const ATool: string): TFileName;
 begin
-  Result := PathToPackage + 'bin/' + ATool + '.exe';
+  Result := PathToPackage + 'bin/' + ATool + FileExt_EXE;
 end;
 
 class function OCmoc.FileNameTranslate(const A: TFileName): TFileName;

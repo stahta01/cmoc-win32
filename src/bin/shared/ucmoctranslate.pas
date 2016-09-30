@@ -33,37 +33,49 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 *)
 
-program amoc;
+unit UCmocTranslate;
 
 {$INCLUDE cmoc.inc}
 
+interface
+
 uses
-  AmocProcess,
-  Classes,
-  SysUtils,
-  UCmocTranslate, UCmocTranslate6502;
+  SysUtils, UCmocAsmSource, UCmocTranslate6502, UCmocUtils;
 
-{$R *.res}
+procedure SourceTranslate(var ASource: OAsmSource);
 
+implementation
+
+type
+  TProcessorMode = (pm6809, pm6502, pmSweet16);
+
+procedure SourceTranslate(var ASource: OAsmSource);
 var
-  GCmdLine: TStrings;
-
+  LIndex: integer;
+  LProcessorMode: TProcessorMode;
 begin
-  try
-    GCmdLine := TStringList.Create;
-    try
-      GCmdLine.CommaText := CmdLine;
-      with CAmoc.Create(nil) do begin
-        try
-          FInitSymbol := GCmdLine.Values['--initgl'];
-          Preprocess(System.Output, System.Input);
-        finally
-          Free;
+  LProcessorMode := pm6809;
+  LIndex := 0;
+  while LIndex < Length(ASource.Lines) do begin
+    with ASource.Lines[LIndex] do begin
+      if not (IsDeleted or Is6502 or (Length(Instruction) = 0)) then begin
+        if SameInstruction('.p09') then begin
+          IsDeleted := True;
+          LProcessorMode := pm6809;
+        end else if SameInstruction('.p02') then begin
+          IsDeleted := True;
+          LProcessorMode := pm6502;
+        end else begin
+          case LProcessorMode of
+            pm6502: begin
+              SourceTranslate6502(ASource, LIndex);
+            end;
+          end;
         end;
       end;
-    finally
-      FreeAndNil(GCmdLine);
     end;
-  except
+    Inc(LIndex);
   end;
+end;
+
 end.

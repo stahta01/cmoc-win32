@@ -73,6 +73,14 @@ begin
   end;
 end;
 
+function TokenIsComment(const A: pchar): boolean; inline;
+begin
+  Result := (A[0] in [#0, ';']) or
+    ((A[0] = '/') and (A[1] = '/')) or
+    ((A[0] = '#') and (A[1] in [#0..#32])) or
+    ((A[0] = '*') and not (A[1] in [#0..#32]));
+end;
+
 procedure OAsmLine.SetLine(const ASymbol, AInstruction, AParameters: string);
 begin
   IsDeleted := False;
@@ -142,20 +150,12 @@ var
     end;
   end;
 
-  function LIsComment: boolean;
-  begin
-    Result := (LTok^ in [#0, ';']) or
-      ((LTok[0] = '/') and (LTok[1] = '/')) or
-      ((LTok[0] = '#') and (LTok[1] in [#0..#32])) or
-      ((LTok[0] = '*') and not (LTok[1] in [#0..#32]));
-  end;
-
 begin
   Result := False;
   LBeg := PChar(ASrcLine);
   LPos := LBeg;
   LNextToken;
-  if not ((LTok^ in ['*', '#']) or LIsComment) then begin
+  if not ((LTok^ in ['*', '#']) or TokenIsComment(LTok)) then begin
     if (LTok = LBeg) or (LPos[-1] = ':') then begin
       Result := True;
       if LPos[-1] = ':' then begin
@@ -169,7 +169,7 @@ begin
       Result := True;
       SetString(Instruction, LTok, LPos - LTok);
       LNextToken;
-      if not LIsComment then begin
+      if not TokenIsComment(LTok) then begin
         SetString(Parameters, LTok, LPos - LTok);
       end;
     end;
