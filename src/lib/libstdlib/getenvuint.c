@@ -1,5 +1,5 @@
 
-#include "_libc.h"
+#include "_stdlib.h"
 
 unsigned getenvuint(char* name)
 {

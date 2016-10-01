@@ -1,5 +1,5 @@
 
-#include "_libc.h"
+#include "_stdlib.h"
 
 div_t* div(div_t* result, int numer, int denom)
 {

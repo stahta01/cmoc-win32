@@ -1,5 +1,5 @@
 
-#include "_libc.h"
+#include "_stdlib.h"
 
 char* strpcpy_pad(char* dst, char* src, int width, char padchar)
 {

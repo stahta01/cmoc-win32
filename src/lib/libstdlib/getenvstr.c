@@ -1,5 +1,5 @@
 
-#include "_libc.h"
+#include "_stdlib.h"
 
 char* getenvstr(char* name, char* dst)
 {

@@ -1,26 +1,24 @@
 
-#include "_libc.h"
+#include "_stdlib.h"
 
-char* itoa(int value, char* string, int radix)
+char* itoa(int val, char* str, int radix)
 {
-    char* p = string;
+    char* p = str, prefix = '0';
     if (radix >= 2 && radix <= 36) {
-        bool sign = value < 0 && radix == 10;
-        if (sign) {
-            value = -value;
+        if (val < 0 && radix == 10) {
+            prefix = '-';
+            val = -val;
+        } else {
+            prefix = 0;
         }
         do {
-            word rem = (word)value % radix;
-            value = (word)value / radix;
-            *p++ = (char)(rem < 10 ? rem + '0' : rem + 'W');
-        } while (value > 0);
-        if (sign) {
-            *p++ = '-';
-        }
-    } else {
-        *p++ = '0';
+            byte rem = (byte)((byte)val % (byte)radix);
+            *p++ = rem + (rem < 10 ? '0' : 'W');
+        } while (val = (word)val / (byte)radix);
     }
-    *p = 0;
-    return _strrev(string);
+    if (*p++ = prefix) {
+        *p = 0;
+    }
+    return _reverse(str);
 }
 

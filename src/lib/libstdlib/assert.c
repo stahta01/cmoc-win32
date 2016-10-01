@@ -1,7 +1,5 @@
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
+#include "_stdlib.h"
 
 void _assert(char* message, char* filename, unsigned line)
 {

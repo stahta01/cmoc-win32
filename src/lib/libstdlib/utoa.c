@@ -1,5 +1,5 @@
 
-#include "_libc.h"
+#include "_stdlib.h"
 
 char* utoa(word value, char* string, int radix)
 {
@@ -14,6 +14,6 @@ char* utoa(word value, char* string, int radix)
         *p++ = '0';
     }
     *p = 0;
-    return _strrev(string);
+    return _reverse(string);
 }
 

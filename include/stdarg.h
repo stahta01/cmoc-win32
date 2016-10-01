@@ -8,14 +8,15 @@
 #ifndef _STDARG_H
 #define _STDARG_H
 
-typedef unsigned* va_list;
+#include <sys/size.h>
 
-extern char* _va_arg(va_list* app, unsigned sizeInBytes);
+typedef word* va_list;
 
-#define va_start(ap, lastFixed) do { (ap) = ((unsigned *) &(lastFixed)) + 1; } while (0)
-#define va_arg(ap, type) (* (type *) _va_arg(&(ap), sizeof(type)))
-#define va_end(ap) do {} while (0)
+extern char* _va_arg(va_list* list, size_t size);
 
+#define va_start(_LIST,_ARG) ((_LIST)=(va_list)&(_ARG)+1)
+#define va_arg(_LIST,_TYPE) (*(_TYPE*)_va_arg(&(_LIST),sizeof(_TYPE)))
+#define va_end(_LIST)
 
 #endif
 
