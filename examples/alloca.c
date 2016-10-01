@@ -14,7 +14,7 @@
 // heap data structure. freeing stack memory will simply negate the size,
 // making _msize() return 0.
 
-// The downsize to libheap is, alloc's are slow for lots of small blocks,
+// The downside to libheap is, alloc's are slow for lots of small blocks,
 // but free's are fast. But, if you have lots of small blocks, you are
 // better off using memory pooling.
 
