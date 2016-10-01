@@ -99,13 +99,14 @@ const
   Format_WAV = 'wav';
   Format_CAS = 'cas';
 
-  Opt_6800compat = '--6800compat';
-  Opt_6809 = '--6809';
+  //Opt_6800compat = '--6800compat';
+  //Opt_6809 = '--6809';
   Opt_Add1 = '--add';
   Opt_Bas2 = '-bas';
   Opt_Cart2 = '-cart';
   Opt_Create1 = '--create';
   Opt_Define2 = '-D';
+  Opt_InitGL1 = '--initgl';
   Opt_DontAssemble1 = '-S';
   Opt_DontLink1 = '-c';
   Opt_Dos2 = '-dos';

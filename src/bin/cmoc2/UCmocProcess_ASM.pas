@@ -64,7 +64,7 @@ begin
       LDst := TMemoryStream.Create;
       try
         try
-          PipeExecute(OCmoc.FileNameTool(Tool_AMOC), ['--initgl=' + AInitSymbol],
+          PipeExecute(OCmoc.FileNameTool(Tool_AMOC), [Opt_InitGL1 + '=' + AInitSymbol],
             EmptyStr, LSrc, LDst, LErr);
         except
           on LException: Exception do OCmoc.RaiseError(Tool_AMOC, Trim(LErr.DataString));

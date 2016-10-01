@@ -40,7 +40,8 @@ program amoc;
 uses
   AmocProcess,
   Classes,
-  SysUtils;
+  SysUtils,
+  UCmocDefs;
 
 {$R *.res}
 
@@ -54,7 +55,7 @@ begin
       GCmdLine.CommaText := CmdLine;
       with CAmoc.Create(nil) do begin
         try
-          FInitSymbol := GCmdLine.Values['--initgl'];
+          FInitSymbol := GCmdLine.Values[Opt_InitGL1];
           Preprocess(System.Output, System.Input);
         finally
           Free;

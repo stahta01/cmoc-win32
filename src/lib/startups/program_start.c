@@ -17,16 +17,18 @@ void _main(void)
         // other priority lib calls should be placed here
         lbsr    INITGL                          // initialize global variables
     }
-    // hanks take up too much memory, and if you dont use it, its wasted memory.
-    // So, this line is taken out.
-    //hank_create_clear(0, 0x8000, HEAP_SIZE_MAX);
     exit(main());
 }
 
 void exit(int status)
 {
     if (status) {
-        printf(status < 1024 ? "EXIT STATUS: %d\n" : "EXIT MESSAGE: %s\n", status);
+        char s[64];
+        itoa(status, _stpcpy(s, "EXIT STATUS #"), 10);
+        if (status >= 1024) {
+            strcat(strcat(s, "\n"), (char*)status);
+        }
+        cputs(s);
     }
     //memset(0x2dd, 0, 250);
     asm {
