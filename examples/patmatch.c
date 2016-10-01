@@ -11,7 +11,7 @@ int main(void)
 {
     *(byte*)0xff22 |= 16;
     clrscr();
-    cputs("kreider's patmatch() tests\n");
+    cputs("kreider's patmatch() tests\n\n");
     test("a*", "Apple", true);
     test("??o?", "cmoc", true);
     test("??o?", "not cmoc", true);
