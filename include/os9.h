@@ -52,5 +52,9 @@ unsigned _umax(unsigned a, unsigned b);
 void _tsleep(clock_t ticks);
 word _swab(word val);
 
+// Non documented OS9, but are used by OS9 via KreiderLib
+
+bool _patmatch(char* pat, char* str, bool ignorecase);
+
 #endif
 

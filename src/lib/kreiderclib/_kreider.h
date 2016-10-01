@@ -82,6 +82,7 @@
 #define strend      __strend
 #define utoa        __utoa
 #define itoa        __itoa
+#define patmatch    __patmatch
 
 // Variables for kreider lib functions
 
