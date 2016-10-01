@@ -37,7 +37,8 @@
 
 #include <disk.h>
 
-// Predefined file handles
+// predefined file handles
+
 #define STDIN_FILENO    0
 #define STDOUT_FILENO   1
 #define STDERR_FILENO   2
@@ -45,30 +46,35 @@
 #include <sys/size.h>
 #include <sys/types.h>
 
-// Stuff for getopt
+// stuff for getopt
+
 extern char* optarg;
 extern int optind, opterr, optopt;
 
-// Files
+// files
+
 int write(int fd, void* buf, unsigned count);
 int read(int fd, void* buf, unsigned count);
 off_t lseek(int fd, off_t offset, int whence);
 size_t ltell(int fd);
 size_t lsize(int fd);
-size_t lgets(int fd, char* s, size_t n);
+size_t lgets(int fd, char* str, size_t n);
 int unlink(char* name);
 
-// Directories
+// directories
+
 int chdir(char* name);
 char* getcwd(char* buf, size_t size);
-int mkdir(char* name, ...);                 // May take a mode argument
+int mkdir(char* name, ...);
 int rmdir(char* name);
 
-// Others
+// others
+
 unsigned sleep(unsigned seconds);
 int getopt(int argc, char** argv, char* optstring);
 
-// Non standard
+// non standard
+
 int exec(char* progname, char* cmdline);
 
 #endif

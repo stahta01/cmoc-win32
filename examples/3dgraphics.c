@@ -1,6 +1,11 @@
 
+// Now works for coco/coco3/dragon32/dragon64.
+
+#pragma options -machine=dragon64
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <fix6.h>
 #include <string.h>
 #include <graph.h>
@@ -8,11 +13,6 @@
 #include <equates.h>
 
 #define S 32
-
-// 9,061
-// 9,029
-// 9,024
-// 9,008
 
 vector_t vectors[8] = {
     {+S, +S, +S},
@@ -44,7 +44,12 @@ int main(void)
 
     // Speed poke. We are using ROM's line draw routine, so this will speed
     // up rendering.
-    *(byte*)65495 = 0;
+    *(byte*)0xffd7 = 0;
+
+    // Sometimes XRoar will crash when changing to graphics via autostarted bin's.
+    // Putting a sleep() command often fixes the issue.
+    puts("PLEASE WAIT FOR XROAR ...");
+    sleep(2);
 
     _setvideomode(0, 1);
     _setcolor(1);
