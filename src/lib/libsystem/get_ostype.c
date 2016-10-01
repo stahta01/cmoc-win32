@@ -1,4 +1,5 @@
 
+#include <coco/ecb_equates.h>
 #include "_system.h"
 
 // Note: As far as I know, there is no easy way to identity a 64K CoCo.
@@ -12,11 +13,11 @@
 // Dragon32's might have dodgy 64K mem, in which case, its not possible
 // to identity them easily.
 
-unsigned char get_ostype(void)
+byte get_ostype(void)
 {
-    unsigned char ostype = 0;
-    char* bas = 0xa147;                 // Color Basic Copyright Message
-    char* ext = 0x80e8;                 // Extended Color Basic Copyright Message
+    byte ostype = 0;
+    char* bas = _LA147;                 // Color Basic Copyright Message
+    char* ext = _L80E8;                 // Extended Color Basic Copyright Message
 
     if (bas[0] == 'C' && bas[1] == 'O') {
         if (ext[0] == 'E' && ext[1] == 'X' && ext[21] == '2') {
@@ -31,8 +32,8 @@ unsigned char get_ostype(void)
             ostype |= (char)(((_topram >> 10) + 1) & 0x70);
         }
     } else {
-        if (*((unsigned*)0x8000) == 0x7ebb) {
-            if (*((char*)0x8002) == 0x3c) {
+        if (*((word*)_MAGIC) == 0x7ebb) {
+            if (*((byte*)_L8002) == 0x3c) {
                 ostype |= SYSTEM_MAC_DRAGON64;
                 ostype |= 64;
             } else {

@@ -1,30 +1,32 @@
 
 #include "_stdio.h"
 
-char* fgets(char* s, size_t n, FILE* fp)
+char* fgets(char* str, size_t size, FILE* fp)
 {
     if (fp->dev) {
-        char* start = s;
-        int c = EOF;
-        while (n-- > 1) {
-            c = fgetc(fp);
-            if (c == EOF) {
+        char* result = str;
+        int chr = EOF;
+        // The null term is included in size, therefore a size of <= 1
+        // does not read anything.
+        while (size-- > 1) {
+            chr = fgetc(fp);
+            if (chr == EOF) {
                 break;
             }
-            *s++ = (char)c;
-            if (c == '\n' || c == '\r') {
+            *str++ = (char)chr;
+            if (chr == '\n' || chr == '\r') {
                 break;
             }
         }
-        *s = 0;
-        return c == EOF ? (char*)NULL : start;
+        *str = 0;
+        return chr == EOF ? (char*)nullptr : result;
     } else {
         // Since char is signed, the max for cgets is most
-        // likely 126-ish.
-        s[0] = n < 100 ? (char)n : 100;
-        strcpy(s, cgets(s));
+        // likely 126-ish. 100 will do.
+        str[0] = size < 100 ? (char)size : 100;
+        strcpy(str, cgets(str));
         cputc('\n');
-        return s;
+        return str;
     }
 }
 

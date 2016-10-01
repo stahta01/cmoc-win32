@@ -4,7 +4,10 @@
 int fputc(int c, FILE* fp)
 {
     if (fp->dev) {
-        system_fputc(c, fp->dev);
+        byte prev = _devnum;
+        _devnum = (byte)fp->dev;
+        system_fputc(c);
+        _devnum = prev;
     } else {
         cputc(c);
     }

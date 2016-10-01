@@ -1,10 +1,10 @@
 
 #include "_system.h"
 
-void system_cputs(char* str)
+void system_fputs(char* str)
 {
     while (*str) {
-        system_cputc(*str++);
+        system_fputc(*str++);
     }
 }
 

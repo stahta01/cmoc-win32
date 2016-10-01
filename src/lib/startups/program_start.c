@@ -24,7 +24,7 @@ void exit(int status)
 {
     if (status) {
         char s[64];
-        itoa(status, _stpcpy(s, "EXIT STATUS #"), 10);
+        _itoa(status, _stpcpy(s, "EXIT STATUS #"));
         if (status >= 1024) {
             strcat(strcat(s, "\r"), (char*)status);
         }

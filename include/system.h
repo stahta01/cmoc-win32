@@ -74,10 +74,11 @@ extern byte _get_ostype;
 void system_init(void);
 int system_polcat(void);
 
-void system_fputc(int c, dev_t dev);
+void system_fputc(int chr);
+void system_fputs(char* str);
 int system_fgetc(dev_t dev);
-void system_cputc(int c);
-void system_cputs(char* s);
+void system_cputc(int chr);
+void system_cputs(char* str);
 
 void system_joyin(void);
 void system_sound(void);
