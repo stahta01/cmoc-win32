@@ -49,8 +49,8 @@ int main(void)
 {
     games_t games = {0, 0};
 
-    games_add(&games,  "STAR RAIDERS", 1982);
     games_add(&games,  "SPACE INVADERS", 1980);
+    games_add(&games,  "STAR RAIDERS", 1982);
     games_add(&games,  "FROGGER", 1982);
     games_add(&games,  "ASTEROIDS", 1981);
     games_add(&games,  "SURROUND", 1977);
