@@ -140,7 +140,8 @@ end;
 
 procedure SourcePeephole(var ASrc: OAsmSource);
 begin
-  SourcePeephole1(ASrc);
+  // Not ready. Needs to check for PULS's or branches. Anything that may change S
+  //SourcePeephole1(ASrc);
   SourcePeephole2(ASrc);
 end;
 
