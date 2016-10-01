@@ -40,8 +40,7 @@ program amoc;
 uses
   AmocProcess,
   Classes,
-  SysUtils,
-  UCmocTranslate, UCmocTranslate6502;
+  SysUtils;
 
 {$R *.res}
 

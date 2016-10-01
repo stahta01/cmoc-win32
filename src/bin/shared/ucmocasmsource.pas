@@ -60,6 +60,8 @@ type
   public
     procedure SaveToStrings(const AStrings: TStrings);
     procedure SaveToFile(const AFileName: TFileName);
+  public
+    function SameInstArgs(const A, B: integer): boolean;
   end;
 
 implementation
@@ -93,7 +95,7 @@ begin
   LAsmLine := default(OAsmLine);
   Result := LAsmLine.SetLine(ASrcLine);
   if Result then begin
-    Add(LAsmLine.Symbol, LAsmLine.Instruction, LAsmLine.Parameters);
+    Add(LAsmLine.Symb, LAsmLine.Inst, LAsmLine.Args);
   end;
 end;
 
@@ -104,7 +106,7 @@ begin
   LAsmLine := default(OAsmLine);
   Result := LAsmLine.SetLine(ASrcLine);
   if Result then begin
-    Insert(AIndex, LAsmLine.Symbol, LAsmLine.Instruction, LAsmLine.Parameters);
+    Insert(AIndex, LAsmLine.Symb, LAsmLine.Inst, LAsmLine.Args);
   end;
 end;
 
@@ -123,7 +125,7 @@ var
 begin
   AStrings.Clear;
   for LIndex := 0 to Count - 1 do begin
-    if not Lines[LIndex].IsDeleted then begin
+    if not Lines[LIndex].Removed then begin
       AStrings.Add(Lines[LIndex].AsString);
     end;
   end;
@@ -140,6 +142,11 @@ begin
   finally
     FreeAndNil(LStrings);
   end;
+end;
+
+function OAsmSource.SameInstArgs(const A, B: integer): boolean;
+begin
+  Result := Lines[A].SameInst(Lines[B].Inst) and Lines[A].SameArgs(Lines[B].Args);
 end;
 
 end.

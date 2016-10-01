@@ -40,8 +40,8 @@ unit AmocProcess;
 interface
 
 uses
-  Classes, StrUtils, SysUtils, UCmocAsmLine, UCmocAsmSource, UCmocDefs, UCmocPreprocessor,
-  UCmocTranslate, UCmocUtils;
+  Classes, StrUtils, SysUtils, UCmocAsmLine, UCmocAsmSource, UCmocDefs,
+  UCmocPeephole, UCmocPreprocessor, UCmocTranslate, UCmocUtils;
 
 type
 
@@ -131,23 +131,23 @@ var
   LIndex: integer;
 begin
   for LIndex := 0 to FSource.Count - 1 do begin
-    FSource.Lines[LIndex].IsDeleted := not FSource.Lines[LIndex].SameSymbol(Sym_FunctionsStart);
-    if not FSource.Lines[LIndex].IsDeleted then begin
+    FSource.Lines[LIndex].Removed := not FSource.Lines[LIndex].SameSymb(Sym_FunctionsStart);
+    if not FSource.Lines[LIndex].Removed then begin
       break;
     end;
   end;
   for LIndex := FSource.Count - 1 downto 0 do begin
-    FSource.Lines[LIndex].IsDeleted := not FSource.Lines[LIndex].SameSymbol(Sym_ProgramEnd);
-    if not FSource.Lines[LIndex].IsDeleted then begin
+    FSource.Lines[LIndex].Removed := not FSource.Lines[LIndex].SameSymb(Sym_ProgramEnd);
+    if not FSource.Lines[LIndex].Removed then begin
       break;
     end;
   end;
   for LIndex := 0 to FSource.Count - 1 do begin
-    if AnsiMatchText(FSource.Lines[LIndex].Symbol, ['program_end', 'functions_start',
+    if AnsiMatchText(FSource.Lines[LIndex].Symb, ['program_end', 'functions_start',
       'functions_end',
       'string_literals_start', 'string_literals_end', 'writable_globals_start',
       'writable_globals_end']) then begin
-      FSource.Lines[LIndex].IsDeleted := True;
+      FSource.Lines[LIndex].Removed := True;
     end;
   end;
 end;
@@ -159,15 +159,15 @@ var
   LParser: OAsmParser;
 begin
   for LIndex := 0 to FSource.Count - 1 do begin
-    if SymbolIsPublic(FSource.Lines[LIndex].Symbol) then begin
-      AddExport(FSource.Lines[LIndex].Symbol);
+    if SymbolIsPublic(FSource.Lines[LIndex].Symb) then begin
+      AddExport(FSource.Lines[LIndex].Symb);
     end;
-    if FSource.Lines[LIndex].SameInstruction('RMB') then begin
-      FSource.Lines[LIndex].Instruction := 'ZMB';
+    if FSource.Lines[LIndex].SameInst('RMB') then begin
+      FSource.Lines[LIndex].Inst := 'ZMB';
     end;
   end;
   for LIndex := 0 to FSource.Count - 1 do begin
-    LParser.SetString(FSource.Lines[LIndex].Parameters);
+    LParser.SetString(FSource.Lines[LIndex].Args);
     while LParser.Next do begin
       LString := LParser.Token;
       if SymbolIsPublic(LString) and (FExportSymbols.IndexOf(LString) < 0) then begin
@@ -182,51 +182,15 @@ var
   LIndex: integer;
 begin
   for LIndex := FSource.Count - 2 downto 0 do begin
-    if AnsiStartsStr(Sym_INITGL, FSource.Lines[LIndex].Symbol) then begin
-      if FSource.Lines[LIndex + 1].SameInstruction('rts') then begin
-        FSource.Lines[LIndex + 0].IsDeleted := True;
-        FSource.Lines[LIndex + 1].IsDeleted := True;
+    if AnsiStartsStr(Sym_INITGL, FSource.Lines[LIndex].Symb) then begin
+      if FSource.Lines[LIndex + 1].SameInst('RTS') then begin
+        FSource.Lines[LIndex + 0].Removed := True;
+        FSource.Lines[LIndex + 1].Removed := True;
       end else begin
-        FSource.Lines[LIndex].Symbol := AName;
+        FSource.Lines[LIndex].Symb := AName;
         AddExport(AName);
       end;
       Break;
-    end;
-  end;
-end;
-
-procedure SourceOptimize(const ASrc: OAsmSource);
-
-  function CanDo(var AIndex: integer): boolean;
-  begin
-    Result := False;
-    Inc(AIndex);
-    while AIndex < ASrc.Count do begin
-      with ASrc.Lines[AIndex] do begin
-        if (Length(Symbol) > 0) or UsesRegs(TCharSetRegS) then begin
-          Break;
-        end;
-        if SameInstruction('PSHS') and SameParameters('B,A') then begin
-          Result := True;
-          Break;
-        end;
-      end;
-      Inc(AIndex);
-    end;
-  end;
-
-var
-  LIndex, LLast: integer;
-begin
-  for LIndex := 0 to ASrc.Count - 1 do begin
-    with ASrc.Lines[LIndex] do begin
-      if not IsDeleted then begin
-        LLast := LIndex;
-        if SameInstruction('LEAS') and SameParameters('2,S') and CanDo(LLast) then begin
-          IsDeleted := True;
-          ASrc.Lines[LLast].SetLine(EmptyStr, 'STD', ',S');
-        end;
-      end;
     end;
   end;
 end;
@@ -251,7 +215,7 @@ begin
   FSource.Insert(1, EmptyStr, 'section', 'SECTION_NAME');
   FSource.Add(EmptyStr, 'endsection', EmptyStr);
   SourceTranslate(FSource);
-  //SourceOptimize(FSource);
+  SourcePeephole(FSource);
   FSource.SaveToStrings(ADst);
 end;
 

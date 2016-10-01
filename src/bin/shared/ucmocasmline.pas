@@ -56,20 +56,24 @@ type
 
   OAsmLine = object
   public
-    Symbol, Instruction, Parameters: string;
+    Symb, Inst, Args, Comm: string;
   public
-    procedure SetLine(const ASymbol, AInstruction, AParameters: string);
+    procedure SetLine(const ASymb, AInst, AArgs: string);
     function SetLine(const ASrcLine: string): boolean;
   public
-    function SameSymbol(const A: string): boolean; inline;
-    function SameInstruction(const A: string): boolean; inline;
-    function SameParameters(const A: string): boolean; inline;
+    function SameSymb(const A: string): boolean; inline;
+    function SameInst(const A: string): boolean; inline;
+    function SameArgs(const A: string): boolean; inline;
   public
-    function UsesRegs(const A: TSysCharSet): boolean;
+    function HasSymb: boolean; inline;
+    function HasInst: boolean; inline;
+    function HasArgs: boolean; inline;
+    function HasComm: boolean; inline;
+    function HasRegs(const A: TSysCharSet): boolean;
   public
     function AsString: string;
   public
-    IsDeleted, Is6502: boolean;
+    Removed, Is6502: boolean;
   end;
 
 function SymbolIsPublic(const A: string): boolean;
@@ -93,47 +97,71 @@ begin
     ((A[0] = '*') and not (A[1] in [#0..#32]));
 end;
 
-procedure OAsmLine.SetLine(const ASymbol, AInstruction, AParameters: string);
+procedure OAsmLine.SetLine(const ASymb, AInst, AArgs: string);
 begin
-  IsDeleted := False;
-  Symbol := Trim(ASymbol);
-  Instruction := UpperCase(Trim(AInstruction));
-  Parameters := Trim(AParameters);
-  if Length(Parameters) > 0 then begin
+  Removed := False;
+  Symb := Trim(ASymb);
+  Inst := UpperCase(Trim(AInst));
+  Args := Trim(AArgs);
+  if Length(Args) > 0 then begin
     // Compatiblity with the BBC assembler
-    if Parameters[1] = '=' then begin
-      Parameters[1] := '#';
+    if Args[1] = '=' then begin
+      Args[1] := '#';
     end;
   end;
 end;
 
-function OAsmLine.SameSymbol(const A: string): boolean;
+function OAsmLine.HasSymb: boolean;
 begin
-  Result := A = Symbol;
+  Result := Length(Symb) > 0;
 end;
 
-function OAsmLine.SameInstruction(const A: string): boolean;
+function OAsmLine.HasInst: boolean;
 begin
-  Result := SameText(A, Instruction);
+  Result := Length(Inst) > 0;
 end;
 
-function OAsmLine.SameParameters(const A: string): boolean;
+function OAsmLine.HasArgs: boolean;
 begin
-  Result := SameText(A, Parameters);
+  Result := Length(Args) > 0;
+end;
+
+function OAsmLine.HasComm: boolean;
+begin
+  Result := Length(Comm) > 0;
+end;
+
+function OAsmLine.SameSymb(const A: string): boolean;
+begin
+  Result := A = Symb;
+end;
+
+function OAsmLine.SameInst(const A: string): boolean;
+begin
+  Result := SameText(A, Inst);
+end;
+
+function OAsmLine.SameArgs(const A: string): boolean;
+begin
+  Result := SameText(A, Args);
 end;
 
 function OAsmLine.AsString: string;
 begin
-  if Length(Symbol) = 0 then begin
-    Result := EmptyStr;
+  if HasSymb then begin
+    Result := Symb;
   end else begin
-    Result := Symbol;
+    Result := EmptyStr;
   end;
-  if Length(Instruction) > 0 then begin
-    Result += #9 + Instruction;
-    if Length(Parameters) > 0 then begin
-      Result += #9 + Parameters;
+  if HasInst then begin
+    Result += #9 + Inst;
+    if HasArgs then begin
+      Result += #9 + Args;
     end;
+  end;
+  //Result := Format('%-30s %-10s %-20s', [Symb, Inst, Args]);
+  if HasComm then begin
+    Result += #9 + '; ' + Comm;
   end;
 end;
 
@@ -171,32 +199,44 @@ begin
     if (LTok = LBeg) or (LPos[-1] = ':') then begin
       Result := True;
       if LPos[-1] = ':' then begin
-        SetString(Symbol, LTok, LPos - LTok - 1);
+        SetString(Symb, LTok, LPos - LTok - 1);
       end else begin
-        SetString(Symbol, LTok, LPos - LTok);
+        SetString(Symb, LTok, LPos - LTok);
       end;
       LNextToken;
     end;
     if LTok^ in ['a'..'z', 'A'..'Z', '.'] then begin
       Result := True;
-      SetString(Instruction, LTok, LPos - LTok);
+      SetString(Inst, LTok, LPos - LTok);
       LNextToken;
       if not TokenIsComment(LTok) then begin
-        SetString(Parameters, LTok, LPos - LTok);
+        SetString(Args, LTok, LPos - LTok);
       end;
     end;
   end;
 end;
 
-function OAsmLine.UsesRegs(const A: TSysCharSet): boolean;
-var
-  LBeg, LCom: pchar;
+function RPosSet(const ASet: TSysCharSet; const A: string): integer;
 begin
-  LBeg := PChar(Parameters);
-  LCom := StrScan(LBeg, ',');
+  for Result := Length(A) downto 1 do begin
+    if A[Result] in ASet then begin
+      Exit;
+    end;
+  end;
+  Result := 0;
+end;
+
+function OAsmLine.HasRegs(const A: TSysCharSet): boolean;
+var
+  LPos, LLen: integer;
+begin
+  LLen := Length(Args);
+  LPos := RPosSet(A, Args);
   Result :=
-    ((LBeg[0] in A) and (LBeg[1] = #0)) or
-    ((LCom <> nil) and (((LCom = LBeg + 1) and (LCom[-1] in A)) or (LCom[1] in A)));
+    ((LLen = 1) and (LPos = 1)) or
+    ((LLen > 1) and (LPos > 1) and (Args[LPos - 1] = ',')) or
+    ((LLen > 1) and (LPos = 1) and (Args[LPos + 1] = ',')) or
+    ((LLen > 2) and (LPos < LLen) and (Args[LPos - 1] = ',') and (Args[LPos + 1] = ','));
 end;
 
 end.

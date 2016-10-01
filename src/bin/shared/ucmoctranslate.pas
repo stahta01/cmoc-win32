@@ -58,17 +58,19 @@ begin
   LIndex := 0;
   while LIndex < Length(ASource.Lines) do begin
     with ASource.Lines[LIndex] do begin
-      if not (IsDeleted or Is6502 or (Length(Instruction) = 0)) then begin
-        if SameInstruction('.p09') then begin
-          IsDeleted := True;
+      if not (Removed or Is6502 or (Length(Inst) = 0)) then begin
+        Removed := SameInst('.p09');
+        if Removed then begin
           LProcessorMode := pm6809;
-        end else if SameInstruction('.p02') then begin
-          IsDeleted := True;
-          LProcessorMode := pm6502;
         end else begin
-          case LProcessorMode of
-            pm6502: begin
-              SourceTranslate6502(ASource, LIndex);
+          Removed := SameInst('.p02');
+          if Removed then begin
+            LProcessorMode := pm6502;
+          end else begin
+            case LProcessorMode of
+              pm6502: begin
+                SourceTranslate6502(ASource, LIndex);
+              end;
             end;
           end;
         end;

@@ -36,7 +36,7 @@
         <PackageName Value="LazUtils"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="4">
+    <Units Count="2">
       <Unit0>
         <Filename Value="amoc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -46,16 +46,6 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="AmocProcess"/>
       </Unit1>
-      <Unit2>
-        <Filename Value="..\shared\ucmoctranslate.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="UCmocTranslate"/>
-      </Unit2>
-      <Unit3>
-        <Filename Value="..\shared\ucmoctranslate6502.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="UCmocTranslate6502"/>
-      </Unit3>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
