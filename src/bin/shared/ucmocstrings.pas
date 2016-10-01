@@ -47,6 +47,8 @@ type
   public
     function _GetString(const AName, ADefault: string): string;
     procedure _InsertStrings(const AIndex: integer; const AStrings: array of string);
+    procedure _MergeValues(const AStrings: TStrings);
+    procedure _MergeValues(const ACommaText: string);
   end;
 
 implementation
@@ -69,6 +71,28 @@ var
 begin
   for LIndex := 0 to High(AStrings) do begin
     Insert(AIndex + LIndex, AStrings[LIndex]);
+  end;
+end;
+
+procedure TStringsHelper._MergeValues(const AStrings: TStrings);
+var
+  LIndex: integer;
+begin
+  for LIndex := 0 to AStrings.Count - 1 do begin
+    Values[AStrings.Names[LIndex]] := AStrings.ValueFromIndex[LIndex];
+  end;
+end;
+
+procedure TStringsHelper._MergeValues(const ACommaText: string);
+var
+  LStrings: TStrings;
+begin
+  LStrings := TStringList.Create;
+  try
+    LStrings.CommaText := ACommaText;
+    _MergeValues(LStrings);
+  finally
+    FreeAndNil(LStrings);
   end;
 end;
 

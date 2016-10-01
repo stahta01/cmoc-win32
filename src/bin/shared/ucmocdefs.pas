@@ -114,6 +114,7 @@ const
   Opt_Entry2 = '-e';
   Opt_ExtBas2 = '-extbas';
   Opt_Format2 = '-f';
+  Opt_Linkin1 = '--linkin';
   Opt_Help1 = '--help';
   Opt_Include2 = '-I';
   Opt_LibInclude2 = '-l';

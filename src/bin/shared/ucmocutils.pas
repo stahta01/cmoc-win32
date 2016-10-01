@@ -41,7 +41,7 @@ interface
 
 uses
   Classes, FileUtil, LazFileUtils, Process, StrUtils, SysUtils, Types, UCmocDefs,
-  UCmocParser, UCmocStringDynArray;
+  UCmocParser, UCmocStringDynArray, UCmocStrings;
 
 type
   ECmocException = EAbort;
@@ -365,7 +365,7 @@ begin
           AOrigin := OCmoc.StringToInteger(LParser.Token);
         end;
         'options': begin
-          AOptions.CommaText := Trim(LParser.Remaining);
+          AOptions._MergeValues(Trim(LParser.Remaining));
         end;
         'target': begin
           LParser.Next;

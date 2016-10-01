@@ -202,7 +202,7 @@ type
   strict private
     FSynEditLinesCount: integer;
     FTarget: string;
-    FOptions: TStrings;
+    FOptions, FLinkin: TStrings;
     FOrigin: cardinal;
   strict private
     function FileNameSrc: TFileName;
@@ -220,7 +220,7 @@ type
     function ExecuteTool(const ATool: string; const AParameters: array of string;
       const AExternal: boolean): integer;
   strict private
-    function BeginProcess(const ADst, ASrc: TFileName): boolean;
+    function BeginProcess(const ADst: TFileName; const ASrc: array of TFileName): boolean;
     procedure EndProcess(const AMessage: string);
   public
     { public declarations }
@@ -238,6 +238,7 @@ var
   LStream: CStringsStream;
 begin
   FOptions := TStringList.Create;
+  FLinkin := TStringList.Create;
 
   LStream := CStringsStream.Create(SynEditLog.Lines);
   AssignStream(Output, LStream);
@@ -374,7 +375,6 @@ begin
     Format_DECB: begin
       LString := FileExt_BIN;
     end else begin
-
       OCmoc.RaiseError('Unknown output format', LString);
     end;
   end;
@@ -564,16 +564,26 @@ begin
   end;
 end;
 
-function TFormCmocIDE.BeginProcess(const ADst, ASrc: TFileName): boolean;
+function TFormCmocIDE.BeginProcess(const ADst: TFileName; const ASrc: array of TFileName): boolean;
+var
+  LFileName: TFileName;
 begin
   MenuFileSave.Click;
-  if not FileExists(ASrc) then begin
-    OCmoc.RaiseError('File does not exist', ASrc);
+  for LFileName in ASrc do begin
+    if not FileExists(LFileName) then begin
+      OCmoc.RaiseError('File does not exist', LFileName);
+    end;
   end;
   while SynEditLog.Lines.Count > 500 do begin
     SynEditLog.Lines.Delete(0);
   end;
-  Result := FileAge(ADst) < FileAge(ASrc);
+  Result := False;
+  for LFileName in ASrc do begin
+    Result := FileAge(ADst) < FileAge(LFileName);
+    if Result then begin
+      Break;
+    end;
+  end;
   if not Result then begin
     WriteLn(OCmoc.StringQuoted(ADst) + ' is unchanged. # No processing required');
   end;
@@ -586,7 +596,7 @@ end;
 
 procedure TFormCmocIDE.MenuRunSyntaxCheckClick(ASender: TObject);
 begin
-  if BeginProcess(EmptyStr, FileNameSrcExists) then begin
+  if BeginProcess(EmptyStr, [FileNameSrcExists]) then begin
     ExecuteTool(Tool_CMOC2, [Opt_DontAssemble1, FileNameSrc], False);
     EndProcess('No syntax error were found');
   end;
@@ -601,7 +611,8 @@ begin
   if FOptions.IndexOfName(Opt_Format2) < 0 then begin
     FOptions.Values[Opt_Format2] := Format_DECB;
   end;
-  if BeginProcess(FileNameObj, FileNameSrcExists) then begin
+  FLinkin.CommaText := FOptions.Values[Opt_Linkin1];
+  if BeginProcess(FileNameObj, [FileNameSrcExists]) then begin
     ExecuteTool(Tool_CMOC2, [Opt_DontLink1, Opt_Output2, FileNameObj, Opt_Target2,
       FTarget, Opt_Origin2, IntToStr(FOrigin), FileNameSrc], False);
     EndProcess('Compilation complete');
@@ -609,11 +620,20 @@ begin
 end;
 
 procedure TFormCmocIDE.MenuRunBuildClick(ASender: TObject);
+var
+  LIndex: integer;
+  LObjFiles: TStringDynArray;
 begin
   MenuRunCompile.Click;
-  if BeginProcess(FileNameOut, FileNameObj) then begin
-    ExecuteTool(Tool_CMOC2, [Opt_Output2, FileNameOut, Opt_Target2, FTarget,
-      Opt_Origin2, IntToStr(FOrigin), FileNameObj], False);
+  LObjFiles := default(TStringDynArray);
+  OStringDynArray.Add(LObjFiles, FileNameObj);
+  for LIndex := 0 to FLinkin.Count - 1 do begin
+    OStringDynArray.Add(LObjFiles, FLinkin[LIndex]);
+  end;
+  if BeginProcess(FileNameOut, LObjFiles) then begin
+    OStringDynArray.InsertStrings(LObjFiles, 0, [Opt_Output2, FileNameOut, Opt_Target2, FTarget,
+      Opt_Origin2, IntToStr(FOrigin)]);
+    ExecuteTool(Tool_CMOC2, LObjFiles, False);
     EndProcess('Build complete');
   end;
 end;
@@ -631,7 +651,7 @@ var
   LIndex: integer;
   LMessage: string;
 begin
-  with FindAllFiles(OCmoc.PathToXroarRoms, '*' + FileExt_ROM, False) do begin
+  with FindAllFiles(OCmoc.PathToXroarRoms, AllFilesMask + FileExt_ROM, False) do begin
     try
       if Count = 0 then begin
         LMessage := 'Unable to locate XRoar ROM files' + LineEnding +

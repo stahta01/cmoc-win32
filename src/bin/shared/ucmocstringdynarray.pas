@@ -47,8 +47,10 @@ type
   OStringDynArray = object
   public
     class procedure Add(var A: TStringDynArray; const S: string);
-    class procedure Insert(var A: TStringDynArray; const I: integer; const S: string);
+    class procedure Insert(var A: TStringDynArray; const AIndex: integer; const S: string);
     class procedure AddStrings(var A: TStringDynArray; const AStrings: array of string);
+    class procedure InsertStrings(var A: TStringDynArray; AIndex: integer;
+      const AStrings: array of string);
     class procedure AddOption(var A: TStringDynArray; const AOption, AValue: string;
       const ASingleEntry: boolean);
     class procedure AddDefine(var A: TStringDynArray; const AName, AValue: string;
@@ -67,15 +69,16 @@ begin
   A[High(A)] := S;
 end;
 
-class procedure OStringDynArray.Insert(var A: TStringDynArray; const I: integer; const S: string);
+class procedure OStringDynArray.Insert(var A: TStringDynArray; const AIndex: integer;
+  const S: string);
 var
   LIndex: integer;
 begin
   SetLength(A, Length(A) + 1);
-  for LIndex := High(A) - 1 downto I do begin
+  for LIndex := High(A) - 1 downto AIndex do begin
     A[LIndex + 1] := A[LIndex];
   end;
-  A[I] := S;
+  A[AIndex] := S;
 end;
 
 class procedure OStringDynArray.AddStrings(var A: TStringDynArray;
@@ -85,6 +88,17 @@ var
 begin
   for LString in AStrings do begin
     Add(A, LString);
+  end;
+end;
+
+class procedure OStringDynArray.InsertStrings(var A: TStringDynArray;
+  AIndex: integer; const AStrings: array of string);
+var
+  LString: string;
+begin
+  for LString in AStrings do begin
+    Insert(A, AIndex, LString);
+    Inc(AIndex);
   end;
 end;
 
@@ -178,4 +192,3 @@ begin
 end;
 
 end.
-
