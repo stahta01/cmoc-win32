@@ -83,6 +83,7 @@
 #define utoa        __utoa
 #define itoa        __itoa
 #define patmatch    __patmatch
+#define findstr     __findstr
 
 // Variables for kreider lib functions
 

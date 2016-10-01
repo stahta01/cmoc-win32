@@ -37,6 +37,9 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _OS9_H
 #define _OS9_H
 
+// For information about these functions, please read:
+// https://sourceforge.net/p/nitros9/wiki/C_Compiler_User's_Guide/
+
 #include <sys/clock.h>
 #include <sys/size.h>
 
@@ -51,6 +54,11 @@ unsigned _umin(unsigned a, unsigned b);
 unsigned _umax(unsigned a, unsigned b);
 void _tsleep(clock_t ticks);
 word _swab(word val);
+
+// Note: pos starts at 1. Returns 0 = not found, or > 0 for char pos (1 based).
+
+int _findstr(int pos, char* str, char* pat);
+int _findnstr(int pos, char* str, char* pat, size_t len);
 
 // Non documented OS9, but are used by OS9 via KreiderLib
 
