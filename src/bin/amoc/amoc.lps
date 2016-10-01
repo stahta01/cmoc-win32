@@ -4,42 +4,45 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="18">
+    <Units Count="21">
       <Unit0>
         <Filename Value="amoc.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="47"/>
-        <CursorPos X="50" Y="54"/>
-        <UsageCount Value="55"/>
+        <CursorPos X="15" Y="56"/>
+        <UsageCount Value="58"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="amocprocess.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="AmocProcess"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="205"/>
-        <CursorPos X="14" Y="222"/>
-        <UsageCount Value="55"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="236"/>
+        <CursorPos X="5" Y="254"/>
+        <UsageCount Value="58"/>
+        <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\shared\ucmoctranslate.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCmocTranslate"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="16"/>
-        <CursorPos X="60" Y="43"/>
-        <UsageCount Value="45"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="55"/>
+        <CursorPos X="40" Y="43"/>
+        <UsageCount Value="48"/>
+        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\shared\ucmoctranslate6502.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCmocTranslate6502"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="296"/>
-        <CursorPos X="83" Y="301"/>
-        <UsageCount Value="22"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="277"/>
+        <CursorPos X="64" Y="43"/>
+        <UsageCount Value="25"/>
+        <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="..\shared\ucmocpreprocessor.pas"/>
@@ -91,8 +94,8 @@
         <Filename Value="..\shared\ucmocasmsource.pas"/>
         <UnitName Value="UCmocAsmSource"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="45"/>
-        <CursorPos X="38" Y="111"/>
+        <TopLine Value="105"/>
+        <CursorPos X="35" Y="43"/>
         <UsageCount Value="21"/>
       </Unit10>
       <Unit11>
@@ -119,10 +122,11 @@
       <Unit14>
         <Filename Value="..\shared\ucmocasmline.pas"/>
         <UnitName Value="UCmocAsmLine"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="86"/>
-        <CursorPos X="13" Y="78"/>
-        <UsageCount Value="22"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="180"/>
+        <CursorPos X="42" Y="199"/>
+        <UsageCount Value="23"/>
+        <Loaded Value="True"/>
       </Unit14>
       <Unit15>
         <Filename Value="..\shared\ucmocasm.pas"/>
@@ -146,7 +150,106 @@
         <CursorPos X="10" Y="176"/>
         <UsageCount Value="10"/>
       </Unit17>
+      <Unit18>
+        <Filename Value="..\shared\cmoc.inc"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="10" Y="9"/>
+        <UsageCount Value="10"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\sysutils\sysunih.inc"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="30"/>
+        <CursorPos X="16" Y="41"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\sysutils\sysuni.inc"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="214"/>
+        <CursorPos X="24" Y="243"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit20>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory Count="19" HistoryIndex="18">
+      <Position1>
+        <Filename Value="amoc.lpr"/>
+        <Caret Line="56" Column="15" TopLine="47"/>
+      </Position1>
+      <Position2>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="206" Column="13" TopLine="187"/>
+      </Position2>
+      <Position3>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="205" Column="21" TopLine="193"/>
+      </Position3>
+      <Position4>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="214" Column="22" TopLine="195"/>
+      </Position4>
+      <Position5>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="38" Column="15" TopLine="27"/>
+      </Position5>
+      <Position6>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="217" Column="5" TopLine="168"/>
+      </Position6>
+      <Position7>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="202" Column="21" TopLine="191"/>
+      </Position7>
+      <Position8>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="203" Column="29" TopLine="195"/>
+      </Position8>
+      <Position9>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="202" Column="17" TopLine="194"/>
+      </Position9>
+      <Position10>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="205" Column="19" TopLine="198"/>
+      </Position10>
+      <Position11>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="256" Column="12" TopLine="238"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\shared\ucmoctranslate.pas"/>
+        <Caret Line="43" Column="40" TopLine="34"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\shared\ucmocasmline.pas"/>
+        <Caret Line="185" Column="44" TopLine="166"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\shared\ucmoctranslate6502.pas"/>
+        <Caret Line="52" Column="46" TopLine="40"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\shared\ucmocasmline.pas"/>
+        <Caret Line="191" Column="21" TopLine="181"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\shared\ucmocasmline.pas"/>
+        <Caret Line="68" Column="19" TopLine="57"/>
+      </Position16>
+      <Position17>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="206" Column="39" TopLine="197"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\shared\ucmocasmline.pas"/>
+        <Caret Line="198" Column="17" TopLine="184"/>
+      </Position18>
+      <Position19>
+        <Filename Value="..\shared\ucmocasmline.pas"/>
+        <Caret Line="202" Column="37" TopLine="187"/>
+      </Position19>
+    </JumpHistory>
   </ProjectSession>
 </CONFIG>

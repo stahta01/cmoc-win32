@@ -87,7 +87,7 @@
 	"lwasm.h"
 	"instab.h"
 
-1460906143 source:c:\dev\cmoc-win32\src\bin\lwtools\src\lwasm\insn_rel.c
+1475275948 source:c:\dev\cmoc-win32\src\bin\lwtools\src\lwasm\insn_rel.c
 	<ctype.h>
 	<stdlib.h>
 	<stdio.h>
@@ -123,7 +123,7 @@
 	"lwasm.h"
 	"instab.h"
 
-1475214062 source:c:\dev\cmoc-win32\src\bin\lwtools\src\lwasm\lwasm.c
+1475276248 source:c:\dev\cmoc-win32\src\bin\lwtools\src\lwasm\lwasm.c
 	<stdio.h>
 	<stdarg.h>
 	<string.h>
@@ -135,7 +135,7 @@
 	"lwasm.h"
 	"instab.h"
 
-1460906143 source:c:\dev\cmoc-win32\src\bin\lwtools\src\lwasm\macro.c
+1475273814 source:c:\dev\cmoc-win32\src\bin\lwtools\src\lwasm\macro.c
 	<ctype.h>
 	<stdlib.h>
 	<string.h>
@@ -146,7 +146,7 @@
 	"input.h"
 	"instab.h"
 
-1475213972 source:c:\dev\cmoc-win32\src\bin\lwtools\src\lwasm\main.c
+1475276214 source:c:\dev\cmoc-win32\src\bin\lwtools\src\lwasm\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -178,7 +178,7 @@
 	<lw_expr.h>
 	"lwasm.h"
 
-1475213972 source:c:\dev\cmoc-win32\src\bin\lwtools\src\lwasm\pass1.c
+1475275576 source:c:\dev\cmoc-win32\src\bin\lwtools\src\lwasm\pass1.c
 	<stdio.h>
 	<string.h>
 	<ctype.h>
@@ -273,7 +273,7 @@
 	"lwasm.h"
 	"instab.h"
 
-1475213972 source:c:\dev\cmoc-win32\src\bin\lwtools\src\lwasm\symbol.c
+1475272355 source:c:\dev\cmoc-win32\src\bin\lwtools\src\lwasm\symbol.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

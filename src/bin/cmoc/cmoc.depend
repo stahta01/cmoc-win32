@@ -3074,7 +3074,7 @@
 	"LabeledStmt.h"
 	"TranslationUnit.h"
 
-1474086927 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\main.cpp
+1474367195 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\main.cpp
 	"TranslationUnit.h"
 	<string>
 	<iostream>
@@ -3105,7 +3105,7 @@
 	<stdlib.h>
 	<errno.h>
 
-1458409119 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\pragma.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\pragma.h
 	"Tree.h"
 
 1458867609 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\scope.cpp
@@ -3142,7 +3142,7 @@
 	"CompoundStmt.h"
 	"LabeledStmt.h"
 
-1466270135 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\switchstmt.h
+1473910497 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\switchstmt.h
 	"Tree.h"
 	"TreeSequence.h"
 
@@ -3193,7 +3193,7 @@
 	"Scope.h"
 	"Declarator.h"
 
-1471916098 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\unaryopexpr.cpp
+1473910497 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\unaryopexpr.cpp
 	"UnaryOpExpr.h"
 	"TranslationUnit.h"
 	"VariableExpr.h"
@@ -3258,4 +3258,42 @@
 	<unistd.h>
 
 1472258656 c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\parser.hh
+
+1474163386 source:c:\dev\cmoc-win32\src\bin\cmoc\cmoc\src\parser.cc
+	"DeclarationSequence.h"
+	"WordConstantExpr.h"
+	"IdentifierExpr.h"
+	"VariableExpr.h"
+	"FunctionCallExpr.h"
+	"StringLiteralExpr.h"
+	"BinaryOpExpr.h"
+	"UnaryOpExpr.h"
+	"CastExpr.h"
+	"CompoundStmt.h"
+	"IfStmt.h"
+	"SwitchStmt.h"
+	"LabeledStmt.h"
+	"WhileStmt.h"
+	"ForStmt.h"
+	"JumpStmt.h"
+	"Scope.h"
+	"FunctionDef.h"
+	"FormalParameter.h"
+	"FormalParamList.h"
+	"AssemblerStmt.h"
+	"TranslationUnit.h"
+	"ObjectMemberExpr.h"
+	"ClassDef.h"
+	"ConditionalExpr.h"
+	"DeclarationSpecifierList.h"
+	"Pragma.h"
+	<string.h>
+	<time.h>
+	<stddef.h>
+	<libintl.h>
+	<alloca.h>
+	<malloc.h>
+	<stdlib.h>
+	<stdlib.h>
+	<stdio.h>
 

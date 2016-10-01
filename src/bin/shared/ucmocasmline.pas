@@ -42,6 +42,16 @@ interface
 uses
   StrUtils, SysUtils;
 
+const
+
+  TCharSetRegA = ['a', 'A'];
+  TCharSetRegB = ['b', 'B'];
+  TCharSetRegD = ['d', 'D'];
+  TCharSetRegX = ['x', 'X'];
+  TCharSetRegY = ['y', 'Y'];
+  TCharSetRegS = ['s', 'S'];
+  TCharSetRegU = ['u', 'U'];
+
 type
 
   OAsmLine = object
@@ -51,9 +61,11 @@ type
     procedure SetLine(const ASymbol, AInstruction, AParameters: string);
     function SetLine(const ASrcLine: string): boolean;
   public
-    function SameSymbol(const A: string): boolean;
-    function SameInstruction(const A: string): boolean;
-    function SameParameters(const A: string): boolean;
+    function SameSymbol(const A: string): boolean; inline;
+    function SameInstruction(const A: string): boolean; inline;
+    function SameParameters(const A: string): boolean; inline;
+  public
+    function UsesRegs(const A: TSysCharSet): boolean;
   public
     function AsString: string;
   public
@@ -176,5 +188,15 @@ begin
   end;
 end;
 
-end.
+function OAsmLine.UsesRegs(const A: TSysCharSet): boolean;
+var
+  LBeg, LCom: pchar;
+begin
+  LBeg := PChar(Parameters);
+  LCom := StrScan(LBeg, ',');
+  Result :=
+    ((LBeg[0] in A) and (LBeg[1] = #0)) or
+    ((LCom <> nil) and (((LCom = LBeg + 1) and (LCom[-1] in A)) or (LCom[1] in A)));
+end;
 
+end.

@@ -8,7 +8,7 @@
 #include <equates.h>
 
 #define S 32
-
+                   //9,057 bytes
 vector_t vectors[8] = {
     {+S, +S, +S},
     {+S, -S, +S},

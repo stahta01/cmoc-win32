@@ -40,8 +40,8 @@ unit AmocProcess;
 interface
 
 uses
-  Classes, StrUtils, SysUtils, UCmocTranslate, UCmocAsmLine, UCmocAsmSource, UCmocDefs, UCmocPreprocessor,
-  UCmocUtils;
+  Classes, StrUtils, SysUtils, UCmocAsmLine, UCmocAsmSource, UCmocDefs, UCmocPreprocessor,
+  UCmocTranslate, UCmocUtils;
 
 type
 
@@ -195,6 +195,42 @@ begin
   end;
 end;
 
+procedure SourceOptimize(const ASrc: OAsmSource);
+
+  function CanDo(var AIndex: integer): boolean;
+  begin
+    Result := False;
+    Inc(AIndex);
+    while AIndex < ASrc.Count do begin
+      with ASrc.Lines[AIndex] do begin
+        if (Length(Symbol) > 0) or UsesRegs(TCharSetRegS) then begin
+          Break;
+        end;
+        if SameInstruction('PSHS') and SameParameters('B,A') then begin
+          Result := True;
+          Break;
+        end;
+      end;
+      Inc(AIndex);
+    end;
+  end;
+
+var
+  LIndex, LLast: integer;
+begin
+  for LIndex := 0 to ASrc.Count - 1 do begin
+    with ASrc.Lines[LIndex] do begin
+      if not IsDeleted then begin
+        LLast := LIndex;
+        if SameInstruction('LEAS') and SameParameters('2,S') and CanDo(LLast) then begin
+          IsDeleted := True;
+          ASrc.Lines[LLast].SetLine(EmptyStr, 'STD', ',S');
+        end;
+      end;
+    end;
+  end;
+end;
+
 procedure CAmoc.Preprocess(const ADst, ASrc: TStrings);
 var
   LSymbol: string;
@@ -212,14 +248,10 @@ begin
   end;
   FSource.Insert(0, EmptyStr, 'pragma',
     '6809,6800compat,6809conv,m80ext,shadow,autobranchlength');
-  FSource.Insert(1, 'jsrbas', 'macro', EmptyStr);
-  FSource.Insert(2, EmptyStr, 'pshs', 'u');
-  FSource.Insert(3, EmptyStr, 'jsr', '\1');
-  FSource.Insert(4, EmptyStr, 'puls', 'u');
-  FSource.Insert(5, EmptyStr, 'endm', EmptyStr);
-  FSource.Insert(6, EmptyStr, 'section', 'SECTION_NAME');
+  FSource.Insert(1, EmptyStr, 'section', 'SECTION_NAME');
   FSource.Add(EmptyStr, 'endsection', EmptyStr);
   SourceTranslate(FSource);
+  //SourceOptimize(FSource);
   FSource.SaveToStrings(ADst);
 end;
 

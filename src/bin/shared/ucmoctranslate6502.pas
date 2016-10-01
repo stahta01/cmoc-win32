@@ -40,7 +40,7 @@ unit UCmocTranslate6502;
 interface
 
 uses
-  StrUtils, SysUtils, UCmocAsmSource, UCmocUtils;
+  StrUtils, SysUtils, UCmocAsmLine, UCmocAsmSource, UCmocUtils;
 
 procedure SourceTranslate6502(var ASrc: OAsmSource; var AIndex: integer);
 
@@ -50,10 +50,6 @@ const
 
   SInvalidInstructionMode = 'Invalid 6502 instruction mode';
   SUnknownMnemonic = 'Unknown 6502 mnemonic';
-
-  TCharSetRegA = ['a', 'A'];
-  TCharSetRegX = ['x', 'X'];
-  TCharSetRegY = ['y', 'Y'];
 
 type
 
