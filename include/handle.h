@@ -41,15 +41,16 @@ typedef void* handle_t;
 
 extern handle_t handle_vidram;
 extern handle_t handle_polcat;
-extern handle_t handle_chrout;
+extern handle_t handle_fputc;
+extern handle_t handle_fgetc;
+extern handle_t handle_cputc;
 extern handle_t handle_csrdon;
 extern handle_t handle_blkin;
 extern handle_t handle_blkout;
 extern handle_t handle_joyin;
 extern handle_t handle_wrtldr;
+
 extern handle_t handle_line;
-extern handle_t handle_getchr;
-extern handle_t handle_putchr;
 extern handle_t handle_sound;
 extern handle_t handle_crunch;
 extern handle_t handle_execute;

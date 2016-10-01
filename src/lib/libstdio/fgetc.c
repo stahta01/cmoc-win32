@@ -8,7 +8,7 @@ int fgetc(FILE* fp)
         if (fp->eof || fcb_get(fp->dev - 1)->cnt.seq.dfl) {
             return fp->eof = EOF;
         }
-        return system_getchr(fp->dev);
+        return system_fgetc(fp->dev);
     } else {
         return cgetc();
     }

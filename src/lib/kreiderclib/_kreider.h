@@ -95,7 +95,7 @@
 #define pffloat     __pffloat
 #define pflong      __pflong
 
-void asm _static_libkreider(void)
+void asm _static_(void)
 {
     asm {
 #define psect *

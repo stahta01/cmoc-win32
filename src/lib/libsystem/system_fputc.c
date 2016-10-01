@@ -3,7 +3,7 @@
 
 byte _static_dev;
 
-asm void system_putchr(int chr, dev_t dev)
+asm void system_fputc(int chr, dev_t dev)
 {
     asm {
         lda     _DEVNUM
@@ -11,7 +11,7 @@ asm void system_putchr(int chr, dev_t dev)
         lda     5,s
         sta     _DEVNUM
         lda     3,s
-        jsr     [handle_putchr]
+        jsr     [handle_fputc]
         lda     _static_dev
         sta     _DEVNUM
     }

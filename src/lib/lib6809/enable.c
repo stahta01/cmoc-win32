@@ -4,7 +4,7 @@
 #define enablef     _enablef
 #define disablef    _disablef
 
-asm void _static_ENABLE_ASM(void)
+asm void _static_(void)
 {
     asm {
 #include "asm/ENABLE.ASM"

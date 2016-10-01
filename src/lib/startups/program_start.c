@@ -9,8 +9,8 @@ void _main(void)
         sts     _static_exitstack
     }
     system_init();
-    heap_init((heap_t*)program_end, 0x7c00 - (int)program_end);
-    malloc_heap((heap_t*)program_end);
+    //heap_init((heap_t*)program_end, 0x7c00 - (int)program_end);
+    //malloc_heap((heap_t*)program_end);
     asm {
         INITGL__STDIO_O: extern
         lbsr    INITGL__STDIO_O                 // stdio needs to init stdin/stdout
@@ -26,9 +26,9 @@ void exit(int status)
         char s[64];
         itoa(status, _stpcpy(s, "EXIT STATUS #"), 10);
         if (status >= 1024) {
-            strcat(strcat(s, "\n"), (char*)status);
+            strcat(strcat(s, "\r"), (char*)status);
         }
-        cputs(s);
+        system_cputs(s);
     }
     //memset(0x2dd, 0, 250);
     asm {

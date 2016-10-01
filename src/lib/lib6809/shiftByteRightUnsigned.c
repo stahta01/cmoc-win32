@@ -9,17 +9,17 @@
 // Result left in B.
 // CAUTION: Trashes X and pops the 8-bit value off the stack.
 
-asm void _static_shiftByteRightUnsigned(void)
+asm void _static_(void)
 {
     asm {
         shiftByteRightUnsigned: export
 
         shiftByteRightUnsigned:
-        addd    #0                          // any shift to do?
+        addd    #0                              // any shift to do?
         beq     shiftByteRightUnsigned_no_change
 
-        cmpd    #16                         // shifting all bits out?
-        blo     shiftByteRightUnsigned_general // if not
+        cmpd    #16                             // shifting all bits out?
+        blo     shiftByteRightUnsigned_general  // if not
 
 // Shifting >= 16 bits out.
 
@@ -27,12 +27,12 @@ asm void _static_shiftByteRightUnsigned(void)
         bra     shiftByteRightUnsigned_end
 
         shiftByteRightUnsigned_no_change:
-        ldb     2,s                         // return left side of shift operator as is
+        ldb     2,s                             // return left side of shift operator as is
         bra     shiftByteRightUnsigned_end
 
         shiftByteRightUnsigned_general:
-        tfr     b,a                         // use A for number of bits to shift
-        ldb     2,s                         // get left side of shift operator
+        tfr     b,a                             // use A for number of bits to shift
+        ldb     2,s                             // get left side of shift operator
 
         shiftByteRightUnsigned_loop:
         lsrb
@@ -40,9 +40,9 @@ asm void _static_shiftByteRightUnsigned(void)
         bne     shiftByteRightUnsigned_loop
 
         shiftByteRightUnsigned_end:
-        puls    x                           // pop return value
-        leas    1,s                         // pop left side
-        tfr     x,pc                        // return from routine (with result in D)
+        puls    x                               // pop return value
+        leas    1,s                             // pop left side
+        tfr     x,pc                            // return from routine (with result in D)
     }
 }
 

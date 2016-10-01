@@ -4,7 +4,7 @@
 int fputc(int c, FILE* fp)
 {
     if (fp->dev) {
-        system_putchr(c, fp->dev);
+        system_fputc(c, fp->dev);
     } else {
         cputc(c);
     }

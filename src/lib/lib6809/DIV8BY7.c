@@ -13,7 +13,7 @@
 // where a = higher five bits and b = lower three bits
 // Source: DIVIDE7 on http://mirrors.apple2.org.za/ground.icaen.uiowa.edu/MiscInfo/Programming/div7
 
-asm void _static_DIV8BY7(void)
+asm void _static_(void)
 {
     asm {
         DIV8BY7: export
@@ -21,18 +21,18 @@ asm void _static_DIV8BY7(void)
         DIV8BY7:
         tfr     A,B
         anda    #7
-        pshs    A                           // low bits (b)
+        pshs    A                               // low bits (b)
         tfr     B,A
         lsra
         lsra
         lsra
-        tfr     A,B                         // high bits, divided by 8 (a)
-        andcc   #$FE                        // clear carry
-        adca    ,S+                         //a + b. here we know carry is low.
+        tfr     A,B                             // high bits, divided by 8 (a)
+        andcc   #$FE                            // clear carry
+        adca    ,S+                             //a + b. here we know carry is low.
 
         DIV8BY7_010:
-        incb                                // the loop is executed between 1 and 6 times
-        sbca    #7                          // since A is at most 38
+        incb                                    // the loop is executed between 1 and 6 times
+        sbca    #7                              // since A is at most 38
         bcc     DIV8BY7_010
         adda    #7
         decb

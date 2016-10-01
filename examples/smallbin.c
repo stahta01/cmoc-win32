@@ -1,6 +1,6 @@
 
 // This produces the current smallest bin size, which is
-// 4,190 bytes ATM. I will try to get this down.
+// 1,313 bytes ATM. I will try to get this down.
 
 #include <stdlib.h>
 

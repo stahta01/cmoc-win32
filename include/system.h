@@ -73,9 +73,12 @@ extern byte _get_ostype;
 
 void system_init(void);
 int system_polcat(void);
-void system_chrout(int c);
-void system_putchr(int c, dev_t dev);
-int system_getchr(dev_t dev);
+
+void system_fputc(int c, dev_t dev);
+int system_fgetc(dev_t dev);
+void system_cputc(int c);
+void system_cputs(char* s);
+
 void system_joyin(void);
 void system_sound(void);
 void system_line(void);
