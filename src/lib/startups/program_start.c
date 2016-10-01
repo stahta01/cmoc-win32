@@ -9,8 +9,6 @@ void _main(void)
         sts     _static_exitstack
     }
     system_init();
-    //heap_init((heap_t*)program_end, 0x7c00 - (int)program_end);
-    //malloc_heap((heap_t*)program_end);
     asm {
         INITGL__STDIO_O: extern
         lbsr    INITGL__STDIO_O                 // stdio needs to init stdin/stdout
@@ -30,7 +28,6 @@ void exit(int status)
         }
         system_cputs(s);
     }
-    //memset(0x2dd, 0, 250);
     asm {
         lds _static_exitstack
         rts                                     // Skip the user stack frame

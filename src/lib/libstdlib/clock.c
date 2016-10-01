@@ -1,8 +1,10 @@
 
 #include "_stdlib.h"
 
-clock_t clock(void)
+asm clock_t clock(void)
 {
-    return *(clock_t*)_TIMVAL;
+    asm {
+        ldd  _TIMVAL
+    }
 }
 

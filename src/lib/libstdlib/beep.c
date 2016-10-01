@@ -3,8 +3,8 @@
 
 void beep(int tone, int duration)
 {
-    _sndton = (char)tone;
-    _snddur = (char)duration;
+    _sndton = (byte)tone;
+    _snddur = (byte)duration;
     system_sound();
 }
 
