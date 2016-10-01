@@ -20,6 +20,8 @@ char* strpcpy_pad(char* dst, char* src, int width, char padchar)
     return dst;
 }
 
+// 2072
+
 int vsprintf(char* dst, char* fmt, va_list args)
 {
     char* pos = dst;
@@ -41,7 +43,8 @@ int vsprintf(char* dst, char* fmt, va_list args)
             if (isneg) {
                 width = -width;
             }
-            if (*fmt == 'F' || *fmt == 'N' || *fmt == 'l' || *fmt == 'h') {
+            char input_size = *fmt;
+            if (input_size == 'F' || input_size == 'N' || input_size == 'l' || input_size == 'h') {
                 fmt++;
             }
             switch (*fmt++) {
@@ -49,7 +52,7 @@ int vsprintf(char* dst, char* fmt, va_list args)
                 *pos++ = (char)*args++;
                 break;
             case 's':
-                if (fmt[-2] == 'F') {
+                if (input_size == 'F') {
                     pos = strpcpy_pad(pos, (char*)far_zoom((far_void_t*)*args), width, padchar);
                     far_zoom((far_void_t*)*args++);
                 } else {
@@ -58,7 +61,7 @@ int vsprintf(char* dst, char* fmt, va_list args)
                 break;
             case 'd':
             case 'i':
-                if (fmt[-2] == 'l') {
+                if (input_size == 'l') {
                     pos = strpcpy_pad(pos, _ltoa((long_t*)*args++, pos), width, padchar);
                 } else {
                     pos = strpcpy_pad(pos, _itoa(*args++, pos), width, padchar);
