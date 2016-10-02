@@ -27,7 +27,7 @@ int main(void)
     _catch(&e) {
         cprintf("BLA BLA BLA FAILED. #%d\n", e.code);
     }
-    cputs("\nRETURN TO BASIC");
+    cputs("\nRETURN TO BASIC\n");
 
     return 0;
 }

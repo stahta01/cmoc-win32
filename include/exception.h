@@ -46,7 +46,9 @@ typedef struct exception_t {
     jmp_buf jmp;
     word code;
     char* what;                                 // currently unused.
-} exception_t;
+} exception_t, *exception_ptr;
+
+extern exception_ptr current_exception;
 
 int exception_set(exception_t* exception);      // internal use atm
 
