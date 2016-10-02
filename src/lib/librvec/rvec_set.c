@@ -3,6 +3,6 @@
 
 void rvec_set(rvec_t* rvec, int n)
 {
-    ((rvec_t*)0x15e)[n] = *rvec;
+    _rvecs[n] = *rvec;
 }
 

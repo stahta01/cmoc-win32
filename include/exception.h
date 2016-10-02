@@ -34,24 +34,24 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 */
 
-#ifndef _SETJMP_H
-#define _SETJMP_H
+#ifndef _EXCEPTION_H
+#define _EXCEPTION_H
 
-// Due to a bug in CMOC, we cant define jmp_buf as an array. Im sure
-// it will be fixed soon.
+#include <setjmp.h>
+#include <rvec.h>
 
-#define _JBLEN      1
-#define _JBTYPE     jmp_buf_t
+typedef struct exception_t {
+    struct exception_t* prev;
+    rvec_t rvec;
+    jmp_buf jmp;
+    word code;
+    char* what;                                 // currently unused.
+} exception_t;
 
-typedef struct jmp_buf_t {
-// I think these are correct for kreider lib.
-    word s, pc, u, y;
-} jmp_buf_t;
+int exception_set(exception_t* exception);      // internal use atm
 
-typedef _JBTYPE jmp_buf;
-
-int setjmp(jmp_buf* buf);
-void longjmp(jmp_buf* buf, int value);
+#define _try(A) if (!exception_set(A))
+#define _catch(A) if ((A)->code)
 
 #endif
 

@@ -1,28 +1,13 @@
 
 #include "_program.h"
 
-void* old_stack;
-rvec_t old_rvec17;
-rvec_t new_rvec17;
-
-asm void _static_error_driver(void)
-{
-    asm {
-        clra
-        std errno
-        leas 2,s
-    }
-}
+void* _static_stack;
 
 void _main(void)
 {
     asm {
-        sts     old_stack
+        sts     _static_stack
     }
-    rvec_get(&old_rvec17, 17);
-    new_rvec17.inst = 0x7e;
-    new_rvec17.addr = _static_error_driver;
-    rvec_set(&new_rvec17, 17);
     system_init();
     asm {
         INITGL__STDIO_O: extern
@@ -43,9 +28,8 @@ void exit(int status)
         }
         system_cputs(s);
     }
-    rvec_set(&old_rvec17, 17);
     asm {
-        lds     old_stack
+        lds     _static_stack
         rts                                     // Skip the user stack frame
     }
 }

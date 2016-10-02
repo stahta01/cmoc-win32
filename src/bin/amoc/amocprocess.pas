@@ -208,13 +208,13 @@ begin
   // When using the 'undefextern' pragma, we dont need to declare extern symbols.
   // Im testing this ATM to see if there are any negitive side effects.
   for LSymbol in FExternSymbols do begin
-    //FSource.Insert(0, EmptyStr, 'extern', LSymbol);
+    FSource.Insert(0, EmptyStr, 'extern', LSymbol);
   end;
   for LSymbol in FExportSymbols do begin
     FSource.Insert(0, LSymbol, 'export', EmptyStr);
   end;
   FSource.Insert(0, EmptyStr, 'pragma',
-    '6809,6800compat,6809conv,m80ext,shadow,autobranchlength,undefextern');
+    '6809,6800compat,6809conv,m80ext,shadow,autobranchlength');//,undefextern');
   FSource.Insert(1, EmptyStr, 'section', 'SECTION_NAME');
   // LWASM slows down to a crawl for large files. The solution to use 'forwardrefmax'
   // for files over a line count threshold (500), which means those files wont
