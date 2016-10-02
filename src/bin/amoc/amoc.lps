@@ -4,13 +4,13 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="27">
+    <Units Count="28">
       <Unit0>
         <Filename Value="amoc.lpr"/>
         <IsPartOfProject Value="True"/>
         <TopLine Value="47"/>
         <CursorPos X="15" Y="56"/>
-        <UsageCount Value="66"/>
+        <UsageCount Value="67"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -19,9 +19,9 @@
         <UnitName Value="AmocProcess"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="209"/>
-        <CursorPos X="18" Y="223"/>
-        <UsageCount Value="66"/>
+        <TopLine Value="211"/>
+        <CursorPos X="5" Y="225"/>
+        <UsageCount Value="67"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -209,6 +209,12 @@
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit26>
+      <Unit27>
+        <Filename Value="..\..\lib\libheap\heap_malloc.asm"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit27>
     </Units>
     <JumpHistory Count="3" HistoryIndex="2">
       <Position1>

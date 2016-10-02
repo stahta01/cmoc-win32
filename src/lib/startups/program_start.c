@@ -2,12 +2,27 @@
 #include "_program.h"
 
 void* _static_exitstack;
+rvec_t _static_rvec17;
+
+asm void _static_error_driver(void)
+{
+    asm {
+        clra
+        std errno
+        leas 2,s
+    }
+}
 
 void _main(void)
 {
     asm {
         sts     _static_exitstack
     }
+    rvec_get(&_static_rvec17, 17);
+    rvec_t rvec;
+    rvec.inst = 0x7e;
+    rvec.addr = _static_error_driver;
+    //rvec_set(&rvec, 17);
     system_init();
     asm {
         INITGL__STDIO_O: extern
@@ -28,6 +43,7 @@ void exit(int status)
         }
         system_cputs(s);
     }
+    //rvec_set(&_static_rvec17, 17);
     asm {
         lds _static_exitstack
         rts                                     // Skip the user stack frame

@@ -265,7 +265,11 @@ begin
       'ARYTAB', 'ARYEND', 'FRETOP', 'STRTAB', 'FRESPC', 'MEMSIZ', 'OLDTXT',
       'BINVAL', 'OLDPTR', 'TINPTR', 'DATTXT', 'DATPTR', 'DATTMP', 'VARNAM',
       'VARPTR', 'VARDES', 'DEVLCF', 'DEVPOS', 'DEVWID', 'DEVNUM', 'RSTFLG',
-      'RSTVEC', 'TOPRAM', 'FILSTA', 'CINCTR', 'CINPTR', 'BLKTYP', 'BLKLEN'));
+      'RSTVEC', 'TOPRAM', 'FILSTA', 'CINCTR', 'CINPTR', 'BLKTYP', 'BLKLEN',
+      'RVEC0', 'RVEC1', 'RVEC2', 'RVEC3', 'RVEC4', 'RVEC5', 'RVEC6', 'RVEC7',
+      'RVEC8', 'RVEC9', 'RVEC10', 'RVEC11', 'RVEC12', 'RVEC13', 'RVEC14', 'RVEC15',
+      'RVEC16', 'RVEC17', 'RVEC18', 'RVEC19', 'RVEC20', 'RVEC21', 'RVEC22', 'RVEC23',
+      'RVEC24'));
 
     LDstPath := OCmoc.PathToInclude + 'vectrex/';
 

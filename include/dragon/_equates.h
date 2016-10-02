@@ -510,6 +510,206 @@
 #define _potval (*(unsigned char*)_POTVAL)
 #endif
 
+// Decimal 350 (0x15E) [Array] - $A5F6 $C426 $C44B OPEN COMMAND (Compatible with CoCo)
+#ifndef _RVEC0
+#define _RVEC0 350
+#endif
+#ifndef _rvec0
+#define _rvec0 ((unsigned char*)_RVEC0)
+#endif
+
+// Decimal 353 (0x161) [Array] - $A5B9 $C838 $C888 DEVICE NUMBER VALIDITY CHECK (Compatible with CoCo)
+#ifndef _RVEC1
+#define _RVEC1 353
+#endif
+#ifndef _rvec1
+#define _rvec1 ((unsigned char*)_RVEC1)
+#endif
+
+// Decimal 356 (0x164) [Array] - $A35F $C843 $C893 SET PRINT PARAMETERS (Compatible with CoCo)
+#ifndef _RVEC2
+#define _RVEC2 356
+#endif
+#ifndef _rvec2
+#define _rvec2 ((unsigned char*)_RVEC2)
+#endif
+
+// Decimal 359 (0x167) [Array] - $A282 $8273 $CB4A $CC1C CONSOLE OUT (Compatible with CoCo)
+#ifndef _RVEC3
+#define _RVEC3 359
+#endif
+#ifndef _rvec3
+#define _rvec3 ((unsigned char*)_RVEC3)
+#endif
+
+// Decimal 362 (0x16A) [Array] - $A176 $8CF1 $C58F $C5BC CONSOLE IN (Compatible with CoCo)
+#ifndef _RVEC4
+#define _RVEC4 362
+#endif
+#ifndef _rvec4
+#define _rvec4 ((unsigned char*)_RVEC4)
+#endif
+
+// Decimal 365 (0x16D) [Array] - $A3ED $C818 $C848 INPUT DEVICE NUMBER CHECK (Compatible with CoCo)
+#ifndef _RVEC5
+#define _RVEC5 365
+#endif
+#ifndef _rvec5
+#define _rvec5 ((unsigned char*)_RVEC5)
+#endif
+
+// Decimal 368 (0x170) [Array] - $A406 $C81B $C84B PRINT DEVICE NUMBER CHECK (Compatible with CoCo)
+#ifndef _RVEC6
+#define _RVEC6 368
+#endif
+#ifndef _rvec6
+#define _rvec6 ((unsigned char*)_RVEC6)
+#endif
+
+// Decimal 371 (0x173) [Array] - $A426 $CA3B $CAE9 CLOSE ALL FILES (Compatible with CoCo)
+#ifndef _RVEC7
+#define _RVEC7 371
+#endif
+#ifndef _rvec7
+#define _rvec7 ((unsigned char*)_RVEC7)
+#endif
+
+// Decimal 374 (0x176) [Array] - $A42D $8286 $CA4B $CAF9 CLOSE ONE FILE (Compatible with CoCo)
+#ifndef _RVEC8
+#define _RVEC8 374
+#endif
+#ifndef _rvec8
+#define _rvec8 ((unsigned char*)_RVEC8)
+#endif
+
+// Decimal 377 (0x179) [Array] - $B918 $8E90 $8E90 $8E90 PRINT (Compatible with CoCo)
+#ifndef _RVEC9
+#define _RVEC9 377
+#endif
+#ifndef _rvec9
+#define _rvec9 ((unsigned char*)_RVEC9)
+#endif
+
+// Decimal 380 (0x17C) [Array] - $B061 $CC5B $CD35 INPUT (Compatible with CoCo)
+#ifndef _RVEC10
+#define _RVEC10 380
+#endif
+#ifndef _rvec10
+#define _rvec10 ((unsigned char*)_RVEC10)
+#endif
+
+// Decimal 383 (0x17F) [Array] - $A549 $C859 $C8A9 BREAK CHECK (Compatible with CoCo)
+#ifndef _RVEC11
+#define _RVEC11 383
+#endif
+#ifndef _rvec11
+#define _rvec11 ((unsigned char*)_RVEC11)
+#endif
+
+// Decimal 386 (0x182) [Array] - $A390 $C6B7 $C6E4 INPUTTING A BASIC LINE (Compatible with CoCo)
+#ifndef _RVEC12
+#define _RVEC12 386
+#endif
+#ifndef _rvec12
+#define _rvec12 ((unsigned char*)_RVEC12)
+#endif
+
+// Decimal 389 (0x185) [Array] - $A4BF $CA36 $CAE4 TERMINATING BASIC LINE INPUT (Compatible with CoCo)
+#ifndef _RVEC13
+#define _RVEC13 389
+#endif
+#ifndef _rvec13
+#define _rvec13 ((unsigned char*)_RVEC13)
+#endif
+
+// Decimal 392 (0x188) [Array] - $A5CE $CA60 $C90C EOF COMMAND (Compatible with CoCo)
+#ifndef _RVEC14
+#define _RVEC14 392
+#endif
+#ifndef _rvec14
+#define _rvec14 ((unsigned char*)_RVEC14)
+#endif
+
+// Decimal 395 (0x18B) [Array] - $B223 $8846 $CDF6 $CED2 EVALUATE AN EXPRESSION (Compatible with CoCo)
+#ifndef _RVEC15
+#define _RVEC15 395
+#endif
+#ifndef _rvec15
+#define _rvec15 ((unsigned char*)_RVEC15)
+#endif
+
+// Decimal 398 (0x18E) [Array] - $AC46 $C6B7 $C6E4 RESERVED FOR ON ERROR GOTO COMMAND (Compatible with CoCo)
+#ifndef _RVEC16
+#define _RVEC16 398
+#endif
+#ifndef _rvec16
+#define _rvec16 ((unsigned char*)_RVEC16)
+#endif
+
+// Decimal 401 (0x191) [Array] - $AC49 $88F0 $C24D $C265 ERROR DRIVER (Compatible with CoCo)
+#ifndef _RVEC17
+#define _RVEC17 401
+#endif
+#ifndef _rvec17
+#define _rvec17 ((unsigned char*)_RVEC17)
+#endif
+
+// Decimal 404 (0x194) [Array] - $AE75 $829C $C990 $CA3E RUN (Compatible with CoCo)
+#ifndef _RVEC18
+#define _RVEC18 404
+#endif
+#ifndef _rvec18
+#define _rvec18 ((unsigned char*)_RVEC18)
+#endif
+
+// Decimal 407 (0x197) [Array] - $BD22 $87EF ASCII TO FLOATING POINT CONVERSION (Compatible with CoCo)
+#ifndef _RVEC19
+#define _RVEC19 407
+#endif
+#ifndef _rvec19
+#define _rvec19 ((unsigned char*)_RVEC19)
+#endif
+
+// Decimal 410 (0x19A) [Array] - $AD9E $82B9 $C8B0 BASIC'S COMMAND INTERPRETATION LOOP (Compatible with CoCo)
+#ifndef _RVEC20
+#define _RVEC20 410
+#endif
+#ifndef _rvec20
+#define _rvec20 ((unsigned char*)_RVEC20)
+#endif
+
+// Decimal 413 (0x19D) [Array] - $A8C4 RESET/SET/POINT COMMANDS (Compatible with CoCo)
+#ifndef _RVEC21
+#define _RVEC21 413
+#endif
+#ifndef _rvec21
+#define _rvec21 ((unsigned char*)_RVEC21)
+#endif
+
+// Decimal 416 (0x1A0) [Array] - $A910 CLS (Compatible with CoCo)
+#ifndef _RVEC22
+#define _RVEC22 416
+#endif
+#ifndef _rvec22
+#define _rvec22 ((unsigned char*)_RVEC22)
+#endif
+
+// Decimal 419 (0x1A3) [Array] - $B821 $8304 CRUNCH BASIC LINE (Compatible with CoCo)
+#ifndef _RVEC23
+#define _RVEC23 419
+#endif
+#ifndef _rvec23
+#define _rvec23 ((unsigned char*)_RVEC23)
+#endif
+
+// Decimal 422 (0x1A6) [Array] - $B7C2 UNCRUNCH BASIC LINE (Compatible with CoCo)
+#ifndef _RVEC24
+#define _RVEC24 422
+#endif
+#ifndef _rvec24
+#define _rvec24 ((unsigned char*)_RVEC24)
+#endif
+
 // Decimal 732 (0x2DC) [Array] - +1 BASIC LINE INPUT BUFFER (Compatible with CoCo)
 #ifndef _LINBUF
 #define _LINBUF 732

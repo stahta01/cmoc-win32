@@ -34,11 +34,16 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 */
 
-#ifndef _ERRNO_H
-#define _ERRNO_H
+#ifndef _RVEC_H
+#define _RVEC_H
 
-#include <sys/errno.h>
+typedef struct {
+    byte inst;
+    void* addr;
+} rvec_t;
 
-extern errno_t errno;
+void rvec_get(rvec_t* rvec, int n);
+void rvec_set(rvec_t* rvec, int n);
 
 #endif
+
