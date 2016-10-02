@@ -1,8 +1,9 @@
 
 #include "_program.h"
 
-void* _static_exitstack;
-rvec_t _static_rvec17;
+void* old_stack;
+rvec_t old_rvec17;
+rvec_t new_rvec17;
 
 asm void _static_error_driver(void)
 {
@@ -16,13 +17,12 @@ asm void _static_error_driver(void)
 void _main(void)
 {
     asm {
-        sts     _static_exitstack
+        sts     old_stack
     }
-    rvec_get(&_static_rvec17, 17);
-    rvec_t rvec;
-    rvec.inst = 0x7e;
-    rvec.addr = _static_error_driver;
-    //rvec_set(&rvec, 17);
+    rvec_get(&old_rvec17, 17);
+    new_rvec17.inst = 0x7e;
+    new_rvec17.addr = _static_error_driver;
+    rvec_set(&new_rvec17, 17);
     system_init();
     asm {
         INITGL__STDIO_O: extern
@@ -43,9 +43,9 @@ void exit(int status)
         }
         system_cputs(s);
     }
-    //rvec_set(&_static_rvec17, 17);
+    rvec_set(&old_rvec17, 17);
     asm {
-        lds _static_exitstack
+        lds     old_stack
         rts                                     // Skip the user stack frame
     }
 }
