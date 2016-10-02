@@ -162,8 +162,9 @@ begin
     if SymbolIsPublic(FSource.Lines[LIndex].Symb) then begin
       AddExport(FSource.Lines[LIndex].Symb);
     end;
-    if FSource.Lines[LIndex].SameInst('RMB') then begin
-      FSource.Lines[LIndex].Inst := 'ZMB';
+    // Do we really need to change this?
+    if FSource.Lines[LIndex].SameInst('rmb') then begin
+      FSource.Lines[LIndex].Inst := 'zmb';
     end;
   end;
   for LIndex := 0 to FSource.Count - 1 do begin
@@ -183,7 +184,7 @@ var
 begin
   for LIndex := FSource.Count - 2 downto 0 do begin
     if AnsiStartsStr(Sym_INITGL, FSource.Lines[LIndex].Symb) then begin
-      if FSource.Lines[LIndex + 1].SameInst('RTS') then begin
+      if FSource.Lines[LIndex + 1].SameInst('rts') then begin
         FSource.Lines[LIndex + 0].Removed := True;
         FSource.Lines[LIndex + 1].Removed := True;
       end else begin
@@ -204,15 +205,23 @@ begin
   ResetSymbols;
   SetGlobalInitSymbol(FInitSymbol);
   ExtractSymbols;
+  // When using the 'undefextern' pragma, we dont need to declare extern symbols.
+  // Im testing this ATM to see if there are any negitive side effects.
   for LSymbol in FExternSymbols do begin
-    FSource.Insert(0, LSymbol, 'extern', EmptyStr);
+    //FSource.Insert(0, EmptyStr, 'extern', LSymbol);
   end;
   for LSymbol in FExportSymbols do begin
     FSource.Insert(0, LSymbol, 'export', EmptyStr);
   end;
   FSource.Insert(0, EmptyStr, 'pragma',
-    '6809,6800compat,6809conv,m80ext,shadow,autobranchlength');
+    '6809,6800compat,6809conv,m80ext,shadow,autobranchlength,undefextern');
   FSource.Insert(1, EmptyStr, 'section', 'SECTION_NAME');
+  // LWASM slows down to a crawl for large files. The solution to use 'forwardrefmax'
+  // for files over a line count threshold (1000), which means those files wont
+  // have small branches.
+  if FSource.Count > 1000 then begin
+    FSource.Insert(0, EmptyStr, 'pragma', 'forwardrefmax');
+  end;
   FSource.Add(EmptyStr, 'endsection', EmptyStr);
   SourceTranslate(FSource);
   SourcePeephole(FSource);

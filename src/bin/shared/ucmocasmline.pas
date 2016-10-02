@@ -101,7 +101,7 @@ procedure OAsmLine.SetLine(const ASymb, AInst, AArgs: string);
 begin
   Removed := False;
   Symb := Trim(ASymb);
-  Inst := UpperCase(Trim(AInst));
+  Inst := LowerCase(Trim(AInst));
   Args := Trim(AArgs);
   if Length(Args) > 0 then begin
     // Compatiblity with the BBC assembler
