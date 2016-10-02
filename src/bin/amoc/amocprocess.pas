@@ -217,9 +217,11 @@ begin
     '6809,6800compat,6809conv,m80ext,shadow,autobranchlength,undefextern');
   FSource.Insert(1, EmptyStr, 'section', 'SECTION_NAME');
   // LWASM slows down to a crawl for large files. The solution to use 'forwardrefmax'
-  // for files over a line count threshold (1000), which means those files wont
+  // for files over a line count threshold (500), which means those files wont
   // have small branches.
-  if FSource.Count > 1000 then begin
+  // NOTE: Changed to 500. I'll provide a pragma option to for code that needs the
+  // extra speed.
+  if FSource.Count > 500 then begin
     FSource.Insert(0, EmptyStr, 'pragma', 'forwardrefmax');
   end;
   FSource.Add(EmptyStr, 'endsection', EmptyStr);
