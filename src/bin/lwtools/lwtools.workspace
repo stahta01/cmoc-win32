@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="Workspace">
+		<Project filename="lwobjdump.cbp" />
+		<Project filename="lwar.cbp" />
+		<Project filename="lwlink.cbp" />
+		<Project filename="lwasm.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>

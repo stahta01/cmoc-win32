@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="lwar" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="../../../bin/lwar" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-m32" />
+					<Add directory="src/lwlib" />
+				</Compiler>
+				<Linker>
+					<Add option="-m32" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="src/lwar/add.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwar/extract.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwar/list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwar/lwar.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwar/lwar.h" />
+		<Unit filename="src/lwar/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwar/remove.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwar/replace.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwlib/lw_alloc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwlib/lw_alloc.h" />
+		<Unit filename="src/lwlib/lw_cmdline.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwlib/lw_cmdline.h" />
+		<Unit filename="src/lwlib/lw_error.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwlib/lw_error.h" />
+		<Unit filename="src/lwlib/lw_expr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwlib/lw_expr.h" />
+		<Unit filename="src/lwlib/lw_free.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwlib/lw_realloc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwlib/lw_stack.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwlib/lw_stack.h" />
+		<Unit filename="src/lwlib/lw_string.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwlib/lw_string.h" />
+		<Unit filename="src/lwlib/lw_stringlist.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lwlib/lw_stringlist.h" />
+		<Unit filename="src/lwlib/lw_version.h" />
+		<Unit filename="src/lwlib/lw_win.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
