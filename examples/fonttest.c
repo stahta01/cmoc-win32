@@ -26,7 +26,11 @@ int main(void)
     char s[100];
     int w, h;
 
-    MCLIP(0, 0, 256, 192);
+    // conio now uses late binding for graphics text. This prevents
+    // libgraph from being linked into your bin for video ram only
+    // programs. Therefore, you must now call conio_uses_graph()
+    // if you want to display text on a graphics screen.
+    conio_uses_graph();
 
     for (;;) {
         bgcolor(0);

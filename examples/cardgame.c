@@ -23,6 +23,12 @@
 
 int main()
 {
+    // conio now uses late binding for graphics text. This prevents
+    // libgraph from being linked into your bin for video ram only
+    // programs. Therefore, you must now call conio_uses_graph()
+    // if you want to display text on a graphics screen.
+    conio_uses_graph();
+
     // Initialize the PMODE 4 screen at the given address.
     // This initializes scrnBuffer.
     _openCardGameScreenMode();
@@ -41,7 +47,7 @@ int main()
     for (byte suit = SUIT_HEARTS; suit <= SUIT_CLUBS; ++suit, pixelRow += cardHeight + horizSkip) {
         for (byte value = 1; value <= 13; ++value) { // ace to king
             byte byteCol = (value - 1) <<
-                           1;               // 2 bytes of visible width per card (other 2 bytes gets overlapped)
+                           1;                   // 2 bytes of visible width per card (other 2 bytes gets overlapped)
             _drawCompiledCard(value, suit, byteCol, pixelRow);
         }
     }

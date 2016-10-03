@@ -8,9 +8,8 @@ void _cputlt(void)
         if (!isvidram()) {
             _curpos = _VIDRAM;
         }
-    }  else if (isgrpram()) {
-        struct _fontinfo* fi = _getfontinfo();
-
+    }  else if (isgrpram() && _conio.getfontinfo) {
+        struct _fontinfo* fi = (struct _fontinfo*)_conio.getfontinfo();
         if (fi->type) {
             fi->base ^= 1;
         }
@@ -18,7 +17,7 @@ void _cputlt(void)
             if (_curpos & (_horbyt - 1)) {
                 _curpos--;
             } else {
-                _curpos -= 1 + ((unsigned)_horbyt << 3) - _horbyt;
+                _curpos -= 1 + ((word)_horbyt << 3) - _horbyt;
             }
             if (!isgrpram()) {
                 _curpos = _beggrp;

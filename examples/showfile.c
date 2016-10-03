@@ -27,6 +27,12 @@ void PrintFileToConsole(char* fn)
 
 int main(void)
 {
+    // conio now uses late binding for graphics text. This prevents
+    // libgraph from being linked into your bin for video ram only
+    // programs. Therefore, you must now call conio_uses_graph()
+    // if you want to display text on a graphics screen.
+    conio_uses_graph();
+
     // Fixed. BASIC.TXT was moved to drive #1.
     // Note: The prefered file commands are in stdio, which use DOS commands.
     // Soon the UNIX commands will also use the DOS commands. LibDisk

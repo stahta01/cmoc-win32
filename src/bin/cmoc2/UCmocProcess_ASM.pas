@@ -53,8 +53,8 @@ implementation
 
 procedure CCmocProcess_ASM.AMOC(const ADst, ASrc: TFileName; const AInitSymbol: string);
 var
-  LSrc, LDst: TMemoryStream;
   LErr: TStringStream;
+  LSrc, LDst: TMemoryStream;
 begin
   LErr := TStringStream.Create(EmptyStr);
   try

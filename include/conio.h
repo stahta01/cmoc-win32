@@ -137,7 +137,9 @@ void textmode(int newmode);                     // Watcom
 // linker from adding the second, but, you must make sure you select a mode
 // which matchs the font. ie: packed vs unpacked fonts.
 
-void textmode2(int newmode, unsigned char* fontdata); // CMOC
+void textmode2(int newmode, byte* fontdata);    // CMOC
+
+void conio_uses_graph(void);                    // CMOC
 
 #endif
 

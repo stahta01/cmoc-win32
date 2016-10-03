@@ -37,7 +37,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _HANDLE_H
 #define _HANDLE_H
 
-typedef void* handle_t;
+#include <sys/handle.h>
 
 extern handle_t handle_vidram;
 extern handle_t handle_polcat;

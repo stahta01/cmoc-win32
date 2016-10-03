@@ -10,15 +10,15 @@ void _cputrt(void)
             scrup();
         }
     } else {
-        if (isgrpram()) {
-            struct _fontinfo* fi = _getfontinfo();
+        if (isgrpram() && _conio.getfontinfo) {
+            struct _fontinfo* fi = (struct _fontinfo*)_conio.getfontinfo();
             if (!fi->type || fi->base & 1) {
                 _curpos++;
                 if ((_curpos & (_horbyt - 1)) == 0) {
-                    _curpos += ((unsigned)_horbyt << 3) - _horbyt;
+                    _curpos += ((word)_horbyt << 3) - _horbyt;
                 }
                 if (!isgrpram()) {
-                    _curpos -= (unsigned)_horbyt << 3;
+                    _curpos -= (word)_horbyt << 3;
                     scrup();
                 }
             }

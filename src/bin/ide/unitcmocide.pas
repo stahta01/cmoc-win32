@@ -668,7 +668,7 @@ var
 begin
   if Length(AFileName) > 0 then begin
     if not SameText(ExtractFileExt(AFileName), FileExt_BIN) then begin
-      OCmoc.RaiseError('Only bin (decb) files can be autoloaded by the emulator.');
+      OCmoc.RaiseError('Only bin (DECB) files can be autoloaded by the emulator.');
     end;
     LDecb := RbsLoadFromFile(AFileName);
     LBinFile := GetTempDir(False) + 'cmocide' + FileExt_BIN;

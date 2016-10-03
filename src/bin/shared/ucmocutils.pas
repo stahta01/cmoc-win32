@@ -166,21 +166,21 @@ var
   LChar: char;
   LPos: pchar;
   LLine: string;
-  LInput, LOutput: TStringStream;
+  LSrc, LDst: TStringStream;
 begin
-  LOutput := TStringStream.Create(EmptyStr);
+  LDst := TStringStream.Create(EmptyStr);
   try
-    LInput := TStringStream.Create(AText);
+    LSrc := TStringStream.Create(AText);
     try
       PipeExecute(OCmoc.FileNameTool(Tool_ASTYLE), ['-A8', '-xC100', '-k1', '-w',
-        (*'-U',*) '-H', '-j', '-s' + IntToStr(ATabWidth)], EmptyStr, LInput, LOutput, nil);
+        (*'-U',*) '-H', '-j', '-s' + IntToStr(ATabWidth)], EmptyStr, LSrc, LDst, nil);
     finally
-      FreeAndNil(LInput);
+      FreeAndNil(LSrc);
     end;
     with TStringList.Create do begin
       try
-        LOutput.Position := 0;
-        LoadFromStream(LOutput);
+        LDst.Position := 0;
+        LoadFromStream(LDst);
         while (Count > 0) and (Length(Trim(Strings[0])) = 0) do begin
           Delete(0);
         end;
@@ -220,7 +220,7 @@ begin
       end;
     end;
   finally
-    FreeAndNil(LOutput);
+    FreeAndNil(LDst);
   end;
 end;
 

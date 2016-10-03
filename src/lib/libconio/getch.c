@@ -2,7 +2,7 @@
 #include "_conio.h"
 
 int __bufferchar = 0;
-unsigned char __buffersize = 0;
+byte __buffersize = 0;
 
 int ungetch(int c)
 {
@@ -35,16 +35,18 @@ int getch(void)
     } else    {
         if (_conio.cursor) {
             clock_t clock_now = clock();
-            unsigned char* curpos = (unsigned char*)_curpos;
-            unsigned char curxor, curchr;
+            byte* curpos = (byte*)_curpos;
+            byte curxor, curchr;
             if (isvidram()) {
                 curchr = *curpos;
                 curxor = 64;
             } else {
-                struct _fontinfo* fi = _getfontinfo();
-                curpos += ((unsigned)_horbyt << 3) - _horbyt;
-                curchr = *curpos;
-                curxor = fi->type ? fi->base & 1 ? 0xF : 0xF0 : 0xFF;
+                if (_conio.getfontinfo) {
+                    struct _fontinfo* fi = (struct _fontinfo*)_conio.getfontinfo();
+                    curpos += ((word)_horbyt << 3) - _horbyt;
+                    curchr = *curpos;
+                    curxor = fi->type ? fi->base & 1 ? 0xF : 0xF0 : 0xFF;
+                }
             }
             while (!kbhit()) {
                 *curpos = (clock() - clock_now) & 16 ? curchr : curchr ^ curxor;

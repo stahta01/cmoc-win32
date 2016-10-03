@@ -12,14 +12,25 @@
 #include <ascii.h>
 #include <vt52.h>
 
+#include <sys/handle.h>
+
 typedef struct {
     bool cursor;
     bool revers;
     int bordercolor;
-} _conio_t;
 
-extern _conio_t _conio;
+    // Late binding handles for libgraph.
+    handle_t outchar;
+    handle_t scrolltextwindow;
+    handle_t clearscreen;
+    handle_t settextposition;
+    handle_t settextpositionx;
+    handle_t settextpositiony;
+    handle_t getfontinfo;
+} conio_t;
 
-#define isvidram() (_curpos < 0x600 && _curpos >= 0x400)
+extern conio_t _conio;
+
+#define isvidram() (_curpos < 0x600)
 #define isgrpram() (_curpos < _endgrp && _curpos >= _beggrp)
 

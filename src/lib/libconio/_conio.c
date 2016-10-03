@@ -1,5 +1,8 @@
 
 #include "_conio.h"
 
-_conio_t _conio = {1, 0, 0};
+conio_t _conio = {
+    true, false, 0,
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
+};
 

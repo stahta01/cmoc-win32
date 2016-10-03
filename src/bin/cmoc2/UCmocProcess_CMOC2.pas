@@ -180,7 +180,7 @@ begin
     Inc(LIndex);
   end;
   if (Length(FSrcFiles) = 0) and (Length(FObjFiles) = 0) then begin
-    OCmoc.RaiseError('No input files', 'cmoc2');
+    OCmoc.RaiseError('No input files', Tool_CMOC2);
   end;
   if Length(FOutFile) = 0 then begin
     SetOutFile('a' + FileExt_BIN);

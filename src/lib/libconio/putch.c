@@ -12,8 +12,8 @@ int putch(int c)
         }
         *(char*)_curpos = (char)c;
     } else {
-        if (isgrpram()) {
-            _outchar(c);
+        if (isgrpram() && _conio.outchar) {
+            _conio.outchar(c);
         }
     }
     _cputrt();
