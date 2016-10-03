@@ -37,23 +37,33 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _EXCEPTION_H
 #define _EXCEPTION_H
 
+#include <errno.h>
 #include <setjmp.h>
 #include <rvec.h>
 
-typedef struct exception_t {
-    struct exception_t* prev;
-    rvec_t rvec;
-    jmp_buf jmp;
-    word code;
-    char* what;                                 // currently unused.
+typedef struct {
+    errno_t errno;
+    char* what;
 } exception_t, *exception_ptr;
 
-extern exception_ptr current_exception;
+typedef struct try_block_t {
+    struct try_block_t* prev;
+    jmp_buf jump;
+    rvec_t rvec;
+    exception_t exception;
+} try_block_t;
 
-int exception_set(exception_t* exception);      // internal use atm
+#define current_exception  (&_current_exception)
 
-#define _try(A) if (!exception_set(A))
-#define _catch(A) if ((A)->code)
+#define try {try_block_t try_block;if(try_block_init(&try_block,setjmp(&try_block.jump)))
+#define except _current_exception=try_block.exception;}if(_current_exception.errno!=ERRNO_NONE)
+
+void exception_raise(errno_t errno, char* message);
+
+// internal use only
+
+extern exception_t _current_exception;
+bool try_block_init(try_block_t* try_block, int jmp_return);
 
 #endif
 

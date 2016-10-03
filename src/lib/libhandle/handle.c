@@ -11,6 +11,8 @@ handle_t handle_blkin;
 handle_t handle_blkout;
 handle_t handle_joyin;
 handle_t handle_wrtldr;
+handle_t handle_error;
+
 handle_t handle_line;
 handle_t handle_sound;
 handle_t handle_crunch;

@@ -41,41 +41,114 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 extern errno_t errno;
 
-/*
-ERROR MESSAGES AND THEIR NUMBERS AS USED INTERNALLY
+#define ERRNO_NONE      255
 
-LABAF	FCC	'NF'	0 NEXT WITHOUT FOR
-FCC	'SN'	1 SYNTAX ERROR
-FCC	'RG'	2 RETURN WITHOUT GOSUB
-FCC	'OD'	3 OUT OF DATA
-FCC	'FC'	4 ILLEGAL FUNCTION CALL
-FCC	'OV'	5 OVERFLOW
-FCC	'OM'	6 OUT OF MEMORY
-FCC	'UL'	7 UNDEFINED LINE NUMBER
-FCC	'BS'	8 BAD SUBSCRIPT
-FCC	'DD'	9 REDIMENSIONED ARRAY
-FCC	'/0'	10 DIVISION BY ZERO
-FCC	'ID'	11 ILLEGAL DIRECT STATEMENT
-FCC	'TM'	12 TYPE MISMATCH
-FCC	'OS'	13 OUT OF STRING SPACE
-FCC	'LS'	14 STRING TOO LONG
-FCC	'ST'	15 STRING FORMULA TOO COMPLEX
-FCC	'CN'	16 CAN'T CONTINUE
-FCC	'FD'	17 BAD FILE DATA
-FCC	'AO'	18 FILE ALREADY OPEN
-FCC	'DN'	19 DEVICE NUMBER ERROR
-FCC	'IO'	20 I/O ERROR
-FCC	'FM'	21 BAD FILE MODE
-FCC	'NO'	22 FILE NOT OPEN
-FCC	'IE'	23 INPUT PAST END OF FILE
-FCC	'DS'	24 DIRECT STATEMENT IN FILE
-*/
+// ERROR MESSAGES AND THEIR NUMBERS AS USED INTERNALLY
 
-/*
-* ADDITIONAL ERROR MESSAGES ADDED BY EXTENDED BASIC
-L890B	FCC	'UF'	25 UNDEFINED FUNCTION (FN) CALL
-L890D	FCC	'NE'	26 FILE NOT FOUND
-*/
+// The CoCo uses a 2 char per error lookup table at $abaf. An error is raised by calling
+// the "error servicing routine" at $ac46 with regb loaded with an offset into this table.
+// Therefore regb is ment to be even, but it so happends (by luck), that calling
+// with odd offsets, also gives error strings which dont clash with standard errors.
+// Therefore, I define system errors as even, and user errors as odd. Use what you
+// want, but I'll probably define some of the odd ones if I need them.
+
+#define ERRNO_NF         0                      // NEXT WITHOUT FOR
+#define ERRNO_FS         1                      //
+#define ERRNO_SN         2                      // SYNTAX ERROR
+#define ERRNO_NR         3                      //
+#define ERRNO_RG         4                      // RETURN WITHOUT GOSUB
+#define ERRNO_GO         5                      //
+#define ERRNO_OD         6                      // OUT OF DATA
+#define ERRNO_DF         7                      //
+#define ERRNO_FC         8                      // ILLEGAL FUNCTION CALL
+#define ERRNO_CO         9                      //
+#define ERRNO_OV        10                      // OVERFLOW
+#define ERRNO_VO        11                      //
+#define ERRNO_OM        12                      // OUT OF MEMORY
+#define ERRNO_MU        13                      //
+#define ERRNO_UL        14                      // UNDEFINED LINE NUMBER
+#define ERRNO_LB        15                      //
+#define ERRNO_BS        16                      // BAD SUBSCRIPT
+#define ERRNO_SD        17                      //
+#define ERRNO_DD        18                      // REDIMENSIONED ARRAY
+#define ERRNO_DS        19                      // (D/)
+#define ERRNO_D0        20                      // DIVISION BY ZERO (/0)
+#define ERRNO_0I        21                      //
+#define ERRNO_ID        22                      // ILLEGAL DIRECT STATEMENT
+#define ERRNO_DT        23                      //
+#define ERRNO_TM        24                      // TYPE MISMATCH
+#define ERRNO_MO        25                      //
+#define ERRNO_OS        26                      // OUT OF STRING SPACE
+#define ERRNO_SL        27                      //
+#define ERRNO_LS        28                      // STRING TOO LONG
+#define ERRNO_SS        29                      //
+#define ERRNO_ST        30                      // STRING FORMULA TOO COMPLEX
+#define ERRNO_TC        31                      //
+#define ERRNO_CN        32                      // CAN'T CONTINUE
+#define ERRNO_NF        33                      //
+#define ERRNO_FD        34                      // BAD FILE DATA
+#define ERRNO_DA        35                      //
+#define ERRNO_AO        36                      // FILE ALREADY OPEN
+#define ERRNO_OD        37                      //
+#define ERRNO_DN        38                      // DEVICE NUMBER ERROR
+#define ERRNO_NI        39                      //
+#define ERRNO_IO        40                      // I/O ERROR
+#define ERRNO_OF        41                      //
+#define ERRNO_FM        42                      // BAD FILE MODE
+#define ERRNO_MN        43                      //
+#define ERRNO_NO        44                      // FILE NOT OPEN
+#define ERRNO_OI        45                      //
+#define ERRNO_IE        46                      // INPUT PAST END OF FILE
+#define ERRNO_EI        47                      //
+#define ERRNO_IE        48                      // DIRECT STATEMENT IN FILE
+#define ERRNO_EU        49                      //
+#define ERRNO_UF        50                      // UNDEFINED FUNCTION (FN) CALL
+#define ERRNO_FN        51                      //
+#define ERRNO_NE        52                      // FILE NOT FOUND
+
+// Behond Extended Basic
+// These strings are shown for error numbers behond the documented ones.
+// They might not show for all systems, but at least they are named.
+// Use with care.
+
+#define ERRNO_BR        54                      // BREAK
+#define ERRNO_RD        55                      //
+#define ERRNO_DF2       56                      //
+#define ERRNO_FO        57                      //
+#define ERRNO_OB        58                      //
+#define ERRNO_BW        59                      //
+#define ERRNO_WP        60                      //
+#define ERRNO_PF        61                      //
+#define ERRNO_FN2       62                      //
+#define ERRNO_NF2       63                      //
+#define ERRNO_FS2       64                      //
+#define ERRNO_SA        65                      //
+#define ERRNO_AE        66                      //
+#define ERRNO_EF        67                      //
+#define ERRNO_FO2       68                      //
+#define ERRNO_OS2       69                      //
+#define ERRNO_SE        70                      //
+#define ERRNO_EV        71                      //
+#define ERRNO_VF        72                      //
+#define ERRNO_FE        73                      //
+#define ERRNO_ER        74                      //
+#define ERRNO_RB        75                      //
+#define ERRNO_BA        76                      //
+#define ERRNO_AS        77                      //
+#define ERRNO_S_        78                      //
+#define ERRNO___        79                      //
+#define ERRNO___2       80                      //
+#define ERRNO__D        81                      //
+#define ERRNO_DA2       82                      //
+#define ERRNO_AT        83                      //
+#define ERRNO_TB        84                      //
+#define ERRNO_BI        85                      //
+#define ERRNO_IN        86                      //
+#define ERRNO_N4        87                      //
+#define ERRNO_4_        88                      //
+#define ERRNO_IN        86                      //
+
+#define ERRNO_CMOC      127
 
 #endif
 

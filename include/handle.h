@@ -49,6 +49,7 @@ extern handle_t handle_blkin;
 extern handle_t handle_blkout;
 extern handle_t handle_joyin;
 extern handle_t handle_wrtldr;
+extern handle_t handle_error;
 
 extern handle_t handle_line;
 extern handle_t handle_sound;

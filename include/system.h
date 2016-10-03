@@ -38,6 +38,8 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define _SYSTEM_H
 
 #include <sys/dev.h>
+#include <sys/errno.h>
+
 #include <handle.h>
 
 #define SYSTEM_CMDLINE ((char*)0x2dd)
@@ -79,7 +81,7 @@ void system_fputs(char* str);
 int system_fgetc(dev_t dev);
 void system_cputc(int chr);
 void system_cputs(char* str);
-
+void system_error(errno_t err, word line);
 void system_joyin(void);
 void system_sound(void);
 void system_line(void);

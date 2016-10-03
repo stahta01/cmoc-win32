@@ -1,33 +1,45 @@
 
+// Exception examples. I tried to make the exception macros as
+// C++ looking as possible.
+
 #include <stdlib.h>
 #include <conio.h>
-#include <errno.h>
 #include <exception.h>
 
 // Exceptions work on coco,coco3 and dragon. Cooooool!
-
-//#pragma options -machine=coco
 
 int main(void)
 {
     clrscr();
     cputs("EXCEPTION EXAMPLES\n\n");
 
-    exception_t e;
-
-    _try(&e) {
+    try {
         system("OPEN\"I\",1,\"nofile\"");
     }
-    _catch(&e) {
-        cprintf("OPEN FAILED. #%d\n", e.code);
+    except {
+        cprintf("OPEN FAILED #%d\n", current_exception->errno);
     }
-    _try(&e) {
-        system("blablabla");
+
+    try {
+        system("BLA BLA BLA");
     }
-    _catch(&e) {
-        cprintf("BLA BLA BLA FAILED. #%d\n", e.code);
+    except cprintf("BLA BLA BLA FAILED. #%d\n", current_exception->errno);
+
+    try system("?\"NO EXCEPTION HERE\"");
+    except cprintf("PRINT FAILED. #%d\n", current_exception->errno);
+
+    try system("?\"NO EXCEPTION HERE EITHER\"");
+    // Must include {}, otherwise next line will be skipped if no exceptions raised.
+    except {}
+
+    try {
+        exception_raise(ERRNO_FC, "RAISED EXCEPTION!");
     }
-    cputs("\nRETURN TO BASIC\n");
+    except {
+        cprintf("#%d %s\n", current_exception->errno, current_exception->what);
+    }
+    cputs("\nRETURN TO BASIC VIA EXCEPTION");
+    //exception_raise(ERRNO_SN, 0);
 
     return 0;
 }

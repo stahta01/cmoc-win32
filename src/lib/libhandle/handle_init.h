@@ -4,6 +4,7 @@
 
 handle_init_common();
 
+handle_error    = _LAC46;
 handle_line     = _L94A1;
 handle_fgetc    = _LA176;
 handle_cputc    = _LA30A;
