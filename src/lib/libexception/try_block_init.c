@@ -30,7 +30,7 @@ bool try_block_init(try_block_t* try_block, int jmp_return)
         try_block->prev = current_try_block;
         try_block->rvec = _rvecs[17];
         try_block->exception.errno = ERRNO_NONE;
-        try_block->exception.line = "EXCEPTION";
+        try_block->exception.line = 0;
         current_try_block = try_block;
         _rvecs[17].inst = 0x7e;
         _rvecs[17].addr = _static_error_driver;
