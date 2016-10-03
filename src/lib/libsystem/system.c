@@ -11,7 +11,7 @@ int systemf(char* fmt, ...)
     char cmd[BUFSIZ];
     va_list args;
     va_start(args, fmt);
-    vsprintf(cmd, fmt, args);
+    vswritef(cmd, fmt, args);
     va_end();
     return system(cmd);
 }

@@ -20,8 +20,6 @@ char* strpcpy_pad(char* dst, char* src, int width, char padchar)
     return dst;
 }
 
-// 2072
-
 int vsprintf(char* dst, char* fmt, va_list args)
 {
     char* pos = dst;

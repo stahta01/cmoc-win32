@@ -87,8 +87,10 @@ void _cputlf(void);                             // CMOC
 void scrclr(void);                              // CMOC - Clear screen without moving cursor
 void scrup(void);                               // CMOC
 
-// Use _tsleep() from os9.h. delay is normally milliseconds, and has no stable standard.
-//void delay(unsigned ticks);                     // CMOC (Ticks are 60hz on a CoCo. Check time.h)
+// write functions use a micro version of sprintf
+
+int vcwritef(char* fmt, va_list args);          // CMOC
+int cwritef(char* fmt, ...);                    // CMOC
 
 // 1 bit for the color set
 
