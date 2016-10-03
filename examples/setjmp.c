@@ -10,11 +10,11 @@ int main(void)
 {
     jmp_buf jb;
     int i = 0;
-    if (i = setjmp(&jb)) {
+    if (i = setjmp(jb)) {
         printf("%d ", i);
 
     }
-    longjmp(&jb, i + 1);
+    longjmp(jb, i + 1);
     return 0;
 }
 

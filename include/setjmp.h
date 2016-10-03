@@ -37,21 +37,15 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _SETJMP_H
 #define _SETJMP_H
 
-// Due to a bug in CMOC, we cant define jmp_buf as an array. Im sure
-// it will be fixed soon.
+#include <sys/jmp_buf.h>
 
 #define _JBLEN      1
 #define _JBTYPE     jmp_buf_t
 
-typedef struct jmp_buf_t {
-// I think these are correct for kreider lib.
-    word s, pc, u, y;
-} jmp_buf_t;
+typedef _JBTYPE jmp_buf[_JBLEN];
 
-typedef _JBTYPE jmp_buf;
-
-int setjmp(jmp_buf* buf);
-void longjmp(jmp_buf* buf, int value);
+int setjmp(_JBTYPE* buf);
+void longjmp(_JBTYPE* buf, int value);
 
 #endif
 

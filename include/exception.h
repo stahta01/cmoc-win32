@@ -48,7 +48,7 @@ typedef struct {
 
 typedef struct try_block_t {
     struct try_block_t* prev;
-    jmp_buf jump;
+    jmp_buf_t jump;
     rvec_t rvec;
     exception_t exception;
 } try_block_t;
