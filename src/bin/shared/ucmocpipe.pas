@@ -40,13 +40,15 @@ unit UCmocPipe;
 interface
 
 uses
-  Classes, Process, SysUtils, UCmocProcess, UCmocUtils;
+  Classes, Process, SysUtils, UCmocProcess;
 
 procedure PipeExecute(const AExecutable: TFileName; const AParameters: array of string;
   const ACurrentDirectory: TFileName; const AInput, AOutput, AStderr: TStream;
   const ASleep: cardinal = 20);
 
 implementation
+
+uses UCmocUtils;
 
 procedure PipeExecute(const AExecutable: TFileName; const AParameters: array of string;
   const ACurrentDirectory: TFileName; const AInput, AOutput, AStderr: TStream;

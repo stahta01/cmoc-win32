@@ -1502,7 +1502,7 @@ object FormCmocIDE: TFormCmocIDE
         Caption = '-'
       end
       object MenuEditFormatSourceCode: TMenuItem
-        Caption = 'Format Source Code (astyle)'
+        Caption = 'Format Source Code (AStyle)'
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
           2000000000000004000064000000640000000000000000000000000000000000

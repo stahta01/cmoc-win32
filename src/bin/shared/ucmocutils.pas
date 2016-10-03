@@ -41,7 +41,7 @@ interface
 
 uses
   Classes, FileUtil, LazFileUtils, Process, StrUtils, SysUtils, Types, UCmocDefs,
-  UCmocParser, UCmocStringDynArray, UCmocStrings;
+  UCmocParser, UCmocPipe, UCmocStringDynArray, UCmocStrings;
 
 type
   ECmocException = EAbort;
@@ -68,8 +68,6 @@ type
       const ACurrentDirectory: TFileName = default(string)); reintroduce;
     procedure ExecuteTool(const ATool: string; const AParams: array of string;
       const ACurrentDirectory: TFileName = default(string));
-  public
-    procedure ExecuteTool_ASTYLE(const ADst, ASrc: TFileName; const ATabWidth: integer);
   end;
 
 var
@@ -112,6 +110,7 @@ type
     class function StringQuoted(const A: string): string;
     class function StringToIdent(const A: string): string;
     class function StringToInteger(const A: string): longint;
+    class function StringAStyle(const AText: string; const ATabWidth: integer): string;
   public
     class procedure ExtractPragmas(const ADst, ASrc: TFileName; var AOrigin: cardinal;
       var ATarget: string; const AOptions: TStrings);
@@ -158,6 +157,70 @@ begin
     end;
   except
     RaiseError(StringQuoted(A) + ' is an invalid number');
+  end;
+end;
+
+class function OCmoc.StringAStyle(const AText: string; const ATabWidth: integer): string;
+var
+  LIndex, LSep: integer;
+  LChar: char;
+  LPos: pchar;
+  LLine: string;
+  LInput, LOutput: TStringStream;
+begin
+  LOutput := TStringStream.Create(EmptyStr);
+  try
+    LInput := TStringStream.Create(AText);
+    try
+      PipeExecute(OCmoc.FileNameTool(Tool_ASTYLE), ['-A8', '-xC100', '-k1', '-w',
+        (*'-U',*) '-H', '-j', '-s' + IntToStr(ATabWidth)], EmptyStr, LInput, LOutput, nil);
+    finally
+      FreeAndNil(LInput);
+    end;
+    with TStringList.Create do begin
+      try
+        LOutput.Position := 0;
+        LoadFromStream(LOutput);
+        while (Count > 0) and (Length(Trim(Strings[0])) = 0) do begin
+          Delete(0);
+        end;
+        while (Count > 0) and (Length(Trim(Strings[Count - 1])) = 0) do begin
+          Delete(Count - 1);
+        end;
+        Insert(0, default(string));
+        for LIndex := 0 to Count - 1 do begin
+          LLine := Strings[LIndex];
+          LPos := PChar(LLine);
+          while LPos[0] in [#1..#32] do begin
+            Inc(LPos);
+          end;
+          if (LPos[0] <> '/') or (LPos[1] <> '/') then begin
+            while (LPos[0] <> #0) and ((LPos[0] <> '/') or (LPos[1] <> '/')) do begin
+              LChar := LPos[0];
+              if LChar in ['"', ''''] then begin
+                repeat
+                  Inc(LPos);
+                  if (LPos[0] = LChar) and (LPos[-1] = '\') then begin
+                    Inc(LPos);
+                  end;
+                until (LPos[0] = #0) or (LPos[0] = LChar);
+              end;
+              Inc(LPos);
+            end;
+            if (LPos[-1] = ' ') and (LPos[0] = '/') then begin
+              LSep := LPos - PChar(LLine) + 1;
+              Strings[LIndex] := PadRight(TrimRight(Copy(LLine, 1, LSep - 1)), 47) + #32 +
+                Copy(LLine, LSep, MaxInt);
+            end;
+          end;
+        end;
+        Result := Text;
+      finally
+        Free;
+      end;
+    end;
+  finally
+    FreeAndNil(LOutput);
   end;
 end;
 
@@ -492,59 +555,6 @@ procedure CCmocProcess.ExecuteTool(const ATool: string; const AParams: array of 
   const ACurrentDirectory: TFileName = default(string));
 begin
   Execute(OCmoc.FileNameTool(ATool), AParams, ACurrentDirectory);
-end;
-
-procedure CCmocProcess.ExecuteTool_ASTYLE(const ADst, ASrc: TFileName; const ATabWidth: integer);
-var
-  LIndex, LSep: integer;
-  LChar: char;
-  LPos: pchar;
-  LLine: string;
-begin
-  // Removed -U because it messed up 6502 code.
-  ExecuteTool(Tool_ASTYLE, ['-A8', '-xC100', '-k1', '-w', (*'-U',*) '-H', '-j',
-    '-s' + IntToStr(ATabWidth), ASrc]);
-  with TStringList.Create do begin
-    try
-      LoadFromFile(ASrc);
-      while (Count > 0) and (Length(Trim(Strings[0])) = 0) do begin
-        Delete(0);
-      end;
-      while (Count > 0) and (Length(Trim(Strings[Count - 1])) = 0) do begin
-        Delete(Count - 1);
-      end;
-      Insert(0, default(string));
-      for LIndex := 0 to Count - 1 do begin
-        LLine := Strings[LIndex];
-        LPos := PChar(LLine);
-        while LPos[0] in [#1..#32] do begin
-          Inc(LPos);
-        end;
-        if (LPos[0] <> '/') or (LPos[1] <> '/') then begin
-          while (LPos[0] <> #0) and ((LPos[0] <> '/') or (LPos[1] <> '/')) do begin
-            LChar := LPos[0];
-            if LChar in ['"', ''''] then begin
-              repeat
-                Inc(LPos);
-                if (LPos[0] = LChar) and (LPos[-1] = '\') then begin
-                  Inc(LPos);
-                end;
-              until (LPos[0] = #0) or (LPos[0] = LChar);
-            end;
-            Inc(LPos);
-          end;
-          if (LPos[-1] = ' ') and (LPos[0] = '/') then begin
-            LSep := LPos - PChar(LLine) + 1;
-            Strings[LIndex] := PadRight(TrimRight(Copy(LLine, 1, LSep - 1)), 47) + #32 +
-              Copy(LLine, LSep, MaxInt);
-          end;
-        end;
-      end;
-      SaveToFile(ADst);
-    finally
-      Free;
-    end;
-  end;
 end;
 
 end.

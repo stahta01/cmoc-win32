@@ -40,7 +40,7 @@ unit UCmocProcess;
 interface
 
 uses
-  Process, SysUtils, UCmocUtils;
+  Process, SysUtils;
 
 type
 
@@ -50,6 +50,8 @@ type
   end;
 
 implementation
+
+uses UCmocUtils;
 
 procedure TProcessHelper._CheckExitCode(const AExitCode: longint);
 begin

@@ -529,36 +529,21 @@ begin
 end;
 
 procedure TFormCmocIDE.MenuEditFormatSourceCodeClick(ASender: TObject);
-var
-  LTmpFile: TFileName;
 begin
   if MessageDlg('Do you want to format current file?', mtConfirmation, [mbYes, mbNo], 0) =
     mrYes then begin
-    LTmpFile := GetTempDir(False) + 'astyle.c';
-    FormCmocIDESynEdit.SynEdit.Lines.SaveToFile(LTmpFile);
-    try
-      with CCmocProcess.Create(Self) do begin
-        try
-          ExecuteTool_ASTYLE(LTmpFile, LTmpFile, FormCmocIDESynEdit.SynEdit.TabWidth);
-        finally
-          Free;
-        end;
+    with CCmocProcess.Create(Self) do begin
+      try
+        FormCmocIDESynEdit.SynEdit._ChangeText(OCmoc.StringAStyle(
+          FormCmocIDESynEdit.SynEdit.Text, FormCmocIDESynEdit.SynEdit.TabWidth));
+      finally
+        Free;
       end;
-      with TStringList.Create do begin
-        try
-          LoadFromFile(LTmpFile);
-          FormCmocIDESynEdit.SynEdit._ChangeText(Text);
-        finally
-          Free;
-        end;
+    end;
+    with FormCmocIDESynEdit.SynEdit do begin
+      if not InRange(CaretY, TopLine, TopLine + LinesInWindow) then begin
+        _SetCaretYCentered(TopLine + (LinesInWindow div 2));
       end;
-      with FormCmocIDESynEdit.SynEdit do begin
-        if not InRange(CaretY, TopLine, TopLine + LinesInWindow) then begin
-          _SetCaretYCentered(TopLine + (LinesInWindow div 2));
-        end;
-      end;
-    finally
-      DeleteFile(LTmpFile);
     end;
     WriteLn('// Formatting complete');
   end;

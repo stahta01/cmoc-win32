@@ -8,7 +8,6 @@
       <Unit0>
         <Filename Value="cmoc2.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="36"/>
         <CursorPos X="21" Y="49"/>
         <UsageCount Value="157"/>
@@ -1385,10 +1384,12 @@
       </Unit191>
       <Unit192>
         <Filename Value="UCmocProcess_CMOC2.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="43"/>
-        <CursorPos X="35" Y="48"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="61"/>
+        <CursorPos X="3" Y="48"/>
         <UsageCount Value="23"/>
+        <Loaded Value="True"/>
       </Unit192>
       <Unit193>
         <Filename Value="C:\Program Files\Borland\CBuilder5\Include\tom.h"/>
