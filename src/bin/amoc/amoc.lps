@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="28">
+    <Units Count="29">
       <Unit0>
         <Filename Value="amoc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -215,6 +215,14 @@
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit27>
+      <Unit28>
+        <Filename Value="..\..\..\bin\cmocide\keywords.txt"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="187"/>
+        <CursorPos X="6" Y="211"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit28>
     </Units>
     <JumpHistory Count="3" HistoryIndex="2">
       <Position1>

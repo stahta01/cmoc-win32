@@ -55,10 +55,12 @@ typedef struct try_block_t {
 
 #define current_exception  (&_current_exception)
 
-void exception_raise(errno_t errno, char* message);
+void exception_throw(errno_t errno, word line);
 
 #define try {try_block_t try_block;if(try_block_init(&try_block,setjmp(&try_block.jump)))
 #define except try_block_done(&try_block);}if(_current_exception.errno!=ERRNO_NONE)
+#define throw(_ERRNO,_LINE) exception_throw(_ERRNO,_LINE)
+#define rethrow throw(_current_exception.errno,_current_exception.line)
 
 // internal use only
 
