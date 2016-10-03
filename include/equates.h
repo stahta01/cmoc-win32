@@ -39,8 +39,9 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 #ifdef __COCO__
 #include <coco/equates.h>
-#include <coco/disk.h>
 #include <coco/cb_equates.h>
+#include <coco/ecb_equates.h>
+#include <coco/disk.h>
 #endif
 
 #ifdef __DRAGON__

@@ -9,8 +9,6 @@ float_t* _flog10(float_t* dst, float_t* src)
 {
     // log10 (x) equals log (x) / log (10)
     float_t temp;
-    _flog(&temp, src);
-    _fdiv(dst, &temp, (float_t*)FP_LOGOF10);
-    return (dst);
+    return _fdiv(dst, _flog(&temp, src), (float_t*)FP_LOGOF10);
 }
 

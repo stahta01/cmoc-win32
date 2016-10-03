@@ -12,7 +12,7 @@ asm char _fsign(float_t* src)
     asm {
         ldx     2,s
         jsr     _LBC14                          // COPY A PACKED FP NUMBER FROM (X) TO FPA0
-        jsr     $BC6D                           // CALL BASIC SGN0 FPA0
+        jsr     _LBC6D                          // CALL BASIC SGN0 FPA0
     }
 }
 

@@ -8,9 +8,6 @@
 float_t* _flogbase(float_t* dst, float_t* src, float_t* base)
 {
     float_t temp1, temp2;
-    _flog10(&temp1, src);
-    _flog10(&temp2, base);
-    _fdiv(dst, &temp1, &temp2);
-    return (dst);
+    return _fdiv(dst, _flog10(&temp1, src), _flog10(&temp2, base));
 }
 

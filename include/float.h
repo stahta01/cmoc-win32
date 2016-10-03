@@ -95,7 +95,7 @@ float_t* _frad(float_t* dst, float_t* deg);
 float_t* _vfrpn(float_t* dst, va_list args);
 float_t* _frpn(float_t* dst, ...);
 
-// raw float constants.
+// raw float constants
 
 #define _FLOAT_SIZE 5
 
@@ -105,6 +105,11 @@ extern byte FP_RAD_TO_DEG[_FLOAT_SIZE];
 extern byte FP_PI[_FLOAT_SIZE];
 extern byte FP_MAXEXP[_FLOAT_SIZE];
 extern byte FP_LOGOF10[_FLOAT_SIZE];
+
+// internal use only
+
+void _fruny2(void);
+void _fruny3(void);
 
 #endif
 

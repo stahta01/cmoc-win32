@@ -10,6 +10,9 @@
 asm float_t* _fexp(float_t* dst, float_t* src)
 {
     asm {
+        ldy     #_EXP
+        jmp     _fruny2
+        /*
         pshs    u
         ldx     6,s
         jsr     _LBC14                          // COPY A PACKED FP NUMBER FROM (X) TO FPA0
@@ -18,6 +21,7 @@ asm float_t* _fexp(float_t* dst, float_t* src)
         jsr     _LBC35                          // PACK FPA0 AND MOVE IT TO ADDRESS IN X
         puls    u
         ldd     2,s
+        */
     }
 }
 
