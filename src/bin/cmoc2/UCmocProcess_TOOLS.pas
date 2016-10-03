@@ -218,7 +218,7 @@ begin
         DeleteFile(LObjFile);
       end;
     finally
-      //DeleteFile(LMapFile);
+      DeleteFile(LMapFile);
     end;
   finally
     DeleteFile(LLibFile);
