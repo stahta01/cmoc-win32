@@ -1,6 +1,15 @@
 
 // Exception examples. I tried to make the exception macros as
-// C++ looking as possible.
+// C++ looking as possible. This example show the different
+// exception structures that work. You can also use
+// exception_raise() to throw an exception errno, a line value.
+// This uses BASIC's error system, which displays an error message
+// (based on a error number), with a line number.
+// Therefore, exceptions which are not handled, will be passed
+// back to BASIC.
+
+// You can also pass a string pointer via line, but be careful
+// that the address is still valid when printing. ie: stack memory.
 
 #include <stdlib.h>
 #include <conio.h>
@@ -36,10 +45,12 @@ int main(void)
         exception_raise(ERRNO_FC, "RAISED EXCEPTION!");
     }
     except {
-        cprintf("#%d %s\n", current_exception->errno, current_exception->what);
+        cprintf("#%d %s\n", current_exception->errno, current_exception->line);
     }
     cputs("\nRETURN TO BASIC VIA EXCEPTION");
-    //exception_raise(ERRNO_SN, 0);
+
+    // Note, BASIC will show the message as the line number.
+    exception_raise(ERRNO_SN, __LINE__);
 
     return 0;
 }

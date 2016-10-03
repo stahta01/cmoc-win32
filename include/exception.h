@@ -43,7 +43,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 typedef struct {
     errno_t errno;
-    char* what;
+    word line;
 } exception_t, *exception_ptr;
 
 typedef struct try_block_t {
@@ -55,15 +55,17 @@ typedef struct try_block_t {
 
 #define current_exception  (&_current_exception)
 
-#define try {try_block_t try_block;if(try_block_init(&try_block,setjmp(&try_block.jump)))
-#define except _current_exception=try_block.exception;}if(_current_exception.errno!=ERRNO_NONE)
-
 void exception_raise(errno_t errno, char* message);
+
+#define try {try_block_t try_block;if(try_block_init(&try_block,setjmp(&try_block.jump)))
+#define except try_block_done(&try_block);}if(_current_exception.errno!=ERRNO_NONE)
 
 // internal use only
 
 extern exception_t _current_exception;
+
 bool try_block_init(try_block_t* try_block, int jmp_return);
+void try_block_done(try_block_t* try_block);
 
 #endif
 
