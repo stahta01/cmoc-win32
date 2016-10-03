@@ -97,10 +97,19 @@ int rename(char* oldname, char* newname);
 int snprintf(char* buf, size_t size, char* format, ...);
 int sprintf(char* buf, char* format, ...);
 int ungetc(int c, FILE* f);
-int vfprintf(FILE* f, char* format, va_list ap);
+
+//int vfprintf(FILE* f, char* format, va_list ap);
 int vprintf(char* format, va_list ap);
-int vsnprintf(char* buf, size_t size, char* format, va_list ap);
+//int vsnprintf(char* buf, size_t size, char* format, va_list ap);
 int vsprintf(char* buf, char* format, va_list ap);
+
+
+// These are non-standard "micro" versions of vsprintf/sprintf.
+
+int vswritef(char* dst, char* fmt, va_list args); // CMOC
+int swritef(char* dst, char* fmt, ...);         // CMOC
+
+// scanf functions are not written yet...
 
 int scanf(char* format, ...);
 int fscanf(FILE* f, char* format, ...);

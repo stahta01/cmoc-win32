@@ -107,14 +107,5 @@ unsigned getenvuint(char* name);
 
 void beep(int frequency, int duration);         // CMOC
 
-// These are non-standard "micro" versions of vsprintf/sprintf. They only
-// support s/d/i/u with no padding/alignment. The problem with vsprintf is, it
-// now supports floats & 32bit longs, which increases your bin size
-// even if you dont use floats/longs. So there will be a group of "write"
-// functions which will handle basic string formating for small projects.
-
-int vswritef(char* dst, char* fmt, va_list args); // CMOC
-int swritef(char* dst, char* fmt, ...);         // CMOC
-
 #endif
 
