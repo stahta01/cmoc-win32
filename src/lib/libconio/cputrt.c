@@ -1,7 +1,7 @@
 
 #include "_conio.h"
 
-void putrt(void)
+void _cputrt(void)
 {
     if (isvidram()) {
         _curpos++;

@@ -16,7 +16,7 @@ int putch(int c)
             _outchar(c);
         }
     }
-    putrt();
+    _cputrt();
     return c;
 }
 

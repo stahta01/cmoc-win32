@@ -1,9 +1,9 @@
 
 #include "_conio.h"
 
-void putlf(void)
+void _cputlf(void)
 {
-    putdn();
+    _cputdn();
     gotox(0);
 }
 

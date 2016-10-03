@@ -1,7 +1,7 @@
 
 #include "_conio.h"
 
-void putup(void)
+void _cputup(void)
 {
     if (isvidram()) {
         _curpos -= 32;

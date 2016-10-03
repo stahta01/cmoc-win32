@@ -1,7 +1,7 @@
 
 #include "_conio.h"
 
-void putlt(void)
+void _cputlt(void)
 {
     if (isvidram()) {
         _curpos--;

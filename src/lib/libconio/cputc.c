@@ -10,19 +10,19 @@ void cputc(int c)
     case ASCII_ESC:
         switch (c) {
         case 'A':
-            putup();
+            _cputup();
             _vt52mode = ASCII_NUL;
             break;
         case 'B':
-            putdn();
+            _cputdn();
             _vt52mode = ASCII_NUL;
             break;
         case 'C':
-            putrt();
+            _cputrt();
             _vt52mode = ASCII_NUL;
             break;
         case 'D':
-            putlt();
+            _cputlt();
             _vt52mode = ASCII_NUL;
             break;
         case 'H':
@@ -49,14 +49,14 @@ void cputc(int c)
             _vt52mode = ASCII_ESC;
             break;
         case ASCII_BS:
-            putlt();
+            _cputlt();
             break;
         case ASCII_HT:
-            putrt();
+            _cputrt();
             break;
         case ASCII_LF:
         case ASCII_CR:
-            putlf();
+            _cputlf();
             break;
         default:
             putch(c);

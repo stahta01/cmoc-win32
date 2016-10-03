@@ -78,11 +78,11 @@ int getche(void);                               // Borland
 int putch(int c);                               // Borland
 int ungetch(int c);                             // Borland
 
-void putdn(void);                               // CMOC
-void putup(void);                               // CMOC
-void putlt(void);                               // CMOC
-void putrt(void);                               // CMOC
-void putlf(void);                               // CMOC
+void _cputdn(void);                             // CMOC
+void _cputup(void);                             // CMOC
+void _cputlt(void);                             // CMOC
+void _cputrt(void);                             // CMOC
+void _cputlf(void);                             // CMOC
 
 void scrclr(void);                              // CMOC - Clear screen without moving cursor
 void scrup(void);                               // CMOC
