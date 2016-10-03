@@ -8,7 +8,7 @@ void PrintFileToConsole(char* fn)
 {
     char s[100];
     cprintf("Searching for '%s'\n", fn);
-    int fd = open("BASIC.TXT", O_RDONLY);
+    int fd = open(fn, O_RDONLY);
     if (fd) {
         while (lgets(fd, s, sizeof(s))) {
             if (s[0] != '\n') {
@@ -27,6 +27,12 @@ void PrintFileToConsole(char* fn)
 
 int main(void)
 {
+    // Fixed. BASIC.TXT was moved to drive #1.
+    // Note: The prefered file commands are in stdio, which use DOS commands.
+    // Soon the UNIX commands will also use the DOS commands. LibDisk
+    // is still handy, but needs a clean up.
+    _setDefaultDriveNo(1);
+
     bgcolor(3);
     textmode2(MODE_H0_64X24, charset_atari_small);
     PrintFileToConsole("BASIC.TXT");
