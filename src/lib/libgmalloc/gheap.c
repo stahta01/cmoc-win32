@@ -1,14 +1,15 @@
 
 #include "_gmalloc.h"
 
-bool _static_gheap_setup;
+bool _static_gheap_initialized;
 
 heap_t* gheap(void)
 {
-    if (!_static_gheap_setup) {
-        _static_gheap_setup = true;
-        heap_init((heap_t*)_beggrp, _endgrp - _beggrp);
+    heap_t* result = (heap_t*)((word)_grpram << 8);
+    if (!_static_gheap_initialized) {
+        _static_gheap_initialized = true;
+        heap_init(result, (_txttab - 1) - (word)result);
     }
-    return (heap_t*)_beggrp;
+    return result;
 }
 

@@ -6,7 +6,7 @@
 
 int main(void)
 {
-    *(byte*)65314 |= 16;
+    *(byte*)0xff22 |= 16;
 
     clrscr();
 

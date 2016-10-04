@@ -45,8 +45,10 @@ uses
 type
   TStringsHelper = class helper for TStrings
   public
+    function _IndexOfName(const AName: string): integer;
     function _GetString(const AName, ADefault: string): string;
     procedure _InsertStrings(const AIndex: integer; const AStrings: array of string);
+  public
     procedure _MergeValues(const AStrings: TStrings);
     procedure _MergeValues(const ACommaText: string);
   end;
@@ -74,12 +76,47 @@ begin
   end;
 end;
 
+procedure NameValueSplit(const A: string; var AName, AValue: string);
+var
+  LPos: integer;
+begin
+  LPos := Pos('=', A);
+  if LPos = 0 then begin
+    AName := A;
+    AValue := EmptyStr;
+  end else begin
+    AName := Copy(A, 1, LPos - 1);
+    AValue := Copy(A, LPos + 1, MaxInt);
+  end;
+end;
+
+function TStringsHelper._IndexOfName(const AName: string): integer;
+var
+  LName, LValue: string;
+begin
+  for Result := 0 to Count - 1 do begin
+    NameValueSplit(Strings[Result], LName, LValue);
+    if AnsiSameText(LName, AName) then begin
+      Exit;
+    end;
+  end;
+  Result := -1;
+end;
+
 procedure TStringsHelper._MergeValues(const AStrings: TStrings);
 var
-  LIndex: integer;
+  LIndex, LPos: integer;
+  LNameValue, LName, LValue: string;
 begin
   for LIndex := 0 to AStrings.Count - 1 do begin
-    Values[AStrings.Names[LIndex]] := AStrings.ValueFromIndex[LIndex];
+    NameValueSplit(AStrings[LIndex], LName, LValue);
+    LNameValue := LName + '=' + LValue;
+    LPos := _IndexOfName(LName);
+    if LPos < 0 then begin
+      Add(LNameValue);
+    end else begin
+      Strings[LPos] := LNameValue;
+    end;
   end;
 end;
 
