@@ -10,13 +10,8 @@ void _cputdn(void)
             scrup();
         }
     } else {
-        if (isgrpram()) {
-            unsigned line = (unsigned)_horbyt << 3;
-            _curpos += line;
-            if (!isgrpram()) {
-                _curpos -= line;
-                scrup();
-            }
+        if (_conio.movetextposition) {
+            _conio.movetextposition(_GMOVEDOWN);
         }
     }
 }

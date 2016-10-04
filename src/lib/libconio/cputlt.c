@@ -8,8 +8,8 @@ void _cputlt(void)
         if (!isvidram()) {
             _curpos = _VIDRAM;
         }
-    }  else if (isgrpram() && _conio.movetextposition) {
-        _conio.movetextposition(_MOVE_TEXT_POSITION_LEFT);
+    }  else if (_conio.movetextposition) {
+        _conio.movetextposition(_GMOVELEFT);
     }
 }
 

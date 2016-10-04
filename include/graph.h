@@ -320,10 +320,13 @@ int _getgtextextent(char*);
 //struct xycoord _setgtextvector(int, int);
 //struct xycoord _getgtextvector(void);
 
-#define _MOVE_TEXT_POSITION_UP      1
-#define _MOVE_TEXT_POSITION_DOWN    2
-#define _MOVE_TEXT_POSITION_LEFT    3
-#define _MOVE_TEXT_POSITION_RIGHT   4
+// X/Y reversed to match _settextposition() which is defined by WATCOM
+void _textscreensize(int* rows, int* cols);     // CMOC
+
+#define _GMOVEUP      1
+#define _GMOVEDOWN    2
+#define _GMOVELEFT    3
+#define _GMOVERIGHT   4
 
 void _movetextposition(int direction);          // CMOC
 

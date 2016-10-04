@@ -9,12 +9,8 @@ void _cputup(void)
             _curpos += 32;
         }
     } else {
-        if (isgrpram()) {
-            unsigned line = (unsigned)_horbyt << 3;
-            _curpos -= line;
-            if (!isgrpram()) {
-                _curpos += line;
-            }
+        if (_conio.movetextposition) {
+            _conio.movetextposition(_GMOVEUP);
         }
     }
 }
