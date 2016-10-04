@@ -1,2 +1,2 @@
-call bat\makelib.bat libvarptr 
+call bat\makelib2.bat varptr 
 
