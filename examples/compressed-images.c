@@ -1,7 +1,7 @@
 
 // NOTE Due to the bin size, this only works on a no dos extended coco
 
-#pragma org 7680
+//#pragma org 7680
 #pragma options -machine=cocous -nodos
 
 #include <stdlib.h>
@@ -14,9 +14,9 @@
 
 #include "images/1.c"
 #include "images/2.c"
-#include "images/3.c"
-#include "images/4.c"
-#include "images/6.c"
+//#include "images/3.c"
+//#include "images/4.c"
+//#include "images/6.c"
 #include "images/8.c"
 
 void ShowImage(crypt_image_t* image)
@@ -35,9 +35,9 @@ int main(void)
     for (;;) {
         ShowImage((crypt_image_t*)image1);
         ShowImage((crypt_image_t*)image2);
-        ShowImage((crypt_image_t*)image3);
-        ShowImage((crypt_image_t*)image4);
-        ShowImage((crypt_image_t*)image6);
+        //ShowImage((crypt_image_t*)image3);
+        //ShowImage((crypt_image_t*)image4);
+        //ShowImage((crypt_image_t*)image6);
         ShowImage((crypt_image_t*)image8);
     }
     return 0;
