@@ -1,5 +1,5 @@
 
-#include "_stdlib.h"
+#include "_sprintf.h"
 
 char* strpcpy_pad(char* dst, char* src, int width, char padchar)
 {

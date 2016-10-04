@@ -1,5 +1,5 @@
 
-#include "_stdlib.h"
+#include "_sprintf.h"
 
 int swritef(char* dst, char* fmt, ...)
 {

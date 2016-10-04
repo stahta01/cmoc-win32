@@ -39,7 +39,8 @@
 #include <sys/fpos.h>
 
 #include <stddef.h>
-#include <stdarg.h>
+#include <sprintf.h>
+#include <sscanf.h>
 
 typedef struct {
     dev_t   dev;
@@ -67,56 +68,44 @@ extern FILE* stderr;
 #define FILENAME_MAX    (16+1)
 #define L_tmpnam        FILENAME_MAX
 
-void clearerr(FILE* f);
-int fclose(FILE* f);
-int feof(FILE* f);
-int ferror(FILE* f);
-int fflush(FILE* f);
-int fgetc(FILE* f);
-char* fgets(char* buf, size_t size, FILE* f);
+void clearerr(FILE* fp);
+int fclose(FILE* fp);
+int feof(FILE* fp);
+int ferror(FILE* fp);
+int fflush(FILE* fp);
+int fgetc(FILE* fp);
+char* fgets(char* buf, size_t size, FILE* fp);
 FILE* fopen(char* name, char* mode);
-int fprintf(FILE* f, char* format, ...);
-int fputc(int c, FILE* f);
-int fputs(char* s, FILE* f);
-size_t fread(void* buf, size_t size, size_t count, FILE* f);
+int fprintf(FILE* fp, char* fmt, ...);
+int fputc(int c, FILE* fp);
+int fputs(char* s, FILE* fp);
+size_t fread(void* buf, size_t size, size_t count, FILE* fp);
 FILE* freopen(char* name, char* mode, FILE* f);
-size_t fwrite(void* buf, size_t size, size_t count, FILE* f);
-int fgetpos(FILE* f, fpos_t* pos);
-int fsetpos(FILE* f, fpos_t* pos);
-size_t ftell(FILE* f);
-int fseek(FILE* f, size_t offset, int whence);
-void rewind(FILE* f);
+size_t fwrite(void* buf, size_t size, size_t count, FILE* fp);
+int fgetpos(FILE* fp, fpos_t* pos);
+int fsetpos(FILE* fp, fpos_t* pos);
+size_t ftell(FILE* fp);
+int fseek(FILE* fp, size_t offset, int whence);
+void rewind(FILE* fp);
 int getchar(void);
 char* gets(char* s);
 void perror(char* s);
-int printf(char* format, ...);
+//int vfprintf(FILE* f, char* format, va_list ap);
+int vprintf(char* fmt, va_list args);
+int printf(char* fmt, ...);
 int putchar(int c);
 int puts(char* s);
 int remove(char* name);
 int rename(char* oldname, char* newname);
-int snprintf(char* buf, size_t size, char* format, ...);
-int sprintf(char* buf, char* format, ...);
-int ungetc(int c, FILE* f);
+int ungetc(int c, FILE* fp);
 
-//int vfprintf(FILE* f, char* format, va_list ap);
-int vprintf(char* format, va_list ap);
-//int vsnprintf(char* buf, size_t size, char* format, va_list ap);
-int vsprintf(char* buf, char* format, va_list ap);
-
-
-// These are non-standard "micro" versions of vsprintf/sprintf.
-
-int vswritef(char* dst, char* fmt, va_list args); // CMOC
-int swritef(char* dst, char* fmt, ...);         // CMOC
 
 // scanf functions are not written yet...
 
-int scanf(char* format, ...);
-int fscanf(FILE* f, char* format, ...);
-int sscanf(char* s, char* format, ...);
-int vscanf(char* format, va_list ap);
-int vsscanf(char* s, char* format, va_list ap);
-int vfscanf(FILE* f, char* format, va_list ap);
+//int scanf(char* fmt, ...);
+//int vfscanf(FILE* fp, char* fmt, va_list args);
+//int fscanf(FILE* fp, char* fmt, ...);
+//int vscanf(char* fmt, va_list args);
 
 size_t _fsize(FILE* fp);                        // CMOC
 

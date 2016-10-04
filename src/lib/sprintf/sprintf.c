@@ -1,5 +1,5 @@
 
-#include "_stdlib.h"
+#include "_sprintf.h"
 
 int sprintf(char* dst, char* fmt, ...)
 {
