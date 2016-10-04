@@ -3,6 +3,6 @@
 
 void* malloc(size_t size)
 {
-    return heap_malloc(malloc_heap(nullptr), size);
+    return heap_malloc(mheap(), size);
 }
 

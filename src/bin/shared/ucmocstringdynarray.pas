@@ -54,7 +54,7 @@ type
     class procedure AddOption(var A: TStringDynArray; const AOption, AValue: string;
       const ASingleEntry: boolean);
     class procedure AddDefine(var A: TStringDynArray; const AName, AValue: string;
-      const ASingleEntry: boolean);
+      const ASingleEntry: boolean = True);
     class procedure AddLib(var A: TStringDynArray; const AName: string);
     class procedure AddLibs(var A: TStringDynArray);
     class procedure AddOptions(var A: TStringDynArray; const AOptions: TStrings;

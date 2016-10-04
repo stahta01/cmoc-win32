@@ -38,6 +38,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define _HEAP_H
 
 #include <sys/size.h>
+#include <sys/heap.h>
 
 // Heap blocks are 2 bytes (sizeof(int)) larger than the requested memory size.
 // These two 2 bytes are the _signed_ size of the block.
@@ -65,13 +66,12 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define HEAP_SIZE_MIN   4
 #define HEAP_SIZE_MAX   0x7e00
 
-typedef int heap_t;
-
 heap_t* heap_init(heap_t* heap, size_t size);
+size_t heap_msize(void* memory);
 void* heap_malloc(heap_t* heap, size_t size);
+void* heap_calloc(heap_t* heap, size_t count, size_t size);
 void* heap_realloc(heap_t* heap, void* memory, size_t size);
 void heap_free(void* memory);
-size_t heap_msize(void* memory);
 
 // Heap Walkers
 

@@ -65,7 +65,6 @@ implementation
 
 procedure CCmocProcess_TOOLS.CMOC(const ADst, ASrc: TFileName; const AWerror, AVerbose: boolean);
 var
-  LSingleEntry: boolean;
   LTmp: TFileName;
   LParams: TStringDynArray;
   LOptions: TStringList;
@@ -85,24 +84,24 @@ begin
         if AVerbose then begin
           OStringDynArray.Add(LParams, Opt_Verbose1);
         end;
-        LSingleEntry := True;
-        OStringDynArray.AddDefine(LParams, Def_CMOC, Ver_CMOC, LSingleEntry);
-        OStringDynArray.AddDefine(LParams, Def_6809, EmptyStr, LSingleEntry);
-        OStringDynArray.AddDefine(LParams, '__' + UpperCase(FTarget) + '__',
-          EmptyStr, LSingleEntry);
-        OStringDynArray.AddDefine(LParams, 'nullptr', '0', LSingleEntry);
-        OStringDynArray.AddDefine(LParams, 'bool', 'unsigned char', LSingleEntry);
-        OStringDynArray.AddDefine(LParams, 'false', '0', LSingleEntry);
-        OStringDynArray.AddDefine(LParams, 'true', '1', LSingleEntry);
-        OStringDynArray.AddDefine(LParams, 'byte', 'unsigned char', LSingleEntry);
-        OStringDynArray.AddDefine(LParams, 'sbyte', 'char', LSingleEntry);
-        OStringDynArray.AddDefine(LParams, 'word', 'unsigned', LSingleEntry);
-        OStringDynArray.AddDefine(LParams, 'sword', 'int', LSingleEntry);
-        OStringDynArray.AddDefine(LParams, 'const', EmptyStr, LSingleEntry);
-        OStringDynArray.AddDefine(LParams, 'long', 'int', LSingleEntry);
-        OStringDynArray.AddDefine(LParams, '__fastcall__', EmptyStr, LSingleEntry);
-        OStringDynArray.AddDefine(LParams, '__cdecl', EmptyStr, LSingleEntry);
-        OStringDynArray.AddDefine(LParams, 'restrict', EmptyStr, LSingleEntry);
+        OStringDynArray.AddDefine(LParams, Def_CMOC, Ver_CMOC);
+        OStringDynArray.AddDefine(LParams, Def_6809, EmptyStr);
+        OStringDynArray.AddDefine(LParams, '__' + UpperCase(FTarget) + '__', EmptyStr);
+        OStringDynArray.AddDefine(LParams, 'nullptr', '0');
+        OStringDynArray.AddDefine(LParams, 'bool', 'unsigned char');
+        OStringDynArray.AddDefine(LParams, 'false', '0');
+        OStringDynArray.AddDefine(LParams, 'true', '1');
+        OStringDynArray.AddDefine(LParams, 'byte', 'unsigned char');
+        OStringDynArray.AddDefine(LParams, 'sbyte', 'char');
+        OStringDynArray.AddDefine(LParams, 'word', 'unsigned');
+        OStringDynArray.AddDefine(LParams, 'sword', 'int');
+        OStringDynArray.AddDefine(LParams, 'const', EmptyStr);
+        OStringDynArray.AddDefine(LParams, 'float', 'float_t');
+        OStringDynArray.AddDefine(LParams, 'long', 'long_t');
+        OStringDynArray.AddDefine(LParams, '__fastcall__', EmptyStr);
+        OStringDynArray.AddDefine(LParams, '__cdecl', EmptyStr);
+        OStringDynArray.AddDefine(LParams, 'restrict', EmptyStr);
+        OStringDynArray.AddDefine(LParams, 'NO_OLDNAMES', EmptyStr);
         OStringDynArray.Add(LParams, ExtractFileName(LTmp));
         ExecuteTool(Tool_CMOC, LParams, ExtractFilePath(LTmp));
         DeleteFile(ADst);

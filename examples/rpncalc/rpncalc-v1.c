@@ -32,6 +32,8 @@ For more information, please refer to <http://unlicense.org/>
 */
 #pragma options -machine=coco --optimize=2
 
+#undef NO_OLDNAMES
+
 #include <sac.h>
 #include <conio.h>
 #include <stdio.h>

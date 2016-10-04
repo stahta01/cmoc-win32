@@ -3,6 +3,6 @@
 
 void* realloc(void* memory, size_t size)
 {
-    return heap_realloc(malloc_heap(nullptr), memory, size);
+    return heap_realloc(mheap(), memory, size);
 }
 

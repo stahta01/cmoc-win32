@@ -1,4 +1,6 @@
 
+#undef NO_OLDNAMES
+
 #include <sac.h>
 #include <conio.h>
 #include <stdio.h>

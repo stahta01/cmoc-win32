@@ -34,66 +34,16 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 */
 
-#ifndef _SAC_H
-#define _SAC_H
+#ifndef _GMALLOC_H
+#define _GMALLOC_H
 
 #include <sys/size.h>
+#include <sys/heap.h>
 
-typedef struct snode_t {
-    struct snode_t* next;
-} snode_t;
+heap_t* gheap(void);
 
-typedef struct dnode_t {
-    struct dnode_t* prev;
-    struct dnode_t* next;
-} dnode_t;
-
-void dnode_link(dnode_t* n1, dnode_t* n2);
-bool dnode_is_head(dnode_t* node);
-bool dnode_is_tail(dnode_t* node);
-
-dnode_t* dnode_insert(dnode_t* node, dnode_t* prev, dnode_t* next);
-dnode_t* dnode_remove(dnode_t* node);
-
-typedef struct {
-    dnode_t head, tail;
-} dlist_t;
-
-void dlist_init(dlist_t* list);
-bool dlist_is_empty(dlist_t* list);
-
-dlist_t* dlist_create(void);
-dnode_t* dlist_head(dlist_t* list);
-dnode_t* dlist_pull_head(dlist_t* list);
-dnode_t* dlist_pull_tail(dlist_t* list);
-dnode_t* dlist_push_head(dlist_t* list, dnode_t* node);
-dnode_t* dlist_push_tail(dlist_t* list, dnode_t* node);
-dnode_t* dlist_tail(dlist_t* list);
-
-typedef struct {
-    size_t count, isize;
-    byte* items;
-} array_t;
-
-void array_init(array_t* array, size_t isize);
-void array_free(array_t* array);
-
-array_t* array_clear(array_t* array);
-array_t* array_create(size_t isize);
-array_t* array_grow(array_t* array, size_t n);
-array_t* array_resize(array_t* array, size_t n);
-
-byte* array_at(array_t* array, size_t index);
-
-#ifndef NO_OLDNAMES
-#define node_t          dnode_t
-#define list_t          dlist_t
-#define list_create     dlist_create
-#define list_head       dlist_head
-#define list_tail       dlist_tail
-#define list_push_head  dlist_push_head
-#define list_pull_head  dlist_pull_head
-#endif
+void* gmalloc(size_t size);
+void* gcalloc(size_t count, size_t size);
+void* grealloc(void* memory, size_t size);
 
 #endif
-

@@ -28,10 +28,10 @@ OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
-
-
 For more information, please refer to <http://unlicense.org/>
 */
+
+#undef NO_OLDNAMES
 
 #include <sac.h>
 #include <conio.h>
@@ -43,6 +43,7 @@ For more information, please refer to <http://unlicense.org/>
 #include <equates.h>
 #include <ctype.h>
 #include <peekpoke.h>
+
 #include "dirent.h"
 
 
@@ -177,6 +178,7 @@ int main(void)
         int pos;
         bool success;
         message[0] = '\0';
+        conio_uses_graph();
         textmode(MODE_H0_32X24);
         /* Don't allow an Overflow to terminate the program to basic */
         POKE(0xBA92, 0x39);
