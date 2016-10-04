@@ -47,6 +47,10 @@ int game_compare_name(game_t* a, game_t* b)
 
 int main(void)
 {
+    // This line causes the standard malloc functions to use up the 6K graphics
+    // memory before heap memory.
+    malloc_uses_gmalloc = true;
+
     games_t games = {0, 0};
 
     games_add(&games,  "SPACE INVADERS", 1980);
@@ -62,7 +66,9 @@ int main(void)
 
     for (;;) {
         clrscr();
-        puts("LIST OF POPULAR 2600 GAMES\n");
+        puts("LIST OF POPULAR 2600 GAMES");
+        printf("DATA MEMORY: $%p\n\n", games.data);
+
         for (int i = 0; i < games.size; i++) {
             printf("%2d: %4d %s\n", i + 1, games.data[i].year, games.data[i].name);
         }

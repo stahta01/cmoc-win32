@@ -3,6 +3,7 @@
 
 void* malloc(size_t size)
 {
-    return heap_malloc(mheap(), size);
+    void* result = malloc_uses_gmalloc ? gmalloc(size) : (void*)nullptr;
+    return result? result : heap_malloc(mheap(), size);
 }
 

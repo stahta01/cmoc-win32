@@ -49,5 +49,9 @@ heap_t* mheap(void);                            // CMOC
 #define new(_TYPE)     ((_TYPE*)calloc(sizeof(_TYPE), 1))
 #define delete(_ADDR)  free(_ADDR)
 
+// setting malloc_uses_gmalloc to true, will allocate graphics memory before mheap.
+
+extern bool malloc_uses_gmalloc;
+
 #endif
 
