@@ -1,7 +1,7 @@
 
 #include "_conio.h"
 
-unsigned char _charsetgroups[] = {0 << 5, 3 << 5, 2 << 5, 0 << 5};
+byte _charsetgroups[] = {0 << 5, 3 << 5, 2 << 5, 0 << 5};
 
 int putch(int c)
 {
@@ -12,7 +12,7 @@ int putch(int c)
         }
         *(char*)_curpos = (char)c;
     } else {
-        if (isgrpram() && _conio.outchar) {
+        if (_conio.outchar) {
             _conio.outchar(c);
         }
     }

@@ -4,7 +4,7 @@
 int textcolor(int color)
 {
     int result = _forcol;
-    _forcol = color;
+    _forcol = (byte)color;
     return result;
 }
 
