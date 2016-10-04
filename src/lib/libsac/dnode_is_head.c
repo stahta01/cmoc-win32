@@ -1,7 +1,7 @@
 
 #include "_sac.h"
 
-bool node_is_head(node_t* node)
+bool dnode_is_head(dnode_t* node)
 {
     return !node->prev || !node->prev->prev;
 }

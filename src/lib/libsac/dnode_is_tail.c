@@ -1,7 +1,7 @@
 
 #include "_sac.h"
 
-bool node_is_tail(node_t* node)
+bool dnode_is_tail(dnode_t* node)
 {
     return !node->next || !node->next->next;
 }

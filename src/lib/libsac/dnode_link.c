@@ -1,7 +1,7 @@
 
 #include "_sac.h"
 
-void node_link(node_t* n1, node_t* n2)
+void dnode_link(dnode_t* n1, dnode_t* n2)
 {
     if (n1) {
         if (n1->next) {

@@ -1,7 +1,7 @@
 
 #include "_sac.h"
 
-bool list_is_empty(list_t* list)
+bool dlist_is_empty(dlist_t* list)
 {
     return !list || !list->head.next->next;
 }
