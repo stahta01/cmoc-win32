@@ -8,9 +8,11 @@ heap_t* mheap(void)
     heap_t* result = (heap_t*)program_end;
     if (!_static_mheap_initialized) {
         _static_mheap_initialized = true;
-        // TODO: We should be checking for 16K machines here. They
-        // have a lower top of ram.
-        heap_init(result, 0x7c00 - (int)result);
+        int size = _topram - (int)result - 1024;
+        if (size < 1024) {
+            exit("OM:HEAP");
+        }
+        heap_init(result, size);
     }
     return result;
 }

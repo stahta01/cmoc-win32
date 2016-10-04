@@ -1,6 +1,8 @@
 
 #include "_far.h"
 
+// TODO: Improve this to use in place reallocating
+
 far_void_t* far_realloc(far_void_t* dst, size_t size)
 {
     size_t oldsize = far_msize(dst);
