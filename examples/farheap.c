@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <far.h>
+#include <fmalloc.h>
 #include <program.h>
 
 #define STRING_COUNT 100
@@ -54,14 +54,14 @@ int main(void)
     hank_create_clear(0, 0x8000, HEAP_SIZE_MAX);
 
     for (int i = 0; i < STRING_COUNT; i++) {
-        if (names[i] = _falloc(300)) {
+        if (names[i] = (far_char_t*)fmalloc(300)) {
             far_sprintf(names[i], "FAR STRING #%d", i);
         }
         size += far_msize((far_void_t*)names[i]);
     }
     for (int i = 0; i < STRING_COUNT; i++) {
         printf("DATA:%Fs BANK:%u\n", names[i], names[i]->bank);
-        _ffree((far_void_t*)names[i]);
+        ffree((far_void_t*)names[i]);
     }
     printf("REQUESTED: %d %u %u\n", size, malloc(10), program_end);
     return 0;

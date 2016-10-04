@@ -102,7 +102,7 @@ typedef unsigned            uintptr_t;
 
 // Greatest width integer types
 typedef long                intmax_t;
-typedef unsigned long       uintmax_t;
+//typedef unsigned long       uintmax_t;
 
 #define INTMAX_MIN          ((intmax_t) 0x80000000)
 #define INTMAX_MAX          ((intmax_t) 0x7FFFFFFF)

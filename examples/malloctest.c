@@ -9,6 +9,7 @@
 
 //#pragma options -machine=coco
 
+
 char* AllocMem(size_t size)
 {
     char* memory = (char*) malloc(size);
@@ -59,7 +60,7 @@ void Test()
 int main()
 {
     clrscr();
-    heap_t* heap = malloc_heap(nullptr);
+    heap_t* heap = mheap();
 
     cprintf("PROGRAM START: %d\n", program_start);
     cprintf("PROGRAM END  : %d\n", program_end);

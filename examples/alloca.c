@@ -21,6 +21,7 @@
 #include <conio.h>
 #include <string.h>
 #include <malloc.h>
+#include <alloca.h>
 
 void alloca_test(void)
 {
