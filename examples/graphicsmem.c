@@ -103,7 +103,7 @@ int main(void)
         // Expand the default gmalloc heap.
         // This assumes the origin is $2800 (DEFAULT)
         heap_init(gheap(), 0x2800 - (int)gheap());
-        if (check_graphics_memory(8292 - 4)) {
+        if (check_graphics_memory(8192 - 4)) {
             allocate_some_data();
             cputs("NOW TRY TO LIST BASIC PROG\n");
         } else {
