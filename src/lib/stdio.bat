@@ -1,2 +1,2 @@
-call bat\makelib.bat libstdio
+call bat\makelib2.bat stdio
 
