@@ -320,5 +320,12 @@ int _getgtextextent(char*);
 //struct xycoord _setgtextvector(int, int);
 //struct xycoord _getgtextvector(void);
 
+#define _MOVE_TEXT_POSITION_UP      1
+#define _MOVE_TEXT_POSITION_DOWN    2
+#define _MOVE_TEXT_POSITION_LEFT    3
+#define _MOVE_TEXT_POSITION_RIGHT   4
+
+void _movetextposition(int direction);          // CMOC
+
 #endif
 

@@ -10,5 +10,6 @@ void conio_uses_graph(void)
     _conio.settextpositionx = _settextpositionx;
     _conio.settextpositiony = _settextpositiony;
     _conio.getfontinfo = _getfontinfo;
+    _conio.movetextposition = _movetextposition;
 }
 

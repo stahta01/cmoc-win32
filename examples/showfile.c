@@ -1,50 +1,50 @@
 
 #include <conio.h>
-#include <unistd.h>
-#include <fcntl.h>
+#include <stdio.h>
 #include <charset.h>
+
+// Text mode bin = 6,211 bytes
+// Graph mode bin = 10,657 bytes + (6144 of graphics) = ~10K
+
+// While conio graphics are cool, if you want more space for data, you
+// need to use text mode only. Or, use libfar to store your data.
+
+//#define _USE_TEXT_MODE
 
 void PrintFileToConsole(char* fn)
 {
     char s[100];
-    cprintf("Searching for '%s'\n", fn);
-    int fd = open(fn, O_RDONLY);
-    if (fd) {
-        while (lgets(fd, s, sizeof(s))) {
-            if (s[0] != '\n') {
-                cprintf("%s", s);
-            }
-            if (kbhit()) {
-                getch();
-                break;
+    cwritef("Searching for '%s'\n", fn);
+    FILE* fp = fopen(fn, "r");
+    if (fp) {
+        while (!feof(fp)) {
+            char s[33];
+            fgets(s, sizeof(s), fp);
+            if (s[0] != '\r') {
+                fputs(s, stdout);
             }
         }
-        close(fd);
-    } else {
-        cputs("Unable to load file");
+        fclose(fp);
     }
 }
 
 int main(void)
 {
+#ifndef _USE_TEXT_MODE
     // conio now uses late binding for graphics text. This prevents
     // libgraph from being linked into your bin for video ram only
     // programs. Therefore, you must now call conio_uses_graph()
     // if you want to display text on a graphics screen.
     conio_uses_graph();
-
-    // Fixed. BASIC.TXT was moved to drive #1.
-    // Note: The prefered file commands are in stdio, which use DOS commands.
-    // Soon the UNIX commands will also use the DOS commands. LibDisk
-    // is still handy, but needs a clean up.
-    _setDefaultDriveNo(1);
-
-    bgcolor(3);
+    bgcolor(0);
     textmode2(MODE_H0_64X24, charset_atari_small);
-    PrintFileToConsole("BASIC.TXT");
+#endif
+    PrintFileToConsole("B:BASIC.TXT");
     cputs("\n\nPress any key to exit");
     getch();
+#ifndef _USE_TEXT_MODE
     textmode(0);
+#endif
     cputs("BACK TO BASIC");
     return 0;
 }

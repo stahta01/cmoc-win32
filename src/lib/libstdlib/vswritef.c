@@ -7,6 +7,9 @@ int vswritef(char* dst, char* fmt, va_list args)
     while (*fmt) {
         if ((*pos = *fmt++) == '%') {
             switch (*fmt++) {
+            case 'c':
+                *pos++ = (char)*args++;
+                break;
             case 's':
                 pos = _stpcpy(pos, (char*)*args++);
                 break;
