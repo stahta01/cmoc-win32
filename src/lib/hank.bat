@@ -1,3 +1,3 @@
-call bat\makelib.bat libhank 
+call bat\makelib2.bat hank 
 
 
