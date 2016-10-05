@@ -7,5 +7,7 @@ typedef struct {
     word lo;
 } _CRT_LONG, long_t;
 
+#define long long_t
+
 #endif
 

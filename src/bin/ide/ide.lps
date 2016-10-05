@@ -20,7 +20,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
-        <TopLine Value="687"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="669"/>
         <CursorPos X="30" Y="696"/>
         <UsageCount Value="99"/>
         <Loaded Value="True"/>
@@ -713,12 +714,10 @@
       <Unit91>
         <Filename Value="..\shared\ucmocstringdynarray.pas"/>
         <UnitName Value="UCmocStringDynArray"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="158"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="52"/>
         <CursorPos X="3" Y="165"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit91>
       <Unit92>
         <Filename Value="..\shared\ucmocstrings.pas"/>

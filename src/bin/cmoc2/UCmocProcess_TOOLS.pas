@@ -96,8 +96,8 @@ begin
         OStringDynArray.AddDefine(LParams, 'word', 'unsigned');
         OStringDynArray.AddDefine(LParams, 'sword', 'int');
         OStringDynArray.AddDefine(LParams, 'const', EmptyStr);
-        OStringDynArray.AddDefine(LParams, 'float', 'float_t');
-        OStringDynArray.AddDefine(LParams, 'long', 'long_t');
+        //OStringDynArray.AddDefine(LParams, 'float', 'float_t');
+        //OStringDynArray.AddDefine(LParams, 'long', 'long_t');
         OStringDynArray.AddDefine(LParams, '__fastcall__', EmptyStr);
         OStringDynArray.AddDefine(LParams, '__cdecl', EmptyStr);
         OStringDynArray.AddDefine(LParams, 'restrict', EmptyStr);

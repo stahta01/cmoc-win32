@@ -1,5 +1,5 @@
 
-// Simple example of using scanf. This code is new, so it is still undergoing bug checking.
+// Simple example of using sscanf. This code is new, so it is still undergoing bug checking.
 // Please contact me if you find an issue.
 
 #include <conio.h>

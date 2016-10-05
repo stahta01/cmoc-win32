@@ -13,5 +13,7 @@ typedef struct {
     unsigned    lsb;                            // LSB's
 } _CRT_FLOAT, float_t;
 
+#define float float_t
+
 #endif
 

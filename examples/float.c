@@ -6,7 +6,7 @@
 
 int main(void)
 {
-    float_t a, b, r, pi;
+    float a, b, r, pi;
 
     cputs("FLOATING POINT TESTS\n");
 

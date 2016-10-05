@@ -8,6 +8,7 @@
       <Unit0>
         <Filename Value="cmoc2.lpr"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="36"/>
         <CursorPos X="19" Y="49"/>
         <UsageCount Value="159"/>
@@ -1378,10 +1379,9 @@
       </Unit190>
       <Unit191>
         <Filename Value="UCmocProcess_TOOLS.pas"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="73"/>
-        <CursorPos X="26" Y="78"/>
+        <TopLine Value="88"/>
+        <CursorPos X="11" Y="100"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit191>

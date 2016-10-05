@@ -42,5 +42,10 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 int vsscanf(char* str, char* fmt, va_list args);
 int sscanf(char* str, char* fmt, ...);
 
+// These versions are tiny implementations of sscanf
+
+int vsreadf(char* str, char* fmt, va_list args);
+int sreadf(char* str, char* fmt, ...);
+
 #endif
 

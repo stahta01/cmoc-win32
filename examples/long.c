@@ -5,7 +5,7 @@
 
 int main(void)
 {
-    long_t a, b, r;
+    long a, b, r;
 
     cputs("CMOC 32BIT LONG FUNCTIONS\n\n");
 
