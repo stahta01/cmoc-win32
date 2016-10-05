@@ -4,11 +4,10 @@
 int vsscanf(char* str, char* fmt, va_list args)
 {
     int count = 0;
-    char chr;
-    for (str = eat_while_space(str); *str && (chr = *fmt++);) {
-        switch (chr) {
+    while (*str && *fmt) {
+        switch (*fmt++) {
         default:
-            if (*str == chr) {
+            if (*str == fmt[-1]) {
                 str++;
             }
             break;
@@ -16,41 +15,38 @@ int vsscanf(char* str, char* fmt, va_list args)
             str = eat_while_space(str);
             break;
         case '%':
-            char* tok = str;
+            char* tok, chr;
             switch (*fmt++) {
-            case 0:
-                goto done;
+            default:
+                fmt--;
                 break;
             case 'c':
-                chr = *(char*)*args++ = *str;
+                *(char*)*args++ = *str++;
                 break;
             case 's':
-                chr = *(str = eat_until(str, isspace));
+                chr = *(str = eat_until_space(tok = eat_while_space(str)));
                 *str = 0;
                 strcpy((char*)*args++, tok);
+                *str = chr;
                 break;
             case 'd':
             case 'i':
-                chr = *(str = eat_integer(str));
+                chr = *(str = eat_integer(tok = eat_while_space(str)));
                 *str = 0;
                 *(int*)*args++ = atoi(tok);
+                *str = chr;
                 break;
             case 'u':
-                chr = *(str = eat_while(str, isdigit));
+                chr = *(str = eat_while_digit(tok = eat_while_space(str)));
                 *str = 0;
                 *(unsigned*)*args++ = atoi(tok);
+                *str = chr;
                 break;
-            default:
-                goto done;
             }
             count++;
-            if (*str = chr) {
-                str++;
-            }
             break;
         }
     }
-done:
     return count;
 }
 

@@ -1,31 +1,35 @@
 
 #include "_sprintf.h"
 
-int vswritef(char* dst, char* fmt, va_list args)
+int vswritef(char* str, char* fmt, va_list args)
 {
-    char* pos = dst;
+    char* out = str;
     while (*fmt) {
-        if ((*pos = *fmt++) == '%') {
+        if ((*out = *fmt++) != '%') {
+            out++;
+        } else {
             switch (*fmt++) {
+            default:
+                out++;
+                fmt--;
+                break;
             case 'c':
-                *pos++ = (char)*args++;
+                *out++ = (char)*args++;
                 break;
             case 's':
-                pos = _stpcpy(pos, (char*)*args++);
+                out = _stpcpy(out, (char*)*args++);
                 break;
             case 'i':
             case 'd':
-                pos = _strend(_itoa(*args++, pos));
+                out = _strend(_itoa(*args++, out));
                 break;
             case 'u':
-                pos = _strend(_utoa(*args++, pos));
+                out = _strend(_utoa(*args++, out));
                 break;
             }
-        } else {
-            pos++;
         }
     }
-    *pos = 0;
-    return pos - dst;
+    *out = 0;
+    return out - str;
 }
 
