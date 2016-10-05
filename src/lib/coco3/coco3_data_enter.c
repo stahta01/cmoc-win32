@@ -4,8 +4,8 @@
 asm coco3_data_t* coco3_data_enter(void)
 {
     asm {
-        bsr     $F772
-        ldd     #$FE00
+        bsr     $f772
+        ldd     #$fe00
     }
 }
 

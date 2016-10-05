@@ -4,7 +4,7 @@
 asm void coco3_data_leave(void)
 {
     asm {
-        bsr    $F778
+        bsr    $f778
     }
 }
 

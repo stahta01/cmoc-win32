@@ -5,8 +5,7 @@ int _vt52mode = ASCII_NUL;
 
 void cputs(char* str)
 {
-    char chr;
-    while (chr = *str++) {
+    for (char chr; chr = *str++;) {
         switch (_vt52mode) {
         case ASCII_ESC:
             switch (chr) {
