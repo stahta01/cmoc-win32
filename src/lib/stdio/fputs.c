@@ -1,16 +1,17 @@
 
 #include "_stdio.h"
 
-int fputs(char* s, FILE* fp)
+int fputs(char* str, FILE* fp)
 {
     if (fp->dev) {
-        while (*s) {
-            if (fputc(*s++, fp) == EOF) {
-                return EOF;
-            }
+        byte olddev = _devnum;
+        _devnum = (byte)fp->dev;
+        while (*str) {
+            system_fputc(*str++);
         }
+        _devnum = olddev;
     } else {
-        cputs(s);
+        cputs(str);
     }
     return 0;
 }

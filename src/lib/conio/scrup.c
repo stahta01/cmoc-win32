@@ -1,6 +1,8 @@
 
 #include "_conio.h"
 
+// Doesn't support CoCo 3 text modes.
+
 void scrup(void)
 {
     if (isvidram()) {

@@ -1,15 +1,13 @@
 
 #include "_stdio.h"
 
-int fputc(int c, FILE* fp)
+int fputc(int chr, FILE* fp)
 {
     if (fp->dev) {
-        byte prev = _devnum;
-        _devnum = (byte)fp->dev;
-        system_fputc(c);
-        _devnum = prev;
+        chr <<= 8;
+        fputs((char*)&chr, fp);
     } else {
-        cputc(c);
+        cputc(chr);
     }
     return 0;
 }
