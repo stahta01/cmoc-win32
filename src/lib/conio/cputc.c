@@ -47,9 +47,13 @@ void cputc(int chr)
             break;
         case ASCII_LF:
         case ASCII_CR:
-            //cursormove(VT52_CHR_DOWN);
-            //gotox(0);
-            chr = '\r';
+            if (_is_coco3_mode) {
+                system_cputc('\r');
+            } else {
+                cursormove(VT52_CHR_DOWN);
+                gotox(0);
+            }
+            break;
         default:
             putch(chr);
             break;

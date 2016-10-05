@@ -21,7 +21,7 @@ void cursormove(int vt52_char)
             gotoxy(p.x + 1, p.y);
             break;
         }
-        gotoxy(0, p.y);
+        gotoxy(p.x = 0, p.y);
     // fall through to VT52_CHR_DOWN
     case VT52_CHR_DOWN:
         if (p.y != h - 1) {

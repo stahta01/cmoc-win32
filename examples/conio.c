@@ -1,19 +1,21 @@
 
-#pragma target coco
+//#pragma options -machine=cocous
 
 #include <conio.h>
 #include <stdlib.h>
 #include <system.h>
+#include <exception.h>
 
 #include <equates.h>
+#include <vt52.h>
 
 int main(void)
 {
-//    clrscr();
-    system("WIDTH40");
+    clrscr();
+    try system("WIDTH80"); except {}
 
     for (;;)  {
-        system_cputs("WELCOME TO...\r THE COLOR COMPUTER\r\r");
+        cputs("WELCOME TO...\n THE COLOR COMPUTER\n\n");
         cputs("OUTPUT WITH A NEW LINE INPUT\n");
         cputs("PRESS SHIFT+LEFT TO MOVE CURSOR BACK\n");
         char s[100];
