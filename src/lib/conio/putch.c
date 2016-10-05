@@ -16,7 +16,7 @@ int putch(int c)
             _conio.outchar(c);
         }
     }
-    _cputrt();
+    cursormove(VT52_CHR_RIGHT);
     return c;
 }
 

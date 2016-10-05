@@ -3,7 +3,7 @@
 
 void _cputlf(void)
 {
-    _cputdn();
+    cursormove(VT52_CHR_DOWN);
     gotox(0);
 }
 

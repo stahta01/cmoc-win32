@@ -3,7 +3,11 @@
 
 void gotoxy(int x, int y)
 {
-    gotox(x);
-    gotoy(y);
+    if (_hrwidth) {
+        coco3_gotoxy(x, y);
+    } else {
+        gotox(x);
+        gotoy(y);
+    }
 }
 

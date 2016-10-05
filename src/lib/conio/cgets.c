@@ -25,24 +25,24 @@ char* cgets(char* s)
         case ASCII_NAK:                         // SHIFT+LEFT
             if (p > s) {
                 p--;
-                cputs(VT52_LEFT);
+                cputs(VT52_ESC_LEFT);
             }
             break;
         case ASCII_HT:
             if (*p) {
                 p++;
-                cputs(VT52_RIGHT);
+                cputs(VT52_ESC_RIGHT);
             }
             break;
         case ASCII_BS:
             if (p > s) {
                 p--;
                 memmove(p, p + 1, strlen(p) + 1);
-                cputs(VT52_LEFT);
+                cputs(VT52_ESC_LEFT);
                 cputs(p);
                 putch(' ');
                 for (int i = strlen(p) + 1; i-- > 0;) {
-                    cputs(VT52_LEFT);
+                    cputs(VT52_ESC_LEFT);
                 }
             }
             break;
@@ -52,7 +52,7 @@ char* cgets(char* s)
                 *p = (char)c;
                 cputs(p);
                 for (int i = strlen(p) - 1; i-- > 0;) {
-                    cputs(VT52_LEFT);
+                    cputs(VT52_ESC_LEFT);
                 }
                 p++;
             }

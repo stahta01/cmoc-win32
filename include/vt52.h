@@ -37,10 +37,15 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _VT52_H
 #define _VT52_H
 
-#define VT52_UP     "\033A"
-#define VT52_DOWN   "\033B"
-#define VT52_RIGHT  "\033C"
-#define VT52_LEFT   "\033D"
+#define VT52_CHR_UP     'A'
+#define VT52_CHR_DOWN   'B'
+#define VT52_CHR_RIGHT  'C'
+#define VT52_CHR_LEFT   'D'
+
+#define VT52_ESC_UP     "\033A"
+#define VT52_ESC_DOWN   "\033B"
+#define VT52_ESC_RIGHT  "\033C"
+#define VT52_ESC_LEFT   "\033D"
 
 #endif
 

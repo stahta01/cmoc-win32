@@ -9,10 +9,13 @@
 #include <equates.h>
 #include <charset.h>
 #include <system.h>
+#include <coco3.h>
 #include <ascii.h>
 #include <vt52.h>
 
 #include <sys/handle.h>
+
+#define _hrwidth (*(byte*)_HRWIDTH)
 
 typedef struct {
     bool cursor;

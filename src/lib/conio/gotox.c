@@ -3,7 +3,9 @@
 
 void gotox(int x)
 {
-    if (isvidram()) {
+    if (_hrwidth) {
+        coco3_gotox(x);
+    } else if (isvidram()) {
         _curpos = (_curpos & -32) | x;
     } else {
         if (_conio.settextpositionx) {

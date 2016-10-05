@@ -1,0 +1,11 @@
+
+#include "_coco3.h"
+
+void coco3_screen(int* x, int* y)
+{
+    coco3_data_t* data = coco3_data_enter();
+    *x = data->column;
+    *y = data->row;
+    coco3_data_leave();
+}
+

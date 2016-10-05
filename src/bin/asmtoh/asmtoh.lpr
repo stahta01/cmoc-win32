@@ -226,8 +226,9 @@ var
 
 begin
   try
-    LSrcPath := OCmoc.PathToSrcLib + 'libcoco/asm/cocoroms/';
+    LSrcPath := OCmoc.PathToSrcLib + 'coco/asm/cocoroms/';
     LDstPath := OCmoc.PathToInclude + 'coco/';
+
     ProcessSrcToPath(LDstPath, LSrcPath + 'equates.asm', '_COCO_EQUATES_H',
       default(TStringDynArray));
 
@@ -273,13 +274,13 @@ begin
 
     LDstPath := OCmoc.PathToInclude + 'vectrex/';
 
-    ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexdefs.asm',
+    ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'vectrex/asm/vectrexdefs.asm',
       '_VECTREX_VECTREXDEFS_H', default(TStringDynArray));
-    ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'libvectrex/asm/vectrexbios.asm',
+    ProcessSrcToPath(LDstPath, OCmoc.PathToSrcLib + 'vectrex/asm/vectrexbios.asm',
       '_VECTREX_VECTREXBIOS_H', default(TStringDynArray));
 
     LDstPath := OCmoc.PathToInclude + 'superdos/';
-    LSrcPath := OCmoc.PathToSrcLib + 'libcoco/asm/superdos/';
+    LSrcPath := OCmoc.PathToSrcLib + 'coco/asm/superdos/';
 
     ProcessSrcToPath(LDstPath, LSrcPath + 'romdefs.asm', '_SUPERDOS_ROMDEFS_H',
       default(TStringDynArray));

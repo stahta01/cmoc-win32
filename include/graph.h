@@ -37,6 +37,8 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _GRAPH_H
 #define _GRAPH_H
 
+#include <vt52.h>
+
 struct xycoord {                                // structure for pixel position
     int   xcoord;
     int   ycoord;
@@ -323,10 +325,10 @@ int _getgtextextent(char*);
 // X/Y reversed to match _settextposition() which is defined by WATCOM
 void _textscreensize(int* rows, int* cols);     // CMOC
 
-#define _GMOVEUP      1
-#define _GMOVEDOWN    2
-#define _GMOVELEFT    3
-#define _GMOVERIGHT   4
+#define _GMOVEUP      VT52_CHR_UP
+#define _GMOVEDOWN    VT52_CHR_DOWN
+#define _GMOVERIGHT   VT52_CHR_RIGHT
+#define _GMOVELEFT    VT52_CHR_LEFT
 
 void _movetextposition(int direction);          // CMOC
 
