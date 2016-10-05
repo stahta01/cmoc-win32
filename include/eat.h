@@ -34,49 +34,24 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 */
 
-#ifndef _CTYPE_H
-#define _CTYPE_H
+#ifndef _EAT_H
+#define _EAT_H
 
-#include <stddef.h>
+typedef void* ischar_t;
 
-bool isascii(int c);
-bool iscntrl(int c);
-bool isdigit(int c);
-bool isupper(int c);
-bool islower(int c);
-bool isprint(int c);
-bool isspace(int c);
-bool isalpha(int c);
-bool isalnum(int c);
-bool isgraph(int c);
-bool ispunct(int c);
-bool isxupper(int c);
-bool isxlower(int c);
-bool isxdigit(int c);
+char* eat_while(char* str, ischar_t ischar);
+char* eat_until(char* str, ischar_t ischar);
 
-int toascii(int c);
-int toupper(int c);
-int tolower(int c);
+char* eat_while_space(char* str);
+char* eat_while_alpha(char* str);
+char* eat_while_digit(char* str);
 
-#define _isrange(_C,_L,_H) ((_C)>=(_L)&&(_C)<=(_H))
+char* eat_until_space(char* str);
+char* eat_until_alpha(char* str);
+char* eat_until_digit(char* str);
 
-#define _isascii(_C) ((_C) >= 0 && (_C) <= 0x7f)
-#define _iscntrl(_C) (((_C) >= 0) && (((_C) < ' ') || ((_C) == 0x7f)))
-#define _isdigit(_C) ((_C) >= '0' && (_C) <= '9')
-#define _isupper(_C) ((_C) >= 'A' && (_C) <= 'Z')
-#define _islower(_C) ((_C) >= 'a' && (_C) <= 'z')
-#define _isprint(_C) ((_C) >= ' ' && (_C) <= '~')
-#define _isspace(_C) ((_C) == ' ' || (_C) == '\f' || (_C) == '\n' || (_C) == '\r' || (_C) == '\t')
-#define _isalpha(_C) (_isupper(_C) || _islower(_C))
-#define _isalnum(_C) (_isalpha(_C) || _isdigit(_C))
-#define _isgraph(_C) ((_C) != ' ' && _isprint(_C))
-#define _ispunct(_C) (((_C) > ' ' && (_C) <= '~') && !_isalnum(_C))
-#define _isxupper(_C) (_isdigit(_C) || ((_C) >= 'A' && (_C) <= 'F'))
-#define _isxlower(_C) (_isdigit(_C) || ((_C) >= 'a' && (_C) <= 'f'))
-#define _isxdigit(_C) (_isxupper(_C) || _isxlower(_C))
-#define _toascii(_C) ((_C) & 0x7f)
-#define _toupper(_C) (_islower(_C) ? ((_C) - ' ') : (_C))
-#define _tolower(_C) (_isupper(_C) ? ((_C) + ' ') : (_C))
+char* eat_sign(char* str);
+char* eat_integer(char* str);
 
 #endif
 

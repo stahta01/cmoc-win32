@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="95">
+    <Units Count="96">
       <Unit0>
         <Filename Value="ide.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -744,6 +744,13 @@
         <CursorPos Y="55"/>
         <UsageCount Value="10"/>
       </Unit94>
+      <Unit95>
+        <Filename Value="..\..\..\bin\cmocide\objects.txt"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="5" Y="63"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit95>
     </Units>
     <JumpHistory Count="28" HistoryIndex="27">
       <Position1>
