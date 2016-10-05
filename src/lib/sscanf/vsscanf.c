@@ -1,51 +1,51 @@
 
 #include "_sscanf.h"
 
-int vsscanf(char* src, char* fmt, va_list args)
+int vsscanf(char* str, char* fmt, va_list args)
 {
     int count = 0;
     char chr;
-    for (src = eat_while_space(src); *src && (chr = *fmt++);) {
+    for (str = eat_while_space(str); *str && (chr = *fmt++);) {
         switch (chr) {
         default:
-            if (*src == chr) {
-                src++;
+            if (*str == chr) {
+                str++;
             }
             break;
         case ' ':
-            src = eat_while_space(src);
+            str = eat_while_space(str);
             break;
         case '%':
-            char* tok = src;
+            char* tok = str;
             switch (*fmt++) {
             case 0:
                 goto done;
                 break;
             case 'c':
-                chr = *(char*)*args++ = *src;
+                chr = *(char*)*args++ = *str;
                 break;
             case 's':
-                chr = *(src = eat_until(src, isspace));
-                *src = 0;
+                chr = *(str = eat_until(str, isspace));
+                *str = 0;
                 strcpy((char*)*args++, tok);
                 break;
             case 'd':
             case 'i':
-                chr = *(src = eat_integer(src));
-                *src = 0;
+                chr = *(str = eat_integer(str));
+                *str = 0;
                 *(int*)*args++ = atoi(tok);
                 break;
             case 'u':
-                chr = *(src = eat_while(src, isdigit));
-                *src = 0;
+                chr = *(str = eat_while(str, isdigit));
+                *str = 0;
                 *(unsigned*)*args++ = atoi(tok);
                 break;
             default:
                 goto done;
             }
             count++;
-            if (*src = chr) {
-                src++;
+            if (*str = chr) {
+                str++;
             }
             break;
         }
