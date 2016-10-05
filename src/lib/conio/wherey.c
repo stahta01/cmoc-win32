@@ -3,6 +3,7 @@
 
 int wherey(void)
 {
-    return _hrwidth ? coco3_wherey() : isvidram() ? (int)((_curpos >> 5) & 15) : _gettextpositiony();
+    return _is_coco3_mode ? coco3_wherey() : isvidram() ? (int)((_curpos >> 5) & 15) :
+           _gettextpositiony();
 }
 

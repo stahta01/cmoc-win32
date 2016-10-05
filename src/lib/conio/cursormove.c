@@ -3,55 +3,39 @@
 
 void cursormove(int vt52_char)
 {
-    switch (vt52_char) {
-    case VT52_CHR_UP:
-        if (isvidram()) {
+    if (_is_coco3_mode) {
+        coco3_cursormove(vt52_char);
+    } else if (isvidram())  {
+        switch (vt52_char) {
+        case VT52_CHR_UP:
             _curpos -= 32;
             if (!isvidram()) {
                 _curpos += 32;
             }
-        } else {
-            if (_conio.movetextposition) {
-                _conio.movetextposition(_GMOVEUP);
-            }
-        }
-        break;
-    case VT52_CHR_DOWN:
-        if (isvidram()) {
+            break;
+        case VT52_CHR_DOWN:
             _curpos += 32;
             if (!isvidram()) {
                 _curpos -= 32;
                 scrup();
             }
-        } else {
-            if (_conio.movetextposition) {
-                _conio.movetextposition(_GMOVEDOWN);
-            }
-        }
-        break;
-    case VT52_CHR_RIGHT:
-        if (isvidram()) {
+            break;
+        case VT52_CHR_RIGHT:
             _curpos++;
             if (!isvidram()) {
                 _curpos -= 32;
                 scrup();
             }
-        } else {
-            if (_conio.movetextposition) {
-                _conio.movetextposition(_GMOVERIGHT);
-            }
-        }
-        break;
-    case VT52_CHR_LEFT:
-        if (isvidram()) {
+            break;
+        case VT52_CHR_LEFT:
             _curpos--;
             if (!isvidram()) {
                 _curpos = _VIDRAM;
             }
-        }  else if (_conio.movetextposition) {
-            _conio.movetextposition(_GMOVELEFT);
+            break;
         }
-        break;
+    } else if (_conio.movetextposition) {
+        _conio.movetextposition(_GMOVEUP);
     }
 }
 

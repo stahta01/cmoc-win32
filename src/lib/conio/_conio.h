@@ -15,7 +15,7 @@
 
 #include <sys/handle.h>
 
-#define _hrwidth (*(byte*)_HRWIDTH)
+#define _is_coco3_mode (*(byte*)_HRWIDTH)
 
 typedef struct {
     bool cursor;

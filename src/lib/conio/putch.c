@@ -11,10 +11,8 @@ int putch(int c)
             c &= 64 ^ -1;
         }
         *(char*)_curpos = (char)c;
-    } else {
-        if (_conio.outchar) {
-            _conio.outchar(c);
-        }
+    } else if (_conio.outchar) {
+        _conio.outchar(c);
     }
     cursormove(VT52_CHR_RIGHT);
     return c;

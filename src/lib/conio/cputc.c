@@ -10,22 +10,13 @@ void cputc(int c)
     case ASCII_ESC:
         switch (c) {
         case VT52_CHR_UP:
-            cursormove(c);
-            _vt52mode = ASCII_NUL;
-            break;
         case VT52_CHR_DOWN:
-            cursormove(c);
-            _vt52mode = ASCII_NUL;
-            break;
         case VT52_CHR_RIGHT:
-            cursormove(c);
-            _vt52mode = ASCII_NUL;
-            break;
         case VT52_CHR_LEFT:
             cursormove(c);
             _vt52mode = ASCII_NUL;
             break;
-        case 'H':
+        case VT52_CHR_HOME:
             gotoxy(0, 0);
             _vt52mode = ASCII_NUL;
             break;
@@ -56,7 +47,8 @@ void cputc(int c)
             break;
         case ASCII_LF:
         case ASCII_CR:
-            _cputlf();
+            cursormove(VT52_CHR_DOWN);
+            gotox(0);
             break;
         default:
             putch(c);

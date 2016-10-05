@@ -82,8 +82,6 @@ int ungetch(int c);                             // Borland
 
 void cursormove(int vt52_char);                 // CMOC
 
-void _cputlf(void);                             // CMOC
-
 void scrclr(void);                              // CMOC - Clear screen without moving cursor
 void scrup(void);                               // CMOC
 

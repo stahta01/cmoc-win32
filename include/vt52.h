@@ -42,6 +42,8 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define VT52_CHR_RIGHT  'C'
 #define VT52_CHR_LEFT   'D'
 
+#define VT52_CHR_HOME   'H'
+
 #define VT52_ESC_UP     "\033A"
 #define VT52_ESC_DOWN   "\033B"
 #define VT52_ESC_RIGHT  "\033C"

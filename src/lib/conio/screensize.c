@@ -3,7 +3,7 @@
 
 void screensize(int* x, int* y)
 {
-    if (_hrwidth) {
+    if (_is_coco3_mode) {
         coco3_screen(x, y);
     } else if (isvidram()) {
         *x = 32;

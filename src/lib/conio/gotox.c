@@ -3,7 +3,7 @@
 
 void gotox(int x)
 {
-    if (_hrwidth) {
+    if (_is_coco3_mode) {
         coco3_gotox(x);
     } else if (isvidram()) {
         _curpos = (_curpos & -32) | x;
