@@ -1,3 +1,3 @@
-call bat\makelib.bat libcardgame 
+call bat\makelib.bat cardgame 
 
 

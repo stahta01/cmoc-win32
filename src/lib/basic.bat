@@ -1,3 +1,3 @@
-call bat\makelib.bat libbasic 
+call bat\makelib.bat basic 
 
 

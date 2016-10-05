@@ -1,3 +1,3 @@
-call bat\makelib2.bat sac 
+call bat\makelib.bat sac 
 
 

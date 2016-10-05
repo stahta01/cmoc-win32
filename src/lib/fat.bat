@@ -1,3 +1,3 @@
-call bat\makelib.bat libfat 
+call bat\makelib.bat fat 
 
 

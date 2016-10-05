@@ -1,3 +1,3 @@
-call bat\makelib.bat libcmoc 
+call bat\makelib.bat cmoc 
 
 

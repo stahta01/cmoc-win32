@@ -1,3 +1,3 @@
-call bat\makelib.bat libfloat 
+call bat\makelib.bat float 
 
 

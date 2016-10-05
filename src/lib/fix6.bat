@@ -1,3 +1,3 @@
-call bat\makelib.bat libfix6 
+call bat\makelib.bat fix6 
 
 

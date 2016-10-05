@@ -1,3 +1,3 @@
-call bat\makelib.bat libbank 
+call bat\makelib.bat bank 
 
 

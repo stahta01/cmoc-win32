@@ -1,2 +1,2 @@
-call bat\makelib.bat libgmalloc
+call bat\makelib.bat gmalloc
 

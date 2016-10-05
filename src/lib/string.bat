@@ -1,2 +1,2 @@
-call bat\makelib2.bat string 
+call bat\makelib.bat string 
 

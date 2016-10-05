@@ -1,3 +1,3 @@
-call bat\makelib.bat libgraph 
+call bat\makelib.bat graph 
 
 

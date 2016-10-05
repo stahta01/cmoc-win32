@@ -1,2 +1,2 @@
-call bat\makelib.bat librle 
+call bat\makelib.bat rle 
 

@@ -1,2 +1,2 @@
-call bat\makelib.bat libfmalloc
+call bat\makelib.bat fmalloc
 

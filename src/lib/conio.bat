@@ -1,3 +1,3 @@
-call bat\makelib.bat libconio 
+call bat\makelib.bat conio 
 
 

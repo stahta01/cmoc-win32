@@ -1,3 +1,3 @@
-call bat\makelib.bat libfar 
+call bat\makelib.bat far 
 
 

@@ -1,2 +1,2 @@
-call bat\makelib.bat libirq 
+call bat\makelib.bat irq 
 

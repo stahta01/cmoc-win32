@@ -1,3 +1,3 @@
-call bat\makelib2.bat iff
+call bat\makelib.bat iff
 
 

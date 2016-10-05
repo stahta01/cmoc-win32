@@ -1,3 +1,3 @@
-call bat\makelib.bat libfcb 
+call bat\makelib.bat fcb 
 
 

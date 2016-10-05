@@ -1,3 +1,3 @@
-call bat\makelib.bat libmotorola 
+call bat\makelib.bat motorola 
 
 

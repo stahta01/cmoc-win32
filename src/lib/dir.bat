@@ -1,2 +1,2 @@
-call bat\makelib.bat libdir 
+call bat\makelib.bat dir 
 

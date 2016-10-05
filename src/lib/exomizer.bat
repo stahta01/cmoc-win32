@@ -1,3 +1,3 @@
-call bat\makelib.bat libexomizer 
+call bat\makelib.bat exomizer 
 
 

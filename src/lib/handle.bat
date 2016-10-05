@@ -1,2 +1,2 @@
-call bat\makelib.bat libhandle
+call bat\makelib.bat handle
 

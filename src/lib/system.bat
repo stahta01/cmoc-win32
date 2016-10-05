@@ -1,3 +1,3 @@
-call bat\makelib2.bat system 
+call bat\makelib.bat system 
 
 

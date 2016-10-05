@@ -1,3 +1,3 @@
-call bat\makelib.bat libctype 
+call bat\makelib.bat ctype 
 
 

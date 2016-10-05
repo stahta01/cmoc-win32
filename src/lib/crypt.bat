@@ -1,3 +1,3 @@
-call bat\makelib.bat libcrypt 
+call bat\makelib.bat crypt 
 
 

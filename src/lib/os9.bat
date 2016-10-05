@@ -1,3 +1,3 @@
-call bat\makelib.bat libos9 
+call bat\makelib.bat os9 
 
 

@@ -1,3 +1,3 @@
-call bat\makelib.bat libcharset 
+call bat\makelib.bat charset 
 
 

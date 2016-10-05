@@ -1,3 +1,3 @@
-call bat\makelib2.bat unistd 
+call bat\makelib.bat unistd 
 
 

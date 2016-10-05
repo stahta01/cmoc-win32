@@ -1,3 +1,3 @@
-call bat\makelib.bat libmemory 
+call bat\makelib.bat memory 
 
 

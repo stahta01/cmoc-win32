@@ -1,3 +1,3 @@
-call bat\makelib.bat libheap 
+call bat\makelib.bat heap 
 
 

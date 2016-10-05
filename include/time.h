@@ -38,6 +38,7 @@
 #include <sys/null.h>
 #include <sys/size.h>
 #include <sys/clock.h>
+#include <sys/long.h>
 
 typedef word time_t;
 

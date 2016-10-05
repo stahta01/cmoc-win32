@@ -1,3 +1,3 @@
-call bat\makelib2.bat stdarg
+call bat\makelib.bat stdarg
 
 

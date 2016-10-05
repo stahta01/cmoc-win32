@@ -1,3 +1,3 @@
-call bat\makelib.bat lib6809
+call bat\makelib.bat 6809
 
 

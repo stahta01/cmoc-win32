@@ -1,3 +1,3 @@
-call bat\makelib.bat libexception 
+call bat\makelib.bat exception 
 
 

@@ -1,2 +1,2 @@
-call bat\makelib.bat libdev 
+call bat\makelib.bat dev 
 

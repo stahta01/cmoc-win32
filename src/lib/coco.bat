@@ -1,2 +1,2 @@
-call bat\makelib.bat libcoco
+call bat\makelib.bat coco
 

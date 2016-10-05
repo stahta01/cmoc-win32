@@ -1,3 +1,3 @@
-call bat\makelib.bat libdskcon 
+call bat\makelib.bat dskcon 
 
 

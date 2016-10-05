@@ -1,3 +1,3 @@
-call bat\makelib.bat liblong 
+call bat\makelib.bat long 
 
 

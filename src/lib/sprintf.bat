@@ -1,1 +1,1 @@
-call bat\makelib2.bat sprintf
+call bat\makelib.bat sprintf

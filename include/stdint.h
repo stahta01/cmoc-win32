@@ -38,6 +38,8 @@
 #ifndef _STDINT_H
 #define _STDINT_H
 
+#include <sys/long.h>
+
 // Exact-width integer types
 typedef signed char         int8_t;
 typedef int                 int16_t;

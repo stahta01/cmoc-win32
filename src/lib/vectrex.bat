@@ -1,3 +1,3 @@
-call bat\makelib.bat libvectrex 
+call bat\makelib.bat vectrex 
 
 

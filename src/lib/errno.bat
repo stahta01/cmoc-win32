@@ -1,3 +1,3 @@
-call bat\makelib.bat liberrno 
+call bat\makelib.bat errno 
 
 

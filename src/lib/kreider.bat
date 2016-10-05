@@ -1,3 +1,3 @@
-call bat\makelib.bat libkreider
+call bat\makelib.bat kreider
 
 

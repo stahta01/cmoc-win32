@@ -1,3 +1,3 @@
-call bat\makelib.bat libdisk 
+call bat\makelib.bat disk 
 
 

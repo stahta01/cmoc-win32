@@ -1,3 +1,3 @@
-call bat\makelib.bat libmalloc 
+call bat\makelib.bat malloc 
 
 

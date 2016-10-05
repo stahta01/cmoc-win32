@@ -1,4 +1,4 @@
-call bat\makelib.bat liblzss
+call bat\makelib.bat lzss
 
 
 

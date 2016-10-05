@@ -1,3 +1,3 @@
-call bat\makelib.bat librvec 
+call bat\makelib.bat rvec 
 
 

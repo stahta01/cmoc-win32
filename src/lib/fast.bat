@@ -1,3 +1,3 @@
-call bat\makelib.bat libfast 
+call bat\makelib.bat fast 
 
 

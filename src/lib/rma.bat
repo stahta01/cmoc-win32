@@ -1,3 +1,3 @@
-call bat\makelib.bat librma 
+call bat\makelib.bat rma 
 
 
