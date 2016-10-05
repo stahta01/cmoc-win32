@@ -38,7 +38,9 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define _GRAPH_H
 
 #include <vt52.h>
+#include <point.h>
 
+// WONT BE USED
 struct xycoord {                                // structure for pixel position
     int   xcoord;
     int   ycoord;
@@ -293,8 +295,10 @@ void _outtext(char*);
 void _settextposition(int row, int col);        // Note: x & y reversed (WATCOM style)
 void _settextpositionx(int x);                  // CMOC
 void _settextpositiony(int y);                  // CMOC
+
 int _gettextpositionx(void);                    // CMOC
 int _gettextpositiony(void);                    // CMOC
+void _gettextposition(point_t* point);          // CMOC
 
 void _scrolltextwindow(int);
 //void _gettextwindow(int*, int*, int*, int*);

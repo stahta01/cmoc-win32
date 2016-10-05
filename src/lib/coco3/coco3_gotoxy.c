@@ -1,12 +1,14 @@
 
 #include "_coco3.h"
 
-void coco3_gotoxy(int x, int y)
+asm void coco3_gotoxy(int x, int y)
 {
-    coco3_data_t* data = coco3_data_enter();
-    data->cursx = (byte)x;
-    data->cursy = (byte)y;
-    data->crsloc = 0x2000 + (((word)data->column * y + x) << 1);
-    coco3_data_leave();
+    asm {
+        lda     3,s
+        ldb     5,s
+        pshs    u,y                             // protect against BASIC routine
+        jsr     $f8f7                           // inside the LOCATE command
+        puls    y,u
+    }
 }
 

@@ -3,13 +3,17 @@
 
 #include <conio.h>
 #include <stdlib.h>
+#include <system.h>
+
+#include <equates.h>
 
 int main(void)
 {
 //    clrscr();
-system("WIDTH40");
+    system("WIDTH40");
+
     for (;;)  {
-        cputs("WELCOME TO...\n THE COLOR COMPUTER\n\n");
+        system_cputs("WELCOME TO...\r THE COLOR COMPUTER\r\r");
         cputs("OUTPUT WITH A NEW LINE INPUT\n");
         cputs("PRESS SHIFT+LEFT TO MOVE CURSOR BACK\n");
         char s[100];
@@ -17,7 +21,6 @@ system("WIDTH40");
         cgets(s);
         cputc('\n');
     }
-
-    return -1;
+    return 0;
 }
 

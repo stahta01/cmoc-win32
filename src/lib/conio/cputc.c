@@ -47,9 +47,9 @@ void cputc(int chr)
             break;
         case ASCII_LF:
         case ASCII_CR:
-            cursormove(VT52_CHR_DOWN);
-            gotox(0);
-            break;
+            //cursormove(VT52_CHR_DOWN);
+            //gotox(0);
+            chr = '\r';
         default:
             putch(chr);
             break;

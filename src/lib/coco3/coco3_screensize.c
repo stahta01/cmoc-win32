@@ -1,7 +1,7 @@
 
 #include "_coco3.h"
 
-void coco3_screen(int* x, int* y)
+void coco3_screensize(int* x, int* y)
 {
     coco3_data_t* data = coco3_data_enter();
     *x = data->column;

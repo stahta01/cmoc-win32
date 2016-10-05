@@ -1,11 +1,11 @@
 
 #include "_coco3.h"
 
-void coco3_wherexy(int* x, int* y)
+void coco3_wherexy(point_t* point)
 {
     coco3_data_t* data = coco3_data_enter();
-    *x = data->cursx;
-    *y = data->cursy;
+    point->x = data->cursx;
+    point->y = data->cursy;
     coco3_data_leave();
 }
 

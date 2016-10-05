@@ -37,6 +37,8 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _COCO3_H
 #define _COCO3_H
 
+#include <point.h>
+
 // ADDITIONAL VARIABLES USED BY SUPER EXTENDED BASIC
 
 typedef struct {
@@ -64,15 +66,15 @@ typedef struct {
 coco3_data_t* coco3_data_enter(void);
 void coco3_data_leave(void);
 
-void coco3_screen(int* x, int* y);
+void coco3_screensize(int* x, int* y);
 
 void coco3_gotox(int x);
 void coco3_gotoy(int y);
 void coco3_gotoxy(int x, int y);
 
-void coco3_wherexy(int* x, int* y);
 int coco3_wherex(void);
 int coco3_wherey(void);
+void coco3_wherexy(point_t* point);
 
 #endif
 
