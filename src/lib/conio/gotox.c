@@ -7,10 +7,8 @@ void gotox(int x)
         coco3_gotox(x);
     } else if (isvidram()) {
         _curpos = (_curpos & -32) | x;
-    } else {
-        if (_conio.settextpositionx) {
-            _conio.settextpositionx(x);
-        }
+    } else if (_conio.settextpositionx) {
+        _conio.settextpositionx(x);
     }
 }
 

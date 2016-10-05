@@ -3,39 +3,40 @@
 
 void cursormove(int vt52_char)
 {
-    if (_is_coco3_mode) {
-        coco3_cursormove(vt52_char);
-    } else if (isvidram())  {
-        switch (vt52_char) {
-        case VT52_CHR_UP:
-            _curpos -= 32;
-            if (!isvidram()) {
-                _curpos += 32;
-            }
-            break;
-        case VT52_CHR_DOWN:
-            _curpos += 32;
-            if (!isvidram()) {
-                _curpos -= 32;
-                scrup();
-            }
-            break;
-        case VT52_CHR_RIGHT:
-            _curpos++;
-            if (!isvidram()) {
-                _curpos -= 32;
-                scrup();
-            }
-            break;
-        case VT52_CHR_LEFT:
-            _curpos--;
-            if (!isvidram()) {
-                _curpos = _VIDRAM;
-            }
+    int w, h;
+    screensize(&w, &h);
+    int x = wherex();
+    int y = wherey();
+    switch (vt52_char) {
+    case VT52_CHR_HOME:
+        gotoxy(0, 0);
+        break;
+    case VT52_CHR_UP:
+        if (y > 0) {
+            gotoy(y - 1);
+        }
+        break;
+    case VT52_CHR_RIGHT:
+        if (x != w - 1) {
+            gotox(x + 1);
             break;
         }
-    } else if (_conio.movetextposition) {
-        _conio.movetextposition(_GMOVEUP);
+        gotox(0);
+    // fall through to chr down
+    case VT52_CHR_DOWN:
+        if (y != h - 1) {
+            gotoy(y + 1);
+        } else {
+            scrup();
+        }
+        break;
+    case VT52_CHR_LEFT:
+        if (x > 0) {
+            gotox(x - 1);
+        } else if (y > 0) {
+            gotoxy(w - 1, y - 1);
+        }
+        break;
     }
 }
 

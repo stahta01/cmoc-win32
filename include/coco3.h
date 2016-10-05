@@ -74,7 +74,5 @@ void coco3_wherexy(int* x, int* y);
 int coco3_wherex(void);
 int coco3_wherey(void);
 
-void coco3_cursormove(int vt52_char);
-
 #endif
 
