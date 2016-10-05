@@ -52,9 +52,11 @@ int cscanf(char* fmt, ...);                     // TODO
 int textcolor(int color);
 int vcprintf(char* fmt, va_list args);
 int vcscanf(char* fmt, va_list args);           // TODO
+
 int wherex(void);
 int wherey(void);
 void wherexy(point_t* point);                   // CMOC
+int whereat(void);                              // CMOC
 
 void cclear(int len);
 void cclearxy(int x, int y, int len);
@@ -67,9 +69,12 @@ void cputs(char* s);
 void cputsxy(int x, int y, char* s);
 void cvline(int length);                        // TODO
 void cvlinexy(int x, int y, int len);
+
 void gotox(int x);
 void gotoxy(int x, int y);
 void gotoy(int y);
+void gotoat(int at);                            // CMOC
+
 void screensize(int* x, int* y);
 
 // Non-standard. Added for CMOC

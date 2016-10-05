@@ -41,6 +41,7 @@ int getch(void)
                 curchr = *curpos;
                 curxor = 64;
             } else {
+                // TODO: CoCo 3 has its own cursor display.
                 if (_conio.getfontinfo) {
                     struct _fontinfo* fi = (struct _fontinfo*)_conio.getfontinfo();
                     curpos += ((word)_horbyt << 3) - _horbyt;

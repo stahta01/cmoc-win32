@@ -71,10 +71,12 @@ void coco3_screensize(int* x, int* y);
 void coco3_gotox(int x);
 void coco3_gotoy(int y);
 void coco3_gotoxy(int x, int y);
+void coco3_gotoat(int at);
 
 int coco3_wherex(void);
 int coco3_wherey(void);
 void coco3_wherexy(point_t* point);
+int coco3_whereat(void);
 
 #endif
 

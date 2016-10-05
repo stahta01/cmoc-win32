@@ -31,6 +31,8 @@ typedef struct {
     handle_t settextpositiony;
     handle_t getfontinfo;
     handle_t movetextposition;
+    handle_t settextpositionat;
+    handle_t gettextpositionat;
 } conio_t;
 
 extern conio_t _conio;

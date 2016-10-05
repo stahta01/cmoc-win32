@@ -40,17 +40,6 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #include <vt52.h>
 #include <point.h>
 
-// WONT BE USED
-struct xycoord {                                // structure for pixel position
-    int   xcoord;
-    int   ycoord;
-};
-
-struct rccoord {                                // structure for text position
-    int   row;
-    int   col;
-};
-
 struct videoconfig {                            // structure for _getvideoconfig
     int   numxpixels;
     int   numypixels;
@@ -199,7 +188,7 @@ void _arc(int x, int y, int w, int h, int s, int e); // CMOC
 
 void _ellipse(int, int, int, int, int);
 void _pie(int, int, int, int, int, int, int, int, int);
-void _polygon(int, int, struct xycoord*);
+void _polygon(int, int, point_t*);
 //void _floodfill(int, int, int);
 void _setpixel(int x, int y);
 int _getpixel(int x, int y);
@@ -295,10 +284,12 @@ void _outtext(char*);
 void _settextposition(int row, int col);        // Note: x & y reversed (WATCOM style)
 void _settextpositionx(int x);                  // CMOC
 void _settextpositiony(int y);                  // CMOC
+void _settextpositionat(int at);                // CMOC
 
 int _gettextpositionx(void);                    // CMOC
 int _gettextpositiony(void);                    // CMOC
 void _gettextposition(point_t* point);          // CMOC
+int _gettextpositionat(void);                   // CMOC
 
 void _scrolltextwindow(int);
 //void _gettextwindow(int*, int*, int*, int*);
