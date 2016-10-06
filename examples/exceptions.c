@@ -32,21 +32,21 @@ int main(void)
     // Example of catching bad filenames.
     try {
         cputs("TRY TO OPEN NONEXIST FILENAME\n");
-        _shell("OPEN\"I\",1,\"nofile\"");
+        systemex("OPEN\"I\",1,\"nofile\"");
     }
     except {
         cprintf("OPEN FAILED #%d\n", current_exception->errno);
     }
     // Example of catching BASIC syntax errors.
     try {
-        _shell("BLA BLA BLA");
+        systemex("BLA BLA BLA");
     }
     except cprintf("BLA BLA BLA FAILED. #%d\n", current_exception->errno);
     // Example of a non-exception
-    try _shell("?\"NO EXCEPTION HERE\"");
+    try systemex("?\"NO EXCEPTION HERE\"");
     except cprintf("PRINT FAILED. #%d\n", current_exception->errno);
     // Example of a non-exception with empty exception catcher
-    try _shell("?\"NO EXCEPTION HERE EITHER\"");
+    try systemex("?\"NO EXCEPTION HERE EITHER\"");
     // Must include {}, otherwise next line will be skipped if no exceptions raised.
     except {}
     // Example of throwing exception with a string message
