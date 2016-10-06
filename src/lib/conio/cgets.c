@@ -11,55 +11,58 @@ to be read. On return, str[1] is set to the number of characters actually read. 
 read start at str[2] and end with a null terminator. Thus, str must be at least str[0] plus 2 bytes long.
 */
 
-char* cgets(char* s)
+char* cgets(char* str)
 {
-    s += 2;
-    s[0] = 0;
-    char* p = s;
-    for (;;) {
-        int c = getch();
-        if (c == ASCII_CR) {
-            break;
-        }
-        switch (c) {
+    int w, h;
+    screensize(&w, &h);
+    int screenendat = w * h;
+    int curpos = whereat();
+    str += 2;
+    str[0] = 0;
+    char* pos = str;
+    for (int chr; (chr = getch()) != ASCII_CR;) {
+        int at = whereat();
+        switch (chr) {
         case ASCII_NAK:                         // SHIFT+LEFT
-            if (p > s) {
-                p--;
-                cputs(VT52_ESC_LEFT);
+            if (pos > str) {
+                pos--;
+                gotoat(at - 1);
             }
             break;
         case ASCII_HT:
-            if (*p) {
-                p++;
-                cputs(VT52_ESC_RIGHT);
+            if (*pos) {
+                pos++;
+                gotoat(at + 1);
             }
             break;
         case ASCII_BS:
-            if (p > s) {
-                p--;
-                memmove(p, p + 1, strlen(p) + 1);
-                cputs(VT52_ESC_LEFT);
-                cputs(p);
+            if (pos > str) {
+                pos--;
+                memmove(pos, pos + 1, strlen(pos) + 1);
+                gotoat(--at);
+                cputs(pos);
                 putch(' ');
-                for (int i = strlen(p) + 1; i-- > 0;) {
-                    cputs(VT52_ESC_LEFT);
-                }
+                gotoat(at);
             }
             break;
         default:
-            if (strlen(s) < (((unsigned)s[-2]) - 1) && _isprint(c)) {
-                memmove(p + 1, p, strlen(p) + 1);
-                *p = (char)c;
-                cputs(p);
-                for (int i = strlen(p) - 1; i-- > 0;) {
-                    cputs(VT52_ESC_LEFT);
+            if (isprint(chr) && strlen(str) < (((word)str[-2]) - 1)) {
+                int poslen = strlen(pos) + 1;
+                memmove(pos + 1, pos, poslen);
+                *pos = (char)chr;
+                if (at + poslen >= screenendat) {
+                    at -= w;
+                    curpos -= w;
                 }
-                p++;
+                cputs(pos++);
+                gotoat(at);
+                cursormove(VT52_CHR_RIGHT);
             }
             break;
         }
     }
-    s[-1] = (char)strlen(s);
-    return s;
+    str[-1] = (char)strlen(str);
+    gotoat(curpos + str[-1]);
+    return str;
 }
 

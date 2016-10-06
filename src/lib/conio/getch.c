@@ -4,23 +4,23 @@
 int __bufferchar = 0;
 byte __buffersize = 0;
 
-int ungetch(int c)
+int ungetch(int chr)
 {
-    if (__buffersize || c < 0) {
-        c = EOF;
+    if (__buffersize || chr < 0) {
+        chr = EOF;
     } else {
-        __bufferchar = c;
+        __bufferchar = chr;
         __buffersize = 1;
     }
-    return c;
+    return chr;
 }
 
-bool kbhit()
+bool kbhit(void)
 {
     if (__buffersize == 0) {
-        int c = system_polcat();
-        if (c) {
-            ungetch(c);
+        int chr = system_polcat();
+        if (chr) {
+            ungetch(chr);
         }
     }
     return __buffersize > 0;
@@ -28,37 +28,39 @@ bool kbhit()
 
 int getch(void)
 {
-    int c;
+    int chr;
     if (__buffersize) {
-        c = __bufferchar;
+        chr = __bufferchar;
         __buffersize = 0;
     } else    {
         if (_conio.cursor) {
-            clock_t clock_now = clock();
-            byte* curpos = (byte*)_curpos;
-            byte curxor, curchr;
-            if (isvidram()) {
-                curchr = *curpos;
-                curxor = 64;
+            if (_is_coco3_mode) {
+                chr = system_waitkey(true);
             } else {
-                // TODO: CoCo 3 has its own cursor display.
-                if (_conio.getfontinfo) {
-                    struct _fontinfo* fi = (struct _fontinfo*)_conio.getfontinfo();
-                    curpos += ((word)_horbyt << 3) - _horbyt;
+                clock_t clock_now = clock();
+                byte* curpos = (byte*)_curpos;
+                byte curxor, curchr;
+                if (isvidram()) {
                     curchr = *curpos;
-                    curxor = fi->type ? fi->base & 1 ? 0xF : 0xF0 : 0xFF;
+                    curxor = 64;
+                } else {
+                    if (_conio.getfontinfo) {
+                        struct _fontinfo* fi = (struct _fontinfo*)_conio.getfontinfo();
+                        curpos += ((word)_horbyt << 3) - _horbyt;
+                        curchr = *curpos;
+                        curxor = fi->type ? fi->base & 1 ? 0xF : 0xF0 : 0xFF;
+                    }
                 }
+                while (!kbhit()) {
+                    *curpos = (clock() - clock_now) & 16 ? curchr : curchr ^ curxor;
+                }
+                chr = getch();
+                *curpos = curchr;
             }
-            while (!kbhit()) {
-                *curpos = (clock() - clock_now) & 16 ? curchr : curchr ^ curxor;
-            }
-            c = getch();
-            *curpos = curchr;
         } else {
-            while (!kbhit()) { }
-            c = getch();
+            chr = system_waitkey(false);
         }
     }
-    return c;
+    return chr;
 }
 

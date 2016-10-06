@@ -3,22 +3,22 @@
 
 byte _charsetgroups[] = {0 << 5, 3 << 5, 2 << 5, 0 << 5};
 
-int putch(int c)
+int putch(int chr)
 {
     if (_is_coco3_mode) {
-        system_cputc(c);
+        system_cputc(chr);
     } else {
         if (isvidram()) {
-            c = (c & 31) | _charsetgroups[c >> 5];
+            chr = (chr & 31) | _charsetgroups[chr >> 5];
             if (_conio.revers) {
-                c &= 64 ^ -1;
+                chr &= 64 ^ -1;
             }
-            *(char*)_curpos = (char)c;
+            *(char*)_curpos = (char)chr;
         } else if (_conio.outchar) {
-            _conio.outchar(c);
+            _conio.outchar(chr);
         }
         cursormove(VT52_CHR_RIGHT);
     }
-    return c;
+    return chr;
 }
 

@@ -225,10 +225,11 @@ enum {                                          // plotting action
 
 // Screen Manipulation Functions
 
-void _clearscreen(int);
-void _setviewport(int, int, int, int);
-void _setcliprgn(int, int, int, int);
-void _getcliprgn(int*, int*, int*, int*);
+void _clearscreen(int area);
+void _setviewport(int x1, int y1, int x2, int y2);
+void _setcliprgn(int x1, int y1, int x2, int y2);
+void _getcliprgn(int* x1, int* y1, int* x2, int* y2);
+
 //int _displaycursor(int);
 //int _wrapon(int);
 
@@ -277,8 +278,8 @@ enum {                                          // text path
 #define _MAXTEXTROWS    (-1)
 
 //void _settextwindow(int, int, int, int);
-void _outchar(int);                             // CMOC
-void _outtext(char*);
+void _outchar(int chr);                         // CMOC
+void _outtext(char* str);                       // WATCOM
 //int _settextcolor(int);
 //int _gettextcolor(void);
 void _settextposition(int row, int col);        // Note: x & y reversed (WATCOM style)
@@ -311,9 +312,9 @@ void _scrolltextwindow(int);
 void _setcharset(int type, int base, byte* data); //CMOC
 
 //int _setfont(char*);
-struct _fontinfo* _getfontinfo(void);
-void _outgtext(char*);
-int _getgtextextent(char*);
+struct _fontinfo* _getfontinfo(void);           // WATCOM
+//void _outgtext(char*);
+//int _getgtextextent(char*);
 //struct xycoord _setgtextvector(int, int);
 //struct xycoord _getgtextvector(void);
 

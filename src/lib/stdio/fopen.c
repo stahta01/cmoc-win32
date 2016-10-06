@@ -42,9 +42,9 @@ FILE* fopen(char* name, char* mode)
                 return nullptr;
             }
         }
-        int errno = systemf(dev <= DEV_SCREEN ? "OPEN\"%c\",#%d,\"%s\"" : "OPEN\"%c\",#%d,\"%s:%u\"",
-                            *mode == 'r' ? 'I' : 'O',
-                            dev, name, drive);
+        errno = systemf(dev <= DEV_SCREEN ? "OPEN\"%c\",#%d,\"%s\"" : "OPEN\"%c\",#%d,\"%s:%u\"",
+                        *mode == 'r' ? 'I' : 'O',
+                        dev, name, drive);
         if (!errno) {
             fp = new(FILE);
             if (fp) {

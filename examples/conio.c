@@ -19,7 +19,7 @@ int main(void)
         cputs("OUTPUT WITH A NEW LINE INPUT\n");
         cputs("PRESS SHIFT+LEFT TO MOVE CURSOR BACK\n");
         char s[100];
-        s[0] = 32;
+        s[0] = 80;
         cgets(s);
         cputc('\n');
     }

@@ -63,11 +63,11 @@ void cclearxy(int x, int y, int len);
 void chline(int len);
 void chlinexy(int x, int y, int len);
 void clrscr(void);
-void cputc(int c);
-void cputcxy(int x, int y, int c);
-void cputs(char* s);
-void cputsxy(int x, int y, char* s);
-void cvline(int length);                        // TODO
+void cputc(int chr);
+void cputcxy(int x, int y, int chr);
+void cputs(char* str);
+void cputsxy(int x, int y, char* str);
+void cvline(int len);                           // TODO
 void cvlinexy(int x, int y, int len);
 
 void gotox(int x);
@@ -79,11 +79,12 @@ void screensize(int* x, int* y);
 
 // Non-standard. Added for CMOC
 
-char* cgets(char* s);                           // Borland
+char* cgets(char* str);                         // Borland
 int getch(void);                                // Borland
 int getche(void);                               // Borland
-int putch(int c);                               // Borland
-int ungetch(int c);                             // Borland
+int putch(int chr);                             // Borland
+int ungetch(int chr);                           // Borland
+void _putstr(char* str);                        // CMOC
 
 // Moves the cursor given a vt52 direction. ie: A,B,C or D
 
