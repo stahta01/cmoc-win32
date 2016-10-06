@@ -1,12 +1,8 @@
 
-/*---------------------------------------------------------------------------*/
-/* isgraph() - test if character is graphic                                  */
-/*---------------------------------------------------------------------------*/
+#include "_ctype.h"
 
-#include <ctype.h>
-
-bool isgraph(int c)
+bool isgraph(int chr)
 {
-    return _isgraph(c);
+    return _isgraph(chr);
 }
 

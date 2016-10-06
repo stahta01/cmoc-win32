@@ -1,12 +1,8 @@
 
-/*---------------------------------------------------------------------------*/
-/* isalpha() - test if character is alphabetic                               */
-/*---------------------------------------------------------------------------*/
+#include "_ctype.h"
 
-#include <ctype.h>
-
-bool isalpha(int c)
+bool isalpha(int chr)
 {
-    return _isalpha(c);
+    return _isalpha(chr);
 }
 

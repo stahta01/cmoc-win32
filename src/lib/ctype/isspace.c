@@ -1,12 +1,8 @@
 
-/*---------------------------------------------------------------------------*/
-/* isspace() - test if character is whitespace                               */
-/*---------------------------------------------------------------------------*/
+#include "_ctype.h"
 
-#include <ctype.h>
-
-bool isspace(int c)
+bool isspace(int chr)
 {
-    return _isspace(c);
+    return _isspace(chr);
 }
 

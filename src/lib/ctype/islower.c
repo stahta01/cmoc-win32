@@ -1,12 +1,8 @@
 
-/*---------------------------------------------------------------------------*/
-/* islower() - test if character is lower case                               */
-/*---------------------------------------------------------------------------*/
+#include "_ctype.h"
 
-#include <ctype.h>
-
-bool islower(int c)
+bool islower(int chr)
 {
-    return _islower(c);
+    return _islower(chr);
 }
 

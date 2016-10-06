@@ -1,12 +1,8 @@
 
-/*---------------------------------------------------------------------------*/
-/* isalnum() - test if character is alpha numeric                            */
-/*---------------------------------------------------------------------------*/
+#include "_ctype.h"
 
-#include <ctype.h>
-
-bool isalnum(int c)
+bool isalnum(int chr)
 {
-    return _isalnum(c);
+    return _isalnum(chr);
 }
 

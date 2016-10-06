@@ -1,12 +1,8 @@
 
-/*---------------------------------------------------------------------------*/
-/* ispunct() - test if character is punctuation                              */
-/*---------------------------------------------------------------------------*/
+#include "_ctype.h"
 
-#include <ctype.h>
-
-bool ispunct(int c)
+bool ispunct(int chr)
 {
-    return _ispunct(c);
+    return _ispunct(chr);
 }
 

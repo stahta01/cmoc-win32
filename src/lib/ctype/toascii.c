@@ -1,12 +1,8 @@
 
-/*---------------------------------------------------------------------------*/
-/* toascii() - convert to ascii                                              */
-/*---------------------------------------------------------------------------*/
+#include "_ctype.h"
 
-#include <ctype.h>
-
-int toascii(int c)
+int toascii(int chr)
 {
-    return _toascii(c);
+    return _toascii(chr);
 }
 

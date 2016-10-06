@@ -1,12 +1,8 @@
 
-/*---------------------------------------------------------------------------*/
-/* isxupper() - test if character is upper case hexadecimal                  */
-/*---------------------------------------------------------------------------*/
+#include "_ctype.h"
 
-#include <ctype.h>
-
-bool isxupper(int c)
+bool isxupper(int chr)
 {
-    return _isxupper(c);
+    return _isxupper(chr);
 }
 

@@ -1,12 +1,8 @@
 
-/*---------------------------------------------------------------------------*/
-/* iscntrl() - test if character is a control character                     */
-/*---------------------------------------------------------------------------*/
+#include "_ctype.h"
 
-#include <ctype.h>
-
-bool iscntrl(int c)
+bool iscntrl(int chr)
 {
-    return _iscntrl(c);
+    return _iscntrl(chr);
 }
 

@@ -1,12 +1,8 @@
 
-/*---------------------------------------------------------------------------*/
-/* isprint() - test if character is printable                                */
-/*---------------------------------------------------------------------------*/
+#include "_ctype.h"
 
-#include <ctype.h>
-
-bool isprint(int c)
+bool isprint(int chr)
 {
-    return _isprint(c);
+    return _isprint(chr);
 }
 

@@ -1,12 +1,8 @@
 
-/*---------------------------------------------------------------------------*/
-/* isdigit() - test if character is a digit                                  */
-/*---------------------------------------------------------------------------*/
+#include "_ctype.h"
 
-#include <ctype.h>
-
-bool isdigit(int c)
+bool isdigit(int chr)
 {
-    return _isdigit(c);
+    return _isdigit(chr);
 }
 

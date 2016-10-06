@@ -1,12 +1,8 @@
 
-/*---------------------------------------------------------------------------*/
-/* isascii() - test if character is ascii                                   */
-/*---------------------------------------------------------------------------*/
+#include "_ctype.h"
 
-#include <ctype.h>
-
-bool isascii(int c)
+bool isascii(int chr)
 {
-    return _isascii(c);
+    return _isascii(chr);
 }
 

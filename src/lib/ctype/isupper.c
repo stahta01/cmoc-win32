@@ -1,12 +1,8 @@
 
-/*---------------------------------------------------------------------------*/
-/* isupper() - test if character is upper case                               */
-/*---------------------------------------------------------------------------*/
+#include "_ctype.h"
 
-#include <ctype.h>
-
-bool isupper(int c)
+bool isupper(int chr)
 {
-    return _isupper(c);
+    return _isupper(chr);
 }
 

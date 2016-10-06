@@ -1,12 +1,8 @@
 
-/*---------------------------------------------------------------------------*/
-/* isxdigit() - test if character is hexadecimal digit                       */
-/*---------------------------------------------------------------------------*/
+#include "_ctype.h"
 
-#include <ctype.h>
-
-bool isxdigit(int c)
+bool isxdigit(int chr)
 {
-    return _isxdigit(c);
+    return _isxdigit(chr);
 }
 

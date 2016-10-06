@@ -1,12 +1,8 @@
 
-/*---------------------------------------------------------------------------*/
-/* isxlower() - test if character is lower case hexadecimal                  */
-/*---------------------------------------------------------------------------*/
+#include "_ctype.h"
 
-#include <ctype.h>
-
-bool isxlower(int c)
+bool isxlower(int chr)
 {
-    return _isxlower(c);
+    return _isxlower(chr);
 }
 
