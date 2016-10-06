@@ -1,18 +1,18 @@
 
 #include "_conio.h"
 
-bool _cursor_onoff = true;
+bool _static_cursor = true;
 
 bool cursor(bool onoff)
 {
-    bool result = _cursor_onoff;
-    _cursor_onoff = onoff;
+    bool result = _static_cursor;
+    _static_cursor = onoff;
     return result;
 }
 
 int cgetc(void)
 {
-    if (!_cursor_onoff) {
+    if (!_static_cursor) {
         while (!kbhit()) {}
     }
     return getch();

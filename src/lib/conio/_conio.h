@@ -39,5 +39,4 @@ typedef struct {
 extern conio_t _conio;
 
 #define isvidram() (_curpos < 0x600)
-#define isgrpram() (_curpos < _endgrp && _curpos >= _beggrp)
 
