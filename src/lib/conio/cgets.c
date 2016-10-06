@@ -48,7 +48,7 @@ char* cgets(char* str)
         default:
             if (isprint(chr) && strlen(str) < (((word)str[-2]) - 1)) {
                 int poslen = strlen(pos) + 1;
-                _memcpy_rev(pos + 1, pos, poslen);
+                _memrcpy(pos + 1, pos, poslen);
                 *pos = (char)chr;
                 if (at + poslen >= screenendat) {
                     at -= w;

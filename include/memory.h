@@ -40,24 +40,22 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #include <sys/size.h>
 
 int memcmp(void* ptr1, void* ptr2, size_t size); // ANSIC
-void* memcpyf(void* dst, void* src, size_t size); // CMOC
-void* memcpyr(void* dst, void* src, size_t size); // CMOC
-void* memmove(void* dst, void* src, size_t size); // ANSIC
-
 void* memchr(void* dst, int value, size_t size); // ANSIC
+
+void* memcpy(void* dst, void* src, size_t size); // ANSIC
+
+void* memmove(void* dst, void* src, size_t size); // ANSIC
 void* memset(void* dst, int value, size_t size); // ANSIC
 
-void  _memcom(void* dst, size_t size);          // CMOC
-void* _memxor(void* dst, int value, size_t size); // CMOC
 void* _memand(void* dst, int value, size_t size); // CMOC
-void* _memor(void* dst, int value, size_t size); // CMOC
-
-void _bzero(void* dst, size_t size);            // BSD
-
 void* _memccpy(void* dst, void* src, int c, size_t size); // CMOC
 void* _memcpy16(void* dst, void* src, size_t size); // CMOC
+void* _memor(void* dst, int value, size_t size); // CMOC
+void* _memxor(void* dst, int value, size_t size); // CMOC
+void  _memcom(void* dst, size_t size);          // CMOC
+void* _memrcpy(void* dst, void* src, size_t size); // CMOC
 
-#define memcpy memcpyf
+void _bzero(void* dst, size_t size);            // BSD
 
 #endif
 
