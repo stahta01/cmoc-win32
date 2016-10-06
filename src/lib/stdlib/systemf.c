@@ -1,10 +1,5 @@
 
-#include "_system.h"
-
-int system(char* cmd)
-{
-    return system_execute(system_crunch(cmd));
-}
+#include "_stdlib.h"
 
 int systemf(char* fmt, ...)
 {

@@ -3,8 +3,8 @@
 
 int fclose(FILE* fp)
 {
-    close(fp->dev);
+    int result = close(fp->dev);
     free(fp);
-    return 0;
+    return result;
 }
 

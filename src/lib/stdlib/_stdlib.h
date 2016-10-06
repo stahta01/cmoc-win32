@@ -12,5 +12,6 @@
 #include <os9.h>
 #include <long.h>
 #include <far.h>
+#include <exception.h>
 #include <coco/disk.h>
 

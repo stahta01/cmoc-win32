@@ -1,7 +1,7 @@
 
 #include "_system.h"
 
-asm int system_execute(char* cmd)
+asm void system_execute(char* cmd)
 {
     asm {
         ldx     2,s
@@ -15,7 +15,6 @@ asm int system_execute(char* cmd)
         cmpa    #':'
         beq     execute_loop
         puls    u
-        clrd
     }
 }
 

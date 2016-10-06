@@ -52,7 +52,12 @@ extern errno_t errno;
 // Therefore, I define system errors as even, and user errors as odd. Use what you
 // want, but I'll probably define some of the odd ones if I need them.
 
+// Note: The system() command returns these values, therefore ERRNO_NF is not supported
+// since system() returns 0 for SUCCESS. If you need to detect ERRNO_NF, use system_crunch()
+// and system_execute() from system.h which raise exceptions.
+
 #define ERRNO_NF         0                      // NEXT WITHOUT FOR
+
 #define ERRNO_FS         1                      //
 #define ERRNO_SN         2                      // SYNTAX ERROR
 #define ERRNO_NR         3                      //

@@ -87,7 +87,7 @@ void system_sound(void);
 void system_line(void);
 void system_screen(int mode);
 char* system_crunch(char* cmd);
-int system_execute(char* cmd);
+void system_execute(char* cmd);
 
 #endif
 

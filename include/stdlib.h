@@ -93,6 +93,9 @@ void srand(unsigned seed);
 int system(char* cmd);
 int systemf(char* fmt, ...);
 
+// systemex is the same as system, except it will raise exceptions.
+void systemex(char* cmd);                       // CMOC
+
 int putenv(char* envptr);
 char* getenv(char* varname);
 

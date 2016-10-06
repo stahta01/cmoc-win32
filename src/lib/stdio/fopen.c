@@ -42,12 +42,14 @@ FILE* fopen(char* name, char* mode)
                 return nullptr;
             }
         }
-        systemf(dev <= DEV_SCREEN ? "OPEN\"%c\",#%d,\"%s\"" : "OPEN\"%c\",#%d,\"%s:%u\"",
-                *mode == 'r' ? 'I' : 'O',
-                dev, name, drive);
-        fp = new(FILE);
-        if (fp) {
-            fp->dev = dev;
+        int errno = systemf(dev <= DEV_SCREEN ? "OPEN\"%c\",#%d,\"%s\"" : "OPEN\"%c\",#%d,\"%s:%u\"",
+                            *mode == 'r' ? 'I' : 'O',
+                            dev, name, drive);
+        if (!errno) {
+            fp = new(FILE);
+            if (fp) {
+                fp->dev = dev;
+            }
         }
     }
     return fp;

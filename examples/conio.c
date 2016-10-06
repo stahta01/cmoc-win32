@@ -1,5 +1,5 @@
 
-//#pragma options -machine=cocous
+#pragma options -machine=cocous
 
 #include <conio.h>
 #include <stdlib.h>
@@ -12,7 +12,7 @@
 int main(void)
 {
     clrscr();
-    try system("WIDTH80"); except {}
+    system("WIDTH80");
 
     for (;;)  {
         cputs("WELCOME TO...\n THE COLOR COMPUTER\n\n");
