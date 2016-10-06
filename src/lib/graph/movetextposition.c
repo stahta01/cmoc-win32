@@ -19,10 +19,10 @@ void _movetextposition(int direction)
         }
         break;
     case _GMOVELEFT:
-        if (fontinfo.type) {
+        if (fontinfo.packed) {
             fontinfo.base ^= 1;
         }
-        if (!fontinfo.type || fontinfo.base & 1) {
+        if (!fontinfo.packed || fontinfo.base & 1) {
             if (_curpos & (_horbyt - 1)) {
                 _curpos--;
             } else {
@@ -34,7 +34,7 @@ void _movetextposition(int direction)
         }
         break;
     case _GMOVERIGHT:
-        if (!fontinfo.type || fontinfo.base & 1) {
+        if (!fontinfo.packed || fontinfo.base & 1) {
             _curpos++;
             if ((_curpos & (_horbyt - 1)) == 0) {
                 _curpos += bytesperrow - _horbyt;
@@ -44,7 +44,7 @@ void _movetextposition(int direction)
                 _scrolltextwindow(_GSCROLLUP);
             }
         }
-        if (fontinfo.type) {
+        if (fontinfo.packed) {
             fontinfo.base ^= 1;
         }
         break;

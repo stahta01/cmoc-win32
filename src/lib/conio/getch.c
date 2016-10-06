@@ -48,7 +48,7 @@ int getch(void)
                         struct _fontinfo* fi = (struct _fontinfo*)_conio.getfontinfo();
                         curpos += ((word)_horbyt << 3) - _horbyt;
                         curchr = *curpos;
-                        curxor = fi->type ? fi->base & 1 ? 0xF : 0xF0 : 0xFF;
+                        curxor = fi->packed ? fi->base & 1 ? 0xF : 0xF0 : 0xFF;
                     }
                 }
                 while (!kbhit()) {

@@ -4,9 +4,8 @@
 void _gettextposition(int* _x, int* _y)
 {
     word x = _curpos & (_horbyt - 1);
-    if (fontinfo.type) {
-        x <<= 1;
-        x |= fontinfo.base & 1;
+    if (fontinfo.packed) {
+        x = (x << 1) | (fontinfo.base & 1);
     }
     word y = _curpos - _beggrp;
     if (_horbyt == 16) {

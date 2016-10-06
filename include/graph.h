@@ -66,7 +66,7 @@ struct textsettings {                           // structure for _gettextsetting
 };
 
 struct _fontinfo {                              // structure for _getfontinfo
-    byte   type;                                // 0=unpacked 1=packed
+    bool   packed;
     word   base;
     byte*  data;
 };

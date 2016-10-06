@@ -4,16 +4,16 @@
 void _outchar(int c)
 {
     c -= 32;
-    if (fontinfo.type) {
+    if (fontinfo.packed) {
         c <<= 1;
     }
     byte* src = fontinfo.data + (((word)c + fontinfo.base) << 3);
     int bkcolor = _getbkcolor();
 
-    if (bkcolor || fontinfo.type) {
+    if (bkcolor || fontinfo.packed) {
         // First we clear the bits. (We could use clr for non-packed fonts)
 
-        byte bits = fontinfo.type ? fontinfo.base & 1 ? 0xF0 : 0xF : 0x0;
+        byte bits = fontinfo.packed ? fontinfo.base & 1 ? 0xF0 : 0xF : 0x0;
 
 #define COPY_AND() asm{ lda ,x} asm{ anda bits} asm{ sta ,x} asm{ abx}
         asm {
@@ -33,7 +33,7 @@ void _outchar(int c)
         // Next we set the bits to the background color
 
         bits = _pset2_all[bkcolor];
-        if (fontinfo.type) {
+        if (fontinfo.packed) {
             bits &= fontinfo.base & 1 ? 0xF : 0xF0;
         }
 

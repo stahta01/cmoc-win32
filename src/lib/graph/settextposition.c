@@ -3,7 +3,7 @@
 
 void _settextposition(int x, int y)
 {
-    if (fontinfo.type) {
+    if (fontinfo.packed) {
         fontinfo.base = (fontinfo.base & 0xfe) | (x & 1);
         x >>= 1;
     }
