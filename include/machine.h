@@ -60,15 +60,16 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define MAC_HAS_SUPBAS              (MAC_HAS_EXTBAS && MAC_EXTBAS_MAJOR >= 2)
 
 // Check for a running DOS system. This checks the start of graphics memory, which is moved
-// by DOS.
+// by DOS. Since it might be possible to disable DOS on a DOS system, this wil return false,
+// while MAC_HAS_DSKEXT returns true.
 
 #define MAC_HAS_DOS                 (*(byte*)0xbc > 6)
 
 // Generic checks for CoCo systems
 
 #define MAC_IS_COCO                 MAC_HAS_COLBAS
-#define MAC_IS_COCO1                (MAC_HAS_COLBAS && MAC_COLBAS_MINOR <  2)
-#define MAC_IS_COCO2                (MAC_HAS_COLBAS && MAC_COLBAS_MINOR >= 2)
+#define MAC_IS_COCO1                (MAC_IS_COCO && MAC_COLBAS_MINOR <  2)
+#define MAC_IS_COCO2                (MAC_IS_COCO && MAC_COLBAS_MINOR >= 2)
 #define MAC_IS_COCO3                MAC_HAS_SUPBAS
 
 // Checks for Dragon systems
