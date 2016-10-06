@@ -3,8 +3,11 @@
 
 void system_fputs(char* str)
 {
-    while (*str) {
-        system_fputc(*str++);
+    for (char chr; chr = *str++;) {
+        asm {
+            lda     :chr
+            jsr     [handle_fputc]
+        }
     }
 }
 

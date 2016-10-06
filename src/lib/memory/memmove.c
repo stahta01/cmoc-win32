@@ -1,6 +1,6 @@
 
 #define _FILE "alib/memmove.as"
-#include "_rma.h"
+#include "../rma/_rma.h"
 
 asm void* memmove(void* dst, void* src, unsigned len)
 {

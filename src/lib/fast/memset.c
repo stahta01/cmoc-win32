@@ -8,7 +8,7 @@
 #define ACHR    4,s
 #define ANUM    6,s
 
-asm void* memset(void* dst, int c, unsigned n)
+asm void* memset(void* dst, int chr, unsigned size)
 {
 #include "fastloop.h"
 }

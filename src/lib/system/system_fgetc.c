@@ -3,13 +3,13 @@
 
 int system_fgetc(dev_t dev)
 {
-    byte c, dn = _devnum;
+    byte chr, devold = _devnum;
     _devnum = (byte)dev;
     asm {
         jsr     [handle_fgetc]
-        sta     c
+        sta     chr
     }
-    _devnum = dn;
-    return c;
+    _devnum = devold;
+    return chr;
 }
 

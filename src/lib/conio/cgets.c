@@ -38,9 +38,9 @@ char* cgets(char* str)
         case ASCII_BS:
             if (pos > str) {
                 pos--;
-                memmove(pos, pos + 1, strlen(pos) + 1);
+                memcpy(pos, pos + 1, strlen(pos) + 1);
                 gotoat(--at);
-                cputs(pos);
+                _putstr(pos);
                 putch(' ');
                 gotoat(at);
             }
@@ -48,13 +48,13 @@ char* cgets(char* str)
         default:
             if (isprint(chr) && strlen(str) < (((word)str[-2]) - 1)) {
                 int poslen = strlen(pos) + 1;
-                memmove(pos + 1, pos, poslen);
+                _memcpy_rev(pos + 1, pos, poslen);
                 *pos = (char)chr;
                 if (at + poslen >= screenendat) {
                     at -= w;
                     curpos -= w;
                 }
-                cputs(pos++);
+                _putstr(pos++);
                 gotoat(at);
                 cursormove(VT52_CHR_RIGHT);
             }

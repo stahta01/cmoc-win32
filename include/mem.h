@@ -56,5 +56,7 @@ void _bzero(void* dst, size_t size);            // BSD
 void* _memccpy(void* dst, void* src, int c, size_t size); // CMOC
 void* _memcpy16(void* dst, void* src, size_t size); // CMOC
 
+void* _memcpy_rev(void* dst, void* src, size_t size); // CMOC
+
 #endif
 

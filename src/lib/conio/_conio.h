@@ -11,6 +11,7 @@
 #include <system.h>
 #include <coco3.h>
 #include <ascii.h>
+#include <dev.h>
 #include <vt52.h>
 
 #include <sys/handle.h>
