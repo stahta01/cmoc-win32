@@ -39,7 +39,7 @@ int main(void)
     bgcolor(0);
     textmode2(MODE_H0_64X24, charset_atari_small);
 #endif
-    PrintFileToConsole("B:BASIC.TXT");
+    PrintFileToConsole("BASIC.TXT:1");
     cputs("\n\nPress any key to exit");
     getch();
 #ifndef _USE_TEXT_MODE

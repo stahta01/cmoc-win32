@@ -39,11 +39,11 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 #define CHARSET_SIZE 2048
 
-typedef unsigned char charset_t[CHARSET_SIZE];
+typedef byte charset_t[CHARSET_SIZE];
 
-extern unsigned char charset_atari_small[CHARSET_SIZE];
-extern unsigned char charset_c64[CHARSET_SIZE];
-extern unsigned char charset_6x8[CHARSET_SIZE];
+extern byte charset_atari_small[CHARSET_SIZE];
+extern byte charset_c64[CHARSET_SIZE];
+extern byte charset_6x8[CHARSET_SIZE];
 
 #endif
 

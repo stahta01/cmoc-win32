@@ -10,7 +10,7 @@ int main(void)
 {
     *(byte*)65314 |= 16;                        // lower case letters
     puts("READING FILE ...");
-    FILE* fp = fopen("B:BASIC.TXT", "r");
+    FILE* fp = fopen("BASIC.TXT:1", "r");
     if (fp) {
         while (!feof(fp)) {
             char s[33];

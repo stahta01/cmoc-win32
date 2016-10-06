@@ -44,5 +44,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define DEV_SERIAL      (-2)
 #define DEV_PRINTER     DEV_SERIAL
 
+#define DEV_MIN         (-2)
+
 #endif
 

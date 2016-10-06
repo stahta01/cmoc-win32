@@ -51,18 +51,23 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define RAND_MAX        0x7fff
 
 // max. length of full pathname
-#define _MAX_PATH       260
+
+#define _MAX_PATH       16
 
 // max. length of drive component
-#define _MAX_DRIVE      4
+
+#define _MAX_DRIVE      2
 
 // max. length of path component
-#define _MAX_DIR        256
+
+#define _MAX_DIR        0
 
 // max. length of file name component
-#define _MAX_FNAME      256
+
+#define _MAX_FNAME      8
 
 // max. length of extension component
+
 #define _MAX_EXT        3
 
 
@@ -94,12 +99,14 @@ int system(char* cmd);
 int systemf(char* fmt, ...);
 
 // systemex is the same as system, except it will raise exceptions.
+
 void systemex(char* cmd);                       // CMOC
 
 int putenv(char* envptr);
 char* getenv(char* varname);
 
 // Non-Standard access to BASIC variables
+
 int putenvstr(char* name, char* value);
 char* getenvstr(char* name, char* dst);
 int putenvuint(char* name, unsigned value);

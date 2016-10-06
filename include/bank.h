@@ -38,6 +38,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define _BANK_H
 
 // Banks are always located at $8000 (32768)
+
 #define BANK_MEMORY 32768
 
 // Bank 0  is the only bank common to 64K CoCo's, Dragons & CoCo 3's

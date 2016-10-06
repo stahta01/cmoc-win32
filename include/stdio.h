@@ -69,7 +69,7 @@ extern FILE* stdout;
 #define SEEK_SET        2
 #define TMP_MAX         256
 
-#define FILENAME_MAX    (16+1)
+#define FILENAME_MAX    (12+1)
 #define L_tmpnam        FILENAME_MAX
 
 //int vfprintf(FILE* f, char* format, va_list ap);

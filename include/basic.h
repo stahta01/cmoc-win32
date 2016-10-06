@@ -44,8 +44,11 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #include <conio.h>
 
 #include <motorola/types.h>
+
 // Use dragon equates to ensure we are compatible
+
 #include <dragon/equates.h>
+
 //#include <equates.h>
 
 #define COLOR_BLACK       0

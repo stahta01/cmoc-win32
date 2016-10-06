@@ -37,6 +37,8 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _DRIVE_H
 #define _DRIVE_H
 
+typedef int drive_t;
+
 #define DRIVE_A     0
 #define DRIVE_B     1
 #define DRIVE_C     2
