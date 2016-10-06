@@ -1,9 +1,12 @@
 
-#include <stdlib.h>
-#include <errno.h>
+#include "_string.h"
 
-char* strerror(int errnum)
+word _static_strerror[2];
+
+char* strerror(errno_t error)
 {
-    return "TODO";
+    _static_strerror[0] = *(word*)((error < ERRNO_UF ? _LABAF : _L890B - ERRNO_UF) + error);
+    _static_strerror[1] = 0;
+    return (char*)_static_strerror;
 }
 

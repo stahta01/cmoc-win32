@@ -3,8 +3,8 @@
 
 int getche(void)
 {
-    int c = getch();
-    cputc(c);
-    return c;
+    int chr = getch();
+    cputc(chr);
+    return chr;
 }
 

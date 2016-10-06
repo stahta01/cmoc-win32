@@ -1,80 +1,83 @@
 
-/*****************************************************************************/
-/*                                                                           */
-/*                                 string.h                                  */
-/*                                                                           */
-/*                              String handling                              */
-/*                                                                           */
-/*                                                                           */
-/*                                                                           */
-/* (C) 1998-2014, Ullrich von Bassewitz                                      */
-/*                Roemerstrasse 52                                           */
-/*                D-70794 Filderstadt                                        */
-/* EMail:         uz@cc65.org                                                */
-/*                                                                           */
-/*                                                                           */
-/* This software is provided 'as-is', without any expressed or implied       */
-/* warranty.  In no event will the authors be held liable for any damages    */
-/* arising from the use of this software.                                    */
-/*                                                                           */
-/* Permission is granted to anyone to use this software for any purpose,     */
-/* including commercial applications, and to alter it and redistribute it    */
-/* freely, subject to the following restrictions:                            */
-/*                                                                           */
-/* 1. The origin of this software must not be misrepresented; you must not   */
-/*    claim that you wrote the original software. If you use this software   */
-/*    in a product, an acknowledgment in the product documentation would be  */
-/*    appreciated but is not required.                                       */
-/* 2. Altered source versions must be plainly marked as such, and must not   */
-/*    be misrepresented as being the original software.                      */
-/* 3. This notice may not be removed or altered from any source              */
-/*    distribution.                                                          */
-/*                                                                           */
-/*****************************************************************************/
+/*
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+For more information, please refer to <http://unlicense.org/>
+
+I dedicate any and all copyright interest in this software to the
+public domain. I make this dedication for the benefit of the public at
+large and to the detriment of my heirs and successors. I intend this
+dedication to be an overt act of relinquishment in perpetuity of all
+present and future rights to this software under copyright law.
+
+Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
+*/
 
 #ifndef _STRING_H
 #define _STRING_H
+
+#include <sys/errno.h>
 
 #include <stddef.h>
 #include <memory.h>
 
 char* strcat(char* dst, char* src);             // ANSIC
 char* strchr(char* s, int c);                   // ANSIC
-int strcmp(char* s1, char* s2);                 // ANSIC
-int strcoll(char* s1, char* s2);                // ANSIC
 char* strcpy(char* dst, char* src);             // ANSIC
-size_t strcspn(char* s1, char* s2);             // ANSIC
+char* strdup(char* s);                          // SYSV/BSD
 char* strerror(int errcode);                    // ANSIC
-size_t strlen(char* s);                         // ANSIC
 char* strncat(char* s1, char* s2, size_t n);    // ANSIC
-int strncmp(char* s1, char* s2, size_t n);      // ANSIC
 char* strncpy(char* dst, char* src, size_t n);  // ANSIC
 char* strrchr(char* s, int c);                  // ANSIC
-size_t strspn(char* s1, char* s2);              // ANSIC
 char* strstr(char* str, char* substr);          // ANSIC
 char* strtok(char* s1, char* s2);               // ANSIC
-size_t strxfrm(char* s1, char* s2, size_t n);   // ANSIC
 
+char* _stpcpy(char* dst, char* src);            // CMOC
+char* _strlower(char* s);                       // UNIX
+char* _strlwr(char* s);                         // UNIX
+char* _strqtok(char* s1, char* s2);             // UNIX
+char* _strrev(char* s);                         // CMOC
+char* _strupper(char* s);                       // UNIX
+char* _strupr(char* s);                         // UNIX
+
+int strcasecmp(char* s1, char* s2);             // UNIX
+int strcmp(char* s1, char* s2);                 // ANSIC
+int strcoll(char* s1, char* s2);                // ANSIC
+int stricmp(char* s1, char* s2);                // DOS/Windows
+int strncasecmp(char* s1, char* s2, size_t n);  // UNIX
+int strncmp(char* s1, char* s2, size_t n);      // ANSIC
+int strnicmp(char* s1, char* s2, size_t n);     // DOS/Windows
 int strtoi(char* s, char** endptr, int radix);  // CMOC
 
-char* strdup(char* s);                          // SYSV/BSD
-int strcasecmp(char* s1, char* s2);             // UNIX
-int strncasecmp(char* s1, char* s2, size_t n);  // UNIX
-int stricmp(char* s1, char* s2);                // DOS/Windows
-int strnicmp(char* s1, char* s2, size_t n);     // DOS/Windows
+size_t strcspn(char* s1, char* s2);             // ANSIC
+size_t strlen(char* s);                         // ANSIC
+size_t strspn(char* s1, char* s2);              // ANSIC
+size_t strxfrm(char* s1, char* s2, size_t n);   // ANSIC
 
-char* _strlwr(char* s);                         // UNIX
-char* _strlower(char* s);                       // UNIX
-char* _strupr(char* s);                         // UNIX
-char* _strupper(char* s);                       // UNIX
-char* _strqtok(char* s1, char* s2);             // UNIX
+char* strerror(errno_t error);                  // ANSIC
 
-char* _strrev(char* s);                         // CMOC
-char* _stpcpy(char* dst, char* src);            // CMOC
-
-// Map an operating system error number to an error message.
-
-char* _stroserror(unsigned char errcode);
+#define _stroserror strerror                    // CC65
 
 #endif
 

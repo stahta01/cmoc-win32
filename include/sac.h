@@ -86,6 +86,7 @@ array_t* array_resize(array_t* array, size_t n);
 byte* array_at(array_t* array, size_t index);
 
 #ifndef NO_OLDNAMES
+
 #define node_t          dnode_t
 #define list_t          dlist_t
 #define list_create     dlist_create
@@ -93,6 +94,7 @@ byte* array_at(array_t* array, size_t index);
 #define list_tail       dlist_tail
 #define list_push_head  dlist_push_head
 #define list_pull_head  dlist_pull_head
+
 #endif
 
 #endif

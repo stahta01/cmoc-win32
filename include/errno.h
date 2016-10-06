@@ -53,8 +53,8 @@ extern errno_t errno;
 // want, but I'll probably define some of the odd ones if I need them.
 
 // Note: The system() command returns these values, therefore ERRNO_NF is not supported
-// since system() returns 0 for SUCCESS. If you need to detect ERRNO_NF, use system_crunch()
-// and system_execute() from system.h which raise exceptions.
+// since system() returns 0 for SUCCESS. If you need to detect ERRNO_NF, use systemex()
+// which raises exceptions.
 
 #define ERRNO_NF         0                      // NEXT WITHOUT FOR
 
@@ -107,11 +107,15 @@ extern errno_t errno;
 #define ERRNO_EI        47                      //
 #define ERRNO_IE        48                      // DIRECT STATEMENT IN FILE
 #define ERRNO_EU        49                      //
+
+// Extended BASIC Errors
+
 #define ERRNO_UF        50                      // UNDEFINED FUNCTION (FN) CALL
 #define ERRNO_FN        51                      //
 #define ERRNO_NE        52                      // FILE NOT FOUND
 
-// Behond Extended Basic
+// Behond Extended BASIC
+
 // These strings are shown for error numbers behond the documented ones.
 // They might not show for all systems, but at least they are named.
 // Use with care.
