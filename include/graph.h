@@ -282,14 +282,14 @@ void _outchar(int chr);                         // CMOC
 void _outtext(char* str);                       // WATCOM
 //int _settextcolor(int);
 //int _gettextcolor(void);
-void _settextposition(int row, int col);        // Note: x & y reversed (WATCOM style)
+void _settextposition(int x, int y);            // CMOC
 void _settextpositionx(int x);                  // CMOC
 void _settextpositiony(int y);                  // CMOC
 void _settextpositionat(int at);                // CMOC
 
 int _gettextpositionx(void);                    // CMOC
 int _gettextpositiony(void);                    // CMOC
-void _gettextposition(point_t* point);          // CMOC
+void _gettextposition(int* x, int* y);          // CMOC
 int _gettextpositionat(void);                   // CMOC
 
 void _scrolltextwindow(int);
@@ -318,8 +318,7 @@ struct _fontinfo* _getfontinfo(void);           // WATCOM
 //struct xycoord _setgtextvector(int, int);
 //struct xycoord _getgtextvector(void);
 
-// X/Y reversed to match _settextposition() which is defined by WATCOM
-void _textscreensize(int* rows, int* cols);     // CMOC
+void _textscreensize(int* x, int* y);           // CMOC
 
 #define _GMOVEUP      VT52_CHR_UP
 #define _GMOVEDOWN    VT52_CHR_DOWN

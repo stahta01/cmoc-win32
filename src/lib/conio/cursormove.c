@@ -3,40 +3,41 @@
 
 void cursormove(int vt52_char)
 {
-    point_t p;
-    wherexy(&p);
-    int w, h;
+    int x, y, w, h;
     screensize(&w, &h);
+    wherexy(&x, &y);
     switch (vt52_char) {
     case VT52_CHR_HOME:
-        gotoxy(0, 0);
+        x = y = 0;
         break;
     case VT52_CHR_UP:
-        if (p.y > 0) {
-            gotoxy(p.x, p.y - 1);
+        if (y > 0) {
+            y--;
         }
         break;
     case VT52_CHR_RIGHT:
-        if (p.x != w - 1) {
-            gotoxy(p.x + 1, p.y);
+        if (x != w - 1) {
+            x++;
             break;
         }
-        gotoxy(p.x = 0, p.y);
+        x = 0;
     // fall through to VT52_CHR_DOWN
     case VT52_CHR_DOWN:
-        if (p.y != h - 1) {
-            gotoxy(p.x, p.y + 1);
+        if (y != h - 1) {
+            y++;
         } else {
             scrup();
         }
         break;
     case VT52_CHR_LEFT:
-        if (p.x > 0) {
-            gotoxy(p.x - 1, p.y);
-        } else if (p.y > 0) {
-            gotoxy(w - 1, p.y - 1);
+        if (x > 0) {
+            x--;
+        } else if (y > 0) {
+            x = w - 1;
+            y --;
         }
         break;
     }
+    gotoxy(x, y);
 }
 

@@ -9,7 +9,7 @@ void screensize(int* x, int* y)
         *x = 32;
         *y = 16;
     } else {
-        _textscreensize(y, x);
+        _textscreensize(x, y);
     }
 }
 

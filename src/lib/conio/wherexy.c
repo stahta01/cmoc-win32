@@ -1,15 +1,15 @@
 
 #include "_conio.h"
 
-void wherexy(point_t* point)
+void wherexy(int* x, int* y)
 {
     if (_is_coco3_mode) {
-        coco3_wherexy(point);
+        coco3_wherexy(x, y);
     } else if (isvidram()) {
-        point->x = _curpos & 31;
-        point->y = (_curpos >> 5) & 15;
+        *x = _curpos & 31;
+        *y = (_curpos >> 5) & 15;
     } else {
-        _gettextposition(point);
+        _gettextposition(x, y);
     }
 }
 

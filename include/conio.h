@@ -38,7 +38,6 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define _CONIO_H
 
 #include <stdarg.h>
-#include <point.h>
 
 bool cursor(bool onoff);
 bool kbhit(void);
@@ -55,7 +54,7 @@ int vcscanf(char* fmt, va_list args);           // TODO
 
 int wherex(void);
 int wherey(void);
-void wherexy(point_t* point);                   // CMOC
+void wherexy(int* x, int* y);                   // CMOC
 int whereat(void);                              // CMOC
 
 void cclear(int len);

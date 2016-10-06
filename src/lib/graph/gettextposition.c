@@ -1,7 +1,7 @@
 
 #include "_graph.h"
 
-void _gettextposition(point_t* point)
+void _gettextposition(int* _x, int* _y)
 {
     word x = _curpos & (_horbyt - 1);
     if (fontinfo.type) {
@@ -14,7 +14,7 @@ void _gettextposition(point_t* point)
     } else {
         y >>= 8;
     }
-    point->x = x;
-    point->y = y;
+    *_x = x;
+    *_y = y;
 }
 
