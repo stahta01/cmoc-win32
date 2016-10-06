@@ -43,6 +43,15 @@ typedef struct snode_t {
     struct snode_t* next;
 } snode_t;
 
+typedef struct slist_t {
+    snode_t head;
+} slist_t;
+
+snode_t* slist_head(slist_t* list);
+snode_t* slist_push_head(slist_t* list, snode_t* node);
+snode_t* slist_pull_head(slist_t* list);
+
+
 typedef struct dnode_t {
     struct dnode_t* prev;
     struct dnode_t* next;
@@ -70,20 +79,22 @@ dnode_t* dlist_push_head(dlist_t* list, dnode_t* node);
 dnode_t* dlist_push_tail(dlist_t* list, dnode_t* node);
 dnode_t* dlist_tail(dlist_t* list);
 
+//#define sarray_t(_TYPE,_SIZE) struct {size_t size; _TYPE data[_SIZE];}
+
 typedef struct {
-    size_t count, isize;
-    byte* items;
-} array_t;
+    size_t size, itemsize;
+    byte* data;
+} darray_t;
 
-void array_init(array_t* array, size_t isize);
-void array_free(array_t* array);
+void darray_init(darray_t* array, size_t itemsize);
+void darray_free(darray_t* array);
 
-array_t* array_clear(array_t* array);
-array_t* array_create(size_t isize);
-array_t* array_grow(array_t* array, size_t n);
-array_t* array_resize(array_t* array, size_t n);
+darray_t* darray_clear(darray_t* array);
+darray_t* darray_create(size_t itemsize);
+darray_t* darray_grow(darray_t* array, size_t size);
+darray_t* darray_resize(darray_t* array, size_t size);
 
-byte* array_at(array_t* array, size_t index);
+byte* darray_at(darray_t* array, size_t index);
 
 #ifndef NO_OLDNAMES
 
