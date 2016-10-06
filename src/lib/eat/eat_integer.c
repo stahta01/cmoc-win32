@@ -3,6 +3,6 @@
 
 char* eat_integer(char* str)
 {
-    return eat_while(eat_sign(str), isdigit);
+    return eat_while_digit(eat_sign(str));
 }
 
