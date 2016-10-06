@@ -13,56 +13,9 @@ read start at str[2] and end with a null terminator. Thus, str must be at least 
 
 char* cgets(char* str)
 {
-    int w, h;
-    screensize(&w, &h);
-    int screenendat = w * h;
-    int curpos = whereat();
     str += 2;
-    str[0] = 0;
-    char* pos = str;
-    for (int chr; (chr = getch()) != ASCII_CR;) {
-        int at = whereat();
-        switch (chr) {
-        case ASCII_NAK:                         // SHIFT+LEFT
-            if (pos > str) {
-                pos--;
-                gotoat(at - 1);
-            }
-            break;
-        case ASCII_HT:
-            if (*pos) {
-                pos++;
-                gotoat(at + 1);
-            }
-            break;
-        case ASCII_BS:
-            if (pos > str) {
-                pos--;
-                memcpy(pos, pos + 1, strlen(pos) + 1);
-                gotoat(--at);
-                _putstr(pos);
-                putch(' ');
-                gotoat(at);
-            }
-            break;
-        default:
-            if (isprint(chr) && strlen(str) < (((word)str[-2]) - 1)) {
-                int poslen = strlen(pos) + 1;
-                _memrcpy(pos + 1, pos, poslen);
-                *pos = (char)chr;
-                if (at + poslen >= screenendat) {
-                    at -= w;
-                    curpos -= w;
-                }
-                _putstr(pos++);
-                gotoat(at);
-                cursormove(VT52_CHR_RIGHT);
-            }
-            break;
-        }
-    }
+    cedits(str, str[-2], "\r", true);
     str[-1] = (char)strlen(str);
-    gotoat(curpos + str[-1]);
     return str;
 }
 

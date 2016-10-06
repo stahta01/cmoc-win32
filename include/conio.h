@@ -88,6 +88,7 @@ void _putstr(char* str);                        // CMOC
 // Moves the cursor given a vt52 direction. ie: A,B,C or D
 
 void cursormove(int vt52_char);                 // CMOC
+void cedits(char* str, size_t size, char* eolchars, bool leaveatend);
 
 void scrclr(void);                              // CMOC - Clear screen without moving cursor
 void scrup(void);                               // CMOC
