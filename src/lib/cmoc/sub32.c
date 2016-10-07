@@ -11,7 +11,7 @@
 // pointed by 'hi'.
 // Returns carry of the subtraction.
 
-byte asm sub32(word* hi, word h, word l)
+asm byte sub32(word* hi, word h, word l)
 {
     asm {
         pshs    U

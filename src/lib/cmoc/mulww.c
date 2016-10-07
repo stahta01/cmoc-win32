@@ -11,7 +11,7 @@
 ** Stores the high word of the product in *productHi,
 ** and returns the low word of the product.
 */
-word asm mulww(word* productHi, word u, word v)
+asm word mulww(word* productHi, word u, word v)
 {
     asm {
         pshs    u

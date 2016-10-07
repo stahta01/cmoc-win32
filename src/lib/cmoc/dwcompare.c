@@ -5,10 +5,10 @@ sbyte dwcompare(word* dw1, word* dw2)
 {
     sbyte result;
     asm {
-        pshs    y                           // must not use U, which serves to refer to 'a' and 'b'
+        pshs    y                               // must not use U, which serves to refer to 'a' and 'b'
         ldx     dw1
         ldy     dw2
-        ldd     ,x++                        // compare MSBs
+        ldd     ,x++                            // compare MSBs
         cmpd    ,y++
         beq     dwcompare_equal
         blo     dwcompare_lower
@@ -24,7 +24,7 @@ sbyte dwcompare(word* dw1, word* dw2)
         bra     dwcompare_end
 
         dwcompare_equal:
-        ldd     ,x                          // compare LSBs
+        ldd     ,x                              // compare LSBs
         cmpd    ,y
         blo     dwcompare_lower
         bhi     dwcompare_greater
