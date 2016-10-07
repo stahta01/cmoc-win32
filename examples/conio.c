@@ -2,14 +2,18 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <system.h>
-#include <exception.h>
+#include <memory.h>
 
-#include <equates.h>
-#include <vt52.h>
+#include <coco/coco3.h>
+#include <coco/super.h>
 
 int main(void)
 {
     system("WIDTH40");
+
+    _h_crsatt = (3<<3)|2;
+    _v_border = 0x88;
+
     clrscr();
 
     for (;;)  {

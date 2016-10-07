@@ -1,7 +1,7 @@
 
 #include "_memory.h"
 
-asm void* _memrcpy(void* dst, void* src, size_t size)
+asm void* memcpy_r(void* dst, void* src, size_t size)
 {
     asm {
         seif

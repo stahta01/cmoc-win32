@@ -11,7 +11,7 @@ void cputs(char* str)
     if (_is_coco3_mode) {
         bank = bank_set(13);
     }
-    for (byte chr; chr = *str++;) {
+    for (int chr; chr = *str++;) {
         switch (_vt52mode) {
         case ASCII_ESC:
             switch (chr) {
@@ -50,13 +50,13 @@ void cputs(char* str)
                 break;
             default:
                 if (_is_coco3_mode) {
-                    *(byte*)(_h_crsloc + 0xa000) = chr;
+                    *(word*)(_h_crsloc + 0xa000) = (chr << 8) | _h_crsatt;
                 } else if (isvidram()) {
                     chr = (chr & 31) | _charsetgroups[chr >> 5];
                     if (_conio.revers) {
                         chr &= 64 ^ -1;
                     }
-                    *(byte*)_curpos = chr;
+                    *(byte*)_curpos = (byte)chr;
                 } else if (_conio.outchar) {
                     _conio.outchar(chr);
                 }

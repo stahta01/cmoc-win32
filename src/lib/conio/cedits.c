@@ -36,7 +36,7 @@ void cedits(char* str, size_t size, char* eolchars, bool leaveatend)
         default:
             if (isprint(chr) && strlen(str) < (size - 1)) {
                 int poslen = strlen(pos) + 1;
-                _memrcpy(pos + 1, pos, poslen);
+                memcpy_r(pos + 1, pos, poslen);
                 *pos = (char)chr;
                 if (at + poslen >= screenendat) {
                     at -= w;

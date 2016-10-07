@@ -1,7 +1,7 @@
 
 #include <equates.h>
 
-void asm _memcpy16(void* dst, void* src, unsigned n)
+void asm memcpy16(void* dst, void* src, unsigned n)
 {
     asm {
         ldd     6,s

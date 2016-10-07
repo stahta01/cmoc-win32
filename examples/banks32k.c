@@ -8,6 +8,7 @@
 
 #include <machine.h>
 #include <coco/coco3.h>
+#include <coco/super.h>
 
 int main(void)
 {

@@ -37,7 +37,7 @@ void cursormove(int chr)
             x--;
         } else if (y > 0) {
             x = w - 1;
-            y --;
+            y--;
         }
         break;
     }

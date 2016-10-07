@@ -63,11 +63,8 @@
 #define setjmp      _setjmp
 #define longjmp     _longjmp
 #define qsort       _qsort
-
-// POSIX functions which have moved to the _ namespace
-
-#define strncat     __strncat
-#define memccpy     __memccpy
+#define strncat     _strncat
+#define memccpy     _memccpy
 
 // Functions defined in os9.h
 

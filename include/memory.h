@@ -47,15 +47,17 @@ void* memcpy(void* dst, void* src, size_t size); // ANSIC
 void* memmove(void* dst, void* src, size_t size); // ANSIC
 void* memset(void* dst, int value, size_t size); // ANSIC
 
-void* _memand(void* dst, int value, size_t size); // CMOC
-void* _memccpy(void* dst, void* src, int c, size_t size); // CMOC
-void* _memcpy16(void* dst, void* src, size_t size); // CMOC
-void* _memor(void* dst, int value, size_t size); // CMOC
-void* _memxor(void* dst, int value, size_t size); // CMOC
-void  _memcom(void* dst, size_t size);          // CMOC
-void* _memrcpy(void* dst, void* src, size_t size); // CMOC
+void* memand(void* dst, int value, size_t size); // CMOC
+void* memccpy(void* dst, void* src, int c, size_t size); // CMOC
+void* memcpy16(void* dst, void* src, size_t size); // CMOC
+void* memor(void* dst, int value, size_t size); // CMOC
+void* memxor(void* dst, int value, size_t size); // CMOC
+void  memcom(void* dst, size_t size);           // CMOC
+void* memcpy_r(void* dst, void* src, size_t size); // CMOC
 
-void _bzero(void* dst, size_t size);            // BSD
+void memset_w(void* dst, word val, size_t size); // CMOC
+
+void bzero(void* dst, size_t size);             // BSD
 
 #endif
 
