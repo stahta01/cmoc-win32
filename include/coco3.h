@@ -37,44 +37,8 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _COCO3_H
 #define _COCO3_H
 
-// ADDITIONAL VARIABLES USED BY SUPER EXTENDED BASIC
-
-typedef struct {
-    word crsloc;                                // CURRENT LOCATION OF CURSOR
-    byte cursx;                                 // X POSITION OF CURSOR
-    byte cursy;                                 // Y POSITION OF CURSOR
-    byte column;                                // COLUMNS ON HI-RES ALPHA SCREEN
-    byte row;                                   // ROWS ON HI-RES ALPHA SCREEN
-    word dispen;                                // END OF HI-RES DISPLAY SCREEN
-    byte crsatt;                                // CURRENT CURSOR'S ATTRIBUTES
-    byte unused;
-    byte fcolor;                                // FOREGROUND COLOR
-    byte bcolor;                                // BACKGROUND COLOR
-    word onbrk;                                 // ON BRK GOTO LINE NUMBER
-    word onerr;                                 // ON ERR GOTO LINE NUMBER
-    byte error;                                 // ERROR NUMBER ENCOUNTERED OR $FF (NO ERROR)
-    word onerrs;                                // ON ERR SOURCE LINE NUMBER
-    word erline;                                // LINE NUMBER WHERE ERROR OCCURRED
-    word onbrks;                                // ON BRK SOURCE LINE NUMBER
-    byte errbrk;                                // STILL UNKNOWN, HAS TO DO WITH ERR, BRK
-    byte pcount;                                // PRINT COUNT, CHARACTERS TO BE HPRINTED
-    byte pbuf[7];                               // PRINT BUFFER, HPRINT CHARS. STORED HERE
-} coco3_data_t;
-
-coco3_data_t* coco3_data_enter(void);
-void coco3_data_leave(void);
-
-void coco3_screensize(int* x, int* y);
-
-void coco3_gotox(int x);
-void coco3_gotoy(int y);
 void coco3_gotoxy(int x, int y);
 void coco3_gotoat(int at);
-
-int coco3_wherex(void);
-int coco3_wherey(void);
-void coco3_wherexy(int* x, int* y);
-int coco3_whereat(void);
 
 #endif
 

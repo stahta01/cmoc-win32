@@ -13,6 +13,7 @@
 #include <ascii.h>
 #include <dev.h>
 #include <vt52.h>
+#include <coco/super.h>
 
 #include <sys/handle.h>
 

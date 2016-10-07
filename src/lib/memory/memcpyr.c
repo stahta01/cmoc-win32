@@ -4,6 +4,7 @@
 asm void* _memrcpy(void* dst, void* src, size_t size)
 {
     asm {
+        seif
         ldd     6,s                             // get size
         beq     exit                            // exit if zero
         pshs    u                               // save u
@@ -22,6 +23,7 @@ asm void* _memrcpy(void* dst, void* src, size_t size)
         puls    u                               // restore u
         exit:
         ldd     2,s                             // return dst
+        clif
     }
 }
 

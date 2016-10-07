@@ -3,6 +3,6 @@
 
 int wherex(void)
 {
-    return _is_coco3_mode ? coco3_wherex() : isvidram() ? (int)(_curpos & 31) : _gettextpositionx();
+    return _is_coco3_mode ? (int)_h_cursx : isvidram() ? (int)(_curpos & 31) : _gettextpositionx();
 }
 

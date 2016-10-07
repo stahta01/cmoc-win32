@@ -4,7 +4,8 @@
 void screensize(int* x, int* y)
 {
     if (_is_coco3_mode) {
-        coco3_screensize(x, y);
+        *x = _h_column;
+        *y = _h_row;
     } else if (isvidram()) {
         *x = 32;
         *y = 16;

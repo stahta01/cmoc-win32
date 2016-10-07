@@ -1,7 +1,7 @@
 
 #include "_bank.h"
 
-bank_t _static_bank = 15;
+bank_t _static_bank = BANK_DEFAULT;
 
 bank_t bank_set(bank_t bank)
 {
@@ -17,13 +17,13 @@ bank_t bank_set(bank_t bank)
         _mmureg[6] = page + 2;
         _mmureg[7] = page + 3;
     } else {
-        if (bank == 15) {
+        if (bank == BANK_DEFAULT) {
             _romclr = true;
         } else {
             _romset = true;
         }
     }
-    if (bank == 15) {
+    if (bank == BANK_DEFAULT) {
         asm {
             clif
         }

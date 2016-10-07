@@ -3,7 +3,7 @@
 
 int whereat(void)
 {
-    return _is_coco3_mode ? coco3_whereat() : isvidram() ? (int)_curpos - _VIDRAM :
+    return _is_coco3_mode ? (int)((_h_crsloc - 0x2000) >> 1) : isvidram() ? (int)_curpos - _VIDRAM :
            _gettextpositionat();
 }
 

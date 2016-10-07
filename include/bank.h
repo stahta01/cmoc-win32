@@ -39,7 +39,10 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 // Banks are always located at $8000 (32768)
 
-#define BANK_MEMORY 32768
+#define BANK_MEMORY         32768
+
+#define BANK_SIZE           32768
+#define BANK_PAGE_SIZE      8192
 
 // Bank 0  is the only bank common to 64K CoCo's, Dragons & CoCo 3's
 // Bank 15 is the default BASIC ROM bank.
@@ -67,9 +70,51 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 // Bank 14 = $0000 RAM (first 32K)  [128K CoCo3]
 // Bank 15 = $8000 BASIC ROM
 
+typedef struct {
+    byte memory[BANK_SIZE];
+} bank00_t;
+
+typedef struct {
+    byte hrpag1[BANK_PAGE_SIZE];
+    byte hrpag2[BANK_PAGE_SIZE];
+    byte hrpag3[BANK_PAGE_SIZE];
+    byte hrpag4[BANK_PAGE_SIZE];
+} bank12_t;
+
+typedef struct {
+    byte chr, atr;
+} bank13_char_t;
+
+typedef struct {
+    byte getput[BANK_PAGE_SIZE];
+    byte sstack[BANK_PAGE_SIZE];
+    bank13_char_t hrtext[4096];
+    byte unused[BANK_PAGE_SIZE];
+} bank13_t;
+
+typedef struct {
+    byte extbas[BANK_PAGE_SIZE];
+    byte colbas[BANK_PAGE_SIZE];
+    byte dosbas[BANK_PAGE_SIZE];
+    byte supbas[BANK_PAGE_SIZE];
+} bank15_t;
+
+typedef union {
+    bank00_t b00;
+    bank12_t b12;
+    bank13_t b13;
+    bank00_t b14;
+    bank15_t b15;
+} banks_t;
+
+#define _banks  (*(banks_t*)32768)
+
+#define BANK_DEFAULT    15
+
 typedef int bank_t;
 
 bank_t bank_set(bank_t bank);
 bank_t bank_get(void);
 
 #endif
+
