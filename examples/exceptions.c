@@ -28,6 +28,7 @@ void* mallocr(size_t size)
 
 int main(void)
 {
+    system("WIDTH40");
     clrscr();
     // Example of catching bad filenames.
     try {

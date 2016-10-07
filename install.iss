@@ -51,7 +51,7 @@ Source: "bin\wimgtool.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\imgtool.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "bin\writecocofile.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 
-Source: "bin\cmocide\*.txt"; DestDir: "{app}\bin\cmocide"; Flags: ignoreversion onlyifdoesntexist
+Source: "bin\cmocide\*.txt"; DestDir: "{app}\bin\cmocide"; Flags: ignoreversion 
 
 Source: "lib\liball.a"; DestDir: "{app}\lib"; Flags: ignoreversion
 Source: "lib\*.o"; DestDir: "{app}\lib"; Flags: ignoreversion
