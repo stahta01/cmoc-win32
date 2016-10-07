@@ -53,15 +53,15 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 // incase the heap header/footer is changed. Note, the main heap
 // at the end of your binary, must leave space for the stack anyway,
 //
-// NOTE: I now leave 512 bytes at the top of the max heap for the hardware
-// interface addresses.
-//
 // You must take care if you split a heap block, since a split requires an
 // extra two bytes for the new block size, so a block of 32 bytes, holds
 // 30 bytes, you loose 2 bytes durring a split. ie: 28 bytes after a split.
 // eg: split in half = 14 + 14 + 2 (size1) + 2 (size2) = a 32 byte block.
 //
 // The min heap size is 4, which allows no data.
+
+// NOTE: The CoCo 3 stores hrtext values at 0xfe00, therefore the max heap is 0x7e00.
+// ie: 0x8000 + 0x7e00 = 0xfe00
 
 #define HEAP_SIZE_MIN   4
 #define HEAP_SIZE_MAX   0x7e00
