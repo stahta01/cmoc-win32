@@ -16,34 +16,34 @@ void machine_init(void)
 {
     if (MAC_IS_COCO) {
         if (MAC_IS_COCO3) {
-            _machine.typ = MAC_TYP_COCO3;
-            _machine.rom = MAC_ROM_SUPER;
-            _machine.ram = 128;
+            machine.typ = MAC_TYP_COCO3;
+            machine.rom = MAC_ROM_SUPER;
+            machine.ram = 128;
         } else {
             if (MAC_IS_COCO1) {
-                _machine.typ = MAC_TYP_COCO1;
+                machine.typ = MAC_TYP_COCO1;
             } else {
-                _machine.typ = MAC_TYP_COCO2;
+                machine.typ = MAC_TYP_COCO2;
             }
             if (MAC_HAS_EXTBAS) {
-                _machine.rom = MAC_ROM_EXTENDED;
+                machine.rom = MAC_ROM_EXTENDED;
             } else {
-                _machine.rom = MAC_ROM_STANDARD;
+                machine.rom = MAC_ROM_STANDARD;
             }
-            _machine.ram = (_topram + 2) >> 10;
+            machine.ram = (_topram + 2) >> 10;
         }
     } else {
         if (MAC_IS_DRAGON) {
             if (MAC_IS_DRAGON64) {
-                _machine.typ = MAC_TYP_DRAGON64;
-                _machine.ram = 64;
+                machine.typ = MAC_TYP_DRAGON64;
+                machine.ram = 64;
             } else {
-                _machine.typ = MAC_TYP_DRAGON32;
-                _machine.ram = 32;
+                machine.typ = MAC_TYP_DRAGON32;
+                machine.ram = 32;
             }
-            _machine.rom = MAC_ROM_EXTENDED;
+            machine.rom = MAC_ROM_EXTENDED;
         }
     }
-    _machine.dos = MAC_HAS_DOS;
+    machine.dos = MAC_HAS_DOS;
 }
 

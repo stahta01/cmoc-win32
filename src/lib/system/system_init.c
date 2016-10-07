@@ -4,7 +4,7 @@
 void system_init(void)
 {
     machine_init();
-    switch (_machine.typ) {
+    switch (machine.typ) {
     case MAC_TYP_COCO1:
     case MAC_TYP_COCO2:
     case MAC_TYP_COCO3:

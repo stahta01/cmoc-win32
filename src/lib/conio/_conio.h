@@ -10,15 +10,17 @@
 #include <equates.h>
 #include <charset.h>
 #include <system.h>
-#include <coco3.h>
-#include <ascii.h>
 #include <dev.h>
 #include <vt52.h>
-#include <coco/super.h>
+#include <ascii.h>
+#include <machine.h>
 
+#include <coco/super.h>
 #include <sys/handle.h>
 
-#define _is_coco3_mode (*(char*)0x80fd == '2' && *(byte*)_HRWIDTH)
+#define _is_coco3_mode (machine.typ == MAC_TYP_COCO3 && *(byte*)_HRWIDTH)
+
+void coco3_gotoxy(int x, int y);
 
 typedef struct {
     bool cursor;

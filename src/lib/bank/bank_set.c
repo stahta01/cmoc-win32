@@ -10,7 +10,7 @@ bank_t bank_set(bank_t bank)
     asm {
         seif
     }
-    if (_machine.typ == MAC_TYP_COCO3) {
+    if (machine.typ == MAC_TYP_COCO3) {
         byte page = (byte)(bank << 2) & 63;
         _mmureg[4] = page + 0;
         _mmureg[5] = page + 1;

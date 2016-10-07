@@ -103,7 +103,7 @@ typedef struct system_t {
 
 void machine_init(void);
 
-extern machine_t _machine;
+extern machine_t machine;
 
 #endif
 

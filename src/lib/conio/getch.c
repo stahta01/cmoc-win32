@@ -35,7 +35,20 @@ int getch(void)
     } else    {
         if (_conio.cursor) {
             if (_is_coco3_mode) {
-                chr = system_waitkey(true);
+                clock_t clock_now = clock();
+                bank_t bank = bank_set(13);
+                byte* curpos = (byte*)_h_crsloc + 0xa001;
+                byte curchr = *curpos;
+                int kb;
+                do {
+                    *curpos = (clock() - clock_now) & 16 ? curchr : curchr ^ 64;
+                    bank = bank_set(bank);
+                    kb = kbhit();
+                    bank = bank_set(bank);
+                } while (!kb);
+                *curpos = curchr;
+                bank_set(bank);
+                chr = getch();
             } else {
                 clock_t clock_now = clock();
                 byte* curpos = (byte*)_curpos;
@@ -54,11 +67,12 @@ int getch(void)
                 while (!kbhit()) {
                     *curpos = (clock() - clock_now) & 16 ? curchr : curchr ^ curxor;
                 }
-                chr = getch();
                 *curpos = curchr;
+                chr = getch();
             }
         } else {
-            chr = system_waitkey(false);
+            while (!kbhit());
+            chr = getch();
         }
     }
     return chr;

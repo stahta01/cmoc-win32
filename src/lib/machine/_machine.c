@@ -1,5 +1,5 @@
 
 #include "_machine.h"
 
-machine_t _machine;
+machine_t machine;
 
