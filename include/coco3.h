@@ -38,7 +38,6 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define _COCO3_H
 
 void coco3_gotoxy(int x, int y);
-void coco3_gotoat(int at);
 
 #endif
 
