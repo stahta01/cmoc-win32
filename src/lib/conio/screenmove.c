@@ -9,7 +9,7 @@ void screenmove(int dir)
         size_t lastline = bytesperline * (_h_row - 1);
         bank_t bank = bank_set(13);
         memcpy(vidram, vidram + bytesperline, lastline);
-        memset_w(vidram + lastline, _h_crsatt, bytesperline >> 1);
+        memset_w(vidram + lastline, _h_crsatt, _h_column);
         bank_set(bank);
     } else if (isvidram()) {
         memmove(_VIDRAM, _VIDRAM + 32, 32 * 15);

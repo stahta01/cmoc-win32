@@ -325,7 +325,5 @@ void _textscreensize(int* x, int* y);           // CMOC
 #define _GMOVERIGHT   VT52_CHR_RIGHT
 #define _GMOVELEFT    VT52_CHR_LEFT
 
-void _movetextposition(int direction);          // CMOC
-
 #endif
 
