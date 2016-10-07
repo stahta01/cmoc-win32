@@ -46,6 +46,11 @@ void far_getpak(void* dst, far_void_t* src)
 
 int main(void)
 {
+    // far memory doesn't work in 40/80 col mode atm. I think its because
+    // chrout uses its own bank switching to display text. I need to find a
+    // way to work with that system....
+    //system("WIDTH40");
+
     char s[100];
     far_char_t* names[STRING_COUNT];
     size_t size = 0;
