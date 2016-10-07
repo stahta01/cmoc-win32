@@ -81,9 +81,8 @@ void screensize(int* x, int* y);
 char* cgets(char* str);                         // Borland
 int getch(void);                                // Borland
 int getche(void);                               // Borland
-int putch(int chr);                             // Borland
+//int putch(int chr);                             // Borland
 int ungetch(int chr);                           // Borland
-void _putstr(char* str);                        // CMOC
 
 // Moves the cursor given a vt52 direction. ie: A,B,C or D
 

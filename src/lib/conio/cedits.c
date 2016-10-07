@@ -28,8 +28,8 @@ void cedits(char* str, size_t size, char* eolchars, bool leaveatend)
                 pos--;
                 memcpy(pos, pos + 1, strlen(pos) + 1);
                 gotoat(--at);
-                _putstr(pos);
-                putch(' ');
+                cputs(pos);
+                cputc(' ');
                 gotoat(at);
             }
             break;
@@ -42,7 +42,7 @@ void cedits(char* str, size_t size, char* eolchars, bool leaveatend)
                     at -= w;
                     curpos -= w;
                 }
-                _putstr(pos++);
+                cputs(pos++);
                 gotoat(at);
                 cursormove(VT52_CHR_RIGHT);
             }
