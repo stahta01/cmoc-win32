@@ -1,20 +1,17 @@
 
 #include "_system.h"
 
-byte _get_ostype;
-
 void system_init(void)
 {
-    _get_ostype = get_ostype();
-
-    switch (_get_ostype & 7) {
-    case SYSTEM_MAC_COCO1:
-    case SYSTEM_MAC_COCO2:
-    case SYSTEM_MAC_COCO3:
+    machine_init();
+    switch (_machine.typ) {
+    case MAC_TYP_COCO1:
+    case MAC_TYP_COCO2:
+    case MAC_TYP_COCO3:
         handle_init_coco();
         break;
-    case SYSTEM_MAC_DRAGON32:
-    case SYSTEM_MAC_DRAGON64:
+    case MAC_TYP_DRAGON32:
+    case MAC_TYP_DRAGON64:
         handle_init_dragon();
         break;
     }

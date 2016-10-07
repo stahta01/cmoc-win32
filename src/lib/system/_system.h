@@ -5,6 +5,8 @@
 #include <stdarg.h>
 #include <equates.h>
 #include <system.h>
+#include <machine.h>
+#include <handle.h>
 #include <rvec.h>
 #include <asm.h>
 

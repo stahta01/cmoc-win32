@@ -78,5 +78,32 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define MAC_IS_DRAGON32             (MAC_IS_DRAGON && *(byte*)0x8002 != 0x3c)
 #define MAC_IS_DRAGON64             (MAC_IS_DRAGON && *(byte*)0x8002 == 0x3c)
 
+// Settings for the machine_t structure
+
+#define MAC_TYP_UNKNOWN         0
+#define MAC_TYP_COCO1           1
+#define MAC_TYP_COCO2           2
+#define MAC_TYP_COCO3           3
+#define MAC_TYP_DRAGON32        4
+#define MAC_TYP_DRAGON64        5
+#define MAC_TYP_RESERVED        6
+#define MAC_TYP_VECTREX         7
+
+#define MAC_ROM_UNKNOWN         0
+#define MAC_ROM_STANDARD        1
+#define MAC_ROM_EXTENDED        2
+#define MAC_ROM_SUPER           3
+
+typedef struct system_t {
+    byte    typ;
+    byte    rom;
+    bool    dos;
+    word    ram;                                // kb
+} machine_t;
+
+void machine_init(void);
+
+extern machine_t _machine;
+
 #endif
 
