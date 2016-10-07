@@ -26,7 +26,7 @@ void cursormove(int vt52_char)
         if (y != h - 1) {
             y++;
         } else {
-            scrup();
+            screenmove(VT52_CHR_UP);
         }
         break;
     case VT52_CHR_LEFT:

@@ -90,8 +90,8 @@ void _putstr(char* str);                        // CMOC
 void cursormove(int vt52_char);                 // CMOC
 void cedits(char* str, size_t size, char* eolchars, bool leaveatend);
 
-void scrclr(void);                              // CMOC - Clear screen without moving cursor
-void scrup(void);                               // CMOC
+void screenwipe(void);                          // CMOC - Wipe screen without moving cursor
+void screenmove(int dir);                       // CMOC
 
 // write functions use a micro version of sprintf
 

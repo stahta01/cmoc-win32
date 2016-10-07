@@ -3,7 +3,7 @@
 
 void clrscr(void)
 {
-    scrclr();
+    screenwipe();
     gotoxy(0, 0);
 }
 

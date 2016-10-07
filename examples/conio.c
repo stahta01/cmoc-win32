@@ -9,8 +9,8 @@
 
 int main(void)
 {
+    system("WIDTH40");
     clrscr();
-    system("WIDTH80");
 
     for (;;)  {
         cputs("WELCOME TO...\n THE COLOR COMPUTER\n\n");

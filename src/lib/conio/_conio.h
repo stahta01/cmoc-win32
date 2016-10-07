@@ -6,6 +6,7 @@
 #include <ctype.h>
 #include <time.h>
 #include <graph.h>
+#include <bank.h>
 #include <equates.h>
 #include <charset.h>
 #include <system.h>
