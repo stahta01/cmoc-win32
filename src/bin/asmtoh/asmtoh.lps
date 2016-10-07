@@ -279,7 +279,8 @@
       <Unit37>
         <Filename Value="..\..\..\bin\cmocide\objects.txt"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="5" Y="67"/>
+        <TopLine Value="19"/>
+        <CursorPos X="5" Y="69"/>
         <UsageCount Value="12"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit37>

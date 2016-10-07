@@ -47,6 +47,8 @@ int game_compare_name(game_t* a, game_t* b)
 
 int main(void)
 {
+    system("WIDTH40");
+
     // This line causes the standard malloc functions to use up the 6K graphics
     // memory before heap memory.
     malloc_uses_gmalloc = true;

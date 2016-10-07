@@ -17,8 +17,8 @@ char* roms[] = {"UNKNOWN", "STANDARD", "EXTENDED", "SUPER"};
 
 int main(void)
 {
-    printf("%s %dK %s [%s]\n", types[_machine.typ], _machine.ram, roms[_machine.rom],
-           _machine.dos ? "DISK" : "NO DISK");
+    printf("%s %dK %s [%s]\n", types[machine.typ], machine.ram, roms[machine.rom],
+           machine.dos ? "DISK" : "NO DISK");
     return 0;
 }
 
