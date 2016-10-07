@@ -1,12 +1,12 @@
 
 #include "_conio.h"
 
-void cursormove(int vt52_char)
+void cursormove(int chr)
 {
     int x, y, w, h;
     screensize(&w, &h);
     wherexy(&x, &y);
-    switch (vt52_char) {
+    switch (chr) {
     case VT52_CHR_HOME:
         x = y = 0;
         break;
@@ -15,13 +15,15 @@ void cursormove(int vt52_char)
             y--;
         }
         break;
+    case ASCII_HT:
     case VT52_CHR_RIGHT:
         if (x != w - 1) {
             x++;
             break;
         }
+    case ASCII_LF:
+    case ASCII_CR:
         x = 0;
-    // fall through to VT52_CHR_DOWN
     case VT52_CHR_DOWN:
         if (y != h - 1) {
             y++;
@@ -29,6 +31,7 @@ void cursormove(int vt52_char)
             screenmove(VT52_CHR_UP);
         }
         break;
+    case ASCII_BS:
     case VT52_CHR_LEFT:
         if (x > 0) {
             x--;

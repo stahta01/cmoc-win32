@@ -28,13 +28,13 @@ void cputs(char* str)
                 break;
             }
             break;
-        case VT52_CHR_YPOS:
-            gotoy(chr - 32);
-            _vt52mode = VT52_CHR_XPOS;
-            break;
         case VT52_CHR_XPOS:
             gotox(chr - 32);
             _vt52mode = ASCII_NUL;
+            break;
+        case VT52_CHR_YPOS:
+            gotoy(chr - 32);
+            _vt52mode = VT52_CHR_XPOS;
             break;
         default:
             _vt52mode = ASCII_NUL;
@@ -43,15 +43,10 @@ void cputs(char* str)
                 _vt52mode = ASCII_ESC;
                 break;
             case ASCII_BS:
-                cursormove(VT52_CHR_LEFT);
-                break;
             case ASCII_HT:
-                cursormove(VT52_CHR_RIGHT);
-                break;
             case ASCII_LF:
             case ASCII_CR:
-                cursormove(VT52_CHR_DOWN);
-                gotox(0);
+                cursormove(chr);
                 break;
             default:
                 if (_is_coco3_mode) {
