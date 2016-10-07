@@ -7,6 +7,40 @@
 
 #define STRING_COUNT 100
 
+int main(void)
+{
+    system("WIDTH80");
+
+    char s[100];
+    far_char_t* names[STRING_COUNT];
+    size_t size = 0;
+
+    // You must create the far heaps first.
+    hank_create_clear(0, 0x8000, HEAP_SIZE_MAX);
+
+    puts("STORING STRINGS IN BANK #0 ...");
+
+    for (int i = 0; i < STRING_COUNT; i++) {
+        if (names[i] = (far_char_t*)fmalloc(300)) {
+            far_sprintf(names[i], "FAR STRING #%d", i);
+        }
+        size += far_msize((far_void_t*)names[i]);
+    }
+
+    puts("RETRIEVING STRINGS");
+
+    for (int i = 0; i < STRING_COUNT; i++) {
+        printf("DATA:%Fs BANK:%u\n", names[i], names[i]->bank);
+        ffree((far_void_t*)names[i]);
+    }
+    printf("REQUESTED: %d %u %u\n", size, malloc(10), program_end);
+
+    puts("BACK TO BASIC");
+
+    return 0;
+}
+
+
 #include <rle.h>
 
 // This code is just my experiments. Dont use it.
@@ -41,34 +75,5 @@ void far_getpak(void* dst, far_void_t* src)
     word* mem = (word*)far_zoom(src);
     rle_decode((byte*)dst, (byte*)&mem[1], *mem);
     far_zoom(src);
-}
-
-
-int main(void)
-{
-    // far memory doesn't work in 40/80 col mode atm. I think its because
-    // chrout uses its own bank switching to display text. I need to find a
-    // way to work with that system....
-    //system("WIDTH40");
-
-    char s[100];
-    far_char_t* names[STRING_COUNT];
-    size_t size = 0;
-
-    // You must create the far heaps first.
-    hank_create_clear(0, 0x8000, HEAP_SIZE_MAX);
-
-    for (int i = 0; i < STRING_COUNT; i++) {
-        if (names[i] = (far_char_t*)fmalloc(300)) {
-            far_sprintf(names[i], "FAR STRING #%d", i);
-        }
-        size += far_msize((far_void_t*)names[i]);
-    }
-    for (int i = 0; i < STRING_COUNT; i++) {
-        printf("DATA:%Fs BANK:%u\n", names[i], names[i]->bank);
-        ffree((far_void_t*)names[i]);
-    }
-    printf("REQUESTED: %d %u %u\n", size, malloc(10), program_end);
-    return 0;
 }
 

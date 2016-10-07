@@ -23,6 +23,7 @@ int main(void)
 
 #define BANK 0
 
+    char s[100];
     bank_t bank = bank_set(BANK);
     strcpy(s1, "THE CMOC STANDARD 32K");
     bank_set(bank);
@@ -32,14 +33,16 @@ int main(void)
     bank_set(bank);
 
     bank = bank_set(BANK);
-    puts(s1);
+    strcpy(s, s1);                              // We cant puts from a bank in 40/80 col mode (CoCo 3)
     bank_set(bank);
+    puts(s);
 
     bank = bank_set(BANK);
-    puts(s2);
+    strcpy(s, s2);                              // We cant puts from a bank in 40/80 col mode (CoCo 3)
     bank_set(bank);
+    puts(s);
 
-    puts("BACK TO BASIC");
+    puts("\nBACK TO BASIC");
 
     return 0;
 }
