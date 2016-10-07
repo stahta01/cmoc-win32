@@ -40,18 +40,18 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #include <sys/size.h>
 
 int memcmp(void* ptr1, void* ptr2, size_t size); // ANSIC
-void* memchr(void* dst, int value, size_t size); // ANSIC
+void* memchr(void* dst, int val, size_t size);  // ANSIC
 
 void* memcpy(void* dst, void* src, size_t size); // ANSIC
 
 void* memmove(void* dst, void* src, size_t size); // ANSIC
-void* memset(void* dst, int value, size_t size); // ANSIC
+void* memset(void* dst, int val, size_t size);  // ANSIC
 
-void* memand(void* dst, int value, size_t size); // CMOC
+void* memand(void* dst, int val, size_t size);  // CMOC
 void* memccpy(void* dst, void* src, int c, size_t size); // CMOC
 void* memcpy16(void* dst, void* src, size_t size); // CMOC
-void* memor(void* dst, int value, size_t size); // CMOC
-void* memxor(void* dst, int value, size_t size); // CMOC
+void* memor(void* dst, int val, size_t size);   // CMOC
+void* memxor(void* dst, int val, size_t size);  // CMOC
 void  memcom(void* dst, size_t size);           // CMOC
 void* memcpy_r(void* dst, void* src, size_t size); // CMOC
 
