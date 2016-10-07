@@ -30,6 +30,17 @@ int main(void)
     puts("RETRIEVING STRINGS");
 
     for (int i = 0; i < STRING_COUNT; i++) {
+        // Note: 40/80 compatiblity issues.
+        // We can printf with far strings, because the strings are copied out
+        // to common memory before printing. puts doesn't work, because
+        // it sends the strings to chrout, which is in ROM. ie: strings cant be in
+        // a bank.
+        // This is only the case for far_char_t types. libfar will handle the switching,
+        // but if you are using libbank directly, you still need to copy the string
+        // out before calling puts.
+        // This does not apply to 32 col mode, or the libgraph modes, since they
+        // dont rely on ROM routines. I will be looking into accessing 40/80 col video ram
+        // directly. ie: bypass the ROM.
         printf("DATA:%Fs BANK:%u\n", names[i], names[i]->bank);
         ffree((far_void_t*)names[i]);
     }
