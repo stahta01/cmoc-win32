@@ -30,7 +30,6 @@ void ShowImage(crypt_image_t* image)
 
 int main(void)
 {
-    system("PMODE4,1:SCREEN1,1");
     for (;;) {
         ShowImage((crypt_image_t*)image1);
         ShowImage((crypt_image_t*)image2);
