@@ -1,7 +1,7 @@
 
 #include "_conio.h"
 
-int palettecolor(int r, int g, int b)
+int colorrgb(int r, int g, int b)
 {
     return
         ((r & 2) << 4) | ((r & 1) << 2) |

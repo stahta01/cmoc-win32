@@ -12,18 +12,18 @@
 
 int main(void)
 {
-    system("WIDTH40");
+    system("WIDTH80");
 
     bgcolor(0);                                 // palette pen = 0
     textcolor(0);                               // palette pen = 8
     // CoCo3 palettes are 16 bytes. The first 8 are used by bgcolor().
     // The second 8 are used by textcolor()
     // palettes contain rgb information. 2 bits each. ie: values 0..3
-    remappalette(0, palettecolor(2, 0, 1));
-    remappalette(8, palettecolor(3, 3, 0));
+    remappalette(0, colorrgb(2, 0, 1));
+    remappalette(8, colorrgb(3, 3, 0));
 
-    // bordercolor() accepts a palettecolor(). ie: it doesn't map to the palette via a pen.
-    bordercolor(palettecolor(1, 0, 1));
+    // bordercolor() accepts a colorrgb(). ie: it doesn't map to the palette via a pen.
+    bordercolor(colorrgb(1, 0, 1));
 
     clrscr();
 
