@@ -19,11 +19,11 @@ int main(void)
     while (true) {
         byte* line = (byte*)_beggrp + (9 << 5);
         for (int y = 0; y < 17; y++, line += 32) {
-            memrol(line, 32, line[0] & 128);
+            memrol(line, 32, line[0]);
         }
         line = (byte*)_beggrp + (43 << 5);
         for (int y = 0; y < 15; y++, line += 32) {
-            memror(line, 32, line[31] & 1);
+            memror(line, 32, line[31]);
         }
     }
     return 0;

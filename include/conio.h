@@ -88,7 +88,7 @@ void screenwipe(void);                          // CMOC
 void screenmove(int dir);                       // CMOC
 
 void remappalette(int pen, int color);          // CMOC
-int remapallpalette(byte* palette);             // CMOC
+void remapallpalette(byte* palette);            // CMOC
 int colorrgb(int r, int g, int b);              // CMOC
 
 // write functions use a micro version of sprintf

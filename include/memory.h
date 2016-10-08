@@ -49,8 +49,8 @@ void* memset(void* dst, int val, size_t size);  // ANSIC
 
 void* memlsr(void* dst, size_t size);           // CMOC
 void* memlsl(void* dst, size_t size);           // CMOC
-void* memror(void* dst, size_t size, int cc);   // CMOC
-void* memrol(void* dst, size_t size, int cc);   // CMOC
+void* memror(void* dst, size_t size, int feed); // CMOC
+void* memrol(void* dst, size_t size, int feed); // CMOC
 
 void* memand(void* dst, int val, size_t size);  // CMOC
 void* memccpy(void* dst, void* src, int c, size_t size); // CMOC

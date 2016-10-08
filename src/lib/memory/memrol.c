@@ -1,7 +1,7 @@
 
 #include "_memory.h"
 
-asm void* memrol(void* dst, size_t size, int cc)
+asm void* memrol(void* dst, size_t size, int feed)
 {
     asm {
         ldd     4,s                             // get size
@@ -9,8 +9,7 @@ asm void* memrol(void* dst, size_t size, int cc)
         tfr     d,y                             // y = size
         ldx     2,s                             // x = dst
         leax    d,x                             // offset by size
-        clra                                    // get cc from parameter
-        cmpa    7,s
+        rol     7,s                             // get cc from first byte
         loop:
         rol     ,-x                             // rol next byte
         dey                                     // decrease size
