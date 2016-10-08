@@ -37,6 +37,9 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _VT52_H
 #define _VT52_H
 
+#define VT52_CHR_NULL       0
+#define VT52_CHR_ESCAPE     27
+
 #define VT52_CHR_UP         'A'
 #define VT52_CHR_DOWN       'B'
 #define VT52_CHR_RIGHT      'C'

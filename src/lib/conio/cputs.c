@@ -1,59 +1,67 @@
 
 #include "_conio.h"
 
-int _vt52mode = ASCII_NUL;
+int _vt52mode = VT52_CHR_NULL;
 
 byte _charsetgroups[] = {0 << 5, 3 << 5, 2 << 5, 0 << 5};
 
 void cputs(char* str)
 {
     bank_t bank;
-    if (_is_coco3_mode) {
+    bool is4080 = _is_coco3_mode;
+    bool is32 = isvidram();
+
+    if (is4080) {
         bank = bank_set(13);
     }
     for (int chr; chr = *str++;) {
-        switch (_vt52mode) {
-        case ASCII_ESC:
-            switch (chr) {
-            case VT52_CHR_UP:
-            case VT52_CHR_DOWN:
-            case VT52_CHR_RIGHT:
-            case VT52_CHR_LEFT:
-            case VT52_CHR_HOME:
-                cursormove(chr);
-                _vt52mode = ASCII_NUL;
+        if (_vt52mode) {
+            switch (_vt52mode) {
+            case VT52_CHR_ESCAPE:
+                switch (chr) {
+                case VT52_CHR_UP:
+                case VT52_CHR_DOWN:
+                case VT52_CHR_RIGHT:
+                case VT52_CHR_LEFT:
+                case VT52_CHR_HOME:
+                    cursormove(chr);
+                    _vt52mode = VT52_CHR_NULL;
+                    break;
+                case VT52_CHR_YPOS:
+                    _vt52mode = VT52_CHR_YPOS;
+                    break;
+                }
+                break;
+            case VT52_CHR_XPOS:
+                gotox(chr - 32);
+                _vt52mode = VT52_CHR_NULL;
                 break;
             case VT52_CHR_YPOS:
-                _vt52mode = chr;
+                gotoy(chr - 32);
+                _vt52mode = VT52_CHR_XPOS;
+                break;
+            default:
+                _vt52mode = VT52_CHR_NULL;
                 break;
             }
-            break;
-        case VT52_CHR_XPOS:
-            gotox(chr - 32);
-            _vt52mode = ASCII_NUL;
-            break;
-        case VT52_CHR_YPOS:
-            gotoy(chr - 32);
-            _vt52mode = VT52_CHR_XPOS;
-            break;
-        default:
-            _vt52mode = ASCII_NUL;
+        } else {
             switch (chr) {
-            case ASCII_ESC:
-                _vt52mode = ASCII_ESC;
-                break;
             case ASCII_BS:
             case ASCII_HT:
             case ASCII_LF:
             case ASCII_CR:
                 cursormove(chr);
                 break;
+            case ASCII_ESC:
+                _vt52mode = VT52_CHR_ESCAPE;
+                break;
             default:
-                if (_is_coco3_mode) {
+                if (is4080) {
                     *(word*)(_h_crsloc + 0xa000) = (chr << 8) | _h_crsatt;
-                } else if (isvidram()) {
+                } else if (is32) {
                     chr = (chr & 31) | _charsetgroups[chr >> 5];
                     if (_conio.revers) {
+                        // todo: fix this
                         chr &= 64 ^ -1;
                     }
                     *(byte*)_curpos = (byte)chr;
@@ -65,7 +73,7 @@ void cputs(char* str)
             }
         }
     }
-    if (_is_coco3_mode) {
+    if (is4080) {
         bank_set(bank);
     }
 }
