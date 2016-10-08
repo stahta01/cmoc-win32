@@ -3,7 +3,7 @@
 
 void bob_free(bob_t* bob)
 {
-    if (bob->freememory) {
+    if (bob->owned) {
         free(bob->data);
     }
     free(bob);

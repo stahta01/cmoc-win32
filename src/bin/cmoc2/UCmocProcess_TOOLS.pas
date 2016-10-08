@@ -101,6 +101,7 @@ begin
         OStringDynArray.AddDefine(LParams, '__fastcall__', EmptyStr);
         OStringDynArray.AddDefine(LParams, '__cdecl', EmptyStr);
         OStringDynArray.AddDefine(LParams, 'restrict', EmptyStr);
+        //OStringDynArray.AddDefine(LParams, 'this', '__this__');
         OStringDynArray.AddDefine(LParams, 'NO_OLDNAMES', EmptyStr);
         OStringDynArray.Add(LParams, ExtractFileName(LTmp));
         ExecuteTool(Tool_CMOC, LParams, ExtractFilePath(LTmp));
