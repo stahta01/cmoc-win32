@@ -47,8 +47,8 @@ int main(void)
 {
     system("HSCREEN3");
 
-    bordercolor(42);
-    _remappalette(0, 0);
+    bordercolor(colorrgb(3, 0, 0));
+    remappalette(0, 0);
 
     _setcharset(1, 0, charset_atari_small);
 
@@ -58,7 +58,7 @@ int main(void)
 
     for (int i = 0; i < 50; i++) {
         ultra_small_string("Ultra small text... PRESS A KEY TO EXIT");
-        _remappalette(1, i);
+        remappalette(1, i);
     }
     while (!kbhit()) {
     }
