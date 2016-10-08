@@ -62,11 +62,11 @@ void sector_close(sector_t* sect)
 void dskcon_dirent_get(dskcon_dirent_t* dirent, char* fn)
 {
     char* pos = fn, *end;
-    end = (char*)_memccpy(pos, dirent->name, ' ', 8);
+    end = (char*)memccpy(pos, dirent->name, ' ', 8);
     end = end ? end - 1 : pos + 8;
     *end++ = '.';
     pos = end;
-    end = (char*)_memccpy(pos, dirent->ext, ' ', 3);
+    end = (char*)memccpy(pos, dirent->ext, ' ', 3);
     end = end ? end - 1 : pos + 3;
     *end = 0;
 }
