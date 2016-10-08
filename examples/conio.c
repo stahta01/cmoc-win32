@@ -13,7 +13,8 @@ int main(void)
 {
     system("WIDTH40");
 
-    _h_crsatt = (3<<3)|2;
+    textcolor(3);
+    bgcolor(7);
     bordercolor(0x88);
 
     clrscr();

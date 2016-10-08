@@ -42,13 +42,13 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 bool cursor(bool onoff);
 bool kbhit(void);
 bool revers(bool onoff);
-int bgcolor(int color);
+int bgcolor(int pen);
 int bordercolor(int color);
 int cgetc(void);
 int cprintf(char* fmt, ...);
 int cprintfxy(int x, int y, char* fmt, ...);    // CMOC
 int cscanf(char* fmt, ...);                     // TODO
-int textcolor(int color);
+int textcolor(int pen);
 int vcprintf(char* fmt, va_list args);
 int vcscanf(char* fmt, va_list args);           // TODO
 
