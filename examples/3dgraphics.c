@@ -1,7 +1,7 @@
 
 // Now works for coco/coco3/dragon32/dragon64.
 
-#pragma options -machine=dragon64
+//#pragma options -machine=dragon64
 
 #include <stdio.h>
 #include <stdlib.h>
