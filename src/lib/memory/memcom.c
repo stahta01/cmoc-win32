@@ -1,17 +1,17 @@
 
 #include "_memory.h"
 
-void asm memcom(void* ptr, size_t n)
+void asm memcom(void* ptr, size_t size)
 {
     asm {
-        ldx     2,s
         ldy     4,s
-        beq     LEXIT
-        LLOOP:
+        beq     endloop
+        ldx     2,s
+        loop:
         com     ,x+
         leay    -1,y
-        bne     LLOOP
-        LEXIT:
+        bne     loop
+        endloop:
     }
 }
 
