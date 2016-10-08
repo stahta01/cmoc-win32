@@ -1,8 +1,8 @@
 
-#include "_basic.h"
+#include "_bob.h"
 
-void BITMAPCOPYRECT(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src,
-                    int u1, int v1, int u2, int v2)
+void bob_copyrect(bob_t* dst, int x1, int y1, int x2, int y2, bob_t* src,
+                  int u1, int v1, int u2, int v2)
 {
     int w = x2 - x1, h = y2 - y1;
 

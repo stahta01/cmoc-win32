@@ -171,21 +171,5 @@ void MELLIPSE(int x, int y, int w, int h, byte c);
 void MCIRCLE(int x, int y, int r, byte c);
 void MCLIP(int x1, int y1, int x2, int y2);
 
-// Bitmap functions
-
-typedef struct {
-    byte* data;
-    word bytesperline, width, height;
-    bool freememory;
-} BITMAP;
-
-BITMAP* BITMAPATTACH(word width, word height, byte* data, word bytesperline, bool freememory);
-BITMAP* BITMAPCREATE(word width, word height);
-void BITMAPFREE(BITMAP* bitmap);
-void BITMAPCOPYRECT(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src,
-                    int u1, int v1, int u2, int v2);
-void BITMAPSTRETCH(BITMAP* dst, int x1, int y1, int x2, int y2, BITMAP* src);
-void BITMAPDRAW(BITMAP* dst, int x, int y, BITMAP* src);
-
 #endif
 
