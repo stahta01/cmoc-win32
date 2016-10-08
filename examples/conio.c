@@ -1,12 +1,6 @@
 
-#include <conio.h>
 #include <stdlib.h>
-#include <system.h>
-#include <graph.h>
-#include <memory.h>
-
-#include <coco/coco3.h>
-#include <coco/super.h>
+#include <conio.h>
 
 //#pragma options -machine=cocous
 
