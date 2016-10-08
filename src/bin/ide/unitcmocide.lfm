@@ -2463,7 +2463,7 @@ object FormCmocIDE: TFormCmocIDE
         Enabled = False
       end
       object MenuHelpLocalDocuments: TMenuItem
-        Caption = 'Local Documents'
+        Caption = 'WinCMOC Documents'
         Default = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -2589,8 +2589,15 @@ object FormCmocIDE: TFormCmocIDE
         ImageIndex = 26
         OnClick = MenuHelpClick
       end
+      object MenuItem1: TMenuItem
+        Caption = 'BASIC Documents'
+        Default = True
+        Hint = '%PACKAGE%/doc/basic/'
+        ImageIndex = 27
+        OnClick = MenuHelpClick
+      end
       object MenuHelpColorBasicSummary: TMenuItem
-        Caption = 'Color Basic Summary ...'
+        Caption = 'Color BASIC Summary ...'
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
           2000000000000004000064000000640000000000000000000000FFFFFF00FFFF
@@ -2632,7 +2639,7 @@ object FormCmocIDE: TFormCmocIDE
         OnClick = MenuHelpClick
       end
       object MenuHelpExtendedBasicSummary: TMenuItem
-        Caption = 'Extended Basic Summary ...'
+        Caption = 'Extended BASIC Summary ...'
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
           2000000000000004000064000000640000000000000000000000FFFFFF00FFFF
@@ -2674,7 +2681,7 @@ object FormCmocIDE: TFormCmocIDE
         OnClick = MenuHelpClick
       end
       object MenuHelpDiskBasicSummary: TMenuItem
-        Caption = 'Disk Basic Summary ...'
+        Caption = 'Disk BASIC Summary ...'
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
           2000000000000004000064000000640000000000000000000000FFFFFF00FFFF
@@ -2714,9 +2721,6 @@ object FormCmocIDE: TFormCmocIDE
         Hint = '%PACKAGE%/doc/basic/diskbasic.txt'
         ImageIndex = 26
         OnClick = MenuHelpClick
-      end
-      object MenuHelpSep2: TMenuItem
-        Enabled = False
       end
       object MenuHelpOnlineHelp: TMenuItem
         Caption = 'Online Help'

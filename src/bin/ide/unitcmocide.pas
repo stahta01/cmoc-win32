@@ -125,10 +125,10 @@ type
     MenuHelpVccEmulator: TMenuItem;
     MenuHelpWinCmocOnline: TMenuItem;
     MenuHelpXRoarEmulator: TMenuItem;
-    MenuHelpSep2: TMenuItem;
     MenuHelpSep1: TMenuItem;
     MenuEmulatorsCoCo2: TMenuItem;
     MenuEditSep6: TMenuItem;
+    MenuItem1: TMenuItem;
     MenuItem3: TMenuItem;
     MenuEmulatorsEDTASM: TMenuItem;
     MenuEmulatorsSep2: TMenuItem;

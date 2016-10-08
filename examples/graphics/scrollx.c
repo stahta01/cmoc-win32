@@ -10,6 +10,10 @@
 
 #include "images/game128x96.c"
 
+asm void memrol2(void* dst, void* src, size_t size)
+{
+}
+
 int main(void)
 {
     system("PMODE1,1");
@@ -19,11 +23,11 @@ int main(void)
     while (true) {
         byte* line = (byte*)_beggrp + (9 << 5);
         for (int y = 0; y < 17; y++, line += 32) {
-            memrol(line, 32, line[0]);
+            memrol(line, line[0], 32);
         }
         line = (byte*)_beggrp + (43 << 5);
         for (int y = 0; y < 15; y++, line += 32) {
-            memror(line, 32, line[31]);
+            memror(line, line[31], 32);
         }
     }
     return 0;
