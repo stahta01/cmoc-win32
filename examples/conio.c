@@ -7,9 +7,11 @@
 #include <coco/coco3.h>
 #include <coco/super.h>
 
+//#pragma options -machine=cocous
+
 int main(void)
 {
-    system("WIDTH40");
+    system("WIDTH80");
 
     _h_crsatt = (3<<3)|2;
     _v_border = 0x88;

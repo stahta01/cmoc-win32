@@ -1,7 +1,7 @@
 
-#include "_conio.h"
+#include "_eddie.h"
 
-void cedits(char* str, size_t size, char* eolchars, bool leaveatend)
+void eddie_line(char* str, size_t size, char* eolchars, bool leaveatend)
 {
     *str = 0;
     int w, h, curpos = whereat();

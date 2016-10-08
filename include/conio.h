@@ -83,12 +83,8 @@ int getch(void);                                // Borland
 int getche(void);                               // Borland
 int ungetch(int chr);                           // Borland
 
-// Moves the cursor given a vt52 direction. ie: A,B,C or D
-
 void cursormove(int chr);                       // CMOC
-void cedits(char* str, size_t size, char* eolchars, bool leaveatend);
-
-void screenwipe(void);                          // CMOC - Wipe screen without moving cursor
+void screenwipe(void);                          // CMOC
 void screenmove(int dir);                       // CMOC
 
 // write functions use a micro version of sprintf

@@ -1,10 +1,12 @@
 
+#include <time.h>
+#include <ctype.h>
 #include <conio.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <ctype.h>
-#include <time.h>
+#include <eddie.h>
+
 #include <graph.h>
 #include <bank.h>
 #include <equates.h>
