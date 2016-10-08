@@ -7,7 +7,7 @@
 // upper 32K is dodgy.
 
 // I'll keep looking for information. On the other hand, a 64K Dragon can be
-// identify, because the ROM was written to support 64K.
+// identified, because the ROM was written to support 64K.
 // But, again, it might be possible to upgrade a Dragon32 to 64K, or some
 // Dragon32's might have dodgy 64K mem, in which case, its not possible
 // to identity them easily.
@@ -18,6 +18,7 @@ void machine_init(void)
         if (MAC_IS_COCO3) {
             machine.typ = MAC_TYP_COCO3;
             machine.rom = MAC_ROM_SUPER;
+            // TODO: Can we detect 512?
             machine.ram = 128;
         } else {
             if (MAC_IS_COCO1) {
