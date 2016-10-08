@@ -2,6 +2,7 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <system.h>
+#include <graph.h>
 #include <memory.h>
 
 #include <coco/coco3.h>
@@ -13,9 +14,16 @@ int main(void)
 {
     system("WIDTH40");
 
-    textcolor(3);
-    bgcolor(7);
-    bordercolor(0x88);
+    bgcolor(0);                                 // palette pen = 0
+    textcolor(0);                               // palette pen = 8
+    // CoCo3 palettes are 16 bytes. The first 8 are used by bgcolor().
+    // The second 8 are used by textcolor()
+    // palettes contain rgb information. 2 bits each. ie: values 0..3
+    remappalette(0, palettecolor(2, 0, 1));
+    remappalette(8, palettecolor(3, 3, 0));
+
+    // bordercolor() accepts a palettecolor(). ie: it doesn't map to the palette via a pen.
+    bordercolor(palettecolor(1, 0, 1));
 
     clrscr();
 

@@ -24,7 +24,6 @@
 #include <graph.h>
 #include <bank.h>
 #include <coco/coco3.h>
-#include <coco/super.h>
 
 void ultra_small_string(char* s)
 {
@@ -48,9 +47,8 @@ int main(void)
 {
     system("HSCREEN3");
 
-    _v_border = 42;
-    _paletreg[0] = 0;
-    _paletreg[1] = 255;
+    bordercolor(42);
+    _remappalette(0, 0);
 
     _setcharset(1, 0, charset_atari_small);
 
@@ -60,7 +58,7 @@ int main(void)
 
     for (int i = 0; i < 50; i++) {
         ultra_small_string("Ultra small text... PRESS A KEY TO EXIT");
-        _paletreg[1]++;
+        _remappalette(1, i);
     }
     while (!kbhit()) {
     }

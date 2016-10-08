@@ -136,9 +136,8 @@ void _setcolor(int);
 int _getcolor(void);
 int _setbkcolor(int);
 int _getbkcolor(void);
-//void _remappalette(int, long);
-//int _remapallpalette(long*);
-int _selectpalette(int);
+
+int _selectpalette(int css);
 
 // Palette #0
 
