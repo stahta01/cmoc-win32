@@ -11,10 +11,10 @@
 
 int main(void)
 {
-    system("WIDTH80");
+    system("WIDTH40");
 
     _h_crsatt = (3<<3)|2;
-    _v_border = 0x88;
+    bordercolor(0x88);
 
     clrscr();
 

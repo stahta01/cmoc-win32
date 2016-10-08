@@ -39,7 +39,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 #include <sys/size.h>
 
-void eddie_line(char* str, size_t size, char* eolchars, bool leaveatend);
+int eddie_line(char* str, size_t size, char* eolchars, bool leaveatend);
 
 #endif
 

@@ -1,14 +1,14 @@
 
 #include "_eddie.h"
 
-void eddie_line(char* str, size_t size, char* eolchars, bool leaveatend)
+int eddie_line(char* str, size_t size, char* eolchars, bool leaveatend)
 {
     *str = 0;
-    int w, h, curpos = whereat();
+    int chr, w, h, curpos = whereat();
     screensize(&w, &h);
-    int screenendat = w * h;
+    int dispen = w * h;
     char* pos = str;
-    for (int chr; !strchr(eolchars, chr = getch());) {
+    while (!strchr(eolchars, chr = getch())) {
         int at = whereat();
         switch (chr) {
         case ASCII_NAK:                         // SHIFT+LEFT
@@ -38,7 +38,7 @@ void eddie_line(char* str, size_t size, char* eolchars, bool leaveatend)
                 int poslen = strlen(pos) + 1;
                 memcpy_r(pos + 1, pos, poslen);
                 *pos = (char)chr;
-                if (at + poslen >= screenendat) {
+                if (at + poslen >= dispen) {
                     at -= w;
                     curpos -= w;
                 }
@@ -52,5 +52,6 @@ void eddie_line(char* str, size_t size, char* eolchars, bool leaveatend)
     if (leaveatend) {
         gotoat(curpos + strlen(str));
     }
+    return chr;
 }
 
