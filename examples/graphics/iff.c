@@ -1,5 +1,5 @@
 
-#pragma options -machine=cocous
+//#pragma options -machine=cocous
 
 // This is a _simple_ example of loading an IFF file. The image was created
 // using Paintshop PRO. The code expects a 256x192, single plane (2 color)
