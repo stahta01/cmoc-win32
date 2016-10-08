@@ -1,11 +1,11 @@
 
-#include <equates.h>
+#include "_memory.h"
 
-void asm memcpy16(void* dst, void* src, unsigned n)
+asm void* memcpy16(void* dst, void* src, size_t size)
 {
     asm {
         ldd     6,s
-        beq     LRTS
+        beq     exit
         lsld
         lsld
         lsld
@@ -20,7 +20,7 @@ void asm memcpy16(void* dst, void* src, unsigned n)
         leau    7,u
         lds     7,s
 
-        LLOOP:
+        loop:
         puls    x,y,d,dp
         pshu    x,y,d,dp
         leau    14,u
@@ -30,11 +30,11 @@ void asm memcpy16(void* dst, void* src, unsigned n)
         ldd     ,s++
         std     -9,u
         cmpu    _V42
-        bne     LLOOP
+        bne     loop
         lds     _V40
         puls    u,dp
         cli
-        LRTS:
+        exit:
         ldd     2,s
     }
 }
