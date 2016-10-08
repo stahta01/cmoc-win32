@@ -52,6 +52,9 @@ void* memlsl(void* dst, size_t size);               // CMOC
 void* memror(void* dst, int val, size_t size);      // CMOC
 void* memrol(void* dst, int val, size_t size);      // CMOC
 
+void* memrol2(void* dst, int val, size_t size);     // CMOC
+void* memror2(void* dst, int val, size_t size);     // CMOC
+
 void* memand(void* dst, int val, size_t size);      // CMOC
 void* memccpy(void* dst, void* src,
               int val, size_t size);                // CMOC

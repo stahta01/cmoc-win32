@@ -4,14 +4,14 @@
 void asm memcom(void* ptr, size_t size)
 {
     asm {
-        ldy     4,s
-        beq     endloop
-        ldx     2,s
-        loop:
+        ldy     4,s                                 // y = size
+        beq     return
+        ldx     2,s                                 // x = dst
+        repeat:
         com     ,x+
         leay    -1,y
-        bne     loop
-        endloop:
+        bne     repeat
+        return:
     }
 }
 

@@ -5,7 +5,7 @@ asm void* memcpy16(void* dst, void* src, size_t size)
 {
     asm {
         ldd     6,s
-        beq     exit
+        beq     return
         lsld
         lsld
         lsld
@@ -20,7 +20,7 @@ asm void* memcpy16(void* dst, void* src, size_t size)
         leau    7,u
         lds     7,s
 
-        loop:
+        repeat:
         puls    x,y,d,dp
         pshu    x,y,d,dp
         leau    14,u
@@ -30,11 +30,11 @@ asm void* memcpy16(void* dst, void* src, size_t size)
         ldd     ,s++
         std     -9,u
         cmpu    _V42
-        bne     loop
+        bne     repeat
         lds     _V40
         puls    u,dp
         cli
-        exit:
+        return:
         ldd     2,s
     }
 }
