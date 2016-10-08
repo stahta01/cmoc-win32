@@ -2,6 +2,10 @@
 #ifndef _COCO_SUPER_H
 #define _COCO_SUPER_H
 
+// Locate of HR vidram in bank_set(13)
+
+#define _H_VIDRAM   49152
+
 // These locations are copies of _HRMODE & _HRWIDTH.
 // Note: These values overlap CoCo2's _DLBAUD & _TIMOUT, which means they are only valid
 // for CoCo3's. I guess the CoCo3 either moved or removed _DLBAUD/_TIMOUT, therefore
