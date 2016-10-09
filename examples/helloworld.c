@@ -7,7 +7,8 @@
 
 int main()
 {
-    system("CLS:LOADM\"CLOWN.PIC:1\"");
+    system("CLS:?\"HERE COMES COCO!\";");
+    system("LOADM\"CLOWN.PIC:1\"");
     puts("HELLO EVERYBODY!");
     beep(40, 1);
     beep(150, 1);

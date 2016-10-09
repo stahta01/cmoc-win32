@@ -1,4 +1,4 @@
 
 #include "_long.h"
 
-long_t __flacc;
+long_t _flacc;

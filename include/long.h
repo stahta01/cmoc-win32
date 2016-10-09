@@ -54,7 +54,7 @@ long_t* _lmod(long_t* dst, long_t* slx, long_t* sly);
 long_t* _atol(char* src, long_t* dst);
 char* _ltoa(long_t* src, char* dst);
 
-extern long_t __flacc;
+extern long_t _flacc;
 
 #endif
 

@@ -85,8 +85,8 @@
 
 // Variables for kreider lib functions
 
-#define _chcodes    ___chcodes
-#define _flacc      ___flacc
+#define _chcodes    __chcodes
+#define _flacc      __flacc
 
 // Unsure if these are used
 

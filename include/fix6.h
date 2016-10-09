@@ -48,7 +48,7 @@ typedef struct {
 } matrix_t;
 
 typedef struct {
-    unsigned char a, b;
+    byte a, b;
 } edge_t;
 
 typedef struct {
