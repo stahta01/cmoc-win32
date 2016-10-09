@@ -53,8 +53,8 @@ snode_t* slist_pull_head(slist_t* list);
 
 
 typedef struct dnode_t {
-    struct dnode_t* prev;
     struct dnode_t* next;
+    struct dnode_t* prev;
 } dnode_t;
 
 void dnode_link(dnode_t* n1, dnode_t* n2);
