@@ -16,8 +16,8 @@
 void coco3_pmode1(void)
 {
     _init0 &= 127;                                  // Enable CoCo3 GIME Modes
-    _videomod = 130;                                // Graphics & 96 rows
-    _videores = 9;                                  // 32 bpr & 4 color
+    _videomod = 130;                                // Enable graphics & 96 rows
+    _videores = 9;                                  // Set 32 bytes per row & 4 colors
     _v_scroll = 0;
     *(word*)_V_OFSET1 = 0xe000 + (_beggrp >> 3);    // Point GIME to beggrp
 
@@ -43,7 +43,7 @@ int main(void)
     while (true) {
         row = (byte*)_beggrp + (9 << 5);
         for (y = 0; y < 17; y++, row += 32) {
-            // Scrolling by one bit, causes color blinking in 2 color mode.
+            // Scrolling by one bit, causes color blinking in 4 color mode.
             // Which looks cool for the evil aliens :-)
             memrol(row, row[0], 32);
         }
