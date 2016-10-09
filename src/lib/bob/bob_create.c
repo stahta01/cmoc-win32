@@ -3,6 +3,16 @@
 
 bob_t* bob_create(int width, int height)
 {
-    return bob_create_with(width, height, width, calloc(width, height), true);
+    bob_t* bob = new(bob_t);
+    if (bob) {
+        void* bytes = calloc(width, height);
+        if (bytes) {
+            bob_init(bob, width, height, width, bytes, true);
+        } else {
+            free(bob);
+            bob = nullptr;
+        }
+    }
+    return bob;
 }
 

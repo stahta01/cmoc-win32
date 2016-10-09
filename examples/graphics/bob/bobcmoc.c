@@ -23,8 +23,8 @@ int main(void)
         *p = (char)(*p == ' ' ? 128 : (128 + (((p - image) / 30) << 4) | 8));
     }
 
-    screen = bob_create_with(32, 16, 32, 0x400, false);
-    test = bob_create_with(30, 7, 30, image, false);
+    screen = bob_create_adapter(32, 16, 32, 0x400);
+    test = bob_create_adapter(30, 7, 30, image);
 
     clrscr();
 

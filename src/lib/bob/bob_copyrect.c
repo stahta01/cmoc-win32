@@ -1,8 +1,9 @@
 
 #include "_bob.h"
 
-void bob_copyrect(bob_t* dst, int x1, int y1, int x2, int y2, bob_t* src,
-                  int u1, int v1, int u2, int v2)
+bob_t* bob_copyrect(
+    bob_t* dst, int x1, int y1, int x2, int y2,
+    bob_t* src, int u1, int v1, int u2, int v2)
 {
     int w = x2 - x1, h = y2 - y1;
     if (w > 0 && h > 0) {
@@ -42,5 +43,6 @@ void bob_copyrect(bob_t* dst, int x1, int y1, int x2, int y2, bob_t* src,
             }
         }
     }
+    return dst;
 }
 

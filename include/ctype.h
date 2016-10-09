@@ -81,23 +81,23 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 extern char _chcodes[128];
 
 bool isascii(int chr);
-bool iscntrl(int c);
-bool isdigit(int c);
-bool isupper(int c);
-bool islower(int c);
-bool isprint(int c);
-bool isspace(int c);
-bool isalpha(int c);
-bool isalnum(int c);
-bool isgraph(int c);
-bool ispunct(int c);
-bool isxupper(int c);
-bool isxlower(int c);
-bool isxdigit(int c);
+bool iscntrl(int chr);
+bool isdigit(int chr);
+bool isupper(int chr);
+bool islower(int chr);
+bool isprint(int chr);
+bool isspace(int chr);
+bool isalpha(int chr);
+bool isalnum(int chr);
+bool isgraph(int chr);
+bool ispunct(int chr);
+bool isxupper(int chr);
+bool isxlower(int chr);
+bool isxdigit(int chr);
 
-int toascii(int c);
-int toupper(int c);
-int tolower(int c);
+int toascii(int chr);
+int toupper(int chr);
+int tolower(int chr);
 
 #endif
 

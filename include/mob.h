@@ -34,34 +34,19 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 */
 
-#ifndef _BOB_H
-#define _BOB_H
+#ifndef _MOB_H
+#define _MOB_H
+
+#include <bob.h>
 
 typedef struct {
-    word width, height, bytesperrow;
-    byte* bytes;
-    bool owned;
-} bob_t;
+    bob_t* bobs[4];
+} mob_t;
 
-void bob_init(bob_t* bob, int width, int height, int bytesperrow, void* bytes, bool owned);
-bob_t* bob_create_adapter(int width, int height, int bytesperrow, void* bytes);
-bob_t* bob_create(int width, int height);
+mob_t* mob_create(bob_t* src);
+void mob_free(mob_t* mob);
 
-void bob_free(bob_t* bob);
-
-void bob_rol(bob_t* bob);
-void bob_ror(bob_t* bob);
-void bob_rol2(bob_t* bob);
-void bob_ror2(bob_t* bob);
-
-bob_t* bob_copyrect(
-    bob_t* dst, int x1, int y1, int x2, int y2,
-    bob_t* src, int u1, int v1, int u2, int v2);
-bob_t* bob_stretch(bob_t* dst, int x1, int y1, int x2, int y2, bob_t* src);
-bob_t* bob_drawrect(bob_t* dst, int x, int y, bob_t* src, int u1, int v1, int u2, int v2);
-bob_t* bob_draw(bob_t* dst, int x, int y, bob_t* src);
-
-void bob_init_beggrp(bob_t* bob);
+void mob_draw(mob_t* mob, int x, int y, bob_t* dst);
 
 #endif
 
