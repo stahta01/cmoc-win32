@@ -40,42 +40,43 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 // I could not find the ctype.h file for kreiderlib, so I recreated this file.
 // If you find an error, email me.
 
-#define _CONTROL            0x01
-#define _UPPER              0x02
-#define _LOWER              0x04
-#define _DIGIT              0x08
-#define _WHITE              0x10
-#define _PUNCT              0x20
-#define _HEXDIG             0x40
+#define CTYPE_CONTROL       0x01
+#define CTYPE_UPPER         0x02
+#define CTYPE_LOWER         0x04
+#define CTYPE_DIGIT         0x08
+#define CTYPE_WHITE         0x10
+#define CTYPE_PUNCT         0x20
+#define CTYPE_HEXDIG        0x40
 
-#define _ALPHA              (_UPPER|_LOWER)
-#define _ALNUM              (_UPPER|_LOWER|_DIGIT)
+#define CTYPE_ALPHA         (CTYPE_UPPER|CTYPE_LOWER)
+#define CTYPE_ALNUM         (CTYPE_UPPER|CTYPE_LOWER|CTYPE_DIGIT)
 
-#define _iscntrl(_C)        (_chcodes[_C]&_CONTROL)
-#define _isdigit(_C)        (_chcodes[_C]&_DIGIT)
-#define _isupper(_C)        (_chcodes[_C]&_UPPER)
-#define _islower(_C)        (_chcodes[_C]&_LOWER)
-#define _isalpha(_C)        (_chcodes[_C]&_ALPHA)
-#define _isalnum(_C)        (_chcodes[_C]&_ALNUM)
-#define _isxdigit(_C)       (_chcodes[_C]&_HEXDIG)
-#define _ispunct(_C)        (_chcodes[_C]&_PUNCT)
-#define _isspace(_C)        (_chcodes[_C]&_WHITE)
-#define _isprint(_C)        (((byte)(_C)-32)<95)
-#define _isgraph(_C)        (((byte)(_C)-33)<94)
+#define _iscntrl(_C)        (_chcodes[_C]&CTYPE_CONTROL)
+#define _isdigit(_C)        (_chcodes[_C]&CTYPE_DIGIT)
+#define _isupper(_C)        (_chcodes[_C]&CTYPE_UPPER)
+#define _islower(_C)        (_chcodes[_C]&CTYPE_LOWER)
+#define _isalpha(_C)        (_chcodes[_C]&CTYPE_ALPHA)
+#define _isalnum(_C)        (_chcodes[_C]&CTYPE_ALNUM)
+#define _isxdigit(_C)       (_chcodes[_C]&CTYPE_HEXDIG)
+#define _ispunct(_C)        (_chcodes[_C]&CTYPE_PUNCT)
+#define _isspace(_C)        (_chcodes[_C]&CTYPE_WHITE)
 
-#define _toascii(_C)        ((_C) & 0x7f)
-#define _toupper(_C)        (_islower(_C) ? ((_C) - ' ') : (_C))
-#define _tolower(_C)        (_isupper(_C) ? ((_C) + ' ') : (_C))
+#define _isprint(_C)        ((unsigned)((_C)-32)<95)
+#define _isgraph(_C)        ((unsigned)((_C)-33)<94)
+
+#define _toascii(_C)        ((_C)&0x7f)
+#define _toupper(_C)        (_islower(_C)?((_C)-' '):(_C))
+#define _tolower(_C)        (_isupper(_C)?((_C)+' '):(_C))
 
 // I recommend using the function versions, as these are a bit long.
 
-#define _isxupper(_C)       (_isdigit(_C) || ((_C) >= 'A' && (_C) <= 'F'))
-#define _isxlower(_C)       (_isdigit(_C) || ((_C) >= 'a' && (_C) <= 'f'))
+#define _isxupper(_C)       (_isdigit(_C)||((_C)>='A'&&(_C)<='F'))
+#define _isxlower(_C)       (_isdigit(_C)||((_C)>='a'&&(_C)<='f'))
 
 // Not standard. Might get removed.
 
 #define _isrange(_C,_L,_H)  ((_C)>=(_L)&&(_C)<=(_H))
-#define _isascii(_C)        ((_C) >= 0 && (_C) <= 0x7f)
+#define _isascii(_C)        ((_C)>=0&&(_C)<=0x7f)
 
 extern char _chcodes[128];
 

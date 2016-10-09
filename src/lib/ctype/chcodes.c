@@ -1,6 +1,14 @@
 
 #include <ctype.h>
 
+#define _CONTROL    CTYPE_CONTROL
+#define _UPPER      CTYPE_UPPER
+#define _LOWER      CTYPE_LOWER
+#define _DIGIT      CTYPE_DIGIT
+#define _WHITE      CTYPE_WHITE
+#define _PUNCT      CTYPE_PUNCT
+#define _HEXDIG     CTYPE_HEXDIG
+
 char  _chcodes[128] = {
     /* 00 */    _CONTROL,
     /* 01 */    _CONTROL,
