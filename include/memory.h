@@ -65,6 +65,9 @@ void* memxor(void* dst, int val, size_t size);      // CMOC
 void  memcom(void* dst, size_t size);               // CMOC
 void* memcpy_r(void* dst, void* src, size_t size);  // CMOC
 
+void memcpy_unpack(void* dst, void* src, size_t count,
+                   size_t size, size_t dstoff);     // CMOC
+
 void memset_w(void* dst, word val, size_t size);    // CMOC
 
 void bzero(void* dst, size_t size);                 // BSD

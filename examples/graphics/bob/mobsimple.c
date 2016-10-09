@@ -36,18 +36,18 @@ int main(void)
 
     bob_init(&bob, 32, 192, 32, (void*)_beggrp, false);
 
-    int x = 0, y = 60 << 5, xx = 40, yy = 30;
+    int x = 0, y = 60 << 5, xx = 10, yy = 14;
 
     for (;;) {
         x += xx;
-        if (x < 0 || x > (110 << 5)) {
+        if (x < 0 || x > (115 << 5)) {
             x += xx = -xx;
         }
-        y += yy += 2;
+        y += yy += 1;
         if (y < 0 || y > (170 << 5)) {
             y += yy = -yy;
         }
-        mob_draw(mob, x >> 5, y >> 5, &bob);
+        mob_memcpy_unpack(mob, x >> 5, y >> 5, &bob);
     }
     return 0;
 }

@@ -48,5 +48,7 @@ void mob_free(mob_t* mob);
 
 void mob_draw(mob_t* mob, int x, int y, bob_t* dst);
 
+void mob_memcpy_unpack(mob_t* mob, int x, int y, bob_t* dst);
+
 #endif
 
