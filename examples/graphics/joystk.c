@@ -1,15 +1,15 @@
 
-
 #include <basic.h>
 #include <ctype.h>
 
-#define VIDCHAR(X,Y) *(byte*)(1024+(unsigned)(Y)*32+(unsigned)(X))
+#define VIDCHAR(X,Y) *(byte*)(1024+((word)(Y)<<5)+(word)(X))
 #define VIDSEMI(X,Y) VIDCHAR(X>>1,Y>>1)
 
 int main(void)
 {
     int i;
-    byte cx = 0, cy = 0, cc = 128, jx = 1, jy = 1, pen = 2;
+    int cx = 0, cy = 0, cc = 128, jx = 1, jy = 1;
+    int pen = 2;
 
     for (i = 0; i < 32; i++) {
         LLINE(0, i, 64, i, 1);
@@ -22,10 +22,18 @@ int main(void)
         if (isdigit(c)) {
             pen = c - '0';
         }
+        if (c == 'L') {
+            LOADM("JOYSTK.PIC", 0);
+            cc = VIDSEMI(cx,cy);
+        }
+        if (c == 'S') {
+            VIDSEMI(cx, cy) = (byte)cc;
+            SAVEM("JOYSTK.PIC", 1024, 1024 + 511, 0);
+        }
         jx = JOYSTK(0);
         jy = JOYSTK(1) >> 1;
         if (jx != cx || jy != cy) {
-            VIDSEMI(cx, cy) = cc;
+            VIDSEMI(cx, cy) = (byte)cc;
             cx = jx;
             cy = jy;
             cc = VIDSEMI(cx, cy);

@@ -1,10 +1,8 @@
 
 #include <basic.h>
 
-void PCLS(int c)
+void PCLS(int pen)
 {
-    char s[] = "PCLS?";
-    s[4] = '0' + c;
-    system(s);
+    systemf("PCLS%d", pen);
 }
 

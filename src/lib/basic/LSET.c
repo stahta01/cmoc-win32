@@ -1,14 +1,13 @@
 
 #include "_basic.h"
-#include <motorola.h>
 
 #define VIDLOC(x,y) (byte*)(_VIDRAM + ((word)((y) & 30) << 4) + (word)(((x) & 63) >> 1))
 
-void LSET(int x, int y, byte c)
+void LSET(int x, int y, int c)
 {
     byte* p = VIDLOC(x, y);
     *p = c ?
-         _chr_set[x & 1][y & 1] | ((c - 1) << 4) | ((*p & 128 ? *p : 0) & 15) :
+         _chr_set[x & 1][y & 1] | (((byte)c - 1) << 4) | ((*p & 128 ? *p : 0) & 15) :
          _chr_clr[x & 1][y & 1] & (*p & 128 ? *p : 0x8f);
 }
 

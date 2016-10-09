@@ -64,8 +64,8 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 // Color BASIC
 
 int ABS(int numeric);
-byte PEEK(unsigned addr);
-void POKE(unsigned addr, byte value);
+byte PEEK(word addr);
+void POKE(word addr, word value);
 void* VARPTR(char* s);
 size_t INPUT(int f, char* s);
 
@@ -92,7 +92,7 @@ void LINE_BF(int x1, int y1, int x2, int y2, int onoff);
 
 // Tape Functions
 
-int CLOADM(char* fn, unsigned offset);
+int CLOADM(char* fn, word offset);
 int CSAVEM(char* fn, void* start, void* finish, void* exec);
 
 // Disk BASIC Functions
@@ -146,15 +146,15 @@ void HLINE_BF(int x1, int y1, int x2, int y2, int onoff);
 
 // New lores functions written in C
 
-void LSET(int x, int y, byte c);
+void LSET(int x, int y, int c);
 int LPOINT(int x, int y);
 void LRESET(int x, int y);
-void LLINE(int x1, int y1, int x2, int y2, byte c);
-void LLINE_B(int x1, int y1, int x2, int y2, byte c);
-void LLINE_BF(int x1, int y1, int x2, int y2, byte c);
-void LARC(int x, int y, int w, int h, int s, int e, byte c);
-void LELLIPSE(int x, int y, int w, int h, byte c);
-void LCIRCLE(int x, int y, int r, byte c);
+void LLINE(int x1, int y1, int x2, int y2, int c);
+void LLINE_B(int x1, int y1, int x2, int y2, int c);
+void LLINE_BF(int x1, int y1, int x2, int y2, int c);
+void LARC(int x, int y, int w, int h, int s, int e, int c);
+void LELLIPSE(int x, int y, int w, int h, int c);
+void LCIRCLE(int x, int y, int r, int c);
 
 // New medium resolution functions written in C
 

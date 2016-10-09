@@ -1,7 +1,7 @@
 
 #include "_basic.h"
 
-void LLINE(int x1, int y1, int x2, int y2, byte c)
+void LLINE(int x1, int y1, int x2, int y2, int c)
 {
     x2 -= x1;
     y2 -= y1;
@@ -17,7 +17,7 @@ void LLINE(int x1, int y1, int x2, int y2, byte c)
                 x = (byte)(x1 >> 8);
                 y = (byte)(y1 >> 8);
                 byte* p = (byte*)_VIDRAM + ((word)(y & 30) << 4) + (word)((x & 63) >> 1);
-                *p = _chr_set[x & 1][y & 1] | c | ((*p & 128 ? *p : 0) & 15);
+                *p = _chr_set[x & 1][y & 1] | (byte)c | ((*p & 128 ? *p : 0) & 15);
             }
         } else {
             for (; length--; x1 += x2, y1 += y2) {

@@ -1,7 +1,7 @@
 
 #include <basic.h>
 
-int LOADM(char* fn, unsigned offset)
+int LOADM(char* fn, word offset)
 {
     return systemf("LOADM\"%s\",%u", fn, offset);
 }

@@ -1,7 +1,7 @@
 
 #include <basic.h>
 
-void LLINE_B(int x1, int y1, int x2, int y2, byte c)
+void LLINE_B(int x1, int y1, int x2, int y2, int c)
 {
     if (x1 < x2 && y1 < y2) {
         x2--;

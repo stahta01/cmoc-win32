@@ -1,9 +1,9 @@
 
 #include <basic.h>
 
-void POKE(unsigned addr, unsigned char value)
+void POKE(word addr, word value)
 {
-    *(unsigned char*)addr = value;
+    *(byte*)addr = (byte)value;
 }
 
 
