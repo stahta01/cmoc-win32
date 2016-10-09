@@ -8,7 +8,7 @@
 // For this example, I've made the src bob higher than need be, because im not using
 // double buffering. I just draw the bobs over the old bobs.
 
-// So, no, bob's currently dont support masking, so you cant have overlapping mobs.
+// Bob's currently dont support masking, so you cant have overlapping mobs.
 
 // And... they might never support masking, because mask drawing in C is never
 // going to cut the mustard.
@@ -16,7 +16,7 @@
 // required to swap a bob with the screen. The code will contain the bob data, so,
 // after a bob is compiled, it can be freed.
 
-// Anyway, thats a few weeks away. Until then, here is a bouncing ball for you
+// Anyway, thats a few weeks away. Until then, here is a bouncing red ball for you
 // to play with...
 
 #include <stdlib.h>
@@ -25,29 +25,29 @@
 
 int main(void)
 {
-    system("PMODE3,1:PCLS1");
-    system("CIRCLE(12,12),8,2:PAINT(12,12),3,2");
+    system("PMODE3,1:PCLS3");
+    system("CIRCLE(12,12),11,0:PAINT(12,12),2,0");
 
     bob_t bob;
     bob_init(&bob, 4, 28, 32, (void*)_beggrp, false);
     mob_t* mob = mob_create(&bob);
 
-    system("PCLS:SCREEN1,0");
+    system("PCLS3:SCREEN1,0");
 
     bob_init(&bob, 32, 192, 32, (void*)_beggrp, false);
 
-    int x = 0, y = 60 << 5, xx = 10, yy = 14;
+    int x = 0, y = 60 << 6, xx = 10, yy = 14;
 
     for (;;) {
         x += xx;
-        if (x < 0 || x > (115 << 5)) {
+        if (x < 0 || x > (115 << 6)) {
             x += xx = -xx;
         }
         y += yy += 1;
-        if (y < 0 || y > (170 << 5)) {
+        if (y < 0 || y > (170 << 6)) {
             y += yy = -yy;
         }
-        mob_memcpy_unpack(mob, x >> 5, y >> 5, &bob);
+        mob_memcpy_unpack(mob, x >> 6, y >> 6, &bob);
     }
     return 0;
 }
