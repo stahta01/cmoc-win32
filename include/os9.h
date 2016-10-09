@@ -48,6 +48,7 @@ char* _strass(char* s1, char* s2, size_t count);
 char* _strhcpy(char* s1, char* s2);
 char* _strclr(char* str);
 char* _reverse(char* str);
+int _htoi(char* src);
 char* _itoa(int src, char* dst);
 char* _utoa(unsigned src, char* dst);
 unsigned _umin(unsigned a, unsigned b);

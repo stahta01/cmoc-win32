@@ -68,6 +68,7 @@
 
 // Functions defined in os9.h
 
+#define htoi        __htoi
 #define swab        __swab
 #define umax        __umax
 #define umin        __umin
