@@ -38,17 +38,21 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define _BOB_H
 
 typedef struct {
-    word bytesperrow, width, height;
-    byte* data;
+    word width, height, bytesperrow;
+    byte* bytes;
     bool owned;
 } bob_t;
 
-void bob_init(bob_t* bob, int width, int height, void* data, int bytesperrow, bool owned);
-
-bob_t* bob_create_with(int width, int height, void* data, int bytesperrow, bool owned);
+void bob_init(bob_t* bob, int width, int height, int bytesperrow, void* bytes, bool owned);
+bob_t* bob_create_with(int width, int height, int bytesperrow, void* bytes, bool owned);
 bob_t* bob_create(int width, int height);
 
-void bob_free(bob_t* bitmap);
+void bob_free(bob_t* bob);
+
+void bob_rol(bob_t* bob);
+void bob_ror(bob_t* bob);
+void bob_rol2(bob_t* bob);
+void bob_ror2(bob_t* bob);
 
 void bob_copyrect(bob_t* dst, int x1, int y1, int x2, int y2, bob_t* src, int u1, int v1, int u2,
                   int v2);

@@ -1,14 +1,14 @@
 
 //#pragma options -machine=cocous
 
-#include <equates.h>
-#include <stdlib.h>
 #include <conio.h>
-#include <memory.h>
+#include <stdlib.h>
+#include <bob.h>
+#include <equates.h>
 
 #include <crypt/image.h>
 
-#include "images/game128x96.c"
+#include "../images/game128x96.c"
 
 // These changes shouldn't effect a CoCo1/2. They setup GIME
 // for a nicer looking PMODE1
@@ -38,23 +38,18 @@ int main(void)
 
     coco3_pmode1();
 
-    byte* row;
-    int y;
+    bob_t cmoc, land, aliens;
+
+    bob_init(&cmoc, 30, 9, 32, (void*)(_beggrp + (80 << 5) + 1), false);
+    bob_init(&land, 32, 15, 32, (void*)(_beggrp + (43 << 5)), false);
+    bob_init(&aliens, 32, 17, 32, (void*)(_beggrp + (9 << 5)), false);
+
     while (true) {
-        row = (byte*)_beggrp + (9 << 5);
-        for (y = 0; y < 17; y++, row += 32) {
-            // Scrolling by one bit, causes color blinking in 4 color mode.
-            // Which looks cool for the evil aliens :-)
-            memrol(row, row[0], 32);
-        }
-        row = (byte*)_beggrp + (43 << 5);
-        for (y = 0; y < 15; y++, row += 32) {
-            memrol2(row, row[0], 32);
-        }
-        row = (byte*)_beggrp + (80 << 5);
-        for (y = 0; y < 9; y++, row += 32) {
-            memror2(row, row[31], 32);
-        }
+        // Scrolling by one bit, causes color blinking in 4 color mode.
+        // Which looks cool for the evil aliens :-)
+        bob_rol(&aliens);
+        bob_rol2(&land);
+        bob_ror2(&cmoc);
     }
     return 0;
 }

@@ -3,6 +3,6 @@
 
 bob_t* bob_create(int width, int height)
 {
-    return bob_create_with(width, height, (byte*)calloc(width, height), width, true);
+    return bob_create_with(width, height, width, calloc(width, height), true);
 }
 
