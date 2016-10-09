@@ -11,9 +11,7 @@ int main(void)
     int cx = 0, cy = 0, cc = 128, jx = 1, jy = 1;
     int pen = 2;
 
-    for (i = 0; i < 32; i++) {
-        LLINE(0, i, 64, i, 1);
-    }
+    LOADM("CLOWN.PIC:1", 0);
 
     cc = VIDSEMI(cx,cy);
 
