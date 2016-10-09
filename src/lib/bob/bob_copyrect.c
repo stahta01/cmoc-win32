@@ -7,7 +7,7 @@ bob_t* bob_copyrect(
 {
     int w = x2 - x1, h = y2 - y1;
     if (w > 0 && h > 0) {
-        int uu = ((u2 - u1) << 8) / w, vv = ((v2 - v1) << 8) / h;
+        int uu = _ishl6(u2 - u1) / w, vv = _ishl6(v2 - v1) / h;
         if (x1 < 0) {
             u1 += -x1 * uu;
             x1 = 0;
@@ -29,16 +29,16 @@ bob_t* bob_copyrect(
                 byte* src1;
                 switch (srcbpr) {
                 case 16:
-                    src1 = src->bytes + ((v1 >> 8) << 4);
+                    src1 = src->bytes + (_ishr6(v1) << 4);
                     break;
                 case 32:
-                    src1 = src->bytes + ((v1 >> 8) << 5);
+                    src1 = src->bytes + (_ishr6(v1) << 5);
                     break;
                 default:
-                    src1 = src->bytes + ((v1 >> 8) * srcbpr);
+                    src1 = src->bytes + (_ishr6(v1) * srcbpr);
                 }
                 for (int u = u1; dst1 < dst2; u += uu) {
-                    *dst1++ = src1[u >> 8];
+                    *dst1++ = src1[_ishr6(u)];
                 }
             }
         }

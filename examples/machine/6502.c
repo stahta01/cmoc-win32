@@ -1,5 +1,5 @@
 
-// Note: These are not working rountines. Its only the start of a 6502->6809 translator.
+// Note: These are not working routines. Its only the start of a 6502->6809 translator.
 // Im just testing that the code is actually converting to something.
 
 #pragma options --optimize=0 -machine=coco
