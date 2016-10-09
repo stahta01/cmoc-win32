@@ -1,0 +1,54 @@
+
+// This is a very basic example of the new mob library. A mob is 4 bobs (byte objects).
+// The idea is, you init a bob from the screen (or other memory), and then create
+// a mob, which will make 4 copies of the bob. 3 will be bit shifted by 2, 4, & 6 bits.
+// The bob must therefore be 1 byte wider than you require. So, a 24x24 image needs
+// a src bob of 4 bytes by 24 rows.
+
+// For this example, I've made the src bob higher than need be, because im not using
+// double buffering. I just draw the bobs over the old bobs.
+
+// So, no, bob's currently dont support masking, so you cant have overlapping mobs.
+
+// And... they might never support masking, because mask drawing in C is never
+// going to cut the mustard.
+// What I will be doing is, writing a mob compiler, which will create the 6809 code
+// required to swap a bob with the screen. The code will contain the bob data, so,
+// after a bob is compiled, it can be freed.
+
+// Anyway, thats a few weeks away. Until then, here is a bouncing ball for you
+// to play with...
+
+#include <stdlib.h>
+#include <equates.h>
+#include <mob.h>
+
+int main(void)
+{
+    system("PMODE3,1:PCLS1");
+    system("CIRCLE(12,12),8,2:PAINT(12,12),3,2");
+
+    bob_t bob;
+    bob_init(&bob, 4, 28, 32, (void*)_beggrp, false);
+    mob_t* mob = mob_create(&bob);
+
+    system("PCLS:SCREEN1,0");
+
+    bob_init(&bob, 32, 192, 32, (void*)_beggrp, false);
+
+    int x = 0, y = 60 << 5, xx = 40, yy = 30;
+
+    for (;;) {
+        x += xx;
+        if (x < 0 || x > (110 << 5)) {
+            x += xx = -xx;
+        }
+        y += yy += 2;
+        if (y < 0 || y > (170 << 5)) {
+            y += yy = -yy;
+        }
+        mob_draw(mob, x >> 5, y >> 5, &bob);
+    }
+    return 0;
+}
+
