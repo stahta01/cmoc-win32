@@ -415,7 +415,10 @@ begin
   LParser := default(OAsmParser);
   AOptions.Clear;
   if Assigned(ADst) then begin
-    ADst.Clear;
+    with ADst do begin
+      Clear;
+      Add('#include <_compiler.h>');
+    end;
   end;
   LIndex := 0;
   for LIndex := 0 to ASrc.Count - 1 do begin
