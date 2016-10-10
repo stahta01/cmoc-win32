@@ -3,7 +3,7 @@
 
 int systemf(char* fmt, ...)
 {
-    char cmd[BUFSIZ];
+    char cmd[MAX_INPUT];
     va_list args;
     va_start(args, fmt);
     vswritef(cmd, fmt, args);

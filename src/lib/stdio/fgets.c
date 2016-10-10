@@ -21,10 +21,9 @@ char* fgets(char* str, size_t size, FILE* fp)
         *str = 0;
         return chr == EOF ? (char*)nullptr : result;
     } else {
-        // Since char is signed, the max for cgets is most
-        // likely 126-ish. 100 will do.
-        str[0] = size < 100 ? (char)size : 100;
-        strcpy(str, cgets(str));
+        char buf[MAX_INPUT];
+        buf[0] = size < MAX_INPUT ? size : MAX_INPUT;
+        strcpy(str, cgets(buf));
         cputc('\n');
         return str;
     }

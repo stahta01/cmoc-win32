@@ -149,7 +149,6 @@ const
   Def_CMOC = '__CMOC__';
   Def_DATE = '__DATE__';
   Def_FILE = '__FILE__';
-  Def_6809 = '__6809__';
 
   Sym_ProgramStart = 'program_start';
   Sym_ProgramEnd = 'program_end';

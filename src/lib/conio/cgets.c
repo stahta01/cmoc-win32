@@ -14,7 +14,7 @@ read start at str[2] and end with a null terminator. Thus, str must be at least 
 char* cgets(char* str)
 {
     str += 2;
-    eddie_line(str, str[-2], "\r", true);
+    eddie_line(str, (byte)str[-2], "\r", true);
     str[-1] = (char)strlen(str);
     return str;
 }

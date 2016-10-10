@@ -14,8 +14,8 @@ size_t INPUT(int fd, char* s)
         }
     } else {
         // Does not support cas input. Yet.
-        char buf[BUFSIZ];
-        buf[0] = BUFSIZ - 1;
+        char buf[MAX_INPUT];
+        buf[0] = MAX_INPUT - 1;
         size = strlen(strcpy(s, cgets(buf)));
     }
     return size;

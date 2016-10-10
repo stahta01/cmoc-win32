@@ -50,6 +50,7 @@ typedef short           sword;
 #define false           0
 #define true            1
 
+#define __6809__
 #define const
 #define __fastcall__
 #define __cdecl

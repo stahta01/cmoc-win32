@@ -3,6 +3,6 @@
 
 char* gets(char* s)
 {
-    return fgets(s, BUFSIZ, stdin);
+    return fgets(s, MAX_INPUT, stdin);
 }
 

@@ -4,7 +4,7 @@
 size_t lgets(int fd, char* s, size_t n)
 {
     size_t size, tell = ltell(fd);
-    char buf[BUFSIZ], *end = buf;
+    char buf[MAX_INPUT], *end = buf;
     do {
         size = read(fd, end, 16);
         end[size] = 0;

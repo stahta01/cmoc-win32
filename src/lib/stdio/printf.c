@@ -3,7 +3,7 @@
 
 int printf(char* fmt, ...)
 {
-    char buf[BUFSIZ];
+    char buf[MAX_INPUT];
     va_list args;
     va_start(args, fmt);
     int result = vsprintf(buf, fmt, args);

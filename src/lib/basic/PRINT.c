@@ -3,7 +3,7 @@
 
 int PRINT(int fd, char* fmt, ...)
 {
-    char buf[BUFSIZ];
+    char buf[MAX_INPUT];
     va_list args;
     va_start(args, fmt);
     vsprintf(buf, fmt, args);

@@ -55,6 +55,8 @@ extern FILE* stderr;
 extern FILE* stdin;
 extern FILE* stdout;
 
+#define MAX_INPUT       255
+
 // Standard defines
 
 #define _IOFBF          0

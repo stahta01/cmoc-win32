@@ -85,7 +85,6 @@ begin
           OStringDynArray.Add(LParams, Opt_Verbose1);
         end;
         OStringDynArray.AddDefine(LParams, Def_CMOC, Ver_CMOC);
-        OStringDynArray.AddDefine(LParams, Def_6809, EmptyStr);
         OStringDynArray.AddDefine(LParams, '__' + UpperCase(FTarget) + '__', EmptyStr);
         OStringDynArray.Add(LParams, ExtractFileName(LTmp));
         ExecuteTool(Tool_CMOC, LParams, ExtractFilePath(LTmp));
