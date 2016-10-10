@@ -57,6 +57,7 @@ void bob_ror2(bob_t* bob);
 bob_t* bob_copyrect(
     bob_t* dst, int x1, int y1, int x2, int y2,
     bob_t* src, int u1, int v1, int u2, int v2);
+
 bob_t* bob_stretch(bob_t* dst, int x1, int y1, int x2, int y2, bob_t* src);
 bob_t* bob_drawrect(bob_t* dst, int x, int y, bob_t* src, int u1, int v1, int u2, int v2);
 bob_t* bob_draw(bob_t* dst, int x, int y, bob_t* src);

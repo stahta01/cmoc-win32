@@ -118,7 +118,7 @@ int OPEN_O(int fd, char* fn);
 int OPEN_D(int fd, char* fn, size_t len);
 
 
-// Extended Color BASIC Version 2 (CoCo 3)
+// Super Extended Color BASIC (CoCo 3)
 
 void HSCREEN(int mode);
 void HCIRCLE(int x, int y, int r);
@@ -129,7 +129,7 @@ void HLINE(int x1, int y1, int x2, int y2, int onoff);
 void HLINE_B(int x1, int y1, int x2, int y2, int onoff);
 void HLINE_BF(int x1, int y1, int x2, int y2, int onoff);
 
-// New V2 Commands
+// New V2 Commands (TODO)
 
 // PALETTE, PALETTE RGB, PALETTE CMP
 // WIDTH, LOCATE, ATTR,
