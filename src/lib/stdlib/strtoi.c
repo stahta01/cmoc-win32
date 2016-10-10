@@ -3,6 +3,7 @@
 
 int strtoi(char* str, char** endptr, int base)
 {
+    for (; isspace(*str); str++);
     int result = 0;
     char* pos = str;
     if (*pos == '+' || *pos == '-') {
@@ -17,16 +18,21 @@ int strtoi(char* str, char** endptr, int base)
             } else {
                 base = 8;
             }
+        } else {
+            base = 10;
         }
     }
-    for (; isdigit(*pos); pos++) {
-        if (isdigit(*pos)) {
-            result = result * base + (*pos - '0');
-        } else if (islower(*pos)) {
-            result = result * base + (*pos - 'a');
-        } else if (isupper(*pos)) {
-            result = result * base + (*pos - 'A');
+    for (char chr; chr = *pos; pos++) {
+        if (isdigit(chr)) {
+            chr -= '0';
+        } else if (islower(chr)) {
+            chr -= 'a';
+        } else if (isupper(chr)) {
+            chr -= 'A';
+        } else {
+            break;
         }
+        result = result * base + chr;
     }
     if (*str == '-') {
         result = -result;
