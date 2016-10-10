@@ -25,8 +25,7 @@
 
 int main(void)
 {
-    system("PMODE3,1:PCLS3");
-    system("CIRCLE(12,12),11,0:PAINT(12,12),2,0");
+    system("PMODE3,1:PCLS3:CIRCLE(12,12),11,0:PAINT(12,12),2,0");
 
     bob_t bob;
     bob_init(&bob, 4, 28, 32, (void*)_beggrp, false);
@@ -36,7 +35,7 @@ int main(void)
 
     bob_init(&bob, 32, 192, 32, (void*)_beggrp, false);
 
-    int x = 0, y = 60 << 6, xx = 10, yy = 14;
+    int x = 0, y = 60 << 6, xx = 40, yy = 14;
 
     for (;;) {
         x += xx;

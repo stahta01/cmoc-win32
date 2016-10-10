@@ -1,19 +1,17 @@
 
 #include "_memory.h"
 
-asm void* memlsr(void* dst, size_t size)
+asm void* memror1(void* dst, int val, size_t size)
 {
     asm {
-        ldy     4,s                                 // y = size
+        ldy     6,s                                 // y = size
         beq     return                              // return if zero
         ldx     2,s                                 // x = dst
-        lsr     ,x+                                 // lsr first byte
-        dey                                         // decrease size
-        beq     return                              // return if done
+        ror     5,s                                 // get cc from val byte
         repeat:
         ror     ,x+                                 // rol next byte
         dey                                         // decrease size
-        bne     repeat                              // loop if not done
+        bne     repeat                              // repeat if not done
         return:
         ldd     2,s                                 // return dst
     }

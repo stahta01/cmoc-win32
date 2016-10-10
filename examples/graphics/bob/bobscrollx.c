@@ -47,7 +47,7 @@ int main(void)
     while (true) {
         // Scrolling by one bit, causes color blinking in 4 color mode.
         // Which looks cool for the evil aliens :-)
-        bob_rol(&aliens);
+        bob_rol1(&aliens);
         bob_rol2(&land);
         bob_ror2(&cmoc);
     }

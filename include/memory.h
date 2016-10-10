@@ -47,10 +47,10 @@ void* memcpy(void* dst, void* src, size_t size);    // ANSIC
 void* memmove(void* dst, void* src, size_t size);   // ANSIC
 void* memset(void* dst, int val, size_t size);      // ANSIC
 
-void* memlsr(void* dst, size_t size);               // CMOC
-void* memlsl(void* dst, size_t size);               // CMOC
-void* memror(void* dst, int val, size_t size);      // CMOC
-void* memrol(void* dst, int val, size_t size);      // CMOC
+void* memlsr1(void* dst, size_t size);              // CMOC
+void* memlsl1(void* dst, size_t size);              // CMOC
+void* memror1(void* dst, int val, size_t size);     // CMOC
+void* memrol1(void* dst, int val, size_t size);     // CMOC
 
 void* memrol2(void* dst, int val, size_t size);     // CMOC
 void* memror2(void* dst, int val, size_t size);     // CMOC

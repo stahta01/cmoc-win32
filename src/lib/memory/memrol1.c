@@ -1,17 +1,15 @@
 
 #include "_memory.h"
 
-asm void* memlsl(void* dst, size_t size)
+asm void* memrol1(void* dst, int val, size_t size)
 {
     asm {
-        ldy     4,s                                 // y = size
-        beq     return                              // return if zero
+        ldy     6,s                                 // y = size
+        beq     return                              // exit if zero
         tfr     y,d                                 // d = y
         ldx     2,s                                 // x = dst
         leax    d,x                                 // offset x by size
-        lsl     ,-x                                 // lsl first byte
-        dey                                         // decrease size
-        beq     return                              // return if done
+        rol     5,s                                 // get cc from val byte
         repeat:
         rol     ,-x                                 // rol next byte
         dey                                         // decrease size

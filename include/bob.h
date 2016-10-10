@@ -49,8 +49,8 @@ bob_t* bob_create(int width, int height);
 
 void bob_free(bob_t* bob);
 
-void bob_rol(bob_t* bob);
-void bob_ror(bob_t* bob);
+void bob_rol1(bob_t* bob);
+void bob_ror1(bob_t* bob);
 void bob_rol2(bob_t* bob);
 void bob_ror2(bob_t* bob);
 
