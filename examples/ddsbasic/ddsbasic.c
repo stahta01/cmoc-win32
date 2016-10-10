@@ -133,7 +133,7 @@ int main(void)
                             *(q = strstr(B, "TH")) = 0; // "THEN"
                             p = B + 2;
                             if (S()) {
-                                p = q + 4 ;
+                                p = q + 4;
                                 l = S() - 1;
                             }
                         }
