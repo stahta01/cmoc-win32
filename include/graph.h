@@ -132,9 +132,9 @@ int _getvisualpage(void);
 
 // Colour Setting and Query Functions
 
-void _setcolor(int);
+void _setcolor(int pen);
 int _getcolor(void);
-int _setbkcolor(int);
+int _setbkcolor(int pen);
 int _getbkcolor(void);
 
 int _selectpalette(int css);

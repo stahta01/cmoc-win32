@@ -40,9 +40,11 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 extern byte pixel1_set[8];
 extern byte pixel1_clr[8];
 
+extern byte pixel2_set[4];
 extern byte pixel2_clr[4];
 extern byte pixel2_all[4];
-extern byte pixel2_set[4][4];
+
+extern byte pixel2_pen[4][4];
 
 #endif
 

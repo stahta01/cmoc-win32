@@ -22,6 +22,6 @@ byte _getpixel2(int x, int y)
         break;
     }
     byte i = (byte)x & 3;
-    return (*p & pixel2_set[3][i]) >> ((3 - i) << 1);
+    return (*p & pixel2_pen[3][i]) >> ((3 - i) << 1);
 }
 

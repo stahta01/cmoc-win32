@@ -1,8 +1,8 @@
 
 #include "_graph.h"
 
-void _setcolor(int color)
+void _setcolor(int pen)
 {
-    _forcol = (byte)color;
+    _forcol = (byte)pen;
 }
 

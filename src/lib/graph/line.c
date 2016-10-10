@@ -111,7 +111,7 @@ void _line(int x1, int y1, int x2, int y2)
                         break;
                     }
                     sx &= 3;
-                    *p = *p & pixel2_clr[sx] | pixel2_set[_forcol][sx];
+                    *p = *p & pixel2_clr[sx] | pixel2_pen[_forcol][sx];
                 }
             } else {
                 for (; length--; x1 += x2, y1 += y2) {

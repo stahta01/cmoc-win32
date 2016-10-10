@@ -1,7 +1,7 @@
 
 #include "_graph.h"
 
-void _setpixel2(int x, int y, byte c)
+void _setpixel2(int x, int y, byte pen)
 {
     if (_pmode != 4)  {
         x >>= 1;
@@ -23,6 +23,6 @@ void _setpixel2(int x, int y, byte c)
         break;
     }
     byte i = (byte)x & 3;
-    *p = *p & pixel2_clr[i] | pixel2_set[c][i];
+    *p = *p & pixel2_clr[i] | pixel2_pen[pen][i];
 }
 
