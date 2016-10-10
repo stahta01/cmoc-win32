@@ -51,71 +51,64 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define RAND_MAX        0x7fff
 
 // max. length of full pathname
-
 #define _MAX_PATH       16
 
 // max. length of drive component
-
 #define _MAX_DRIVE      2
 
 // max. length of path component
-
 #define _MAX_DIR        0
 
 // max. length of file name component
-
 #define _MAX_FNAME      8
 
 // max. length of extension component
-
 #define _MAX_EXT        3
-
 
 #define _max(_a,_b)     (((_a) > (_b)) ? (_a) : (_b))
 #define _min(_a,_b)     (((_a) < (_b)) ? (_a) : (_b))
 #define _abs(_a)        ((_a) < 0 ? -(_a) : (_a))
 
-int max(int a, int b);
-int min(int a, int b);
-int abs(int n);
+int max(int a, int b);                              // ANSIC
+int min(int a, int b);                              // ANSIC
+int abs(int n);                                     // ANSIC
 
-int atoi(char* s);
-int atexit(void(*func)(void));
+int atexit(void(*func)(void));                      // TODO
 
-div_t* div(div_t* result, int numer, int denom);
-void exit(int status);
-char* _getcmd(void);
-char* itoa(int value, char* s, int radix);
-char* utoa(unsigned value, char* s, int radix);
-//void ldiv(ldiv_t* result, long_t* numer, long_t* denom);
-char* ltoa(long_t* value, char* string, int radix);
-int rand(void);
-void srand(unsigned seed);
+int atoi(char* s);                                  // ANSIC
 
-//long strtol(char* nptr, char** endptr, int base);
-//unsigned long strtoul(char* nptr, char** endptr, int base);
+div_t* div(div_t* result, int numer, int denom);    // ANSIC
+void exit(int status);                              // ANSIC
+char* _getcmd(void);                                // REMOVE!
+char* itoa(int value, char* s, int radix);          // ANSIC
+char* utoa(unsigned value, char* s, int radix);     // ANSIC
+char* ltoa(long_t* value, char* string, int radix); // ANSIC
+int rand(void);                                     // ANSIC
+void srand(unsigned seed);                          // ANSIC
 
-int system(char* cmd);
-int systemf(char* fmt, ...);
+int strtoi(char* str, char** endptr, int base);     // CMOC
 
-// systemex is the same as system, except it will raise exceptions.
+int system(char* cmd);                              // ANSIC
+int systemf(char* fmt, ...);                        // CMOC
 
-void systemex(char* cmd);                       // CMOC
+// systemex() is the same as system, except it will raise exceptions.
 
-int putenv(char* envptr);
-char* getenv(char* varname);
+void systemex(char* cmd);                           // CMOC
+
+int putenv(char* envptr);                           // ANSIC
+char* getenv(char* varname);                        // ANSIC
 
 // Non-Standard access to BASIC variables
 
-int putenvstr(char* name, char* value);
-char* getenvstr(char* name, char* dst);
-int putenvuint(char* name, unsigned value);
-unsigned getenvuint(char* name);
+int putenvstr(char* name, char* value);             // CMOC
+char* getenvstr(char* name, char* dst);             // CMOC
+int putenvuint(char* name, unsigned value);         // CMOC
+unsigned getenvuint(char* name);                    // CMOC
 
 //void uldiv(uldiv_t* result, unsigned long numer, unsigned long denom);
 //char* ultoa(unsigned long value, char* string, int radix);
 
-void beep(int frequency, int duration);         // CMOC
+void beep(int frequency, int duration);             // CMOC
 
 #endif
 
