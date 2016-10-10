@@ -23,6 +23,6 @@ void _setpixel2(int x, int y, byte c)
         break;
     }
     byte i = (byte)x & 3;
-    *p = *p & _pset2_clr[i] | _pset2_set[c][i];
+    *p = *p & pixel2_clr[i] | pixel2_set[c][i];
 }
 

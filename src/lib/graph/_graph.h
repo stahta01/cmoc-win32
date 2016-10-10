@@ -5,6 +5,7 @@
 #include <string.h>
 #include <equates.h>
 #include <system.h>
+#include <pixel.h>
 #include <fix6.h>
 
 typedef struct {
@@ -15,12 +16,6 @@ typedef struct {
 
 extern _graph_t _graph;
 extern struct _fontinfo fontinfo;
-
-extern byte _pset1_set[8];
-extern byte _pset1_clr[8];
-extern byte _pset2_set[4][4];
-extern byte _pset2_clr[4];
-extern byte _pset2_all[4];
 
 void _setpixel1(int x, int y, byte c);
 void _setpixel2(int x, int y, byte c);

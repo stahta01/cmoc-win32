@@ -32,7 +32,7 @@ void _outchar(int c)
 
         // Next we set the bits to the background color
 
-        bits = _pset2_all[bkcolor];
+        bits = pixel2_all[bkcolor];
         if (fontinfo.packed) {
             bits &= fontinfo.base & 1 ? 0xF : 0xF0;
         }

@@ -9,7 +9,7 @@ void  _scrolltextwindow(int rows)
     case _GSCROLLUP:
         word line = (word)_horbyt << 3;
         memcpy16((void*)_beggrp, (void*)(_beggrp + line), ((_endgrp - _beggrp) - line) >> 4);
-        memset((void*)(_endgrp - line), _pset2_all[_bakcol], line);
+        memset((void*)(_endgrp - line), pixel2_all[_bakcol], line);
         break;
     }
 }

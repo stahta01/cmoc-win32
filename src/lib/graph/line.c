@@ -111,7 +111,7 @@ void _line(int x1, int y1, int x2, int y2)
                         break;
                     }
                     sx &= 3;
-                    *p = *p & _pset2_clr[sx] | _pset2_set[_forcol][sx];
+                    *p = *p & pixel2_clr[sx] | pixel2_set[_forcol][sx];
                 }
             } else {
                 for (; length--; x1 += x2, y1 += y2) {
@@ -120,23 +120,23 @@ void _line(int x1, int y1, int x2, int y2)
                     switch (_horbyt) {
                     case 16:
                         if (_forcol) {
-                            *((byte*)_beggrp + (sy << 4) + (sx >> 3)) |= _pset1_set[sx & 7];
+                            *((byte*)_beggrp + (sy << 4) + (sx >> 3)) |= pixel1_set[sx & 7];
                         } else {
-                            *((byte*)_beggrp + (sy << 4) + (sx >> 3)) &= _pset1_clr[sx & 7];
+                            *((byte*)_beggrp + (sy << 4) + (sx >> 3)) &= pixel1_clr[sx & 7];
                         }
                         break;
                     case 32:
                         if (_forcol) {
-                            *((byte*)_beggrp + (sy << 5) + (sx >> 3)) |= _pset1_set[sx & 7];
+                            *((byte*)_beggrp + (sy << 5) + (sx >> 3)) |= pixel1_set[sx & 7];
                         } else {
-                            *((byte*)_beggrp + (sy << 5) + (sx >> 3)) &= _pset1_clr[sx & 7];
+                            *((byte*)_beggrp + (sy << 5) + (sx >> 3)) &= pixel1_clr[sx & 7];
                         }
                         break;
                     default:
                         if (_forcol) {
-                            *((byte*)_beggrp + (sy * _horbyt) + (sx >> 3)) |= _pset1_set[sx & 7];
+                            *((byte*)_beggrp + (sy * _horbyt) + (sx >> 3)) |= pixel1_set[sx & 7];
                         } else {
-                            *((byte*)_beggrp + (sy * _horbyt) + (sx >> 3)) &= _pset1_clr[sx & 7];
+                            *((byte*)_beggrp + (sy * _horbyt) + (sx >> 3)) &= pixel1_clr[sx & 7];
                         }
                         break;
                     }
