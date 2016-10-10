@@ -13,7 +13,7 @@
 // which caused DDS-BASIC to only accept 2 digit numbers. I fixed the issue, but it
 // shouldn't effect any normal C code. DDS-BASIC does some strange things.
 
-// You can reduce the size of the bin, but removing the printf's, and using system()
+// You can reduce the size of the bin, by removing the printf's, and using system()
 // to save the BASIC source. There are lots of things that can be done. I could play with
 // this code for hours, but, i'll leave it like it is.
 
