@@ -26,9 +26,9 @@ int strtoi(char* str, char** endptr, int base)
         if (isdigit(chr)) {
             chr -= '0';
         } else if (islower(chr)) {
-            chr -= 'a';
+            chr -= 'a' - 10;
         } else if (isupper(chr)) {
-            chr -= 'A';
+            chr -= 'A' - 10;
         } else {
             break;
         }
