@@ -17,7 +17,7 @@ int vswritef(char* str, char* fmt, va_list args)
                 *out++ = (char)*args++;
                 break;
             case 's':
-                out = _stpcpy(out, (char*)*args++);
+                out = stpcpy(out, (char*)*args++);
                 break;
             case 'i':
             case 'd':

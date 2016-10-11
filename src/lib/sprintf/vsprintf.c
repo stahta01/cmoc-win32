@@ -78,11 +78,11 @@ int vsprintf(char* str, char* fmt, va_list args)
                 out = strpcpy_pad(out, utoa(*args++, out, 16), width, padchar);
                 break;
             case 'X':
-                out = strpcpy_pad(out, _strupr(utoa(*args++, out, 16)), width, padchar);
+                out = strpcpy_pad(out, strupr(utoa(*args++, out, 16)), width, padchar);
                 break;
             case 'p':
                 // This isn't correct, but it will do for now.
-                out = strpcpy_pad(out, _strupr(utoa(*args++, out, 16)), 4, '0');
+                out = strpcpy_pad(out, strupr(utoa(*args++, out, 16)), 4, '0');
                 break;
             case 'u':
                 out = strpcpy_pad(out, _utoa(*args++, out), width, padchar);

@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="18">
+    <Units Count="19">
       <Unit0>
         <Filename Value="cpp.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -135,6 +135,13 @@
         <CursorPos X="70" Y="968"/>
         <UsageCount Value="10"/>
       </Unit17>
+      <Unit18>
+        <Filename Value="..\..\..\bin\cmocide\keywords.txt"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="29" Y="12"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit18>
     </Units>
     <JumpHistory Count="23" HistoryIndex="22">
       <Position1>

@@ -4,7 +4,7 @@
 //
 // Converted to C for WinCMOC by Derek Evans 2016
 
-asm char* _strupr(char* str)
+asm char* strupr(char* str)
 {
     asm {
         pshs    x

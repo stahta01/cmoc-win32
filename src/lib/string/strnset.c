@@ -1,14 +1,14 @@
 
 #include "_string.h"
 
-char* strnset(char* string, int c, size_t count)
+char* strnset(char* str, int chr, size_t size)
 {
-    char* p = string;
-    while (*p && count) {
-        *p = (char)c;
-        count--;
+    char* p = str;
+    while (*p && size) {
+        *p = (char)chr;
+        size--;
         p++;
     }
-    return (string);
+    return str;
 }
 

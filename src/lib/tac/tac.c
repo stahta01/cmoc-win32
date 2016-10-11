@@ -1,7 +1,7 @@
 
 // NOTE: This is work in progress. It wont be ready for weeks.
 
-// The aim is to write a Tiny Assembler Code (TAC) compiler, which
+// The aim is to write a Tiny Assembler Compiler (TAC), which
 // will take C strings and compile to 6809 code.
 
 // The code must be untra small, fast and usable for large projects.
@@ -11,8 +11,14 @@
 #include <conio.h>
 #include <ctype.h>
 
-#define TAC_TYP_VAL     1
-#define TAC_TYP_REG     2
+#define TAC_TYP_N       0
+#define TAC_TYP_A       1
+#define TAC_TYP_B       2
+#define TAC_TYP_D       3
+#define TAC_TYP_X       4
+#define TAC_TYP_Y       5
+#define TAC_TYP_U       6
+#define TAC_TYP_S       7
 
 #define TAC_MOD_VAL     '#'
 #define TAC_MOD_PTR     '*'
@@ -42,7 +48,7 @@ TAC_t tac;
 void tac_locsym(char* name, size_t size)
 {
     tac.sym = tac.top;
-    for (; tac.sym && strncmp(tac.sym->name, name, size); tac.sym = tac.sym->next);
+    for (; tac.sym && strmcmp(tac.sym->name, name, size); tac.sym = tac.sym->next);
 }
 
 void tac_newsym(char* name, size_t size, byte type)
@@ -75,8 +81,9 @@ void tac_eatspc(void)
     for (; tac.chr && tac.chr <= 32; EATCHR);
 }
 
-void tac_eatval(void)
+void tac_eatnum(void)
 {
+    tac.sym = tac.numb;
     tac.sym->value = strtoi(tac.src, &tac.src, 0);
     tac.chr = *tac.src;
 }
@@ -89,10 +96,9 @@ void tac_eatsym(void)
     }
     if ((tac.chr & 192) == 64) {
         for (tac.tok = tac.src; (tac.chr & 192) == 64; EATCHR);
-        tac_addsym(tac.tok, tac.src - tac.tok, TAC_TYP_VAL);
+        tac_addsym(tac.tok, tac.src - tac.tok, TAC_TYP_N);
     } else {
-        tac.sym = tac.numb;
-        tac_eatval();
+        tac_eatnum();
     }
     tac.sym->mod = mod;
 }
@@ -102,7 +108,7 @@ void tac_compile(void)
     tac.chr = *tac.src;
     while (tac.chr) {
         tac_eatspc();
-        sym_t* lft = tac.sym;
+        sym_t* lft = tac.sym, *rgt;
         switch (tac.chr) {
         case ':':
             EATCHR;
@@ -111,9 +117,18 @@ void tac_compile(void)
         case '=':
             EATCHR;
             tac_eatsym();
-            if (lft->type == TAC_TYP_VAL) {
-                if (tac.sym->type == TAC_TYP_VAL) {
-                    lft->value = tac.sym->value;
+            rgt = tac.sym;
+
+            //
+            if (lft->type) {
+            } else {
+                if (rgt->type) {
+                   cprintf("%s %d ? %s %d\n", lft->name, lft->type, rgt->name, rgt->type);
+                }
+            }
+            if (lft->type == TAC_TYP_N) {
+                if (rgt->type == TAC_TYP_N) {
+                    lft->value = rgt->value;
                 }
             }
             break;
@@ -133,26 +148,48 @@ void tac_compile(void)
 
 void tac_init(void)
 {
-    tac_addsym("N", 1, TAC_TYP_VAL);
+    tac_addsym("N", 1, TAC_TYP_N);
     tac.numb = tac.sym;
-    return;
-    tac_addsym("A", 1, TAC_TYP_REG);
+    tac_addsym("A", 1, TAC_TYP_A);
     tac.rega = tac.sym;
-    tac_addsym("B", 1, TAC_TYP_REG);
+    return;
+    tac_addsym("B", 1, TAC_TYP_B);
     tac.regb = tac.sym;
-    tac_addsym("D", 1, TAC_TYP_REG);
+    tac_addsym("D", 1, TAC_TYP_D);
     tac.regd = tac.sym;
-    tac_addsym("X", 1, TAC_TYP_REG);
+    tac_addsym("X", 1, TAC_TYP_X);
     tac.regx = tac.sym;
-    tac_addsym("Y", 1, TAC_TYP_REG);
+    tac_addsym("Y", 1, TAC_TYP_Y);
     tac.regy = tac.sym;
+}
+
+asm void code(void)
+{
+    // sty  16
+    // sta  183
+    // stx  191
+    // stb  247
+    // std  253
+    // stu  255
+
+    asm {
+        stu     1024
+    }
 }
 
 int main(void)
 {
+    int p = (int)code;
+
+    cprintf("%d\n", strmcmp("AAPPLE", "AA", 2));
+    return 0;
+
+    cprintf("%d %u\n", *(byte*)p, *(word*)(p + 1));
+
     tac_init();
     tac.dst = 0x6000;
     tac.src = "PEAR=0xFF APPLE=PEAR *1024=A";
+    tac.src = "PEAR=0xFF APPLE=1024  APPLE=A";
     tac_compile();
     for (sym_t* sym = tac.top; sym; sym = sym->next) {
         cprintf("$%06i %s\n", sym->value, sym->name);

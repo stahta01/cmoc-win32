@@ -42,42 +42,44 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #include <stddef.h>
 #include <memory.h>
 
-char* strcat(char* dst, char* src);             // ANSIC
-char* strchr(char* s, int c);                   // ANSIC
-char* strcpy(char* dst, char* src);             // ANSIC
-char* strdup(char* s);                          // SYSV/BSD
-char* strerror(int errcode);                    // ANSIC
-char* strncat(char* s1, char* s2, size_t n);    // ANSIC
-char* strncpy(char* dst, char* src, size_t n);  // ANSIC
-char* strrchr(char* s, int c);                  // ANSIC
-char* strstr(char* str, char* substr);          // ANSIC
-char* strtok(char* s1, char* s2);               // ANSIC
+char* strcat(char* dst, char* src);                 // ANSIC
+char* strchr(char* s, int c);                       // ANSIC
+char* strcpy(char* dst, char* src);                 // ANSIC
+char* strdup(char* s);                              // SYSV/BSD
+char* strerror(int errcode);                        // ANSIC
+char* strncat(char* s1, char* s2, size_t n);        // ANSIC
+char* strncpy(char* dst, char* src, size_t n);      // ANSIC
+char* strrchr(char* s, int c);                      // ANSIC
+char* strstr(char* str, char* substr);              // ANSIC
+char* strtok(char* s1, char* s2);                   // ANSIC
 
-char* _stpcpy(char* dst, char* src);            // CMOC
-char* _strlower(char* s);                       // UNIX
-char* _strlwr(char* s);                         // UNIX
-char* _strqtok(char* s1, char* s2);             // UNIX
-char* _strrev(char* s);                         // CMOC
-char* _strupper(char* s);                       // UNIX
-char* _strupr(char* s);                         // UNIX
+int strmcmp(char* str, char* mem, size_t size);     // CMOC
+char* stpcpy(char* dst, char* src);                 // CMOC
+char* strlwr(char* str);                            // UNIX
+char* strrev(char* str);                            // CMOC
+char* strupr(char* str);                            // UNIX
 
-int strcasecmp(char* s1, char* s2);             // UNIX
-int strcmp(char* s1, char* s2);                 // ANSIC
-int strcoll(char* s1, char* s2);                // ANSIC
-int stricmp(char* s1, char* s2);                // DOS/Windows
-int strncasecmp(char* s1, char* s2, size_t n);  // UNIX
-int strncmp(char* s1, char* s2, size_t n);      // ANSIC
-int strnicmp(char* s1, char* s2, size_t n);     // DOS/Windows
-int strtoi(char* s, char** endptr, int radix);  // CMOC
+//char* _strqtok(char* s1, char* s2);               // UNIX
+//char* _strlower(char* s);                         // UNIX
+//char* _strupper(char* s);                         // UNIX
 
-size_t strcspn(char* s1, char* s2);             // ANSIC
-size_t strlen(char* s);                         // ANSIC
-size_t strspn(char* s1, char* s2);              // ANSIC
-size_t strxfrm(char* s1, char* s2, size_t n);   // ANSIC
+int strcasecmp(char* s1, char* s2);                 // UNIX
+int strcmp(char* s1, char* s2);                     // ANSIC
+int strcoll(char* s1, char* s2);                    // ANSIC
+int stricmp(char* s1, char* s2);                    // DOS/Windows
+int strncasecmp(char* s1, char* s2, size_t n);      // UNIX
+int strncmp(char* s1, char* s2, size_t n);          // ANSIC
+int strnicmp(char* s1, char* s2, size_t n);         // DOS/Windows
+int strtoi(char* s, char** endptr, int radix);      // CMOC
 
-char* strerror(errno_t error);                  // ANSIC
+size_t strcspn(char* s1, char* s2);                 // ANSIC
+size_t strlen(char* s);                             // ANSIC
+size_t strspn(char* s1, char* s2);                  // ANSIC
+size_t strxfrm(char* s1, char* s2, size_t n);       // ANSIC
 
-#define _stroserror strerror                    // CC65
+char* strerror(errno_t error);                      // ANSIC
+
+#define _stroserror strerror                        // CC65
 
 #endif
 
