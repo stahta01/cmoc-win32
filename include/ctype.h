@@ -37,9 +37,6 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _CTYPE_H
 #define _CTYPE_H
 
-// I could not find the ctype.h file for kreiderlib, so I recreated this file.
-// If you find an error, email me.
-
 #define CTYPE_CONTROL       0x01
 #define CTYPE_UPPER         0x02
 #define CTYPE_LOWER         0x04
@@ -50,7 +47,9 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 #define CTYPE_ALPHA         (CTYPE_UPPER|CTYPE_LOWER)
 #define CTYPE_ALNUM         (CTYPE_UPPER|CTYPE_LOWER|CTYPE_DIGIT)
+#define CTYPE_PRINT         (CTYPE_UPPER|CTYPE_LOWER|CTYPE_DIGIT|CTYPE_PUNCT)
 
+#define _isascii(_C)        ((unsigned)(_C)<=0x7f)
 #define _iscntrl(_C)        (_chcodes[_C]&CTYPE_CONTROL)
 #define _isdigit(_C)        (_chcodes[_C]&CTYPE_DIGIT)
 #define _isupper(_C)        (_chcodes[_C]&CTYPE_UPPER)
@@ -60,13 +59,13 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define _isxdigit(_C)       (_chcodes[_C]&CTYPE_HEXDIG)
 #define _ispunct(_C)        (_chcodes[_C]&CTYPE_PUNCT)
 #define _isspace(_C)        (_chcodes[_C]&CTYPE_WHITE)
+#define _isprint(_C)        (_chcodes[_C]&CTYPE_PRINT)
 
-#define _isprint(_C)        ((unsigned)((_C)-32)<95)
 #define _isgraph(_C)        ((unsigned)((_C)-33)<94)
 
 #define _toascii(_C)        ((_C)&0x7f)
-#define _toupper(_C)        (_islower(_C)?((_C)-' '):(_C))
-#define _tolower(_C)        (_isupper(_C)?((_C)+' '):(_C))
+#define _toupper(_C)        ((_C)&0xdf)
+#define _tolower(_C)        ((_C)|0x20)
 
 // I recommend using the function versions, as these are a bit long.
 
@@ -76,7 +75,6 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 // Not standard. Might get removed.
 
 #define _isrange(_C,_L,_H)  ((_C)>=(_L)&&(_C)<=(_H))
-#define _isascii(_C)        ((_C)>=0&&(_C)<=0x7f)
 
 extern char _chcodes[128];
 
