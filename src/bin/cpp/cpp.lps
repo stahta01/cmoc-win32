@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="19">
+    <Units Count="21">
       <Unit0>
         <Filename Value="cpp.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -142,6 +142,20 @@
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit18>
+      <Unit19>
+        <Filename Value="..\..\lib\stdlib\strtoi.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="5" Y="4"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="..\..\lib\string\strtoi.c"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="5" Y="4"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit20>
     </Units>
     <JumpHistory Count="23" HistoryIndex="22">
       <Position1>

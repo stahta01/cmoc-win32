@@ -1,37 +1,38 @@
 
 #include "_string.h"
 
-int strtoi(char* s, char** endptr, int radix)
+int strtoi(char* str, char** endptr, int base)
 {
-    char sign = 0;
-    int value = 0;
-    for (; _isspace(*s); s++);
-    if ((*s == '-') || (*s == '+')) {
-        sign = *s;
-        s++;
+    for (; _isspace(*str); str++);
+    int result = 0;
+    char* pos = str;
+    if (*pos == '+' || *pos == '-') {
+        pos++;
     }
-    if (s[0] == '0' && s[1] == 'x') {
-        s += 2;
-        if (!radix) {
-            radix= 16;
-        }
-    } else {
-        if (!radix) {
-            radix = 10;
+    if (!base) {
+        if (*pos == '0') {
+            pos++;
+            if (*pos == 'x' || *pos == 'X') {
+                base = 16;
+                pos++;
+            } else {
+                base = 8;
+            }
+        } else {
+            base = 10;
         }
     }
-    for (; *s; s++) {
-        char c = *s;
-        c = _isdigit(c) ? c - '0' : _tolower(c) - 'a' + 10;
-        if (c >= 0 && c < radix) {
-            value = value * radix + c;
+    for (char chr; chr = *pos; pos++) {
+        chr = _isdigit(chr) ?  chr - '0' : _tolower(chr) - 'a' + 10;
+        if (chr >= 0 && chr < base) {
+            result = result * base + chr;
         } else {
             break;
         }
     }
     if (endptr) {
-        *endptr = s;
+        *endptr = pos;
     }
-    return sign == '-' ? -value : value;
+    return *str == '-' ? -result : result;
 }
 

@@ -236,6 +236,9 @@ int main(void)
 {
     int p = (int)code;
 
+    cprintf("%d\n", strtoi("AZ", 0, 16));
+    return 0;
+
     cprintf("%d %d %u\n", ((byte*)p)[0], ((byte*)p)[1], *(word*)(p + 1));
     //return 0;
 
