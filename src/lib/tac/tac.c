@@ -94,8 +94,8 @@ void tac_eatsym(void)
     if (mod == TAC_MOD_PTR || mod == TAC_MOD_VAL) {
         EATCHR;
     }
-    if ((tac.chr & 192) == 64) {
-        for (tac.tok = tac.src; (tac.chr & 192) == 64; EATCHR);
+    if (isalpha(tac.chr)) {
+        for (tac.tok = tac.src; isalnum(tac.chr); EATCHR);
         tac_addsym(tac.tok, tac.src - tac.tok, TAC_TYP_N);
     } else {
         tac_eatnum();
@@ -181,15 +181,12 @@ int main(void)
 {
     int p = (int)code;
 
-    cprintf("%d\n", strmcmp("AAPPLE", "AA", 2));
-    return 0;
-
-    cprintf("%d %u\n", *(byte*)p, *(word*)(p + 1));
+    //cprintf("%d %u\n", *(byte*)p, *(word*)(p + 1));
 
     tac_init();
     tac.dst = 0x6000;
     tac.src = "PEAR=0xFF APPLE=PEAR *1024=A";
-    tac.src = "PEAR=0xFF APPLE=1024  APPLE=A";
+    tac.src = "PEAR=0xFF APPLE=1024  APPLE2=A";
     tac_compile();
     for (sym_t* sym = tac.top; sym; sym = sym->next) {
         cprintf("$%06i %s\n", sym->value, sym->name);
