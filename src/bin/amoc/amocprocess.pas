@@ -201,7 +201,8 @@ var
   LSymbol: string;
 begin
   FSource.AddSource(ASrc);
-  Peephole_Rejuice(FSource);
+  // Removed Rejuice.
+  //Peephole_Rejuice(FSource);
   TrimSource;
   ResetSymbols;
   SetGlobalInitSymbol(FInitSymbol);
