@@ -42,22 +42,22 @@ interface
 uses
   SysUtils, UCmocAsmSource, UCmocTranslate6502, UCmocUtils;
 
-procedure SourceTranslate(var ASource: OAsmSource);
+procedure Translate(var ASrc: OAsmSource);
 
 implementation
 
 type
   TProcessorMode = (pm6809, pm6502, pmSweet16);
 
-procedure SourceTranslate(var ASource: OAsmSource);
+procedure Translate(var ASrc: OAsmSource);
 var
   LIndex: integer;
   LProcessorMode: TProcessorMode;
 begin
   LProcessorMode := pm6809;
   LIndex := 0;
-  while LIndex < Length(ASource.Items) do begin
-    with ASource.Items[LIndex] do begin
+  while LIndex < Length(ASrc.Items) do begin
+    with ASrc.Items[LIndex] do begin
       if not (Removed or Is6502 or (Length(Inst) = 0)) then begin
         Removed := SameInst('.p09');
         if Removed then begin
@@ -69,7 +69,7 @@ begin
           end else begin
             case LProcessorMode of
               pm6502: begin
-                SourceTranslate6502(ASource, LIndex);
+                Translate6502(ASrc, LIndex);
               end;
             end;
           end;

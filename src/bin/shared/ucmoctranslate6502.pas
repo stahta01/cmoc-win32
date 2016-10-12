@@ -42,7 +42,7 @@ interface
 uses
   StrUtils, SysUtils, UCmocAsmLine, UCmocAsmSource, UCmocUtils;
 
-procedure SourceTranslate6502(var ASrc: OAsmSource; var AIndex: integer);
+procedure Translate6502(var ASrc: OAsmSource; var AIndex: integer);
 
 implementation
 
@@ -233,7 +233,7 @@ begin
   Insert_ASM([amImpl], ASource, AIndex, [amImpl, 'PULS ###'], ARegister);
 end;
 
-procedure SourceTranslate6502(var ASrc: OAsmSource; var AIndex: integer);
+procedure Translate6502(var ASrc: OAsmSource; var AIndex: integer);
 var
   S: string;
 begin

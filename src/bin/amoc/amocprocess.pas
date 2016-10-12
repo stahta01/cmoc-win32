@@ -226,7 +226,7 @@ begin
     FSource.Insert(0, EmptyStr, 'pragma', 'forwardrefmax');
   end;
   FSource.Add(EmptyStr, 'endsection', EmptyStr);
-  SourceTranslate(FSource);
+  Translate(FSource);
   Peephole(FSource);
   FSource.SaveToStrings(ADst);
 end;

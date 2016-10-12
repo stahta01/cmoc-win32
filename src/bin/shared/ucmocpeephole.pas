@@ -145,11 +145,30 @@ end;
 // 16,107
 // 16,065
 // 16,062
+// 15,975
+// 15,910
+// 15,834
 
 procedure Peephole_Rejuice(var ASrc: OAsmSource);
 var
   LIndex: integer;
   LRejuice: boolean;
+  A, B, C, D: ^OAsmLine;
+
+  procedure RejuiceBRA(const AName: string; const ALength: integer);
+  begin
+    A^.Inst := 'lbra';
+    A^.Args := AName;
+    ASrc.Remove(LIndex + 1, LIndex + ALength);
+  end;
+
+  procedure RejuiceBSR(const AName: string; const ALength: integer);
+  begin
+    A^.Inst := 'lbsr';
+    A^.Args := AName;
+    ASrc.Remove(LIndex + 1, LIndex + ALength);
+  end;
+
 begin
   LRejuice := True;
   with ASrc do begin
@@ -158,18 +177,30 @@ begin
         Items[LIndex].Removed := True;
         LRejuice := StrToBool(Items[LIndex].Args);
       end;
-      if LRejuice and CanChange(LIndex, LIndex + 3) then begin
-        if Items[LIndex + 0].Same('ldd', ',x') and Items[LIndex + 2].Same('std', ',x') then begin
-          if Items[LIndex + 1].Same('subd', '#1') and Items[LIndex + 3].Same('addd', '#1') then
-          begin
-            Items[LIndex].Inst := 'lbsr';
-            Items[LIndex].Args := '_rejuice_1';
-            Remove(LIndex + 1, LIndex + 3);
-          end else if Items[LIndex + 1].Same('addd', '#1') and
-            Items[LIndex + 3].Same('subd', '#1') then begin
-            Items[LIndex].Inst := 'lbsr';
-            Items[LIndex].Args := '_rejuice_2';
-            Remove(LIndex + 1, LIndex + 3);
+      if LRejuice then begin
+        if CanChange(LIndex, LIndex + 1) then begin
+          A := @Items[LIndex + 0];
+          B := @Items[LIndex + 1];
+          if A^.Same('leas', ',u') and B^.Same('puls', 'u,pc') then begin
+            RejuiceBRA('_rejuice_5', 1);
+          end else if A^.Same('pshs', 'u') and B^.Same('leau', ',s') then begin
+            RejuiceBSR('_rejuice_4', 1);
+          end else if CanChange(LIndex, LIndex + 3) then begin
+            C := @Items[LIndex + 2];
+            D := @Items[LIndex + 3];
+            if A^.Same('ldd', ',x') then begin
+              if B^.Same('tfr', 'b,a') then begin
+                if C^.SameInst('clrb') and D^.Same('std', ',x') then begin
+                  RejuiceBSR('_rejuice_3', 3);
+                end;
+              end else if C^.Same('std', ',x') then begin
+                if B^.Same('subd', '#1') and D^.Same('addd', '#1') then begin
+                  RejuiceBSR('_rejuice_1', 3);
+                end else if B^.Same('addd', '#1') and D^.Same('subd', '#1') then begin
+                  RejuiceBSR('_rejuice_2', 3);
+                end;
+              end;
+            end;
           end;
         end;
       end;

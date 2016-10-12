@@ -128,7 +128,9 @@ var
 begin
   AStrings.Clear;
   for LIndex := 0 to Count - 1 do begin
-    AStrings.Add(Items[LIndex].AsString);
+    if not Items[LIndex].Removed then begin
+      AStrings.Add(Items[LIndex].AsString);
+    end;
   end;
 end;
 

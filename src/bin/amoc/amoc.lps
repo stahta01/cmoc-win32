@@ -10,7 +10,7 @@
         <IsPartOfProject Value="True"/>
         <TopLine Value="47"/>
         <CursorPos X="16" Y="56"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="74"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -19,24 +19,24 @@
         <UnitName Value="AmocProcess"/>
         <EditorIndex Value="1"/>
         <TopLine Value="213"/>
-        <CursorPos X="11" Y="229"/>
-        <UsageCount Value="69"/>
+        <CursorPos X="17" Y="231"/>
+        <UsageCount Value="74"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\shared\ucmoctranslate.pas"/>
         <UnitName Value="UCmocTranslate"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="34"/>
-        <CursorPos X="21" Y="45"/>
+        <TopLine Value="24"/>
+        <CursorPos X="26" Y="72"/>
         <UsageCount Value="52"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\shared\ucmoctranslate6502.pas"/>
         <UnitName Value="UCmocTranslate6502"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="229"/>
-        <CursorPos X="28" Y="240"/>
+        <TopLine Value="291"/>
+        <CursorPos X="11" Y="45"/>
         <UsageCount Value="29"/>
       </Unit3>
       <Unit4>
@@ -88,10 +88,11 @@
       <Unit10>
         <Filename Value="..\shared\ucmocasmsource.pas"/>
         <UnitName Value="UCmocAsmSource"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="153"/>
-        <CursorPos X="42" Y="131"/>
-        <UsageCount Value="23"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="36"/>
+        <CursorPos X="29" Y="49"/>
+        <UsageCount Value="25"/>
+        <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="..\shared\ucmocstringdynarray.pas"/>
@@ -168,10 +169,10 @@
         <Filename Value="..\shared\ucmocpeephole.pas"/>
         <UnitName Value="UCmocPeephole"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="135"/>
-        <CursorPos X="40" Y="142"/>
-        <UsageCount Value="21"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="134"/>
+        <CursorPos X="10" Y="150"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit21>
       <Unit22>
@@ -225,7 +226,7 @@
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit28>
     </Units>
-    <JumpHistory Count="8" HistoryIndex="7">
+    <JumpHistory Count="15" HistoryIndex="14">
       <Position1>
         <Filename Value="amoc.lpr"/>
         <Caret Line="57" Column="53" TopLine="46"/>
@@ -256,8 +257,36 @@
       </Position7>
       <Position8>
         <Filename Value="amocprocess.pas"/>
-        <Caret Line="229" Column="11" TopLine="213"/>
+        <Caret Line="229" Column="10" TopLine="213"/>
       </Position8>
+      <Position9>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="231" Column="17" TopLine="213"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\shared\ucmocasmsource.pas"/>
+        <Caret Line="125" Column="13" TopLine="125"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\shared\ucmocpeephole.pas"/>
+        <Caret Line="169" Column="63" TopLine="160"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\shared\ucmocpeephole.pas"/>
+        <Caret Line="180" Column="49" TopLine="166"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\shared\ucmocpeephole.pas"/>
+        <Caret Line="156" Column="15" TopLine="145"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\shared\ucmocpeephole.pas"/>
+        <Caret Line="160" Column="10" TopLine="149"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\shared\ucmocpeephole.pas"/>
+        <Caret Line="156" Column="24" TopLine="142"/>
+      </Position15>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
