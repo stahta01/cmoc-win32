@@ -77,6 +77,7 @@ begin
       try
         OCmoc.ExtractPragmas(LTmp, ASrc, FOrigin, FTarget, LOptions);
         LParams := TStringDynArray.Create(Opt_EmitUncalled1, Opt_DontLink1);
+        OStringDynArray.Add(LParams, '--allow-undef-func');
         OStringDynArray.Add(LParams, Opt_O + LOptions._GetString(Opt_Optimize, '1'));
         if AWerror then begin
           OStringDynArray.Add(LParams, Opt_Werror1);
