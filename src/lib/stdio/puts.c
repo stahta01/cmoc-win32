@@ -1,9 +1,9 @@
 
 #include "_stdio.h"
 
-int puts(char* s)
+int puts(char* str)
 {
-    if (fputs(s, stdout) == EOF) {
+    if (fputs(str, stdout) == EOF) {
         return EOF;
     }
     if (fputc('\n', stdout) == EOF) {

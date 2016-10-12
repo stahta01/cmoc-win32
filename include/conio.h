@@ -46,16 +46,16 @@ int bgcolor(int pen);
 int bordercolor(int color);
 int cgetc(void);
 int cprintf(char* fmt, ...);
-int cprintfxy(int x, int y, char* fmt, ...);    // CMOC
-int cscanf(char* fmt, ...);                     // TODO
+int cprintfxy(int x, int y, char* fmt, ...);        // CMOC
+int cscanf(char* fmt, ...);                         // TODO
 int textcolor(int pen);
 int vcprintf(char* fmt, va_list args);
-int vcscanf(char* fmt, va_list args);           // TODO
+int vcscanf(char* fmt, va_list args);               // TODO
 
 int wherex(void);
 int wherey(void);
-void wherexy(int* x, int* y);                   // CMOC
-int whereat(void);                              // CMOC
+void wherexy(int* x, int* y);                       // CMOC
+int whereat(void);                                  // CMOC
 
 void cclear(int len);
 void cclearxy(int x, int y, int len);
@@ -66,35 +66,38 @@ void cputc(int chr);
 void cputcxy(int x, int y, int chr);
 void cputs(char* str);
 void cputsxy(int x, int y, char* str);
-void cvline(int len);                           // TODO
+void cvline(int len);                               // TODO
 void cvlinexy(int x, int y, int len);
 
 void gotox(int x);
 void gotoxy(int x, int y);
 void gotoy(int y);
-void gotoat(int at);                            // CMOC
+void gotoat(int at);                                // CMOC
 
 void screensize(int* x, int* y);
 
 // Non-standard. Added for CMOC
 
-char* cgets(char* str);                         // Borland
-int getch(void);                                // Borland
-int getche(void);                               // Borland
-int ungetch(int chr);                           // Borland
+char* cgets(char* str);                             // Borland
+int getch(void);                                    // Borland
+int getche(void);                                   // Borland
+int ungetch(int chr);                               // Borland
 
-void cursormove(int chr);                       // CMOC
-void screenwipe(void);                          // CMOC
-void screenmove(int dir);                       // CMOC
+void cursormove(int chr);                           // CMOC
+void screenwipe(void);                              // CMOC
+void screenmove(int dir);                           // CMOC
 
-void remappalette(int pen, int color);          // CMOC
-void remapallpalette(byte* palette);            // CMOC
-int colorrgb(int r, int g, int b);              // CMOC
+void remappalette(int pen, int color);              // CMOC
+void remapallpalette(byte* palette);                // CMOC
+int colorrgb(int r, int g, int b);                  // CMOC
 
 // write functions use a micro version of sprintf
 
-int vcwritef(char* fmt, va_list args);          // CMOC
-int cwritef(char* fmt, ...);                    // CMOC
+int vcwritef(char* fmt, va_list args);              // CMOC
+int cwritef(char* fmt, ...);                        // CMOC
+
+void cread(char* str, size_t size);                 // CMOC
+void cwrite(char* str, size_t size);                // CMOC
 
 // 1 bit for the color set
 
@@ -134,16 +137,16 @@ int cwritef(char* fmt, ...);                    // CMOC
 #define MODE_H0_64X24 (MODE_CSS0 | MODE_HRES | MODE_FONT_PACKED)
 #define MODE_H1_64X24 (MODE_CSS1 | MODE_HRES | MODE_FONT_PACKED)
 
-void textmode(int newmode);                     // Watcom
+void textmode(int newmode);                         // Watcom
 
 // You can save 2K by calling textmode2. textmode() refers to 2 fonts, when you
 // may only need 1. Calling textmode2 with the font you need, will prevent the
 // linker from adding the second, but, you must make sure you select a mode
 // which matchs the font. ie: packed vs unpacked fonts.
 
-void textmode2(int newmode, byte* fontdata);    // CMOC
+void textmode2(int newmode, byte* fontdata);        // CMOC
 
-void conio_uses_graph(void);                    // CMOC
+void conio_uses_graph(void);                        // CMOC
 
 #endif
 

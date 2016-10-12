@@ -11,7 +11,7 @@ size_t fread(void* buf, size_t size, size_t count, FILE* fp)
                 if (c == EOF) {
                     return count_in;
                 }
-                *(unsigned char*)buf = (unsigned char)c;
+                *(byte*)buf = (byte)c;
                 buf = buf + 1;
             }
         }

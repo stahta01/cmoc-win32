@@ -3,16 +3,7 @@
 
 int fputs(char* str, FILE* fp)
 {
-    if (fp->dev) {
-        byte olddev = _devnum;
-        _devnum = (byte)fp->dev;
-        while (*str) {
-            system_fputc(*str++);
-        }
-        _devnum = olddev;
-    } else {
-        cputs(str);
-    }
-    return 0;
+    size_t count = strlen(str);
+    return fwrite(str, sizeof(char), count, fp) == count ? true : EOF;
 }
 

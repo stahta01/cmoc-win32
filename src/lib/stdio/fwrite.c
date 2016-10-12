@@ -4,18 +4,21 @@
 size_t fwrite(void* buf, size_t size, size_t count, FILE* fp)
 {
     if (size && count) {
-        size_t count_out = 0;
-        for (count_out = 0; count_out < count; count_out++) {
-            for (size_t size_out = 0; size_out < size; size_out++) {
-                if (fputc(*(unsigned char*)buf, fp) == EOF) {
-                    return count_out;
+        if (fp->dev) {
+            byte olddev = _devnum;
+            _devnum = (byte)fp->dev;
+            for (size_t i = 0; i < count; i++) {
+                for (size_t j = size; j--;) {
+                    // todo: how do we check for an error here?
+                    system_fputc(*(byte*)buf);
+                    buf = buf + 1;
                 }
-                buf = buf + 1;
             }
+            _devnum = olddev;
+        } else {
+            cwrite((char*)buf, size * count);
         }
-        return count_out;
-    } else {
-        return 0;
     }
+    return count;
 }
 
