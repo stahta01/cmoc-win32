@@ -148,6 +148,7 @@ end;
 // 15,975
 // 15,910
 // 15,834
+// 15,834
 
 procedure Peephole_Rejuice(var ASrc: OAsmSource);
 var
@@ -185,19 +186,28 @@ begin
             RejuiceBRA('_rejuice_5', 1);
           end else if A^.Same('pshs', 'u') and B^.Same('leau', ',s') then begin
             RejuiceBSR('_rejuice_4', 1);
-          end else if CanChange(LIndex, LIndex + 3) then begin
+          end else if CanChange(LIndex, LIndex + 2) then begin
             C := @Items[LIndex + 2];
-            D := @Items[LIndex + 3];
-            if A^.Same('ldd', ',x') then begin
-              if B^.Same('tfr', 'b,a') then begin
-                if C^.SameInst('clrb') and D^.Same('std', ',x') then begin
-                  RejuiceBSR('_rejuice_3', 3);
-                end;
-              end else if C^.Same('std', ',x') then begin
-                if B^.Same('subd', '#1') and D^.Same('addd', '#1') then begin
-                  RejuiceBSR('_rejuice_1', 3);
-                end else if B^.Same('addd', '#1') and D^.Same('subd', '#1') then begin
-                  RejuiceBSR('_rejuice_2', 3);
+            if A^.Same('leax', 'd,x') and B^.Same('ldb', ',x') then begin
+              if C^.SameInst('clra') then begin
+                RejuiceBSR('_rejuice_6', 2);
+              end else if C^.SameInst('sex') then begin
+                RejuiceBSR('_rejuice_7', 2);
+              end;
+            end else if CanChange(LIndex, LIndex + 3) then begin
+              D := @Items[LIndex + 3];
+              if A^.Same('ldd', ',x') then begin
+                if B^.Same('tfr', 'b,a') then begin
+                  if C^.SameInst('clrb') and D^.Same('std', ',x') then begin
+                    // Only used in 2 places. Not useful.
+                    //RejuiceBSR('_rejuice_3', 3);
+                  end;
+                end else if C^.Same('std', ',x') then begin
+                  if B^.Same('subd', '#1') and D^.Same('addd', '#1') then begin
+                    RejuiceBSR('_rejuice_1', 3);
+                  end else if B^.Same('addd', '#1') and D^.Same('subd', '#1') then begin
+                    RejuiceBSR('_rejuice_2', 3);
+                  end;
                 end;
               end;
             end;

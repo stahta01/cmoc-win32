@@ -10,7 +10,7 @@
         <IsPartOfProject Value="True"/>
         <TopLine Value="47"/>
         <CursorPos X="16" Y="56"/>
-        <UsageCount Value="74"/>
+        <UsageCount Value="76"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -20,7 +20,7 @@
         <EditorIndex Value="1"/>
         <TopLine Value="213"/>
         <CursorPos X="17" Y="231"/>
-        <UsageCount Value="74"/>
+        <UsageCount Value="76"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -29,7 +29,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="24"/>
         <CursorPos X="26" Y="72"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="51"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\shared\ucmoctranslate6502.pas"/>
@@ -37,7 +37,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="291"/>
         <CursorPos X="11" Y="45"/>
-        <UsageCount Value="29"/>
+        <UsageCount Value="28"/>
       </Unit3>
       <Unit4>
         <Filename Value="..\shared\ucmocpreprocessor.pas"/>
@@ -45,21 +45,21 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="70"/>
         <CursorPos X="15" Y="52"/>
-        <UsageCount Value="19"/>
+        <UsageCount Value="18"/>
       </Unit4>
       <Unit5>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\inc\systemh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1238"/>
         <CursorPos X="11" Y="1249"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit5>
       <Unit6>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\inc\objpash.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="60"/>
         <CursorPos X="8" Y="71"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit6>
       <Unit7>
         <Filename Value="..\shared\ucmocrbs.pas"/>
@@ -67,7 +67,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="34"/>
         <CursorPos Y="38"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit7>
       <Unit8>
         <Filename Value="..\shared\ucmocutils.pas"/>
@@ -75,7 +75,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="170"/>
         <CursorPos X="18" Y="179"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit8>
       <Unit9>
         <Filename Value="..\shared\ucmocasmdefs.pas"/>
@@ -83,7 +83,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="36"/>
         <CursorPos X="18" Y="36"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit9>
       <Unit10>
         <Filename Value="..\shared\ucmocasmsource.pas"/>
@@ -91,7 +91,7 @@
         <EditorIndex Value="2"/>
         <TopLine Value="36"/>
         <CursorPos X="29" Y="49"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit10>
       <Unit11>
@@ -99,21 +99,21 @@
         <UnitName Value="UCmocStringDynArray"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="31"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit11>
       <Unit12>
         <Filename Value="..\shared\ucmocdefs.pas"/>
         <UnitName Value="UCmocDefs"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="43"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit12>
       <Unit13>
         <Filename Value="..\shared\ucmocparser.pas"/>
         <UnitName Value="UCmocParser"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="31"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit13>
       <Unit14>
         <Filename Value="..\shared\ucmocasmline.pas"/>
@@ -121,7 +121,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="152"/>
         <CursorPos X="11" Y="170"/>
-        <UsageCount Value="28"/>
+        <UsageCount Value="27"/>
       </Unit14>
       <Unit15>
         <Filename Value="..\shared\ucmocasm.pas"/>
@@ -129,57 +129,57 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="25"/>
         <CursorPos X="6" Y="36"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit15>
       <Unit16>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\sysutils\sysstrh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="200"/>
         <CursorPos X="18" Y="211"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit16>
       <Unit17>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\sysutils\sysstr.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1800"/>
         <CursorPos X="3" Y="1802"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit17>
       <Unit18>
         <Filename Value="..\shared\cmoc.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="10" Y="9"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit18>
       <Unit19>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\sysutils\sysunih.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="46"/>
         <CursorPos X="14" Y="57"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit19>
       <Unit20>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\sysutils\sysuni.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="426"/>
         <CursorPos X="5" Y="437"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit20>
       <Unit21>
         <Filename Value="..\shared\ucmocpeephole.pas"/>
         <UnitName Value="UCmocPeephole"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="134"/>
-        <CursorPos X="10" Y="150"/>
-        <UsageCount Value="23"/>
+        <TopLine Value="189"/>
+        <CursorPos X="58" Y="202"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit21>
       <Unit22>
         <Filename Value="..\..\..\examples\rpncalc\rpncalc-v2.asm"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="328"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit22>
       <Unit23>
@@ -187,41 +187,40 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="390"/>
         <CursorPos X="48" Y="399"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
         <DefaultSyntaxHighlighter Value="C++"/>
       </Unit23>
       <Unit24>
         <Filename Value="..\..\lib\libgraph\line.asm"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="710"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit24>
       <Unit25>
         <Filename Value="..\..\lib\libstdlib\vsprintf.asm"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="512"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit25>
       <Unit26>
         <Filename Value="..\..\..\examples\rpncalc\rpncalc-v1.asm"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="605"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit26>
       <Unit27>
         <Filename Value="..\..\lib\libheap\heap_malloc.asm"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit27>
       <Unit28>
         <Filename Value="..\..\..\bin\cmocide\keywords.txt"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="187"/>
-        <CursorPos X="6" Y="211"/>
+        <CursorPos X="6" Y="214"/>
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit28>
