@@ -11,8 +11,8 @@ void screenmove(int dir)
         memset_w((void*)(_H_VIDRAM + lastline), _h_crsatt, _h_column);
         bank_set(bank);
     } else if (isvidram()) {
-        memcpy(_VIDRAM, _VIDRAM + 32, 32 * 15);
-        memset(_VIDRAM + 32 * 15, 96, 32);
+        memcpy(_VIDRAM, _VIDRAM + 32, 480);
+        memset_w(_VIDRAM + 480, 0x6060, 16);
     } else if (_conio.scrolltextwindow) {
         _conio.scrolltextwindow(_GSCROLLUP);
     }
