@@ -8,43 +8,42 @@
       <Unit0>
         <Filename Value="amoc.lpr"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="47"/>
-        <CursorPos X="15" Y="56"/>
-        <UsageCount Value="67"/>
+        <CursorPos X="14" Y="56"/>
+        <UsageCount Value="69"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="amocprocess.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="AmocProcess"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="198"/>
-        <CursorPos X="66" Y="217"/>
-        <UsageCount Value="67"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="197"/>
+        <CursorPos X="21" Y="204"/>
+        <UsageCount Value="69"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\shared\ucmoctranslate.pas"/>
         <UnitName Value="UCmocTranslate"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="56"/>
-        <CursorPos X="35" Y="67"/>
+        <TopLine Value="47"/>
+        <CursorPos X="23" Y="60"/>
         <UsageCount Value="52"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\shared\ucmoctranslate6502.pas"/>
         <UnitName Value="UCmocTranslate6502"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="154"/>
-        <CursorPos X="34" Y="167"/>
+        <TopLine Value="229"/>
+        <CursorPos X="28" Y="240"/>
         <UsageCount Value="29"/>
       </Unit3>
       <Unit4>
         <Filename Value="..\shared\ucmocpreprocessor.pas"/>
         <UnitName Value="UCmocPreprocessor"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="23"/>
+        <TopLine Value="70"/>
         <CursorPos X="15" Y="52"/>
         <UsageCount Value="19"/>
       </Unit4>
@@ -90,9 +89,9 @@
         <Filename Value="..\shared\ucmocasmsource.pas"/>
         <UnitName Value="UCmocAsmSource"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="130"/>
-        <CursorPos X="33" Y="147"/>
-        <UsageCount Value="22"/>
+        <TopLine Value="153"/>
+        <CursorPos X="42" Y="131"/>
+        <UsageCount Value="23"/>
       </Unit10>
       <Unit11>
         <Filename Value="..\shared\ucmocstringdynarray.pas"/>
@@ -119,9 +118,9 @@
         <Filename Value="..\shared\ucmocasmline.pas"/>
         <UnitName Value="UCmocAsmLine"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="150"/>
-        <CursorPos X="101" Y="150"/>
-        <UsageCount Value="27"/>
+        <TopLine Value="152"/>
+        <CursorPos X="11" Y="170"/>
+        <UsageCount Value="28"/>
       </Unit14>
       <Unit15>
         <Filename Value="..\shared\ucmocasm.pas"/>
@@ -134,15 +133,15 @@
       <Unit16>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\sysutils\sysstrh.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="206"/>
-        <CursorPos X="17" Y="217"/>
+        <TopLine Value="200"/>
+        <CursorPos X="18" Y="211"/>
         <UsageCount Value="10"/>
       </Unit16>
       <Unit17>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\sysutils\sysstr.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="2621"/>
-        <CursorPos X="3" Y="2631"/>
+        <TopLine Value="1800"/>
+        <CursorPos X="3" Y="1802"/>
         <UsageCount Value="10"/>
       </Unit17>
       <Unit18>
@@ -169,9 +168,9 @@
         <Filename Value="..\shared\ucmocpeephole.pas"/>
         <UnitName Value="UCmocPeephole"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="126"/>
-        <CursorPos X="82" Y="143"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="139"/>
+        <CursorPos X="30" Y="151"/>
+        <UsageCount Value="21"/>
       </Unit21>
       <Unit22>
         <Filename Value="..\..\..\examples\rpncalc\rpncalc-v2.asm"/>
@@ -224,7 +223,7 @@
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit28>
     </Units>
-    <JumpHistory Count="3" HistoryIndex="2">
+    <JumpHistory Count="5" HistoryIndex="4">
       <Position1>
         <Filename Value="amoc.lpr"/>
         <Caret Line="57" Column="53" TopLine="46"/>
@@ -237,6 +236,14 @@
         <Filename Value="amoc.lpr"/>
         <Caret Line="56" Column="15" TopLine="47"/>
       </Position3>
+      <Position4>
+        <Filename Value="amoc.lpr"/>
+        <Caret Line="59" Column="19" TopLine="47"/>
+      </Position4>
+      <Position5>
+        <Filename Value="amoc.lpr"/>
+        <Caret Line="56" Column="14" TopLine="47"/>
+      </Position5>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

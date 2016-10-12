@@ -46,7 +46,7 @@ type
 
   OAsmSource = object
   public
-    Lines: array of OAsmLine;
+    Items: array of OAsmLine;
   public
     function Count: integer; inline;
   public
@@ -62,13 +62,16 @@ type
     procedure SaveToFile(const AFileName: TFileName);
   public
     function SameInstArgs(const A, B: integer): boolean;
+  public
+    function CanChange(const ALow, AHigh: integer): boolean;
+    procedure Remove(const ALow, AHigh: integer);
   end;
 
 implementation
 
 function OAsmSource.Count: integer;
 begin
-  Result := System.Length(Lines);
+  Result := System.Length(Items);
 end;
 
 procedure OAsmSource.Insert(const AIndex: integer;
@@ -76,11 +79,11 @@ procedure OAsmSource.Insert(const AIndex: integer;
 var
   LIndex: integer;
 begin
-  System.SetLength(Lines, Count + 1);
+  System.SetLength(Items, Count + 1);
   for LIndex := Count - 2 downto AIndex do begin
-    Lines[LIndex + 1] := Lines[LIndex];
+    Items[LIndex + 1] := Items[LIndex];
   end;
-  Lines[AIndex].SetLine(ASymbol, AInstruction, AParameters);
+  Items[AIndex].SetLine(ASymbol, AInstruction, AParameters);
 end;
 
 procedure OAsmSource.Add(const ASymbol, AInstruction, AParameters: string);
@@ -125,9 +128,7 @@ var
 begin
   AStrings.Clear;
   for LIndex := 0 to Count - 1 do begin
-    if not Lines[LIndex].Removed then begin
-      AStrings.Add(Lines[LIndex].AsString);
-    end;
+    AStrings.Add(Items[LIndex].AsString);
   end;
 end;
 
@@ -146,7 +147,31 @@ end;
 
 function OAsmSource.SameInstArgs(const A, B: integer): boolean;
 begin
-  Result := Lines[A].SameInst(Lines[B].Inst) and Lines[A].SameArgs(Lines[B].Args);
+  Result := Items[A].SameInst(Items[B].Inst) and Items[A].SameArgs(Items[B].Args);
+end;
+
+function OAsmSource.CanChange(const ALow, AHigh: integer): boolean;
+var
+  LIndex: integer;
+begin
+  Result := (ALow <= AHigh) and (ALow >= 0) and (ALow < Count) and
+    (AHigh >= 0) and (AHigh < Count) and not Items[ALow].Removed;
+  if Result then begin
+    for LIndex := ALow + 1 to AHigh do begin
+      if Items[LIndex].Removed or Items[LIndex].HasSymb then begin
+        Exit(False);
+      end;
+    end;
+  end;
+end;
+
+procedure OAsmSource.Remove(const ALow, AHigh: integer);
+var
+  LIndex: integer;
+begin
+  for LIndex := ALow to AHigh do begin
+    Items[LIndex].Removed := True;
+  end;
 end;
 
 end.

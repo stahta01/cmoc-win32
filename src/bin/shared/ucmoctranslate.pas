@@ -56,8 +56,8 @@ var
 begin
   LProcessorMode := pm6809;
   LIndex := 0;
-  while LIndex < Length(ASource.Lines) do begin
-    with ASource.Lines[LIndex] do begin
+  while LIndex < Length(ASource.Items) do begin
+    with ASource.Items[LIndex] do begin
       if not (Removed or Is6502 or (Length(Inst) = 0)) then begin
         Removed := SameInst('.p09');
         if Removed then begin

@@ -4,21 +4,21 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="25">
+    <Units Count="26">
       <Unit0>
         <Filename Value="cpp.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="58"/>
-        <CursorPos X="39" Y="60"/>
+        <TopLine Value="66"/>
+        <CursorPos X="15" Y="83"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\sysutils\osutilsh.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="4"/>
-        <CursorPos X="50" Y="15"/>
+        <TopLine Value="22"/>
+        <CursorPos X="21" Y="33"/>
         <UsageCount Value="10"/>
       </Unit1>
       <Unit2>
@@ -188,8 +188,15 @@
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="C++"/>
       </Unit24>
+      <Unit25>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\win\sysutils.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1132"/>
+        <CursorPos X="3" Y="1139"/>
+        <UsageCount Value="10"/>
+      </Unit25>
     </Units>
-    <JumpHistory Count="21" HistoryIndex="20">
+    <JumpHistory Count="22" HistoryIndex="21">
       <Position1>
         <Filename Value="cpp.lpr"/>
         <Caret Line="24" Column="13" TopLine="17"/>
@@ -274,6 +281,10 @@
         <Filename Value="cpp.lpr"/>
         <Caret Line="45" Column="7" TopLine="42"/>
       </Position21>
+      <Position22>
+        <Filename Value="cpp.lpr"/>
+        <Caret Line="83" Column="14" TopLine="66"/>
+      </Position22>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

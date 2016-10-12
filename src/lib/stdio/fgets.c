@@ -22,7 +22,7 @@ char* fgets(char* str, size_t size, FILE* fp)
         return chr == EOF ? (char*)nullptr : result;
     } else {
         char buf[MAX_INPUT];
-        buf[0] = size < MAX_INPUT ? size : MAX_INPUT;
+        buf[0] = size < MAX_INPUT ? (byte)size : MAX_INPUT;
         strcpy(str, cgets(buf));
         cputc('\n');
         return str;

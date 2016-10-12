@@ -40,9 +40,10 @@ unit UCmocPeephole;
 interface
 
 uses
-  UCmocAsmLine, UCmocAsmSource;
+  SysUtils, UCmocAsmLine, UCmocAsmSource;
 
 procedure SourcePeephole(var ASrc: OAsmSource);
+procedure SourcePeephole_Rejuice(var ASrc: OAsmSource);
 
 implementation
 
@@ -64,7 +65,7 @@ procedure SourcePeephole1(const ASrc: OAsmSource);
   begin
     Result := False;
     for AIndex := AIndex + 1 to ASrc.Count - 1 do begin
-      with ASrc.Lines[AIndex] do begin
+      with ASrc.Items[AIndex] do begin
         if HasSymb or HasRegs(TCharSetRegS) then begin
           Break;
         end;
@@ -84,27 +85,27 @@ var
   LIndex, LPos1, LPos2, LPos3: integer;
 begin
   for LIndex := 0 to ASrc.Count - 1 do begin
-    with ASrc.Lines[LIndex] do begin
+    with ASrc.Items[LIndex] do begin
       if not Removed then begin
         if SameInst('LEAS') then begin
           if SameArgs('2,S') then begin
             Removed := Find_PSHS(LPos1, LIndex);
             if Removed then begin
-              PSHS_TO_STORE(ASrc.Lines[LPos1], '0');
+              PSHS_TO_STORE(ASrc.Items[LPos1], '0');
             end;
           end else if SameArgs('4,S') then begin
             Removed := Find_PSHS(LPos1, LIndex) and Find_PSHS(LPos2, LPos1);
             if Removed then begin
-              PSHS_TO_STORE(ASrc.Lines[LPos1], '2');
-              PSHS_TO_STORE(ASrc.Lines[LPos2], '0');
+              PSHS_TO_STORE(ASrc.Items[LPos1], '2');
+              PSHS_TO_STORE(ASrc.Items[LPos2], '0');
             end;
           end else if SameArgs('6,S') then begin
             Removed := Find_PSHS(LPos1, LIndex) and Find_PSHS(LPos2, LPos1) and
               Find_PSHS(LPos3, LPos2);
             if Removed then begin
-              PSHS_TO_STORE(ASrc.Lines[LPos1], '4');
-              PSHS_TO_STORE(ASrc.Lines[LPos2], '2');
-              PSHS_TO_STORE(ASrc.Lines[LPos3], '0');
+              PSHS_TO_STORE(ASrc.Items[LPos1], '4');
+              PSHS_TO_STORE(ASrc.Items[LPos2], '2');
+              PSHS_TO_STORE(ASrc.Items[LPos3], '0');
             end;
           end;
         end;
@@ -113,26 +114,55 @@ begin
   end;
 end;
 
-procedure SourcePeephole2(const ASrc: OAsmSource);
+procedure SourcePeephole_Duplicates(const ASrc: OAsmSource);
 var
   LIndex: integer;
 
   procedure DuplicateRemove;
   begin
     if ASrc.SameInstArgs(LIndex, LIndex + 1) then begin
-      if not ASrc.Lines[LIndex].HasSymb then begin
-        ASrc.Lines[LIndex + 0].Removed := True;
-      end else if not ASrc.Lines[LIndex + 1].HasSymb then begin
-        ASrc.Lines[LIndex + 1].Removed := True;
+      if not ASrc.Items[LIndex].HasSymb then begin
+        ASrc.Items[LIndex + 0].Removed := True;
+      end else if not ASrc.Items[LIndex + 1].HasSymb then begin
+        ASrc.Items[LIndex + 1].Removed := True;
       end;
     end;
   end;
 
 begin
   for LIndex := 0 to ASrc.Count - 2 do begin
-    if not (ASrc.Lines[LIndex].Removed or ASrc.Lines[LIndex + 1].Removed) then begin
-      if ASrc.Lines[LIndex].SameInst('RTS') then begin
+    if not (ASrc.Items[LIndex].Removed or ASrc.Items[LIndex + 1].Removed) then begin
+      if ASrc.Items[LIndex].SameInst('rts') then begin
         DuplicateRemove;
+      end;
+    end;
+  end;
+end;
+
+// 16,146
+// 16,129
+// 16,107
+// 16,065
+
+procedure SourcePeephole_Rejuice(var ASrc: OAsmSource);
+var
+  LIndex: integer;
+  LRejuice: boolean;
+begin
+  LRejuice := True;
+  with ASrc do begin
+    for LIndex := 0 to Count - 1 do begin
+      if Items[LIndex].SameInst('.rejuice') then begin
+        Items[LIndex].Removed := True;
+        LRejuice := StrToBool(Items[LIndex].Args);
+      end;
+      if LRejuice and CanChange(LIndex, LIndex + 3) then begin
+        if Items[LIndex + 0].Same('ldd', ',x') and Items[LIndex + 1].Same('subd', '#1') and
+          Items[LIndex + 2].Same('std', ',x') and Items[LIndex + 3].Same('addd', '#1') then begin
+          Items[LIndex].Inst := 'lbsr';
+          Items[LIndex].Args := '_rejuice_1';
+          Remove(LIndex + 1, LIndex + 3);
+        end;
       end;
     end;
   end;
@@ -142,8 +172,7 @@ procedure SourcePeephole(var ASrc: OAsmSource);
 begin
   // Not ready. Needs to check for PULS's or branches. Anything that may change S
   //SourcePeephole1(ASrc);
-  SourcePeephole2(ASrc);
+  SourcePeephole_Duplicates(ASrc);
 end;
 
 end.
-

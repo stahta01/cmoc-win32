@@ -80,7 +80,7 @@ uses
       end;
       Inc(LIndex);
     end;
-    ExecuteProcess(ProgramDirectory + Tool_MCPP, LParams, [ExecInheritsHandles]);
+    ExitCode := ExecuteProcess(ProgramDirectory + Tool_MCPP, LParams, [ExecInheritsHandles]);
   end;
 
 begin

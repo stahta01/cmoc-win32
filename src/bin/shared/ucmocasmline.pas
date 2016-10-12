@@ -61,6 +61,7 @@ type
     procedure SetLine(const ASymb, AInst, AArgs: string);
     function SetLine(const ASrcLine: string): boolean;
   public
+    function Same(const AInst, AArgs: string): boolean; inline;
     function SameSymb(const A: string): boolean; inline;
     function SameInst(const A: string): boolean; inline;
     function SameArgs(const A: string): boolean; inline;
@@ -146,12 +147,20 @@ begin
   Result := SameText(A, Args);
 end;
 
+function OAsmLine.Same(const AInst, AArgs: string): boolean;
+begin
+  Result := SameText(AInst, Inst) and SameText(AArgs, Args);
+end;
+
 function OAsmLine.AsString: string;
 begin
-  if HasSymb then begin
-    Result := Symb;
+  if Removed then begin
+    Result := '# REMOVED ';
   end else begin
     Result := EmptyStr;
+  end;
+  if HasSymb then begin
+    Result += Symb;
   end;
   if HasInst then begin
     Result += #9 + Inst;
@@ -159,7 +168,6 @@ begin
       Result += #9 + Args;
     end;
   end;
-  //Result := Format('%-30s %-10s %-20s', [Symb, Inst, Args]);
   if HasComm then begin
     Result += #9 + '; ' + Comm;
   end;

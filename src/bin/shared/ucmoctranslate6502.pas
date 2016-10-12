@@ -148,11 +148,11 @@ var
   LString, LValue: string;
   LMode: TAddrMode6502;
 begin
-  LMode := GetAddrMode(ASource.Lines[AInsertPos].Args, LValue);
+  LMode := GetAddrMode(ASource.Items[AInsertPos].Args, LValue);
   if not (LMode in AModes) then begin
     OCmoc.RaiseError(SInvalidInstructionMode);
   end;
-  ASource.Lines[AInsertPos].Removed := True;
+  ASource.Items[AInsertPos].Removed := True;
   LRuleIndex := 0;
   while LRuleIndex < High(ARules) do begin
     if ARules[LRuleIndex] = LMode then begin
@@ -166,9 +166,9 @@ begin
         if ASource.InsertSourceLine(AInsertPos, #9 +
           AnsiReplaceStr(AnsiReplaceStr(Copy(LString, LPos, LEnd - LPos),
           '?', LValue), '###', AMeta)) then begin
-          ASource.Lines[AInsertPos].Is6502 := True;
-          ASource.Lines[AInsertPos].Symb := ASource.Lines[AInsertPos + 1].Symb;
-          ASource.Lines[AInsertPos + 1].Symb := EmptyStr;
+          ASource.Items[AInsertPos].Is6502 := True;
+          ASource.Items[AInsertPos].Symb := ASource.Items[AInsertPos + 1].Symb;
+          ASource.Items[AInsertPos + 1].Symb := EmptyStr;
           Inc(AInsertPos);
         end;
         LPos := LEnd + 1;
@@ -237,7 +237,7 @@ procedure SourceTranslate6502(var ASrc: OAsmSource; var AIndex: integer);
 var
   S: string;
 begin
-  S := UpperCase(ASrc.Lines[AIndex].Inst);
+  S := UpperCase(ASrc.Items[AIndex].Inst);
   case S of
     'SEI', 'CLI', 'SEC', 'CLC', 'NOP', 'RTS', 'RTI': begin
       Insert_ASM([amImpl], ASrc, AIndex, [amImpl, '###'], S);

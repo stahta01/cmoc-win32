@@ -131,23 +131,23 @@ var
   LIndex: integer;
 begin
   for LIndex := 0 to FSource.Count - 1 do begin
-    FSource.Lines[LIndex].Removed := not FSource.Lines[LIndex].SameSymb(Sym_FunctionsStart);
-    if not FSource.Lines[LIndex].Removed then begin
+    FSource.Items[LIndex].Removed := not FSource.Items[LIndex].SameSymb(Sym_FunctionsStart);
+    if not FSource.Items[LIndex].Removed then begin
       break;
     end;
   end;
   for LIndex := FSource.Count - 1 downto 0 do begin
-    FSource.Lines[LIndex].Removed := not FSource.Lines[LIndex].SameSymb(Sym_ProgramEnd);
-    if not FSource.Lines[LIndex].Removed then begin
+    FSource.Items[LIndex].Removed := not FSource.Items[LIndex].SameSymb(Sym_ProgramEnd);
+    if not FSource.Items[LIndex].Removed then begin
       break;
     end;
   end;
   for LIndex := 0 to FSource.Count - 1 do begin
-    if AnsiMatchText(FSource.Lines[LIndex].Symb, ['program_end', 'functions_start',
+    if AnsiMatchText(FSource.Items[LIndex].Symb, ['program_end', 'functions_start',
       'functions_end',
       'string_literals_start', 'string_literals_end', 'writable_globals_start',
       'writable_globals_end']) then begin
-      FSource.Lines[LIndex].Removed := True;
+      FSource.Items[LIndex].Removed := True;
     end;
   end;
 end;
@@ -159,16 +159,16 @@ var
   LParser: OAsmParser;
 begin
   for LIndex := 0 to FSource.Count - 1 do begin
-    if SymbolIsPublic(FSource.Lines[LIndex].Symb) then begin
-      AddExport(FSource.Lines[LIndex].Symb);
+    if SymbolIsPublic(FSource.Items[LIndex].Symb) then begin
+      AddExport(FSource.Items[LIndex].Symb);
     end;
     // Do we really need to change this?
-    if FSource.Lines[LIndex].SameInst('rmb') then begin
-      FSource.Lines[LIndex].Inst := 'zmb';
+    if FSource.Items[LIndex].SameInst('rmb') then begin
+      FSource.Items[LIndex].Inst := 'zmb';
     end;
   end;
   for LIndex := 0 to FSource.Count - 1 do begin
-    LParser.SetString(FSource.Lines[LIndex].Args);
+    LParser.SetString(FSource.Items[LIndex].Args);
     while LParser.Next do begin
       LString := LParser.Token;
       if SymbolIsPublic(LString) and (FExportSymbols.IndexOf(LString) < 0) then begin
@@ -183,12 +183,12 @@ var
   LIndex: integer;
 begin
   for LIndex := FSource.Count - 2 downto 0 do begin
-    if AnsiStartsStr(Sym_INITGL, FSource.Lines[LIndex].Symb) then begin
-      if FSource.Lines[LIndex + 1].SameInst('rts') then begin
-        FSource.Lines[LIndex + 0].Removed := True;
-        FSource.Lines[LIndex + 1].Removed := True;
+    if AnsiStartsStr(Sym_INITGL, FSource.Items[LIndex].Symb) then begin
+      if FSource.Items[LIndex + 1].SameInst('rts') then begin
+        FSource.Items[LIndex + 0].Removed := True;
+        FSource.Items[LIndex + 1].Removed := True;
       end else begin
-        FSource.Lines[LIndex].Symb := AName;
+        FSource.Items[LIndex].Symb := AName;
         AddExport(AName);
       end;
       Break;
@@ -201,6 +201,7 @@ var
   LSymbol: string;
 begin
   FSource.AddSource(ASrc);
+  SourcePeephole_Rejuice(FSource);
   TrimSource;
   ResetSymbols;
   SetGlobalInitSymbol(FInitSymbol);
