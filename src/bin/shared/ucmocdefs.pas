@@ -41,7 +41,7 @@ interface
 
 const
 
-  Ver_CMOC = '0.1.32';
+  Ver_CMOC = '0.1.33';
   Ver_LWTOOLS = '4.13';
 
   Char_SPC = char(#32);
