@@ -201,7 +201,7 @@ var
   LSymbol: string;
 begin
   FSource.AddSource(ASrc);
-  SourcePeephole_Rejuice(FSource);
+  Peephole_Rejuice(FSource);
   TrimSource;
   ResetSymbols;
   SetGlobalInitSymbol(FInitSymbol);
@@ -227,7 +227,7 @@ begin
   end;
   FSource.Add(EmptyStr, 'endsection', EmptyStr);
   SourceTranslate(FSource);
-  SourcePeephole(FSource);
+  Peephole(FSource);
   FSource.SaveToStrings(ADst);
 end;
 

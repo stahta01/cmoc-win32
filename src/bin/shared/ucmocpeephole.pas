@@ -42,8 +42,8 @@ interface
 uses
   SysUtils, UCmocAsmLine, UCmocAsmSource;
 
-procedure SourcePeephole(var ASrc: OAsmSource);
-procedure SourcePeephole_Rejuice(var ASrc: OAsmSource);
+procedure Peephole(var ASrc: OAsmSource);
+procedure Peephole_Rejuice(var ASrc: OAsmSource);
 
 implementation
 
@@ -139,12 +139,14 @@ begin
   end;
 end;
 
+// Bin size count down for rpncalc-v2.c
 // 16,146
 // 16,129
 // 16,107
 // 16,065
+// 16,062
 
-procedure SourcePeephole_Rejuice(var ASrc: OAsmSource);
+procedure Peephole_Rejuice(var ASrc: OAsmSource);
 var
   LIndex: integer;
   LRejuice: boolean;
@@ -157,18 +159,25 @@ begin
         LRejuice := StrToBool(Items[LIndex].Args);
       end;
       if LRejuice and CanChange(LIndex, LIndex + 3) then begin
-        if Items[LIndex + 0].Same('ldd', ',x') and Items[LIndex + 1].Same('subd', '#1') and
-          Items[LIndex + 2].Same('std', ',x') and Items[LIndex + 3].Same('addd', '#1') then begin
-          Items[LIndex].Inst := 'lbsr';
-          Items[LIndex].Args := '_rejuice_1';
-          Remove(LIndex + 1, LIndex + 3);
+        if Items[LIndex + 0].Same('ldd', ',x') and Items[LIndex + 2].Same('std', ',x') then begin
+          if Items[LIndex + 1].Same('subd', '#1') and Items[LIndex + 3].Same('addd', '#1') then
+          begin
+            Items[LIndex].Inst := 'lbsr';
+            Items[LIndex].Args := '_rejuice_1';
+            Remove(LIndex + 1, LIndex + 3);
+          end else if Items[LIndex + 1].Same('addd', '#1') and
+            Items[LIndex + 3].Same('subd', '#1') then begin
+            Items[LIndex].Inst := 'lbsr';
+            Items[LIndex].Args := '_rejuice_2';
+            Remove(LIndex + 1, LIndex + 3);
+          end;
         end;
       end;
     end;
   end;
 end;
 
-procedure SourcePeephole(var ASrc: OAsmSource);
+procedure Peephole(var ASrc: OAsmSource);
 begin
   // Not ready. Needs to check for PULS's or branches. Anything that may change S
   //SourcePeephole1(ASrc);

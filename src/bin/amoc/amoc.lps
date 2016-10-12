@@ -8,9 +8,8 @@
       <Unit0>
         <Filename Value="amoc.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="47"/>
-        <CursorPos X="14" Y="56"/>
+        <CursorPos X="16" Y="56"/>
         <UsageCount Value="69"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -18,17 +17,18 @@
         <Filename Value="amocprocess.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="AmocProcess"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="197"/>
-        <CursorPos X="21" Y="204"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="213"/>
+        <CursorPos X="11" Y="229"/>
         <UsageCount Value="69"/>
+        <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\shared\ucmoctranslate.pas"/>
         <UnitName Value="UCmocTranslate"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="47"/>
-        <CursorPos X="23" Y="60"/>
+        <TopLine Value="34"/>
+        <CursorPos X="21" Y="45"/>
         <UsageCount Value="52"/>
       </Unit2>
       <Unit3>
@@ -167,10 +167,12 @@
       <Unit21>
         <Filename Value="..\shared\ucmocpeephole.pas"/>
         <UnitName Value="UCmocPeephole"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="139"/>
-        <CursorPos X="30" Y="151"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="135"/>
+        <CursorPos X="40" Y="142"/>
         <UsageCount Value="21"/>
+        <Loaded Value="True"/>
       </Unit21>
       <Unit22>
         <Filename Value="..\..\..\examples\rpncalc\rpncalc-v2.asm"/>
@@ -223,7 +225,7 @@
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit28>
     </Units>
-    <JumpHistory Count="5" HistoryIndex="4">
+    <JumpHistory Count="8" HistoryIndex="7">
       <Position1>
         <Filename Value="amoc.lpr"/>
         <Caret Line="57" Column="53" TopLine="46"/>
@@ -242,8 +244,20 @@
       </Position4>
       <Position5>
         <Filename Value="amoc.lpr"/>
-        <Caret Line="56" Column="14" TopLine="47"/>
+        <Caret Line="56" Column="16" TopLine="47"/>
       </Position5>
+      <Position6>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="86" Column="30" TopLine="76"/>
+      </Position6>
+      <Position7>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="204" Column="3" TopLine="193"/>
+      </Position7>
+      <Position8>
+        <Filename Value="amocprocess.pas"/>
+        <Caret Line="229" Column="11" TopLine="213"/>
+      </Position8>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
