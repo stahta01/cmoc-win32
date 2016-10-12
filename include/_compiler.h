@@ -52,6 +52,7 @@ typedef short           sword;
 
 #define __6809__
 #define const
+#define inline
 #define __fastcall__
 #define __cdecl
 #define restrict
