@@ -29,9 +29,9 @@ void alloca_test(void)
     char* s1 = "FIRST STRING";
     char* s2 = "SECOND STRING";
     char* s3 = "THIRD STRING";
-    char* m1 = (char*)_alloca(strlen(s1) + 1);
-    char* m2 = (char*)_alloca(strlen(s2) + 1);
-    char* m3 = (char*)_alloca(strlen(s3) + 1);
+    char* m1 = (char*)alloca(strlen(s1) + 1);
+    char* m2 = (char*)alloca(strlen(s2) + 1);
+    char* m3 = (char*)alloca(strlen(s3) + 1);
     int a = 10, b = 20, c = 30, d = 40;         // dummy variables
     strcpy(m1, s1);
     strcpy(m2, s2);

@@ -12,6 +12,9 @@
 // For some reason, my compressor produces smaller sizes. Im unsure why... But, its better
 // than bigger sizes.
 
+// NOTE: Demo now uses alloca to allocate memory on the stack for the body. No check is
+// made to see if the body is too big.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,33 +22,34 @@
 #include <equates.h>
 #include <iff.h>
 #include <rle.h>
+#include <alloca.h>
 
 int main(void)
 {
-    byte buf[4000];                             // Must be big enough for BODY data
+    byte littlechunk[100];                          // Should be big enough for non-body chunks.
     clrscr();
     puts("LOADING IFF IMAGE ...");
     FILE* fp = fopen("WINCMOC.IFF:1", "r");
     if (fp) {
         iff_head_t head;
         if (iff_head_read(&head, fp) && iff_head_is(&head, "FORM")) {
-            fread(buf, 4, 1, fp);
+            fread(littlechunk, 4, 1, fp);
             while (iff_head_read(&head, fp)) {
-                fread(buf, 1, head.size.lo, fp);
                 if (iff_head_is(&head, "BODY")) {
-                    if (head.size.lo > sizeof(buf)) {
-                        puts("IMAGE DATA TOO BIG");
-                        exit(-1);
-                    }
+                    byte* body = (byte*)alloca(head.size.lo);
+                    fread(body, 1, head.size.lo, fp);
                     system("PMODE4,1");
                     system("SCREEN1,1");
-                    rle_decode((byte*)_beggrp, buf, _endgrp - _beggrp);
-                    byte* end = rle_encode(buf, (byte*)_beggrp, _endgrp - _beggrp);
+                    rle_decode((byte*)_beggrp, body, _endgrp - _beggrp);
+                    byte* end = rle_encode(body, (byte*)_beggrp, _endgrp - _beggrp);
                     system("PCLS");
                     system("SCREEN,0");
-                    rle_decode((byte*)_beggrp, buf, _endgrp - _beggrp);
-                    printf("SIZES: NEW=%d OLD=%ld\n", end - buf, &head.size);
+                    rle_decode((byte*)_beggrp, body, _endgrp - _beggrp);
+                    printf("SIZES: NEW=%d OLD=%ld\n", end - body, &head.size);
                     break;
+                } else {
+                    // This should be a fseek, but, we dont have it yet
+                    fread(littlechunk, 1, head.size.lo, fp);
                 }
             }
         }

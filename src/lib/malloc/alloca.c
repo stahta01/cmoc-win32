@@ -4,7 +4,7 @@
 // allocates memory on the stack. also stores the memory size, so you
 // can use _msize()
 
-asm void* _alloca(size_t size)
+asm void* alloca(size_t size)
 {
     asm {
         ldx     0,s                             // get return address

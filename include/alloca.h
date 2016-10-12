@@ -39,7 +39,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 #include <sys/size.h>
 
-void* _alloca(size_t size);                     // BSD
+void* alloca(size_t size);                          // BSD
 
 #endif
 
