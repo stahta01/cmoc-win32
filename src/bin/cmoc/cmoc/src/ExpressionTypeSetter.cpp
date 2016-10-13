@@ -57,8 +57,16 @@ ExpressionTypeSetter::close(Tree *t)
 {
     BinaryOpExpr *bin = dynamic_cast<BinaryOpExpr *>(t);
     if (bin != NULL)
+    {
+        if (
+            bin->getOperator() >= BinaryOpExpr::INFERIOR &&
+            bin->getOperator() <= BinaryOpExpr::SUPERIOR_OR_EQUAL &&
+            bin->getLeft()->isSigned() ^ bin->getRight()->isSigned())
+        {
+            bin->warnmsg("signed/unsigned mismatch. using unsigned comparison.");
+        }
         return processBinOp(bin);
-
+    }
     UnaryOpExpr *un = dynamic_cast<UnaryOpExpr *>(t);
     if (un != NULL)
         return processUnaryOp(un);

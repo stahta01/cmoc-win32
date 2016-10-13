@@ -4,14 +4,14 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="30">
+    <Units Count="33">
       <Unit0>
         <Filename Value="amoc.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="47"/>
         <CursorPos X="16" Y="56"/>
-        <UsageCount Value="76"/>
+        <UsageCount Value="77"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -21,7 +21,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="197"/>
         <CursorPos X="22" Y="204"/>
-        <UsageCount Value="76"/>
+        <UsageCount Value="77"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\shared\ucmoctranslate.pas"/>
@@ -229,6 +229,30 @@
         <CursorPos X="37" Y="48"/>
         <UsageCount Value="10"/>
       </Unit29>
+      <Unit30>
+        <Filename Value="..\cmoc\cmoc\src\ASMText.cpp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3475"/>
+        <CursorPos X="24" Y="3481"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="..\cmoc\cmoc\src\BinaryOpExpr.cpp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="587"/>
+        <CursorPos X="29" Y="885"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="..\cmoc\cmoc\src\ExpressionTypeSetter.cpp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="54"/>
+        <CursorPos X="50" Y="58"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="C++"/>
+      </Unit32>
     </Units>
     <JumpHistory Count="5" HistoryIndex="4">
       <Position1>
