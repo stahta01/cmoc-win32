@@ -1,13 +1,13 @@
 
 #include "_graph.h"
 
-void _outchar(int c)
+void _outchar(int chr)
 {
-    c -= 32;
+    chr -= 32;
     if (fontinfo.packed) {
-        c <<= 1;
+        chr <<= 1;
     }
-    byte* src = fontinfo.data + (((word)c + fontinfo.base) << 3);
+    byte* src = fontinfo.data + (((word)chr + fontinfo.base) << 3);
     int bkcolor = _getbkcolor();
 
     if (bkcolor || fontinfo.packed) {

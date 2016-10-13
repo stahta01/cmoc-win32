@@ -10,7 +10,7 @@ void gotoxy(int x, int y)
         y += (y <<= 2 +_h_width) << 2;
         _h_crsloc = 0x2000 + ((x + y) << 1);
     } else if (isvidram()) {
-        _curpos = _VIDRAM + (y << 5) + x;
+        _curpos = _VIDRAM + _umul32(y) + x;
     } else if (_conio.settextposition) {
         _conio.settextposition(x, y);
     }

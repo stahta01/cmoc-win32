@@ -8,7 +8,7 @@ void wherexy(int* x, int* y)
         *y = _h_cursy;
     } else if (isvidram()) {
         *x = _curpos & 31;
-        *y = (_curpos >> 5) & 15;
+        *y = _udiv32(_curpos) & 15;
     } else {
         _gettextposition(x, y);
     }

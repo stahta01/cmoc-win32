@@ -37,32 +37,14 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _INT_H
 #define _INT_H
 
-// These will soon be functions.
-
-#define _imul2(A)   ((A)<<1)
-#define _imul4(A)   ((A)<<2)
-#define _imul8(A)   ((A)<<3)
-#define _imul16(A)  ((A)<<4)
-#define _imul32(A)  ((A)<<5)
-#define _imul64(A)  ((A)<<6)
-#define _imul127(A) ((A)<<7)
-#define _imul256(A) ((A)<<8)
-
-#define _imul3(A)   (_imul2(A)+(A))
-#define _imul5(A)   (_imul4(A)+(A))
-#define _imul6(A)   (_imul4(A)+_imul2(A))
-#define _imul7(A)   (_imul8(A)-(A))
-
-#define _imul10(A)  (_imul8(A)+_imul2(A))
-
-#define _imul40(A)  (_imul32(A)+_imul8(A))
-#define _imul80(A)  (_imul64(A)+_imul16(A))
-
 // Im experimenting with int shift functions. CMOC outputs a lot of code
 // for bit shifts. Im testing if using functions will reduce bin sizes.
 
 int _ishl6(int val);
 int _ishr6(int val);
+
+word _udiv32(word val);
+word _umul32(word val);
 
 word _umul(word v1, word v2);
 

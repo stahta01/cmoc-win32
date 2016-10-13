@@ -34,8 +34,8 @@ int getch(void)
         __buffersize = 0;
     } else    {
         if (_conio.cursor) {
+            clock_t clock_now = clock();
             if (_is_coco3_mode) {
-                clock_t clock_now = clock();
                 bank_t bank = bank_set(13);
                 byte* curpos = (byte*)_h_crsloc + 0xa001;
                 byte curchr = *curpos;
@@ -48,9 +48,7 @@ int getch(void)
                 } while (!kb);
                 *curpos = curchr;
                 bank_set(bank);
-                chr = getch();
             } else {
-                clock_t clock_now = clock();
                 byte* curpos = (byte*)_curpos;
                 byte curxor, curchr;
                 if (isvidram()) {
@@ -68,12 +66,11 @@ int getch(void)
                     *curpos = (clock() - clock_now) & 16 ? curchr : curchr ^ curxor;
                 }
                 *curpos = curchr;
-                chr = getch();
             }
         } else {
             while (!kbhit());
-            chr = getch();
         }
+        chr = getch();
     }
     return chr;
 }
