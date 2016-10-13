@@ -3,7 +3,7 @@
 
 conio_t _conio = {
     true, false, 0,
-    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr
 };
 
 void coco3_gotoxy(int x, int y)

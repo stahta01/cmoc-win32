@@ -62,7 +62,7 @@ int main(void)
         matrix_rotate_z(&matz, a * 3);
         matrix_multiply(&mat, &matx, &matz);
         mat.v[0][3] = 0;
-        mat.v[2][3] = S<<1;
+        mat.v[2][3] = S << 1;
         model_rotate(&obj, &mat, tmp, 64, 48);
         model_draw_edges(&obj, tmp);
         _setvisualpage(page + 1);

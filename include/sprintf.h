@@ -44,8 +44,8 @@ int sprintf(char* buf, char* fmt, ...);
 
 // These are non-standard "micro" versions of vsprintf/sprintf.
 
-int vswritef(char* dst, char* fmt, va_list args); // CMOC
-int swritef(char* dst, char* fmt, ...);         // CMOC
+int vswritef(char* dst, char* fmt, va_list args);   // CMOC
+int swritef(char* dst, char* fmt, ...);             // CMOC
 
 // TODO
 

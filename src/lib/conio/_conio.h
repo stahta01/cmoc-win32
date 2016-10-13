@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <int.h>
 #include <eddie.h>
+#include <pixel.h>
 
 #include <graph.h>
 #include <bank.h>
@@ -33,7 +34,6 @@ typedef struct {
     // Late binding handles for libgraph.
     handle_t outchar;
     handle_t scrolltextwindow;
-    handle_t clearscreen;
     handle_t settextposition;
     handle_t settextpositionx;
     handle_t settextpositiony;
@@ -44,5 +44,5 @@ typedef struct {
 
 extern conio_t _conio;
 
-#define isvidram() (_curpos < 0x600)
+#define isvidram() (_curpos < (unsigned)0x600)
 

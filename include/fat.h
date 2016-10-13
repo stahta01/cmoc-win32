@@ -50,11 +50,11 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 // OFFSETS TO FAT CONTROL BYTES
 
 typedef struct {
-    byte afc;                                   // ACTIVE FILE COUNTER : DISK TO RAM FAT IMAGE DISABLE
+    byte afc;                                       // ACTIVE FILE COUNTER : DISK TO RAM FAT IMAGE DISABLE
     // VALID DATA FLAG: 0=DISK DATA VALID, <> 0 = NEW FAT
     // DATA - DISK DATA INVALID
-    byte mod;                                   // FAT MODIFIED FLAG
-    byte reserved[4];                           // NOT USED
+    byte mod;                                       // FAT MODIFIED FLAG
+    byte reserved[4];                               // NOT USED
     byte dat[68];
 } fat_t;
 

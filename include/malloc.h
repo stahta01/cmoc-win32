@@ -39,12 +39,12 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 #include <heap.h>
 
-void* malloc(size_t size);                      // ANSIC
-void* calloc(size_t count, size_t size);        // ANSIC
-void free(void* memory);                        // ANSIC
-size_t _msize(void* memory);                    // ANSIC
-void* realloc(void* memory, size_t size);       // ANSIC
-heap_t* mheap(void);                            // CMOC
+void* malloc(size_t size);                          // ANSIC
+void* calloc(size_t count, size_t size);            // ANSIC
+void free(void* memory);                            // ANSIC
+size_t _msize(void* memory);                        // ANSIC
+void* realloc(void* memory, size_t size);           // ANSIC
+heap_t* mheap(void);                                // CMOC
 
 #define new(_TYPE)     ((_TYPE*)calloc(sizeof(_TYPE), 1))
 #define delete(_ADDR)  free(_ADDR)

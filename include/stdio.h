@@ -76,31 +76,31 @@ extern FILE* stdout;
 
 //int vfprintf(FILE* f, char* format, va_list ap);
 
-char* fgets(char* buf, size_t size, FILE* fp);  // ANSIC
-char* gets(char* str);                          // ANSIC
+char* fgets(char* buf, size_t size, FILE* fp);      // ANSIC
+char* gets(char* str);                              // ANSIC
 
-FILE* fopen(char* name, char* mode);            // ANSIC
+FILE* fopen(char* name, char* mode);                // ANSIC
 //FILE* freopen(char* name, char* mode, FILE* f);
 
-int fclose(FILE* fp);                           // ANSIC
-int feof(FILE* fp);                             // ANSIC
-int ferror(FILE* fp);                           // ANSIC
-int fflush(FILE* fp);                           // ANSIC
-int fgetc(FILE* fp);                            // ANSIC
-int fgetpos(FILE* fp, fpos_t* pos);             // ANSIC
-int fprintf(FILE* fp, char* fmt, ...);          // ANSIC
-int fputc(int chr, FILE* fp);                   // ANSIC
-int fputs(char* str, FILE* fp);                 // ANSIC
-int fseek(FILE* fp, size_t offset, int whence); // ANSIC
-int fsetpos(FILE* fp, fpos_t* pos);             // ANSIC
-int getchar(void);                              // ANSIC
-int printf(char* fmt, ...);                     // ANSIC
-int putchar(int chr);                           // ANSIC
-int puts(char* str);                            // ANSIC
-int remove(char* name);                         // ANSIC
-int rename(char* oldname, char* newname);       // ANSIC
-int ungetc(int chr, FILE* fp);                  // ANSIC
-int vprintf(char* fmt, va_list args);           // ANSIC
+int fclose(FILE* fp);                               // ANSIC
+int feof(FILE* fp);                                 // ANSIC
+int ferror(FILE* fp);                               // ANSIC
+int fflush(FILE* fp);                               // ANSIC
+int fgetc(FILE* fp);                                // ANSIC
+int fgetpos(FILE* fp, fpos_t* pos);                 // ANSIC
+int fprintf(FILE* fp, char* fmt, ...);              // ANSIC
+int fputc(int chr, FILE* fp);                       // ANSIC
+int fputs(char* str, FILE* fp);                     // ANSIC
+int fseek(FILE* fp, size_t offset, int whence);     // ANSIC
+int fsetpos(FILE* fp, fpos_t* pos);                 // ANSIC
+int getchar(void);                                  // ANSIC
+int printf(char* fmt, ...);                         // ANSIC
+int putchar(int chr);                               // ANSIC
+int puts(char* str);                                // ANSIC
+int remove(char* name);                             // ANSIC
+int rename(char* oldname, char* newname);           // ANSIC
+int ungetc(int chr, FILE* fp);                      // ANSIC
+int vprintf(char* fmt, va_list args);               // ANSIC
 
 size_t fread(void* buf, size_t size, size_t count, FILE* fp);
 size_t ftell(FILE* fp);
@@ -117,10 +117,10 @@ void rewind(FILE* fp);
 //int fscanf(FILE* fp, char* fmt, ...);
 //int vscanf(char* fmt, va_list args);
 
-size_t _fsize(FILE* fp);                        // CMOC
+size_t _fsize(FILE* fp);                            // CMOC
 
-#define getc(_f)        fgetc(_f)               // ANSI
-#define putc(_c,_f)     fputc(_c,_f)            // ANSI
+#define getc(_f)        fgetc(_f)                   // ANSI
+#define putc(_c,_f)     fputc(_c,_f)                // ANSI
 
 #endif
 

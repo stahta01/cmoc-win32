@@ -58,22 +58,24 @@ typedef struct {
     edge_t* edges;
 } model_t;
 
-#define i2f6(X) (((int)(X))<<6)
-#define f2i6(X) (((int)(X))>>6)
+#define _i2f6(VAL) (((int)(VAL))<<6)
+#define _f2i6(VAL) (((int)(VAL))>>6)
 
-int sin6(int x);
-int cos6(int x);
+int i2f6(int val);
+int f2i6(int val);
+int sin6(int val);
+int cos6(int val);
 
 void vector_set(vector_t* dst, int x, int y, int z);
-void vector_rotate(vector_t* dst, vector_t* src, size_t n, matrix_t* mat);
-void vector_project(vector_t* dst, vector_t* src, size_t n, int x, int y);
+void vector_rotate(vector_t* dst, vector_t* src, size_t size, matrix_t* mat);
+void vector_project(vector_t* dst, vector_t* src, size_t size, int x, int y);
 
 void matrix_scale(matrix_t* dst, int x, int y, int z);
 void matrix_identity(matrix_t* dst);
 void matrix_position(matrix_t* dst, int x, int y, int z);
-void matrix_rotate_x(matrix_t* dst, int x);
-void matrix_rotate_y(matrix_t* dst, int y);
-void matrix_rotate_z(matrix_t* dst, int z);
+void matrix_rotate_x(matrix_t* dst, int ang);
+void matrix_rotate_y(matrix_t* dst, int ang);
+void matrix_rotate_z(matrix_t* dst, int ang);
 void matrix_multiply(matrix_t* dst, matrix_t* mat1, matrix_t* mat2);
 
 void model_rotate(model_t* model, matrix_t* mat, vector_t* vec, int x, int y);
