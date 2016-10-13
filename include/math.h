@@ -39,7 +39,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 #include <stddef.h>
 
-int sqrt(int a);
+//int sqrt(int a);
 
 #endif
 

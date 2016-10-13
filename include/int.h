@@ -64,5 +64,9 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 int _ishl6(int val);
 int _ishr6(int val);
 
+word _umul(word v1, word v2);
+
+word _usqrt(word val);
+
 #endif
 
