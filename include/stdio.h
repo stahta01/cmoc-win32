@@ -118,6 +118,7 @@ void rewind(FILE* fp);
 //int vscanf(char* fmt, va_list args);
 
 size_t _fsize(FILE* fp);                            // CMOC
+FILE* fopenf(char* fmt, char* mode, ...);           // CMOC
 
 #define getc(_f)        fgetc(_f)                   // ANSI
 #define putc(_c,_f)     fputc(_c,_f)                // ANSI

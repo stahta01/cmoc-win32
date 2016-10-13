@@ -13,7 +13,7 @@ int main(void)
     cputs("INSERT TAPE & PRESS RECORD.\nPRESS ANY KEY WHEN READY.\n");
     getch();
     cputs("WRITING FILE ...");
-    fp = fopen("TEST.TXT,-1", "w");
+    fp = fopenf("TEST.TXT:%d", "w", -1);
     if (fp) {
         for (int i = 0; i < 20; i++) {
             fprintf(fp, "TAPE STRING #%d\r", i);
@@ -22,7 +22,7 @@ int main(void)
     }
     cputs("\nREWIND & PLAY TAPE.\nPRESS ANY KEY WHEN READY.\n");
     getch();
-    fp = fopen("TEST.TXT,-1", "r");
+    fp = fopenf("TEST.TXT:%d", "r", -1);
     if (fp) {
         int chr;
         while ((chr = fgetc(fp)) != EOF) {
