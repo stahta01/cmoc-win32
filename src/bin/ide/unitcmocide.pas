@@ -43,7 +43,7 @@ uses
   Classes, ComCtrls, Controls, Dialogs, ExtCtrls, FileUtil, Forms, Graphics, LCLIntf, Math,
   Menus, MouseAndKeyInput, process, StreamIO, StrUtils, SynEdit, SynHighlighterAny,
   SysUtils, Types, UCmocDefs, UCmocIDE, UCmocMenuItem, UCmocPlatform, UCmocRbs,
-  UCmocStringDynArray, UCmocSynEdit, UCmocUtils, UnitCmocIDESynEdit;
+  UCmocStringDynArray, UCmocSynEdit, UCmocUtils, UCmocXRoar, UnitCmocIDESynEdit;
 
 type
 
@@ -679,7 +679,7 @@ begin
     AFileName := LBinFile;
   end;
   LParams := default(TStringDynArray);
-  if SameText(FOptions.Values[Opt_Machine2], Machine_COCO3) then begin
+  if SameText(FOptions.Values[Opt_XRoar_Machine], Machine_COCO3) then begin
     if not OPlatform.IsWindows then begin
       OCmoc.RaiseError('CoCo 3 emulation is Windows only. Try CoCo 2 emulation via XRoar.');
     end;
@@ -691,23 +691,21 @@ begin
     end;
   end else begin
     CheckRoms;
-    WriteLn('// Running XRoar emulator. Machine=', FOptions.Values[Opt_Machine2]);
+    WriteLn('// Running XRoar emulator. Machine=', FOptions.Values[Opt_XRoar_Machine]);
     try
-      OStringDynArray.AddOptions(LParams, FOptions, [Opt_Machine2, Opt_Bas2,
-        Opt_ExtBas2, Opt_Dos2, Opt_Cart2, Opt_NoExtBas1, Opt_NoDos1, Opt_Ram2,
-        Opt_NoTapeFast1, Opt_Type2]);
-      if FOptions.IndexOfName(Opt_Load2) < 0 then begin
-        OStringDynArray.AddStrings(LParams, [Opt_Load2, OCmoc.PathToDsk + 'disk0.dsk']);
-        OStringDynArray.AddStrings(LParams, [Opt_Load2, OCmoc.PathToDsk + 'disk1.dsk']);
-        OStringDynArray.AddStrings(LParams, [Opt_Load2, OCmoc.PathToDsk + 'disk2.dsk']);
+      OStringDynArray.AddOptions(LParams, FOptions, Opt_XRoar_All);
+      if FOptions.IndexOfName(Opt_XRoar_Load) < 0 then begin
+        OStringDynArray.AddStrings(LParams, [Opt_XRoar_Load, OCmoc.PathToDsk + 'disk0.dsk']);
+        OStringDynArray.AddStrings(LParams, [Opt_XRoar_Load, OCmoc.PathToDsk + 'disk1.dsk']);
+        OStringDynArray.AddStrings(LParams, [Opt_XRoar_Load, OCmoc.PathToDsk + 'disk2.dsk']);
       end else begin
         with TStringList.Create do begin
           try
             Delimiter := PathSeparator;
-            DelimitedText := FOptions.Values[Opt_Load2];
+            DelimitedText := FOptions.Values[Opt_XRoar_Load];
             for LIndex := 0 to Count - 1 do begin
               OStringDynArray.AddStrings(LParams,
-                [Opt_Load2, OCmoc.FileNameTranslate(Strings[LIndex])]);
+                [Opt_XRoar_Load, OCmoc.FileNameTranslate(Strings[LIndex])]);
             end;
           finally
             Free;
@@ -715,7 +713,7 @@ begin
         end;
       end;
       if Length(AFileName) > 0 then begin
-        OStringDynArray.AddStrings(LParams, [Opt_Run2, AFileName]);
+        OStringDynArray.AddStrings(LParams, [Opt_XRoar_Run, AFileName]);
       end;
       Execute(OCmoc.PathToXroar + 'xroar.exe', LParams, True);
     except
@@ -728,27 +726,27 @@ procedure TFormCmocIDE.ExecuteMachine(const AName: string; const AFileName: TFil
 begin
   case AName of
     'coco1': begin
-      FOptions.Values[Opt_Machine2] := Machine_COCOUS;
-      FOptions.Values[Opt_Ram2] := '16';
-      FOptions.Values[Opt_Bas2] := 'bas10.rom';
-      FOptions.Values[Opt_NoExtBas1] := EmptyStr;
-      FOptions.Values[Opt_NoDos1] := EmptyStr;
+      FOptions.Values[Opt_XRoar_Machine] := Machine_COCOUS;
+      FOptions.Values[Opt_XRoar_Ram] := '16';
+      FOptions.Values[Opt_XRoar_Bas] := 'bas10.rom';
+      FOptions.Values[Opt_XRoar_NoExtBas] := EmptyStr;
+      FOptions.Values[Opt_XRoar_NoDos] := EmptyStr;
     end;
     'coco1d': begin
-      FOptions.Values[Opt_Machine2] := Machine_COCOUS;
-      FOptions.Values[Opt_Ram2] := '64';
-      FOptions.Values[Opt_Bas2] := 'bas10.rom';
-      FOptions.Values[Opt_ExtBas2] := 'extbas10.rom';
-      FOptions.Values[Opt_Dos2] := 'disk10.rom';
+      FOptions.Values[Opt_XRoar_Machine] := Machine_COCOUS;
+      FOptions.Values[Opt_XRoar_Ram] := '64';
+      FOptions.Values[Opt_XRoar_Bas] := 'bas10.rom';
+      FOptions.Values[Opt_XRoar_ExtBas] := 'extbas10.rom';
+      FOptions.Values[Opt_XRoar_Dos] := 'disk10.rom';
     end;
     'coco2d': begin
-      FOptions.Values[Opt_Machine2] := Machine_COCOUS;
-      FOptions.Values[Opt_Ram2] := '64';
-      FOptions.Values[Opt_Bas2] := 'bas11.rom';
-      FOptions.Values[Opt_ExtBas2] := 'extbas11.rom';
-      FOptions.Values[Opt_Dos2] := 'disk11.rom';
+      FOptions.Values[Opt_XRoar_Machine] := Machine_COCOUS;
+      FOptions.Values[Opt_XRoar_Ram] := '64';
+      FOptions.Values[Opt_XRoar_Bas] := 'bas11.rom';
+      FOptions.Values[Opt_XRoar_ExtBas] := 'extbas11.rom';
+      FOptions.Values[Opt_XRoar_Dos] := 'disk11.rom';
     end else begin
-      FOptions.Values[Opt_Machine2] := AName;
+      FOptions.Values[Opt_XRoar_Machine] := AName;
     end;
   end;
   ExecuteEmulator(AFileName);
@@ -757,17 +755,17 @@ end;
 procedure TFormCmocIDE.MenuRunBuildAndRunClick(ASender: TObject);
 begin
   MenuRunBuild.Click;
-  if FOptions.IndexOfName(Opt_Machine2) < 0 then begin
+  if FOptions.IndexOfName(Opt_XRoar_Machine) < 0 then begin
     case FTarget of
       Target_COCO: begin
         if OPlatform.IsWindows then begin
-          FOptions.Values[Opt_Machine2] := Machine_COCO3;
+          FOptions.Values[Opt_XRoar_Machine] := Machine_COCO3;
         end else begin
-          FOptions.Values[Opt_Machine2] := Machine_COCOUS;
+          FOptions.Values[Opt_XRoar_Machine] := Machine_COCOUS;
         end;
       end;
       Target_DRAGON: begin
-        FOptions.Values[Opt_Machine2] := Machine_DRAGON64;
+        FOptions.Values[Opt_XRoar_Machine] := Machine_DRAGON64;
       end;
     end;
   end;
@@ -900,7 +898,7 @@ end;
 procedure TFormCmocIDE.MenuEmulatorsEDTASMClick(ASender: TObject);
 begin
   FOptions.Clear;
-  FOptions.Values[Opt_Type2] := 'LOADM"EDTASM++:2":EXEC\n';
+  FOptions.Values[Opt_XRoar_Type] := 'LOADM"EDTASM++:2":EXEC\n';
   ExecuteMachine('coco2d', default(string));
 end;
 
