@@ -107,7 +107,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define VK_SHIFT5       (VK_SHIFT|VK_5)
 #define VK_SHIFT6       (VK_SHIFT|VK_6)
 
-bool vkey_state(int vkey);
+bool vkey_state(word vkey);
 
 #endif
 
