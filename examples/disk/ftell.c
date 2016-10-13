@@ -12,12 +12,7 @@ int main(void)
     cprintf("FILE SIZE: %d BYTES\n", _fsize(fp));
     cputs("READING FILE ...\n");
     if (fp) {
-        int c;
-        for (;;) {
-            c = fgetc(fp);
-            if (c == EOF) {
-                break;
-            }
+        for (int c; (c = fgetc(fp)) != EOF;) {
             cprintf("%2d%c ", ftell(fp), c);
         }
 

@@ -8,5 +8,7 @@
 #include <machine.h>
 #include <handle.h>
 #include <rvec.h>
+#include <dev.h>
+#include <fcb.h>
 #include <asm.h>
 

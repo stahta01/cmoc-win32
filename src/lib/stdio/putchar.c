@@ -1,8 +1,8 @@
 
 #include "_stdio.h"
 
-int putchar(int c)
+int putchar(int chr)
 {
-    return fputc(c, stdout);
+    return fputc(chr, stdout);
 }
 

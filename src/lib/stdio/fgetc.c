@@ -3,14 +3,12 @@
 
 int fgetc(FILE* fp)
 {
-    if (fp->dev) {
-        // TODO: We need to check for R/W and tape/printer
-        if (fp->eof || fcb_get(fp->dev - 1)->cnt.seq.dfl) {
-            return fp->eof = EOF;
+    int chr = EOF;
+    if (!fp->eof) {
+        if ((chr = fp->dev ? system_fgetc(fp->dev) : cgetc()) == EOF) {
+            fp->eof = true;
         }
-        return system_fgetc(fp->dev);
-    } else {
-        return cgetc();
     }
+    return chr;
 }
 
