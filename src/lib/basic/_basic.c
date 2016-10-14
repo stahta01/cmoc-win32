@@ -1,6 +1,5 @@
 
 #include "_basic.h"
-#include "coco.h"
 
 int _filedesc[FOPEN_MAX];
 
