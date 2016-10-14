@@ -54,6 +54,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 bool becky_wait(word wait);
 bool becky_good(void);
+bool becky_stop(void);
 
 bool becky_recvbyte(byte* val);
 bool becky_recvword(word* val);

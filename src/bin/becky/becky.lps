@@ -17,19 +17,17 @@
         <Filename Value="ubeckystream.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UBeckyStream"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="103"/>
         <CursorPos X="3" Y="109"/>
         <UsageCount Value="23"/>
-        <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="ubeckyserver.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UBeckyServer"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="104"/>
         <CursorPos X="25" Y="105"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>

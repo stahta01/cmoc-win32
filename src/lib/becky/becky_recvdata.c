@@ -8,6 +8,9 @@ bool becky_recvdata(byte* dst, size_t* size)
     for (size_t n = *size; result && n--;) {
         result = dst < end && becky_recvbyte(dst++);
     }
+    if (!result) {
+        becky_stop();
+    }
     return result;
 }
 

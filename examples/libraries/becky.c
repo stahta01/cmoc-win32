@@ -21,8 +21,6 @@ int main(void)
     char title[100];
     if (becky_sendword(BECKY_TITLE) && becky_recvstring(title, sizeof(title))) {
         cwritef("%s\n", title);
-    } else {
-        becky_sendword(BECKY_FAILURE);
     }
     if (becky_sendrequest("GET http://cs.unc.edu/~yakowenk/coco/text/extendedbasic.html")) {
         if (becky_sendword_wait(BECKY_RESPONSE, 1000)) {
