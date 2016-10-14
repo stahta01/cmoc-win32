@@ -13,7 +13,7 @@
 int main(void)
 {
     if (becky_sendstring("GET http://cs.unc.edu/~yakowenk/coco/text/extendedbasic.html")) {
-        if (becky_request(20, 1000)) {
+        if (becky_sendword_wait(20, 1000)) {
             byte b;
             while (becky_recvbyte(&b)) {
                 cputc(b);

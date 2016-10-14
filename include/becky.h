@@ -43,14 +43,19 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define BECKY_BYTE     (*(byte*)0xff42)
 #define BECKY_TICK     (*(word*)0x0112)
 
+#define BECKY_STRING    10
+#define BECKY_BUFFER    20
+
 bool becky_wait(word wait);
 bool becky_good(void);
-bool becky_request(int val, word wait);
 bool becky_recvbyte(byte* val);
 bool becky_sendbyte(word val);
 bool becky_sendword(word val);
 bool becky_senddata(word type, byte* src, size_t size);
 bool becky_sendstring(char* str);
+
+bool becky_sendbyte_wait(word val, word wait);
+bool becky_sendword_wait(word val, word wait);
 
 #endif
 
