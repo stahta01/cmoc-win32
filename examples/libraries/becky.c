@@ -5,19 +5,27 @@
 
 #include <conio.h>
 #include <becky.h>
+#include <unistd.h>
 
 #pragma options -machine=coco2b -cart=becker
 
 // TODO: Simple HTML reader
-// BUG: Sometimes Becky fails. The Becker server stream might need to be flushed
-// on errors.
 
 int main(void)
 {
     *(byte*)0xff22 |= 16;                           // lower case letters
 
-    if (becky_sendstring("GET http://cs.unc.edu/~yakowenk/coco/text/extendedbasic.html")) {
-        if (becky_sendword_wait(BECKY_BUFFER, 1000)) {
+    cputs("WAIT FOR XROAR TO CONNECT\n");
+    sleep(1);
+
+    char title[100];
+    if (becky_sendword(BECKY_TITLE) && becky_recvstring(title, sizeof(title))) {
+        cwritef("%s\n", title);
+    } else {
+        becky_sendword(BECKY_FAILURE);
+    }
+    if (becky_sendrequest("GET http://cs.unc.edu/~yakowenk/coco/text/extendedbasic.html")) {
+        if (becky_sendword_wait(BECKY_RESPONSE, 1000)) {
             byte b;
             while (becky_recvbyte(&b)) {
                 cputc(b);

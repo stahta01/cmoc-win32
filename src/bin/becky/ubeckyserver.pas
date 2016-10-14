@@ -44,60 +44,94 @@ uses
 
 const
 
-  BECKY_STRING = 10;
-  BECKY_BUFFER = 20;
+  BECKY_TITLE = 1;
+  BECKY_REQUEST = 2;
+  BECKY_RESPONSE = 3;
+  BECKY_FLUSH_SOCKET = 4;
+  BECKY_FLUSH_RESPONSE = 5;
+  BECKY_FLUSH_REQUEST = 6;
 
 type
 
   TBeckyServer = class(TINetServer)
   protected
-    procedure HandleRequest(const AMessage: string; const AStream: TMemoryStream);
+    procedure HandleRequest(const AMessage: string; const AResponse: TMemoryStream);
     procedure DoConnect(ASocket: TSocketStream); override;
   end;
 
 implementation
 
-procedure TBeckyServer.HandleRequest(const AMessage: string; const AStream: TMemoryStream);
+procedure TBeckyServer.HandleRequest(const AMessage: string; const AResponse: TMemoryStream);
 var
   LPos: integer;
+  LName, LValue: string;
 begin
   LPos := Pos(#32, AMessage);
-  with TFPHTTPClient.Create(nil) do begin
-    try
-      WriteLn('Requesting ', AMessage);
-      AStream.Clear;
-      HTTPMethod(Copy(AMessage, 1, LPos - 1), Copy(AMessage, LPos + 1, MaxInt),
-        AStream, [200]);
-    finally
-      Free;
+  if LPos > 0 then begin
+    LName := Trim(Copy(AMessage, 1, LPos - 1));
+    LValue := Trim(Copy(AMessage, LPos + 1, MaxInt));
+    with TFPHTTPClient.Create(nil) do begin
+      try
+        WriteLn('Requesting ', AMessage);
+        AResponse.Clear;
+        try
+          HTTPMethod(LName, LValue, AResponse, [200]);
+        except
+          on E: Exception do begin
+            WriteLn(E.Message);
+          end;
+        end;
+      finally
+        Free;
+      end;
     end;
   end;
-  AStream.Position := 0;
+  AResponse.Position := 0;
 end;
 
 procedure TBeckyServer.DoConnect(ASocket: TSocketStream);
 var
-  FMemory: TMemoryStream;
+  FResponse, FRequest: TMemoryStream;
 begin
   WriteLn('Connected');
-  FMemory := TMemoryStream.Create;
+  FResponse := TMemoryStream.Create;
   try
-    ASocket.Size := 0;
-    while True do begin
-      case ASocket.RecvWord of
-        BECKY_STRING: begin
-          HandleRequest(ASocket.RecvString, FMemory);
-        end;
-        BECKY_BUFFER: begin
-          while (FMemory.Position < FMemory.Size) and ASocket.SendByte(FMemory.ReadByte) do begin
+    FRequest := TMemoryStream.Create;
+    try
+      ASocket.Size := 0;
+      while True do begin
+        case ASocket.RecvWord of
+          BECKY_TITLE: begin
+            ASocket.SendString('Becky Server v0.1');
+          end;
+          BECKY_FLUSH_SOCKET: begin
+            WriteLn('Flushing Stream.');
+            ASocket.Size := 0;
+          end;
+          BECKY_FLUSH_RESPONSE: begin
+            FResponse.Size := 0;
+          end;
+          BECKY_FLUSH_REQUEST: begin
+            FRequest.Size := 0;
+          end;
+          BECKY_REQUEST: begin
+            HandleRequest(ASocket.RecvString, FResponse);
+          end;
+          BECKY_RESPONSE: begin
+            WriteLn('Write Response');
+            ASocket.SendStream(FResponse);
+          end else begin
+            WriteLn('Unknown Command. Flushing Stream.');
+            ASocket.Size := 0;
           end;
         end;
       end;
+    finally
+      FreeAndNil(FRequest);
     end;
   finally
-    FreeAndNil(FMemory);
+    FreeAndNil(FResponse);
   end;
 end;
 
 end.
-

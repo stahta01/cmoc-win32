@@ -61,6 +61,9 @@ uses
           try
             StartAccepting;
           except
+            on E: Exception do begin
+              WriteLn(E.Message);
+            end;
           end;
           WriteLn('Disconnected');
         end;

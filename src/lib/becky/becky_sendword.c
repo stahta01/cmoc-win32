@@ -3,6 +3,6 @@
 
 bool becky_sendword(word val)
 {
-    return becky_sendbyte((byte)val) && becky_sendbyte(val >> 8);
+    return becky_sendbyte(val >> 8) && becky_sendbyte((byte)val);
 }
 

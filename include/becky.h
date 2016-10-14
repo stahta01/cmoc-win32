@@ -39,20 +39,34 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 #include <sys/size.h>
 
-#define BECKY_STAT     (*(byte*)0xff41)
-#define BECKY_BYTE     (*(byte*)0xff42)
-#define BECKY_TICK     (*(word*)0x0112)
+#define BECKY_STAT              (*(byte*)0xff41)
+#define BECKY_BYTE              (*(byte*)0xff42)
+#define BECKY_TICK              (*(word*)0x0112)
 
-#define BECKY_STRING    10
-#define BECKY_BUFFER    20
+#define BECKY_TITLE             1
+#define BECKY_REQUEST           2
+#define BECKY_RESPONSE          3
+#define BECKY_FLUSH_SOCKET      4
+#define BECKY_FLUSH_RESPONSE    5
+#define BECKY_FLUSH_REQUEST     6
+
+#define BECKY_FAILURE           255
 
 bool becky_wait(word wait);
 bool becky_good(void);
+
 bool becky_recvbyte(byte* val);
+bool becky_recvword(word* val);
+
 bool becky_sendbyte(word val);
 bool becky_sendword(word val);
-bool becky_senddata(word type, byte* src, size_t size);
+
+bool becky_senddata(byte* src, size_t size);
+bool becky_recvdata(byte* dst, size_t* size);
+
+bool becky_recvstring(char* str, size_t size);
 bool becky_sendstring(char* str);
+bool becky_sendrequest(char* str);
 
 bool becky_sendbyte_wait(word val, word wait);
 bool becky_sendword_wait(word val, word wait);

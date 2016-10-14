@@ -40,7 +40,7 @@ unit UBeckyStream;
 interface
 
 uses
-  SSockets;
+  Classes, SSockets;
 
 type
 
@@ -48,9 +48,14 @@ type
   public
     function RecvByte: byte;
     function RecvWord: word;
+    function RecvDWord: dword;
     function RecvString: string;
   public
     function SendByte(const A: byte): boolean;
+    function SendWord(const A: word): boolean;
+    function SendDWord(const A: dword): boolean;
+    function SendString(const A: string): boolean;
+    function SendStream(const A: TStream): boolean;
   end;
 
 implementation
@@ -63,8 +68,12 @@ end;
 
 function TBeckySocketStreamHelper.RecvWord: word;
 begin
-  Result := RecvByte;
-  Result := (RecvByte shl 8) or Result;
+  Result := (RecvByte shl 8) or RecvByte;
+end;
+
+function TBeckySocketStreamHelper.RecvDWord: dword;
+begin
+  Result := (RecvByte shl 24) or (RecvByte shl 16) or (RecvByte shl 8) or RecvByte;
 end;
 
 function TBeckySocketStreamHelper.RecvString: string;
@@ -83,5 +92,39 @@ begin
   Result := ReadByte = A;
 end;
 
-end.
+function TBeckySocketStreamHelper.SendWord(const A: word): boolean;
+begin
+  Result := SendByte(A shr 8) and SendByte(A);
+end;
 
+function TBeckySocketStreamHelper.SendDWord(const A: dword): boolean;
+begin
+  Result := SendByte(A shr 24) and SendByte(A shr 16) and SendByte(A shr 8) and SendByte(A);
+end;
+
+function TBeckySocketStreamHelper.SendString(const A: string): boolean;
+var
+  LIndex: integer;
+begin
+  Result := SendWord(Length(A));
+  if Result then begin
+    for LIndex := 1 to Length(A) do begin
+      Result := SendByte(byte(A[LIndex]));
+      if not Result then begin
+        Break;
+      end;
+    end;
+  end;
+end;
+
+function TBeckySocketStreamHelper.SendStream(const A: TStream): boolean;
+begin
+  while A.Position < A.Size do begin
+    if not SendByte(A.ReadByte) then begin
+      Exit(False);
+    end;
+  end;
+  Result := True;
+end;
+
+end.
