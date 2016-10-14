@@ -3,6 +3,6 @@
 
 bool dlist_is_empty(dlist_t* list)
 {
-    return !list || !list->head.next->next;
+    return !list->head.next->next;
 }
 
