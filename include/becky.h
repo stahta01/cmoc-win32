@@ -52,9 +52,9 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 #define BECKY_FAILURE           255
 
-bool becky_wait(word wait);
-bool becky_good(void);
-bool becky_stop(void);
+bool becky_data_wait(word wait);
+bool becky_data_ready(void);
+bool becky_data_stop(void);
 
 bool becky_recvbyte(byte* val);
 bool becky_recvword(word* val);

@@ -9,7 +9,7 @@ bool becky_recvdata(byte* dst, size_t* size)
         result = dst < end && becky_recvbyte(dst++);
     }
     if (!result) {
-        becky_stop();
+        becky_data_stop();
     }
     return result;
 }

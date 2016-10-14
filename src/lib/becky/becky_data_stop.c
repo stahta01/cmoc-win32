@@ -1,8 +1,8 @@
 #include "_becky.h"
 
-bool becky_stop(void)
+bool becky_data_stop(void)
 {
-    bool result = becky_good();
+    bool result = becky_data_ready();
     if (result) {
         BECKY_BYTE = BECKY_BYTE + 1;
     }
