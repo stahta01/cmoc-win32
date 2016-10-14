@@ -9,8 +9,8 @@
         <Filename Value="pic2raw.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="37"/>
-        <CursorPos X="11" Y="48"/>
+        <TopLine Value="40"/>
+        <CursorPos X="50" Y="64"/>
         <UsageCount Value="36"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -48,9 +48,11 @@
       <Unit5>
         <Filename Value="C:\lazarus\lcl\graphtype.pp"/>
         <UnitName Value="GraphType"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="259"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="83"/>
+        <CursorPos X="5" Y="97"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\winunits-jedi\src\jwawingdi.pas"/>
@@ -331,7 +333,7 @@
         <UsageCount Value="10"/>
       </Unit42>
     </Units>
-    <JumpHistory Count="14" HistoryIndex="13">
+    <JumpHistory Count="15" HistoryIndex="14">
       <Position1>
         <Filename Value="pic2raw.lpr"/>
         <Caret Line="47" Column="31" TopLine="32"/>
@@ -388,6 +390,10 @@
         <Filename Value="pic2raw.lpr"/>
         <Caret Line="48" Column="11" TopLine="37"/>
       </Position14>
+      <Position15>
+        <Filename Value="pic2raw.lpr"/>
+        <Caret Line="64" Column="50" TopLine="49"/>
+      </Position15>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

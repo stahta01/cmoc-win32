@@ -39,18 +39,26 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 #include <sys/size.h>
 
-#define BECKY_DATA_READY_WAIT   100
+#define BECKY_TIMEOUT           500
 
 #define BECKY_STAT              (*(byte*)0xff41)
 #define BECKY_BYTE              (*(byte*)0xff42)
 #define BECKY_TICK              (*(word*)0x0112)
 
+#define BECKY_NULL              0
 #define BECKY_TITLE             1
 #define BECKY_REQUEST           2
 #define BECKY_RESPONSE          3
 #define BECKY_FLUSH_SOCKET      4
 #define BECKY_FLUSH_RESPONSE    5
 #define BECKY_FLUSH_REQUEST     6
+
+#define BECKY_IMAGE_WIDTH       10
+#define BECKY_IMAGE_HEIGHT      11
+#define BECKY_IMAGE_LOAD        12
+#define BECKY_IMAGE_RESAMPLE    13
+#define BECKY_IMAGE_SAVE_BMP    14
+#define BECKY_IMAGE_SAVE_RAW    15
 
 #define BECKY_FAILURE           255
 

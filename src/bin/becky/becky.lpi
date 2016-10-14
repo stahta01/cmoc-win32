@@ -31,7 +31,15 @@
         <FormatVersion Value="1"/>
       </local>
     </RunParams>
-    <Units Count="3">
+    <RequiredPackages Count="2">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="LCLBase"/>
+      </Item2>
+    </RequiredPackages>
+    <Units Count="4">
       <Unit0>
         <Filename Value="becky.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -46,6 +54,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UBeckyServer"/>
       </Unit2>
+      <Unit3>
+        <Filename Value="ubeckysession.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UBeckySession"/>
+      </Unit3>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -56,6 +69,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir);..\shared"/>
+      <OtherUnitFiles Value="..\shared"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>

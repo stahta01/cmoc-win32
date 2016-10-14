@@ -40,10 +40,12 @@ unit UBeckyServer;
 interface
 
 uses
-  Classes, FpHttpClient, SSockets, SysUtils, UBeckyStream;
+  Classes, FpHttpClient, FPImage, Graphics, IntfGraphics, SSockets, SysUtils,
+  UBeckySession, UBeckyStream;
 
 const
 
+  BECKY_NULL = 0;
   BECKY_TITLE = 1;
   BECKY_REQUEST = 2;
   BECKY_RESPONSE = 3;
@@ -51,9 +53,16 @@ const
   BECKY_FLUSH_RESPONSE = 5;
   BECKY_FLUSH_REQUEST = 6;
 
+  BECKY_IMAGE_WIDTH = 10;
+  BECKY_IMAGE_HEIGHT = 11;
+  BECKY_IMAGE_LOAD = 12;
+  BECKY_IMAGE_RESAMPLE = 13;
+  BECKY_IMAGE_SAVE_BMP = 14;
+  BECKY_IMAGE_SAVE_RAW = 15;
+
 type
 
-  TBeckyServer = class(TINetServer)
+  CBeckyServer = class(TINetServer)
   protected
     procedure HandleRequest(const AMessage: string; const AResponse: TMemoryStream);
     procedure DoConnect(ASocket: TSocketStream); override;
@@ -61,7 +70,7 @@ type
 
 implementation
 
-procedure TBeckyServer.HandleRequest(const AMessage: string; const AResponse: TMemoryStream);
+procedure CBeckyServer.HandleRequest(const AMessage: string; const AResponse: TMemoryStream);
 var
   LPos: integer;
   LName, LValue: string;
@@ -89,48 +98,60 @@ begin
   AResponse.Position := 0;
 end;
 
-procedure TBeckyServer.DoConnect(ASocket: TSocketStream);
+procedure CBeckyServer.DoConnect(ASocket: TSocketStream);
 var
-  FResponse, FRequest: TMemoryStream;
+  LSession: CBeckySession;
 begin
   WriteLn('Connected');
-  FResponse := TMemoryStream.Create;
+  LSession := CBeckySession.Create;
   try
-    FRequest := TMemoryStream.Create;
-    try
-      ASocket.Size := 0;
-      while True do begin
-        case ASocket.RecvWord of
-          BECKY_TITLE: begin
-            ASocket.SendString('Becky Server v0.1');
-          end;
-          BECKY_FLUSH_SOCKET: begin
-            WriteLn('Flushing Stream.');
-            ASocket.Size := 0;
-          end;
-          BECKY_FLUSH_RESPONSE: begin
-            FResponse.Size := 0;
-          end;
-          BECKY_FLUSH_REQUEST: begin
-            FRequest.Size := 0;
-          end;
-          BECKY_REQUEST: begin
-            HandleRequest(ASocket.RecvString, FResponse);
-          end;
-          BECKY_RESPONSE: begin
-            WriteLn('Write Response');
-            ASocket.SendStream(FResponse);
-          end else begin
-            WriteLn('Unknown Command. Flushing Stream.');
-            ASocket.Size := 0;
-          end;
+    ASocket.Size := 0;
+    while True do begin
+      case ASocket.RecvWord of
+        BECKY_NULL: begin
+        end;
+        BECKY_TITLE: begin
+          ASocket.SendString('Becky Server v0.1');
+        end;
+        BECKY_FLUSH_SOCKET: begin
+          ASocket.Size := 0;
+        end;
+        BECKY_FLUSH_RESPONSE: begin
+          LSession.FResponse.Size := 0;
+        end;
+        BECKY_FLUSH_REQUEST: begin
+          LSession.FRequest.Size := 0;
+        end;
+        BECKY_REQUEST: begin
+          HandleRequest(ASocket.RecvString, LSession.FResponse);
+        end;
+        BECKY_RESPONSE: begin
+          ASocket.SendStream(LSession.FResponse);
+        end;
+        BECKY_IMAGE_WIDTH: begin
+          ASocket.SendWord(LSession.FImage.Width);
+        end;
+        BECKY_IMAGE_HEIGHT: begin
+          ASocket.SendWord(LSession.FImage.Height);
+        end;
+        BECKY_IMAGE_LOAD: begin
+          LSession.PictureLoad;
+        end;
+        BECKY_IMAGE_SAVE_BMP: begin
+          LSession.PictureSaveBmp;
+        end;
+        BECKY_IMAGE_SAVE_RAW: begin
+          LSession.PictureSaveRaw;
+        end;
+        BECKY_IMAGE_RESAMPLE: begin
+          LSession.PictureResample(ASocket.RecvWord, ASocket.RecvWord);
+        end else begin
+          ASocket.Size := 0;
         end;
       end;
-    finally
-      FreeAndNil(FRequest);
     end;
   finally
-    FreeAndNil(FResponse);
+    FreeAndNil(LSession);
   end;
 end;
 

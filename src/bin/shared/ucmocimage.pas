@@ -53,6 +53,7 @@ type
   public
     class procedure ResampleAndDither(const ADst, ASrc: TLazIntfImage;
       const APalette: TFPPalette);
+    class function SaveToRawPic(const A: TLazIntfImage; const APalette: TFPPalette): rawbytestring;
     class function SaveToCoCoPic(const A: TLazIntfImage; const APalCode: byte;
       const APalette: TFPPalette): rawbytestring;
     class procedure SaveToCoCoPic(const A: TLazIntfImage; const AFileName: TFileName;
@@ -196,6 +197,26 @@ begin
     end;
     Result := (Result shl LBitsPerPixel) or LPalIndex;
     Inc(AX);
+  end;
+end;
+
+class function OImage.SaveToRawPic(const A: TLazIntfImage;
+  const APalette: TFPPalette): rawbytestring;
+var
+  LX, LY: integer;
+  LDitherer: TBytePixelDitherer;
+begin
+  Result := default(rawbytestring);
+  LDitherer := TBytePixelDitherer.Create(APalette);
+  try
+    for LY := 0 to A.Height - 1 do begin
+      LX := 0;
+      while LX < A.Width do begin
+        Result += RbsByte(LDitherer.GetColorByte(A, LX, LY));
+      end;
+    end;
+  finally
+    FreeAndNil(LDitherer);
   end;
 end;
 

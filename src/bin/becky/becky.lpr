@@ -40,9 +40,11 @@ program becky;
 uses
   Classes,
   FpHttpClient,
+  Interfaces,
   SSockets,
   SysUtils,
   UBeckyServer,
+  UBeckySession,
   UBeckyStream;
 
 {$R *.res}
@@ -50,15 +52,15 @@ uses
 
   procedure Main;
   begin
-    with TBeckyServer.Create('127.0.0.1', 65504) do begin
+    with CBeckyServer.Create('127.0.0.1', 65504) do begin
       try
         WriteLn('Becky Server - A Simple Becker Port Server for WinCMOC');
         WriteLn;
-        WriteLn('Binding');
+        WriteLn('Binding to ', Host, ':', Port);
         Bind;
-        WriteLn('Accepting Requests');
         while True do begin
           try
+            WriteLn('Waiting for requests');
             StartAccepting;
           except
             on E: Exception do begin
