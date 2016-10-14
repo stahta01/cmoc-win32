@@ -6,10 +6,16 @@
 #include <conio.h>
 #include <becky.h>
 
-#pragma options -machine=cocous -cart=becker
+#pragma options -machine=coco2b -cart=becker
+
+// TODO: Simple HTML reader
+// BUG: Sometimes Becky fails. The Becker server stream might need to be flushed
+// on errors.
 
 int main(void)
 {
+    *(byte*)0xff22 |= 16;                           // lower case letters
+
     if (becky_sendstring("GET http://cs.unc.edu/~yakowenk/coco/text/extendedbasic.html")) {
         if (becky_sendword_wait(BECKY_BUFFER, 1000)) {
             byte b;

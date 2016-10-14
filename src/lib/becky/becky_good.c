@@ -3,6 +3,6 @@
 
 bool becky_good(void)
 {
-    return becky_wait(60);
+    return becky_wait(100);
 }
 
