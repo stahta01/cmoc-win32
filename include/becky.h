@@ -38,6 +38,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define _BECKY_H
 
 #include <sys/size.h>
+#include <sys/long.h>
 
 #define BECKY_TIMEOUT           500
 
@@ -64,23 +65,20 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 bool becky_data_wait(word wait);
 bool becky_data_ready(void);
-bool becky_data_stop(void);
 
-bool becky_recvbyte(byte* dst);
-bool becky_recvword(word* dst);
+bool becky_recv_byte(byte* dst);
+bool becky_recv_word(word* dst);
 
-bool becky_sendbyte(word val);
-bool becky_sendword(word val);
+bool becky_send_data(word type, byte* src, size_t size);
+bool becky_send_null(word type);
+bool becky_send_byte(word type, byte src);
+bool becky_send_word(word type, word src);
+bool becky_send_str(word type, char* src);
 
-bool becky_senddata(byte* src, size_t size);
-bool becky_recvdata(byte* dst, size_t* size);
+bool becky_recv_data(word type, byte* dst, size_t size);
+bool becky_recv_str(word type, char* dst, size_t size);
 
-bool becky_recvstring(char* dst, size_t size);
-bool becky_sendstring(char* src);
-bool becky_sendrequest(char* src);
-
-bool becky_sendbyte_wait(word val, word wait);
-bool becky_sendword_wait(word val, word wait);
+extern long_t becky_result;
 
 #endif
 

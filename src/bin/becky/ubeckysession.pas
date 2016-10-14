@@ -53,6 +53,8 @@ type
     constructor Create;
     destructor Destroy; override;
   public
+    procedure SetResponse(const A: rawbytestring);
+  public
     procedure ImageLoad;
     procedure ImageSaveBmp;
     procedure ImageSaveRaw;
@@ -79,6 +81,13 @@ begin
   inherited;
 end;
 
+procedure CBeckySession.SetResponse(const A: rawbytestring);
+begin
+  FResponse.Clear;
+  FResponse.WriteBuffer(A[1], Length(A));
+  FResponse.Position := 0;
+end;
+
 procedure CBeckySession.ImageLoad;
 begin
   FResponse.Position := 0;
@@ -96,13 +105,8 @@ begin
 end;
 
 procedure CBeckySession.ImageSaveRaw;
-var
-  LDst: rawbytestring;
 begin
-  LDst := OImage.SaveToRawPic(FImage, FPalette);
-  FResponse.Clear;
-  FResponse.WriteBuffer(LDst[1], Length(LDst));
-  FResponse.Position := 0;
+  SetResponse(OImage.SaveToRawPic(FImage, FPalette));
 end;
 
 procedure CBeckySession.ImageResample(const AWidth, AHeight: integer);
