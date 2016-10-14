@@ -4,8 +4,6 @@
 // the becker port and provides byte-to-byte handshaking.
 
 #include <conio.h>
-#include <string.h>
-#include <stdlib.h>
 #include <becky.h>
 
 #pragma options -machine=cocous -cart=becker
@@ -13,7 +11,7 @@
 int main(void)
 {
     if (becky_sendstring("GET http://cs.unc.edu/~yakowenk/coco/text/extendedbasic.html")) {
-        if (becky_sendword_wait(20, 1000)) {
+        if (becky_sendword_wait(BECKY_BUFFER, 1000)) {
             byte b;
             while (becky_recvbyte(&b)) {
                 cputc(b);
