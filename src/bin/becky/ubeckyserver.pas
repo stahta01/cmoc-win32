@@ -44,13 +44,13 @@ uses
   UBeckySession, UBeckyStream, UCmocRbs;
 
 var
-  BeckyTitle: string = 'Becky Server v0.1';
+  BeckyTitle: string = 'BECKY SERVER V0.1';
 
 const
 
-  BECKY_NULL = 0;
+  BECKY_MAGIC = 0;
   BECKY_TITLE = 1;
-  BECKY_REQUEST = 2;
+  BECKY_HTTP = 2;
   BECKY_RESPONSE = 3;
   BECKY_FLUSH_SOCKET = 4;
   BECKY_FLUSH_RESPONSE = 5;
@@ -106,9 +106,8 @@ procedure CBeckyServer.DoConnect(ASocket: TSocketStream);
 
 var
   LSession: CBeckySession;
-  LIndex: integer;
   LType, LSize: word;
-  LPacket: rawbytestring;
+  LData: rawbytestring;
 
   procedure LSetResponse(const A: rawbytestring);
   begin
@@ -123,10 +122,11 @@ begin
     ASocket.Size := 0;
     while True do begin
       LType := ASocket.RecvWord;
-      LPacket := ASocket.RecvPacket;
+      LData := ASocket.RecvData;
       //WriteLn('REQUEST');
       case LType of
-        BECKY_NULL: begin
+        BECKY_MAGIC: begin
+          ASocket.SendDWord(1234);
         end;
         BECKY_TITLE: begin
           LSetResponse(BeckyTitle);
@@ -143,12 +143,12 @@ begin
           LSession.FRequest.Size := 0;
           ASocket.SendDWord(LSession.FResponse.Size);
         end;
-        BECKY_REQUEST: begin
-          HandleRequest(LPacket, LSession.FResponse);
+        BECKY_HTTP: begin
+          HandleRequest(LData, LSession.FResponse);
           ASocket.SendDWord(LSession.FResponse.Size);
         end;
         BECKY_RESPONSE: begin
-          LSize := Min(RbsWord(LPacket, 0), LSession.FResponse.Size - LSession.FResponse.Position);
+          LSize := Min(RbsWord(LData, 0), LSession.FResponse.Size - LSession.FResponse.Position);
           ASocket.SendDWord(LSize);
           ASocket.SendStream(LSession.FResponse, LSize);
         end;
@@ -160,7 +160,8 @@ begin
         end;
         BECKY_IMAGE_LOAD: begin
           LSession.ImageLoad;
-          ASocket.SendDWord(LSession.FResponse.Size);
+          ASocket.SendWord(LSession.FImage.Width);
+          ASocket.SendWord(LSession.FImage.Height);
         end;
         BECKY_IMAGE_SAVE_BMP: begin
           LSession.ImageSaveBmp;
@@ -171,10 +172,11 @@ begin
           ASocket.SendDWord(LSession.FResponse.Size);
         end;
         BECKY_IMAGE_RESAMPLE: begin
-          LSession.ImageResample(RbsWord(LPacket, 0), RbsWord(LPacket, 2));
-          ASocket.SendDWord(LSession.FResponse.Size);
+          LSession.ImageResample(RbsWord(LData, 0), RbsWord(LData, 2));
+          ASocket.SendWord(LSession.FImage.Width);
+          ASocket.SendWord(LSession.FImage.Height);
         end else begin
-          ASocket.SendDWord($ffff);
+          ASocket.SendDWord(0);
         end;
       end;
     end;

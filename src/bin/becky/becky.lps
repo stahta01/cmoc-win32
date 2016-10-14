@@ -10,8 +10,8 @@
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="47"/>
-        <CursorPos X="48" Y="68"/>
-        <UsageCount Value="44"/>
+        <CursorPos X="76" Y="57"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -19,27 +19,28 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UBeckyStream"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="75"/>
-        <CursorPos X="3" Y="82"/>
-        <UsageCount Value="33"/>
+        <TopLine Value="39"/>
+        <CursorPos X="22" Y="52"/>
+        <UsageCount Value="34"/>
       </Unit1>
       <Unit2>
         <Filename Value="ubeckyserver.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UBeckyServer"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="112"/>
-        <CursorPos X="31" Y="126"/>
-        <UsageCount Value="33"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="34"/>
+        <CursorPos X="13" Y="47"/>
+        <UsageCount Value="34"/>
+        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="ubeckysession.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UBeckySession"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="99"/>
-        <CursorPos X="14" Y="109"/>
-        <UsageCount Value="28"/>
+        <TopLine Value="106"/>
+        <CursorPos X="3" Y="113"/>
+        <UsageCount Value="29"/>
       </Unit3>
       <Unit4>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\fcl-net\src\ssockets.pp"/>
@@ -121,6 +122,35 @@
         <UsageCount Value="11"/>
       </Unit14>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory Count="7" HistoryIndex="6">
+      <Position1>
+        <Filename Value="becky.lpr"/>
+        <Caret Line="55" Column="18" TopLine="47"/>
+      </Position1>
+      <Position2>
+        <Filename Value="ubeckyserver.pas"/>
+        <Caret Line="161" Column="25" TopLine="143"/>
+      </Position2>
+      <Position3>
+        <Filename Value="ubeckyserver.pas"/>
+        <Caret Line="170" Column="26" TopLine="154"/>
+      </Position3>
+      <Position4>
+        <Filename Value="ubeckyserver.pas"/>
+        <Caret Line="129" Column="33" TopLine="122"/>
+      </Position4>
+      <Position5>
+        <Filename Value="ubeckyserver.pas"/>
+        <Caret Line="131" Column="17" TopLine="115"/>
+      </Position5>
+      <Position6>
+        <Filename Value="ubeckyserver.pas"/>
+        <Caret Line="51" Column="14" TopLine="45"/>
+      </Position6>
+      <Position7>
+        <Filename Value="ubeckyserver.pas"/>
+        <Caret Line="132" Column="31" TopLine="121"/>
+      </Position7>
+    </JumpHistory>
   </ProjectSession>
 </CONFIG>

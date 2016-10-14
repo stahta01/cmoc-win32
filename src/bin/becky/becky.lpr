@@ -54,7 +54,7 @@ uses
   begin
     with CBeckyServer.Create('127.0.0.1', 65504) do begin
       try
-        WriteLn('Becky Server - A Simple Becker Port Server for WinCMOC');
+        WriteLn(BeckyTitle + ' - A Simple Becker Port Server for WinCMOC');
         WriteLn;
         WriteLn('Binding to ', Host, ':', Port);
         Bind;

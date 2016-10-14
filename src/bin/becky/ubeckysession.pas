@@ -91,7 +91,11 @@ end;
 procedure CBeckySession.ImageLoad;
 begin
   FResponse.Position := 0;
-  FImage.LoadFromStream(FResponse);
+  FImage.SetSize(0, 0);
+  try
+    FImage.LoadFromStream(FResponse);
+  except
+  end;
 end;
 
 procedure CBeckySession.ImageSaveBmp;

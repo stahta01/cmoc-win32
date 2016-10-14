@@ -49,7 +49,7 @@ type
     function RecvByte: byte;
     function RecvWord: word;
     function RecvDWord: dword;
-    function RecvPacket: rawbytestring;
+    function RecvData: rawbytestring;
   public
     procedure SendByte(const A: byte);
     procedure SendWord(const A: word);
@@ -75,7 +75,7 @@ begin
   Result := (RecvByte shl 24) or (RecvByte shl 16) or (RecvByte shl 8) or RecvByte;
 end;
 
-function TBeckySocketStreamHelper.RecvPacket: rawbytestring;
+function TBeckySocketStreamHelper.RecvData: rawbytestring;
 var
   LIndex: integer;
 begin

@@ -64,10 +64,15 @@ int main(void)
     cputs("WAIT FOR XROAR TO CONNECT\n");
     sleep(1);
 
+    if (!becky_send_null(BECKY_MAGIC) || becky_result.lo != 1234) {
+        exit("BECKY NOT AVALIABLE");
+    }
     becky_send_null(BECKY_TITLE);
     char title[100];
     becky_recv_str(BECKY_RESPONSE, title, 32);
     cputs(title);
+    cputs("\nPRESS ANY KEY\n");
+    getch();
     test_image();
 
     //test_html();
