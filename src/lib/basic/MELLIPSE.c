@@ -1,6 +1,5 @@
 
-#include <basic.h>
-#include <graph.h>
+#include "_basic.h"
 
 void MELLIPSE(int x, int y, int w, int h, byte c)
 {

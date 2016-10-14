@@ -1,6 +1,5 @@
 
-#include <stdlib.h>
-#include <basic.h>
+#include "_basic.h"
 
 void SOUND(int tone, int duration)
 {

@@ -1,6 +1,5 @@
 
-#include <basic.h>
-#include <time.h>
+#include "_basic.h"
 
 word TIMER(void)
 {

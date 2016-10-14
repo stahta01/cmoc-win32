@@ -37,19 +37,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _BASIC_H
 #define _BASIC_H
 
-#include <stdio.h>
-#include <ctype.h>
-#include <stdlib.h>
-#include <string.h>
-#include <conio.h>
-
-#include <motorola/types.h>
-
-// Use dragon equates to ensure we are compatible
-
-#include <dragon/equates.h>
-
-//#include <equates.h>
+#include <sys/size.h>
 
 #define COLOR_BLACK       0
 #define COLOR_GREEN       1
@@ -104,7 +92,7 @@ int DIR(int dr);
 int DSKINI(int dr);
 int DRIVE(int dr);
 int KILL(char* fn);
-int LOADM(char* fn, unsigned offset);
+int LOADM(char* fn, word offset);
 int SAVEM(char* fn, void* start, void* finish, void* exec);
 int COPY(char* fn1, char* fn2);
 int UNLOAD(int dr);

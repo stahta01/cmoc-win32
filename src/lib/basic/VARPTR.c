@@ -1,9 +1,9 @@
 
-#include <basic.h>
+#include "_basic.h"
 
 void* VARPTR(char* s)
 {
     systemf("ZZ=VARPTR(%s)", s);
-    return (void*)*(unsigned*)_varptr;
+    return (void*)*(word*)_varptr;
 }
 

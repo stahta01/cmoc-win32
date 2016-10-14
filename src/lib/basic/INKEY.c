@@ -1,6 +1,5 @@
 
-#include <basic.h>
-#include <conio.h>
+#include "_basic.h"
 
 int INKEY(void)
 {

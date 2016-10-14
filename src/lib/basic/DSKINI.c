@@ -1,5 +1,5 @@
 
-#include <basic.h>
+#include "_basic.h"
 
 int DSKINI(int d)
 {

@@ -1,6 +1,5 @@
 
-#include <basic.h>
-#include <graph.h>
+#include "_basic.h"
 
 void MARC(int x, int y, int w, int h, int s, int e, byte c)
 {

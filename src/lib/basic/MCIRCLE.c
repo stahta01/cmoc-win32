@@ -1,6 +1,5 @@
 
-#include <basic.h>
-#include <graph.h>
+#include "_basic.h"
 
 void MCIRCLE(int x, int y, int r, byte c)
 {

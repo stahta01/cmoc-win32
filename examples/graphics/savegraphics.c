@@ -1,6 +1,7 @@
 
 #include <basic.h>
 #include <conio.h>
+#include <equates.h>
 
 int main(void)
 {
@@ -13,7 +14,7 @@ int main(void)
     bgcolor(0);
     textmode(MODE_L0_16X12);
     MCLIP(0, 0, 256, 192);
-    for (byte i = 0; i < 50; i += 6) {
+    for (int i = 0; i < 50; i += 6) {
         MELLIPSE(128,96, 80 + i, 20 + i, 2);
     }
     cprintf("Saving graphics to disk\n");
@@ -24,7 +25,7 @@ int main(void)
     cprintf("Press any key\n");
     getch();
     textmode(MODE_T0_32X16);
-    puts("BACK TO BASIC");
+    cputs("BACK TO BASIC\n");
     return 0;
 }
 

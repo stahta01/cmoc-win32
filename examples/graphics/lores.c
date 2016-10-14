@@ -2,6 +2,7 @@
 #pragma target coco
 
 #include <basic.h>
+#include <conio.h>
 
 int main()
 {

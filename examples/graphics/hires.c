@@ -4,6 +4,7 @@
 #pragma options -machine=cocous
 
 #include <basic.h>
+#include <conio.h>
 #include <unistd.h>
 
 void DrawGraphics(void)

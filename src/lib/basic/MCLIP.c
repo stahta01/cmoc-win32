@@ -1,6 +1,5 @@
 
-#include <basic.h>
-#include <graph.h>
+#include "_basic.h"
 
 void MCLIP(int x1, int y1, int x2, int y2)
 {

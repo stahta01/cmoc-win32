@@ -1,5 +1,5 @@
 
-#include <basic.h>
+#include "_basic.h"
 
 void HCOLOR(int c1, int c2)
 {

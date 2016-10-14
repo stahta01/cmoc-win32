@@ -3,6 +3,11 @@
 #define _BASIC_DEFS_H
 
 #include <basic.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
+#include <conio.h>
 #include <fix6.h>
 #include <cmoc.h>
 #include <coco.h>
@@ -10,6 +15,9 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <system.h>
+#include <graph.h>
+#include <time.h>
+#include <disk.h>
 
 extern int _filedesc[FOPEN_MAX];
 

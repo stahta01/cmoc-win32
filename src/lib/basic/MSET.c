@@ -1,6 +1,5 @@
 
-#include <basic.h>
-#include <graph.h>
+#include "_basic.h"
 
 void MSET(int x, int y, byte c)
 {

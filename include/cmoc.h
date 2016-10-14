@@ -9,19 +9,6 @@
 #ifndef _CMOC_H
 #define _CMOC_H
 
-#include <assert.h>
-#include <stddef.h>
-#include <stdint.h>
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <conio.h>
-
-#include <peekpoke.h>
-
-#include <motorola/types.h>
-
 // Double-word to ASCII.
 // Converts the unsigned 32-bit integer formed by hi * 65536 + lo into
 // an ASCII decimal representation that gets written to 'out'.
