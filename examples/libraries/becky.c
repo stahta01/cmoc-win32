@@ -1,7 +1,7 @@
 
 // Becky is the start of a very basic protocol for making HTTP requests.
 // The Becky server is currently being written. Again, its very basic. Becky uses
-// the becker port and provides byte-to-byte handshacking.
+// the becker port and provides byte-to-byte handshaking.
 
 #include <conio.h>
 #include <string.h>
