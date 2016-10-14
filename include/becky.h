@@ -39,6 +39,8 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 #include <sys/size.h>
 
+#define BECKY_DATA_READY_WAIT   100
+
 #define BECKY_STAT              (*(byte*)0xff41)
 #define BECKY_BYTE              (*(byte*)0xff42)
 #define BECKY_TICK              (*(word*)0x0112)
@@ -56,8 +58,8 @@ bool becky_data_wait(word wait);
 bool becky_data_ready(void);
 bool becky_data_stop(void);
 
-bool becky_recvbyte(byte* val);
-bool becky_recvword(word* val);
+bool becky_recvbyte(byte* dst);
+bool becky_recvword(word* dst);
 
 bool becky_sendbyte(word val);
 bool becky_sendword(word val);
@@ -65,9 +67,9 @@ bool becky_sendword(word val);
 bool becky_senddata(byte* src, size_t size);
 bool becky_recvdata(byte* dst, size_t* size);
 
-bool becky_recvstring(char* str, size_t size);
-bool becky_sendstring(char* str);
-bool becky_sendrequest(char* str);
+bool becky_recvstring(char* dst, size_t size);
+bool becky_sendstring(char* src);
+bool becky_sendrequest(char* src);
 
 bool becky_sendbyte_wait(word val, word wait);
 bool becky_sendword_wait(word val, word wait);

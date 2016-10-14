@@ -1,8 +1,8 @@
 
 #include "_becky.h"
 
-bool becky_recvword(word* val)
+bool becky_recvword(word* dst)
 {
-    return becky_recvbyte(&((byte*)val)[0]) && becky_recvbyte(&((byte*)val)[1]);
+    return becky_recvbyte(&((byte*)dst)[0]) && becky_recvbyte(&((byte*)dst)[1]);
 }
 

@@ -1,8 +1,8 @@
 
 #include "_becky.h"
 
-bool becky_sendstring(char* str)
+bool becky_sendstring(char* src)
 {
-    return becky_senddata((byte*)str, strlen(str));
+    return becky_senddata((byte*)src, strlen(src));
 }
 
