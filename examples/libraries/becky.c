@@ -18,6 +18,9 @@ void test_html(void)
 {
     if (becky_sendrequest("GET http://cs.unc.edu/~yakowenk/coco/text/extendedbasic.html")) {
         if (becky_sendword_wait(BECKY_RESPONSE, 1000)) {
+            word hi, lo;
+            becky_recvword(&hi);
+            becky_recvword(&lo);
             byte b;
             while (becky_recvbyte(&b)) {
                 cputc(b);
@@ -30,16 +33,17 @@ void showimage(char* url)
 {
     char buf[100];
     stpcpy(stpcpy(buf, "GET "), url);
-    if (becky_sendrequest(buf)) {
-        if (becky_sendword_wait(BECKY_NULL, 1000)) {
-            if (becky_sendword(BECKY_IMAGE_LOAD) && becky_sendword(BECKY_IMAGE_RESAMPLE) && becky_sendword(192)
-                && becky_sendword(256)) {
-                if (becky_sendword_wait(BECKY_NULL, 1000)) {
-                    if (becky_sendword(BECKY_IMAGE_SAVE_RAW) && becky_sendword_wait(BECKY_RESPONSE, 1000)) {
-                        byte* dst = (byte*)_beggrp;
-                        while (becky_recvbyte(dst)) {
-                            dst++;
-                        }
+    if (becky_sendrequest(buf) && becky_sendword_wait(BECKY_NULL, 1000)) {
+        if (becky_sendword(BECKY_IMAGE_LOAD) && becky_sendword(BECKY_IMAGE_RESAMPLE) && becky_sendword(192)
+            && becky_sendword(256)) {
+            if (becky_sendword_wait(BECKY_NULL, 1000)) {
+                if (becky_sendword(BECKY_IMAGE_SAVE_RAW) && becky_sendword_wait(BECKY_RESPONSE, 1000)) {
+                    word hi, lo;
+                    becky_recvword(&hi);
+                    becky_recvword(&lo);
+                    byte* dst = (byte*)_beggrp;
+                    while (lo-- && becky_recvbyte(dst)) {
+                        dst++;
                     }
                 }
             }
@@ -51,9 +55,10 @@ void test_image(void)
 {
     system("PMODE4,1:SCREEN1,1:PCLS0");
     for (;;) {
+        showimage("http://www.vintage-computer.com/images/apple2running.jpg");
+        showimage("http://www.old-computers.com/museum/photos/Tandy_Color3_System_s1.jpg");
+        showimage("http://www.nerdlikeyou.com/wp-content/uploads/2013/03/retro-consoles-commodore-64-and-screen.jpg");
         showimage("http://meme-lol.com/wp-content/uploads/meme-lol/Funny-LOL-Ferret.jpg");
-        showimage("http://harry.enzoverder.be/cats/funny-pictures-static-kitten.jpg");
-        showimage("http://funny-pics.co/wp-content/uploads/Funny-silly-dog.jpg");
     }
 }
 

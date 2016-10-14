@@ -119,6 +119,8 @@ end;
 
 function TBeckySocketStreamHelper.SendStream(const A: TStream): boolean;
 begin
+  SendDWord(A.Size);
+  A.Position := 0;
   while A.Position < A.Size do begin
     if not SendByte(A.ReadByte) then begin
       Exit(False);
