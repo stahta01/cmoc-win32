@@ -135,16 +135,16 @@ begin
           ASocket.SendWord(LSession.FImage.Height);
         end;
         BECKY_IMAGE_LOAD: begin
-          LSession.PictureLoad;
+          LSession.ImageLoad;
         end;
         BECKY_IMAGE_SAVE_BMP: begin
-          LSession.PictureSaveBmp;
+          LSession.ImageSaveBmp;
         end;
         BECKY_IMAGE_SAVE_RAW: begin
-          LSession.PictureSaveRaw;
+          LSession.ImageSaveRaw;
         end;
         BECKY_IMAGE_RESAMPLE: begin
-          LSession.PictureResample(ASocket.RecvWord, ASocket.RecvWord);
+          LSession.ImageResample(ASocket.RecvWord, ASocket.RecvWord);
         end else begin
           ASocket.Size := 0;
         end;

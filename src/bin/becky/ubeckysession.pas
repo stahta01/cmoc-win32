@@ -53,10 +53,10 @@ type
     constructor Create;
     destructor Destroy; override;
   public
-    procedure PictureLoad;
-    procedure PictureSaveBmp;
-    procedure PictureSaveRaw;
-    procedure PictureResample(const AWidth, AHeight: integer);
+    procedure ImageLoad;
+    procedure ImageSaveBmp;
+    procedure ImageSaveRaw;
+    procedure ImageResample(const AWidth, AHeight: integer);
   end;
 
 implementation
@@ -79,13 +79,13 @@ begin
   inherited;
 end;
 
-procedure CBeckySession.PictureLoad;
+procedure CBeckySession.ImageLoad;
 begin
   FResponse.Position := 0;
   FImage.LoadFromStream(FResponse);
 end;
 
-procedure CBeckySession.PictureSaveBmp;
+procedure CBeckySession.ImageSaveBmp;
 begin
   FResponse.Clear;
   try
@@ -95,7 +95,7 @@ begin
   FResponse.Position := 0;
 end;
 
-procedure CBeckySession.PictureSaveRaw;
+procedure CBeckySession.ImageSaveRaw;
 var
   LDst: rawbytestring;
 begin
@@ -105,7 +105,7 @@ begin
   FResponse.Position := 0;
 end;
 
-procedure CBeckySession.PictureResample(const AWidth, AHeight: integer);
+procedure CBeckySession.ImageResample(const AWidth, AHeight: integer);
 var
   LDst, LTmp: TLazIntfImage;
 begin
