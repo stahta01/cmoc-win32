@@ -50,7 +50,7 @@ void showimage(char* url)
 
 void test_image(void)
 {
-    system("PMODE4,1:SCREEN1,1:PCLS0");
+    system("PMODE4,1:SCREEN1,1:PCLS1");
     for (;;) {
         showimage("http://www.trs-80.org/images/coco1a.jpg");
         showimage("http://colorcomputer.50webs.com/logo.jpg");
@@ -74,7 +74,7 @@ int main(void)
     char title[100];
     becky_recv_str(BECKY_READ, title, 32);
     cputs(title);
-    cputs("\nPRESS ANY KEY\n");
+    cputs("\nPRESS ANY KEY TO START DOWNLOAD");
     getch();
     //test_html();
 
