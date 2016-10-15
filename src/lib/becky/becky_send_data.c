@@ -1,8 +1,6 @@
 
 #include "_becky.h"
 
-#define becky_result_error() ((becky_result.hi==0xffff)&&(becky_result.lo==0xffff))
-
 bool becky_send_data(word type, byte* src, size_t size)
 {
     BECKY_BYTE = (byte)(type >> 8);
