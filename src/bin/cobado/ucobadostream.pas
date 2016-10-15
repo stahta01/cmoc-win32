@@ -44,8 +44,7 @@ uses
 
 type
 
-  TCobadoCode = (ccNothing, ccUninstall, ccChrOut, ccGetMem, ccSetMem, ccPoke, ccPokeW,
-    ccPeek, ccPeekW, ccMemSet, ccMemCpy, ccJsrMem);
+  TCobadoCode = (ccNothing, ccUninstall, ccChrOut, ccGetMem, ccSetMem, ccMemSet, ccMemCpy, ccJsrMem);
 
   CCobadoStream = class(TComponent)
   strict private

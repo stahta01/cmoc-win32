@@ -46,7 +46,14 @@ type
 
   CCobadoSession = class(CCobadoRemote)
   strict private
-    FParams: TStrings;
+    FTextIndex: integer;
+    FParams, FText: TStrings;
+  strict private
+    procedure Command_LS;
+    procedure Command_CD;
+    procedure Command_SAVE;
+    procedure Command_MORE;
+    procedure Command_MORE2;
   public
     constructor Create(const AOwner: TComponent; const AStream: TStream); override;
     destructor Destroy; override;
@@ -62,11 +69,13 @@ constructor CCobadoSession.Create(const AOwner: TComponent; const AStream: TStre
 begin
   inherited;
   FParams := TStringList.Create;
+  FText := TStringList.Create;
 end;
 
 destructor CCobadoSession.Destroy;
 begin
   FreeAndNil(FParams);
+  FreeAndNil(FText);
   inherited;
 end;
 
@@ -79,35 +88,96 @@ begin
   end;
 end;
 
+procedure CCobadoSession.Command_MORE2;
+var
+  LIndex: integer;
+begin
+  LIndex := 0;
+  while (FTextIndex < FText.Count) and (LIndex < 16) do begin
+    PrintString(#13 + FText[FTextIndex]);
+    Inc(FTextIndex);
+    Inc(LIndex);
+  end;
+end;
+
+procedure CCobadoSession.Command_MORE;
+begin
+  ClearLineBuffer;
+  FTextIndex := 0;
+  FText.LoadFromFile(GetString(1));
+  Command_MORE2;
+end;
+
+procedure CCobadoSession.Command_LS;
+var
+  LSearchRec: TSearchRec;
+begin
+  ClearLineBuffer;
+  PrintChar(#13);
+  if FindFirst(GetString(1, AllFilesMask), faDirectory, LSearchRec) = 0 then begin
+    try
+      repeat
+        if (LSearchRec.Attr and faDirectory) <> 0 then begin
+          PrintColumn('[' + LSearchRec.Name + ']');
+        end;
+      until FindNext(LSearchRec) <> 0;
+    finally
+      FindClose(LSearchRec);
+    end;
+  end;
+  if FindFirst(GetString(1, AllFilesMask), 0, LSearchRec) = 0 then begin
+    try
+      repeat
+        PrintColumn(LSearchRec.Name);
+      until FindNext(LSearchRec) <> 0;
+    finally
+      FindClose(LSearchRec);
+    end;
+  end;
+  PrintCurrentDir;
+end;
+
+procedure CCobadoSession.Command_CD;
+begin
+  ClearLineBuffer;
+  SetCurrentDir(GetString(1));
+  PrintCurrentDir;
+end;
+
+procedure CCobadoSession.Command_SAVE;
+begin
+  ClearLineBuffer;
+end;
+
 procedure CCobadoSession.Command(const ACmd: string);
 var
   LIndex: integer;
-  LSearchRec: TSearchRec;
-
 begin
   FParams.CommaText := ACmd;
-  case LowerCase(GetString(0)) of
-    'ls': begin
-      ClearLineBuffer;
-      if FindFirst(GetString(1, AllFilesMask), faDirectory, LSearchRec) = 0 then begin
-        try
-          repeat
-            PrintStr(LSearchRec.Name + #13);
-          until FindNext(LSearchRec) <> 0;
-        finally
-          FindClose(LSearchRec);
+  try
+    case LowerCase(GetString(0)) of
+      'ls': begin
+        Command_LS;
+      end;
+      'funny': begin
+        ClearLineBuffer;
+        for LIndex := 0 to 511 do begin
+          Poke(LIndex + 1024, LIndex);
         end;
       end;
-    end;
-    'funny': begin
-      ClearLineBuffer;
-      for LIndex := 0 to 511 do begin
-        Poke(LIndex + 1024, LIndex);
+      'cd': begin
+        Command_CD;
+      end;
+      'more': begin
+        Command_MORE;
+      end;
+      'save': begin
+        Command_SAVE;
       end;
     end;
-    'cd': begin
-      ClearLineBuffer;
-      SetCurrentDir(GetString(1));
+  except
+    on LException: Exception do begin
+      PrintString(#13 + LException.Message);
     end;
   end;
 end;

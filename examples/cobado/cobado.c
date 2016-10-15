@@ -16,7 +16,7 @@
 
 // The system enables you to intercept the command line, and add new commands
 // to the CoCo... remotely. There is no need to install, patch, modify the
-// ROM, or load in a new DOS, etc.
+// ROM, or load in a new DOS.
 
 // Ive only just started to play with this idea, but it should be able todo
 // anything. You can even put code into the CoCo's memory, and execute it.
@@ -70,19 +70,11 @@ asm void cobado_install(void)
         deca
         beq     do_setmem                           // #4
         deca
-        beq     do_poke                             // #5
+        beq     do_memset                           // #5
         deca
-        beq     do_pokew                            // #6
+        beq     do_memcpy                           // #6
         deca
-        beq     do_peek                             // #7
-        deca
-        beq     do_peekw                            // #8
-        deca
-        beq     do_memset                           // #9
-        deca
-        beq     do_memcpy                           // #10
-        deca
-        beq     do_jsrmem                           // #11
+        beq     do_jsrmem                           // #7
 
         bra     command_loop
 
@@ -111,36 +103,13 @@ asm void cobado_install(void)
         do_setmem:
         bsr     becker_x                            // dst
         bsr     becker_y                            // count
+        cmpy    #0
         beq     command_loop
         do_setmem_loop:
         bsr     becker_a
         sta     ,x+
         dey
         bne     do_setmem_loop
-        bra     command_loop
-
-        do_poke:
-        bsr     becker_x                            // dst
-        bsr     becker_a                            // value
-        sta     ,x
-        bra     command_loop
-
-        do_pokew:
-        bsr     becker_x                            // dst
-        bsr     becker_d                            // value
-        std     ,x
-        bra     command_loop
-
-        do_peek:
-        bsr     becker_x                            // src
-        lda     ,x                                  // value
-        bsr     becker_send_a
-        bra     command_loop
-
-        do_peekw:
-        bsr     becker_x                            // src
-        ldd     ,x                                  // value
-        bsr     becker_send_d
         bra     command_loop
 
         do_memcpy:
