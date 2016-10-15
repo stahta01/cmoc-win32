@@ -43,7 +43,7 @@ uses
   SysUtils,
   UCobadoServer,
   UCobadoSession,
-  UCobadoStream;
+  UCobadoStream, UCobadoRemote, UCobadoStreamHelper;
 
 {$R *.res}
 

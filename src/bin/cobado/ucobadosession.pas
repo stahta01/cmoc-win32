@@ -40,26 +40,25 @@ unit UCobadoSession;
 interface
 
 uses
-  Classes, SSockets, SysUtils, UCobadoStream;
+  Classes, SysUtils, UCobadoRemote, UCobadoStream;
 
 type
 
-  CCobadoSession = class(TComponent)
+  CCobadoSession = class(CCobadoRemote)
   strict private
     FParams: TStrings;
   public
-    FSocket: TSocketStream;
-  public
-    constructor Create(AOwner: TComponent); override;
+    constructor Create(const AOwner: TComponent; const AStream: TStream); override;
     destructor Destroy; override;
   public
     function GetString(const AIndex: integer; const ADefault: string = ''): string;
     procedure Command(const ACmd: string);
+    procedure CommandEnd;
   end;
 
 implementation
 
-constructor CCobadoSession.Create(AOwner: TComponent);
+constructor CCobadoSession.Create(const AOwner: TComponent; const AStream: TStream);
 begin
   inherited;
   FParams := TStringList.Create;
@@ -84,15 +83,16 @@ procedure CCobadoSession.Command(const ACmd: string);
 var
   LIndex: integer;
   LSearchRec: TSearchRec;
+
 begin
   FParams.CommaText := ACmd;
   case LowerCase(GetString(0)) of
-    'dir': begin
-      FSocket.ChrOut(#13);
-      if FindFirst(GetString(1, '*.*'), faDirectory, LSearchRec) = 0 then begin
+    'ls': begin
+      ClearLineBuffer;
+      if FindFirst(GetString(1, AllFilesMask), faDirectory, LSearchRec) = 0 then begin
         try
           repeat
-            FSocket.StrOut(LSearchRec.Name + #13);
+            PrintStr(LSearchRec.Name + #13);
           until FindNext(LSearchRec) <> 0;
         finally
           FindClose(LSearchRec);
@@ -100,14 +100,21 @@ begin
       end;
     end;
     'funny': begin
+      ClearLineBuffer;
       for LIndex := 0 to 511 do begin
-        FSocket.Poke(LIndex + 1024, LIndex);
+        Poke(LIndex + 1024, LIndex);
       end;
     end;
     'cd': begin
+      ClearLineBuffer;
       SetCurrentDir(GetString(1));
     end;
   end;
+end;
+
+procedure CCobadoSession.CommandEnd;
+begin
+  SendCode(ccNothing);
 end;
 
 end.

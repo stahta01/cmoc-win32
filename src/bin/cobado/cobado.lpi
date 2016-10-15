@@ -31,7 +31,7 @@
         <FormatVersion Value="1"/>
       </local>
     </RunParams>
-    <Units Count="4">
+    <Units Count="6">
       <Unit0>
         <Filename Value="cobado.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -51,6 +51,16 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCobadoServer"/>
       </Unit3>
+      <Unit4>
+        <Filename Value="ucobadoremote.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UCobadoRemote"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="ucobadostreamhelper.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UCobadoStreamHelper"/>
+      </Unit5>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -33,52 +33,48 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 *)
 
-unit UCobadoServer;
+unit UCobadoStreamHelper;
 
 {$INCLUDE cobado.inc}
 
 interface
 
 uses
-  Classes, SSockets, SysUtils, UCobadoSession, UCobadoStream;
+  Classes;
 
 type
 
-  CCobadoServer = class(TInetServer)
-  protected
-    procedure DoConnect(ASocket: TSocketStream); override;
+  CCobadoStreamHelper = class helper for TStream
+  public
+    procedure _SendByte(const A: byte);
+    procedure _SendWord(const A: word);
+  public
+    function _RecvByte: byte;
+    function _RecvWord: word;
   end;
 
 implementation
 
-procedure CCobadoServer.DoConnect(ASocket: TSocketStream);
-var
-  LBuffer: string;
-  LChar: char;
-  LSession: CCobadoSession;
+procedure CCobadoStreamHelper._SendByte(const A: byte);
 begin
-  LSession := CCobadoSession.Create(nil, ASocket);
-  try
-    LBuffer := EmptyStr;
-    while True do begin
-      LChar := char(ASocket.ReadByte);
-      case LChar of
-        #13: begin
-          LSession.Command(LBuffer);
-          LBuffer := EmptyStr;
-        end;
-        #8: begin
-          Delete(LBuffer, Length(LBuffer), 1);
-        end else begin
-          LBuffer += LChar;
-        end;
-      end;
-      //WriteLn(LBuffer);
-      LSession.CommandEnd;
-    end;
-  finally
-    FreeAndNil(LSession);
-  end;
+  WriteByte(A);
+  ReadByte;
+end;
+
+procedure CCobadoStreamHelper._SendWord(const A: word);
+begin
+  _SendByte(A and $ff);
+  _SendByte(A shr 8);
+end;
+
+function CCobadoStreamHelper._RecvByte: byte;
+begin
+  Result := ReadByte;
+end;
+
+function CCobadoStreamHelper._RecvWord: word;
+begin
+  Result := ReadByte or (ReadByte shl 8);
 end;
 
 end.

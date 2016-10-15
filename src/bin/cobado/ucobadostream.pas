@@ -40,44 +40,39 @@ unit UCobadoStream;
 interface
 
 uses
-  SSockets;
+  Classes, UCobadoStreamHelper;
 
 type
 
-  TCobadoCode = (ccNothing, ccChrOut, ccGetMem, ccSetMem, ccPoke, ccPokeW,
+  TCobadoCode = (ccNothing, ccUninstall, ccChrOut, ccGetMem, ccSetMem, ccPoke, ccPokeW,
     ccPeek, ccPeekW, ccMemSet, ccMemCpy, ccJsrMem);
 
-
-  CCobadoStream = class helper for TSocketStream
-  public
+  CCobadoStream = class(TComponent)
+  strict private
+    FStream: TStream;
+  protected
     procedure SendByte(const A: byte);
     procedure SendCode(const A: TCobadoCode);
     procedure SendWord(const A: word);
+  protected
+    function RecvByte: byte;
+    function RecvWord: word;
   public
-    procedure ChrOut(const A: char);
-    procedure StrOut(const A: string);
-  public
-    procedure Poke(const ADst: word; const AVal: byte);
-    procedure PokeW(const ADst, AVal: word);
-  public
-    function Peek(const ASrc: word): byte;
-    function PeekW(const ASrc: word): word;
-  public
-    function GetMem(const ASrc, ASize: word): rawbytestring;
-    procedure SetMem(const ADst: word; const ASrc: rawbytestring);
-  public
-    procedure MemSet(const ADst: word; const AVal: byte; const ASize: word);
-    procedure MemCpy(const ADst, ASrc, ASize: word);
-  public
-    procedure JsrMem(const AAddr: word);
+    constructor Create(const AOwner: TComponent; const AStream: TStream);
+      virtual; reintroduce;
   end;
 
 implementation
 
+constructor CCobadoStream.Create(const AOwner: TComponent; const AStream: TStream);
+begin
+  inherited Create(AOwner);
+  FStream := AStream;
+end;
+
 procedure CCobadoStream.SendByte(const A: byte);
 begin
-  WriteByte(A);
-  ReadByte;
+  FStream._SendByte(A);
 end;
 
 procedure CCobadoStream.SendCode(const A: TCobadoCode);
@@ -87,102 +82,17 @@ end;
 
 procedure CCobadoStream.SendWord(const A: word);
 begin
-  SendByte(A and $ff);
-  SendByte(A shr 8);
+  FStream._SendWord(A);
 end;
 
-procedure CCobadoStream.ChrOut(const A: char);
+function CCobadoStream.RecvByte: byte;
 begin
-  SendCode(ccChrOut);
-  SendByte(byte(A));
+  Result := FStream._RecvByte;
 end;
 
-function CCobadoStream.GetMem(const ASrc, ASize: word): rawbytestring;
-var
-  LIndex: integer;
+function CCobadoStream.RecvWord: word;
 begin
-  SetLength(Result, ASize);
-  if ASize > 0 then begin
-    SendCode(ccGetMem);
-    SendWord(ASrc);
-    SendWord(ASize);
-    for LIndex := 1 to ASize do begin
-      Result[LIndex] := char(ReadByte);
-    end;
-  end;
-end;
-
-procedure CCobadoStream.SetMem(const ADst: word; const ASrc: rawbytestring);
-var
-  LIndex: integer;
-begin
-  if Length(ASrc) > 0 then begin
-    SendCode(ccSetMem);
-    SendWord(ADst);
-    SendWord(Length(ASrc));
-    for LIndex := 1 to Length(ASrc) do begin
-      SendByte(byte(ASrc[LIndex]));
-    end;
-  end;
-end;
-
-procedure CCobadoStream.JsrMem(const AAddr: word);
-begin
-  SendCode(ccJsrMem);
-  SendWord(AAddr);
-end;
-
-procedure CCobadoStream.Poke(const ADst: word; const AVal: byte);
-begin
-  SendCode(ccPoke);
-  SendWord(ADst);
-  SendByte(AVal);
-end;
-
-procedure CCobadoStream.PokeW(const ADst, AVal: word);
-begin
-  SendCode(ccPokeW);
-  SendWord(ADst);
-  SendWord(AVal);
-end;
-
-function CCobadoStream.Peek(const ASrc: word): byte;
-begin
-  SendCode(ccPeek);
-  SendWord(ASrc);
-  Result := ReadByte;
-end;
-
-function CCobadoStream.PeekW(const ASrc: word): word;
-begin
-  SendCode(ccPeekW);
-  SendWord(ASrc);
-  Result := ReadWord;
-end;
-
-procedure CCobadoStream.MemSet(const ADst: word; const AVal: byte; const ASize: word);
-begin
-  SendCode(ccMemSet);
-  SendWord(ADst);
-  SendByte(AVal);
-  SendWord(ASize);
-end;
-
-procedure CCobadoStream.MemCpy(const ADst, ASrc, ASize: word);
-begin
-  SendCode(ccMemCpy);
-  SendWord(ADst);
-  SendWord(ASrc);
-  SendWord(ASize);
-end;
-
-procedure CCobadoStream.StrOut(const A: string);
-var
-  LIndex: integer;
-begin
-  for LIndex := 1 to Length(A) do begin
-    ChrOut(A[LIndex]);
-  end;
+  Result := FStream._RecvWord;
 end;
 
 end.

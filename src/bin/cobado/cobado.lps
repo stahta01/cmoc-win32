@@ -4,14 +4,14 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="10">
+    <Units Count="13">
       <Unit0>
         <Filename Value="cobado.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="8"/>
-        <CursorPos Y="35"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="45"/>
+        <CursorPos X="18" Y="54"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -19,33 +19,33 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCobadoStream"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="8"/>
-        <CursorPos Y="35"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="33"/>
+        <CursorPos X="41" Y="41"/>
+        <UsageCount Value="25"/>
       </Unit1>
       <Unit2>
         <Filename Value="ucobadosession.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCobadoSession"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="8"/>
-        <CursorPos Y="35"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="39"/>
+        <CursorPos X="51" Y="43"/>
+        <UsageCount Value="25"/>
       </Unit2>
       <Unit3>
         <Filename Value="ucobadoserver.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCobadoServer"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="8"/>
-        <CursorPos Y="35"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="59"/>
+        <CursorPos X="32" Y="72"/>
+        <UsageCount Value="25"/>
       </Unit3>
       <Unit4>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\fcl-net\src\ssockets.pp"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="126"/>
-        <CursorPos X="50" Y="131"/>
+        <TopLine Value="63"/>
+        <CursorPos X="30" Y="75"/>
         <UsageCount Value="10"/>
       </Unit4>
       <Unit5>
@@ -82,84 +82,32 @@
         <EditorIndex Value="-1"/>
         <UsageCount Value="10"/>
       </Unit9>
+      <Unit10>
+        <Filename Value="ucobadoremote.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UCobadoRemote"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="20"/>
+        <CursorPos X="17" Y="168"/>
+        <UsageCount Value="23"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\classes\classesh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="826"/>
+        <CursorPos X="10" Y="840"/>
+        <UsageCount Value="10"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="ucobadostreamhelper.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UCobadoStreamHelper"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="54"/>
+        <CursorPos X="5" Y="62"/>
+        <UsageCount Value="22"/>
+      </Unit12>
     </Units>
-    <JumpHistory Count="19" HistoryIndex="18">
-      <Position1>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="22" Column="18" TopLine="19"/>
-      </Position1>
-      <Position2>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="30" Column="38" TopLine="15"/>
-      </Position2>
-      <Position3>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="49" Column="31" TopLine="35"/>
-      </Position3>
-      <Position4>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="30" Column="7" TopLine="12"/>
-      </Position4>
-      <Position5>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="61" Column="42" TopLine="42"/>
-      </Position5>
-      <Position6>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="51" Column="91" TopLine="44"/>
-      </Position6>
-      <Position7>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="84" Column="21" TopLine="65"/>
-      </Position7>
-      <Position8>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="46" Column="78" TopLine="32"/>
-      </Position8>
-      <Position9>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="55" Column="30" TopLine="46"/>
-      </Position9>
-      <Position10>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="84" Column="7" TopLine="58"/>
-      </Position10>
-      <Position11>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="70" Column="27" TopLine="60"/>
-      </Position11>
-      <Position12>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="62" Column="23" TopLine="47"/>
-      </Position12>
-      <Position13>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="69" Column="6" TopLine="42"/>
-      </Position13>
-      <Position14>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="77" Column="16" TopLine="63"/>
-      </Position14>
-      <Position15>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="128" Column="26" TopLine="110"/>
-      </Position15>
-      <Position16>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="85" Column="52" TopLine="72"/>
-      </Position16>
-      <Position17>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="17" TopLine="11"/>
-      </Position17>
-      <Position18>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="19" Column="17" TopLine="10"/>
-      </Position18>
-      <Position19>
-        <Filename Value="cobado.lpr"/>
-        <Caret Line="10" Column="12"/>
-      </Position19>
-    </JumpHistory>
+    <JumpHistory HistoryIndex="-1"/>
   </ProjectSession>
 </CONFIG>
