@@ -48,14 +48,21 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 
 #define BECKY_MAGIC             0
 #define BECKY_TITLE             1
-#define BECKY_REQUEST           2
-#define BECKY_RESPONSE          3
+#define BECKY_ERROR             2
 
-#define BECKY_IMAGE_WIDTH       10
-#define BECKY_IMAGE_HEIGHT      11
-#define BECKY_IMAGE_LOAD        12
-#define BECKY_IMAGE_RESAMPLE    13
-#define BECKY_IMAGE_SAVE_RAW    15
+#define BECKY_HTTP              10
+#define BECKY_READ              11
+#define BECKY_WRITE             12
+#define BECKY_REWIND            13
+#define BECKY_REWRITE           14
+#define BECKY_LOAD              15
+#define BECKY_SAVE              16
+
+#define BECKY_IMAGE_WIDTH       20
+#define BECKY_IMAGE_HEIGHT      21
+#define BECKY_IMAGE_LOAD        22
+#define BECKY_IMAGE_RESAMPLE    23
+#define BECKY_IMAGE_SAVE_RAW    25
 
 bool becky_data_wait(word wait);
 bool becky_data_ready(void);

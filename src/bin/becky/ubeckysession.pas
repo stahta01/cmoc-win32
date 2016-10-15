@@ -40,20 +40,23 @@ unit UBeckySession;
 interface
 
 uses
-  Classes, FPImage, Graphics, GraphType, IntfGraphics, SysUtils, UCmocImage;
+  Classes, FpHttpClient, FPImage, Graphics, GraphType, IntfGraphics, SysUtils, UCmocImage;
 
 type
 
-  CBeckySession = class
+  CBeckySession = class(TComponent)
   public
-    FResponse, FRequest: TMemoryStream;
+    FStream: TMemoryStream;
     FImage: TLazIntfImage;
     FPalette: TFPPalette;
+    FHttp: TFPHTTPClient;
   public
-    constructor Create;
+    constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
   public
     procedure SetResponse(const A: rawbytestring);
+  public
+    procedure Http(const AHttp: string);
   public
     procedure ImageLoad;
     procedure ImageSaveBmp;
@@ -63,11 +66,11 @@ type
 
 implementation
 
-constructor CBeckySession.Create;
+constructor CBeckySession.Create(AOwner: TComponent);
 begin
-  inherited;
-  FResponse := TMemoryStream.Create;
-  FRequest := TMemoryStream.Create;
+  inherited Create(AOwner);
+  FHttp := TFPHTTPClient.Create(Self);
+  FStream := TMemoryStream.Create;
   FImage := TLazIntfImage.Create(0, 0, [riqfRGB]);
   FPalette := OImage.CreatePalette(1);
 end;
@@ -76,36 +79,69 @@ destructor CBeckySession.Destroy;
 begin
   FreeAndNil(FPalette);
   FreeAndNil(FImage);
-  FreeAndNil(FRequest);
-  FreeAndNil(FResponse);
+  FreeAndNil(FStream);
   inherited;
 end;
 
 procedure CBeckySession.SetResponse(const A: rawbytestring);
 begin
-  FResponse.Clear;
-  FResponse.WriteBuffer(A[1], Length(A));
-  FResponse.Position := 0;
+  FStream.Clear;
+  FStream.WriteBuffer(A[1], Length(A));
+  FStream.Position := 0;
+end;
+
+procedure CBeckySession.Http(const AHttp: string);
+var
+  LPos: integer;
+  LMethod, LUrl: string;
+begin
+  LPos := Pos(#32, AHttp);
+  LMethod := UpperCase(Trim(Copy(AHttp, 1, LPos - 1)));
+  LUrl := Trim(Copy(AHttp, LPos + 1, MaxInt));
+  WriteLn('Requesting ', AHttp);
+  case LMethod of
+    'GET': begin
+      FStream.Clear;
+      FHttp.Get(LUrl, FStream);
+    end;
+    'POST', 'PUT': begin
+      FHttp.RequestBody := TMemoryStream.Create;
+      try
+        FStream.Position := 0;
+        FHttp.RequestBody.CopyFrom(FStream, 0);
+        FHttp.RequestBody.Position := 0;
+        FStream.Clear;
+        if LMethod = 'POST' then begin
+          FHttp.Post(LUrl, FStream);
+        end else begin
+          FHttp.Put(LUrl, FStream);
+        end;
+      finally
+        FHttp.RequestBody.Free;
+        FHttp.RequestBody := nil;
+      end;
+    end else begin
+      raise Exception.Create('UNKNOWN HTTP METHOD');
+    end;
+  end;
+  FStream.Position := 0;
 end;
 
 procedure CBeckySession.ImageLoad;
 begin
-  FResponse.Position := 0;
+  FStream.Position := 0;
   FImage.SetSize(0, 0);
-  try
-    FImage.LoadFromStream(FResponse);
-  except
-  end;
+  FImage.LoadFromStream(FStream);
 end;
 
 procedure CBeckySession.ImageSaveBmp;
 begin
-  FResponse.Clear;
+  FStream.Clear;
   try
-    //FImage.SaveToStream(FResponse);     // TODO, Maybe
+    //FImage.SaveToStream(FStream);     // TODO, Maybe
   except
   end;
-  FResponse.Position := 0;
+  FStream.Position := 0;
 end;
 
 procedure CBeckySession.ImageSaveRaw;
@@ -130,4 +166,3 @@ begin
 end;
 
 end.
-

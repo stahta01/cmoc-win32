@@ -9,9 +9,9 @@
         <Filename Value="becky.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="47"/>
-        <CursorPos X="76" Y="57"/>
-        <UsageCount Value="45"/>
+        <TopLine Value="50"/>
+        <CursorPos X="17" Y="55"/>
+        <UsageCount Value="47"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -19,28 +19,27 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UBeckyStream"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="39"/>
-        <CursorPos X="22" Y="52"/>
-        <UsageCount Value="34"/>
+        <TopLine Value="94"/>
+        <CursorPos X="5" Y="106"/>
+        <UsageCount Value="36"/>
       </Unit1>
       <Unit2>
         <Filename Value="ubeckyserver.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UBeckyServer"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="34"/>
-        <CursorPos X="13" Y="47"/>
-        <UsageCount Value="34"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="96"/>
+        <CursorPos X="15" Y="105"/>
+        <UsageCount Value="36"/>
       </Unit2>
       <Unit3>
         <Filename Value="ubeckysession.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UBeckySession"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="106"/>
-        <CursorPos X="3" Y="113"/>
-        <UsageCount Value="29"/>
+        <TopLine Value="101"/>
+        <CursorPos X="44" Y="124"/>
+        <UsageCount Value="31"/>
       </Unit3>
       <Unit4>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\fcl-net\src\ssockets.pp"/>
@@ -52,23 +51,23 @@
       <Unit5>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\classes\classesh.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="867"/>
-        <CursorPos X="20" Y="878"/>
+        <TopLine Value="848"/>
+        <CursorPos X="20" Y="862"/>
         <UsageCount Value="12"/>
       </Unit5>
       <Unit6>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\fcl-web\src\base\fphttpclient.pp"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="509"/>
-        <CursorPos X="37" Y="520"/>
+        <TopLine Value="153"/>
+        <CursorPos X="41" Y="174"/>
         <UsageCount Value="10"/>
       </Unit6>
       <Unit7>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\classes\streams.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="481"/>
-        <CursorPos X="8" Y="484"/>
-        <UsageCount Value="9"/>
+        <TopLine Value="215"/>
+        <CursorPos X="16" Y="226"/>
+        <UsageCount Value="10"/>
       </Unit7>
       <Unit8>
         <Filename Value="..\shared\cmoc.inc"/>
@@ -122,35 +121,11 @@
         <UsageCount Value="11"/>
       </Unit14>
     </Units>
-    <JumpHistory Count="7" HistoryIndex="6">
+    <JumpHistory Count="1">
       <Position1>
         <Filename Value="becky.lpr"/>
-        <Caret Line="55" Column="18" TopLine="47"/>
+        <Caret Line="55" Column="17" TopLine="50"/>
       </Position1>
-      <Position2>
-        <Filename Value="ubeckyserver.pas"/>
-        <Caret Line="161" Column="25" TopLine="143"/>
-      </Position2>
-      <Position3>
-        <Filename Value="ubeckyserver.pas"/>
-        <Caret Line="170" Column="26" TopLine="154"/>
-      </Position3>
-      <Position4>
-        <Filename Value="ubeckyserver.pas"/>
-        <Caret Line="129" Column="33" TopLine="122"/>
-      </Position4>
-      <Position5>
-        <Filename Value="ubeckyserver.pas"/>
-        <Caret Line="131" Column="17" TopLine="115"/>
-      </Position5>
-      <Position6>
-        <Filename Value="ubeckyserver.pas"/>
-        <Caret Line="51" Column="14" TopLine="45"/>
-      </Position6>
-      <Position7>
-        <Filename Value="ubeckyserver.pas"/>
-        <Caret Line="132" Column="31" TopLine="121"/>
-      </Position7>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

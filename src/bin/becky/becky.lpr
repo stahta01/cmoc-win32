@@ -63,9 +63,6 @@ uses
             WriteLn('Waiting for requests');
             StartAccepting;
           except
-            on E: Exception do begin
-              WriteLn(E.Message);
-            end;
           end;
           WriteLn('Disconnected');
         end;

@@ -18,12 +18,19 @@
 
 void test_html(void)
 {
-    if (becky_send_str(BECKY_REQUEST, "GET http://cs.unc.edu/~yakowenk/coco/text/extendedbasic.html")) {
+    if (becky_send_str(BECKY_HTTP, "GET http://cs.unc.edu/~yakowenk/coco/text/extendedbasic.html")) {
         if (becky_result.hi) {
-            cputs("RESPONSE IS OVER 64K\n");
+            if (becky_result.lo == -1 && becky_result.hi == -1) {
+                becky_send_null(BECKY_ERROR);
+                char err[100];
+                becky_recv_str(BECKY_READ, err, 80);
+                cputs(err);
+            } else {
+                cputs("RESPONSE IS OVER 64K\n");
+            }
         } else {
             char s[100];
-            while (becky_result.lo && becky_recv_str(BECKY_RESPONSE, s, 32)) {
+            while (becky_result.lo && becky_recv_str(BECKY_READ, s, 32)) {
                 cputs(s);
             }
         }
@@ -34,13 +41,13 @@ void showimage(char* url)
 {
     char buf[100];
     stpcpy(stpcpy(buf, "GET "), url);
-    if (becky_send_str(BECKY_REQUEST, buf) && becky_send_null(BECKY_IMAGE_LOAD)) {
+    if (becky_send_str(BECKY_HTTP, buf) && becky_send_null(BECKY_IMAGE_LOAD)) {
         point_t p;
         p.x = 256;
         p.y = 192;
         if (becky_send_data(BECKY_IMAGE_RESAMPLE, (byte*)&p, sizeof(point_t))
             && becky_send_null(BECKY_IMAGE_SAVE_RAW)) {
-            becky_recv_data(BECKY_RESPONSE, (byte*)_beggrp, _endgrp - _beggrp);
+            becky_recv_data(BECKY_READ, (byte*)_beggrp, _endgrp - _beggrp);
         }
     }
 }
@@ -69,11 +76,13 @@ int main(void)
     }
     becky_send_null(BECKY_TITLE);
     char title[100];
-    becky_recv_str(BECKY_RESPONSE, title, 32);
+    becky_recv_str(BECKY_READ, title, 32);
     cputs(title);
     cputs("\nPRESS ANY KEY\n");
     getch();
-    test_image();
+    test_html();
+
+    //test_image();
 
     //test_html();
     return 0;

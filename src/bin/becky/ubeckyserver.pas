@@ -40,7 +40,7 @@ unit UBeckyServer;
 interface
 
 uses
-  Classes, FpHttpClient, FPImage, Graphics, IntfGraphics, Math, SSockets, SysUtils,
+  Classes, FPImage, Graphics, IntfGraphics, Math, SSockets, SysUtils,
   UBeckySession, UBeckyStream, UCmocRbs;
 
 var
@@ -50,133 +50,127 @@ const
 
   BECKY_MAGIC = 0;
   BECKY_TITLE = 1;
-  BECKY_HTTP = 2;
-  BECKY_RESPONSE = 3;
-  BECKY_FLUSH_SOCKET = 4;
-  BECKY_FLUSH_RESPONSE = 5;
-  BECKY_FLUSH_REQUEST = 6;
+  BECKY_ERROR = 2;
 
-  BECKY_IMAGE_WIDTH = 10;
-  BECKY_IMAGE_HEIGHT = 11;
-  BECKY_IMAGE_LOAD = 12;
-  BECKY_IMAGE_RESAMPLE = 13;
-  BECKY_IMAGE_SAVE_BMP = 14;
-  BECKY_IMAGE_SAVE_RAW = 15;
+  BECKY_HTTP = 10;
+  BECKY_READ = 11;
+  BECKY_WRITE = 12;
+  BECKY_REWIND = 13;
+  BECKY_REWRITE = 14;
+  BECKY_LOAD = 15;
+  BECKY_SAVE = 16;
+
+  BECKY_IMAGE_WIDTH = 20;
+  BECKY_IMAGE_HEIGHT = 21;
+  BECKY_IMAGE_LOAD = 22;
+  BECKY_IMAGE_RESAMPLE = 23;
+  BECKY_IMAGE_SAVE_BMP = 24;
+  BECKY_IMAGE_SAVE_RAW = 25;
 
 type
 
   CBeckyServer = class(TINetServer)
-  strict private
-    procedure HandleRequest(const AMessage: string; const AResponse: TMemoryStream);
   protected
     procedure DoConnect(ASocket: TSocketStream); override;
   end;
 
 implementation
 
-procedure CBeckyServer.HandleRequest(const AMessage: string; const AResponse: TMemoryStream);
-var
-  LPos: integer;
-  LName, LValue: string;
-begin
-  LPos := Pos(#32, AMessage);
-  if LPos > 0 then begin
-    LName := Trim(Copy(AMessage, 1, LPos - 1));
-    LValue := Trim(Copy(AMessage, LPos + 1, MaxInt));
-    with TFPHTTPClient.Create(nil) do begin
-      try
-        WriteLn('Requesting ', AMessage);
-        AResponse.Clear;
-        try
-          HTTPMethod(LName, LValue, AResponse, [200]);
-        except
-          on E: Exception do begin
-            WriteLn(E.Message);
-          end;
-        end;
-      finally
-        Free;
-      end;
-    end;
-  end;
-  AResponse.Position := 0;
-end;
-
 procedure CBeckyServer.DoConnect(ASocket: TSocketStream);
 
 var
   LSession: CBeckySession;
   LType, LSize: word;
+  LError: string;
   LData: rawbytestring;
 
   procedure LSetResponse(const A: rawbytestring);
   begin
     LSession.SetResponse(A);
-    ASocket.SendDWord(LSession.FResponse.Size);
+    ASocket.SendDWord(LSession.FStream.Size);
   end;
 
 begin
+  LError := EmptyStr;
   WriteLn('Connected');
-  LSession := CBeckySession.Create;
+  LSession := CBeckySession.Create(nil);
   try
     ASocket.Size := 0;
     while True do begin
       LType := ASocket.RecvWord;
       LData := ASocket.RecvData;
       //WriteLn('REQUEST');
-      case LType of
-        BECKY_MAGIC: begin
-          ASocket.SendDWord(1234);
+      try
+        case LType of
+          BECKY_MAGIC: begin
+            ASocket.SendDWord(1234);
+          end;
+          BECKY_TITLE: begin
+            LSetResponse(BeckyTitle);
+          end;
+          BECKY_ERROR: begin
+            LSetResponse(LError);
+          end;
+          BECKY_HTTP: begin
+            LSession.Http(LData);
+            ASocket.SendDWord(LSession.FStream.Size);
+          end;
+          BECKY_READ: begin
+            LSize := Min(RbsWord(LData, 0), LSession.FStream.Size - LSession.FStream.Position);
+            ASocket.SendDWord(LSize);
+            ASocket.SendStream(LSession.FStream, LSize);
+          end;
+          BECKY_WRITE: begin
+            LSession.FStream.WriteBuffer(LData[1], Length(LData));
+            ASocket.SendDWord(LSession.FStream.Size);
+          end;
+          BECKY_REWIND: begin
+            LSession.FStream.Position := 0;
+            ASocket.SendDWord(LSession.FStream.Size);
+          end;
+          BECKY_REWRITE: begin
+            LSession.FStream.Size := 0;
+            ASocket.SendDWord(LSession.FStream.Size);
+          end;
+          BECKY_LOAD: begin
+            LSession.FStream.LoadFromFile(LData);
+            ASocket.SendDWord(LSession.FStream.Size);
+          end;
+          BECKY_SAVE: begin
+            LSession.FStream.SaveToFile(LData);
+            ASocket.SendDWord(LSession.FStream.Size);
+          end;
+          BECKY_IMAGE_WIDTH: begin
+            ASocket.SendDWord(LSession.FImage.Width);
+          end;
+          BECKY_IMAGE_HEIGHT: begin
+            ASocket.SendDWord(LSession.FImage.Height);
+          end;
+          BECKY_IMAGE_LOAD: begin
+            LSession.ImageLoad;
+            ASocket.SendWord(LSession.FImage.Width);
+            ASocket.SendWord(LSession.FImage.Height);
+          end;
+          BECKY_IMAGE_SAVE_BMP: begin
+            LSession.ImageSaveBmp;
+            ASocket.SendDWord(LSession.FStream.Size);
+          end;
+          BECKY_IMAGE_SAVE_RAW: begin
+            LSession.ImageSaveRaw;
+            ASocket.SendDWord(LSession.FStream.Size);
+          end;
+          BECKY_IMAGE_RESAMPLE: begin
+            LSession.ImageResample(RbsWord(LData, 0), RbsWord(LData, 2));
+            ASocket.SendWord(LSession.FImage.Width);
+            ASocket.SendWord(LSession.FImage.Height);
+          end else begin
+            raise Exception.Create('UNKNOWN TYPE');
+          end;
         end;
-        BECKY_TITLE: begin
-          LSetResponse(BeckyTitle);
-        end;
-        BECKY_FLUSH_SOCKET: begin
-          ASocket.Size := 0;
-          ASocket.SendDWord(0);
-        end;
-        BECKY_FLUSH_RESPONSE: begin
-          LSession.FResponse.Size := 0;
-          ASocket.SendDWord(LSession.FResponse.Size);
-        end;
-        BECKY_FLUSH_REQUEST: begin
-          LSession.FRequest.Size := 0;
-          ASocket.SendDWord(LSession.FResponse.Size);
-        end;
-        BECKY_HTTP: begin
-          HandleRequest(LData, LSession.FResponse);
-          ASocket.SendDWord(LSession.FResponse.Size);
-        end;
-        BECKY_RESPONSE: begin
-          LSize := Min(RbsWord(LData, 0), LSession.FResponse.Size - LSession.FResponse.Position);
-          ASocket.SendDWord(LSize);
-          ASocket.SendStream(LSession.FResponse, LSize);
-        end;
-        BECKY_IMAGE_WIDTH: begin
-          ASocket.SendDWord(LSession.FImage.Width);
-        end;
-        BECKY_IMAGE_HEIGHT: begin
-          ASocket.SendDWord(LSession.FImage.Height);
-        end;
-        BECKY_IMAGE_LOAD: begin
-          LSession.ImageLoad;
-          ASocket.SendWord(LSession.FImage.Width);
-          ASocket.SendWord(LSession.FImage.Height);
-        end;
-        BECKY_IMAGE_SAVE_BMP: begin
-          LSession.ImageSaveBmp;
-          ASocket.SendDWord(LSession.FResponse.Size);
-        end;
-        BECKY_IMAGE_SAVE_RAW: begin
-          LSession.ImageSaveRaw;
-          ASocket.SendDWord(LSession.FResponse.Size);
-        end;
-        BECKY_IMAGE_RESAMPLE: begin
-          LSession.ImageResample(RbsWord(LData, 0), RbsWord(LData, 2));
-          ASocket.SendWord(LSession.FImage.Width);
-          ASocket.SendWord(LSession.FImage.Height);
-        end else begin
-          ASocket.SendDWord(0);
+      except
+        on LException: Exception do begin
+          LError := LException.Message;
+          ASocket.SendDWord(DWord(-1));
         end;
       end;
     end;
