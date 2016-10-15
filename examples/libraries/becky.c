@@ -12,13 +12,11 @@
 #include <point.h>
 #include <long.h>
 
-#pragma options -machine=cocous -cart=becker
-
 // TODO: Simple HTML reader
 
 void test_html(void)
 {
-    if (becky_send_str(BECKY_HTTP, "GaET http://cs.unc.edu/~yakowenk/coco/text/extendedbasic.html")) {
+    if (becky_send_str(BECKY_HTTP, "GET http://cs.unc.edu/~yakowenk/coco/text/extendedbasic.html")) {
         if (becky_result.hi) {
             cputs("RESPONSE IS OVER 64K\n");
         } else {
@@ -66,7 +64,7 @@ void test_image(void)
 
 int main(void)
 {
-    cputs("WAIT FOR XROAR TO CONNECT\n");
+    cputs("WAIT FOR CONNECTION ...\n");
     sleep(1);
 
     if (!becky_send_null(BECKY_MAGIC) || becky_result.lo != 1234) {
@@ -78,9 +76,9 @@ int main(void)
     cputs(title);
     cputs("\nPRESS ANY KEY\n");
     getch();
-    test_html();
+    //test_html();
 
-    //test_image();
+    test_image();
     return 0;
 }
 

@@ -67,13 +67,11 @@ Source: "dsk\disk2.dsk"; DestDir: "{app}\dsk"; Flags: ignoreversion
 Source: "examples\*.c"; DestDir: "{app}\examples"; Flags: ignoreversion recursesubdirs
 
 Source: "vcc\Vcc.exe"; DestDir: "{app}\vcc"; Flags: ignoreversion
-Source: "vcc\Welcome to Vcc.pdf"; DestDir: "{app}\vcc"; Flags: ignoreversion
-Source: "vcc\Vcc.ini"; DestDir: "{app}\vcc"; Flags: ignoreversion
-Source: "vcc\orch90.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
-Source: "vcc\mpi.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
-Source: "vcc\IDE.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
-Source: "vcc\harddisk.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
-Source: "vcc\fd502.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\*.txt"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\*.pdf"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\*.ini"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\*.dll"; DestDir: "{app}\vcc"; Flags: ignoreversion
+Source: "vcc\*.rom"; DestDir: "{app}\vcc"; Flags: ignoreversion
 
 Source: "xroar\xroar.exe"; DestDir: "{app}\xroar"; Flags: ignoreversion
 Source: "xroar\coco.bat"; DestDir: "{app}\xroar"; Flags: ignoreversion
