@@ -21,8 +21,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="693"/>
-        <CursorPos X="40" Y="694"/>
+        <TopLine Value="687"/>
+        <CursorPos X="58" Y="696"/>
         <UsageCount Value="100"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -761,12 +761,12 @@
         <Filename Value="..\shared\ucmocxroar.pas"/>
         <UnitName Value="UCmocXRoar"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="42"/>
-        <CursorPos X="29" Y="65"/>
+        <TopLine Value="46"/>
+        <CursorPos X="39" Y="61"/>
         <UsageCount Value="20"/>
       </Unit97>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="unitcmocide.pas"/>
         <Caret Line="615" Column="52" TopLine="604"/>
@@ -883,6 +883,10 @@
         <Filename Value="unitcmocide.pas"/>
         <Caret Line="771" Column="42" TopLine="760"/>
       </Position29>
+      <Position30>
+        <Filename Value="unitcmocide.pas"/>
+        <Caret Line="696" Column="58" TopLine="687"/>
+      </Position30>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
