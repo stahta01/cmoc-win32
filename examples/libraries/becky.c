@@ -80,11 +80,9 @@ int main(void)
     cputs(title);
     cputs("\nPRESS ANY KEY\n");
     getch();
-    test_html();
-
-    //test_image();
-
     //test_html();
+
+    test_image();
     return 0;
 }
 
