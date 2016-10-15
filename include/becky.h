@@ -41,6 +41,7 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #include <sys/long.h>
 
 #define BECKY_TIMEOUT           500
+#define BECKY_ERROR_SIZE        80
 
 #define BECKY_STAT              (*(byte*)0xff41)
 #define BECKY_BYTE              (*(byte*)0xff42)
@@ -63,6 +64,9 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define BECKY_IMAGE_LOAD        22
 #define BECKY_IMAGE_RESAMPLE    23
 #define BECKY_IMAGE_SAVE_RAW    25
+
+bool becky_error();
+bool becky_recv_str_error(char* dst);
 
 bool becky_data_wait(word wait);
 bool becky_data_ready(void);

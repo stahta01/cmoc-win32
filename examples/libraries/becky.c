@@ -18,21 +18,19 @@
 
 void test_html(void)
 {
-    if (becky_send_str(BECKY_HTTP, "GET http://cs.unc.edu/~yakowenk/coco/text/extendedbasic.html")) {
+    if (becky_send_str(BECKY_HTTP, "GaET http://cs.unc.edu/~yakowenk/coco/text/extendedbasic.html")) {
         if (becky_result.hi) {
-            if (becky_result.lo == -1 && becky_result.hi == -1) {
-                becky_send_null(BECKY_ERROR);
-                char err[100];
-                becky_recv_str(BECKY_READ, err, 80);
-                cputs(err);
-            } else {
-                cputs("RESPONSE IS OVER 64K\n");
-            }
+            cputs("RESPONSE IS OVER 64K\n");
         } else {
             char s[100];
             while (becky_result.lo && becky_recv_str(BECKY_READ, s, 32)) {
                 cputs(s);
             }
+        }
+    } else {
+        char err[BECKY_ERROR_SIZE];
+        if (becky_recv_str_error(err)) {
+            cputs(err);
         }
     }
 }
@@ -80,9 +78,9 @@ int main(void)
     cputs(title);
     cputs("\nPRESS ANY KEY\n");
     getch();
-    //test_html();
+    test_html();
 
-    test_image();
+    //test_image();
     return 0;
 }
 
