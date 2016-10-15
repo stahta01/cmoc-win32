@@ -39,9 +39,7 @@ void showimage(char* url)
     stpcpy(stpcpy(buf, "GET "), url);
     if (becky_send_str(BECKY_HTTP, buf) && becky_send_null(BECKY_IMAGE_LOAD)) {
         point_t p;
-        p.x = 256;
-        p.y = 192;
-        if (becky_send_data(BECKY_IMAGE_RESAMPLE, (byte*)&p, sizeof(point_t))
+        if (becky_send_data(BECKY_IMAGE_RESAMPLE, (byte*)point_init(&p, 256, 192), sizeof(point_t))
             && becky_send_null(BECKY_IMAGE_SAVE_RAW)) {
             becky_recv_data(BECKY_READ, (byte*)_beggrp, _endgrp - _beggrp);
         }
@@ -67,7 +65,7 @@ int main(void)
     cputs("WAIT FOR CONNECTION ...\n");
     sleep(1);
 
-    if (!becky_send_null(BECKY_MAGIC) || becky_result.lo != 1234) {
+    if (!becky_send_null(BECKY_MAGIC) || becky_result.lo != 0xC0C0) {
         exit("BECKY NOT AVALIABLE");
     }
     becky_send_null(BECKY_TITLE);

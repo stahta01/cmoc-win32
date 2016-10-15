@@ -52,11 +52,11 @@ uses
 
   procedure Main;
   begin
-    with CBeckyServer.Create('127.0.0.1', 65504) do begin
+    with CBeckyServer.Create('127.0.0.1', $C0C0) do begin
       try
         WriteLn(BeckyTitle + ' - A Simple Becker Port Server for WinCMOC');
         WriteLn;
-        WriteLn('Binding to ', Host, ':', Port);
+        WriteLn('Binding to ', Host, ':$', IntToHex(Port, 4));
         Bind;
         while True do begin
           try

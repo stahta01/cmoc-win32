@@ -10,7 +10,7 @@
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="50"/>
-        <CursorPos X="17" Y="55"/>
+        <CursorPos X="18" Y="55"/>
         <UsageCount Value="47"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -28,8 +28,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UBeckyServer"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="96"/>
-        <CursorPos X="15" Y="105"/>
+        <TopLine Value="87"/>
+        <CursorPos X="29" Y="105"/>
         <UsageCount Value="36"/>
       </Unit2>
       <Unit3>
@@ -124,7 +124,7 @@
     <JumpHistory Count="1">
       <Position1>
         <Filename Value="becky.lpr"/>
-        <Caret Line="55" Column="17" TopLine="50"/>
+        <Caret Line="55" Column="18" TopLine="50"/>
       </Position1>
     </JumpHistory>
   </ProjectSession>

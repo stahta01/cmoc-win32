@@ -103,7 +103,8 @@ begin
       try
         case LType of
           BECKY_MAGIC: begin
-            ASocket.SendDWord(1234);
+            ASocket.SendWord($B0B0);
+            ASocket.SendWord($C0C0);
           end;
           BECKY_TITLE: begin
             LSetResponse(BeckyTitle);

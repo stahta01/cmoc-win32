@@ -37,9 +37,14 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _RECT_H
 #define _RECT_H
 
-typedef struct rect_t {
+typedef struct {
     int x1, y1, x2, y2;
 } rect_t;
+
+rect_t* rect_init(rect_t* rect, int x1, int y1, int x2, int y2);
+
+int rect_width(rect_t* rect);
+int rect_height(rect_t* rect);
 
 #endif
 

@@ -37,9 +37,11 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _POINT_H
 #define _POINT_H
 
-typedef struct point_t {
+typedef struct {
     int x, y;
 } point_t;
+
+point_t* point_init(point_t* point, int x, int y);
 
 #endif
 
