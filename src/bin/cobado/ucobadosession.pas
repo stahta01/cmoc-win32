@@ -48,17 +48,21 @@ type
   strict private
     FTextIndex: integer;
     FParams, FText: TStrings;
+    FBinary: TMemoryStream;
   strict private
     procedure Command_LS;
     procedure Command_CD;
     procedure Command_SAVE;
+    procedure Command_LOAD;
     procedure Command_MORE;
     procedure Command_MORE2;
   public
     constructor Create(const AOwner: TComponent; const AStream: TStream); override;
     destructor Destroy; override;
   public
-    function GetString(const AIndex: integer; const ADefault: string = ''): string;
+    function GetString(const AIndex: integer): string;
+    function GetWord(const AIndex: integer): word;
+    function GetString(const AIndex: integer; const ADefault: string): string;
     procedure Command(const ACmd: string);
     procedure Command_DONE;
   end;
@@ -70,20 +74,36 @@ begin
   inherited;
   FParams := TStringList.Create;
   FText := TStringList.Create;
+  FBinary := TMemoryStream.Create;
 end;
 
 destructor CCobadoSession.Destroy;
 begin
   FreeAndNil(FParams);
+  FreeAndNil(FBinary);
   FreeAndNil(FText);
   inherited;
 end;
 
-function CCobadoSession.GetString(const AIndex: integer; const ADefault: string): string;
+function CCobadoSession.GetString(const AIndex: integer): string;
 begin
   if AIndex < FParams.Count then begin
     Result := FParams[AIndex];
   end else begin
+    raise Exception.CreateFmt('Missing parameter #%d', [AIndex]);
+  end;
+end;
+
+function CCobadoSession.GetWord(const AIndex: integer): word;
+begin
+  Result := StrToInt(GetString(AIndex));
+end;
+
+function CCobadoSession.GetString(const AIndex: integer; const ADefault: string): string;
+begin
+  try
+    Result := GetString(AIndex);
+  except
     Result := ADefault;
   end;
 end;
@@ -149,9 +169,69 @@ begin
   PrintCurrentDir;
 end;
 
-procedure CCobadoSession.Command_SAVE;
+procedure CCobadoSession.Command_LOAD;
+var
+  LFileName: TFileName;
+  LAddr: word;
+  LData: string;
 begin
   ClearLineBuffer;
+  LFileName := GetString(1);
+  FBinary.LoadFromFile(LFileName);
+  FBinary.Position := 0;
+  case LowerCase(ExtractFileExt(LFileName)) of
+    '.bin': begin
+      while True do begin
+        case FBinary.ReadByte of
+          $00: begin
+            SetLength(LData, Swap(FBinary.ReadWord));
+            LAddr := Swap(FBinary.ReadWord);
+            FBinary.ReadBuffer(LData[1], Length(LData));
+            SetMem(LAddr, LData);
+          end;
+          $ff: begin
+            FBinary.ReadWord;
+            PokeW($9d, Swap(FBinary.ReadWord));
+            Break;
+          end;
+        end;
+      end;
+    end else begin
+      raise Exception.Create('Unsupported file type');
+    end;
+  end;
+end;
+
+procedure CCobadoSession.Command_SAVE;
+var
+  LAddr, LSize, LExec: word;
+  LFileName: TFileName;
+  LData: string;
+begin
+  ClearLineBuffer;
+  LFileName := GetString(1);
+  FBinary.Clear;
+  case LowerCase(ExtractFileExt(LFileName)) of
+    '.bin': begin
+      LAddr := GetWord(2);
+      LSize := GetWord(3);
+      LExec := GetWord(4);
+      FBinary.WriteByte(0);
+      FBinary.WriteWord(Swap(LSize));
+      FBinary.WriteWord(Swap(LAddr));
+      LData := GetMem(LAddr, LSize);
+      FBinary.WriteBuffer(LData[1], Length(LData));
+      FBinary.WriteByte(255);
+      FBinary.WriteWord(0);
+      FBinary.WriteWord(LExec);
+      FBinary.SaveToFile(LFileName);
+    end;
+    '.bas': begin
+      // TODO
+    end else begin
+      raise Exception.Create('Unsupported file type');
+    end;
+  end;
 end;
 
 procedure CCobadoSession.Command(const ACmd: string);
@@ -159,30 +239,35 @@ var
   LIndex: integer;
 begin
   FParams.CommaText := ACmd;
-  try
-    case LowerCase(GetString(0)) of
-      'ls': begin
-        Command_LS;
-      end;
-      'funny': begin
-        ClearLineBuffer;
-        for LIndex := 0 to 511 do begin
-          Poke(LIndex + 1024, LIndex);
+  if FParams.Count > 0 then begin
+    try
+      case LowerCase(GetString(0)) of
+        'ls': begin
+          Command_LS;
+        end;
+        'funny': begin
+          ClearLineBuffer;
+          for LIndex := 0 to 511 do begin
+            Poke(LIndex + 1024, LIndex);
+          end;
+        end;
+        'cd': begin
+          Command_CD;
+        end;
+        'more': begin
+          Command_MORE;
+        end;
+        'load': begin
+          Command_LOAD;
+        end;
+        'save': begin
+          Command_SAVE;
         end;
       end;
-      'cd': begin
-        Command_CD;
+    except
+      on LException: Exception do begin
+        PrintString(#13 + LException.Message);
       end;
-      'more': begin
-        Command_MORE;
-      end;
-      'save': begin
-        Command_SAVE;
-      end;
-    end;
-  except
-    on LException: Exception do begin
-      PrintString(#13 + LException.Message);
     end;
   end;
 end;

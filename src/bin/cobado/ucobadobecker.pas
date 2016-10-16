@@ -33,7 +33,7 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 *)
 
-unit UCobadoStreamHelper;
+unit UCobadoBecker;
 
 {$INCLUDE cobado.inc}
 
@@ -42,39 +42,34 @@ interface
 uses
   Classes;
 
-type
+procedure BeckerSendByte(const A: TStream; const AValue: byte);
+procedure BeckerSendWord(const A: TStream; const AValue: word);
 
-  CCobadoStreamHelper = class helper for TStream
-  public
-    procedure _SendByte(const A: byte);
-    procedure _SendWord(const A: word);
-  public
-    function _RecvByte: byte;
-    function _RecvWord: word;
-  end;
+function BeckerRecvByte(const A: TStream): byte;
+function BeckerRecvWord(const A: TStream): word;
 
 implementation
 
-procedure CCobadoStreamHelper._SendByte(const A: byte);
+procedure BeckerSendByte(const A: TStream; const AValue: byte);
 begin
-  WriteByte(A);
-  ReadByte;
+  A.WriteByte(AValue);
+  A.ReadByte;
 end;
 
-procedure CCobadoStreamHelper._SendWord(const A: word);
+procedure BeckerSendWord(const A: TStream; const AValue: word);
 begin
-  _SendByte(A and $ff);
-  _SendByte(A shr 8);
+  BeckerSendByte(A, AValue and $ff);
+  BeckerSendByte(A, AValue shr 8);
 end;
 
-function CCobadoStreamHelper._RecvByte: byte;
+function BeckerRecvByte(const A: TStream): byte;
 begin
-  Result := ReadByte;
+  Result := A.ReadByte;
 end;
 
-function CCobadoStreamHelper._RecvWord: word;
+function BeckerRecvWord(const A: TStream): word;
 begin
-  Result := ReadByte or (ReadByte shl 8);
+  Result := BeckerRecvByte(A) or (BeckerRecvByte(A) shl 8);
 end;
 
 end.

@@ -57,9 +57,9 @@
         <UnitName Value="UCobadoRemote"/>
       </Unit4>
       <Unit5>
-        <Filename Value="ucobadostreamhelper.pas"/>
+        <Filename Value="ucobadobecker.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="UCobadoStreamHelper"/>
+        <UnitName Value="UCobadoBecker"/>
       </Unit5>
     </Units>
   </ProjectOptions>

@@ -47,18 +47,18 @@ type
   CCobadoRemote = class(CCobadoStream)
   public
     procedure PrintChar(const A: char);
-    procedure PrintString(const A: string);
+    procedure PrintString(A: string);
     procedure PrintColumn(const A: string);
     procedure PrintCurrentDir;
   public
-    procedure Poke(const ADst: word; const AVal: byte);
-    procedure PokeW(const ADst, AVal: word);
+    procedure Poke(const AAddr: word; const AVal: byte);
+    procedure PokeW(const AAddr, AVal: word);
   public
-    function Peek(const ASrc: word): byte;
-    function PeekW(const ASrc: word): word;
+    function Peek(const AAddr: word): byte;
+    function PeekW(const AAddr: word): word;
   public
-    function GetMem(const ASrc, ASize: word): string;
-    procedure SetMem(const ADst: word; const ASrc: string);
+    function GetMem(const AAddr, ASize: word): string;
+    procedure SetMem(const AAddr: word; const ASrc: string);
   public
     procedure JsrMem(const AAddr: word);
   public
@@ -73,14 +73,14 @@ begin
   SendByte(byte(A));
 end;
 
-function CCobadoRemote.GetMem(const ASrc, ASize: word): string;
+function CCobadoRemote.GetMem(const AAddr, ASize: word): string;
 var
   LIndex: integer;
 begin
   SetLength(Result, ASize);
   if ASize > 0 then begin
     SendCode(ccGetMem);
-    SendWord(ASrc);
+    SendWord(AAddr);
     SendWord(ASize);
     for LIndex := 1 to ASize do begin
       Result[LIndex] := char(RecvByte);
@@ -88,13 +88,13 @@ begin
   end;
 end;
 
-procedure CCobadoRemote.SetMem(const ADst: word; const ASrc: string);
+procedure CCobadoRemote.SetMem(const AAddr: word; const ASrc: string);
 var
   LIndex: integer;
 begin
   if Length(ASrc) > 0 then begin
     SendCode(ccSetMem);
-    SendWord(ADst);
+    SendWord(AAddr);
     SendWord(Length(ASrc));
     for LIndex := 1 to Length(ASrc) do begin
       SendByte(byte(ASrc[LIndex]));
@@ -108,33 +108,34 @@ begin
   SendWord(AAddr);
 end;
 
-procedure CCobadoRemote.Poke(const ADst: word; const AVal: byte);
+procedure CCobadoRemote.Poke(const AAddr: word; const AVal: byte);
 begin
-  SetMem(ADst, Chr(AVal));
+  SetMem(AAddr, Chr(AVal));
 end;
 
-procedure CCobadoRemote.PokeW(const ADst, AVal: word);
+procedure CCobadoRemote.PokeW(const AAddr, AVal: word);
 begin
-  SetMem(ADst, Chr(AVal shr 8) + Chr(AVal));
+  SetMem(AAddr, Chr(AVal shr 8) + Chr(AVal));
 end;
 
-function CCobadoRemote.Peek(const ASrc: word): byte;
+function CCobadoRemote.Peek(const AAddr: word): byte;
 begin
-  Result := byte(GetMem(ASrc, 1)[1]);
+  Result := byte(GetMem(AAddr, 1)[1]);
 end;
 
-function CCobadoRemote.PeekW(const ASrc: word): word;
+function CCobadoRemote.PeekW(const AAddr: word): word;
 var
   LString: string;
 begin
-  LString := GetMem(ASrc, 1);
+  LString := GetMem(AAddr, 1);
   Result := (word(LString[1]) shl 8) or word(LString[2]);
 end;
 
-procedure CCobadoRemote.PrintString(const A: string);
+procedure CCobadoRemote.PrintString(A: string);
 var
   LIndex: integer;
 begin
+  A := UpperCase(A);
   for LIndex := 1 to Length(A) do begin
     PrintChar(A[LIndex]);
   end;

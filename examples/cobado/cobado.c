@@ -182,7 +182,7 @@ int main(void)
     cputs("SAVING COBADO TO DISK ...\n\n");
     systemf("SAVEM \"COBADO.BIN\",%u,%u,%u", COBADO_EXEC, COBADO_EXEC + size, COBADO_EXEC);
     cputs("DONE. TO INSTALL USE:\n\n");
-    cputs("LOADM\"COBADO.BIN\":EXEC\n\nBACK TO BASIC\n");
+    cputs("LOADM\"COBADO\":EXEC\n\nBACK TO BASIC\n");
     return 0;
 }
 

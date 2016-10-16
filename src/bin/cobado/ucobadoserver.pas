@@ -40,7 +40,7 @@ unit UCobadoServer;
 interface
 
 uses
-  Classes, SSockets, SysUtils, UCobadoSession, UCobadoStream;
+  Classes, SSockets, SysUtils, UCobadoSession;
 
 type
 

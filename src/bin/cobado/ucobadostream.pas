@@ -40,7 +40,7 @@ unit UCobadoStream;
 interface
 
 uses
-  Classes, UCobadoStreamHelper;
+  Classes, UCobadoBecker;
 
 type
 
@@ -71,7 +71,7 @@ end;
 
 procedure CCobadoStream.SendByte(const A: byte);
 begin
-  FStream._SendByte(A);
+  BeckerSendByte(FStream, A);
 end;
 
 procedure CCobadoStream.SendCode(const A: TCobadoCode);
@@ -81,17 +81,17 @@ end;
 
 procedure CCobadoStream.SendWord(const A: word);
 begin
-  FStream._SendWord(A);
+  BeckerSendWord(FStream, A);
 end;
 
 function CCobadoStream.RecvByte: byte;
 begin
-  Result := FStream._RecvByte;
+  Result := BeckerRecvByte(FStream);
 end;
 
 function CCobadoStream.RecvWord: word;
 begin
-  Result := FStream._RecvWord;
+  Result := BeckerRecvWord(FStream);
 end;
 
 end.
