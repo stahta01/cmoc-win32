@@ -60,7 +60,7 @@ type
   public
     function GetString(const AIndex: integer; const ADefault: string = ''): string;
     procedure Command(const ACmd: string);
-    procedure CommandEnd;
+    procedure Command_DONE;
   end;
 
 implementation
@@ -86,6 +86,11 @@ begin
   end else begin
     Result := ADefault;
   end;
+end;
+
+procedure CCobadoSession.Command_DONE;
+begin
+  SendCode(ccDone);
 end;
 
 procedure CCobadoSession.Command_MORE2;
@@ -180,11 +185,6 @@ begin
       PrintString(#13 + LException.Message);
     end;
   end;
-end;
-
-procedure CCobadoSession.CommandEnd;
-begin
-  SendCode(ccNothing);
 end;
 
 end.

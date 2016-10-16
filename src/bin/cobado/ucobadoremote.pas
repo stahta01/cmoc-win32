@@ -60,9 +60,6 @@ type
     function GetMem(const ASrc, ASize: word): string;
     procedure SetMem(const ADst: word; const ASrc: string);
   public
-    procedure MemSet(const ADst: word; const AVal: byte; const ASize: word);
-    procedure MemCpy(const ADst, ASrc, ASize: word);
-  public
     procedure JsrMem(const AAddr: word);
   public
     procedure ClearLineBuffer;
@@ -132,22 +129,6 @@ var
 begin
   LString := GetMem(ASrc, 1);
   Result := (word(LString[1]) shl 8) or word(LString[2]);
-end;
-
-procedure CCobadoRemote.MemSet(const ADst: word; const AVal: byte; const ASize: word);
-begin
-  SendCode(ccMemSet);
-  SendWord(ADst);
-  SendByte(AVal);
-  SendWord(ASize);
-end;
-
-procedure CCobadoRemote.MemCpy(const ADst, ASrc, ASize: word);
-begin
-  SendCode(ccMemCpy);
-  SendWord(ADst);
-  SendWord(ASrc);
-  SendWord(ASize);
 end;
 
 procedure CCobadoRemote.PrintString(const A: string);

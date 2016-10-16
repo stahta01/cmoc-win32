@@ -9,29 +9,29 @@
         <Filename Value="cobado.lpr"/>
         <IsPartOfProject Value="True"/>
         <TopLine Value="45"/>
-        <CursorPos X="16" Y="54"/>
-        <UsageCount Value="27"/>
+        <CursorPos X="18" Y="54"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="ucobadostream.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCobadoStream"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="49"/>
-        <CursorPos X="71" Y="41"/>
-        <UsageCount Value="27"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="33"/>
+        <CursorPos X="27" Y="47"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="ucobadosession.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCobadoSession"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="89"/>
-        <CursorPos X="17" Y="108"/>
-        <UsageCount Value="27"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="88"/>
+        <CursorPos X="14" Y="93"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -39,9 +39,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCobadoServer"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="40"/>
-        <CursorPos X="24" Y="60"/>
-        <UsageCount Value="27"/>
+        <TopLine Value="56"/>
+        <CursorPos X="23" Y="77"/>
+        <UsageCount Value="31"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -49,9 +49,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCobadoRemote"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="145"/>
-        <CursorPos X="40" Y="167"/>
-        <UsageCount Value="25"/>
+        <TopLine Value="38"/>
+        <CursorPos X="62" Y="61"/>
+        <UsageCount Value="29"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -61,7 +61,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="54"/>
         <CursorPos X="5" Y="62"/>
-        <UsageCount Value="24"/>
+        <UsageCount Value="28"/>
       </Unit5>
       <Unit6>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\fcl-net\src\ssockets.pp"/>
@@ -119,127 +119,39 @@
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit13>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="8" HistoryIndex="7">
       <Position1>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="119" Column="27" TopLine="105"/>
+        <Filename Value="cobado.lpr"/>
+        <Caret Line="54" Column="18" TopLine="45"/>
       </Position1>
       <Position2>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="124" Column="17" TopLine="110"/>
+        <Filename Value="ucobadoserver.pas"/>
+        <Caret Line="43" Column="53" TopLine="33"/>
       </Position2>
       <Position3>
         <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="58" Column="14" TopLine="44"/>
+        <Caret Line="167" Column="40" TopLine="145"/>
       </Position3>
       <Position4>
         <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="124" Column="15" TopLine="110"/>
+        <Caret Line="135" Column="5" TopLine="132"/>
       </Position4>
       <Position5>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="58" Column="60" TopLine="44"/>
+        <Filename Value="ucobadoserver.pas"/>
+        <Caret Line="43" Column="51" TopLine="33"/>
       </Position5>
       <Position6>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="77" Column="70" TopLine="63"/>
+        <Filename Value="ucobadosession.pas"/>
+        <Caret Line="58" Column="39" TopLine="54"/>
       </Position6>
       <Position7>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="87" Column="33" TopLine="73"/>
+        <Filename Value="ucobadoserver.pas"/>
+        <Caret Line="77" Column="23" TopLine="56"/>
       </Position7>
       <Position8>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="124" Column="30" TopLine="115"/>
+        <Filename Value="ucobadosession.pas"/>
+        <Caret Line="93" Column="14" TopLine="88"/>
       </Position8>
-      <Position9>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="100" Column="40" TopLine="82"/>
-      </Position9>
-      <Position10>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="101" Column="28" TopLine="91"/>
-      </Position10>
-      <Position11>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="114" Column="8" TopLine="103"/>
-      </Position11>
-      <Position12>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="97" Column="18" TopLine="92"/>
-      </Position12>
-      <Position13>
-        <Filename Value="ucobadoserver.pas"/>
-        <Caret Line="60" Column="24" TopLine="47"/>
-      </Position13>
-      <Position14>
-        <Filename Value="ucobadosession.pas"/>
-        <Caret Line="90" Column="18" TopLine="75"/>
-      </Position14>
-      <Position15>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="59" Column="58" TopLine="49"/>
-      </Position15>
-      <Position16>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="86" Column="29" TopLine="67"/>
-      </Position16>
-      <Position17>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="87" Column="40" TopLine="79"/>
-      </Position17>
-      <Position18>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="101" Column="34" TopLine="88"/>
-      </Position18>
-      <Position19>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="115" Column="25" TopLine="100"/>
-      </Position19>
-      <Position20>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="113" Column="14" TopLine="101"/>
-      </Position20>
-      <Position21>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="119" Column="45" TopLine="105"/>
-      </Position21>
-      <Position22>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="124" Column="37" TopLine="110"/>
-      </Position22>
-      <Position23>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="129" Column="12" TopLine="115"/>
-      </Position23>
-      <Position24>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="132" Column="32" TopLine="118"/>
-      </Position24>
-      <Position25>
-        <Filename Value="ucobadosession.pas"/>
-        <Caret Line="95" Column="16" TopLine="83"/>
-      </Position25>
-      <Position26>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="163" Column="33" TopLine="139"/>
-      </Position26>
-      <Position27>
-        <Filename Value="ucobadosession.pas"/>
-        <Caret Line="109" Column="39" TopLine="99"/>
-      </Position27>
-      <Position28>
-        <Filename Value="ucobadosession.pas"/>
-        <Caret Line="131" Column="13" TopLine="110"/>
-      </Position28>
-      <Position29>
-        <Filename Value="ucobadosession.pas"/>
-        <Caret Line="164" Column="45" TopLine="145"/>
-      </Position29>
-      <Position30>
-        <Filename Value="ucobadosession.pas"/>
-        <Caret Line="90" Column="34" TopLine="81"/>
-      </Position30>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

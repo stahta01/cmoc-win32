@@ -74,7 +74,7 @@ begin
         end;
       end;
       //WriteLn(LBuffer);
-      LSession.CommandEnd;
+      LSession.Command_DONE;
     end;
   finally
     FreeAndNil(LSession);
