@@ -32,7 +32,17 @@
 #include <conio.h>
 #include <string.h>
 
-#define COBADO_EXEC 0x1d1
+// Future RS232 Notes:
+
+// L8DBC = RS232 read. A = data. Z = 0 = timeout.
+// L8E0C = RS232 write. A = data.
+
+// Store Cobado BIOS into cas buffer.
+
+#define COBADO_EXEC 0x1da
+
+#define _RVEC12     386
+#define _LINBUF     732
 
 extern byte cobado_start[1];
 extern byte cobado_end[1];
@@ -41,40 +51,43 @@ asm void cobado_install(void)
 {
     asm {
         _cobado_start:
-        leax    cobado_vector3,pcr
-        cmpx    $168
-        beq     cobado_uninstall
-        lda     $167
-        sta     vector3+0,pcr
-        ldd     $168
-        std     vector3+1,pcr
-        lda     #$7E
-        sta     $167
-        stx     $168
+        leax    cobado_vector,pcr
+        cmpx    _RVEC12+1                           // check if already installed
+        beq     cobado_uninstall                    // uninstall if we are installed
+        lda     _RVEC12+0                           // save current vector 12
+        sta     vector12+0,pcr
+        ldd     _RVEC12+1
+        std     vector12+1,pcr
+        lda     #$7E                                // install new vector 12
+        sta     _RVEC12+0
+        stx     _RVEC12+1
         rts
 
         cobado_uninstall:
-        lda     vector3+0,pcr
-        sta     $167
-        ldd     vector3+1,pcr
-        std     $168
+        lda     vector12+0,pcr                      // restore old vector 12
+        sta     _RVEC12+0
+        ldd     vector12+1,pcr
+        std     _RVEC12+1
+        cobado_rts:
         rts
 
-        vector3:
+        vector12:
         fcb     0,0,0
 
-        request_time:
-        fdb     0
-
-        cobado_vector3:
-        bsr     vector3
-        pshs    d,x,y
-        tst     $6f                                 // test devnum
-        bne     do_return                           // return if not screen
-        bsr     becker_send_a                       // send screen char
+        cobado_vector:
+        bsr     vector12                            // branch to old vector12
+        puls    x                                   // pull return address
+        jsr     ,x                                  // execute caller
+        bcs     cobado_rts                          // exit if break key hit
+        pshs    d,x,y,cc                            // push registers
+        inx                                         // x = start of line buffer
+        send_line_buffer:
+        lda     ,x+                                 // get char from line buffer
+        bsr     becker_send_a                       // send to server
+        bne     send_line_buffer                    // repeat until null
 
         command_loop:
-        bsr     becker_a
+        bsr     becker_a                            // get command from server
         beq     do_uninstall                        // #0
         deca
         beq     do_return                           // #1
@@ -86,87 +99,90 @@ asm void cobado_install(void)
         beq     do_setmem                           // #4
         deca
         beq     do_jsrmem                           // #5
-        bra     command_loop
+        bra     command_loop                        // repeat until #0 (uninstall) or #1 (return)
 
-        do_uninstall:
+        do_uninstall:                               // uninstall cobado and return
         bsr     cobado_uninstall
 
-        do_return:
-        puls    d,x,y,pc
+        do_return:                                  // return from cobado hook
+        puls    d,x,y,cc,pc
 
         do_chrout:
         bsr     becker_a                            // chr to output
-        jsr     $a30a
+        jsr     [$a002]                             // $a30a
         bra     command_loop
 
-        do_getmem:
+do_getmem:
         bsr     becker_x                            // src
         bsr     becker_y                            // count
-        addd    #0
+        addd    #0                                  // exit if count = 0
         beq     command_loop
-        do_getmem_loop:
-        lda     ,x+
-        bsr     becker_send_a
-        dey
-        bne     do_getmem_loop
+do_getmem_loop:
+        lda     ,x+                                 // get a byte
+        bsr     becker_send_a                       // send to server
+        dey                                         // decrease counter
+        bne     do_getmem_loop                      // repeat until done
         bra     command_loop
 
-        do_setmem:
+do_setmem:
         bsr     becker_x                            // dst
         bsr     becker_y                            // count
-        addd    #0
+        addd    #0                                  // exit if count = 0
         beq     command_loop
-        do_setmem_loop:
-        bsr     becker_a
-        sta     ,x+
-        dey
-        bne     do_setmem_loop
+do_setmem_loop:
+        bsr     becker_a                            // get a byte from server
+        sta     ,x+                                 //store the byte
+        dey                                         // decrease counter
+        bne     do_setmem_loop                      // repeat until done
         bra     command_loop
 
-        do_jsrmem:
-        bsr     becker_x                            // routine address
-        jsr     ,x
+do_jsrmem:
+        bsr     becker_x                            // x = routine address
+        jsr     ,x                                  // jump to rountine
         bra     command_loop
 
 becker_send_d:
-        stb     $ff42
+        stb     $ff42                               // send b (low) byte to server
 becker_send_a:
-        sta     $ff42
+        sta     $ff42                               // send a (high) byte to server
         rts
 
+request_time:
+        fdb     0                                   // request tick. used for timeouts
+
 becker_d:
-        bsr     becker_a
-        tfr     a,b
+        bsr     becker_a                            // get low byte from server
+        tfr     a,b                                 // b = low byte
 becker_a:
-        pshs    b
-        ldd     $112
-        std     request_time,pcr
-        puls    b
+        pshs    b                                   // save b
+        ldd     $112                                // get current time
+        std     request_time,pcr                    // store time
+        puls    b                                   // restore b
 becker_a_loop:
-        lda     $ff41
+        lda     $ff41                               // check beckers data status
         anda    #2
-        bne     becker_a_success
-        pshs    b
-        ldd     $112
-        subd    request_time,pcr
-        subd    #2*60
-        puls    b
-        blo     becker_a_loop
-        clra                                        // failed: uninstall
+        bne     becker_a_success                    // branch if data avaliable
+        pshs    b                                   // save b
+        ldd     $112                                // get current time
+        subd    request_time,pcr                    // subtract start time
+        subd    #2*60                               // subtract timeout (2 seconds)
+        puls    b                                   // restore b
+        blo     becker_a_loop                       // repeat until timeout or data
+        clra                                        // if timeout then uninstall
         rts
 becker_a_success:
-        lda     $ff42
-        sta     $ff42
+        lda     $ff42                               // get byte from server
+        sta     $ff42                               // echo byte to server
         rts
 
 becker_x:
-        bsr     becker_d
-        tfr     d,x
+        bsr     becker_d                            // get d (word) from server
+        tfr     d,x                                 // x = d
         rts
 
 becker_y:
-        bsr     becker_d
-        tfr     d,y
+        bsr     becker_d                            // get d (word) from server
+        tfr     d,y                                 // y = d
         rts
 _cobado_end:
     }

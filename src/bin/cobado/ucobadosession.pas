@@ -119,7 +119,7 @@ var
 begin
   LIndex := 0;
   while (FTextIndex < FText.Count) and (LIndex < 16) do begin
-    PrintString(#13 + FText[FTextIndex]);
+    PrintLn(FText[FTextIndex]);
     Inc(FTextIndex);
     Inc(LIndex);
   end;
@@ -138,7 +138,6 @@ var
   LSearchRec: TSearchRec;
 begin
   ClearLineBuffer;
-  PrintChar(#13);
   if FindFirst(GetString(1, AllFilesMask), faDirectory, LSearchRec) = 0 then begin
     try
       repeat
@@ -159,13 +158,16 @@ begin
       FindClose(LSearchRec);
     end;
   end;
+  Print(#13);
   PrintCurrentDir;
 end;
 
 procedure CCobadoSession.Command_CD;
 begin
   ClearLineBuffer;
-  SetCurrentDir(GetString(1));
+  if not SetCurrentDir(GetString(1)) then begin
+    PrintLn('Unable to find path');
+  end;
   PrintCurrentDir;
 end;
 
@@ -279,16 +281,16 @@ begin
         'more': begin
           Command_MORE;
         end;
-        'ld': begin
+        'cload': begin
           Command_LOAD;
         end;
-        'st': begin
+        'csave': begin
           Command_SAVE;
         end;
       end;
     except
       on LException: Exception do begin
-        PrintString(#13 + LException.Message);
+        PrintLn(LException.Message);
       end;
     end;
   end;

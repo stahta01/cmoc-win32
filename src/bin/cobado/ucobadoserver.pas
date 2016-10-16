@@ -59,20 +59,17 @@ var
 begin
   LSession := CCobadoSession.Create(nil, ASocket);
   try
-    LBuffer := EmptyStr;
     while True do begin
-      LChar := char(ASocket.ReadByte);
-      case LChar of
-        #13: begin
-          LSession.Command(LBuffer);
-          LBuffer := EmptyStr;
-        end;
-        #8: begin
-          Delete(LBuffer, Length(LBuffer), 1);
+      LBuffer := EmptyStr;
+      while True do begin
+        LChar := char(ASocket.ReadByte);
+        if LChar = #0 then begin
+          Break;
         end else begin
           LBuffer += LChar;
         end;
       end;
+      LSession.Command(LBuffer);
       LSession.Command_DONE;
     end;
   finally
@@ -81,4 +78,3 @@ begin
 end;
 
 end.
-

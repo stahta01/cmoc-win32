@@ -61,8 +61,9 @@ type
 
   CCobadoRemote = class(CCobadoStream)
   public
-    procedure PrintChar(const A: char);
-    procedure PrintString(A: string);
+    procedure Print(const A: char);
+    procedure Print(A: string);
+    procedure PrintLn(A: string);
     procedure PrintColumn(const A: string);
     procedure PrintCurrentDir;
   public
@@ -81,12 +82,6 @@ type
   end;
 
 implementation
-
-procedure CCobadoRemote.PrintChar(const A: char);
-begin
-  SendCode(ccChrOut);
-  SendByte(byte(A));
-end;
 
 function CCobadoRemote.GetMem(const AAddr, ASize: word): string;
 var
@@ -146,24 +141,35 @@ begin
   Result := (word(LString[1]) shl 8) or word(LString[2]);
 end;
 
-procedure CCobadoRemote.PrintString(A: string);
+procedure CCobadoRemote.Print(const A: char);
+begin
+  SendCode(ccChrOut);
+  SendByte(byte(A));
+end;
+
+procedure CCobadoRemote.Print(A: string);
 var
   LIndex: integer;
 begin
   A := UpperCase(A);
   for LIndex := 1 to Length(A) do begin
-    PrintChar(A[LIndex]);
+    Print(A[LIndex]);
   end;
+end;
+
+procedure CCobadoRemote.PrintLn(A: string);
+begin
+  Print(A + #13);
 end;
 
 procedure CCobadoRemote.PrintColumn(const A: string);
 begin
-  PrintString(PadRight(A, (Length(A) + 15) div 16 * 16));
+  Print(PadRight(A, (Length(A) + 15) div 16 * 16));
 end;
 
 procedure CCobadoRemote.PrintCurrentDir;
 begin
-  PrintString(#13 + GetCurrentDir + '>');
+  Print(GetCurrentDir + '>');
 end;
 
 procedure CCobadoRemote.ClearLineBuffer;
