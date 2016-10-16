@@ -42,6 +42,21 @@ interface
 uses
   Classes, StrUtils, SysUtils, UCobadoStream;
 
+const
+  _TEMPPT = 11;
+  _TXTTAB = 25;
+  _VARTAB = 27;
+  _ARYTAB = 29;
+  _ARYEND = 31;
+  _FRETOP = 33;
+  _STRTAB = 35;
+  _FRESPC = 37;
+  _MEMSIZ = 39;
+  _EXECJP = 157;
+  _CHARAD = 166;
+  _STRSTK = 425;
+  _LINBUF = 732;
+
 type
 
   CCobadoRemote = class(CCobadoStream)
@@ -127,7 +142,7 @@ function CCobadoRemote.PeekW(const AAddr: word): word;
 var
   LString: string;
 begin
-  LString := GetMem(AAddr, 1);
+  LString := GetMem(AAddr, 2);
   Result := (word(LString[1]) shl 8) or word(LString[2]);
 end;
 
@@ -153,7 +168,7 @@ end;
 
 procedure CCobadoRemote.ClearLineBuffer;
 begin
-  Poke(733, 0);
+  Poke(_LINBUF + 1, 0);
 end;
 
 end.

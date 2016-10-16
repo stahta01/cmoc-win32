@@ -125,7 +125,7 @@ asm void cobado_install(void)
 
         do_jsrmem:
         bsr     becker_x                            // routine address
-        jsr     [,x]
+        jsr     ,x
         bra     command_loop
 
 becker_send_d:

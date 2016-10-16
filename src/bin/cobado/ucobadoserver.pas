@@ -73,7 +73,6 @@ begin
           LBuffer += LChar;
         end;
       end;
-      //WriteLn(LBuffer);
       LSession.Command_DONE;
     end;
   finally

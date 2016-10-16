@@ -50,7 +50,7 @@ type
     FParams, FText: TStrings;
     FBinary: TMemoryStream;
   strict private
-    procedure Command_LS;
+    procedure Command_DIR;
     procedure Command_CD;
     procedure Command_SAVE;
     procedure Command_LOAD;
@@ -63,7 +63,7 @@ type
     function GetString(const AIndex: integer): string;
     function GetWord(const AIndex: integer): word;
     function GetString(const AIndex: integer; const ADefault: string): string;
-    procedure Command(const ACmd: string);
+    procedure Command(const ACommandLine: string);
     procedure Command_DONE;
   end;
 
@@ -133,7 +133,7 @@ begin
   Command_MORE2;
 end;
 
-procedure CCobadoSession.Command_LS;
+procedure CCobadoSession.Command_DIR;
 var
   LSearchRec: TSearchRec;
 begin
@@ -172,7 +172,7 @@ end;
 procedure CCobadoSession.Command_LOAD;
 var
   LFileName: TFileName;
-  LAddr: word;
+  LAddr, LSize: word;
   LData: string;
 begin
   ClearLineBuffer;
@@ -180,18 +180,34 @@ begin
   FBinary.LoadFromFile(LFileName);
   FBinary.Position := 0;
   case LowerCase(ExtractFileExt(LFileName)) of
+    '.bas': begin
+      if FBinary.ReadByte = $ff then begin
+        LSize := Swap(FBinary.ReadWord);
+        LAddr := PeekW(_TXTTAB);
+        SetLength(LData, LSize);
+        FBinary.ReadBuffer(LData[1], Length(LData));
+        SetMem(LAddr, LData);
+        PokeW(_VARTAB, LAddr + LSize);
+        PokeW(_ARYTAB, LAddr + LSize);
+        PokeW(_ARYEND, LAddr + LSize);
+        PokeW(_CHARAD, LAddr - 1);
+        PokeW(_STRTAB, PeekW(_MEMSIZ));
+        PokeW(_TEMPPT, _STRSTK);
+      end;
+    end;
     '.bin': begin
       while True do begin
         case FBinary.ReadByte of
           $00: begin
-            SetLength(LData, Swap(FBinary.ReadWord));
+            LSize := Swap(FBinary.ReadWord);
             LAddr := Swap(FBinary.ReadWord);
-            FBinary.ReadBuffer(LData[1], Length(LData));
+            SetLength(LData, LSize);
+            FBinary.ReadBuffer(LData[1], LSize);
             SetMem(LAddr, LData);
           end;
           $ff: begin
             FBinary.ReadWord;
-            PokeW($9d, Swap(FBinary.ReadWord));
+            PokeW(_EXECJP, Swap(FBinary.ReadWord));
             Break;
           end;
         end;
@@ -227,23 +243,29 @@ begin
       FBinary.SaveToFile(LFileName);
     end;
     '.bas': begin
-      // TODO
+      LAddr := PeekW(25);  // TXTTAB
+      LSize := PeekW(27) - LAddr; // VARTAB
+      FBinary.WriteByte($ff);
+      FBinary.WriteWord(Swap(LSize));
+      LData := GetMem(LAddr, LSize);
+      FBinary.WriteBuffer(LData[1], Length(LData));
+      FBinary.SaveToFile(LFileName);
     end else begin
       raise Exception.Create('Unsupported file type');
     end;
   end;
 end;
 
-procedure CCobadoSession.Command(const ACmd: string);
+procedure CCobadoSession.Command(const ACommandLine: string);
 var
   LIndex: integer;
 begin
-  FParams.CommaText := ACmd;
+  FParams.CommaText := ACommandLine;
   if FParams.Count > 0 then begin
     try
       case LowerCase(GetString(0)) of
         'ls': begin
-          Command_LS;
+          Command_DIR;
         end;
         'funny': begin
           ClearLineBuffer;
@@ -257,10 +279,10 @@ begin
         'more': begin
           Command_MORE;
         end;
-        'load': begin
+        'ld': begin
           Command_LOAD;
         end;
-        'save': begin
+        'st': begin
           Command_SAVE;
         end;
       end;
