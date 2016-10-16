@@ -177,12 +177,12 @@ int main(void)
     size_t size = cobado_end - cobado_start;
 
     clrscr();
-    cprintf("COBADO SIZE: %d BYTES\n", size);
+    cprintf("COBADO BIOS SIZE: %d BYTES\n", size);
     memcpy(COBADO_EXEC, cobado_start, size);
-    cputs("SAVING COBADO TO DISK ...\n\n");
+    cputs("SAVING COBADO BIOS TO DISK ...\n\n");
     systemf("SAVEM \"COBADO.BIN\",%u,%u,%u", COBADO_EXEC, COBADO_EXEC + size, COBADO_EXEC);
-    cputs("DONE. TO INSTALL USE:\n\n");
-    cputs("LOADM\"COBADO\":EXEC\n\nBACK TO BASIC\n");
+    cputs("DONE. TO INSTALL TYPE:\n");
+    cputs("LOADM \"COBADO\":EXEC\n\nBACK TO BASIC\n");
     return 0;
 }
 
