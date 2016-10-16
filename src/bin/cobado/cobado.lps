@@ -8,51 +8,47 @@
       <Unit0>
         <Filename Value="cobado.lpr"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="45"/>
         <CursorPos X="18" Y="54"/>
-        <UsageCount Value="31"/>
+        <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="ucobadostream.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCobadoStream"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="33"/>
         <CursorPos X="27" Y="47"/>
-        <UsageCount Value="31"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="34"/>
       </Unit1>
       <Unit2>
         <Filename Value="ucobadosession.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCobadoSession"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="88"/>
         <CursorPos X="14" Y="93"/>
-        <UsageCount Value="31"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="34"/>
       </Unit2>
       <Unit3>
         <Filename Value="ucobadoserver.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCobadoServer"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="56"/>
         <CursorPos X="23" Y="77"/>
-        <UsageCount Value="31"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="34"/>
       </Unit3>
       <Unit4>
         <Filename Value="ucobadoremote.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UCobadoRemote"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="38"/>
         <CursorPos X="62" Y="61"/>
-        <UsageCount Value="29"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="32"/>
       </Unit4>
       <Unit5>
         <Filename Value="ucobadostreamhelper.pas"/>
@@ -61,97 +57,69 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="54"/>
         <CursorPos X="5" Y="62"/>
-        <UsageCount Value="28"/>
+        <UsageCount Value="31"/>
       </Unit5>
       <Unit6>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\packages\fcl-net\src\ssockets.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="63"/>
         <CursorPos X="30" Y="75"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit6>
       <Unit7>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\inc\systemh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="422"/>
         <CursorPos X="3" Y="436"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit7>
       <Unit8>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\inc\astrings.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1352"/>
         <CursorPos X="3" Y="1356"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit8>
       <Unit9>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\sysutils\filutilh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="75"/>
         <CursorPos X="3" Y="89"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit9>
       <Unit10>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\objpas.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="21"/>
         <CursorPos X="8" Y="35"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit10>
       <Unit11>
         <Filename Value="..\..\..\..\upascal\udbgridcolumns.pas"/>
         <UnitName Value="UDBGridColumns"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit11>
       <Unit12>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\objpas\classes\classesh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="826"/>
         <CursorPos X="10" Y="840"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit12>
       <Unit13>
         <Filename Value="..\..\..\bin\cmocide\keywords.txt"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="6" Y="215"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit13>
     </Units>
-    <JumpHistory Count="8" HistoryIndex="7">
+    <JumpHistory Count="1">
       <Position1>
         <Filename Value="cobado.lpr"/>
         <Caret Line="54" Column="18" TopLine="45"/>
       </Position1>
-      <Position2>
-        <Filename Value="ucobadoserver.pas"/>
-        <Caret Line="43" Column="53" TopLine="33"/>
-      </Position2>
-      <Position3>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="167" Column="40" TopLine="145"/>
-      </Position3>
-      <Position4>
-        <Filename Value="ucobadoremote.pas"/>
-        <Caret Line="135" Column="5" TopLine="132"/>
-      </Position4>
-      <Position5>
-        <Filename Value="ucobadoserver.pas"/>
-        <Caret Line="43" Column="51" TopLine="33"/>
-      </Position5>
-      <Position6>
-        <Filename Value="ucobadosession.pas"/>
-        <Caret Line="58" Column="39" TopLine="54"/>
-      </Position6>
-      <Position7>
-        <Filename Value="ucobadoserver.pas"/>
-        <Caret Line="77" Column="23" TopLine="56"/>
-      </Position7>
-      <Position8>
-        <Filename Value="ucobadosession.pas"/>
-        <Caret Line="93" Column="14" TopLine="88"/>
-      </Position8>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
