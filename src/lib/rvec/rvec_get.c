@@ -1,8 +1,8 @@
 
 #include "_rvec.h"
 
-void rvec_get(rvec_t* rvec, int n)
+void rvec_get(rvec_t* dst, int n)
 {
-    *rvec = _rvecs[n];
+    *dst = _rvecs[n];
 }
 

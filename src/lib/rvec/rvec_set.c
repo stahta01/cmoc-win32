@@ -1,8 +1,8 @@
 
 #include "_rvec.h"
 
-void rvec_set(rvec_t* rvec, int n)
+void rvec_set(rvec_t* src, int n)
 {
-    _rvecs[n] = *rvec;
+    _rvecs[n] = *src;
 }
 

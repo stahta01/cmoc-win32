@@ -42,8 +42,10 @@ typedef struct {
     void* addr;
 } rvec_t;
 
-void rvec_get(rvec_t* rvec, int n);
-void rvec_set(rvec_t* rvec, int n);
+void rvec_set(rvec_t* src, int n);
+void rvec_get(rvec_t* dst, int n);
+
+void rvec_ins(rvec_t* dst, int n, void* addr);
 
 #define _rvecs  ((rvec_t*)350)
 
