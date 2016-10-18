@@ -81,6 +81,7 @@ type
   strict private
     FFileName: TFileName;
     procedure SetFileName(const AFileName: TFileName);
+    procedure LoadKeyWordFile(const AStrings: TStrings; const AFileName: TFileName);
   public
     function GetDisplayName: string;
     function Modified: boolean;
@@ -112,16 +113,16 @@ begin
     LineHighlightColor.Background := $E6FFFA;
     OnStatusChange := @SynEditStatusChange;
   end;
+  LoadKeyWordFile(SynAnySyn.KeyWords, 'keywords.txt');
+  LoadKeyWordFile(SynAnySyn.Constants, 'constants.txt');
+  LoadKeyWordFile(SynAnySyn.Objects, 'objects.txt');
+end;
+
+procedure TFormCmocIDESynEdit.LoadKeyWordFile(const AStrings: TStrings;
+  const AFileName: TFileName);
+begin
   try
-    SynAnySyn.KeyWords.LoadFromFile(ProgramDirectory + 'cmocide/keywords.txt');
-  except
-  end;
-  try
-    SynAnySyn.Constants.LoadFromFile(ProgramDirectory + 'cmocide/constants.txt');
-  except
-  end;
-  try
-    SynAnySyn.Objects.LoadFromFile(ProgramDirectory + 'cmocide/objects.txt');
+    AStrings.LoadFromFile(ProgramDirectory + 'cmocide/' + AFileName);
   except
   end;
 end;
@@ -137,6 +138,17 @@ begin
   FormCmocIDE.Caption := Application.Title + ' - [' + GetDisplayName + ']';
   SynEdit.Modified := False;
   SynEditStatusChange(SynEdit, scTextCleared + [scInsertMode]);
+  case LowerCase(ExtractFileExt(AFileName)) of
+    '.asm', '.as', '.a': begin
+      SynEdit.Options := SynEdit.Options - [eoShowSpecialChars, eoTabsToSpaces];
+      SynEdit.Options2 := SynEdit.Options2 + [eoCaretSkipTab];
+      SynEdit.TabWidth := 8;
+    end else begin
+      SynEdit.Options := SynEdit.Options + [eoShowSpecialChars, eoTabsToSpaces];
+      SynEdit.Options2 := SynEdit.Options2 - [eoCaretSkipTab];
+      SynEdit.TabWidth := 4;
+    end;
+  end;
 end;
 
 function TFormCmocIDESynEdit.GetDisplayName: string;

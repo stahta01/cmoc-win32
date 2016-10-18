@@ -512,8 +512,8 @@ object FormCmocIDESynEdit: TFormCmocIDESynEdit
   end
   object SynEditMenu: TPopupMenu
     Images = ImageList16
-    left = 80
-    top = 80
+    left = 88
+    top = 72
     object MenuUndo: TMenuItem
       Caption = 'Undo'
       Bitmap.Data = {
@@ -938,8 +938,8 @@ object FormCmocIDESynEdit: TFormCmocIDESynEdit
     end
   end
   object ImageList16: TImageList
-    left = 152
-    top = 16
+    left = 88
+    top = 128
     Bitmap = {
       4C690A0000001000000010000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
@@ -1287,7 +1287,7 @@ object FormCmocIDESynEdit: TFormCmocIDESynEdit
     Entity = False
     DollarVariables = False
     ActiveDot = False
-    left = 80
+    left = 88
     top = 16
   end
 end
