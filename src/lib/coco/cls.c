@@ -4,12 +4,12 @@
 // color: Argument that would be passed to BASIC's CLS command.
 //        Pass 255 to signify no argument.
 //
-void cls(byte color)
+void _cls(byte color)
 {
-    asm("PSHS", "U,Y");  // protect against BASIC routine
+    asm("PSHS", "U,Y");                             // protect against BASIC routine
     byte hrwidth;
     if (isCoCo3) {
-        hrwidth = * (byte*) 0x00E7;
+        hrwidth = *(byte*)0x00E7;
     } else {
         hrwidth = 0;
     }
@@ -30,5 +30,4 @@ void cls(byte color)
     }
     asm("PULS", "Y,U");
 }
-
 

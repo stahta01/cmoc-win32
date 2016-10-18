@@ -6,10 +6,10 @@
 // Bits 6: underline if set.
 // Bits 7: blink if set.
 //
-byte attr(byte foreColor, byte backColor, byte blink, byte underline)
+byte _attr(byte foreColor, byte backColor, byte blink, byte underline)
 {
     if (!isCoCo3) {
-        return FALSE;
+        return false;
     }
 
     asm {
@@ -29,6 +29,6 @@ byte attr(byte foreColor, byte backColor, byte blink, byte underline)
         stb     $FE08
     }
 
-    return TRUE;
+    return true;
 }
 

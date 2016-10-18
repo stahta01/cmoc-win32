@@ -37,43 +37,40 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _COCO_H
 #define _COCO_H
 
-#include <motorola/types.h>
-#include <coco/equates.h>
-
 extern byte isCoCo3;
 extern byte textScreenWidth;
 extern byte textScreenHeight;
 
-void newBasicProgram();
-void warmStart();
-void coldStart();
-void setCaseFlag(byte upperCase);
-byte inkey();
-byte waitkey(byte blinkCursor);
-void sound(byte tone, byte duration);
-void setOutputDevice(sbyte deviceNum);
-void setSAMRegisters(byte* samAddr, byte value, byte numBits);
-void showGraphicsAddress(byte pageNum);
-void showPmode4(byte colorset);
-void showLowResTextAddress();
-void showPmode0();
-void initCoCoSupport();
-void setHighSpeed(byte fast);
-byte resetPalette(byte isRGB);
-byte palette(byte slot, byte color);
-void paletteRGB(byte slot, byte red, byte green, byte blue);
-byte setBorderColor(byte color);
-byte width(byte columns);
-byte getTextMode();
-void cls(byte color);
-byte attr(byte foreColor, byte backColor, byte blink, byte underline);
-byte locate(byte column, byte row);
-byte hscreen(byte mode);
-byte hset(word x, word y, byte color);
-void pcls(byte* buffer, byte byteToClearWith);
+void _newBasicProgram(void);
+void _warmStart(void);
+void _coldStart(void);
+void _setCaseFlag(byte upperCase);
+byte _inkey(void);
+byte _waitkey(byte blinkCursor);
+void _sound(byte tone, byte duration);
+void _setOutputDevice(sbyte deviceNum);
+void _setSAMRegisters(byte* samAddr, byte value, byte numBits);
+void _showGraphicsAddress(byte pageNum);
+void _showPmode4(byte colorset);
+void _showLowResTextAddress(void);
+void _showPmode0(void);
+void _initCoCoSupport(void);
+void _setHighSpeed(byte fast);
+byte _resetPalette(byte isRGB);
+byte _palette(byte slot, byte color);
+void _paletteRGB(byte slot, byte red, byte green, byte blue);
+byte _setBorderColor(byte color);
+byte _width(byte columns);
+byte _getTextMode(void);
+void _cls(byte color);
+byte _attr(byte foreColor, byte backColor, byte blink, byte underline);
+byte _locate(byte column, byte row);
+byte _hscreen(byte mode);
+byte _hset(word x, word y, byte color);
+void _pcls(byte* buffer, byte byteToClearWith);
 
-#define setTimer(newValue) (* (word *) 0x112 = (newValue))
-#define getTimer() (* (word *) 0x112)
+#define _setTimer(newValue) (*(word*)0x112=(newValue))
+#define _getTimer()         (*(word*)0x112)
 
 #endif
 

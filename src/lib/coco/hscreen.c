@@ -1,19 +1,19 @@
 
 #include "_coco.h"
 
-byte hscreen(byte mode)
+byte _hscreen(byte mode)
 {
     if (!isCoCo3) {
-        return FALSE;
+        return false;
     }
 
     if (mode > 4) {
-        return FALSE;
+        return false;
     }
-    asm("PSHS", "U,Y");                     // protect against BASIC routine
+    asm("PSHS", "U,Y");                             // protect against BASIC routine
     asm("LDB", mode);
     asm("JSR", "$E69C");
     asm("PULS", "Y,U");
-    return TRUE;
+    return true;
 }
 

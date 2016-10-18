@@ -1,7 +1,7 @@
 
 #include "_coco.h"
 
-void setHighSpeed(byte fast)
+void _setHighSpeed(byte fast)
 {
     asm {
         ldx     #65494

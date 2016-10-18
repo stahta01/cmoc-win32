@@ -3,7 +3,7 @@
 
 // Show the text mode.
 //
-void asm showPmode0()
+asm void _showPmode0()
 {
     asm {
         ldb     $FF22
@@ -11,6 +11,4 @@ void asm showPmode0()
         stb     $FF22
     }
 }
-
-
 

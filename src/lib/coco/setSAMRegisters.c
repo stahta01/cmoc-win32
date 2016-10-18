@@ -7,7 +7,7 @@
 // numBits: Number of bits to write to samAddr. (Refers to the
 //          least significant bits of 'value'.)
 //
-void setSAMRegisters(byte* samAddr, byte value, byte numBits)
+void _setSAMRegisters(byte* samAddr, byte value, byte numBits)
 {
     while (numBits) {
         // Write at even address to send a 0, odd to send a 1.

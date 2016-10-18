@@ -1,7 +1,7 @@
 
 #include "_coco.h"
 
-byte locate(byte column, byte row)
+byte _locate(byte column, byte row)
 {
     byte hrwidth;
     if (isCoCo3) {
@@ -10,31 +10,31 @@ byte locate(byte column, byte row)
         hrwidth = 0;
     }
 
-    if (hrwidth == 0) {                     // if 32 col mode
+    if (hrwidth == 0) {                             // if 32 col mode
         if (column >= 32) {
-            return FALSE;
+            return false;
         }
         if (row >= 16) {
-            return FALSE;
+            return false;
         }
         * (word*) 0x0088 = 1024 + (((word) row) << 5) + column;
     } else {
         if (column >= 80) {
-            return FALSE;
+            return false;
         }
         if (row >= 24) {
-            return FALSE;
+            return false;
         }
-        if (hrwidth == 1)                   // if 40 col mode
+        if (hrwidth == 1)                           // if 40 col mode
             if (column >= 40) {
-                return FALSE;
+                return false;
             }
-        asm("PSHS", "U,Y");                 // protect against BASIC routine
+        asm("PSHS", "U,Y");                         // protect against BASIC routine
         asm("LDA", column);
         asm("LDB", row);
-        asm("JSR", "$F8F7");                // inside the LOCATE command
+        asm("JSR", "$F8F7");                        // inside the LOCATE command
         asm("PULS", "Y,U");
     }
-    return TRUE;
+    return true;
 }
 

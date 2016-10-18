@@ -1,8 +1,8 @@
 
 #include "_coco.h"
 
-void warmStart()
+void _warmStart()
 {
-    asm("JMP", "$A027");                    // EXEC 40999
+    asm("JMP", "$A027");                            // EXEC 40999
 }
 

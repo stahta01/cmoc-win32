@@ -3,10 +3,10 @@
 
 // Returns 32, 40 or 80.
 //
-byte getTextMode()
+byte _getTextMode(void)
 {
     if (isCoCo3) {
-        byte hrWidth = * (byte*) 0x00E7;
+        byte hrWidth = *(byte*)0x00E7;
         if (hrWidth == 1) {
             return 40;
         }

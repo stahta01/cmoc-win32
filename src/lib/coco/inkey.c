@@ -3,11 +3,11 @@
 
 // Returns 0 if no key is currently pressed.
 //
-unsigned char asm inkey()
+asm byte _inkey(void)
 {
     asm {
         jsr     [$a000]
-        tfr     a,b                         // byte return value goes in B
+        tfr     a,b                                 // byte return value goes in B
     }
 }
 
