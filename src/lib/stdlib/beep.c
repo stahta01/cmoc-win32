@@ -4,7 +4,7 @@
 void beep(int tone, int duration)
 {
     _sndton = (byte)tone;
-    _snddur = (byte)duration;
+    _snddur = (word)duration;
     system_sound();
 }
 
