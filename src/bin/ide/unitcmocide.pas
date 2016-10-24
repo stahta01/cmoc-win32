@@ -289,10 +289,9 @@ begin
       Add('#include <math.h>');
       Add('#include <ctype.h>');
       Add('#include <stdio.h>');
+      Add('#include <stdlib.h>');
       Add('#include <string.h>');
       Add('#include <conio.h>');
-      Add(EmptyStr);
-      Add('#include <basic.h>');
       Add(EmptyStr);
       Add('int main(void)');
       Add('{');

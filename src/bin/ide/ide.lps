@@ -11,7 +11,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos Y="25"/>
-        <UsageCount Value="100"/>
+        <UsageCount Value="101"/>
       </Unit0>
       <Unit1>
         <Filename Value="unitcmocide.pas"/>
@@ -21,9 +21,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDE"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="269"/>
-        <CursorPos X="31" Y="285"/>
-        <UsageCount Value="100"/>
+        <TopLine Value="296"/>
+        <CursorPos X="35" Y="308"/>
+        <UsageCount Value="101"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -33,7 +33,7 @@
         <UnitName Value="UCmocIDE"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="2"/>
-        <UsageCount Value="93"/>
+        <UsageCount Value="94"/>
       </Unit2>
       <Unit3>
         <Filename Value="unitcmocidesynedit.pas"/>
@@ -43,9 +43,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnitCmocIDESynEdit"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="129"/>
-        <CursorPos X="24" Y="142"/>
-        <UsageCount Value="91"/>
+        <TopLine Value="244"/>
+        <CursorPos X="49" Y="253"/>
+        <UsageCount Value="92"/>
       </Unit3>
       <Unit4>
         <Filename Value="..\shared\ucmocutils.pas"/>
@@ -250,9 +250,9 @@
         <Filename Value="C:\lazarus\components\synedit\syneditmiscclasses.pp"/>
         <UnitName Value="SynEditMiscClasses"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="84"/>
-        <CursorPos X="33" Y="96"/>
-        <UsageCount Value="9"/>
+        <TopLine Value="219"/>
+        <CursorPos X="37" Y="225"/>
+        <UsageCount Value="10"/>
       </Unit30>
       <Unit31>
         <Filename Value="..\..\..\LazHelpers\umemo.pas"/>
@@ -411,8 +411,8 @@
         <Filename Value="C:\lazarus\components\synedit\synhighlighterany.pas"/>
         <UnitName Value="SynHighlighterAny"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="57"/>
-        <CursorPos X="88" Y="67"/>
+        <TopLine Value="55"/>
+        <CursorPos X="65" Y="67"/>
         <UsageCount Value="10"/>
       </Unit51>
       <Unit52>

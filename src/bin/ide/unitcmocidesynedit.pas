@@ -41,7 +41,8 @@ interface
 
 uses
   Classes, Controls, Dialogs, FileUtil, Forms, Graphics, Menus, MouseAndKeyInput,
-  StrUtils, SynEdit, SynEditTypes, SynHighlighterAny, SysUtils, UCmocSynEditFindDialog;
+  StrUtils, SynEdit, SynEditMarkupSpecialLine, SynEditMiscClasses, SynEditTypes,
+  SynHighlighterAny, SysUtils, UCmocSynEditFindDialog;
 
 type
 
@@ -77,6 +78,8 @@ type
     procedure MenuReplaceClick(ASender: TObject);
     procedure MenuSelectAllClick(ASender: TObject);
     procedure MenuUndoClick(ASender: TObject);
+    procedure SynEditSpecialLineMarkup(ASender: TObject; ALine: integer;
+      var ASpecial: boolean; AMarkup: TSynSelectedColor);
     procedure SynEditStatusChange(ASender: TObject; AChanges: TSynStatusChanges);
   strict private
     FFileName: TFileName;
@@ -140,10 +143,12 @@ begin
   SynEditStatusChange(SynEdit, scTextCleared + [scInsertMode]);
   case LowerCase(ExtractFileExt(AFileName)) of
     '.asm', '.as', '.a': begin
+      SynAnySyn.Comments := SynAnySyn.Comments + [csAsmStyle];
       SynEdit.Options := SynEdit.Options - [eoShowSpecialChars, eoTabsToSpaces];
       SynEdit.Options2 := SynEdit.Options2 + [eoCaretSkipTab];
       SynEdit.TabWidth := 8;
     end else begin
+      SynAnySyn.Comments := SynAnySyn.Comments - [csAsmStyle];
       SynEdit.Options := SynEdit.Options + [eoShowSpecialChars, eoTabsToSpaces];
       SynEdit.Options2 := SynEdit.Options2 - [eoCaretSkipTab];
       SynEdit.TabWidth := 4;
@@ -241,6 +246,22 @@ end;
 procedure TFormCmocIDESynEdit.MenuUndoClick(ASender: TObject);
 begin
   SynEdit.Undo;
+end;
+
+procedure TFormCmocIDESynEdit.SynEditSpecialLineMarkup(ASender: TObject;
+  ALine: integer; var ASpecial: boolean; AMarkup: TSynSelectedColor);
+var
+  LString: string;
+begin
+  ASpecial := csAsmStyle in SynAnySyn.Comments;
+  if ASpecial then begin
+    LString := SynEdit.Lines[ALine - 1];
+    ASpecial := (Length(LString) > 0) and (LString[1] = '*');
+    if ASpecial then begin
+      AMarkup.Foreground := SynAnySyn.CommentAttri.Foreground;
+      AMarkup.Background := SynAnySyn.CommentAttri.Background;
+    end;
+  end;
 end;
 
 procedure TFormCmocIDESynEdit.MenuRedoClick(ASender: TObject);
