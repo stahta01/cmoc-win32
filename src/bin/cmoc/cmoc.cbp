@@ -51,7 +51,7 @@ Automake
 					<Add option="-m32" />
 					<Add option='-DPROGRAM=\&quot;cmoc\&quot;' />
 					<Add option='-DPACKAGE=\&quot;CMOC\&quot;' />
-					<Add option='-DVERSION=\&quot;0.1.32\&quot;' />
+					<Add option='-DVERSION=\&quot;0.1.33\&quot;' />
 					<Add option='-DPKGDATADIR=\&quot;PKGDATADIR_IS_UNDEFINED\&quot;' />
 				</Compiler>
 				<Linker>

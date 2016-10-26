@@ -5,7 +5,7 @@
 #include <string.h>
 #include <basic.h>
 
-#define SIMPLE_EFFECT(X) for (unsigned i = 0; i < 256; i++) beep(X, 0)
+#define SIMPLE_EFFECT(X) for (int i = 0; i < 256; i++) beep(X, 0)
 
 void PlayEffect(int c)
 {
