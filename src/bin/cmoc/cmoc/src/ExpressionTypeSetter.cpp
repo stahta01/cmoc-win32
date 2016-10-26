@@ -1,4 +1,4 @@
-/*  $Id: ExpressionTypeSetter.cpp,v 1.25 2016/10/11 01:23:50 sarrazip Exp $
+/*  $Id: ExpressionTypeSetter.cpp,v 1.26 2016/10/19 03:33:39 sarrazip Exp $
 
     CMOC - A C-like cross-compiler
     Copyright (C) 2003-2015 Pierre Sarrazin <http://sarrazip.com/>
@@ -55,18 +55,22 @@ ExpressionTypeSetter::~ExpressionTypeSetter()
 bool
 ExpressionTypeSetter::close(Tree *t)
 {
+    const TranslationUnit &tu = TranslationUnit::instance();
+
     BinaryOpExpr *bin = dynamic_cast<BinaryOpExpr *>(t);
     if (bin != NULL)
     {
-        if (
-            bin->getOperator() >= BinaryOpExpr::INFERIOR &&
-            bin->getOperator() <= BinaryOpExpr::SUPERIOR_OR_EQUAL &&
-            bin->getLeft()->isSigned() ^ bin->getRight()->isSigned())
+        if (tu.isWarningOnSignCompareEnabled()
+            && bin->isOrderComparisonOperator()
+            && bin->getLeft()->isSigned() != bin->getRight()->isSigned())
         {
-            bin->warnmsg("signed/unsigned mismatch. using unsigned comparison.");
+            bin->warnmsg("comparison of integers of different signs (`%s' vs `%s'); using unsigned comparison",
+                         bin->getLeft()->getTypeDesc()->toString().c_str(),
+                         bin->getRight()->getTypeDesc()->toString().c_str());
         }
         return processBinOp(bin);
     }
+
     UnaryOpExpr *un = dynamic_cast<UnaryOpExpr *>(t);
     if (un != NULL)
         return processUnaryOp(un);
@@ -86,8 +90,6 @@ ExpressionTypeSetter::close(Tree *t)
         (void) fc->checkAndSetTypes();  // may report errors
         return true;
     }
-
-    const TranslationUnit &tu = TranslationUnit::instance();
 
     ConditionalExpr *cond = dynamic_cast<ConditionalExpr *>(t);
     if (cond != NULL)
