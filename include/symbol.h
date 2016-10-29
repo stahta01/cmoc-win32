@@ -52,7 +52,7 @@ typedef struct {
     symbol_t* head;
 } symbols_t;
 
-symbol_t* symbols_push(symbols_t* symbols, char* name, int type, int value, void* data);
+void symbols_push(symbols_t* symbols, symbol_t* symbol);
 symbol_t* symbols_pull(symbols_t* symbols);
 
 #endif
