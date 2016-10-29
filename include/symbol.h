@@ -34,21 +34,26 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 */
 
-#ifndef _WINERROR_H
-#define _WINERROR_H
+#ifndef _SYMBOL_H
+#define _SYMBOL_H
 
-#define ERROR_FILE_NOT_FOUND            2
-#define ERROR_PATH_NOT_FOUND            3
-#define ERROR_TOO_MANY_OPEN_FILES       4
-#define ERROR_ACCESS_DENIED             5
-#define ERROR_INVALID_HANDLE            6
-#define ERROR_NOT_ENOUGH_MEMORY         8
-#define ERROR_INVALID_ACCESS            12
-#define ERROR_NOT_SAME_DEVICE           17
-#define ERROR_SHARING_VIOLATION         32
-#define ERROR_INVALID_PARAMETER         87
-#define ERROR_OPEN_FAILED               110
-#define ERROR_DISK_FULL                 112
+typedef struct symbol_t {
+    struct symbol_t* next;
+    char* name;
+    int type, value;
+    void* data;
+} symbol_t;
+
+symbol_t* symbol_create(char* name, int type, int value, void* data);
+void symbol_free(symbol_t* symbol);
+void symbol_set_name(symbol_t* symbol, char* name);
+
+typedef struct {
+    symbol_t* head;
+} symbols_t;
+
+symbol_t* symbols_push(symbols_t* symbols, char* name, int type, int value, void* data);
+symbol_t* symbols_pull(symbols_t* symbols);
 
 #endif
 

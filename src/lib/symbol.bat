@@ -1,0 +1,1 @@
+call bat\makelib.bat symbol
