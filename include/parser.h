@@ -34,27 +34,24 @@ present and future rights to this software under copyright law.
 Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 */
 
-#ifndef _EAT_H
-#define _EAT_H
+#ifndef _PARSER_H
+#define _PARSER_H
 
-typedef void* ischar_t;
+#define PARSER_EOL          0
+#define PARSER_OPERATOR     1
+#define PARSER_DIGIT        2
+#define PARSER_HEX          3
+#define PARSER_IDENT        4
+#define PARSER_STRING       5
+#define PARSER_CHAR         6
 
-char* eat_while(char* str, ischar_t ischar);
-char* eat_until(char* str, ischar_t ischar);
+typedef struct {
+    char chr, *tok, *pos;
+} parser_t;
 
-char* eat_while_space(char* str);
-char* eat_while_alpha(char* str);
-char* eat_while_digit(char* str);
-char* eat_while_xdigit(char* str);
-
-char* eat_until_space(char* str);
-char* eat_until_alpha(char* str);
-char* eat_until_digit(char* str);
-
-char* eat_sign(char* str);
-char* eat_integer(char* str);
-char* eat_ident(char* str);
-char* eat_quoted(char* str, char quote);
+void parser_init(parser_t* parser, char* str);
+int parser_next(parser_t* parser);
+bool parser_token_is(parser_t* parser, char* str);
 
 #endif
 

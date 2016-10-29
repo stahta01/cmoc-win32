@@ -49,32 +49,33 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define CTYPE_ALNUM         (CTYPE_UPPER|CTYPE_LOWER|CTYPE_DIGIT)
 #define CTYPE_PRINT         (CTYPE_UPPER|CTYPE_LOWER|CTYPE_DIGIT|CTYPE_PUNCT)
 
-#define _isascii(_C)        ((unsigned)(_C)<=0x7f)
-#define _iscntrl(_C)        (_chcodes[_C]&CTYPE_CONTROL)
-#define _isdigit(_C)        (_chcodes[_C]&CTYPE_DIGIT)
-#define _isupper(_C)        (_chcodes[_C]&CTYPE_UPPER)
-#define _islower(_C)        (_chcodes[_C]&CTYPE_LOWER)
-#define _isalpha(_C)        (_chcodes[_C]&CTYPE_ALPHA)
-#define _isalnum(_C)        (_chcodes[_C]&CTYPE_ALNUM)
-#define _isxdigit(_C)       (_chcodes[_C]&CTYPE_HEXDIG)
-#define _ispunct(_C)        (_chcodes[_C]&CTYPE_PUNCT)
-#define _isspace(_C)        (_chcodes[_C]&CTYPE_WHITE)
-#define _isprint(_C)        (_chcodes[_C]&CTYPE_PRINT)
+#define _isascii(X)         ((unsigned)(X)<=0x7f)
+#define _iscntrl(X)         (_chcodes[X]&CTYPE_CONTROL)
+#define _isdigit(X)         (_chcodes[X]&CTYPE_DIGIT)
+#define _isupper(X)         (_chcodes[X]&CTYPE_UPPER)
+#define _islower(X)         (_chcodes[X]&CTYPE_LOWER)
+#define _isalpha(X)         (_chcodes[X]&CTYPE_ALPHA)
+#define _isalnum(X)         (_chcodes[X]&CTYPE_ALNUM)
+#define _isxdigit(X)        (_chcodes[X]&CTYPE_HEXDIG)
+#define _ispunct(X)         (_chcodes[X]&CTYPE_PUNCT)
+#define _isspace(X)         (_chcodes[X]&CTYPE_WHITE)
+#define _isprint(X)         (_chcodes[X]&CTYPE_PRINT)
 
-#define _isgraph(_C)        ((unsigned)((_C)-33)<94)
+#define _isgraph(X)         ((unsigned)((X)-33)<94)
 
-#define _toascii(_C)        ((_C)&0x7f)
-#define _toupper(_C)        ((_C)&0xdf)
-#define _tolower(_C)        ((_C)|0x20)
+#define _toascii(X)         ((X)&0x7f)
+#define _toupper(X)         ((X)&0xdf)
+#define _tolower(X)         ((X)|0x20)
 
 // I recommend using the function versions, as these are a bit long.
 
-#define _isxupper(_C)       (_isdigit(_C)||((_C)>='A'&&(_C)<='F'))
-#define _isxlower(_C)       (_isdigit(_C)||((_C)>='a'&&(_C)<='f'))
+#define _isident(X)         (_isalpha(X)||((X)=='_'))
+#define _isxupper(X)        (_isdigit(X)||((X)>='A'&&(X)<='F'))
+#define _isxlower(X)        (_isdigit(X)||((X)>='a'&&(X)<='f'))
 
 // Not standard. Might get removed.
 
-#define _isrange(_C,_L,_H)  ((_C)>=(_L)&&(_C)<=(_H))
+#define _isrange(X,_L,_H)   ((X)>=(_L)&&(X)<=(_H))
 
 extern char _chcodes[128];
 
@@ -92,6 +93,7 @@ bool ispunct(int chr);
 bool isxupper(int chr);
 bool isxlower(int chr);
 bool isxdigit(int chr);
+bool isident(int chr);
 
 int toascii(int chr);
 int toupper(int chr);
