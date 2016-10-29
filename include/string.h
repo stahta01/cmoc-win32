@@ -70,7 +70,9 @@ int stricmp(char* s1, char* s2);                    // DOS/Windows
 int strncasecmp(char* s1, char* s2, size_t n);      // UNIX
 int strncmp(char* s1, char* s2, size_t n);          // ANSIC
 int strnicmp(char* s1, char* s2, size_t n);         // DOS/Windows
+unsigned strtou(char* str, char** endptr, int base);// CMOC
 int strtoi(char* s, char** endptr, int radix);      // CMOC
+word strton(char* str, char** endptr, int base);    // CMOC
 
 size_t strcspn(char* s1, char* s2);                 // ANSIC
 size_t strlen(char* s);                             // ANSIC
