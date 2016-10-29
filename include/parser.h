@@ -37,6 +37,8 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _PARSER_H
 #define _PARSER_H
 
+#include <sys/size.h>
+
 #define PARSER_EOL          0
 #define PARSER_OPERATOR     1
 #define PARSER_DIGIT        2
@@ -46,11 +48,13 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #define PARSER_CHAR         6
 
 typedef struct {
-    char chr, *tok, *pos;
+    char* tok, *pos;
 } parser_t;
 
 void parser_init(parser_t* parser, char* str);
 int parser_next(parser_t* parser);
+size_t parser_token_len(parser_t* parser);
+char* parser_token_get(parser_t* parser, char* dst);
 bool parser_token_is(parser_t* parser, char* str);
 
 #endif

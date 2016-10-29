@@ -54,7 +54,7 @@ TAC_t tac;
 void tac_locsym(char* name, size_t size)
 {
     tac.sym = tac.top;
-    for (; tac.sym && strmcmp(tac.sym->name, name, size); tac.sym = tac.sym->next);
+    for (; tac.sym && strmemcmp(tac.sym->name, name, size); tac.sym = tac.sym->next);
 }
 
 void tac_newsym(char* name, size_t size, byte type)

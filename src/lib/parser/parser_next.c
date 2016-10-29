@@ -4,7 +4,6 @@
 int parser_next(parser_t* parser)
 {
     int result = PARSER_EOL;
-    *parser->pos = parser->chr;
     parser->pos = eat_while_space(parser->pos);
     if (*(parser->tok = parser->pos)) {
         if (isdigit(*parser->pos)) {
@@ -29,8 +28,6 @@ int parser_next(parser_t* parser)
             parser->pos++;
         }
     }
-    parser->chr = *parser->pos;
-    *parser->pos = 0;
     return result;
 }
 

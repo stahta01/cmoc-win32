@@ -3,6 +3,6 @@
 
 bool parser_token_is(parser_t* parser, char* str)
 {
-    return strcmp(parser->tok, str) == 0;
+    return strmemcmp(str, parser->tok, parser->pos - parser->tok) == 0;
 }
 

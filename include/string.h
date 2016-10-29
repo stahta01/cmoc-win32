@@ -53,7 +53,7 @@ char* strrchr(char* s, int c);                      // ANSIC
 char* strstr(char* str, char* substr);              // ANSIC
 char* strtok(char* s1, char* s2);                   // ANSIC
 
-int strmcmp(char* str, char* mem, size_t size);     // CMOC
+int strmemcmp(char* str, char* mem, size_t size);   // CMOC
 char* stpcpy(char* dst, char* src);                 // CMOC
 char* strlwr(char* str);                            // UNIX
 char* strrev(char* str);                            // CMOC
