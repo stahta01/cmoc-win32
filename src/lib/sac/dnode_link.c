@@ -25,7 +25,6 @@ asm void dnode_link(dnode_t* n1, dnode_t* n2)
         ldd     2,s                                 // d = n1
         std     2,x                                 // n2->prev = d
         end_n2:
-
     }
     /*
     if (n1) {
