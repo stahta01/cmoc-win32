@@ -59,8 +59,8 @@ void dlist_test(void)
     if (list) {
         for (i = 0; i < 10; i++) {
             dnode_data_t* data = new(dnode_data_t);
-            char s[20];
-            sprintf(s, "[$%X]", data);
+            char s[40];
+            sprintf(s, "%d=$%X ", i, data);
             data->name = strdup(s);
             dlist_push_head(list, &data->node);
         }
