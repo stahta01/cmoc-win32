@@ -37,20 +37,22 @@ Derek John Evans <https://sourceforge.net/u/buzzphp/profile/>
 #ifndef _SYMBOL_H
 #define _SYMBOL_H
 
-typedef struct symbol_t {
-    struct symbol_t* next;
+#include <sac.h>
+
+typedef struct {
+    snode_t node;
     char* name;
     int type, value;
     void* data;
 } symbol_t;
 
+typedef struct {
+    slist_t list;
+} symbols_t;
+
 symbol_t* symbol_create(char* name, int type, int value, void* data);
 void symbol_free(symbol_t* symbol);
 void symbol_set_name(symbol_t* symbol, char* name);
-
-typedef struct {
-    symbol_t* head;
-} symbols_t;
 
 void symbols_push(symbols_t* symbols, symbol_t* symbol);
 symbol_t* symbols_pull(symbols_t* symbols);
