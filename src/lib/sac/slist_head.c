@@ -1,8 +1,10 @@
 
 #include "_sac.h"
 
-snode_t* slist_head(slist_t* list)
+asm snode_t* slist_head(slist_t* list)
 {
-    return list->head.next;
+    asm {
+        ldd     [2,s]                               // get list head
+    }
 }
 
