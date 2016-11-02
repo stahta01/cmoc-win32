@@ -58,8 +58,8 @@ typedef struct dnode_t {
 } dnode_t;
 
 void dnode_link(dnode_t* n1, dnode_t* n2);
-bool dnode_is_head(dnode_t* node);
-bool dnode_is_tail(dnode_t* node);
+//bool dnode_is_head(dnode_t* node);
+//bool dnode_is_tail(dnode_t* node);
 
 dnode_t* dnode_insert(dnode_t* node, dnode_t* prev, dnode_t* next);
 dnode_t* dnode_remove(dnode_t* node);
