@@ -57,7 +57,8 @@ void fused_run(fused_t* fused)
     for (;;) {
         gotoy(fused->y);
         strcpy(s, fused->cur->line);
-        int chr = eddie_line_at(s, 32, fused->y * 32, fused->x, "\r", false);
+        size_t at = fused->y * 32, xy = at + fused->x;
+        int chr = eddie_line_at(s, 32, &at, &xy, "\r");
         fused_down(fused);
     }
 }
