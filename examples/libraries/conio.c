@@ -6,7 +6,7 @@
 
 int main(void)
 {
-    system("WIDTH80");
+    system("WIDTH40");
 
     bgcolor(0);                                 // palette pen = 0
     textcolor(0);                               // palette pen = 8
