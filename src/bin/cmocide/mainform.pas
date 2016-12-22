@@ -5,7 +5,7 @@ unit MainForm;
 interface
 
 uses Classes, ComCtrls, Controls, CustomForms, Documents, FileUtils, Forms, IdeIcons, Java, LCLIntf, Memos,
-  Menus, Splitters, StdCtrls, SysUtils;
+  Menus, Process, Splitters, StdCtrls, StrUtils, SysUtils;
 
 type
 
@@ -13,12 +13,14 @@ type
   strict private
     FIcons: TIdeIcons;
     FSplitter: TPairSplitter;
+    FProcess: TProcess;
     FMemo: TRichMemo;
     FListBox: TListBox;
     FDocument: TDocumentSyntaxHighlighter;
   public
     constructor Create(A: TComponent); override;
   public
+    procedure Execute(const AExecutable: string; const AParameters: array of string);
     procedure AddEditMenuItems(const A: TAbstractMenuItem);
     procedure LogMessage(const A: string);
     procedure SaveToFile(const A: TFileName); override;
@@ -39,6 +41,7 @@ type
     procedure EditPaste(A: TSender);
     procedure EditDelete(A: TSender);
     procedure EditSelectAll(A: TSender);
+    procedure EditFormatSource(A: TSender);
   public
     procedure ToolsOpenConsole(A: TSender);
     procedure ToolsMessImageTool(A: TSender);
@@ -60,6 +63,7 @@ begin
   Position := poScreenCenter;
   FileName := EmptyStr;
 
+  FProcess := TProcess.Create(Self);
   FIcons := TIdeIcons.Create;
 
   OpenDialog.Filter := 'C/C++ Files|*.c;*.h;*.cpp;*.hpp|All Files|*.*';
@@ -193,13 +197,45 @@ begin
     AddMenuItem('Uppercase Selection');
     AddMenuItem('Lowercase Selection');
     AddMenuItem(MenuItemSeparator);
-    AddMenuItem('Format Source Code (AStyle)');
+    AddMenuItem('Format Source Code (AStyle)', @EditFormatSource);
   end;
 end;
 
 procedure TFormIDE.LogMessage(const A: string);
 begin
   FListBox.ItemIndex := FListBox.Items.Add(A);
+  FListBox.MakeCurrentVisible;
+end;
+
+procedure TFormIDE.Execute(const AExecutable: string; const AParameters: array of string);
+var
+  LPos: integer;
+  LBytes: array[0..100] of byte;
+  LString, LBuffer: string;
+begin
+  FListBox.Items.Clear;
+  FProcess.Executable := AExecutable;
+  FProcess.Parameters.LoadFromStrings(AParameters);
+  FProcess.Execute;
+  LBuffer := default(string);
+  while FProcess.Running or (FProcess.Output.NumBytesAvailable > 0) do begin
+    if FProcess.Output.NumBytesAvailable > 0 then begin
+      SetString(LString, @LBytes[0], FProcess.Output.Read(@LBytes[0], SizeOf(LBytes)));
+      LBuffer += LString;
+      LPos := PosSet(AllowLineEndings, LBuffer);
+      if (LPos > 0) and (LPos < Length(LBuffer)) then begin
+        LPos := 1;
+        LogMessage(AnsiReadLine(LBuffer, LPos));
+        Delete(LBuffer, 1, LPos - 1);
+      end;
+    end else begin
+      Sleep(50);
+    end;
+  end;
+  LPos := 1;
+  while LPos <= Length(LBuffer) do begin
+    LogMessage(AnsiReadLine(LBuffer, LPos));
+  end;
 end;
 
 procedure TFormIDE.SaveToFile(const A: TFileName);
@@ -296,6 +332,11 @@ end;
 procedure TFormIDE.EditSelectAll(A: TSender);
 begin
   FMemo.SelectAll;
+end;
+
+procedure TFormIDE.EditFormatSource(A: TSender);
+begin
+  Execute(ProgramDirectory + 'cmsoc.exe', ['--help']);
 end;
 
 procedure TFormIDE.ToolsOpenConsole(A: TSender);
