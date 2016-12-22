@@ -4,7 +4,7 @@ unit MainForm;
 
 interface
 
-uses Classes, ComCtrls, Controls, CustomForms, Documents, FileUtils, Forms, IdeIcons, Java, Memos,
+uses Classes, ComCtrls, Controls, CustomForms, Documents, FileUtils, Forms, IdeIcons, Java, LCLIntf, Memos,
   Menus, Splitters, StdCtrls, SysUtils;
 
 type
@@ -39,6 +39,9 @@ type
     procedure EditPaste(A: TSender);
     procedure EditDelete(A: TSender);
     procedure EditSelectAll(A: TSender);
+  public
+    procedure ToolsOpenConsole(A: TSender);
+    procedure ToolsMessImageTool(A: TSender);
   end;
 
 var
@@ -59,6 +62,9 @@ begin
 
   FIcons := TIdeIcons.Create;
 
+  OpenDialog.Filter := 'C/C++ Files|*.c;*.h;*.cpp;*.hpp|All Files|*.*';
+  SaveDialog.Filter := OpenDialog.Filter;
+
   with MainMenu do begin
     with AddMenuItem('File') do begin
       AddMenuItem('New', @FileNew).Icon := FIcons.New;
@@ -76,11 +82,34 @@ begin
     with AddMenuItem('Run') do begin
       AddMenuItem('Syntax Check').Icon := FIcons.SyntaxCheck;
       AddMenuItem('Compile').Icon := FIcons.Compile;
+      AddMenuItem(MenuItemSeparator);
       AddMenuItem('Build').Icon := FIcons.Build;
       AddMenuItem('Build and Run ...').Icon := FIcons.BuildAndRun;
     end;
-    AddMenuItem('Emulators');
-    AddMenuItem('Tools');
+    with AddMenuItem('Emulators') do begin
+      AddMenuItem('Colour Computer 1 (Color BASIC 1.0)');
+      AddMenuItem('Colour Computer 1 (Disk Extended Color BASIC 1.0)');
+      AddMenuItem('Colour Computer 2 (Disk Extended Color BASIC 1.1)');
+      AddMenuItem('Colour Computer 3 (Disk Extended Color BASIC 2.1)');
+      AddMenuItem(MenuItemSeparator);
+      AddMenuItem('Dragon 32 (PAL)');
+      AddMenuItem('Dragon 64 (PAL)');
+      AddMenuItem('Dragon 200-E (PAL)');
+      AddMenuItem('Tano Dragon (NTSC)');
+      AddMenuItem('Dynacom MX-1600 (PAL-M)');
+      AddMenuItem(MenuItemSeparator);
+      AddMenuItem('EDTASM++ 1.1 ...');
+    end;
+    with AddMenuItem('Tools') do begin
+      AddMenuItem('WinCMOC Console ...', @ToolsOpenConsole);
+      AddMenuItem(MenuItemSeparator);
+      AddMenuItem('Disassemble 6809 Binary ...');
+      AddMenuItem(MenuItemSeparator);
+      AddMenuItem('MESS Image Tool ...', @ToolsMessImageTool);
+      AddMenuItem('Open Disk #0 ...');
+      AddMenuItem('Open Disk #1 ...');
+      AddMenuItem('Open Disk #2 ... (EDTASM++)');
+    end;
     with AddMenuItem('Help') do begin
       AddMenuItem('About WinCMOC ...');
     end;
@@ -260,6 +289,16 @@ end;
 procedure TFormIDE.EditSelectAll(A: TSender);
 begin
   FMemo.SelectAll;
+end;
+
+procedure TFormIDE.ToolsOpenConsole(A: TSender);
+begin
+  OpenDocument(ProgramDirectory + 'console.bat');
+end;
+
+procedure TFormIDE.ToolsMessImageTool(A: TSender);
+begin
+  OpenDocument(ProgramDirectory + 'wimgtool.exe');
 end;
 
 end.
