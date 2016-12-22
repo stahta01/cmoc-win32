@@ -210,7 +210,13 @@ end;
 
 procedure TFormIDE.LoadFromFile(const A: TFileName);
 begin
-  FMemo.Lines.LoadFromFile(A);
+  FMemo.DisableUndo := True;
+  try
+    FMemo.Lines.LoadFromFile(A);
+  finally
+    FMemo.ClearUndoBuffer;
+    FMemo.DisableUndo := False;
+  end;
   FMemo.SelStart := 0;
   inherited;
 end;
@@ -223,6 +229,7 @@ end;
 
 procedure TFormIDE.FileNew(A: TSender);
 begin
+  FMemo.Lines.Clear;
   FileName := EmptyStr;
 end;
 
