@@ -5,7 +5,7 @@ unit MainForm;
 interface
 
 uses Classes, ComCtrls, Controls, CustomForms, Documents, FileUtils, Forms, IdeIcons, Java, LCLIntf, Memos,
-  Menus, Process, ProcessUtils, Splitters, StdCtrls, SysUtils;
+  Menus, Process, ProcessUtils, Splitters, StdCtrls, StrUtils, SysUtils;
 
 type
 
@@ -225,13 +225,8 @@ end;
 
 procedure TFormIDE.LoadFromFile(const A: TFileName);
 begin
-  FMemo.DisableUndo := True;
-  try
-    FMemo.Lines.LoadFromFile(A);
-  finally
-    FMemo.ClearUndoBuffer;
-    FMemo.DisableUndo := False;
-  end;
+  FMemo.Text := AnsiLoadFromFile(A);
+  FMemo.ClearUndoBuffer;
   FMemo.SelStart := 0;
   inherited;
 end;
