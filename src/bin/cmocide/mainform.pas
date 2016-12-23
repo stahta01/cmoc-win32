@@ -5,7 +5,7 @@ unit MainForm;
 interface
 
 uses Classes, ComCtrls, Controls, CustomForms, Dialogs, Documents, FatCowIcons, FileUtils, Forms,
-  Java, LCLIntf, Memos, Menus, Process, ProcessUtils, Splitters, StdCtrls, StrUtils, SysUtils;
+  Java, LCLIntf, Memos, Menus, Process, ProcessUtils, Programs, Splitters, StdCtrls, StrUtils, SysUtils;
 
 type
 
@@ -34,6 +34,7 @@ type
     procedure FormCloseQuery(A: TSender; var ACanClose: boolean);
   public
     procedure FileNew(A: TSender);
+    procedure FileNewWindow(A: TSender);
     procedure FileOpen(A: TSender);
     procedure FileSave(A: TSender);
     procedure FileSaveAs(A: TSender);
@@ -74,7 +75,7 @@ begin
   with MainMenu do begin
     with AddMenuItem('File') do begin
       AddMenuItem('New', @FileNew).Icon := FIcons.New;
-      AddMenuItem('New Window').Icon := FIcons.NewWindow;
+      AddMenuItem('New Window', @FileNewWindow).Icon := FIcons.NewWindow;
       AddMenuItem(MenuItemSeparator);
       AddMenuItem('Open ...', @FileOpen).Icon := FIcons.Open;
       AddMenuItem('Open New Window ...').Icon := FIcons.FolderGo;
@@ -236,7 +237,6 @@ end;
 procedure TFormIDE.Execute(const AExecutable: string; const AParameters: array of string;
   const AConsole: boolean);
 begin
-  FListBox.Items.Clear;
   with FProcess do begin
     if AConsole then begin
       Options := [];
@@ -244,8 +244,10 @@ begin
       Options := [poUsePipes];
     end;
     Executable := AExecutable;
-    if not FileExists(Executable) then begin
-      Executable := ExeSearch(AExecutable);
+    if Length(ExtractFileExt(Executable)) > 0 then begin
+      if not FileExists(Executable) and not DirectoryExists(Executable) then begin
+        Executable := ExeSearch(AExecutable);
+      end;
     end;
     CurrentDirectory := ExtractFileDir(Executable);
     Parameters.LoadFromStrings(AParameters);
@@ -286,6 +288,12 @@ procedure TFormIDE.FileNew(A: TSender);
 begin
   FMemo.Lines.Clear;
   FileName := EmptyStr;
+end;
+
+procedure TFormIDE.FileNewWindow(A: TSender);
+begin
+  LogMessage('Opening New WinCMOC IDE Window');
+  Execute('javaw', ['-cp', TProgram.FileName, 'cmocide'], True);
 end;
 
 procedure TFormIDE.FileOpen(A: TSender);
@@ -379,11 +387,13 @@ end;
 
 procedure TFormIDE.ToolsOpenConsole(A: TSender);
 begin
+  LogMessage('Opening WinCMOC Console');
   Execute(ProgramDirectory + 'console.bat', [], True);
 end;
 
 procedure TFormIDE.ToolsMessImageTool(A: TSender);
 begin
+  LogMessage('Opening MESS Image Tool');
   Execute(ProgramDirectory + 'wimgtool.exe', [], True);
 end;
 

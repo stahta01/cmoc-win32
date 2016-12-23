@@ -17,17 +17,17 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="MainForm"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="79" Y="7"/>
+        <TopLine Value="20"/>
+        <CursorPos X="24" Y="29"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\..\..\..\javavcl\src\fatcowicons.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="FatCowIcons"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="53"/>
-        <CursorPos X="17" Y="14"/>
+        <CursorPos X="19" Y="69"/>
         <UsageCount Value="64"/>
       </Unit2>
       <Unit3>
@@ -132,23 +132,23 @@
       <Unit17>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\jdk15.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="15028"/>
-        <CursorPos X="21" Y="15038"/>
-        <UsageCount Value="18"/>
+        <TopLine Value="20748"/>
+        <CursorPos X="6" Y="20758"/>
+        <UsageCount Value="19"/>
       </Unit17>
       <Unit18>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\jdk15.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="31519"/>
-        <CursorPos X="26" Y="31529"/>
-        <UsageCount Value="51"/>
+        <TopLine Value="1875"/>
+        <CursorPos X="33" Y="1876"/>
+        <UsageCount Value="52"/>
       </Unit18>
       <Unit19>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\java_sys.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="1163"/>
-        <CursorPos X="14" Y="1212"/>
-        <UsageCount Value="9"/>
+        <TopLine Value="658"/>
+        <CursorPos X="17" Y="666"/>
+        <UsageCount Value="11"/>
       </Unit19>
       <Unit20>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\java_sysh.inc"/>
@@ -1005,16 +1005,16 @@
         <Filename Value="..\..\..\..\javavcl\src\java.pas"/>
         <UnitName Value="Java"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="159"/>
-        <CursorPos X="18" Y="166"/>
-        <UsageCount Value="12"/>
+        <TopLine Value="54"/>
+        <CursorPos X="26" Y="63"/>
+        <UsageCount Value="13"/>
       </Unit135>
       <Unit136>
         <Filename Value="..\..\..\..\javavcl\src\graphics.pas"/>
         <UnitName Value="Graphics"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="259"/>
-        <CursorPos X="5" Y="261"/>
+        <TopLine Value="271"/>
+        <CursorPos X="12" Y="257"/>
         <UsageCount Value="10"/>
       </Unit136>
       <Unit137>
@@ -1037,16 +1037,16 @@
         <Filename Value="..\..\..\..\javavcl\src\customforms.pas"/>
         <UnitName Value="CustomForms"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="70"/>
-        <CursorPos X="3" Y="75"/>
+        <TopLine Value="40"/>
+        <CursorPos X="43" Y="36"/>
         <UsageCount Value="20"/>
       </Unit139>
       <Unit140>
         <Filename Value="..\..\..\..\javavcl\src\sysutils.pas"/>
         <UnitName Value="SysUtils"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="654"/>
-        <CursorPos X="66" Y="670"/>
+        <TopLine Value="69"/>
+        <CursorPos X="3" Y="79"/>
         <UsageCount Value="13"/>
       </Unit140>
       <Unit141>
@@ -1061,9 +1061,9 @@
         <Filename Value="..\..\..\..\javavcl\src\strings.pas"/>
         <UnitName Value="Strings"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="130"/>
-        <CursorPos X="3" Y="132"/>
-        <UsageCount Value="17"/>
+        <TopLine Value="54"/>
+        <CursorPos X="9" Y="65"/>
+        <UsageCount Value="18"/>
       </Unit142>
       <Unit143>
         <Filename Value="..\..\..\..\javavcl\src\streams.pas"/>
@@ -1263,9 +1263,9 @@
         <Filename Value="..\..\..\..\javavcl\src\process.pas"/>
         <UnitName Value="Process"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="49"/>
-        <CursorPos X="27" Y="66"/>
-        <UsageCount Value="13"/>
+        <TopLine Value="11"/>
+        <CursorPos X="37" Y="64"/>
+        <UsageCount Value="14"/>
       </Unit168>
       <Unit169>
         <Filename Value="..\..\..\..\javavcl\src\persistents.pas"/>
@@ -1307,35 +1307,47 @@
         <UsageCount Value="10"/>
       </Unit173>
     </Units>
-    <JumpHistory Count="7" HistoryIndex="6">
+    <JumpHistory Count="10" HistoryIndex="9">
       <Position1>
         <Filename Value="mainform.pas"/>
-        <Caret Line="34" Column="32" TopLine="25"/>
+        <Caret Line="8" Column="50"/>
       </Position1>
       <Position2>
         <Filename Value="mainform.pas"/>
-        <Caret Line="271" Column="37" TopLine="262"/>
+        <Caret Line="294" Column="8" TopLine="285"/>
       </Position2>
       <Position3>
         <Filename Value="mainform.pas"/>
-        <Caret Line="8" Column="8"/>
+        <Caret Line="253" Column="9" TopLine="244"/>
       </Position3>
       <Position4>
         <Filename Value="mainform.pas"/>
-        <Caret Line="71" Column="20" TopLine="68"/>
+        <Caret Line="295" Column="8" TopLine="285"/>
       </Position4>
       <Position5>
         <Filename Value="mainform.pas"/>
-        <Caret Line="83" Column="72" TopLine="73"/>
+        <Caret Line="293" Column="27" TopLine="285"/>
       </Position5>
       <Position6>
         <Filename Value="mainform.pas"/>
-        <Caret Line="85" Column="57" TopLine="74"/>
+        <Caret Line="37" Column="28" TopLine="28"/>
       </Position6>
       <Position7>
         <Filename Value="mainform.pas"/>
-        <Caret Line="7" Column="20"/>
+        <Caret Line="78" Column="47" TopLine="63"/>
       </Position7>
+      <Position8>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="295" Column="5" TopLine="285"/>
+      </Position8>
+      <Position9>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="303" Column="15" TopLine="290"/>
+      </Position9>
+      <Position10>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="29" Column="24" TopLine="20"/>
+      </Position10>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

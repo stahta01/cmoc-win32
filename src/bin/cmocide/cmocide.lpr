@@ -4,7 +4,7 @@ program cmocide;
 
 uses
   Forms,
-  MainForm, fatcowicons;
+  MainForm;
 
 begin
   Application.Title := 'WinCMOC IDE v0.8';
