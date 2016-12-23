@@ -21,7 +21,8 @@ type
   public
     constructor Create(A: TComponent); override;
   public
-    procedure Execute(const AExecutable: string; const AParameters: array of string; const AConsole: boolean);
+    procedure Execute(const AExecutable: string; const AParameters: array of string;
+      const AConsole: boolean);
     procedure AddEditMenuItems(const A: TAbstractMenuItem);
     procedure LogMessage(const A: string);
     procedure LogFileName(const A, AFileName: string);
@@ -90,38 +91,38 @@ begin
 
   with MainMenu do begin
     with AddMenuItem('File') do begin
-      AddMenuItem('New', @FileNew).Icon := FIcons.New;
-      AddMenuItem('New Window', @FileNewWindow).Icon := FIcons.NewWindow;
+      AddMenuItem('New', @FileNew, FIcons.New);
+      AddMenuItem('New Window', @FileNewWindow, FIcons.NewWindow);
       AddMenuItem(MenuItemSeparator);
-      AddMenuItem('Open ...', @FileOpen).Icon := FIcons.Open;
-      AddMenuItem('Open New Window ...', @FileOpenInNewWindow).Icon := FIcons.FolderGo;
+      AddMenuItem('Open ...', @FileOpen, FIcons.Open);
+      AddMenuItem('Open New Window ...', @FileOpenInNewWindow, FIcons.FolderGo);
       AddMenuItem(MenuItemSeparator);
-      AddMenuItem('Save', @FileSave).Icon := FIcons.Save;
-      AddMenuItem('Save As ...', @FileSaveAs).Icon := FIcons.FileSaveAs;
+      AddMenuItem('Save', @FileSave, FIcons.Save);
+      AddMenuItem('Save As ...', @FileSaveAs, FIcons.FileSaveAs);
       AddMenuItem(MenuItemSeparator);
-      AddMenuItem('Exit', @FileExit).Icon := FIcons.Door;
+      AddMenuItem('Exit', @FileExit, FIcons.Door);
     end;
     AddEditMenuItems(AddMenuItem('Edit'));
     with AddMenuItem('Run') do begin
-      AddMenuItem('Syntax Check', @RunSyntaxCheck).Icon := FIcons.TickButton;
-      AddMenuItem('Compile', @RunCompile).Icon := FIcons.Compile;
+      AddMenuItem('Syntax Check', @RunSyntaxCheck, FIcons.TickButton);
+      AddMenuItem('Compile', @RunCompile, FIcons.Compile);
       AddMenuItem(MenuItemSeparator);
-      AddMenuItem('Build', @RunBuild).Icon := FIcons.Bricks;
-      AddMenuItem('Build and Run ...', @RunBuildAndRun).Icon := FIcons.BrickGo;
+      AddMenuItem('Build', @RunBuild, FIcons.Bricks);
+      AddMenuItem('Build and Run ...', @RunBuildAndRun, FIcons.BrickGo);
     end;
     with AddMenuItem('Emulators') do begin
-      AddMenuItem('Colour Computer 1 (Color BASIC 1.0)').Icon := FIcons.BulletRight;
-      AddMenuItem('Colour Computer 1 (Disk Extended Color BASIC 1.0)').Icon := FIcons.BulletRight;
-      AddMenuItem('Colour Computer 2 (Disk Extended Color BASIC 1.1)').Icon := FIcons.BulletRight;
-      AddMenuItem('Colour Computer 3 (Disk Extended Color BASIC 2.1)').Icon := FIcons.BulletRight;
+      AddMenuItem('Colour Computer 1 (Color BASIC 1.0)', nil, FIcons.BulletRight);
+      AddMenuItem('Colour Computer 1 (Disk Extended Color BASIC 1.0)', nil, FIcons.BulletRight);
+      AddMenuItem('Colour Computer 2 (Disk Extended Color BASIC 1.1)', nil, FIcons.BulletRight);
+      AddMenuItem('Colour Computer 3 (Disk Extended Color BASIC 2.1)', nil, FIcons.BulletRight);
       AddMenuItem(MenuItemSeparator);
-      AddMenuItem('Dragon 32 (PAL)').Icon := FIcons.BulletRight;
-      AddMenuItem('Dragon 64 (PAL)').Icon := FIcons.BulletRight;
-      AddMenuItem('Dragon 200-E (PAL)').Icon := FIcons.BulletRight;
-      AddMenuItem('Tano Dragon (NTSC)').Icon := FIcons.BulletRight;
-      AddMenuItem('Dynacom MX-1600 (PAL-M)').Icon := FIcons.BulletRight;
+      AddMenuItem('Dragon 32 (PAL)', nil, FIcons.BulletRight);
+      AddMenuItem('Dragon 64 (PAL)', nil, FIcons.BulletRight);
+      AddMenuItem('Dragon 200-E (PAL)', nil, FIcons.BulletRight);
+      AddMenuItem('Tano Dragon (NTSC)', nil, FIcons.BulletRight);
+      AddMenuItem('Dynacom MX-1600 (PAL-M)', nil, FIcons.BulletRight);
       AddMenuItem(MenuItemSeparator);
-      AddMenuItem('EDTASM++ 1.1 ...').Icon := FIcons.BulletRight;
+      AddMenuItem('EDTASM++ 1.1 ...', nil, FIcons.BulletRight);
     end;
     with AddMenuItem('Tools') do begin
       AddMenuItem('WinCMOC Console ...', @ToolsOpenConsole);
@@ -138,19 +139,19 @@ begin
     end;
   end;
   ToolBar.Height := 44;
-  ToolBar.AddToolBarButton('New', @FileNew).Icon := FIcons.New;
-  ToolBar.AddToolBarButton('Open', @FileOpen).Icon := FIcons.Open;
-  ToolBar.AddToolBarButton('Save', @FileSave).Icon := FIcons.Save;
-  ToolBar.AddToolBarButton('Undo', @EditUndo).Icon := FIcons.Undo;
-  ToolBar.AddToolBarButton('Redo', @EditRedo).Icon := FIcons.Redo;
-  ToolBar.AddToolBarButton('Cut', @EditCut).Icon := FIcons.Cut;
-  ToolBar.AddToolBarButton('Copy', @EditCopy).Icon := FIcons.Copy;
-  ToolBar.AddToolBarButton('Paste', @EditPaste).Icon := FIcons.Paste;
-  ToolBar.AddToolBarButton('Delete', @EditDelete).Icon := FIcons.Cross;
-  ToolBar.AddToolBarButton('Syntax Check', @RunSyntaxCheck).Icon := FIcons.TickButton;
-  ToolBar.AddToolBarButton('Compile', @RunCompile).Icon := FIcons.Compile;
-  ToolBar.AddToolBarButton('Build', @RunBuild).Icon := FIcons.Bricks;
-  ToolBar.AddToolBarButton('Build and Run', @RunBuildAndRun).Icon := FIcons.BrickGo;
+  ToolBar.AddToolBarButton('New', @FileNew, FIcons.New);
+  ToolBar.AddToolBarButton('Open', @FileOpen, FIcons.Open);
+  ToolBar.AddToolBarButton('Save', @FileSave, FIcons.Save);
+  ToolBar.AddToolBarButton('Undo', @EditUndo, FIcons.Undo);
+  ToolBar.AddToolBarButton('Redo', @EditRedo, FIcons.Redo);
+  ToolBar.AddToolBarButton('Cut', @EditCut, FIcons.Cut);
+  ToolBar.AddToolBarButton('Copy', @EditCopy, FIcons.Copy);
+  ToolBar.AddToolBarButton('Paste', @EditPaste, FIcons.Paste);
+  ToolBar.AddToolBarButton('Delete', @EditDelete, FIcons.Cross);
+  ToolBar.AddToolBarButton('Syntax Check', @RunSyntaxCheck, FIcons.TickButton);
+  ToolBar.AddToolBarButton('Compile', @RunCompile, FIcons.Compile);
+  ToolBar.AddToolBarButton('Build', @RunBuild, FIcons.Bricks);
+  ToolBar.AddToolBarButton('Build and Run', @RunBuildAndRun, FIcons.BrickGo);
 
   FSplitter := TPairSplitter.Create(Self);
   FSplitter.Handle.setResizeWeight(1);
@@ -210,17 +211,17 @@ end;
 procedure TFormIDE.AddEditMenuItems(const A: TAbstractMenuItem);
 begin
   with A do begin
-    AddMenuItem('Undo', @EditUndo).Icon := FIcons.Undo;
-    AddMenuItem('Redo', @EditRedo).Icon := FIcons.Redo;
+    AddMenuItem('Undo', @EditUndo, FIcons.Undo);
+    AddMenuItem('Redo', @EditRedo, FIcons.Redo);
     AddMenuItem(MenuItemSeparator);
-    AddMenuItem('Cut', @EditCut).Icon := FIcons.Cut;
-    AddMenuItem('Copy', @EditCopy).Icon := FIcons.Copy;
-    AddMenuItem('Paste', @EditPaste).Icon := FIcons.Paste;
-    AddMenuItem('Delete', @EditDelete).Icon := FIcons.Cross;
+    AddMenuItem('Cut', @EditCut, FIcons.Cut);
+    AddMenuItem('Copy', @EditCopy, FIcons.Copy);
+    AddMenuItem('Paste', @EditPaste, FIcons.Paste);
+    AddMenuItem('Delete', @EditDelete, FIcons.Cross);
     AddMenuItem(MenuItemSeparator);
-    AddMenuItem('Select All', @EditSelectAll).Icon := FIcons.LayerSelect;
+    AddMenuItem('Select All', @EditSelectAll, FIcons.LayerSelect);
     AddMenuItem(MenuItemSeparator);
-    AddMenuItem('Find ...', @EditFind).Icon := FIcons.Find;
+    AddMenuItem('Find ...', @EditFind, FIcons.Find);
     AddMenuItem('Find Next', @EditFindNext);
     AddMenuItem(MenuItemSeparator);
     AddMenuItem('Replace', @EditReplace);
@@ -268,7 +269,8 @@ begin
   inherited;
 end;
 
-procedure TFormIDE.Execute(const AExecutable: string; const AParameters: array of string; const AConsole: boolean);
+procedure TFormIDE.Execute(const AExecutable: string; const AParameters: array of string;
+  const AConsole: boolean);
 begin
   with FProcess do begin
     if AConsole then begin
@@ -415,9 +417,43 @@ begin
   FMemo.SelectAll;
 end;
 
+type
+
+  TFindDialog = class(TForm)
+  strict private
+    procedure ButtonClick(A: TObject);
+  public
+    constructor Create(A: TComponent); override;
+  end;
+
+constructor TFindDialog.Create(A: TComponent);
+begin
+  inherited;
+  Caption := 'Find';
+  Width := 400;
+  Height := 300;
+  with TButton.Create(Self) do begin
+    SetBounds(0, 0, 80, 24);
+    Caption := 'OK';
+    OnClick := @ButtonClick;
+    Parent := Self;
+  end;
+end;
+
+procedure TFindDialog.ButtonClick(A: TObject);
+begin
+  ModalResult := mrOk;
+end;
+
 procedure TFormIDE.EditFind(A: TSender);
 begin
-
+  with TFindDialog.Create(Self) do begin
+    try
+      ShowModal;
+    finally
+      Free;
+    end;
+  end;
 end;
 
 procedure TFormIDE.EditFindNext(A: TSender);
