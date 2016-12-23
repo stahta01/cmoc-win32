@@ -4,14 +4,14 @@ unit MainForm;
 
 interface
 
-uses Classes, ComCtrls, Controls, CustomForms, Documents, FileUtils, Forms, IdeIcons, Java, LCLIntf, Memos,
-  Menus, Process, ProcessUtils, Splitters, StdCtrls, StrUtils, SysUtils;
+uses Classes, ComCtrls, Controls, CustomForms, Dialogs, Documents, FatCowIcons, FileUtils, Forms,
+  Java, LCLIntf, Memos, Menus, Process, ProcessUtils, Splitters, StdCtrls, StrUtils, SysUtils;
 
 type
 
   TFormIDE = class(TFormSDI)
   strict private
-    FIcons: TIdeIcons;
+    FIcons: TFatCowIcons;
     FSplitter: TPairSplitter;
     FProcess: TProcess;
     FMemo: TRichMemo;
@@ -31,6 +31,7 @@ type
     procedure ListBoxInserted(A: TSender; AIndex: integer);
   public
     procedure FormShow(A: TSender);
+    procedure FormCloseQuery(A: TSender; var ACanClose: boolean);
   public
     procedure FileNew(A: TSender);
     procedure FileOpen(A: TSender);
@@ -61,48 +62,49 @@ begin
   inherited;
 
   OnShow := @FormShow;
+  OnCloseQuery := @FormCloseQuery;
 
   Width := 720;
   Height := 500;
   Position := poScreenCenter;
 
   FProcess := TProcess.Create(Self);
-  FIcons := TIdeIcons.Create;
+  FIcons := TFatCowIcons.Create(ProgramDirectory + 'images');
 
   with MainMenu do begin
     with AddMenuItem('File') do begin
       AddMenuItem('New', @FileNew).Icon := FIcons.New;
-      AddMenuItem('New Window');
+      AddMenuItem('New Window').Icon := FIcons.NewWindow;
       AddMenuItem(MenuItemSeparator);
       AddMenuItem('Open ...', @FileOpen).Icon := FIcons.Open;
-      AddMenuItem('Open New Window ...');
+      AddMenuItem('Open New Window ...').Icon := FIcons.FolderGo;
       AddMenuItem(MenuItemSeparator);
       AddMenuItem('Save', @FileSave).Icon := FIcons.Save;
-      AddMenuItem('Save As ...', @FileSaveAs);
+      AddMenuItem('Save As ...', @FileSaveAs).Icon := FIcons.FileSaveAs;
       AddMenuItem(MenuItemSeparator);
-      AddMenuItem('Exit', @FileExit);
+      AddMenuItem('Exit', @FileExit).Icon := FIcons.Door;
     end;
     AddEditMenuItems(AddMenuItem('Edit'));
     with AddMenuItem('Run') do begin
-      AddMenuItem('Syntax Check').Icon := FIcons.SyntaxCheck;
+      AddMenuItem('Syntax Check').Icon := FIcons.TickButton;
       AddMenuItem('Compile').Icon := FIcons.Compile;
       AddMenuItem(MenuItemSeparator);
-      AddMenuItem('Build').Icon := FIcons.Build;
-      AddMenuItem('Build and Run ...').Icon := FIcons.BuildAndRun;
+      AddMenuItem('Build').Icon := FIcons.Bricks;
+      AddMenuItem('Build and Run ...').Icon := FIcons.BrickGo;
     end;
     with AddMenuItem('Emulators') do begin
-      AddMenuItem('Colour Computer 1 (Color BASIC 1.0)');
-      AddMenuItem('Colour Computer 1 (Disk Extended Color BASIC 1.0)');
-      AddMenuItem('Colour Computer 2 (Disk Extended Color BASIC 1.1)');
-      AddMenuItem('Colour Computer 3 (Disk Extended Color BASIC 2.1)');
+      AddMenuItem('Colour Computer 1 (Color BASIC 1.0)').Icon := FIcons.BulletRight;
+      AddMenuItem('Colour Computer 1 (Disk Extended Color BASIC 1.0)').Icon := FIcons.BulletRight;
+      AddMenuItem('Colour Computer 2 (Disk Extended Color BASIC 1.1)').Icon := FIcons.BulletRight;
+      AddMenuItem('Colour Computer 3 (Disk Extended Color BASIC 2.1)').Icon := FIcons.BulletRight;
       AddMenuItem(MenuItemSeparator);
-      AddMenuItem('Dragon 32 (PAL)');
-      AddMenuItem('Dragon 64 (PAL)');
-      AddMenuItem('Dragon 200-E (PAL)');
-      AddMenuItem('Tano Dragon (NTSC)');
-      AddMenuItem('Dynacom MX-1600 (PAL-M)');
+      AddMenuItem('Dragon 32 (PAL)').Icon := FIcons.BulletRight;
+      AddMenuItem('Dragon 64 (PAL)').Icon := FIcons.BulletRight;
+      AddMenuItem('Dragon 200-E (PAL)').Icon := FIcons.BulletRight;
+      AddMenuItem('Tano Dragon (NTSC)').Icon := FIcons.BulletRight;
+      AddMenuItem('Dynacom MX-1600 (PAL-M)').Icon := FIcons.BulletRight;
       AddMenuItem(MenuItemSeparator);
-      AddMenuItem('EDTASM++ 1.1 ...');
+      AddMenuItem('EDTASM++ 1.1 ...').Icon := FIcons.BulletRight;
     end;
     with AddMenuItem('Tools') do begin
       AddMenuItem('WinCMOC Console ...', @ToolsOpenConsole);
@@ -127,11 +129,11 @@ begin
   ToolBar.AddToolBarButton('Cut', @EditCut).Icon := FIcons.Cut;
   ToolBar.AddToolBarButton('Copy', @EditCopy).Icon := FIcons.Copy;
   ToolBar.AddToolBarButton('Paste', @EditPaste).Icon := FIcons.Paste;
-  ToolBar.AddToolBarButton('Delete', @EditDelete).Icon := FIcons.Delete;
-  ToolBar.AddToolBarButton('Syntax Check').Icon := FIcons.SyntaxCheck;
+  ToolBar.AddToolBarButton('Delete', @EditDelete).Icon := FIcons.Cross;
+  ToolBar.AddToolBarButton('Syntax Check').Icon := FIcons.TickButton;
   ToolBar.AddToolBarButton('Compile').Icon := FIcons.Compile;
-  ToolBar.AddToolBarButton('Build').Icon := FIcons.Build;
-  ToolBar.AddToolBarButton('Build and Run').Icon := FIcons.BuildAndRun;
+  ToolBar.AddToolBarButton('Build').Icon := FIcons.Bricks;
+  ToolBar.AddToolBarButton('Build and Run').Icon := FIcons.BrickGo;
 
   FSplitter := TPairSplitter.Create(Self);
   FSplitter.Handle.setResizeWeight(1);
@@ -162,10 +164,6 @@ begin
   FListBox.Items.OnInserted := @ListBoxInserted;
   FListBox.Parent := FSplitter.Sides[1];
 
-  OpenDialog.Filter := 'C/C++ Files|*.c;*.h;*.cpp;*.hpp|All Files|*.*';
-  SaveDialog.Filter := OpenDialog.Filter;
-  FileName := EmptyStr;
-
   FMemo.Lines.Add(EmptyStr);
   FMemo.Lines.Add('#include <math.h>');
   FMemo.Lines.Add('#include <ctype.h>');
@@ -179,6 +177,10 @@ begin
   FMemo.Lines.Add('    puts("WELCOME TO WINCMOC IDE V0.7!");');
   FMemo.Lines.Add('    return 0;');
   FMemo.Lines.Add('}');
+
+  OpenDialog.Filter := 'C/C++ Files|*.c;*.h;*.cpp;*.hpp|All Files|*.*';
+  SaveDialog.Filter := OpenDialog.Filter;
+  FileName := EmptyStr;
 end;
 
 procedure TFormIDE.AddEditMenuItems(const A: TAbstractMenuItem);
@@ -190,11 +192,11 @@ begin
     AddMenuItem('Cut', @EditCut).Icon := FIcons.Cut;
     AddMenuItem('Copy', @EditCopy).Icon := FIcons.Copy;
     AddMenuItem('Paste', @EditPaste).Icon := FIcons.Paste;
-    AddMenuItem('Delete', @EditDelete).Icon := FIcons.Delete;
+    AddMenuItem('Delete', @EditDelete).Icon := FIcons.Cross;
     AddMenuItem(MenuItemSeparator);
-    AddMenuItem('Select All', @EditSelectAll).Icon := FIcons.Delete;
+    AddMenuItem('Select All', @EditSelectAll).Icon := FIcons.LayerSelect;
     AddMenuItem(MenuItemSeparator);
-    AddMenuItem('Find ...');
+    AddMenuItem('Find ...').Icon := FIcons.Find;
     AddMenuItem('Find Next');
     AddMenuItem(MenuItemSeparator);
     AddMenuItem('Replace');
@@ -264,6 +266,20 @@ procedure TFormIDE.FormShow(A: TSender);
 begin
   LogMessage('Welcome to ' + Application.Title);
   WindowState := wsMaximized;
+end;
+
+procedure TFormIDE.FormCloseQuery(A: TSender; var ACanClose: boolean);
+begin
+  if FMemo.Modified then begin
+    case MessageDlg('Do you want to save changes?', mtConfirmation, mbYesNoCancel, 0) of
+      mrYes: begin
+        FileSave(Self);
+      end;
+      mrCancel: begin
+        ACanClose := False;
+      end;
+    end;
+  end;
 end;
 
 procedure TFormIDE.FileNew(A: TSender);

@@ -43,9 +43,9 @@
         <UnitName Value="MainForm"/>
       </Unit1>
       <Unit2>
-        <Filename Value="ideicons.pas"/>
+        <Filename Value="..\..\..\..\javavcl\src\fatcowicons.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="IdeIcons"/>
+        <UnitName Value="FatCowIcons"/>
       </Unit2>
     </Units>
   </ProjectOptions>
