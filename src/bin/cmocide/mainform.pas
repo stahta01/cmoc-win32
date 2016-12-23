@@ -21,13 +21,14 @@ type
   public
     constructor Create(A: TComponent); override;
   public
-    procedure Execute(const AExecutable: string; const AParameters: array of string;
-      const AConsole: boolean);
+    procedure Execute(const AExecutable: string; const AParameters: array of string; const AConsole: boolean);
     procedure AddEditMenuItems(const A: TAbstractMenuItem);
     procedure LogMessage(const A: string);
+    procedure LogFileName(const A, AFileName: string);
     procedure SetFileName(const A: TFileName); override;
     procedure SaveToFile(const A: TFileName); override;
     procedure LoadFromFile(const A: TFileName); override;
+    procedure OpenMESSImage(const A: TFileName);
   public
     procedure ListBoxInserted(A: TSender; AIndex: integer);
   public
@@ -49,6 +50,11 @@ type
     procedure EditPaste(A: TSender);
     procedure EditDelete(A: TSender);
     procedure EditSelectAll(A: TSender);
+    procedure EditFind(A: TSender);
+    procedure EditFindNext(A: TSender);
+    procedure EditReplace(A: TSender);
+    procedure EditUpperCase(A: TSender);
+    procedure EditLowerCase(A: TSender);
     procedure EditFormatSource(A: TSender);
   public
     procedure RunSyntaxCheck(A: TSender);
@@ -58,6 +64,9 @@ type
   public
     procedure ToolsOpenConsole(A: TSender);
     procedure ToolsMessImageTool(A: TSender);
+    procedure ToolsOpenDisk0(A: TSender);
+    procedure ToolsOpenDisk1(A: TSender);
+    procedure ToolsOpenDisk2(A: TSender);
   end;
 
 var
@@ -120,9 +129,9 @@ begin
       AddMenuItem('Disassemble 6809 Binary ...');
       AddMenuItem(MenuItemSeparator);
       AddMenuItem('MESS Image Tool ...', @ToolsMessImageTool);
-      AddMenuItem('Open Disk #0 ...');
-      AddMenuItem('Open Disk #1 ...');
-      AddMenuItem('Open Disk #2 ... (EDTASM++)');
+      AddMenuItem('Open Disk #0 ...', @ToolsOpenDisk0);
+      AddMenuItem('Open Disk #1 ...', @ToolsOpenDisk1);
+      AddMenuItem('Open Disk #2 ... (EDTASM++)', @ToolsOpenDisk2);
     end;
     with AddMenuItem('Help') do begin
       AddMenuItem('About WinCMOC ...');
@@ -138,10 +147,10 @@ begin
   ToolBar.AddToolBarButton('Copy', @EditCopy).Icon := FIcons.Copy;
   ToolBar.AddToolBarButton('Paste', @EditPaste).Icon := FIcons.Paste;
   ToolBar.AddToolBarButton('Delete', @EditDelete).Icon := FIcons.Cross;
-  ToolBar.AddToolBarButton('Syntax Check').Icon := FIcons.TickButton;
-  ToolBar.AddToolBarButton('Compile').Icon := FIcons.Compile;
-  ToolBar.AddToolBarButton('Build').Icon := FIcons.Bricks;
-  ToolBar.AddToolBarButton('Build and Run').Icon := FIcons.BrickGo;
+  ToolBar.AddToolBarButton('Syntax Check', @RunSyntaxCheck).Icon := FIcons.TickButton;
+  ToolBar.AddToolBarButton('Compile', @RunCompile).Icon := FIcons.Compile;
+  ToolBar.AddToolBarButton('Build', @RunBuild).Icon := FIcons.Bricks;
+  ToolBar.AddToolBarButton('Build and Run', @RunBuildAndRun).Icon := FIcons.BrickGo;
 
   FSplitter := TPairSplitter.Create(Self);
   FSplitter.Handle.setResizeWeight(1);
@@ -170,7 +179,7 @@ begin
   FListBox.BevelInner := bvNone;
   FListBox.Align := alClient;
   FListBox.Items.OnInserted := @ListBoxInserted;
-  FListBox.Color := $ddffff;
+  FListBox.Color := clInfoBk;
   FListBox.Font.Name := 'Courier New';
   FListBox.Font.Size := 10;
   FListBox.Parent := FSplitter.Sides[1];
@@ -193,6 +202,7 @@ begin
     FMemo.Lines.Add('    puts("WELCOME TO WINCMOC IDE V0.7!");');
     FMemo.Lines.Add('    return 0;');
     FMemo.Lines.Add('}');
+    FMemo.ClearUndoBuffer;
     FileName := EmptyStr;
   end;
 end;
@@ -210,13 +220,13 @@ begin
     AddMenuItem(MenuItemSeparator);
     AddMenuItem('Select All', @EditSelectAll).Icon := FIcons.LayerSelect;
     AddMenuItem(MenuItemSeparator);
-    AddMenuItem('Find ...').Icon := FIcons.Find;
-    AddMenuItem('Find Next');
+    AddMenuItem('Find ...', @EditFind).Icon := FIcons.Find;
+    AddMenuItem('Find Next', @EditFindNext);
     AddMenuItem(MenuItemSeparator);
-    AddMenuItem('Replace');
+    AddMenuItem('Replace', @EditReplace);
     AddMenuItem(MenuItemSeparator);
-    AddMenuItem('Uppercase Selection');
-    AddMenuItem('Lowercase Selection');
+    AddMenuItem('Uppercase Selection', @EditUpperCase);
+    AddMenuItem('Lowercase Selection', @EditLowerCase);
     AddMenuItem(MenuItemSeparator);
     AddMenuItem('Format Source Code (AStyle)', @EditFormatSource);
   end;
@@ -227,6 +237,15 @@ begin
   FListBox.Items.Add(A);
 end;
 
+procedure TFormIDE.LogFileName(const A, AFileName: string);
+begin
+  if Length(AFileName) = 0 then begin
+    LogMessage(A);
+  end else begin
+    LogMessage(A + ' - [' + AFileName + ']');
+  end;
+end;
+
 procedure TFormIDE.SetFileName(const A: TFileName);
 begin
   FMemo.Modified := False;
@@ -235,20 +254,21 @@ end;
 
 procedure TFormIDE.SaveToFile(const A: TFileName);
 begin
+  LogFileName('Saving', A);
   FMemo.Lines.SaveToFile(A);
   inherited;
 end;
 
 procedure TFormIDE.LoadFromFile(const A: TFileName);
 begin
+  LogFileName('Loading', A);
   FMemo.Text := AnsiLoadFromFile(A);
   FMemo.ClearUndoBuffer;
   FMemo.SelStart := 0;
   inherited;
 end;
 
-procedure TFormIDE.Execute(const AExecutable: string; const AParameters: array of string;
-  const AConsole: boolean);
+procedure TFormIDE.Execute(const AExecutable: string; const AParameters: array of string; const AConsole: boolean);
 begin
   with FProcess do begin
     if AConsole then begin
@@ -395,6 +415,31 @@ begin
   FMemo.SelectAll;
 end;
 
+procedure TFormIDE.EditFind(A: TSender);
+begin
+
+end;
+
+procedure TFormIDE.EditFindNext(A: TSender);
+begin
+
+end;
+
+procedure TFormIDE.EditReplace(A: TSender);
+begin
+
+end;
+
+procedure TFormIDE.EditUpperCase(A: TSender);
+begin
+  FMemo.ReplaceSelectedText(AnsiUpperCase(FMemo.SelText));
+end;
+
+procedure TFormIDE.EditLowerCase(A: TSender);
+begin
+  FMemo.ReplaceSelectedText(AnsiLowerCase(FMemo.SelText));
+end;
+
 procedure TFormIDE.EditFormatSource(A: TSender);
 var
   LDst, LSrc: TStringStream;
@@ -440,10 +485,30 @@ begin
   Execute(ProgramDirectory + 'console.bat', [], True);
 end;
 
+procedure TFormIDE.OpenMESSImage(const A: TFileName);
+begin
+  LogFileName('Opening MESS Image Tool', A);
+  Execute(ProgramDirectory + 'wimgtool.exe', [A], True);
+end;
+
 procedure TFormIDE.ToolsMessImageTool(A: TSender);
 begin
-  LogMessage('Opening MESS Image Tool');
-  Execute(ProgramDirectory + 'wimgtool.exe', [], True);
+  OpenMESSImage(EmptyStr);
+end;
+
+procedure TFormIDE.ToolsOpenDisk0(A: TSender);
+begin
+  OpenMESSImage(ProgramDirectory + '..\dsk\disk0.dsk');
+end;
+
+procedure TFormIDE.ToolsOpenDisk1(A: TSender);
+begin
+  OpenMESSImage(ProgramDirectory + '..\dsk\disk1.dsk');
+end;
+
+procedure TFormIDE.ToolsOpenDisk2(A: TSender);
+begin
+  OpenMESSImage(ProgramDirectory + '..\dsk\disk2.dsk');
 end;
 
 end.
