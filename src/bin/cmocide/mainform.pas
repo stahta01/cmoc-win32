@@ -36,6 +36,7 @@ type
     procedure FileNew(A: TSender);
     procedure FileNewWindow(A: TSender);
     procedure FileOpen(A: TSender);
+    procedure FileOpenInNewWindow(A: TSender);
     procedure FileSave(A: TSender);
     procedure FileSaveAs(A: TSender);
     procedure FileExit(A: TSender);
@@ -78,7 +79,7 @@ begin
       AddMenuItem('New Window', @FileNewWindow).Icon := FIcons.NewWindow;
       AddMenuItem(MenuItemSeparator);
       AddMenuItem('Open ...', @FileOpen).Icon := FIcons.Open;
-      AddMenuItem('Open New Window ...').Icon := FIcons.FolderGo;
+      AddMenuItem('Open New Window ...', @FileOpenInNewWindow).Icon := FIcons.FolderGo;
       AddMenuItem(MenuItemSeparator);
       AddMenuItem('Save', @FileSave).Icon := FIcons.Save;
       AddMenuItem('Save As ...', @FileSaveAs).Icon := FIcons.FileSaveAs;
@@ -165,23 +166,26 @@ begin
   FListBox.Items.OnInserted := @ListBoxInserted;
   FListBox.Parent := FSplitter.Sides[1];
 
-  FMemo.Lines.Add(EmptyStr);
-  FMemo.Lines.Add('#include <math.h>');
-  FMemo.Lines.Add('#include <ctype.h>');
-  FMemo.Lines.Add('#include <stdio.h>');
-  FMemo.Lines.Add('#include <stdlib.h>');
-  FMemo.Lines.Add('#include <string.h>');
-  FMemo.Lines.Add('#include <conio.h>');
-  FMemo.Lines.Add(EmptyStr);
-  FMemo.Lines.Add('int main(void)');
-  FMemo.Lines.Add('{');
-  FMemo.Lines.Add('    puts("WELCOME TO WINCMOC IDE V0.7!");');
-  FMemo.Lines.Add('    return 0;');
-  FMemo.Lines.Add('}');
-
   OpenDialog.Filter := 'C/C++ Files|*.c;*.h;*.cpp;*.hpp|All Files|*.*';
   SaveDialog.Filter := OpenDialog.Filter;
-  FileName := EmptyStr;
+  try
+    LoadFromFile(GetEnvironmentVariable('FILENAME'));
+  except
+    FMemo.Lines.Add(EmptyStr);
+    FMemo.Lines.Add('#include <math.h>');
+    FMemo.Lines.Add('#include <ctype.h>');
+    FMemo.Lines.Add('#include <stdio.h>');
+    FMemo.Lines.Add('#include <stdlib.h>');
+    FMemo.Lines.Add('#include <string.h>');
+    FMemo.Lines.Add('#include <conio.h>');
+    FMemo.Lines.Add(EmptyStr);
+    FMemo.Lines.Add('int main(void)');
+    FMemo.Lines.Add('{');
+    FMemo.Lines.Add('    puts("WELCOME TO WINCMOC IDE V0.7!");');
+    FMemo.Lines.Add('    return 0;');
+    FMemo.Lines.Add('}');
+    FileName := EmptyStr;
+  end;
 end;
 
 procedure TFormIDE.AddEditMenuItems(const A: TAbstractMenuItem);
@@ -294,6 +298,7 @@ procedure TFormIDE.FileNewWindow(A: TSender);
 begin
   LogMessage('Opening New WinCMOC IDE Window');
   Execute('javaw', ['-cp', TProgram.FileName, 'cmocide'], True);
+  FProcess.Environment.Values['FILENAME'] := EmptyStr;
 end;
 
 procedure TFormIDE.FileOpen(A: TSender);
@@ -301,6 +306,16 @@ begin
   OpenDialog.FileName := FileName;
   if OpenDialog.Execute then begin
     LoadFromFile(OpenDialog.FileName);
+  end else begin
+    Abort;
+  end;
+end;
+
+procedure TFormIDE.FileOpenInNewWindow(A: TSender);
+begin
+  if OpenDialog.Execute then begin
+    FProcess.Environment.Values['FILENAME'] := OpenDialog.FileName;
+    FileNewWindow(A);
   end else begin
     Abort;
   end;
