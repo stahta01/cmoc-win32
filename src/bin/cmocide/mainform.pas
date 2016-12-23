@@ -5,7 +5,7 @@ unit MainForm;
 interface
 
 uses Classes, ComCtrls, Controls, CustomForms, Documents, FileUtils, Forms, IdeIcons, Java, LCLIntf, Memos,
-  Menus, Process, Splitters, StdCtrls, StrUtils, SysUtils;
+  Menus, Process, ProcessUtils, Splitters, StdCtrls, SysUtils;
 
 type
 
@@ -20,11 +20,15 @@ type
   public
     constructor Create(A: TComponent); override;
   public
-    procedure Execute(const AExecutable: string; const AParameters: array of string);
+    procedure Execute(const AExecutable: string; const AParameters: array of string;
+      const AConsole: boolean);
     procedure AddEditMenuItems(const A: TAbstractMenuItem);
     procedure LogMessage(const A: string);
+    procedure SetFileName(const A: TFileName); override;
     procedure SaveToFile(const A: TFileName); override;
     procedure LoadFromFile(const A: TFileName); override;
+  public
+    procedure ListBoxInserted(A: TSender; AIndex: integer);
   public
     procedure FormShow(A: TSender);
   public
@@ -61,13 +65,9 @@ begin
   Width := 720;
   Height := 500;
   Position := poScreenCenter;
-  FileName := EmptyStr;
 
   FProcess := TProcess.Create(Self);
   FIcons := TIdeIcons.Create;
-
-  OpenDialog.Filter := 'C/C++ Files|*.c;*.h;*.cpp;*.hpp|All Files|*.*';
-  SaveDialog.Filter := OpenDialog.Filter;
 
   with MainMenu do begin
     with AddMenuItem('File') do begin
@@ -159,7 +159,12 @@ begin
   FListBox.BevelOuter := bvNone;
   FListBox.BevelInner := bvNone;
   FListBox.Align := alClient;
+  FListBox.Items.OnInserted := @ListBoxInserted;
   FListBox.Parent := FSplitter.Sides[1];
+
+  OpenDialog.Filter := 'C/C++ Files|*.c;*.h;*.cpp;*.hpp|All Files|*.*';
+  SaveDialog.Filter := OpenDialog.Filter;
+  FileName := EmptyStr;
 
   FMemo.Lines.Add(EmptyStr);
   FMemo.Lines.Add('#include <math.h>');
@@ -203,39 +208,13 @@ end;
 
 procedure TFormIDE.LogMessage(const A: string);
 begin
-  FListBox.ItemIndex := FListBox.Items.Add(A);
-  FListBox.MakeCurrentVisible;
+  FListBox.Items.Add(A);
 end;
 
-procedure TFormIDE.Execute(const AExecutable: string; const AParameters: array of string);
-var
-  LPos: integer;
-  LBytes: array[0..100] of byte;
-  LString, LBuffer: string;
+procedure TFormIDE.SetFileName(const A: TFileName);
 begin
-  FListBox.Items.Clear;
-  FProcess.Executable := AExecutable;
-  FProcess.Parameters.LoadFromStrings(AParameters);
-  FProcess.Execute;
-  LBuffer := default(string);
-  while FProcess.Running or (FProcess.Output.NumBytesAvailable > 0) do begin
-    if FProcess.Output.NumBytesAvailable > 0 then begin
-      SetString(LString, @LBytes[0], FProcess.Output.Read(@LBytes[0], SizeOf(LBytes)));
-      LBuffer += LString;
-      LPos := PosSet(AllowLineEndings, LBuffer);
-      if (LPos > 0) and (LPos < Length(LBuffer)) then begin
-        LPos := 1;
-        LogMessage(AnsiReadLine(LBuffer, LPos));
-        Delete(LBuffer, 1, LPos - 1);
-      end;
-    end else begin
-      Sleep(50);
-    end;
-  end;
-  LPos := 1;
-  while LPos <= Length(LBuffer) do begin
-    LogMessage(AnsiReadLine(LBuffer, LPos));
-  end;
+  FMemo.Modified := False;
+  inherited;
 end;
 
 procedure TFormIDE.SaveToFile(const A: TFileName);
@@ -257,6 +236,35 @@ begin
   inherited;
 end;
 
+procedure TFormIDE.Execute(const AExecutable: string; const AParameters: array of string;
+  const AConsole: boolean);
+begin
+  FListBox.Items.Clear;
+  with FProcess do begin
+    if AConsole then begin
+      Options := [];
+    end else begin
+      Options := [poUsePipes];
+    end;
+    Executable := AExecutable;
+    if not FileExists(Executable) then begin
+      Executable := ExeSearch(AExecutable);
+    end;
+    CurrentDirectory := ExtractFileDir(Executable);
+    Parameters.LoadFromStrings(AParameters);
+    Execute;
+    if not AConsole then begin
+      ProcessOutputTo(FProcess, FListBox.Items);
+    end;
+  end;
+end;
+
+procedure TFormIDE.ListBoxInserted(A: TSender; AIndex: integer);
+begin
+  FListBox.ItemIndex := AIndex;
+  FListBox.MakeCurrentVisible;
+end;
+
 procedure TFormIDE.FormShow(A: TSender);
 begin
   LogMessage('Welcome to ' + Application.Title);
@@ -274,6 +282,8 @@ begin
   OpenDialog.FileName := FileName;
   if OpenDialog.Execute then begin
     LoadFromFile(OpenDialog.FileName);
+  end else begin
+    Abort;
   end;
 end;
 
@@ -291,6 +301,8 @@ begin
   SaveDialog.FileName := FileName;
   if SaveDialog.Execute then begin
     SaveToFile(SaveDialog.FileName);
+  end else begin
+    Abort;
   end;
 end;
 
@@ -335,18 +347,33 @@ begin
 end;
 
 procedure TFormIDE.EditFormatSource(A: TSender);
+var
+  LDst, LSrc: TStringStream;
 begin
-  Execute(ProgramDirectory + 'cmsoc.exe', ['--help']);
+  LSrc := TStringStream.Create(FMemo.Text);
+  try
+    LDst := TStringStream.Create(EmptyStr);
+    try
+      ProcessPipe(LDst, LSrc, ProgramDirectory + 'astyle.exe', EmptyStr, ['-A8', '-xC100', '-k1', '-w',
+        (*'-U',*) '-H', '-j', '-s' + IntToStr(4)], []);
+      FMemo.Text := LDst.DataString;
+    finally
+      FreeAndNil(LDst);
+    end;
+  finally
+    FreeAndNil(LSrc);
+  end;
+  //Execute(ProgramDirectory + 'cmoc.exe', ['--help'], False);
 end;
 
 procedure TFormIDE.ToolsOpenConsole(A: TSender);
 begin
-  OpenDocument(ProgramDirectory + 'console.bat');
+  Execute(ProgramDirectory + 'console.bat', [], True);
 end;
 
 procedure TFormIDE.ToolsMessImageTool(A: TSender);
 begin
-  OpenDocument(ProgramDirectory + 'wimgtool.exe');
+  Execute(ProgramDirectory + 'wimgtool.exe', [], True);
 end;
 
 end.
