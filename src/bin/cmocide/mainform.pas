@@ -5,7 +5,8 @@ unit MainForm;
 interface
 
 uses Classes, ComCtrls, Controls, CustomForms, Dialogs, Documents, FatCowIcons, FileUtils, Forms,
-  Java, LCLIntf, Memos, Menus, Process, ProcessUtils, Programs, Splitters, StdCtrls, StrUtils, SysUtils;
+  Graphics, Java, LCLIntf, Memos, Menus, Process, ProcessUtils, Programs, Splitters,
+  StdCtrls, StrUtils, SysUtils;
 
 type
 
@@ -50,6 +51,11 @@ type
     procedure EditSelectAll(A: TSender);
     procedure EditFormatSource(A: TSender);
   public
+    procedure RunSyntaxCheck(A: TSender);
+    procedure RunCompile(A: TSender);
+    procedure RunBuild(A: TSender);
+    procedure RunBuildAndRun(A: TSender);
+  public
     procedure ToolsOpenConsole(A: TSender);
     procedure ToolsMessImageTool(A: TSender);
   end;
@@ -88,11 +94,11 @@ begin
     end;
     AddEditMenuItems(AddMenuItem('Edit'));
     with AddMenuItem('Run') do begin
-      AddMenuItem('Syntax Check').Icon := FIcons.TickButton;
-      AddMenuItem('Compile').Icon := FIcons.Compile;
+      AddMenuItem('Syntax Check', @RunSyntaxCheck).Icon := FIcons.TickButton;
+      AddMenuItem('Compile', @RunCompile).Icon := FIcons.Compile;
       AddMenuItem(MenuItemSeparator);
-      AddMenuItem('Build').Icon := FIcons.Bricks;
-      AddMenuItem('Build and Run ...').Icon := FIcons.BrickGo;
+      AddMenuItem('Build', @RunBuild).Icon := FIcons.Bricks;
+      AddMenuItem('Build and Run ...', @RunBuildAndRun).Icon := FIcons.BrickGo;
     end;
     with AddMenuItem('Emulators') do begin
       AddMenuItem('Colour Computer 1 (Color BASIC 1.0)').Icon := FIcons.BulletRight;
@@ -164,6 +170,9 @@ begin
   FListBox.BevelInner := bvNone;
   FListBox.Align := alClient;
   FListBox.Items.OnInserted := @ListBoxInserted;
+  FListBox.Color := $ddffff;
+  FListBox.Font.Name := 'Courier New';
+  FListBox.Font.Size := 10;
   FListBox.Parent := FSplitter.Sides[1];
 
   OpenDialog.Filter := 'C/C++ Files|*.c;*.h;*.cpp;*.hpp|All Files|*.*';
@@ -289,9 +298,15 @@ begin
 end;
 
 procedure TFormIDE.FileNew(A: TSender);
+var
+  LCanClose: boolean;
 begin
-  FMemo.Lines.Clear;
-  FileName := EmptyStr;
+  LCanClose := True;
+  FormCloseQuery(A, LCanClose);
+  if LCanClose then begin
+    FMemo.Lines.Clear;
+    FileName := EmptyStr;
+  end;
 end;
 
 procedure TFormIDE.FileNewWindow(A: TSender);
@@ -397,7 +412,26 @@ begin
   finally
     FreeAndNil(LSrc);
   end;
-  //Execute(ProgramDirectory + 'cmoc.exe', ['--help'], False);
+end;
+
+procedure TFormIDE.RunSyntaxCheck(A: TSender);
+begin
+  Execute(ProgramDirectory + 'cmoc.exe', ['--help'], False);
+end;
+
+procedure TFormIDE.RunCompile(A: TSender);
+begin
+
+end;
+
+procedure TFormIDE.RunBuild(A: TSender);
+begin
+
+end;
+
+procedure TFormIDE.RunBuildAndRun(A: TSender);
+begin
+
 end;
 
 procedure TFormIDE.ToolsOpenConsole(A: TSender);
