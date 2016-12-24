@@ -4,8 +4,8 @@ unit MainForm;
 
 interface
 
-uses Classes, ComCtrls, Controls, CustomForms, Dialogs, Documents, FatCowIcons, FileUtils, Forms,
-  FormsFind, Graphics, Memos, Menus, Process, ProcessUtils, Programs, Splitters,
+uses Classes, ComCtrls, Controls, CustomForms, Dialogs, Documents, FatCowIcons, FileUtils, FindForms, Forms,
+  Graphics, GraphTypes, Memos, Menus, Process, ProcessUtils, Programs, Splitters,
   StdCtrls, StrUtils, SysUtils;
 
 type
@@ -33,7 +33,7 @@ type
   public
     procedure ListBoxInserted(A: TObject; AIndex: integer);
   public
-    procedure FormShown(A: TObject);
+    procedure FormShow(A: TObject);
     procedure FormCloseQuery(A: TObject; var ACanClose: boolean);
   public
     procedure FileNew(A: TObject);
@@ -79,7 +79,7 @@ constructor TFormIDE.Create(A: TComponent);
 begin
   inherited;
 
-  OnShown := @FormShown;
+  OnShow := @FormShow;
   OnCloseQuery := @FormCloseQuery;
 
   Width := 720;
@@ -299,7 +299,7 @@ begin
   FListBox.MakeCurrentVisible;
 end;
 
-procedure TFormIDE.FormShown(A: TObject);
+procedure TFormIDE.FormShow(A: TObject);
 begin
   LogMessage('Welcome to ' + Application.Title);
   WindowState := wsMaximized;
