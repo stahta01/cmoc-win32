@@ -82,9 +82,9 @@ begin
   OnShow := @FormShow;
   OnCloseQuery := @FormCloseQuery;
 
-  Width := 720;
-  Height := 500;
+  SetSize(720, 500);
   Position := poScreenCenter;
+  WindowState := wsMaximized;
 
   FProcess := TProcess.Create(Self);
   FIcons := TFatCowIcons.Create(ProgramDirectory + 'images');
@@ -156,7 +156,6 @@ begin
   FSplitter := TPairSplitter.Create(Self);
   FSplitter.Handle.setResizeWeight(1);
   FSplitter.SplitterType := pstVertical;
-  FSplitter.Position := Height - 250;
   FSplitter.Align := alClient;
   FSplitter.Parent := Self;
 
@@ -302,7 +301,7 @@ end;
 procedure TFormIDE.FormShow(A: TObject);
 begin
   LogMessage('Welcome to ' + Application.Title);
-  WindowState := wsMaximized;
+  FSplitter.Position := Height - 256;
 end;
 
 procedure TFormIDE.FormCloseQuery(A: TObject; var ACanClose: boolean);

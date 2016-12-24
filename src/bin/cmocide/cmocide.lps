@@ -17,8 +17,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="MainForm"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="72"/>
-        <CursorPos Y="81"/>
+        <CursorPos X="19" Y="9"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -146,8 +145,8 @@
       <Unit19>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\java_sys.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="661"/>
-        <CursorPos X="17" Y="666"/>
+        <TopLine Value="631"/>
+        <CursorPos X="3" Y="641"/>
         <UsageCount Value="11"/>
       </Unit19>
       <Unit20>
@@ -850,7 +849,8 @@
       <Unit114>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\jdynarrh.inc"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="31" Y="33"/>
+        <TopLine Value="10"/>
+        <CursorPos X="3" Y="20"/>
         <UsageCount Value="10"/>
       </Unit114>
       <Unit115>
@@ -982,8 +982,8 @@
         <Filename Value="..\..\..\..\javavcl\src\controls.pas"/>
         <UnitName Value="Controls"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="11"/>
-        <CursorPos X="42" Y="20"/>
+        <TopLine Value="4"/>
+        <CursorPos X="71" Y="18"/>
         <UsageCount Value="13"/>
       </Unit132>
       <Unit133>
@@ -998,8 +998,7 @@
         <Filename Value="..\..\..\..\javavcl\src\elements.pas"/>
         <UnitName Value="Elements"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="61"/>
-        <CursorPos X="13" Y="70"/>
+        <CursorPos X="41" Y="154"/>
         <UsageCount Value="11"/>
       </Unit134>
       <Unit135>
@@ -1046,8 +1045,8 @@
         <Filename Value="..\..\..\..\javavcl\src\sysutils.pas"/>
         <UnitName Value="SysUtils"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="214"/>
-        <CursorPos X="3" Y="216"/>
+        <TopLine Value="724"/>
+        <CursorPos X="18" Y="709"/>
         <UsageCount Value="13"/>
       </Unit140>
       <Unit141>
@@ -1141,8 +1140,8 @@
         <Filename Value="..\..\..\..\javavcl\src\strutils.pas"/>
         <UnitName Value="StrUtils"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="649"/>
-        <CursorPos X="5" Y="140"/>
+        <TopLine Value="41"/>
+        <CursorPos X="10" Y="51"/>
         <UsageCount Value="11"/>
       </Unit152>
       <Unit153>
@@ -1361,11 +1360,23 @@
         <UsageCount Value="10"/>
       </Unit180>
     </Units>
-    <JumpHistory Count="1">
+    <JumpHistory Count="4" HistoryIndex="3">
       <Position1>
         <Filename Value="mainform.pas"/>
         <Caret Line="76" Column="15" TopLine="75"/>
       </Position1>
+      <Position2>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="82" Column="22" TopLine="76"/>
+      </Position2>
+      <Position3>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="7" Column="28"/>
+      </Position3>
+      <Position4>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="9" Column="19"/>
+      </Position4>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
