@@ -5,7 +5,7 @@ unit MainForm;
 interface
 
 uses Classes, ComCtrls, Controls, CustomForms, Dialogs, Documents, FatCowIcons, FileUtils, Forms,
-  FormsFind, Graphics, Java, LCLIntf, Memos, Menus, Process, ProcessUtils, Programs, Splitters,
+  FormsFind, Graphics, Memos, Menus, Process, ProcessUtils, Programs, Splitters,
   StdCtrls, StrUtils, SysUtils;
 
 type
@@ -421,6 +421,7 @@ procedure TFormIDE.EditFind(A: TObject);
 begin
   with TFormFind.Create(Self) do begin
     try
+      FindText.Text := FMemo.SelText;
       ShowModal;
     finally
       Free;
