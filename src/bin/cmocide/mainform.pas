@@ -4,7 +4,7 @@ unit MainForm;
 
 interface
 
-uses Classes, ComCtrls, Controls, CustomForms, Dialogs, Documents, FatCowIcons, FileUtils, Forms,
+uses Classes, ComCtrls, Controls, CustomForms, Dialogs, Documents, FatCowIcons, FileUtils, FormsFind, Forms,
   Graphics, Java, LCLIntf, Memos, Menus, Process, ProcessUtils, Programs, Splitters,
   StdCtrls, StrUtils, SysUtils;
 
@@ -31,43 +31,43 @@ type
     procedure LoadFromFile(const A: TFileName); override;
     procedure OpenMESSImage(const A: TFileName);
   public
-    procedure ListBoxInserted(A: TSender; AIndex: integer);
+    procedure ListBoxInserted(A: TObject; AIndex: integer);
   public
-    procedure FormShow(A: TSender);
-    procedure FormCloseQuery(A: TSender; var ACanClose: boolean);
+    procedure FormShow(A: TObject);
+    procedure FormCloseQuery(A: TObject; var ACanClose: boolean);
   public
-    procedure FileNew(A: TSender);
-    procedure FileNewWindow(A: TSender);
-    procedure FileOpen(A: TSender);
-    procedure FileOpenInNewWindow(A: TSender);
-    procedure FileSave(A: TSender);
-    procedure FileSaveAs(A: TSender);
-    procedure FileExit(A: TSender);
+    procedure FileNew(A: TObject);
+    procedure FileNewWindow(A: TObject);
+    procedure FileOpen(A: TObject);
+    procedure FileOpenInNewWindow(A: TObject);
+    procedure FileSave(A: TObject);
+    procedure FileSaveAs(A: TObject);
+    procedure FileExit(A: TObject);
   public
-    procedure EditUndo(A: TSender);
-    procedure EditRedo(A: TSender);
-    procedure EditCut(A: TSender);
-    procedure EditCopy(A: TSender);
-    procedure EditPaste(A: TSender);
-    procedure EditDelete(A: TSender);
-    procedure EditSelectAll(A: TSender);
-    procedure EditFind(A: TSender);
-    procedure EditFindNext(A: TSender);
-    procedure EditReplace(A: TSender);
-    procedure EditUpperCase(A: TSender);
-    procedure EditLowerCase(A: TSender);
-    procedure EditFormatSource(A: TSender);
+    procedure EditUndo(A: TObject);
+    procedure EditRedo(A: TObject);
+    procedure EditCut(A: TObject);
+    procedure EditCopy(A: TObject);
+    procedure EditPaste(A: TObject);
+    procedure EditDelete(A: TObject);
+    procedure EditSelectAll(A: TObject);
+    procedure EditFind(A: TObject);
+    procedure EditFindNext(A: TObject);
+    procedure EditReplace(A: TObject);
+    procedure EditUpperCase(A: TObject);
+    procedure EditLowerCase(A: TObject);
+    procedure EditFormatSource(A: TObject);
   public
-    procedure RunSyntaxCheck(A: TSender);
-    procedure RunCompile(A: TSender);
-    procedure RunBuild(A: TSender);
-    procedure RunBuildAndRun(A: TSender);
+    procedure RunSyntaxCheck(A: TObject);
+    procedure RunCompile(A: TObject);
+    procedure RunBuild(A: TObject);
+    procedure RunBuildAndRun(A: TObject);
   public
-    procedure ToolsOpenConsole(A: TSender);
-    procedure ToolsMessImageTool(A: TSender);
-    procedure ToolsOpenDisk0(A: TSender);
-    procedure ToolsOpenDisk1(A: TSender);
-    procedure ToolsOpenDisk2(A: TSender);
+    procedure ToolsOpenConsole(A: TObject);
+    procedure ToolsMessImageTool(A: TObject);
+    procedure ToolsOpenDisk0(A: TObject);
+    procedure ToolsOpenDisk1(A: TObject);
+    procedure ToolsOpenDisk2(A: TObject);
   end;
 
 var
@@ -293,19 +293,19 @@ begin
   end;
 end;
 
-procedure TFormIDE.ListBoxInserted(A: TSender; AIndex: integer);
+procedure TFormIDE.ListBoxInserted(A: TObject; AIndex: integer);
 begin
   FListBox.ItemIndex := AIndex;
   FListBox.MakeCurrentVisible;
 end;
 
-procedure TFormIDE.FormShow(A: TSender);
+procedure TFormIDE.FormShow(A: TObject);
 begin
   LogMessage('Welcome to ' + Application.Title);
   WindowState := wsMaximized;
 end;
 
-procedure TFormIDE.FormCloseQuery(A: TSender; var ACanClose: boolean);
+procedure TFormIDE.FormCloseQuery(A: TObject; var ACanClose: boolean);
 begin
   if FMemo.Modified then begin
     case MessageDlg('Do you want to save changes?', mtConfirmation, mbYesNoCancel, 0) of
@@ -319,7 +319,7 @@ begin
   end;
 end;
 
-procedure TFormIDE.FileNew(A: TSender);
+procedure TFormIDE.FileNew(A: TObject);
 var
   LCanClose: boolean;
 begin
@@ -331,14 +331,14 @@ begin
   end;
 end;
 
-procedure TFormIDE.FileNewWindow(A: TSender);
+procedure TFormIDE.FileNewWindow(A: TObject);
 begin
   LogMessage('Opening New WinCMOC IDE Window');
   Execute('javaw', ['-cp', TProgram.FileName, 'cmocide'], True);
   FProcess.Environment.Values['FILENAME'] := EmptyStr;
 end;
 
-procedure TFormIDE.FileOpen(A: TSender);
+procedure TFormIDE.FileOpen(A: TObject);
 begin
   OpenDialog.FileName := FileName;
   if OpenDialog.Execute then begin
@@ -348,7 +348,7 @@ begin
   end;
 end;
 
-procedure TFormIDE.FileOpenInNewWindow(A: TSender);
+procedure TFormIDE.FileOpenInNewWindow(A: TObject);
 begin
   if OpenDialog.Execute then begin
     FProcess.Environment.Values['FILENAME'] := OpenDialog.FileName;
@@ -358,7 +358,7 @@ begin
   end;
 end;
 
-procedure TFormIDE.FileSave(A: TSender);
+procedure TFormIDE.FileSave(A: TObject);
 begin
   try
     SaveToFile(FileName);
@@ -367,7 +367,7 @@ begin
   end;
 end;
 
-procedure TFormIDE.FileSaveAs(A: TSender);
+procedure TFormIDE.FileSaveAs(A: TObject);
 begin
   SaveDialog.FileName := FileName;
   if SaveDialog.Execute then begin
@@ -377,77 +377,49 @@ begin
   end;
 end;
 
-procedure TFormIDE.FileExit(A: TSender);
+procedure TFormIDE.FileExit(A: TObject);
 begin
   Close;
 end;
 
-procedure TFormIDE.EditUndo(A: TSender);
+procedure TFormIDE.EditUndo(A: TObject);
 begin
   FMemo.Undo;
 end;
 
-procedure TFormIDE.EditRedo(A: TSender);
+procedure TFormIDE.EditRedo(A: TObject);
 begin
   FMemo.Redo;
 end;
 
-procedure TFormIDE.EditCut(A: TSender);
+procedure TFormIDE.EditCut(A: TObject);
 begin
   FMemo.CutToClipboard;
 end;
 
-procedure TFormIDE.EditCopy(A: TSender);
+procedure TFormIDE.EditCopy(A: TObject);
 begin
   FMemo.CopyToClipboard;
 end;
 
-procedure TFormIDE.EditPaste(A: TSender);
+procedure TFormIDE.EditPaste(A: TObject);
 begin
   FMemo.PasteFromClipboard;
 end;
 
-procedure TFormIDE.EditDelete(A: TSender);
+procedure TFormIDE.EditDelete(A: TObject);
 begin
   FMemo.ClearSelection;
 end;
 
-procedure TFormIDE.EditSelectAll(A: TSender);
+procedure TFormIDE.EditSelectAll(A: TObject);
 begin
   FMemo.SelectAll;
 end;
 
-type
-
-  TFindDialog = class(TForm)
-  strict private
-    procedure ButtonClick(A: TObject);
-  public
-    constructor Create(A: TComponent); override;
-  end;
-
-constructor TFindDialog.Create(A: TComponent);
+procedure TFormIDE.EditFind(A: TObject);
 begin
-  inherited;
-  Caption := 'Find';
-  Width := 400;
-  Height := 300;
-  with TButton.Create(Self) do begin
-    SetBounds(0, 0, 80, 24);
-    Caption := 'OK';
-    OnClick := @ButtonClick;
-    Parent := Self;
-  end;
-end;
-
-procedure TFindDialog.ButtonClick(A: TObject);
-begin
-  ModalResult := mrOk;
-end;
-
-procedure TFormIDE.EditFind(A: TSender);
-begin
-  with TFindDialog.Create(Self) do begin
+  with TFormFind.Create(Self) do begin
     try
       ShowModal;
     finally
@@ -456,27 +428,27 @@ begin
   end;
 end;
 
-procedure TFormIDE.EditFindNext(A: TSender);
+procedure TFormIDE.EditFindNext(A: TObject);
 begin
 
 end;
 
-procedure TFormIDE.EditReplace(A: TSender);
+procedure TFormIDE.EditReplace(A: TObject);
 begin
 
 end;
 
-procedure TFormIDE.EditUpperCase(A: TSender);
+procedure TFormIDE.EditUpperCase(A: TObject);
 begin
   FMemo.ReplaceSelectedText(AnsiUpperCase(FMemo.SelText));
 end;
 
-procedure TFormIDE.EditLowerCase(A: TSender);
+procedure TFormIDE.EditLowerCase(A: TObject);
 begin
   FMemo.ReplaceSelectedText(AnsiLowerCase(FMemo.SelText));
 end;
 
-procedure TFormIDE.EditFormatSource(A: TSender);
+procedure TFormIDE.EditFormatSource(A: TObject);
 var
   LDst, LSrc: TStringStream;
 begin
@@ -495,27 +467,27 @@ begin
   end;
 end;
 
-procedure TFormIDE.RunSyntaxCheck(A: TSender);
+procedure TFormIDE.RunSyntaxCheck(A: TObject);
 begin
   Execute(ProgramDirectory + 'cmoc.exe', ['--help'], False);
 end;
 
-procedure TFormIDE.RunCompile(A: TSender);
+procedure TFormIDE.RunCompile(A: TObject);
 begin
 
 end;
 
-procedure TFormIDE.RunBuild(A: TSender);
+procedure TFormIDE.RunBuild(A: TObject);
 begin
 
 end;
 
-procedure TFormIDE.RunBuildAndRun(A: TSender);
+procedure TFormIDE.RunBuildAndRun(A: TObject);
 begin
 
 end;
 
-procedure TFormIDE.ToolsOpenConsole(A: TSender);
+procedure TFormIDE.ToolsOpenConsole(A: TObject);
 begin
   LogMessage('Opening WinCMOC Console');
   Execute(ProgramDirectory + 'console.bat', [], True);
@@ -527,22 +499,22 @@ begin
   Execute(ProgramDirectory + 'wimgtool.exe', [A], True);
 end;
 
-procedure TFormIDE.ToolsMessImageTool(A: TSender);
+procedure TFormIDE.ToolsMessImageTool(A: TObject);
 begin
   OpenMESSImage(EmptyStr);
 end;
 
-procedure TFormIDE.ToolsOpenDisk0(A: TSender);
+procedure TFormIDE.ToolsOpenDisk0(A: TObject);
 begin
   OpenMESSImage(ProgramDirectory + '..\dsk\disk0.dsk');
 end;
 
-procedure TFormIDE.ToolsOpenDisk1(A: TSender);
+procedure TFormIDE.ToolsOpenDisk1(A: TObject);
 begin
   OpenMESSImage(ProgramDirectory + '..\dsk\disk1.dsk');
 end;
 
-procedure TFormIDE.ToolsOpenDisk2(A: TSender);
+procedure TFormIDE.ToolsOpenDisk2(A: TObject);
 begin
   OpenMESSImage(ProgramDirectory + '..\dsk\disk2.dsk');
 end;
