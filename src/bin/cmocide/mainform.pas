@@ -199,7 +199,7 @@ begin
     FMemo.Lines.Add(EmptyStr);
     FMemo.Lines.Add('int main(void)');
     FMemo.Lines.Add('{');
-    FMemo.Lines.Add('    puts("WELCOME TO WINCMOC IDE V0.7!");');
+    FMemo.Lines.Add('    puts("WELCOME TO ' + UpperCase(Application.Title) + '!");');
     FMemo.Lines.Add('    return 0;');
     FMemo.Lines.Add('}');
     FMemo.ClearUndoBuffer;
