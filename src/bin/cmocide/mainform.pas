@@ -4,9 +4,9 @@ unit MainForm;
 
 interface
 
-uses Classes, ComCtrls, Controls, CustomForms, Dialogs, Documents, FatCowIcons, FileUtils, FindForms, Forms,
-  Graphics, GraphTypes, Memos, Menus, Process, ProcessUtils, Programs, Splitters,
-  StdCtrls, StrUtils, SysUtils;
+uses CharUtils, Classes, ComCtrls, Controls, CustomForms, Dialogs, Documents, ExtCtrls,
+  FatCowIcons, FileUtils, FindForms, Forms, Graphics, GraphTypes, Memos, Menus,
+  Process, ProcessUtils, Programs, Splitters, StdCtrls, StrTools, StrUtils, SysUtils;
 
 type
 
@@ -72,6 +72,7 @@ type
 
 var
   FormMain: TForm;
+  FormFind: TFormFind;
 
 implementation
 
@@ -154,7 +155,7 @@ begin
   ToolBar.AddToolBarButton('Build and Run', @RunBuildAndRun, FIcons.BrickGo);
 
   FSplitter := TPairSplitter.Create(Self);
-  FSplitter.Handle.setResizeWeight(1);
+  FSplitter.Widget.setResizeWeight(1);
   FSplitter.SplitterType := pstVertical;
   FSplitter.Align := alClient;
   FSplitter.Parent := Self;
@@ -189,7 +190,7 @@ begin
   try
     LoadFromFile(GetEnvironmentVariable('FILENAME'));
   except
-    FMemo.Lines.Add(EmptyStr);
+    FMemo.Lines.Add('apple orange pair');
     FMemo.Lines.Add('#include <math.h>');
     FMemo.Lines.Add('#include <ctype.h>');
     FMemo.Lines.Add('#include <stdio.h>');
@@ -202,7 +203,7 @@ begin
     FMemo.Lines.Add('    puts("WELCOME TO ' + UpperCase(Application.Title) + '!");');
     FMemo.Lines.Add('    return 0;');
     FMemo.Lines.Add('}');
-    FMemo.ClearUndoBuffer;
+    FMemo.ClearUndo;
     FileName := EmptyStr;
   end;
 end;
@@ -263,7 +264,7 @@ procedure TFormIDE.LoadFromFile(const A: TFileName);
 begin
   LogFileName('Loading', A);
   FMemo.Text := AnsiLoadFromFile(A);
-  FMemo.ClearUndoBuffer;
+  FMemo.ClearUndo;
   FMemo.SelStart := 0;
   inherited;
 end;
@@ -418,19 +419,19 @@ end;
 
 procedure TFormIDE.EditFind(A: TObject);
 begin
-  with TFormFind.Create(Self) do begin
-    try
-      FindText.Text := FMemo.SelText;
-      ShowModal;
-    finally
-      Free;
-    end;
-  end;
+  FormFind.OnFindNext := @EditFindNext;
+  FormFind.FindText.Text := FMemo.SelText;
+  FormFind.ShowModal;
 end;
 
 procedure TFormIDE.EditFindNext(A: TObject);
 begin
-
+  FormFind.FindText.Text := Trim(FormFind.FindText.Text);
+  if Length(FormFind.FindText.Text) = 0 then begin
+    EditFind(A);
+  end else begin
+    FMemo.SearchReplace(FormFind.FindText.Text, EmptyStr, []);
+  end;
 end;
 
 procedure TFormIDE.EditReplace(A: TObject);
