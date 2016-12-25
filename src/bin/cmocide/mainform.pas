@@ -90,6 +90,15 @@ begin
   FProcess := TProcess.Create(Self);
   FIcons := TFatCowIcons.Create(ProgramDirectory + 'images');
 
+  with StatusBar.AddPanel do begin
+    Width := 100;
+  end;
+  with StatusBar.AddPanel do begin
+    Width := 100;
+  end;
+  with StatusBar.AddPanel do begin
+    Align := alClient;
+  end;
   with MainMenu do begin
     with AddMenuItem('File') do begin
       AddMenuItem('New', @FileNew, FIcons.New);
@@ -420,17 +429,17 @@ end;
 procedure TFormIDE.EditFind(A: TObject);
 begin
   FormFind.OnFindNext := @EditFindNext;
-  FormFind.FindText.Text := FMemo.SelText;
+  FormFind.Search.Text := FMemo.SelText;
   FormFind.ShowModal;
 end;
 
 procedure TFormIDE.EditFindNext(A: TObject);
 begin
-  FormFind.FindText.Text := Trim(FormFind.FindText.Text);
-  if Length(FormFind.FindText.Text) = 0 then begin
+  FormFind.Search.Text := Trim(FormFind.Search.Text);
+  if Length(FormFind.Search.Text) = 0 then begin
     EditFind(A);
   end else begin
-    FMemo.SearchReplace(FormFind.FindText.Text, EmptyStr, []);
+    FMemo.SearchReplace(FormFind.Search.Text, EmptyStr, []);
   end;
 end;
 
