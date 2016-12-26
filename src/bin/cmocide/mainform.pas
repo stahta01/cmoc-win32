@@ -4,9 +4,9 @@ unit MainForm;
 
 interface
 
-uses Classes, ComCtrls, Controls, CustomForms, Dialogs, Documents,
-  FatCowIcons, FileUtils, FindForms, Forms, Graphics, GraphTypes, Memos, Menus,
-  Process, ProcessUtils, Programs, Splitters, StdCtrls, StrUtils, SysUtils;
+uses Classes, ComCtrls, Controls, CustomForms, Dialogs, Documents, FatCowIcons,
+  FileUtils, FindForms, Forms, Graphics, GraphTypes, LclType,
+  Memos, Menus, Process, ProcessUtils, Programs, Splitters, StdCtrls, StrUtils, SysUtils;
 
 type
 
@@ -100,52 +100,52 @@ begin
     Align := alClient;
   end;
   with MainMenu do begin
-    with AddMenuItem('File') do begin
-      AddMenuItem('New', @FileNew, FIcons.New);
+    with AddMenuItem('&File') do begin
+      AddMenuItem('&New', @FileNew, FIcons.New);
       AddMenuItem('New Window', @FileNewWindow, FIcons.NewWindow);
-      AddMenuItem(MenuItemSeparator);
-      AddMenuItem('Open ...', @FileOpen, FIcons.Open);
+      AddMenuItem(cLineCaption);
+      AddMenuItem('&Open ...', @FileOpen, FIcons.Open);
       AddMenuItem('Open New Window ...', @FileOpenInNewWindow, FIcons.FolderGo);
-      AddMenuItem(MenuItemSeparator);
-      AddMenuItem('Save', @FileSave, FIcons.Save);
-      AddMenuItem('Save As ...', @FileSaveAs, FIcons.FileSaveAs);
-      AddMenuItem(MenuItemSeparator);
-      AddMenuItem('Exit', @FileExit, FIcons.Door);
+      AddMenuItem(cLineCaption);
+      AddMenuItem('&Save', @FileSave, FIcons.Save).ShortCut := scCtrl + VK_S;
+      AddMenuItem('Save &As ...', @FileSaveAs, FIcons.FileSaveAs);
+      AddMenuItem(cLineCaption);
+      AddMenuItem('E&xit', @FileExit, FIcons.Door);
     end;
-    AddEditMenuItems(AddMenuItem('Edit'));
-    with AddMenuItem('Run') do begin
-      AddMenuItem('Syntax Check', @RunSyntaxCheck, FIcons.TickButton);
-      AddMenuItem('Compile', @RunCompile, FIcons.Compile);
-      AddMenuItem(MenuItemSeparator);
-      AddMenuItem('Build', @RunBuild, FIcons.Bricks);
-      AddMenuItem('Build and Run ...', @RunBuildAndRun, FIcons.BrickGo);
+    AddEditMenuItems(AddMenuItem('&Edit'));
+    with AddMenuItem('&Run') do begin
+      AddMenuItem('&Syntax Check', @RunSyntaxCheck, FIcons.TickButton);
+      AddMenuItem('&Compile', @RunCompile, FIcons.Compile);
+      AddMenuItem(cLineCaption);
+      AddMenuItem('&Build', @RunBuild, FIcons.Bricks);
+      AddMenuItem('Build and &Run ...', @RunBuildAndRun, FIcons.BrickGo);
     end;
-    with AddMenuItem('Emulators') do begin
+    with AddMenuItem('E&mulators') do begin
       AddMenuItem('Colour Computer 1 (Color BASIC 1.0)', nil, FIcons.BulletRight);
       AddMenuItem('Colour Computer 1 (Disk Extended Color BASIC 1.0)', nil, FIcons.BulletRight);
       AddMenuItem('Colour Computer 2 (Disk Extended Color BASIC 1.1)', nil, FIcons.BulletRight);
       AddMenuItem('Colour Computer 3 (Disk Extended Color BASIC 2.1)', nil, FIcons.BulletRight);
-      AddMenuItem(MenuItemSeparator);
+      AddMenuItem(cLineCaption);
       AddMenuItem('Dragon 32 (PAL)', nil, FIcons.BulletRight);
       AddMenuItem('Dragon 64 (PAL)', nil, FIcons.BulletRight);
       AddMenuItem('Dragon 200-E (PAL)', nil, FIcons.BulletRight);
       AddMenuItem('Tano Dragon (NTSC)', nil, FIcons.BulletRight);
       AddMenuItem('Dynacom MX-1600 (PAL-M)', nil, FIcons.BulletRight);
-      AddMenuItem(MenuItemSeparator);
+      AddMenuItem(cLineCaption);
       AddMenuItem('EDTASM++ 1.1 ...', nil, FIcons.BulletRight);
     end;
-    with AddMenuItem('Tools') do begin
+    with AddMenuItem('&Tools') do begin
       AddMenuItem('WinCMOC Console ...', @ToolsOpenConsole);
-      AddMenuItem(MenuItemSeparator);
+      AddMenuItem(cLineCaption);
       AddMenuItem('Disassemble 6809 Binary ...');
-      AddMenuItem(MenuItemSeparator);
+      AddMenuItem(cLineCaption);
       AddMenuItem('MESS Image Tool ...', @ToolsMessImageTool);
       AddMenuItem('Open Disk #0 ...', @ToolsOpenDisk0);
       AddMenuItem('Open Disk #1 ...', @ToolsOpenDisk1);
       AddMenuItem('Open Disk #2 ... (EDTASM++)', @ToolsOpenDisk2);
     end;
-    with AddMenuItem('Help') do begin
-      AddMenuItem('About WinCMOC ...');
+    with AddMenuItem('&Help') do begin
+      AddMenuItem('&About WinCMOC ...');
     end;
   end;
   ToolBar.Height := 44;
@@ -219,25 +219,25 @@ end;
 procedure TFormIDE.AddEditMenuItems(const A: TAbstractMenuItem);
 begin
   with A do begin
-    AddMenuItem('Undo', @EditUndo, FIcons.Undo);
-    AddMenuItem('Redo', @EditRedo, FIcons.Redo);
-    AddMenuItem(MenuItemSeparator);
-    AddMenuItem('Cut', @EditCut, FIcons.Cut);
-    AddMenuItem('Copy', @EditCopy, FIcons.Copy);
-    AddMenuItem('Paste', @EditPaste, FIcons.Paste);
-    AddMenuItem('Delete', @EditDelete, FIcons.Cross);
-    AddMenuItem(MenuItemSeparator);
-    AddMenuItem('Select All', @EditSelectAll, FIcons.LayerSelect);
-    AddMenuItem(MenuItemSeparator);
-    AddMenuItem('Find ...', @EditFind, FIcons.Find);
+    AddMenuItem('&Undo', @EditUndo, FIcons.Undo);
+    AddMenuItem('&Redo', @EditRedo, FIcons.Redo);
+    AddMenuItem(cLineCaption);
+    AddMenuItem('Cu&t', @EditCut, FIcons.Cut);
+    AddMenuItem('&Copy', @EditCopy, FIcons.Copy);
+    AddMenuItem('&Paste', @EditPaste, FIcons.Paste);
+    AddMenuItem('&Delete', @EditDelete, FIcons.Cross);
+    AddMenuItem(cLineCaption);
+    AddMenuItem('Select &All', @EditSelectAll, FIcons.LayerSelect);
+    AddMenuItem(cLineCaption);
+    AddMenuItem('&Find ...', @EditFind, FIcons.Find).ShortCut := scCtrl + VK_F;
     AddMenuItem('Find Next', @EditFindNext);
-    AddMenuItem(MenuItemSeparator);
-    AddMenuItem('Replace', @EditReplace);
-    AddMenuItem(MenuItemSeparator);
-    AddMenuItem('Uppercase Selection', @EditUpperCase);
-    AddMenuItem('Lowercase Selection', @EditLowerCase);
-    AddMenuItem(MenuItemSeparator);
-    AddMenuItem('Format Source Code (AStyle)', @EditFormatSource);
+    AddMenuItem(cLineCaption);
+    AddMenuItem('Replace', @EditReplace).ShortCut := scCtrl + VK_R;
+    AddMenuItem(cLineCaption);
+    AddMenuItem('Uppercase Selection', @EditUpperCase).ShortCut := scAlt + VK_UP;
+    AddMenuItem('Lowercase Selection', @EditLowerCase).ShortCut := scAlt + VK_DOWN;
+    AddMenuItem(cLineCaption);
+    AddMenuItem('Format Source Code (AStyle)', @EditFormatSource).ShortCut := scCtrl + VK_D;
   end;
 end;
 
@@ -461,18 +461,20 @@ procedure TFormIDE.EditFormatSource(A: TObject);
 var
   LDst, LSrc: TStringStream;
 begin
-  LSrc := TStringStream.Create(FMemo.Text);
-  try
-    LDst := TStringStream.Create(EmptyStr);
+  if MessageDlg('Do you want to format the source code?', mtConfirmation, mbYesNo, 0) = mrYes then begin
+    LSrc := TStringStream.Create(FMemo.Text);
     try
-      ProcessPipe(LDst, LSrc, ProgramDirectory + 'astyle.exe', EmptyStr, ['-A8', '-xC100', '-k1', '-w',
-        (*'-U',*) '-H', '-j', '-s' + IntToStr(4)], []);
-      FMemo.Text := LDst.DataString;
+      LDst := TStringStream.Create(EmptyStr);
+      try
+        ProcessPipe(LDst, LSrc, ProgramDirectory + 'astyle.exe', EmptyStr, ['-A8', '-xC100', '-k1', '-w',
+          (*'-U',*) '-H', '-j', '-s' + IntToStr(4)], []);
+        FMemo.Text := LDst.DataString;
+      finally
+        FreeAndNil(LDst);
+      end;
     finally
-      FreeAndNil(LDst);
+      FreeAndNil(LSrc);
     end;
-  finally
-    FreeAndNil(LSrc);
   end;
 end;
 
