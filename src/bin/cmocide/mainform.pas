@@ -444,7 +444,6 @@ end;
 
 procedure TFormIDE.EditReplace(A: TObject);
 begin
-
 end;
 
 procedure TFormIDE.EditUpperCase(A: TObject);
