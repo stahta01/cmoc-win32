@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="190">
+    <Units Count="192">
       <Unit0>
         <Filename Value="cmocide.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -17,8 +17,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="MainForm"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="421"/>
-        <CursorPos X="18" Y="431"/>
+        <CursorPos X="36" Y="17"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -982,16 +981,15 @@
         <Filename Value="..\..\..\..\javavcl\src\controls.pas"/>
         <UnitName Value="Controls"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="8"/>
-        <CursorPos X="24" Y="67"/>
+        <TopLine Value="190"/>
+        <CursorPos X="5" Y="208"/>
         <UsageCount Value="16"/>
       </Unit132>
       <Unit133>
         <Filename Value="..\..\..\..\javavcl\src\stdctrls.pas"/>
         <UnitName Value="StdCtrls"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="156"/>
-        <CursorPos X="26" Y="157"/>
+        <CursorPos X="33" Y="27"/>
         <UsageCount Value="12"/>
       </Unit133>
       <Unit134>
@@ -1077,16 +1075,16 @@
         <Filename Value="..\..\..\..\javavcl\src\memos.pas"/>
         <UnitName Value="Memos"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="17"/>
-        <CursorPos X="27" Y="24"/>
+        <TopLine Value="3"/>
+        <CursorPos X="38" Y="20"/>
         <UsageCount Value="13"/>
       </Unit144>
       <Unit145>
         <Filename Value="..\..\..\..\javavcl\src\texteditors.pas"/>
         <UnitName Value="TextEditors"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="299"/>
-        <CursorPos X="51" Y="312"/>
+        <TopLine Value="82"/>
+        <CursorPos X="53" Y="89"/>
         <UsageCount Value="13"/>
       </Unit145>
       <Unit146>
@@ -1341,8 +1339,8 @@
         <Filename Value="..\..\..\..\javavcl\src\findforms.pas"/>
         <UnitName Value="FindForms"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="14"/>
-        <CursorPos X="21" Y="120"/>
+        <TopLine Value="17"/>
+        <CursorPos X="17" Y="27"/>
         <UsageCount Value="13"/>
       </Unit178>
       <Unit179>
@@ -1426,12 +1424,22 @@
         <CursorPos X="30" Y="52"/>
         <UsageCount Value="20"/>
       </Unit189>
+      <Unit190>
+        <Filename Value="..\..\..\..\javavcl\src\editors.pas"/>
+        <UnitName Value="Editors"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="342"/>
+        <CursorPos X="11" Y="128"/>
+        <UsageCount Value="10"/>
+      </Unit190>
+      <Unit191>
+        <Filename Value="..\..\..\..\javavcl\src\buttons.pas"/>
+        <UnitName Value="Buttons"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="61" Y="59"/>
+        <UsageCount Value="20"/>
+      </Unit191>
     </Units>
-    <JumpHistory Count="1">
-      <Position1>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="7" Column="40" TopLine="3"/>
-      </Position1>
-    </JumpHistory>
+    <JumpHistory HistoryIndex="-1"/>
   </ProjectSession>
 </CONFIG>
