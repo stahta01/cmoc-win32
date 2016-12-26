@@ -17,7 +17,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="MainForm"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="36" Y="17"/>
+        <TopLine Value="179"/>
+        <CursorPos Y="185"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -973,17 +974,17 @@
         <Filename Value="..\..\..\..\javavcl\src\toolbars.pas"/>
         <UnitName Value="ToolBars"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="44"/>
-        <CursorPos X="9" Y="55"/>
-        <UsageCount Value="18"/>
+        <TopLine Value="65"/>
+        <CursorPos X="16" Y="81"/>
+        <UsageCount Value="19"/>
       </Unit131>
       <Unit132>
         <Filename Value="..\..\..\..\javavcl\src\controls.pas"/>
         <UnitName Value="Controls"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="190"/>
-        <CursorPos X="5" Y="208"/>
-        <UsageCount Value="16"/>
+        <TopLine Value="723"/>
+        <CursorPos X="55" Y="678"/>
+        <UsageCount Value="17"/>
       </Unit132>
       <Unit133>
         <Filename Value="..\..\..\..\javavcl\src\stdctrls.pas"/>
@@ -996,8 +997,8 @@
         <Filename Value="..\..\..\..\javavcl\src\elements.pas"/>
         <UnitName Value="Elements"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="26"/>
-        <CursorPos X="36" Y="34"/>
+        <TopLine Value="95"/>
+        <CursorPos X="3" Y="97"/>
         <UsageCount Value="13"/>
       </Unit134>
       <Unit135>
@@ -1020,8 +1021,8 @@
         <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
         <UnitName Value="Forms"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="325"/>
-        <CursorPos X="3" Y="329"/>
+        <TopLine Value="67"/>
+        <CursorPos X="22" Y="76"/>
         <UsageCount Value="14"/>
       </Unit137>
       <Unit138>
@@ -1440,6 +1441,15 @@
         <UsageCount Value="20"/>
       </Unit191>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory Count="2" HistoryIndex="1">
+      <Position1>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="152" Column="25" TopLine="150"/>
+      </Position1>
+      <Position2>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="188" Column="17" TopLine="171"/>
+      </Position2>
+    </JumpHistory>
   </ProjectSession>
 </CONFIG>

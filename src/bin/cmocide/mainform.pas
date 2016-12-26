@@ -4,9 +4,9 @@ unit MainForm;
 
 interface
 
-uses CharUtils, Classes, ComCtrls, Controls, CustomForms, Dialogs, Documents, ExtCtrls,
+uses Classes, ComCtrls, Controls, CustomForms, Dialogs, Documents,
   FatCowIcons, FileUtils, FindForms, Forms, Graphics, GraphTypes, Memos, Menus,
-  Process, ProcessUtils, Programs, Splitters, StdCtrls, StrTools, StrUtils, SysUtils;
+  Process, ProcessUtils, Programs, Splitters, StdCtrls, StrUtils, SysUtils;
 
 type
 
@@ -180,7 +180,6 @@ begin
   FMemo.Document := FDocument;
   FMemo.Align := alClient;
   FMemo.Parent := FSplitter.Sides[0];
-
   FMemo.PopupMenu := TPopupMenu.Create(FMemo);
   AddEditMenuItems(FMemo.PopupMenu);
 
