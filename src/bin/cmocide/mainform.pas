@@ -428,7 +428,7 @@ end;
 
 procedure TFormIDE.EditFind(A: TObject);
 begin
-  FormFind.OnFindNext := @EditFindNext;
+  FormFind.OnFind := @EditFindNext;
   FormFind.Search.Text := FMemo.SelText;
   FormFind.ShowModal;
 end;
