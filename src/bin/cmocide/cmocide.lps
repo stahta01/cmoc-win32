@@ -139,8 +139,8 @@
       <Unit18>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\jdk15.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="63682"/>
-        <CursorPos X="15" Y="63694"/>
+        <TopLine Value="72091"/>
+        <CursorPos X="17" Y="72102"/>
         <UsageCount Value="55"/>
       </Unit18>
       <Unit19>
@@ -1093,8 +1093,7 @@
         <Filename Value="..\..\..\..\javavcl\src\widgets.pas"/>
         <UnitName Value="Widgets"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="33"/>
-        <CursorPos X="27" Y="23"/>
+        <CursorPos X="3" Y="59"/>
         <UsageCount Value="11"/>
       </Unit146>
       <Unit147>
@@ -1108,8 +1107,8 @@
       <Unit148>
         <Filename Value="..\..\..\..\javavcl\src\widgets.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="58"/>
-        <CursorPos X="34" Y="76"/>
+        <TopLine Value="30"/>
+        <CursorPos X="52" Y="35"/>
         <UsageCount Value="10"/>
       </Unit148>
       <Unit149>
@@ -1211,8 +1210,8 @@
         <Filename Value="..\..\..\..\javavcl\src\utils.pas"/>
         <UnitName Value="Utils"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="85"/>
-        <CursorPos X="20" Y="96"/>
+        <TopLine Value="143"/>
+        <CursorPos X="30" Y="153"/>
         <UsageCount Value="12"/>
       </Unit161>
       <Unit162>
