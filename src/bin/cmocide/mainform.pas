@@ -438,7 +438,14 @@ begin
   if Length(FormFind.Search.Text) = 0 then begin
     EditFind(A);
   end else begin
-    FMemo.SearchReplace(FormFind.Search.Text, EmptyStr, []);
+    if FMemo.SearchReplace(FormFind.Search.Text, EmptyStr, []) < 0 then begin
+      if MessageDlg('Search from the beginning?', mtConfirmation, mbYesNo, 0) = mrYes then begin
+        FMemo.SelStart := 0;
+        if FMemo.SearchReplace(FormFind.Search.Text, EmptyStr, []) < 0 then begin
+          ShowMessage('Search complete');
+        end;
+      end;
+    end;
   end;
 end;
 
