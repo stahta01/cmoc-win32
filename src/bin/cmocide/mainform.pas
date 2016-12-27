@@ -5,7 +5,7 @@ unit MainForm;
 interface
 
 uses Classes, ComCtrls, Controls, CustomForms, Dialogs, Documents, FatCowIcons,
-  FileUtils, FindForms, Forms, Graphics, GraphTypes, LclType,
+  FileUtils, FindForms, Forms, Graphics, GraphTypes, LCLType,
   Memos, Menus, Process, ProcessUtils, Programs, Splitters, StdCtrls, StrUtils, SysUtils;
 
 type
