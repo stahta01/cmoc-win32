@@ -175,8 +175,7 @@ begin
   FDocument.Constants.LoadFromFile(ProgramDirectory + 'cmocide\constants.txt');
 
   FMemo := TRichMemo.Create(Self);
-  FMemo.BevelOuter := bvNone;
-  FMemo.BevelInner := bvNone;
+  FMemo.Widget.setBorder(nil);
   FMemo.Document := FDocument;
   FMemo.Align := alClient;
   FMemo.Parent := FSplitter.Sides[0];
@@ -184,8 +183,7 @@ begin
   AddEditMenuItems(FMemo.PopupMenu);
 
   FListBox := TListBox.Create(Self);
-  FListBox.BevelOuter := bvNone;
-  FListBox.BevelInner := bvNone;
+  FListBox.Widget.setBorder(nil);
   FListBox.Align := alClient;
   FListBox.Items.OnInserted := @ListBoxInserted;
   FListBox.Color := clInfoBk;
