@@ -5,7 +5,7 @@ program cmocide;
 uses
   FindForms,
   Forms,
-  MainForm;
+  MainForm, ControlEvents;
 
 begin
   Application.Title := 'WinCMOC IDE v0.8';
