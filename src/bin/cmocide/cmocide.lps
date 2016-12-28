@@ -17,8 +17,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="MainForm"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="68"/>
-        <CursorPos X="15" Y="84"/>
+        <CursorPos X="24" Y="13"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -28,7 +27,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="4"/>
         <CursorPos X="36" Y="20"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="21"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\..\..\..\javavcl\src\fatcowicons.pas"/>
@@ -967,7 +966,8 @@
         <Filename Value="..\..\..\..\javavcl\src\comctrls.pas"/>
         <UnitName Value="ComCtrls"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="23" Y="11"/>
+        <TopLine Value="9"/>
+        <CursorPos X="33" Y="29"/>
         <UsageCount Value="13"/>
       </Unit130>
       <Unit131>
@@ -1045,8 +1045,8 @@
         <Filename Value="..\..\..\..\javavcl\src\customforms.pas"/>
         <UnitName Value="CustomForms"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="57"/>
-        <CursorPos X="78" Y="20"/>
+        <TopLine Value="19"/>
+        <CursorPos X="22" Y="39"/>
         <UsageCount Value="19"/>
       </Unit140>
       <Unit141>
@@ -1404,8 +1404,8 @@
         <Filename Value="..\..\..\..\javavcl\src\statusbars.pas"/>
         <UnitName Value="StatusBars"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="32"/>
-        <CursorPos X="62" Y="20"/>
+        <TopLine Value="9"/>
+        <CursorPos X="68" Y="81"/>
         <UsageCount Value="20"/>
       </Unit187>
       <Unit188>
@@ -1519,8 +1519,8 @@
         <Filename Value="..\..\..\..\javavcl\src\basetypes.pas"/>
         <UnitName Value="BaseTypes"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="27"/>
-        <CursorPos X="55" Y="39"/>
+        <TopLine Value="82"/>
+        <CursorPos X="13" Y="104"/>
         <UsageCount Value="10"/>
       </Unit202>
       <Unit203>
@@ -1532,7 +1532,7 @@
         <UsageCount Value="20"/>
       </Unit203>
     </Units>
-    <JumpHistory Count="12" HistoryIndex="11">
+    <JumpHistory Count="13" HistoryIndex="12">
       <Position1>
         <Filename Value="mainform.pas"/>
         <Caret Line="7" Column="20"/>
@@ -1581,6 +1581,10 @@
         <Filename Value="mainform.pas"/>
         <Caret Line="84" Column="12" TopLine="57"/>
       </Position12>
+      <Position13>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="13" Column="24"/>
+      </Position13>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
