@@ -18,6 +18,7 @@ type
     FMemo: TRichMemo;
     FListBox: TListBox;
     FFindDialog: TFindDialog;
+    FReplaceDialog: TReplaceDialog;
     FDocument: TDocumentSyntaxHighlighter;
   public
     constructor Create(A: TComponent); override;
@@ -90,7 +91,9 @@ begin
 
   FFindDialog := TFindDialog.Create(Self);
   FFindDialog.OnFind := @EditFindNext;
-  FFindDialog.OnReplace := @EditReplaceNext;
+
+  FReplaceDialog := TReplaceDialog.Create(Self);
+  FReplaceDialog.OnReplace := @EditReplaceNext;
 
   FProcess := TProcess.Create(Self);
   FIcons := TFatCowIcons.Create(ProgramDirectory + 'images');
@@ -430,30 +433,36 @@ begin
   FFindDialog.Execute;
 end;
 
+procedure MemoSR(const A: TRichMemo; const AFindText, AReplaceText: string; const AOptions: TSearchOptions);
+begin
+  if A.SearchReplace(AFindText, AReplaceText, AOptions) < 0 then begin
+    if MessageDlg('Search from the beginning?', mtConfirmation, mbYesNo, 0) = mrYes then begin
+      A.SelStart := 0;
+      if A.SearchReplace(AFindText, AReplaceText, AOptions) < 0 then begin
+        ShowMessage('Search complete');
+      end;
+    end;
+  end;
+end;
+
 procedure TFormIDE.EditFindNext(A: TObject);
 begin
   FFindDialog.FindText := Trim(FFindDialog.FindText);
   if Length(FFindDialog.FindText) = 0 then begin
     EditFind(A);
   end else begin
-    if FMemo.SearchReplace(FFindDialog.FindText, EmptyStr, []) < 0 then begin
-      if MessageDlg('Search from the beginning?', mtConfirmation, mbYesNo, 0) = mrYes then begin
-        FMemo.SelStart := 0;
-        if FMemo.SearchReplace(FFindDialog.FindText, EmptyStr, []) < 0 then begin
-          ShowMessage('Search complete');
-        end;
-      end;
-    end;
+    MemoSR(FMemo, FFindDialog.FindText, EmptyStr, []);
   end;
 end;
 
 procedure TFormIDE.EditReplace(A: TObject);
 begin
+  FReplaceDialog.Execute;
 end;
 
 procedure TFormIDE.EditReplaceNext(A: TObject);
 begin
-
+  MemoSR(FMemo, FReplaceDialog.FindText, FReplaceDialog.ReplaceText, [soReplace]);
 end;
 
 procedure TFormIDE.EditUpperCase(A: TObject);
