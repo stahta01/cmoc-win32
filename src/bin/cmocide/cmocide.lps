@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="204">
+    <Units Count="205">
       <Unit0>
         <Filename Value="cmocide.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -16,8 +16,8 @@
         <Filename Value="mainform.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="MainForm"/>
-        <IsVisibleTab Value="True"/>
-        <CursorPos X="20" Y="8"/>
+        <TopLine Value="331"/>
+        <CursorPos X="11" Y="331"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -139,16 +139,16 @@
       <Unit18>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\jdk15.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="20822"/>
-        <CursorPos X="69" Y="20832"/>
-        <UsageCount Value="22"/>
+        <TopLine Value="9279"/>
+        <CursorPos X="7" Y="9288"/>
+        <UsageCount Value="23"/>
       </Unit18>
       <Unit19>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\jdk15.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="63486"/>
-        <CursorPos X="7" Y="63500"/>
-        <UsageCount Value="55"/>
+        <TopLine Value="40647"/>
+        <CursorPos X="35" Y="40652"/>
+        <UsageCount Value="57"/>
       </Unit19>
       <Unit20>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\java_sys.inc"/>
@@ -965,57 +965,60 @@
       <Unit130>
         <Filename Value="..\..\..\..\javavcl\src\comctrls.pas"/>
         <UnitName Value="ComCtrls"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="9"/>
-        <CursorPos X="33" Y="29"/>
-        <UsageCount Value="13"/>
+        <EditorIndex Value="11"/>
+        <TopLine Value="14"/>
+        <UsageCount Value="14"/>
+        <Loaded Value="True"/>
       </Unit130>
       <Unit131>
         <Filename Value="..\..\..\..\javavcl\src\splitters.pas"/>
         <UnitName Value="Splitters"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="60"/>
+        <TopLine Value="58"/>
+        <CursorPos X="15" Y="68"/>
         <UsageCount Value="10"/>
       </Unit131>
       <Unit132>
         <Filename Value="..\..\..\..\javavcl\src\toolbars.pas"/>
         <UnitName Value="ToolBars"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="22"/>
-        <CursorPos X="89" Y="20"/>
+        <TopLine Value="51"/>
+        <CursorPos X="15" Y="61"/>
         <UsageCount Value="21"/>
       </Unit132>
       <Unit133>
         <Filename Value="..\..\..\..\javavcl\src\controls.pas"/>
         <UnitName Value="Controls"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="314"/>
-        <CursorPos X="3" Y="316"/>
+        <TopLine Value="724"/>
+        <CursorPos X="15" Y="735"/>
         <UsageCount Value="21"/>
       </Unit133>
       <Unit134>
         <Filename Value="..\..\..\..\javavcl\src\stdctrls.pas"/>
         <UnitName Value="StdCtrls"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="4"/>
-        <CursorPos X="91" Y="20"/>
+        <TopLine Value="197"/>
+        <CursorPos X="15" Y="207"/>
         <UsageCount Value="13"/>
       </Unit134>
       <Unit135>
         <Filename Value="..\..\..\..\javavcl\src\elements.pas"/>
         <UnitName Value="Elements"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="130"/>
-        <CursorPos X="3" Y="132"/>
-        <UsageCount Value="14"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="21"/>
+        <CursorPos X="28" Y="24"/>
+        <UsageCount Value="15"/>
+        <Loaded Value="True"/>
       </Unit135>
       <Unit136>
         <Filename Value="..\..\..\..\javavcl\src\java.pas"/>
         <UnitName Value="Java"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="44"/>
-        <CursorPos X="3" Y="53"/>
-        <UsageCount Value="18"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="53"/>
+        <CursorPos X="21" Y="54"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
       </Unit136>
       <Unit137>
         <Filename Value="..\..\..\..\javavcl\src\graphics.pas"/>
@@ -1028,17 +1031,19 @@
       <Unit138>
         <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
         <UnitName Value="Forms"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="261"/>
-        <CursorPos X="37" Y="277"/>
-        <UsageCount Value="16"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="10"/>
+        <CursorPos X="97" Y="20"/>
+        <UsageCount Value="17"/>
+        <Loaded Value="True"/>
       </Unit138>
       <Unit139>
         <Filename Value="..\..\..\..\javavcl\src\menus.pas"/>
         <UnitName Value="Menus"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="93"/>
-        <CursorPos X="10" Y="109"/>
+        <TopLine Value="281"/>
+        <CursorPos X="15" Y="291"/>
         <UsageCount Value="11"/>
       </Unit139>
       <Unit140>
@@ -1085,7 +1090,8 @@
         <Filename Value="..\..\..\..\javavcl\src\memos.pas"/>
         <UnitName Value="Memos"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="26" Y="24"/>
+        <TopLine Value="79"/>
+        <CursorPos X="15" Y="89"/>
         <UsageCount Value="13"/>
       </Unit145>
       <Unit146>
@@ -1099,23 +1105,27 @@
       <Unit147>
         <Filename Value="..\..\..\..\javavcl\src\widgets.pas"/>
         <UnitName Value="Widgets"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="3" Y="59"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="9"/>
+        <TopLine Value="9"/>
+        <CursorPos X="102" Y="26"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
       </Unit147>
       <Unit148>
         <Filename Value="..\..\..\..\javavcl\src\messages.pas"/>
         <UnitName Value="Messages"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="61" Y="37"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="8"/>
+        <TopLine Value="74"/>
+        <CursorPos X="3" Y="24"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit148>
       <Unit149>
         <Filename Value="..\..\..\..\javavcl\src\widgets.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="30"/>
-        <CursorPos X="52" Y="35"/>
-        <UsageCount Value="10"/>
+        <TopLine Value="27"/>
+        <CursorPos X="25" Y="33"/>
+        <UsageCount Value="11"/>
       </Unit149>
       <Unit150>
         <Filename Value="..\..\..\..\javavcl\src\fonts.pas"/>
@@ -1145,8 +1155,7 @@
         <Filename Value="..\..\..\..\javavcl\src\strutils.pas"/>
         <UnitName Value="StrUtils"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="6"/>
-        <CursorPos X="23" Y="698"/>
+        <TopLine Value="22"/>
         <UsageCount Value="12"/>
       </Unit153>
       <Unit154>
@@ -1184,8 +1193,8 @@
         <Filename Value="..\..\..\..\javavcl\src\listboxes.pas"/>
         <UnitName Value="ListBoxes"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="20"/>
-        <CursorPos X="6" Y="45"/>
+        <TopLine Value="127"/>
+        <CursorPos X="15" Y="137"/>
         <UsageCount Value="18"/>
       </Unit158>
       <Unit159>
@@ -1345,10 +1354,9 @@
       <Unit179>
         <Filename Value="..\..\..\..\javavcl\src\findforms.pas"/>
         <UnitName Value="FindForms"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="20"/>
-        <CursorPos X="20" Y="27"/>
-        <UsageCount Value="15"/>
+        <EditorIndex Value="10"/>
+        <UsageCount Value="16"/>
+        <Loaded Value="True"/>
       </Unit179>
       <Unit180>
         <Filename Value="..\..\..\..\javavcl\src\chrutils.pas"/>
@@ -1396,7 +1404,7 @@
         <Filename Value="..\..\..\..\javavcl\src\strtools.pas"/>
         <UnitName Value="StrTools"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="106"/>
+        <TopLine Value="61"/>
         <CursorPos X="31" Y="80"/>
         <UsageCount Value="10"/>
       </Unit186>
@@ -1412,16 +1420,16 @@
         <Filename Value="..\..\..\..\javavcl\src\pagecontrols.pas"/>
         <UnitName Value="PageControls"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="20"/>
-        <CursorPos X="6" Y="36"/>
+        <TopLine Value="87"/>
+        <CursorPos X="15" Y="97"/>
         <UsageCount Value="20"/>
       </Unit188>
       <Unit189>
         <Filename Value="..\..\..\..\javavcl\src\positionbars.pas"/>
         <UnitName Value="PositionBars"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="21"/>
-        <CursorPos X="55" Y="48"/>
+        <TopLine Value="113"/>
+        <CursorPos X="15" Y="123"/>
         <UsageCount Value="20"/>
       </Unit189>
       <Unit190>
@@ -1435,17 +1443,18 @@
       <Unit191>
         <Filename Value="..\..\..\..\javavcl\src\editors.pas"/>
         <UnitName Value="Editors"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="5"/>
-        <CursorPos X="6" Y="20"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="120"/>
+        <CursorPos X="46" Y="124"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit191>
       <Unit192>
         <Filename Value="..\..\..\..\javavcl\src\buttons.pas"/>
         <UnitName Value="Buttons"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="78"/>
-        <CursorPos X="43" Y="100"/>
+        <TopLine Value="145"/>
+        <CursorPos X="15" Y="155"/>
         <UsageCount Value="22"/>
       </Unit192>
       <Unit193>
@@ -1502,10 +1511,11 @@
       <Unit200>
         <Filename Value="..\..\..\..\javavcl\src\elementevents.pas"/>
         <UnitName Value="ElementEvents"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="9"/>
-        <CursorPos X="3" Y="25"/>
-        <UsageCount Value="20"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="15"/>
+        <CursorPos X="37" Y="25"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
       </Unit200>
       <Unit201>
         <Filename Value="..\..\..\..\javavcl\src\graphtype.pas"/>
@@ -1518,77 +1528,110 @@
       <Unit202>
         <Filename Value="..\..\..\..\javavcl\src\basetypes.pas"/>
         <UnitName Value="BaseTypes"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="25"/>
-        <CursorPos X="66" Y="43"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="29"/>
+        <CursorPos X="41" Y="39"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit202>
       <Unit203>
         <Filename Value="..\..\..\..\javavcl\src\formevents.pas"/>
         <UnitName Value="FormEvents"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="68"/>
-        <CursorPos X="34" Y="96"/>
+        <TopLine Value="24"/>
+        <CursorPos X="3" Y="27"/>
         <UsageCount Value="20"/>
       </Unit203>
+      <Unit204>
+        <Filename Value="..\..\..\..\javavcl\src\windowevents.pas"/>
+        <UnitName Value="FormEvents"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="31"/>
+        <CursorPos X="18" Y="14"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit204>
     </Units>
-    <JumpHistory Count="14" HistoryIndex="13">
+    <JumpHistory Count="20" HistoryIndex="19">
       <Position1>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="19" Column="6" TopLine="3"/>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="305" Column="28" TopLine="295"/>
       </Position1>
       <Position2>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="7" Column="30"/>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="304" Column="19" TopLine="295"/>
       </Position2>
       <Position3>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="9" Column="55"/>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="47" Column="21" TopLine="41"/>
       </Position3>
       <Position4>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="8" Column="45"/>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="76" Column="29" TopLine="66"/>
       </Position4>
       <Position5>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="9" Column="56"/>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="157" Column="18" TopLine="148"/>
       </Position5>
       <Position6>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="8" Column="53"/>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="229" Column="35" TopLine="214"/>
       </Position6>
       <Position7>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="7" Column="31"/>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="278" Column="34" TopLine="268"/>
       </Position7>
       <Position8>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="11" Column="22"/>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="300" Column="46" TopLine="290"/>
       </Position8>
       <Position9>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="9" Column="53"/>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="303" Column="44" TopLine="294"/>
       </Position9>
       <Position10>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="84" Column="12" TopLine="57"/>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="303" Column="60" TopLine="294"/>
       </Position10>
       <Position11>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="84" Column="12" TopLine="57"/>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="309" Column="92" TopLine="290"/>
       </Position11>
       <Position12>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="13" Column="24"/>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="182" Column="11" TopLine="171"/>
       </Position12>
       <Position13>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="7" Column="12"/>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="160" Column="12" TopLine="154"/>
       </Position13>
       <Position14>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="8" Column="20"/>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="51" Column="22" TopLine="41"/>
       </Position14>
+      <Position15>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="161" Column="15" TopLine="150"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="245" Column="32" TopLine="234"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="258" Column="13" TopLine="244"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="244" Column="19" TopLine="244"/>
+      </Position18>
+      <Position19>
+        <Filename Value="..\..\..\..\javavcl\src\forms.pas"/>
+        <Caret Line="45" Column="25" TopLine="35"/>
+      </Position19>
+      <Position20>
+        <Filename Value="..\..\..\..\javavcl\src\windowevents.pas"/>
+      </Position20>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

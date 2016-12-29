@@ -5,7 +5,7 @@ unit MainForm;
 interface
 
 uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, Documents, FatCowIcons,
-  FileUtils, FindForms, Forms, Graphics, LCLType, Memos, Menus, Process, ProcessUtils,
+  FileUtils, FindForms, Forms, Graphics, Java, LCLType, Memos, Menus, Process, ProcessUtils,
   Programs, Splitters, StdCtrls, StrUtils, SysUtils;
 
 type
@@ -326,13 +326,9 @@ begin
 end;
 
 procedure TFormIDE.FileNew(A: TObject);
-var
-  LCanClose: boolean;
 begin
-  LCanClose := True;
-  FormCloseQuery(A, LCanClose);
-  if LCanClose then begin
-    FMemo.Lines.Clear;
+  if CloseQuery then begin
+    FMemo.Clear;
     FileName := EmptyStr;
   end;
 end;
