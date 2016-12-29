@@ -5,7 +5,7 @@ unit MainForm;
 interface
 
 uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, Documents, FatCowIcons,
-  FileUtils, FindForms, Forms, Graphics, Java, LCLType, Memos, Menus, Process, ProcessUtils,
+  FileUtils, Forms, Graphics, Java, LCLType, Memos, Menus, Process, ProcessUtils,
   Programs, Splitters, StdCtrls, StrUtils, SysUtils;
 
 type
@@ -17,6 +17,7 @@ type
     FProcess: TProcess;
     FMemo: TRichMemo;
     FListBox: TListBox;
+    FFindDialog: TFindDialog;
     FDocument: TDocumentSyntaxHighlighter;
   public
     constructor Create(A: TComponent); override;
@@ -54,6 +55,7 @@ type
     procedure EditFind(A: TObject);
     procedure EditFindNext(A: TObject);
     procedure EditReplace(A: TObject);
+    procedure EditReplaceNext(A: TObject);
     procedure EditUpperCase(A: TObject);
     procedure EditLowerCase(A: TObject);
     procedure EditFormatSource(A: TObject);
@@ -72,7 +74,6 @@ type
 
 var
   FormMain: TForm;
-  FormFind: TFormFind;
 
 implementation
 
@@ -86,6 +87,10 @@ begin
   SetSize(720, 500);
   Position := poScreenCenter;
   WindowState := wsMaximized;
+
+  FFindDialog := TFindDialog.Create(Self);
+  FFindDialog.OnFind := @EditFindNext;
+  FFindDialog.OnReplace := @EditReplaceNext;
 
   FProcess := TProcess.Create(Self);
   FIcons := TFatCowIcons.Create(ProgramDirectory + 'images');
@@ -228,7 +233,7 @@ begin
     AddMenuItem('Select &All', @EditSelectAll, FIcons.LayerSelect);
     AddMenuItem(cLineCaption);
     AddMenuItem('&Find ...', @EditFind, FIcons.Find).ShortCut := scCtrl + VK_F;
-    AddMenuItem('Find Next', @EditFindNext);
+    AddMenuItem('Find Next', @EditFindNext).ShortCut := VK_F3;
     AddMenuItem(cLineCaption);
     AddMenuItem('Replace', @EditReplace).ShortCut := scCtrl + VK_R;
     AddMenuItem(cLineCaption);
@@ -421,21 +426,20 @@ end;
 
 procedure TFormIDE.EditFind(A: TObject);
 begin
-  FormFind.OnFind := @EditFindNext;
-  FormFind.Search.Text := FMemo.SelText;
-  FormFind.ShowModal;
+  FFindDialog.FindText := FMemo.SelText;
+  FFindDialog.Execute;
 end;
 
 procedure TFormIDE.EditFindNext(A: TObject);
 begin
-  FormFind.Search.Text := Trim(FormFind.Search.Text);
-  if Length(FormFind.Search.Text) = 0 then begin
+  FFindDialog.FindText := Trim(FFindDialog.FindText);
+  if Length(FFindDialog.FindText) = 0 then begin
     EditFind(A);
   end else begin
-    if FMemo.SearchReplace(FormFind.Search.Text, EmptyStr, []) < 0 then begin
+    if FMemo.SearchReplace(FFindDialog.FindText, EmptyStr, []) < 0 then begin
       if MessageDlg('Search from the beginning?', mtConfirmation, mbYesNo, 0) = mrYes then begin
         FMemo.SelStart := 0;
-        if FMemo.SearchReplace(FormFind.Search.Text, EmptyStr, []) < 0 then begin
+        if FMemo.SearchReplace(FFindDialog.FindText, EmptyStr, []) < 0 then begin
           ShowMessage('Search complete');
         end;
       end;
@@ -445,6 +449,11 @@ end;
 
 procedure TFormIDE.EditReplace(A: TObject);
 begin
+end;
+
+procedure TFormIDE.EditReplaceNext(A: TObject);
+begin
+
 end;
 
 procedure TFormIDE.EditUpperCase(A: TObject);
