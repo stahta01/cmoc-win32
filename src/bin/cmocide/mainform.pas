@@ -33,7 +33,7 @@ type
     procedure LoadFromFile(const A: TFileName); override;
     procedure OpenMESSImage(const A: TFileName);
   public
-    procedure ListBoxInserted(A: TObject; AIndex: integer);
+    procedure ListBoxInserted(A: TObject; const AIndex: integer);
   public
     procedure FormShow(A: TObject);
     procedure FormCloseQuery(A: TObject; var ACanClose: boolean);
@@ -307,7 +307,7 @@ begin
   end;
 end;
 
-procedure TFormIDE.ListBoxInserted(A: TObject; AIndex: integer);
+procedure TFormIDE.ListBoxInserted(A: TObject; const AIndex: integer);
 begin
   FListBox.ItemIndex := AIndex;
   FListBox.MakeCurrentVisible;
