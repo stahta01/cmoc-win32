@@ -373,7 +373,6 @@ end;
 
 procedure TFormIDE.FileSave(A: TObject);
 begin
-  raise Exception.Create('Hello there');
   try
     SaveToFile(FileName);
   except
