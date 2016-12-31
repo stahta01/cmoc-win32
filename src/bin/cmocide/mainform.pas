@@ -88,7 +88,8 @@ begin
   SetSize(720, 500);
   Position := poScreenCenter;
   WindowState := wsMaximized;
-
+  SizeConstraints.MinWidth := 200;
+  SizeConstraints.MinHeight := 200;
   FFindDialog := TFindDialog.Create(Self);
   FFindDialog.OnFind := @EditFindNext;
 
@@ -109,10 +110,10 @@ begin
   end;
   with MainMenu do begin
     with AddMenuItem('&File') do begin
-      AddMenuItem('&New', @FileNew, FIcons.New);
+      AddMenuItem('&New', @FileNew, FIcons.New).ShortCut := scCtrl + VK_N;
       AddMenuItem('New Window', @FileNewWindow, FIcons.NewWindow);
       AddMenuItem(cLineCaption);
-      AddMenuItem('&Open ...', @FileOpen, FIcons.Open);
+      AddMenuItem('&Open ...', @FileOpen, FIcons.Open).ShortCut := scCtrl + VK_O;
       AddMenuItem('Open New Window ...', @FileOpenInNewWindow, FIcons.FolderGo);
       AddMenuItem(cLineCaption);
       AddMenuItem('&Save', @FileSave, FIcons.Save).ShortCut := scCtrl + VK_S;
@@ -196,7 +197,9 @@ begin
   FListBox.Items.OnInserted := @ListBoxInserted;
   FListBox.Color := clInfoBk;
   FListBox.Font.Name := 'Courier New';
-  FListBox.Font.Size := 10;
+  FListBox.Font.Height := 12;
+  FListBox.Font.Color := clGreen;
+  FListBox.ItemHeight := 14;
   FListBox.Parent := FSplitter.Sides[1];
 
   OpenDialog.Filter := 'C/C++ Files|*.c;*.h;*.cpp;*.hpp|All Files|*.*';
@@ -225,15 +228,15 @@ end;
 procedure TFormIDE.AddEditMenuItems(const A: TAbstractMenuItem);
 begin
   with A do begin
-    AddMenuItem('&Undo', @EditUndo, FIcons.Undo);
-    AddMenuItem('&Redo', @EditRedo, FIcons.Redo);
+    AddMenuItem('&Undo', @EditUndo, FIcons.Undo).ShortCut := scCtrl + VK_Z;
+    AddMenuItem('&Redo', @EditRedo, FIcons.Redo).ShortCut := scCtrl + scShift + VK_Z;
     AddMenuItem(cLineCaption);
-    AddMenuItem('Cu&t', @EditCut, FIcons.Cut);
-    AddMenuItem('&Copy', @EditCopy, FIcons.Copy);
-    AddMenuItem('&Paste', @EditPaste, FIcons.Paste);
+    AddMenuItem('Cu&t', @EditCut, FIcons.Cut).ShortCut := scCtrl + VK_X;
+    AddMenuItem('&Copy', @EditCopy, FIcons.Copy).ShortCut := scCtrl + VK_C;
+    AddMenuItem('&Paste', @EditPaste, FIcons.Paste).ShortCut := scCtrl + VK_V;
     AddMenuItem('&Delete', @EditDelete, FIcons.Cross);
     AddMenuItem(cLineCaption);
-    AddMenuItem('Select &All', @EditSelectAll, FIcons.LayerSelect);
+    AddMenuItem('Select &All', @EditSelectAll, FIcons.LayerSelect).ShortCut := scCtrl + VK_A;
     AddMenuItem(cLineCaption);
     AddMenuItem('&Find ...', @EditFind, FIcons.Find).ShortCut := scCtrl + VK_F;
     AddMenuItem('Find Next', @EditFindNext).ShortCut := VK_F3;
