@@ -220,6 +220,7 @@ begin
   try
     LoadFromFile(GetEnvironmentVariable('FILENAME'));
   except
+    FMemo.Clear;
     FMemo.Lines.Add('apple orange pair');
     FMemo.Lines.Add('#include <math.h>');
     FMemo.Lines.Add('#include <ctype.h>');
