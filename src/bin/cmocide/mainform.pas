@@ -34,6 +34,7 @@ type
     procedure OpenMESSImage(const A: TFileName);
   public
     procedure ListBoxInserted(A: TObject; const AIndex: integer);
+    procedure MemoChange(A: TObject);
   public
     procedure FormShow(A: TObject);
     procedure FormCloseQuery(A: TObject; var ACanClose: boolean);
@@ -100,12 +101,18 @@ begin
   FIcons := TFatCowIcons.Create(ProgramDirectory + 'images');
 
   with StatusBar.AddPanel do begin
-    Width := 100;
+    Caption := '100:100';
+    Width := 70;
   end;
   with StatusBar.AddPanel do begin
-    Width := 100;
+    Width := 70;
   end;
   with StatusBar.AddPanel do begin
+    Caption := 'INS';
+    Width := 50;
+  end;
+  with StatusBar.AddPanel do begin
+    Caption := 'FileName';
     Align := alClient;
   end;
   with MainMenu do begin
@@ -189,6 +196,7 @@ begin
   FMemo.Align := alClient;
   FMemo.Parent := FSplitter.Sides[0];
   FMemo.PopupMenu := TPopupMenu.Create(FMemo);
+  FMemo.OnChange := @MemoChange;
   AddEditMenuItems(FMemo.PopupMenu);
 
   FListBox := TListBox.Create(Self);
@@ -266,8 +274,8 @@ end;
 
 procedure TFormIDE.SetFileName(const A: TFileName);
 begin
-  FMemo.Modified := False;
   inherited;
+  FMemo.Modified := False;
 end;
 
 procedure TFormIDE.SaveToFile(const A: TFileName);
@@ -314,6 +322,12 @@ procedure TFormIDE.ListBoxInserted(A: TObject; const AIndex: integer);
 begin
   FListBox.ItemIndex := AIndex;
   FListBox.MakeCurrentVisible;
+end;
+
+procedure TFormIDE.MemoChange(A: TObject);
+begin
+  StatusBar.Panels[1].Caption := IfThen(FMemo.Modified, 'Modified', EmptyStr);
+  StatusBar.Panels[3].Caption := GetDisplayFileName;
 end;
 
 procedure TFormIDE.FormShow(A: TObject);
