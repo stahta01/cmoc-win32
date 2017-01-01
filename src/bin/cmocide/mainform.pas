@@ -201,6 +201,7 @@ begin
   FMemo.PopupMenu := TPopupMenu.Create(FMemo);
   FMemo.OnChange := @MemoChange;
   FMemo.OnCaretUpdate := @MemoCaretUpdate;
+  FMemo.UndoLimit := 1000;
   AddEditMenuItems(FMemo.PopupMenu);
 
   FListBox := TListBox.Create(Self);
