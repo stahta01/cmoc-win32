@@ -248,13 +248,13 @@ end;
 procedure TFormIDE.AddEditMenuItems(const A: TAbstractMenuItem);
 begin
   with A do begin
-    AddMenuItem('&Undo', @EditUndo, FIcons.Undo);//.ShortCut := scCtrl + VK_Z;
-    AddMenuItem('&Redo', @EditRedo, FIcons.Redo);//.ShortCut := scCtrl + scShift + VK_Z;
+    AddMenuItem('&Undo', @EditUndo, FIcons.Undo).ShortCut := scCtrl + VK_Z;
+    AddMenuItem('&Redo', @EditRedo, FIcons.Redo).ShortCut := scCtrl + scShift + VK_Z;
     AddMenuItem(cLineCaption);
     AddMenuItem('Cu&t', @EditCut, FIcons.Cut).ShortCut := scCtrl + VK_X;
     AddMenuItem('&Copy', @EditCopy, FIcons.Copy).ShortCut := scCtrl + VK_C;
     AddMenuItem('&Paste', @EditPaste, FIcons.Paste).ShortCut := scCtrl + VK_V;
-    AddMenuItem('&Delete', @EditDelete, FIcons.Cross);
+    AddMenuItem('&Delete', @EditDelete, FIcons.Cross).ShortCut := VK_DELETE;
     AddMenuItem(cLineCaption);
     AddMenuItem('Select &All', @EditSelectAll, FIcons.LayerSelect).ShortCut := scCtrl + VK_A;
     AddMenuItem(cLineCaption);
