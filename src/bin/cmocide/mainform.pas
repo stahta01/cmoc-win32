@@ -4,7 +4,7 @@ unit MainForm;
 
 interface
 
-uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, Documents, FatCowIcons,
+uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, Documents, ExtCtrls, FatCowIcons,
   FileUtils, Forms, Graphics, Java, LCLType, Memos, Menus, Process, ProcessUtils,
   Programs, Splitters, StdCtrls, StrUtils, SysUtils;
 
@@ -20,6 +20,7 @@ type
     FFindDialog: TFindDialog;
     FReplaceDialog: TReplaceDialog;
     FDocument: TDocumentSyntaxHighlighter;
+    FButtonUndo, FButtonRedo, FButtonCut, FButtonCopy, FButtonPaste, FButtonDelete: TButton;
   public
     constructor Create(A: TComponent); override;
   public
@@ -35,6 +36,7 @@ type
   public
     procedure ListBoxInserted(A: TObject; const AIndex: integer);
     procedure MemoChange(A: TObject);
+    procedure MemoCaretUpdate(A: TObject);
   public
     procedure FormShow(A: TObject);
     procedure FormCloseQuery(A: TObject; var ACanClose: boolean);
@@ -164,16 +166,17 @@ begin
       AddMenuItem('&About WinCMOC ...');
     end;
   end;
+
   ToolBar.Height := 44;
   ToolBar.AddToolBarButton('New', @FileNew, FIcons.New);
   ToolBar.AddToolBarButton('Open', @FileOpen, FIcons.Open);
   ToolBar.AddToolBarButton('Save', @FileSave, FIcons.Save);
-  ToolBar.AddToolBarButton('Undo', @EditUndo, FIcons.Undo);
-  ToolBar.AddToolBarButton('Redo', @EditRedo, FIcons.Redo);
-  ToolBar.AddToolBarButton('Cut', @EditCut, FIcons.Cut);
-  ToolBar.AddToolBarButton('Copy', @EditCopy, FIcons.Copy);
-  ToolBar.AddToolBarButton('Paste', @EditPaste, FIcons.Paste);
-  ToolBar.AddToolBarButton('Delete', @EditDelete, FIcons.Cross);
+  FButtonUndo := ToolBar.AddToolBarButton('Undo', @EditUndo, FIcons.Undo);
+  FButtonRedo := ToolBar.AddToolBarButton('Redo', @EditRedo, FIcons.Redo);
+  FButtonCut := ToolBar.AddToolBarButton('Cut', @EditCut, FIcons.Cut);
+  FButtonCopy := ToolBar.AddToolBarButton('Copy', @EditCopy, FIcons.Copy);
+  FButtonPaste := ToolBar.AddToolBarButton('Paste', @EditPaste, FIcons.Paste);
+  FButtonDelete := ToolBar.AddToolBarButton('Delete', @EditDelete, FIcons.Cross);
   ToolBar.AddToolBarButton('Syntax Check', @RunSyntaxCheck, FIcons.TickButton);
   ToolBar.AddToolBarButton('Compile', @RunCompile, FIcons.Compile);
   ToolBar.AddToolBarButton('Build', @RunBuild, FIcons.Bricks);
@@ -197,6 +200,7 @@ begin
   FMemo.Parent := FSplitter.Sides[0];
   FMemo.PopupMenu := TPopupMenu.Create(FMemo);
   FMemo.OnChange := @MemoChange;
+  FMemo.OnCaretUpdate := @MemoCaretUpdate;
   AddEditMenuItems(FMemo.PopupMenu);
 
   FListBox := TListBox.Create(Self);
@@ -233,11 +237,17 @@ begin
   end;
 end;
 
+procedure TFormIDE.FormShow(A: TObject);
+begin
+  LogMessage('Welcome to ' + Application.Title);
+  FSplitter.Position := Height - 256;
+end;
+
 procedure TFormIDE.AddEditMenuItems(const A: TAbstractMenuItem);
 begin
   with A do begin
-    AddMenuItem('&Undo', @EditUndo, FIcons.Undo).ShortCut := scCtrl + VK_Z;
-    AddMenuItem('&Redo', @EditRedo, FIcons.Redo).ShortCut := scCtrl + scShift + VK_Z;
+    AddMenuItem('&Undo', @EditUndo, FIcons.Undo);//.ShortCut := scCtrl + VK_Z;
+    AddMenuItem('&Redo', @EditRedo, FIcons.Redo);//.ShortCut := scCtrl + scShift + VK_Z;
     AddMenuItem(cLineCaption);
     AddMenuItem('Cu&t', @EditCut, FIcons.Cut).ShortCut := scCtrl + VK_X;
     AddMenuItem('&Copy', @EditCopy, FIcons.Copy).ShortCut := scCtrl + VK_C;
@@ -289,7 +299,6 @@ procedure TFormIDE.LoadFromFile(const A: TFileName);
 begin
   LogFileName('Loading', A);
   FMemo.Text := AnsiLoadFromFile(A);
-  FMemo.ClearUndo;
   FMemo.SelStart := 0;
   inherited;
 end;
@@ -324,16 +333,19 @@ begin
   FListBox.MakeCurrentVisible;
 end;
 
+procedure TFormIDE.MemoCaretUpdate(A: TObject);
+begin
+  with FMemo.CaretPos do begin
+    StatusBar.Panels[0].Caption := IntToStr(X) + ':' + IntToStr(Y);
+  end;
+end;
+
 procedure TFormIDE.MemoChange(A: TObject);
 begin
   StatusBar.Panels[1].Caption := IfThen(FMemo.Modified, 'Modified', EmptyStr);
   StatusBar.Panels[3].Caption := GetDisplayFileName;
-end;
-
-procedure TFormIDE.FormShow(A: TObject);
-begin
-  LogMessage('Welcome to ' + Application.Title);
-  FSplitter.Position := Height - 256;
+  //FButtonUndo.Enabled := FMemo.CanUndo;
+  //FButtonRedo.Enabled := FMemo.CanRedo;
 end;
 
 procedure TFormIDE.FormCloseQuery(A: TObject; var ACanClose: boolean);
@@ -484,12 +496,12 @@ end;
 
 procedure TFormIDE.EditUpperCase(A: TObject);
 begin
-  FMemo.ReplaceSelectedText(AnsiUpperCase(FMemo.SelText));
+  FMemo.ReplaceSelection(AnsiUpperCase(FMemo.SelText));
 end;
 
 procedure TFormIDE.EditLowerCase(A: TObject);
 begin
-  FMemo.ReplaceSelectedText(AnsiLowerCase(FMemo.SelText));
+  FMemo.ReplaceSelection(AnsiLowerCase(FMemo.SelText));
 end;
 
 procedure TFormIDE.EditFormatSource(A: TObject);
