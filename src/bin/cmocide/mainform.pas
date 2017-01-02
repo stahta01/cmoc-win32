@@ -4,8 +4,8 @@ unit MainForm;
 
 interface
 
-uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, Documents, ExtCtrls, FatCowIcons,
-  FileUtils, Forms, Graphics, Java, LCLType, Memos, Menus, MenuTypes, Process, ProcessUtils,
+uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, ExtCtrls, FatCowIcons,
+  FileUtils, Forms, Graphics, Highlighters, Java, LCLType, Memos, Menus, MenuTypes, Process, ProcessUtils,
   Programs, Splitters, StdCtrls, StrUtils, SysUtils;
 
 type
@@ -19,7 +19,7 @@ type
     FListBox: TListBox;
     FFindDialog: TFindDialog;
     FReplaceDialog: TReplaceDialog;
-    FDocument: TDocumentSyntaxHighlighter;
+    FDocument: TCppHighlighter;
     FButtonUndo, FButtonRedo, FButtonCut, FButtonCopy, FButtonPaste, FButtonDelete: TButton;
   public
     constructor Create(A: TComponent); override;
@@ -169,7 +169,7 @@ begin
   ToolBar.Height := 44;
   ToolBar.AddToolBarButton('New', @FileNew, FIcons.New);
   ToolBar.AddToolBarButton('Open', @FileOpen, FIcons.Open);
-  ToolBar.AddToolBarButton('Save', @FileSave, FIcons.Save);
+  ToolBar.AddToolBarButton('Save', @FileSaveAs, FIcons.Save);
   FButtonUndo := ToolBar.AddToolBarButton('Undo', @EditUndo, FIcons.Undo);
   FButtonRedo := ToolBar.AddToolBarButton('Redo', @EditRedo, FIcons.Redo);
   FButtonCut := ToolBar.AddToolBarButton('Cut', @EditCut, FIcons.Cut);
@@ -187,7 +187,7 @@ begin
   FSplitter.Align := alClient;
   FSplitter.Parent := Self;
 
-  FDocument := TDocumentSyntaxHighlighter.Create;
+  FDocument := TCppHighlighter.Create;
   FDocument.Objects.LoadFromFile(ProgramDirectory + 'cmocide\objects.txt');
   FDocument.Keywords.LoadFromFile(ProgramDirectory + 'cmocide\keywords.txt');
   FDocument.Constants.LoadFromFile(ProgramDirectory + 'cmocide\constants.txt');
@@ -340,14 +340,18 @@ begin
   with FMemo.CaretPos do begin
     StatusBar.Panels[0].Caption := IntToStr(X) + ':' + IntToStr(Y);
   end;
+  FButtonCut.Enabled := FMemo.SelLength > 0;
+  FButtonCopy.Enabled := FButtonCut.Enabled;
+  FButtonDelete.Enabled := FButtonCut.Enabled;
 end;
 
 procedure TFormIDE.MemoChange(A: TObject);
 begin
   StatusBar.Panels[1].Caption := IfThen(FMemo.Modified, 'Modified', EmptyStr);
   StatusBar.Panels[3].Caption := GetDisplayFileName;
-  //FButtonUndo.Enabled := FMemo.CanUndo;
-  //FButtonRedo.Enabled := FMemo.CanRedo;
+  FButtonUndo.Enabled := FMemo.CanUndo;
+  FButtonRedo.Enabled := FMemo.CanRedo;
+  MemoCaretUpdate(FMemo);
 end;
 
 procedure TFormIDE.FormCloseQuery(A: TObject; var ACanClose: boolean);
