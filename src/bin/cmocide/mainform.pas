@@ -196,12 +196,13 @@ begin
   FMemo.Widget.setBorder(nil);
   FMemo.Document := FDocument;
   FMemo.Align := alClient;
-  FMemo.Parent := FSplitter.Sides[0];
-  FMemo.PopupMenu := TPopupMenu.Create(FMemo);
   FMemo.OnChange := @MemoChange;
   FMemo.OnCaretUpdate := @MemoCaretUpdate;
+  FMemo.OnCaretUpdate(FMemo);
   FMemo.UndoLimit := 1000;
+  FMemo.PopupMenu := TPopupMenu.Create(FMemo);
   AddEditMenuItems(FMemo.PopupMenu);
+  FMemo.Parent := FSplitter.Sides[0];
 
   FListBox := TListBox.Create(Self);
   FListBox.Widget.setBorder(nil);
@@ -380,11 +381,13 @@ end;
 
 procedure TFormIDE.FileOpen(A: TObject);
 begin
-  OpenDialog.FileName := FileName;
-  if OpenDialog.Execute then begin
-    LoadFromFile(OpenDialog.FileName);
-  end else begin
-    Abort;
+  if CloseQuery then begin
+    OpenDialog.FileName := FileName;
+    if OpenDialog.Execute then begin
+      LoadFromFile(OpenDialog.FileName);
+    end else begin
+      Abort;
+    end;
   end;
 end;
 
