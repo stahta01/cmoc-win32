@@ -5,7 +5,7 @@ unit MainForm;
 interface
 
 uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, Documents, ExtCtrls, FatCowIcons,
-  FileUtils, Forms, Graphics, Java, LCLType, Memos, MenuItems, Menus, Process, ProcessUtils,
+  FileUtils, Forms, Graphics, Java, LCLType, Memos, Menus, MenuTypes, Process, ProcessUtils,
   Programs, Splitters, StdCtrls, StrUtils, SysUtils;
 
 type
