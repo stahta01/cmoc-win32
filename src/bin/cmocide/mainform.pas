@@ -5,7 +5,7 @@ unit MainForm;
 interface
 
 uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, Documents, ExtCtrls, FatCowIcons,
-  FileUtils, Forms, Graphics, Java, LCLType, Memos, Menus, Process, ProcessUtils,
+  FileUtils, Forms, Graphics, Java, LCLType, Memos, MenuItems, Menus, Process, ProcessUtils,
   Programs, Splitters, StdCtrls, StrUtils, SysUtils;
 
 type
@@ -26,7 +26,7 @@ type
   public
     procedure Execute(const AExecutable: string; const AParameters: array of string;
       const AConsole: boolean);
-    procedure AddEditMenuItems(const A: TAbstractMenuItem);
+    procedure AddEditMenuItems(const A: TMenuElement);
     procedure LogMessage(const A: string);
     procedure LogFileName(const A, AFileName: string);
     procedure SetFileName(const A: TFileName); override;
@@ -103,7 +103,6 @@ begin
   FIcons := TFatCowIcons.Create(ProgramDirectory + 'images');
 
   with StatusBar.AddPanel do begin
-    Caption := '100:100';
     Width := 70;
   end;
   with StatusBar.AddPanel do begin
@@ -245,7 +244,7 @@ begin
   FSplitter.Position := Height - 256;
 end;
 
-procedure TFormIDE.AddEditMenuItems(const A: TAbstractMenuItem);
+procedure TFormIDE.AddEditMenuItems(const A: TMenuElement);
 begin
   with A do begin
     AddMenuItem('&Undo', @EditUndo, FIcons.Undo).ShortCut := scCtrl + VK_Z;
