@@ -51,7 +51,7 @@
       <Filename Value="cmocide"/>
     </Target>
     <SearchPaths>
-      <IncludeFiles Value="$(ProjOutDir)"/>
+      <IncludeFiles Value="$(ProjOutDir);..\..\..\..\javavcl\src"/>
       <OtherUnitFiles Value="..\..\..\..\javavcl\src"/>
       <UnitOutputDirectory Value="..\..\..\bin\cmocide.jar"/>
     </SearchPaths>

@@ -1,1 +1,1 @@
-java -cp ../../../bin/cmocide.jar cmocide
+java -cp ../../../bin/cmocide.jar main apple orange
