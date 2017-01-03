@@ -4,9 +4,10 @@ unit MainForm;
 
 interface
 
-uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, ExtCtrls, FatCowIcons,
-  FileUtils, Forms, Graphics, Highlighters, Java, LCLType, MemoTypes, Menus, MenuTypes,
-  Process, ProcessUtils, Programs, SplitterTypes, StdCtrls, StrTools, StrUtils, SysUtils;
+uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, ExtCtrls, FileUtils, Forms,
+  Graphics, Java, LCLType, Menus, Process, ProcessUtils,
+  StdCtrls, StrTools, StrUtils, SysUtils, UFatCow,
+  UHighlighterCpp, UMenuItem, UPairSplitter, UProgram;
 
 type
 
@@ -19,7 +20,7 @@ type
     FListBox: TListBox;
     FFindDialog: TFindDialog;
     FReplaceDialog: TReplaceDialog;
-    FDocument: TCppHighlighter;
+    FDocument: THighlighterCpp;
     FButtonUndo, FButtonRedo, FButtonCut, FButtonCopy, FButtonPaste, FButtonDelete: TButton;
   public
     constructor Create(A: TComponent); override;
@@ -187,7 +188,7 @@ begin
   FSplitter.Align := alClient;
   FSplitter.Parent := Self;
 
-  FDocument := TCppHighlighter.Create;
+  FDocument := THighlighterCpp.Create;
   FDocument.Objects.LoadFromFile(ProgramDirectory + 'cmocide\objects.txt');
   FDocument.Keywords.LoadFromFile(ProgramDirectory + 'cmocide\keywords.txt');
   FDocument.Constants.LoadFromFile(ProgramDirectory + 'cmocide\constants.txt');
