@@ -5,8 +5,8 @@ unit MainForm;
 interface
 
 uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, ExtCtrls, FatCowIcons,
-  FileUtils, Forms, Graphics, Highlighters, Java, LCLType, Memos, Menus, MenuTypes, Process, ProcessUtils,
-  Programs, Splitters, StdCtrls, StrUtils, SysUtils;
+  FileUtils, Forms, Graphics, Highlighters, Java, LCLType, MemoTypes, Menus, MenuTypes,
+  Process, ProcessUtils, Programs, SplitterTypes, StdCtrls, StrTools, StrUtils, SysUtils;
 
 type
 
@@ -34,7 +34,7 @@ type
     procedure LoadFromFile(const A: TFileName); override;
     procedure OpenMESSImage(const A: TFileName);
   public
-    procedure ListBoxInserted(A: TObject; const AIndex: integer);
+    procedure ListBoxInsert(A: TObject; const AIndex: integer);
     procedure MemoChange(A: TObject);
     procedure MemoCaretUpdate(A: TObject);
   public
@@ -207,7 +207,7 @@ begin
   FListBox := TListBox.Create(Self);
   FListBox.Widget.setBorder(nil);
   FListBox.Align := alClient;
-  FListBox.Items.OnInserted := @ListBoxInserted;
+  FListBox.Items.OnInsert := @ListBoxInsert;
   FListBox.Color := clInfoBk;
   FListBox.Font.Name := 'Courier New';
   FListBox.Font.Height := 12;
@@ -293,7 +293,7 @@ end;
 procedure TFormIDE.SaveToFile(const A: TFileName);
 begin
   LogFileName('Saving', A);
-  FMemo.Lines.SaveToFile(A);
+  AnsiSaveToFile(FMemo.Text, A);
   inherited;
 end;
 
@@ -329,7 +329,7 @@ begin
   end;
 end;
 
-procedure TFormIDE.ListBoxInserted(A: TObject; const AIndex: integer);
+procedure TFormIDE.ListBoxInsert(A: TObject; const AIndex: integer);
 begin
   FListBox.ItemIndex := AIndex;
   FListBox.MakeCurrentVisible;
