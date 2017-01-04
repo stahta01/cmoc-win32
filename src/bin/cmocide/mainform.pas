@@ -205,7 +205,7 @@ begin
   FMemo.Parent := FSplitter.Sides[0];
 
   FListBox := TListBox.Create(Self);
-  FListBox.Widget.setBorder(nil);
+  FListBox.BorderStyle := bsNone;
   FListBox.Align := alClient;
   FListBox.Items.OnInsert := @ListBoxInsert;
   FListBox.Color := clInfoBk;
