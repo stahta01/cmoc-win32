@@ -182,7 +182,7 @@ begin
   ToolBar.AddToolBarButton('Build and Run', @RunBuildAndRun, FIcons.BrickGo);
 
   FSplitter := TPairSplitter.Create(Self);
-  FSplitter.Widget.setResizeWeight(1);
+  FSplitter.ResizeWeight := 1;
   FSplitter.SplitterType := pstVertical;
   FSplitter.Align := alClient;
   FSplitter.Parent := Self;
@@ -193,7 +193,7 @@ begin
   FDocument.Constants.LoadFromFile(ProgramDirectory + 'cmocide\constants.txt');
 
   FMemo := TRichMemo.Create(Self);
-  FMemo.Widget.setBorder(nil);
+  FMemo.BorderStyle := bsNone;
   FMemo.Document := FDocument;
   FMemo.Align := alClient;
   FMemo.OnChange := @MemoChange;
