@@ -10,29 +10,27 @@ uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, ExtCtrls, FileUtils, Fo
 
 type
 
-  TFormIDE = class(TFormSDI)
+  TFormIDE = class(TFormToolStatusBar)
   strict private
     FIcons: TFatCowIcons;
     FSplitter: TPairSplitter;
     FProcess: TProcess;
     FListBox: TListBox;
     FEditors: TEditorPageControl;
+    FEditorPopupMenu: TPopupMenu;
     FLogPages: TPageControl;
     FFindDialog: TFindDialog;
     FReplaceDialog: TReplaceDialog;
-    FDocument: THighlighterCpp;
     FButtonUndo, FButtonRedo, FButtonCut, FButtonCopy, FButtonPaste, FButtonDelete: TButton;
   public
     constructor Create(A: TComponent); override;
   public
+    procedure CloseQueryDlg;
     procedure Execute(const AExecutable: string; const AParameters: array of string;
       const AConsole: boolean);
     procedure AddEditMenuItems(const A: TMenuElement);
     procedure LogMessage(const A: string);
     procedure LogFileName(const A, AFileName: string);
-    procedure SetFileName(const A: TFileName); override;
-    procedure SaveToFile(const A: TFileName); override;
-    procedure LoadFromFile(const A: TFileName); override;
     procedure OpenMESSImage(const A: TFileName);
   public
     procedure ListBoxInsert(A: TObject; const AIndex: integer);
@@ -48,6 +46,7 @@ type
     procedure FileOpenInNewWindow(A: TObject);
     procedure FileSave(A: TObject);
     procedure FileSaveAs(A: TObject);
+    procedure FileClose(A: TObject);
     procedure FileExit(A: TObject);
   public
     procedure EditUndo(A: TObject);
@@ -83,8 +82,6 @@ var
 implementation
 
 constructor TFormIDE.Create(A: TComponent);
-var
-  LEditor: TEditor;
 begin
   inherited;
 
@@ -129,6 +126,7 @@ begin
       AddMenuItem(cLineCaption);
       AddMenuItem('&Save', @FileSave, FIcons.Save).ShortCut := scCtrl + VK_S;
       AddMenuItem('Save &As ...', @FileSaveAs, FIcons.FileSaveAs);
+      AddMenuItem('&Close Page ...', @FileClose, FIcons.FileSaveAs);
       AddMenuItem(cLineCaption);
       AddMenuItem('E&xit', @FileExit, FIcons.Door);
     end;
@@ -169,6 +167,9 @@ begin
     end;
   end;
 
+  FEditorPopupMenu := TPopupMenu.Create(Self);
+  AddEditMenuItems(FEditorPopupMenu);
+
   ToolBar.Height := 44;
   ToolBar.AddToolBarButton('New', @FileNew, FIcons.New);
   ToolBar.AddToolBarButton('Open', @FileOpen, FIcons.Open);
@@ -192,28 +193,15 @@ begin
   FSplitter.Align := alClient;
   FSplitter.Parent := Self;
 
-  FDocument := THighlighterCpp.Create;
-  FDocument.Objects.LoadFromFile(ProgramDirectory + 'cmocide\objects.txt');
-  FDocument.Keywords.LoadFromFile(ProgramDirectory + 'cmocide\keywords.txt');
-  FDocument.Constants.LoadFromFile(ProgramDirectory + 'cmocide\constants.txt');
-
   FEditors := TEditorPageControl.Create(Self);
   FEditors.Align := alClient;
   FEditors.Focusable := False;
   FEditors.Parent := FSplitter.Sides[0];
 
-  LEditor := FEditors.AddEditor(TRichMemo);
-  LEditor.Document := FDocument;
-  LEditor.OnChange := @MemoChange;
-  LEditor.OnCaretUpdate := @MemoCaretUpdate;
-  LEditor.OnCaretUpdate(LEditor);
-  LEditor.UndoLimit := 1000;
-  LEditor.PopupMenu := TPopupMenu.Create(LEditor);
-  AddEditMenuItems(LEditor.PopupMenu);
-
   FLogPages := TPageControl.Create(Self);
   FLogPages.Align := alClient;
   FLogPages.Focusable := False;
+  FLogPages.TabPosition := tpBottom;
   FLogPages.Parent := FSplitter.Sides[1];
 
   FListBox := TListBox.Create(Self);
@@ -229,27 +217,29 @@ begin
 
   OpenDialog.Filter := 'C/C++ Files|*.c;*.h;*.cpp;*.hpp|All Files|*.*';
   SaveDialog.Filter := OpenDialog.Filter;
-  try
-    LoadFromFile(GetEnvironmentVariable('FILENAME'));
-  except
-    LEditor.Clear;
-    LEditor.Lines.Add('apple orange pair');
-    LEditor.Lines.Add('#include <math.h>');
-    LEditor.Lines.Add('#include <ctype.h>');
-    LEditor.Lines.Add('#include <stdio.h>');
-    LEditor.Lines.Add('#include <stdlib.h>');
-    LEditor.Lines.Add('#include <string.h>');
-    LEditor.Lines.Add('#include <conio.h>');
-    LEditor.Lines.Add(EmptyStr);
-    LEditor.Lines.Add('int main(void)');
-    LEditor.Lines.Add('{');
-    LEditor.Lines.Add('    puts("WELCOME TO ' + UpperCase(Application.Title) + '!");');
-    LEditor.Lines.Add('    return 0;');
-    LEditor.Lines.Add('}');
-    LEditor.ClearUndo;
-    FileName := EmptyStr;
+
+  FileNew(nil);
+
+  with FEditors.ActiveEditor do begin
+    Clear;
+    Lines.Add('apple orange pair');
+    Lines.Add('#include <math.h>');
+    Lines.Add('#include <ctype.h>');
+    Lines.Add('#include <stdio.h>');
+    Lines.Add('#include <stdlib.h>');
+    Lines.Add('#include <string.h>');
+    Lines.Add('#include <conio.h>');
+    Lines.Add(EmptyStr);
+    Lines.Add('int main(void)');
+    Lines.Add('{');
+    Lines.Add('    puts("WELCOME TO ' + UpperCase(Application.Title) + '!");');
+    Lines.Add('    return 0;');
+    Lines.Add('}');
+    ClearUndo;
   end;
+  FEditors.SetFileName(EmptyStr);
 end;
+
 
 procedure TFormIDE.FormShow(A: TObject);
 begin
@@ -296,28 +286,6 @@ begin
   end;
 end;
 
-procedure TFormIDE.SetFileName(const A: TFileName);
-begin
-  inherited;
-  FEditors.ActivePage.Caption := ExtractFileName(GetDisplayFileName);
-  FEditors.ActiveEditor.Modified := False;
-end;
-
-procedure TFormIDE.SaveToFile(const A: TFileName);
-begin
-  LogFileName('Saving', A);
-  AnsiSaveToFile(FEditors.ActiveEditor.Text, A);
-  inherited;
-end;
-
-procedure TFormIDE.LoadFromFile(const A: TFileName);
-begin
-  LogFileName('Loading', A);
-  FEditors.ActiveEditor.Text := AnsiLoadFromFile(A);
-  FEditors.ActiveEditor.SelStart := 0;
-  inherited;
-end;
-
 procedure TFormIDE.Execute(const AExecutable: string; const AParameters: array of string;
   const AConsole: boolean);
 begin
@@ -359,34 +327,62 @@ begin
 end;
 
 procedure TFormIDE.MemoChange(A: TObject);
+var
+  LFileName: TFileName;
 begin
+  LFileName := FEditors.GetFileName;
+  if Length(LFileName) = 0 then begin
+    LFileName := 'untitled';
+  end;
+  Caption := Application.Title + ' - [' + LFileName + ']';
   StatusBar.Panels[1].Caption := IfThen(FEditors.ActiveEditor.Modified, 'Modified', EmptyStr);
-  StatusBar.Panels[3].Caption := GetDisplayFileName;
+  StatusBar.Panels[3].Caption := LFileName;
   FButtonUndo.Enabled := FEditors.ActiveEditor.CanUndo;
   FButtonRedo.Enabled := FEditors.ActiveEditor.CanRedo;
   MemoCaretUpdate(FEditors.ActiveEditor);
 end;
 
-procedure TFormIDE.FormCloseQuery(A: TObject; var ACanClose: boolean);
+procedure TFormIDE.CloseQueryDlg;
 begin
-  if FEditors.ActiveEditor.Modified then begin
-    case MessageDlg('Do you want to save changes?', mtConfirmation, mbYesNoCancel, 0) of
-      mrYes: begin
-        FileSave(Self);
-      end;
-      mrCancel: begin
-        ACanClose := False;
-      end;
+  case MessageDlg('Do you want to save changes?', mtConfirmation, mbYesNoCancel, 0) of
+    mrYes: begin
+      FileSave(nil);
+    end;
+    mrCancel: begin
+      Abort;
+    end;
+  end;
+end;
+
+procedure TFormIDE.FormCloseQuery(A: TObject; var ACanClose: boolean);
+var
+  LIndex: integer;
+begin
+  for LIndex := 0 to FEditors.PageCount - 1 do begin
+    if FEditors.GetEditor(LIndex).Modified then begin
+      FEditors.ActivePageIndex := LIndex;
+      CloseQueryDlg;
     end;
   end;
 end;
 
 procedure TFormIDE.FileNew(A: TObject);
+var
+  LEditor: TEditor;
+  LDocument: THighlighterCpp;
 begin
-  if CloseQuery then begin
-    FEditors.ActiveEditor.Clear;
-    FileName := EmptyStr;
-  end;
+  LDocument := THighlighterCpp.Create;
+  LDocument.Objects.LoadFromFile(ProgramDirectory + 'cmocide\objects.txt');
+  LDocument.Keywords.LoadFromFile(ProgramDirectory + 'cmocide\keywords.txt');
+  LDocument.Constants.LoadFromFile(ProgramDirectory + 'cmocide\constants.txt');
+
+  LEditor := FEditors.AddEditor(TRichMemo);
+  LEditor.Document := LDocument;
+  LEditor.OnChange := @MemoChange;
+  LEditor.OnCaretUpdate := @MemoCaretUpdate;
+  LEditor.OnCaretUpdate(LEditor);
+  LEditor.UndoLimit := 1000;
+  LEditor.PopupMenu := FEditorPopupMenu;
 end;
 
 procedure TFormIDE.FileNewWindow(A: TObject);
@@ -398,13 +394,12 @@ end;
 
 procedure TFormIDE.FileOpen(A: TObject);
 begin
-  if CloseQuery then begin
-    OpenDialog.FileName := FileName;
-    if OpenDialog.Execute then begin
-      LoadFromFile(OpenDialog.FileName);
-    end else begin
-      Abort;
-    end;
+  if OpenDialog.Execute then begin
+    LogFileName('Loading', OpenDialog.FileName);
+    FileNew(nil);
+    FEditors.LoadFromFile(OpenDialog.FileName);
+  end else begin
+    Abort;
   end;
 end;
 
@@ -412,7 +407,7 @@ procedure TFormIDE.FileOpenInNewWindow(A: TObject);
 begin
   if OpenDialog.Execute then begin
     FProcess.Environment.Values['FILENAME'] := OpenDialog.FileName;
-    FileNewWindow(A);
+    FileNewWindow(nil);
   end else begin
     Abort;
   end;
@@ -421,7 +416,7 @@ end;
 procedure TFormIDE.FileSave(A: TObject);
 begin
   try
-    SaveToFile(FileName);
+    FEditors.SaveToFile;
   except
     FileSaveAs(A);
   end;
@@ -429,11 +424,22 @@ end;
 
 procedure TFormIDE.FileSaveAs(A: TObject);
 begin
-  SaveDialog.FileName := FileName;
+  SaveDialog.FileName := FEditors.GetFileName;
   if SaveDialog.Execute then begin
-    SaveToFile(SaveDialog.FileName);
+    FEditors.SaveToFile(SaveDialog.FileName);
   end else begin
     Abort;
+  end;
+end;
+
+procedure TFormIDE.FileClose(A: TObject);
+begin
+  if FEditors.ActiveEditor.Modified then begin
+    CloseQueryDlg;
+  end;
+  FEditors.ActivePage.Free;
+  if FEditors.PageCount = 0 then begin
+    Close;
   end;
 end;
 
