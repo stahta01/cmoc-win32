@@ -4,7 +4,7 @@ unit MainForm;
 
 interface
 
-uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, FileUtils, Forms, Graphics,
+uses BaseTypes, Classes, Math,ComCtrls, CustomForms, Dialogs, FileUtils, Forms, Graphics,
   LCLType, Menus, Process, ProcessUtils, StdCtrls, StrTools, StrUtils, SysUtils,
   UFatCow, UHighlighterCpp, UPairSplitter, UProgram;
 
