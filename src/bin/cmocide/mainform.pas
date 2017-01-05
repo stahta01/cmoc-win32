@@ -6,7 +6,7 @@ interface
 
 uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, ExtCtrls, FileUtils, Forms, Graphics,
   LCLType, Math, Menus, Process, ProcessUtils, StdCtrls, StrTools, StrUtils, SysUtils,
-  UFatCow, UHighlighterCpp, UPairSplitter, UProgram;
+  UEditor, UEditorPageControl, UFatCow, UHighlighterCpp, UPairSplitter, UProgram;
 
 type
 
@@ -15,10 +15,9 @@ type
     FIcons: TFatCowIcons;
     FSplitter: TPairSplitter;
     FProcess: TProcess;
-    FMemo: TRichMemo;
     FListBox: TListBox;
-    FPageControlClient: TPageControl;
-    FPageControlBottom: TPageControl;
+    FEditors: TEditorPageControl;
+    FLogPages: TPageControl;
     FFindDialog: TFindDialog;
     FReplaceDialog: TReplaceDialog;
     FDocument: THighlighterCpp;
@@ -84,6 +83,8 @@ var
 implementation
 
 constructor TFormIDE.Create(A: TComponent);
+var
+  LEditor: TEditor;
 begin
   inherited;
 
@@ -196,26 +197,24 @@ begin
   FDocument.Keywords.LoadFromFile(ProgramDirectory + 'cmocide\keywords.txt');
   FDocument.Constants.LoadFromFile(ProgramDirectory + 'cmocide\constants.txt');
 
-  FPageControlClient := TPageControl.Create(Self);
-  FPageControlClient.Align := alClient;
-  FPageControlClient.Focusable := False;
-  FPageControlClient.Parent := FSplitter.Sides[0];
+  FEditors := TEditorPageControl.Create(Self);
+  FEditors.Align := alClient;
+  FEditors.Focusable := False;
+  FEditors.Parent := FSplitter.Sides[0];
 
-  FMemo := TRichMemo.Create(Self);
-  FMemo.Document := FDocument;
-  FMemo.Align := alClient;
-  FMemo.OnChange := @MemoChange;
-  FMemo.OnCaretUpdate := @MemoCaretUpdate;
-  FMemo.OnCaretUpdate(FMemo);
-  FMemo.UndoLimit := 1000;
-  FMemo.PopupMenu := TPopupMenu.Create(FMemo);
-  AddEditMenuItems(FMemo.PopupMenu);
-  FMemo.Parent := FPageControlClient.AddTabSheet('File');
+  LEditor := FEditors.AddEditor(TRichMemo);
+  LEditor.Document := FDocument;
+  LEditor.OnChange := @MemoChange;
+  LEditor.OnCaretUpdate := @MemoCaretUpdate;
+  LEditor.OnCaretUpdate(LEditor);
+  LEditor.UndoLimit := 1000;
+  LEditor.PopupMenu := TPopupMenu.Create(LEditor);
+  AddEditMenuItems(LEditor.PopupMenu);
 
-  FPageControlBottom := TPageControl.Create(Self);
-  FPageControlBottom.Align := alClient;
-  FPageControlBottom.Focusable := False;
-  FPageControlBottom.Parent := FSplitter.Sides[1];
+  FLogPages := TPageControl.Create(Self);
+  FLogPages.Align := alClient;
+  FLogPages.Focusable := False;
+  FLogPages.Parent := FSplitter.Sides[1];
 
   FListBox := TListBox.Create(Self);
   //FListBox.BorderStyle := bsNone;
@@ -226,28 +225,28 @@ begin
   FListBox.Font.Height := 12;
   FListBox.Font.Color := clGreen;
   FListBox.ItemHeight := 14;
-  FListBox.Parent := FPageControlBottom.AddTabSheet('Messages');
+  FListBox.Parent := FLogPages.AddTabSheet('Messages');
 
   OpenDialog.Filter := 'C/C++ Files|*.c;*.h;*.cpp;*.hpp|All Files|*.*';
   SaveDialog.Filter := OpenDialog.Filter;
   try
     LoadFromFile(GetEnvironmentVariable('FILENAME'));
   except
-    FMemo.Clear;
-    FMemo.Lines.Add('apple orange pair');
-    FMemo.Lines.Add('#include <math.h>');
-    FMemo.Lines.Add('#include <ctype.h>');
-    FMemo.Lines.Add('#include <stdio.h>');
-    FMemo.Lines.Add('#include <stdlib.h>');
-    FMemo.Lines.Add('#include <string.h>');
-    FMemo.Lines.Add('#include <conio.h>');
-    FMemo.Lines.Add(EmptyStr);
-    FMemo.Lines.Add('int main(void)');
-    FMemo.Lines.Add('{');
-    FMemo.Lines.Add('    puts("WELCOME TO ' + UpperCase(Application.Title) + '!");');
-    FMemo.Lines.Add('    return 0;');
-    FMemo.Lines.Add('}');
-    FMemo.ClearUndo;
+    LEditor.Clear;
+    LEditor.Lines.Add('apple orange pair');
+    LEditor.Lines.Add('#include <math.h>');
+    LEditor.Lines.Add('#include <ctype.h>');
+    LEditor.Lines.Add('#include <stdio.h>');
+    LEditor.Lines.Add('#include <stdlib.h>');
+    LEditor.Lines.Add('#include <string.h>');
+    LEditor.Lines.Add('#include <conio.h>');
+    LEditor.Lines.Add(EmptyStr);
+    LEditor.Lines.Add('int main(void)');
+    LEditor.Lines.Add('{');
+    LEditor.Lines.Add('    puts("WELCOME TO ' + UpperCase(Application.Title) + '!");');
+    LEditor.Lines.Add('    return 0;');
+    LEditor.Lines.Add('}');
+    LEditor.ClearUndo;
     FileName := EmptyStr;
   end;
 end;
@@ -300,22 +299,22 @@ end;
 procedure TFormIDE.SetFileName(const A: TFileName);
 begin
   inherited;
-  TTabSheet(FMemo.Parent).Caption := ExtractFileName(GetDisplayFileName);
-  FMemo.Modified := False;
+  FEditors.ActivePage.Caption := ExtractFileName(GetDisplayFileName);
+  FEditors.ActiveEditor.Modified := False;
 end;
 
 procedure TFormIDE.SaveToFile(const A: TFileName);
 begin
   LogFileName('Saving', A);
-  AnsiSaveToFile(FMemo.Text, A);
+  AnsiSaveToFile(FEditors.ActiveEditor.Text, A);
   inherited;
 end;
 
 procedure TFormIDE.LoadFromFile(const A: TFileName);
 begin
   LogFileName('Loading', A);
-  FMemo.Text := AnsiLoadFromFile(A);
-  FMemo.SelStart := 0;
+  FEditors.ActiveEditor.Text := AnsiLoadFromFile(A);
+  FEditors.ActiveEditor.SelStart := 0;
   inherited;
 end;
 
@@ -351,26 +350,26 @@ end;
 
 procedure TFormIDE.MemoCaretUpdate(A: TObject);
 begin
-  with FMemo.CaretPos do begin
+  with FEditors.ActiveEditor.CaretPos do begin
     StatusBar.Panels[0].Caption := IntToStr(X) + ':' + IntToStr(Y);
   end;
-  FButtonCut.Enabled := FMemo.SelLength > 0;
+  FButtonCut.Enabled := FEditors.ActiveEditor.SelLength > 0;
   FButtonCopy.Enabled := FButtonCut.Enabled;
   FButtonDelete.Enabled := FButtonCut.Enabled;
 end;
 
 procedure TFormIDE.MemoChange(A: TObject);
 begin
-  StatusBar.Panels[1].Caption := IfThen(FMemo.Modified, 'Modified', EmptyStr);
+  StatusBar.Panels[1].Caption := IfThen(FEditors.ActiveEditor.Modified, 'Modified', EmptyStr);
   StatusBar.Panels[3].Caption := GetDisplayFileName;
-  FButtonUndo.Enabled := FMemo.CanUndo;
-  FButtonRedo.Enabled := FMemo.CanRedo;
-  MemoCaretUpdate(FMemo);
+  FButtonUndo.Enabled := FEditors.ActiveEditor.CanUndo;
+  FButtonRedo.Enabled := FEditors.ActiveEditor.CanRedo;
+  MemoCaretUpdate(FEditors.ActiveEditor);
 end;
 
 procedure TFormIDE.FormCloseQuery(A: TObject; var ACanClose: boolean);
 begin
-  if FMemo.Modified then begin
+  if FEditors.ActiveEditor.Modified then begin
     case MessageDlg('Do you want to save changes?', mtConfirmation, mbYesNoCancel, 0) of
       mrYes: begin
         FileSave(Self);
@@ -385,7 +384,7 @@ end;
 procedure TFormIDE.FileNew(A: TObject);
 begin
   if CloseQuery then begin
-    FMemo.Clear;
+    FEditors.ActiveEditor.Clear;
     FileName := EmptyStr;
   end;
 end;
@@ -445,46 +444,46 @@ end;
 
 procedure TFormIDE.EditUndo(A: TObject);
 begin
-  FMemo.Undo;
+  FEditors.ActiveEditor.Undo;
 end;
 
 procedure TFormIDE.EditRedo(A: TObject);
 begin
-  FMemo.Redo;
+  FEditors.ActiveEditor.Redo;
 end;
 
 procedure TFormIDE.EditCut(A: TObject);
 begin
-  FMemo.CutToClipboard;
+  FEditors.ActiveEditor.CutToClipboard;
 end;
 
 procedure TFormIDE.EditCopy(A: TObject);
 begin
-  FMemo.CopyToClipboard;
+  FEditors.ActiveEditor.CopyToClipboard;
 end;
 
 procedure TFormIDE.EditPaste(A: TObject);
 begin
-  FMemo.PasteFromClipboard;
+  FEditors.ActiveEditor.PasteFromClipboard;
 end;
 
 procedure TFormIDE.EditDelete(A: TObject);
 begin
-  FMemo.ClearSelection;
+  FEditors.ActiveEditor.ClearSelection;
 end;
 
 procedure TFormIDE.EditSelectAll(A: TObject);
 begin
-  FMemo.SelectAll;
+  FEditors.ActiveEditor.SelectAll;
 end;
 
 procedure TFormIDE.EditFind(A: TObject);
 begin
-  FFindDialog.FindText := FMemo.SelText;
+  FFindDialog.FindText := FEditors.ActiveEditor.SelText;
   FFindDialog.Execute;
 end;
 
-procedure MemoSR(const A: TRichMemo; const AFindText, AReplaceText: string; const AOptions: TSearchOptions);
+procedure MemoSR(const A: TEditor; const AFindText, AReplaceText: string; const AOptions: TSearchOptions);
 begin
   if A.SearchReplace(AFindText, AReplaceText, AOptions) < 0 then begin
     if MessageDlg('Search from the beginning?', mtConfirmation, mbYesNo, 0) = mrYes then begin
@@ -502,7 +501,7 @@ begin
   if Length(FFindDialog.FindText) = 0 then begin
     EditFind(A);
   end else begin
-    MemoSR(FMemo, FFindDialog.FindText, EmptyStr, []);
+    MemoSR(FEditors.ActiveEditor, FFindDialog.FindText, EmptyStr, []);
   end;
 end;
 
@@ -513,17 +512,17 @@ end;
 
 procedure TFormIDE.EditReplaceNext(A: TObject);
 begin
-  MemoSR(FMemo, FReplaceDialog.FindText, FReplaceDialog.ReplaceText, [soReplace]);
+  MemoSR(FEditors.ActiveEditor, FReplaceDialog.FindText, FReplaceDialog.ReplaceText, [soReplace]);
 end;
 
 procedure TFormIDE.EditUpperCase(A: TObject);
 begin
-  FMemo.ReplaceSelection(AnsiUpperCase(FMemo.SelText));
+  FEditors.ActiveEditor.ReplaceSelection(AnsiUpperCase(FEditors.ActiveEditor.SelText));
 end;
 
 procedure TFormIDE.EditLowerCase(A: TObject);
 begin
-  FMemo.ReplaceSelection(AnsiLowerCase(FMemo.SelText));
+  FEditors.ActiveEditor.ReplaceSelection(AnsiLowerCase(FEditors.ActiveEditor.SelText));
 end;
 
 procedure TFormIDE.EditFormatSource(A: TObject);
@@ -531,13 +530,13 @@ var
   LDst, LSrc: TStringStream;
 begin
   if MessageDlg('Do you want to format the source code?', mtConfirmation, mbYesNo, 0) = mrYes then begin
-    LSrc := TStringStream.Create(FMemo.Text);
+    LSrc := TStringStream.Create(FEditors.ActiveEditor.Text);
     try
       LDst := TStringStream.Create(EmptyStr);
       try
         ProcessPipe(LDst, LSrc, ProgramDirectory + 'astyle.exe', EmptyStr, ['-A8', '-xC100', '-k1', '-w',
           (*'-U',*) '-H', '-j', '-s' + IntToStr(4)], []);
-        FMemo.Text := LDst.DataString;
+        FEditors.ActiveEditor.Text := LDst.DataString;
       finally
         FreeAndNil(LDst);
       end;
