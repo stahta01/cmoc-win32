@@ -17,8 +17,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="MainForm"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="8"/>
-        <CursorPos X="30" Y="13"/>
+        <TopLine Value="464"/>
+        <CursorPos X="31" Y="477"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -121,7 +121,7 @@
         <UnitName Value="Lists"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="15" Y="3"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit15>
       <Unit16>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\jdk15.pas"/>
@@ -133,8 +133,8 @@
       <Unit17>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\jdk15.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="46021"/>
-        <CursorPos X="41" Y="46032"/>
+        <TopLine Value="57047"/>
+        <CursorPos X="32" Y="57063"/>
         <UsageCount Value="74"/>
       </Unit17>
       <Unit18>
@@ -216,7 +216,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="27"/>
         <CursorPos X="83" Y="11"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit29>
       <Unit30>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\jastrings.inc"/>
@@ -244,84 +244,84 @@
         <UnitName Value="Classes"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="3"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit33>
       <Unit34>
         <Filename Value="..\src\fcl\pascal.pas"/>
         <UnitName Value="Pascal"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="3"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit34>
       <Unit35>
         <Filename Value="..\src\fcl\lists.pas"/>
         <UnitName Value="Lists"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="3"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit35>
       <Unit36>
         <Filename Value="..\src\fcl\sysutils.pas"/>
         <UnitName Value="SysUtils"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="3"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit36>
       <Unit37>
         <Filename Value="..\src\fcl\math.pas"/>
         <UnitName Value="Math"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="3"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit37>
       <Unit38>
         <Filename Value="..\src\fcl\strutils.pas"/>
         <UnitName Value="StrUtils"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="3"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit38>
       <Unit39>
         <Filename Value="..\src\fcl\types.pas"/>
         <UnitName Value="Types"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="3"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit39>
       <Unit40>
         <Filename Value="..\src\vcl\comctrls.pas"/>
         <UnitName Value="ComCtrls"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="3"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit40>
       <Unit41>
         <Filename Value="..\src\vcl\controls.pas"/>
         <UnitName Value="Controls"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="3"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit41>
       <Unit42>
         <Filename Value="..\src\vcl\widgets.pas"/>
         <UnitName Value="Widgets"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="3"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit42>
       <Unit43>
         <Filename Value="..\src\vcl\forms.pas"/>
         <UnitName Value="Forms"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="3"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit43>
       <Unit44>
         <Filename Value="..\src\vcl\stdctrls.pas"/>
         <UnitName Value="StdCtrls"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="3"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit44>
       <Unit45>
         <Filename Value="..\..\src\fcl\classes.pas"/>
@@ -361,7 +361,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="128"/>
         <CursorPos X="14" Y="587"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit49>
       <Unit50>
         <Filename Value="..\..\..\upascal\ulowhigh.pas"/>
@@ -377,7 +377,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <CursorPos X="42" Y="29"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit51>
       <Unit52>
         <Filename Value="..\..\src\vcl\comctrls.pas"/>
@@ -393,7 +393,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <CursorPos X="34" Y="27"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit53>
       <Unit54>
         <Filename Value="..\..\src\vcl\controls.pas"/>
@@ -437,7 +437,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="11"/>
         <CursorPos X="24" Y="23"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit59>
       <Unit60>
         <Filename Value="..\..\..\upascal\upascal.inc"/>
@@ -493,7 +493,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="11"/>
         <CursorPos X="26" Y="23"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit67>
       <Unit68>
         <Filename Value="..\..\src\vcl\graphics.pas"/>
@@ -515,7 +515,7 @@
         <UnitName Value="Interfaces"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="10" Y="18"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit70>
       <Unit71>
         <Filename Value="..\..\src\vcl\controltypes.pas"/>
@@ -523,7 +523,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="9"/>
         <CursorPos X="25" Y="21"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit71>
       <Unit72>
         <Filename Value="..\..\src\fcl\math.pas"/>
@@ -571,7 +571,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="186"/>
         <CursorPos X="42" Y="194"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit77>
       <Unit78>
         <Filename Value="..\..\..\upascal\uchar.pas"/>
@@ -720,7 +720,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="10"/>
         <CursorPos X="70" Y="21"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit96>
       <Unit97>
         <Filename Value="..\..\src\comctrls.pas"/>
@@ -763,7 +763,7 @@
       <Unit102>
         <Filename Value="..\..\src\javaplugs.inc"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit102>
       <Unit103>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\jdynarrh.inc"/>
@@ -850,8 +850,8 @@
         <Filename Value="..\..\..\..\javavcl\src\comctrls.pas"/>
         <UnitName Value="ComCtrls"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="16"/>
-        <CursorPos X="32" Y="27"/>
+        <TopLine Value="18"/>
+        <CursorPos X="31" Y="29"/>
         <UsageCount Value="14"/>
       </Unit114>
       <Unit115>
@@ -936,14 +936,15 @@
         <Filename Value="..\..\..\..\javavcl\src\sysutils.pas"/>
         <UnitName Value="SysUtils"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="50"/>
-        <CursorPos Y="56"/>
+        <TopLine Value="627"/>
+        <CursorPos X="12" Y="619"/>
         <UsageCount Value="20"/>
       </Unit125>
       <Unit126>
         <Filename Value="..\..\..\..\javavcl\src\classes.pas"/>
         <UnitName Value="Classes"/>
         <EditorIndex Value="-1"/>
+        <CursorPos X="47" Y="20"/>
         <UsageCount Value="12"/>
       </Unit126>
       <Unit127>
@@ -1045,7 +1046,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="17"/>
         <CursorPos X="15" Y="27"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit139>
       <Unit140>
         <Filename Value="..\..\..\..\javavcl\src\ascii.pas"/>
@@ -1053,7 +1054,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="92"/>
         <CursorPos X="3" Y="105"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit140>
       <Unit141>
         <Filename Value="..\..\..\..\javavcl\src\listboxes.pas"/>
@@ -1113,7 +1114,7 @@
         <Filename Value="..\..\..\..\javavcl\src\dialogs.pas"/>
         <UnitName Value="Dialogs"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="19"/>
+        <CursorPos X="46" Y="90"/>
         <UsageCount Value="13"/>
       </Unit148>
       <Unit149>
@@ -1167,7 +1168,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="159"/>
         <CursorPos X="57" Y="176"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit155>
       <Unit156>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\jastringh.inc"/>
@@ -1387,8 +1388,8 @@
         <Filename Value="..\..\..\..\javavcl\src\basetypes.pas"/>
         <UnitName Value="BaseTypes"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="23"/>
-        <CursorPos X="3" Y="34"/>
+        <TopLine Value="17"/>
+        <CursorPos X="18" Y="28"/>
         <UsageCount Value="14"/>
       </Unit185>
       <Unit186>
@@ -1671,9 +1672,8 @@
         <Filename Value="..\..\..\..\javavcl\src\pipes.pas"/>
         <UnitName Value="Pipes"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="17"/>
-        <CursorPos X="34" Y="21"/>
-        <UsageCount Value="9"/>
+        <CursorPos X="36" Y="25"/>
+        <UsageCount Value="10"/>
       </Unit221>
       <Unit222>
         <Filename Value="..\..\..\..\javavcl\src\memory.pas"/>
@@ -1954,9 +1954,9 @@
         <Filename Value="..\..\..\..\javavcl\src\ustream.pas"/>
         <UnitName Value="UStream"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="98"/>
-        <CursorPos X="64" Y="20"/>
-        <UsageCount Value="9"/>
+        <TopLine Value="394"/>
+        <CursorPos X="7" Y="400"/>
+        <UsageCount Value="10"/>
       </Unit257>
       <Unit258>
         <Filename Value="..\..\..\..\javavcl\src\ucomponent.pas"/>
@@ -2023,8 +2023,8 @@
         <Filename Value="..\..\..\..\javavcl\src\umenuitem.pas"/>
         <UnitName Value="UMenuItem"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos X="72" Y="65"/>
+        <TopLine Value="67"/>
+        <CursorPos X="6" Y="78"/>
         <UsageCount Value="13"/>
       </Unit266>
       <Unit267>
@@ -2032,15 +2032,15 @@
         <UnitName Value="UElement"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="64"/>
-        <CursorPos X="29" Y="75"/>
+        <CursorPos X="15" Y="20"/>
         <UsageCount Value="15"/>
       </Unit267>
       <Unit268>
         <Filename Value="..\..\..\..\javavcl\src\uelementevents.pas"/>
         <UnitName Value="UElementEvents"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="19"/>
-        <CursorPos X="15" Y="30"/>
+        <TopLine Value="45"/>
+        <CursorPos X="22" Y="56"/>
         <UsageCount Value="14"/>
       </Unit268>
       <Unit269>
@@ -2167,16 +2167,16 @@
         <Filename Value="..\..\..\..\javavcl\src\upagecontrol.pas"/>
         <UnitName Value="UPageControl"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="167"/>
-        <CursorPos X="26" Y="184"/>
+        <TopLine Value="29"/>
+        <CursorPos X="22" Y="39"/>
         <UsageCount Value="10"/>
       </Unit284>
       <Unit285>
         <Filename Value="..\..\..\..\javavcl\src\upairsplitter.pas"/>
         <UnitName Value="UPairSplitter"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="42"/>
-        <CursorPos X="17" Y="52"/>
+        <TopLine Value="63"/>
+        <CursorPos X="19" Y="79"/>
         <UsageCount Value="11"/>
       </Unit285>
       <Unit286>
@@ -2309,8 +2309,8 @@
         <Filename Value="..\..\..\..\javavcl\src\uwindowevents.pas"/>
         <UnitName Value="UWindowEvents"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="27"/>
-        <CursorPos X="76" Y="53"/>
+        <TopLine Value="44"/>
+        <CursorPos X="19" Y="55"/>
         <UsageCount Value="10"/>
       </Unit302>
       <Unit303>
@@ -2735,16 +2735,16 @@
         <Filename Value="..\..\..\..\javavcl\src\ucustomcontrol.pas"/>
         <UnitName Value="UCustomControl"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="76"/>
-        <CursorPos X="84" Y="91"/>
+        <TopLine Value="37"/>
+        <CursorPos X="22" Y="47"/>
         <UsageCount Value="11"/>
       </Unit364>
       <Unit365>
         <Filename Value="..\..\..\..\javavcl\src\upopupmenuevents.pas"/>
         <UnitName Value="UPopupMenuEvents"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="13"/>
-        <CursorPos X="43" Y="24"/>
+        <TopLine Value="28"/>
+        <CursorPos X="22" Y="39"/>
         <UsageCount Value="20"/>
       </Unit365>
       <Unit366>
@@ -2756,6 +2756,27 @@
         <UsageCount Value="20"/>
       </Unit366>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory Count="5" HistoryIndex="4">
+      <Position1>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="7" Column="22"/>
+      </Position1>
+      <Position2>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="420" Column="19" TopLine="410"/>
+      </Position2>
+      <Position3>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="9" Column="61"/>
+      </Position3>
+      <Position4>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="221" Column="9" TopLine="207"/>
+      </Position4>
+      <Position5>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="131" Column="44" TopLine="119"/>
+      </Position5>
+    </JumpHistory>
   </ProjectSession>
 </CONFIG>

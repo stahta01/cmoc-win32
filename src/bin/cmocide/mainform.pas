@@ -47,6 +47,7 @@ type
     procedure FileSave(A: TObject);
     procedure FileSaveAs(A: TObject);
     procedure FileClose(A: TObject);
+    procedure FilePrint(A: TObject);
     procedure FileExit(A: TObject);
   public
     procedure EditUndo(A: TObject);
@@ -129,6 +130,8 @@ begin
       AddMenuItem('Save &As ...', @FileSaveAs, FIcons.FileSaveAs);
       AddMenuItem('&Close Page ...', @FileClose, FIcons.FileSaveAs);
       AddMenuItem(cLineCaption);
+      AddMenuItem('&Print ...', @FilePrint, FIcons.FileSaveAs);
+      AddMenuItem(cLineCaption);
       AddMenuItem('E&xit', @FileExit, FIcons.Door);
     end;
     AddEditMenuItems(AddMenuItem('&Edit'));
@@ -189,6 +192,7 @@ begin
 
   FSplitter := TPairSplitter.Create(Self);
   FSplitter.Sides[0].BorderStyle := bsNone;
+  FSplitter.Sides[0].BorderWidth := 4;
   FSplitter.Sides[1].BorderStyle := bsNone;
   FSplitter.ResizeWeight := 1;
   FSplitter.SplitterType := pstVertical;
@@ -207,7 +211,7 @@ begin
   FLogPages.Parent := FSplitter.Sides[1];
 
   FListBox := TListBox.Create(Self);
-  //FListBox.BorderStyle := bsNone;
+  FListBox.BorderStyle := bsNone;
   FListBox.Align := alClient;
   FListBox.Items.OnInsert := @ListBoxInsert;
   FListBox.Color := clInfoBk;
@@ -216,6 +220,8 @@ begin
   FListBox.Font.Color := clGreen;
   FListBox.ItemHeight := 14;
   FListBox.Parent := FLogPages.AddTabSheet('Messages');
+
+  TTabSheet(FListBox.Parent).Color := clInfoBk;
 
   OpenDialog.Filter := 'C/C++ Files|*.c;*.h;*.cpp;*.hpp|All Files|*.*';
   SaveDialog.Filter := OpenDialog.Filter;
@@ -389,6 +395,7 @@ begin
   LDocument.Constants.LoadFromFile(ProgramDirectory + 'cmocide\constants.txt');
 
   LEditor := FEditors.AddEditor(TRichMemo);
+  LEditor.BorderStyle := bsNone;
   LEditor.Document := LDocument;
   LEditor.OnChange := @MemoChange;
   LEditor.OnCaretUpdate := @MemoCaretUpdate;
@@ -405,11 +412,21 @@ begin
 end;
 
 procedure TFormMain.FileOpen(A: TObject);
+var
+  LText: TText;
 begin
   if OpenDialog.Execute then begin
     LogFileName('Loading', OpenDialog.FileName);
-    FileNew(nil);
-    FEditors.LoadFromFile(OpenDialog.FileName);
+    try
+      LText := AnsiLoadFromFile(OpenDialog.FileName);
+      FileNew(nil);
+      FEditors.ActiveEditor.Text := LText;
+      FEditors.ActiveEditor.SelStart := 0;
+      FEditors.SetFileName(EmptyStr);
+    except
+      ShowMessageError('Unable to load file');
+      Abort;
+    end;
   end else begin
     Abort;
   end;
@@ -453,6 +470,11 @@ begin
   if FEditors.PageCount = 0 then begin
     Close;
   end;
+end;
+
+procedure TFormMain.FilePrint(A: TObject);
+begin
+  FEditors.ActiveEditor.Print;
 end;
 
 procedure TFormMain.FileExit(A: TObject);
