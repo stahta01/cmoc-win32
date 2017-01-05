@@ -4,8 +4,8 @@ unit MainForm;
 
 interface
 
-uses BaseTypes, Classes, Math,ComCtrls, CustomForms, Dialogs, FileUtils, Forms, Graphics,
-  LCLType, Menus, Process, ProcessUtils, StdCtrls, StrTools, StrUtils, SysUtils,
+uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, FileUtils, Forms, Graphics,
+  LCLType, Math, Menus, Process, ProcessUtils, StdCtrls, StrTools, StrUtils, SysUtils,
   UFatCow, UHighlighterCpp, UPairSplitter, UProgram;
 
 type
@@ -17,6 +17,8 @@ type
     FProcess: TProcess;
     FMemo: TRichMemo;
     FListBox: TListBox;
+    FPageControlClient: TPageControl;
+    FPageControlBottom: TPageControl;
     FFindDialog: TFindDialog;
     FReplaceDialog: TReplaceDialog;
     FDocument: THighlighterCpp;
@@ -192,8 +194,12 @@ begin
   FDocument.Keywords.LoadFromFile(ProgramDirectory + 'cmocide\keywords.txt');
   FDocument.Constants.LoadFromFile(ProgramDirectory + 'cmocide\constants.txt');
 
+  FPageControlClient := TPageControl.Create(Self);
+  FPageControlClient.Align := alClient;
+  FPageControlClient.Focusable := False;
+  FPageControlClient.Parent := FSplitter.Sides[0];
+
   FMemo := TRichMemo.Create(Self);
-  FMemo.BorderStyle := bsNone;
   FMemo.Document := FDocument;
   FMemo.Align := alClient;
   FMemo.OnChange := @MemoChange;
@@ -202,10 +208,15 @@ begin
   FMemo.UndoLimit := 1000;
   FMemo.PopupMenu := TPopupMenu.Create(FMemo);
   AddEditMenuItems(FMemo.PopupMenu);
-  FMemo.Parent := FSplitter.Sides[0];
+  FMemo.Parent := FPageControlClient.AddTabSheet('File');
+
+  FPageControlBottom := TPageControl.Create(Self);
+  FPageControlBottom.Align := alClient;
+  FPageControlBottom.Focusable := False;
+  FPageControlBottom.Parent := FSplitter.Sides[1];
 
   FListBox := TListBox.Create(Self);
-  FListBox.BorderStyle := bsNone;
+  //FListBox.BorderStyle := bsNone;
   FListBox.Align := alClient;
   FListBox.Items.OnInsert := @ListBoxInsert;
   FListBox.Color := clInfoBk;
@@ -213,7 +224,7 @@ begin
   FListBox.Font.Height := 12;
   FListBox.Font.Color := clGreen;
   FListBox.ItemHeight := 14;
-  FListBox.Parent := FSplitter.Sides[1];
+  FListBox.Parent := FPageControlBottom.AddTabSheet('Messages');
 
   OpenDialog.Filter := 'C/C++ Files|*.c;*.h;*.cpp;*.hpp|All Files|*.*';
   SaveDialog.Filter := OpenDialog.Filter;
@@ -287,6 +298,7 @@ end;
 procedure TFormIDE.SetFileName(const A: TFileName);
 begin
   inherited;
+  TTabSheet(FMemo.Parent).Caption := ExtractFileName(GetDisplayFileName);
   FMemo.Modified := False;
 end;
 
