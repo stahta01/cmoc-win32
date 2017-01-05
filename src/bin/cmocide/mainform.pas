@@ -28,7 +28,7 @@ type
     procedure CloseQueryDlg;
     procedure Execute(const AExecutable: string; const AParameters: array of string;
       const AConsole: boolean);
-    procedure AddEditMenuItems(const A: TMenuElement);
+    procedure AddEditMenuItems(const A: TCustomMenuItem);
     procedure LogMessage(const A: string);
     procedure LogFileName(const A, AFileName: string);
     procedure OpenMESSImage(const A: TFileName);
@@ -169,7 +169,7 @@ begin
   end;
 
   FEditorPopupMenu := TPopupMenu.Create(Self);
-  FEditorPopupMenu.OnShown := @EditPopupMenuShow;
+  FEditorPopupMenu.OnPopup := @EditPopupMenuShow;
   AddEditMenuItems(FEditorPopupMenu);
 
   ToolBar.Height := 44;
@@ -249,7 +249,7 @@ begin
   FSplitter.Position := Height - 256;
 end;
 
-procedure TFormMain.AddEditMenuItems(const A: TMenuElement);
+procedure TFormMain.AddEditMenuItems(const A: TCustomMenuItem);
 begin
   with A do begin
     with AddMenuItem('&Undo', @EditUndo, FIcons.Undo) do begin
@@ -566,7 +566,6 @@ end;
 
 procedure TFormMain.EditPopupMenuShow(A: TObject);
 begin
-  PrintLn('asdfasdf');
   FEditorPopupMenu.FindElementByName('undo').Enabled := Self.FEditors.ActiveEditor.CanUndo;
 end;
 
