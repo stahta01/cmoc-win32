@@ -4,7 +4,7 @@ program cmocide;
 
 uses
   Forms,
-  MainForm, UPaintBox;
+  MainForm;
 
 const
   ProgramName = 'cmocide';
