@@ -5,12 +5,12 @@ unit MainForm;
 interface
 
 uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, ExtCtrls, FileUtils, Forms, Graphics,
-  LCLType, Math, Menus, Process, ProcessUtils, StdCtrls, StrTools, StrUtils, SysUtils,
+  Java, LCLType, Math, Menus, Process, ProcessUtils, StdCtrls, StrTools, StrUtils, SysUtils,
   UEditor, UEditorPageControl, UFatCow, UHighlighterCpp, UPairSplitter, UProgram;
 
 type
 
-  TFormIDE = class(TFormToolStatusBar)
+  TFormMain = class(TFormToolStatusBar)
   strict private
     FIcons: TFatCowIcons;
     FSplitter: TPairSplitter;
@@ -63,6 +63,7 @@ type
     procedure EditUpperCase(A: TObject);
     procedure EditLowerCase(A: TObject);
     procedure EditFormatSource(A: TObject);
+    procedure EditPopupMenuShow(A: TObject);
   public
     procedure RunSyntaxCheck(A: TObject);
     procedure RunCompile(A: TObject);
@@ -77,11 +78,11 @@ type
   end;
 
 var
-  FormMain: TForm;
+  FormMain: TFormMain;
 
 implementation
 
-constructor TFormIDE.Create(A: TComponent);
+constructor TFormMain.Create(A: TComponent);
 begin
   inherited;
 
@@ -168,6 +169,7 @@ begin
   end;
 
   FEditorPopupMenu := TPopupMenu.Create(Self);
+  FEditorPopupMenu.OnShown := @EditPopupMenuShow;
   AddEditMenuItems(FEditorPopupMenu);
 
   ToolBar.Height := 44;
@@ -241,20 +243,30 @@ begin
 end;
 
 
-procedure TFormIDE.FormShow(A: TObject);
+procedure TFormMain.FormShow(A: TObject);
 begin
   LogMessage('Welcome to ' + Application.Title);
   FSplitter.Position := Height - 256;
 end;
 
-procedure TFormIDE.AddEditMenuItems(const A: TMenuElement);
+procedure TFormMain.AddEditMenuItems(const A: TMenuElement);
 begin
   with A do begin
-    AddMenuItem('&Undo', @EditUndo, FIcons.Undo).ShortCut := scCtrl + VK_Z;
-    AddMenuItem('&Redo', @EditRedo, FIcons.Redo).ShortCut := scCtrl + scShift + VK_Z;
+    with AddMenuItem('&Undo', @EditUndo, FIcons.Undo) do begin
+      Name := 'undo';
+      ShortCut := scCtrl + VK_Z;
+    end;
+    with AddMenuItem('&Redo', @EditRedo, FIcons.Redo) do begin
+      Name := 'redo';
+      ShortCut := scCtrl + scShift + VK_Z;
+    end;
     AddMenuItem(cLineCaption);
-    AddMenuItem('Cu&t', @EditCut, FIcons.Cut).ShortCut := scCtrl + VK_X;
-    AddMenuItem('&Copy', @EditCopy, FIcons.Copy).ShortCut := scCtrl + VK_C;
+    with AddMenuItem('Cu&t', @EditCut, FIcons.Cut) do begin
+      ShortCut := scCtrl + VK_X;
+    end;
+    with AddMenuItem('&Copy', @EditCopy, FIcons.Copy) do begin
+      ShortCut := scCtrl + VK_C;
+    end;
     AddMenuItem('&Paste', @EditPaste, FIcons.Paste).ShortCut := scCtrl + VK_V;
     AddMenuItem('&Delete', @EditDelete, FIcons.Cross).ShortCut := VK_DELETE;
     AddMenuItem(cLineCaption);
@@ -272,12 +284,12 @@ begin
   end;
 end;
 
-procedure TFormIDE.LogMessage(const A: string);
+procedure TFormMain.LogMessage(const A: string);
 begin
   FListBox.Items.Add(A);
 end;
 
-procedure TFormIDE.LogFileName(const A, AFileName: string);
+procedure TFormMain.LogFileName(const A, AFileName: string);
 begin
   if Length(AFileName) = 0 then begin
     LogMessage(A);
@@ -286,7 +298,7 @@ begin
   end;
 end;
 
-procedure TFormIDE.Execute(const AExecutable: string; const AParameters: array of string;
+procedure TFormMain.Execute(const AExecutable: string; const AParameters: array of string;
   const AConsole: boolean);
 begin
   with FProcess do begin
@@ -310,13 +322,13 @@ begin
   end;
 end;
 
-procedure TFormIDE.ListBoxInsert(A: TObject; const AIndex: integer);
+procedure TFormMain.ListBoxInsert(A: TObject; const AIndex: integer);
 begin
   FListBox.ItemIndex := AIndex;
   FListBox.MakeCurrentVisible;
 end;
 
-procedure TFormIDE.MemoCaretUpdate(A: TObject);
+procedure TFormMain.MemoCaretUpdate(A: TObject);
 begin
   with FEditors.ActiveEditor.CaretPos do begin
     StatusBar.Panels[0].Caption := IntToStr(X) + ':' + IntToStr(Y);
@@ -326,7 +338,7 @@ begin
   FButtonDelete.Enabled := FButtonCut.Enabled;
 end;
 
-procedure TFormIDE.MemoChange(A: TObject);
+procedure TFormMain.MemoChange(A: TObject);
 var
   LFileName: TFileName;
 begin
@@ -342,7 +354,7 @@ begin
   MemoCaretUpdate(FEditors.ActiveEditor);
 end;
 
-procedure TFormIDE.CloseQueryDlg;
+procedure TFormMain.CloseQueryDlg;
 begin
   case MessageDlg('Do you want to save changes?', mtConfirmation, mbYesNoCancel, 0) of
     mrYes: begin
@@ -354,7 +366,7 @@ begin
   end;
 end;
 
-procedure TFormIDE.FormCloseQuery(A: TObject; var ACanClose: boolean);
+procedure TFormMain.FormCloseQuery(A: TObject; var ACanClose: boolean);
 var
   LIndex: integer;
 begin
@@ -366,7 +378,7 @@ begin
   end;
 end;
 
-procedure TFormIDE.FileNew(A: TObject);
+procedure TFormMain.FileNew(A: TObject);
 var
   LEditor: TEditor;
   LDocument: THighlighterCpp;
@@ -385,14 +397,14 @@ begin
   LEditor.PopupMenu := FEditorPopupMenu;
 end;
 
-procedure TFormIDE.FileNewWindow(A: TObject);
+procedure TFormMain.FileNewWindow(A: TObject);
 begin
   LogMessage('Opening New WinCMOC IDE Window');
   Execute('javaw', ['-cp', TProgram.FileName, 'cmocide'], True);
   FProcess.Environment.Values['FILENAME'] := EmptyStr;
 end;
 
-procedure TFormIDE.FileOpen(A: TObject);
+procedure TFormMain.FileOpen(A: TObject);
 begin
   if OpenDialog.Execute then begin
     LogFileName('Loading', OpenDialog.FileName);
@@ -403,7 +415,7 @@ begin
   end;
 end;
 
-procedure TFormIDE.FileOpenInNewWindow(A: TObject);
+procedure TFormMain.FileOpenInNewWindow(A: TObject);
 begin
   if OpenDialog.Execute then begin
     FProcess.Environment.Values['FILENAME'] := OpenDialog.FileName;
@@ -413,7 +425,7 @@ begin
   end;
 end;
 
-procedure TFormIDE.FileSave(A: TObject);
+procedure TFormMain.FileSave(A: TObject);
 begin
   try
     FEditors.SaveToFile;
@@ -422,7 +434,7 @@ begin
   end;
 end;
 
-procedure TFormIDE.FileSaveAs(A: TObject);
+procedure TFormMain.FileSaveAs(A: TObject);
 begin
   SaveDialog.FileName := FEditors.GetFileName;
   if SaveDialog.Execute then begin
@@ -432,7 +444,7 @@ begin
   end;
 end;
 
-procedure TFormIDE.FileClose(A: TObject);
+procedure TFormMain.FileClose(A: TObject);
 begin
   if FEditors.ActiveEditor.Modified then begin
     CloseQueryDlg;
@@ -443,47 +455,47 @@ begin
   end;
 end;
 
-procedure TFormIDE.FileExit(A: TObject);
+procedure TFormMain.FileExit(A: TObject);
 begin
   Close;
 end;
 
-procedure TFormIDE.EditUndo(A: TObject);
+procedure TFormMain.EditUndo(A: TObject);
 begin
   FEditors.ActiveEditor.Undo;
 end;
 
-procedure TFormIDE.EditRedo(A: TObject);
+procedure TFormMain.EditRedo(A: TObject);
 begin
   FEditors.ActiveEditor.Redo;
 end;
 
-procedure TFormIDE.EditCut(A: TObject);
+procedure TFormMain.EditCut(A: TObject);
 begin
   FEditors.ActiveEditor.CutToClipboard;
 end;
 
-procedure TFormIDE.EditCopy(A: TObject);
+procedure TFormMain.EditCopy(A: TObject);
 begin
   FEditors.ActiveEditor.CopyToClipboard;
 end;
 
-procedure TFormIDE.EditPaste(A: TObject);
+procedure TFormMain.EditPaste(A: TObject);
 begin
   FEditors.ActiveEditor.PasteFromClipboard;
 end;
 
-procedure TFormIDE.EditDelete(A: TObject);
+procedure TFormMain.EditDelete(A: TObject);
 begin
   FEditors.ActiveEditor.ClearSelection;
 end;
 
-procedure TFormIDE.EditSelectAll(A: TObject);
+procedure TFormMain.EditSelectAll(A: TObject);
 begin
   FEditors.ActiveEditor.SelectAll;
 end;
 
-procedure TFormIDE.EditFind(A: TObject);
+procedure TFormMain.EditFind(A: TObject);
 begin
   FFindDialog.FindText := FEditors.ActiveEditor.SelText;
   FFindDialog.Execute;
@@ -501,7 +513,7 @@ begin
   end;
 end;
 
-procedure TFormIDE.EditFindNext(A: TObject);
+procedure TFormMain.EditFindNext(A: TObject);
 begin
   FFindDialog.FindText := Trim(FFindDialog.FindText);
   if Length(FFindDialog.FindText) = 0 then begin
@@ -511,27 +523,27 @@ begin
   end;
 end;
 
-procedure TFormIDE.EditReplace(A: TObject);
+procedure TFormMain.EditReplace(A: TObject);
 begin
   FReplaceDialog.Execute;
 end;
 
-procedure TFormIDE.EditReplaceNext(A: TObject);
+procedure TFormMain.EditReplaceNext(A: TObject);
 begin
   MemoSR(FEditors.ActiveEditor, FReplaceDialog.FindText, FReplaceDialog.ReplaceText, [soReplace]);
 end;
 
-procedure TFormIDE.EditUpperCase(A: TObject);
+procedure TFormMain.EditUpperCase(A: TObject);
 begin
   FEditors.ActiveEditor.ReplaceSelection(AnsiUpperCase(FEditors.ActiveEditor.SelText));
 end;
 
-procedure TFormIDE.EditLowerCase(A: TObject);
+procedure TFormMain.EditLowerCase(A: TObject);
 begin
   FEditors.ActiveEditor.ReplaceSelection(AnsiLowerCase(FEditors.ActiveEditor.SelText));
 end;
 
-procedure TFormIDE.EditFormatSource(A: TObject);
+procedure TFormMain.EditFormatSource(A: TObject);
 var
   LDst, LSrc: TStringStream;
 begin
@@ -552,54 +564,60 @@ begin
   end;
 end;
 
-procedure TFormIDE.RunSyntaxCheck(A: TObject);
+procedure TFormMain.EditPopupMenuShow(A: TObject);
+begin
+  PrintLn('asdfasdf');
+  FEditorPopupMenu.FindElementByName('undo').Enabled := Self.FEditors.ActiveEditor.CanUndo;
+end;
+
+procedure TFormMain.RunSyntaxCheck(A: TObject);
 begin
   Execute(ProgramDirectory + 'cmoc.exe', ['--help'], False);
 end;
 
-procedure TFormIDE.RunCompile(A: TObject);
+procedure TFormMain.RunCompile(A: TObject);
 begin
 
 end;
 
-procedure TFormIDE.RunBuild(A: TObject);
+procedure TFormMain.RunBuild(A: TObject);
 begin
 
 end;
 
-procedure TFormIDE.RunBuildAndRun(A: TObject);
+procedure TFormMain.RunBuildAndRun(A: TObject);
 begin
 
 end;
 
-procedure TFormIDE.ToolsOpenConsole(A: TObject);
+procedure TFormMain.ToolsOpenConsole(A: TObject);
 begin
   LogMessage('Opening WinCMOC Console');
   Execute(ProgramDirectory + 'console.bat', [], True);
 end;
 
-procedure TFormIDE.OpenMESSImage(const A: TFileName);
+procedure TFormMain.OpenMESSImage(const A: TFileName);
 begin
   LogFileName('Opening MESS Image Tool', A);
   Execute(ProgramDirectory + 'wimgtool.exe', [A], True);
 end;
 
-procedure TFormIDE.ToolsMessImageTool(A: TObject);
+procedure TFormMain.ToolsMessImageTool(A: TObject);
 begin
   OpenMESSImage(EmptyStr);
 end;
 
-procedure TFormIDE.ToolsOpenDisk0(A: TObject);
+procedure TFormMain.ToolsOpenDisk0(A: TObject);
 begin
   OpenMESSImage(ProgramDirectory + '..\dsk\disk0.dsk');
 end;
 
-procedure TFormIDE.ToolsOpenDisk1(A: TObject);
+procedure TFormMain.ToolsOpenDisk1(A: TObject);
 begin
   OpenMESSImage(ProgramDirectory + '..\dsk\disk1.dsk');
 end;
 
-procedure TFormIDE.ToolsOpenDisk2(A: TObject);
+procedure TFormMain.ToolsOpenDisk2(A: TObject);
 begin
   OpenMESSImage(ProgramDirectory + '..\dsk\disk2.dsk');
 end;
