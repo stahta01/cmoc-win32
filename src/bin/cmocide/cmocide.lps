@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="355">
+    <Units Count="354">
       <Unit0>
         <Filename Value="cmocide.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -17,7 +17,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="MainForm"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="53" Y="8"/>
+        <TopLine Value="175"/>
+        <CursorPos X="44" Y="187"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -132,8 +133,8 @@
       <Unit17>
         <Filename Value="C:\lazarus\fpc\3.0.0\source\rtl\java\jdk15.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="63740"/>
-        <CursorPos X="15" Y="63756"/>
+        <TopLine Value="124"/>
+        <CursorPos X="45" Y="141"/>
         <UsageCount Value="73"/>
       </Unit17>
       <Unit18>
@@ -852,7 +853,7 @@
         <UnitName Value="ComCtrls"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="8"/>
-        <CursorPos X="28" Y="30"/>
+        <CursorPos X="29" Y="30"/>
         <UsageCount Value="14"/>
       </Unit114>
       <Unit115>
@@ -873,8 +874,8 @@
         <Filename Value="..\..\..\..\javavcl\src\controls.pas"/>
         <UnitName Value="Controls"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="6"/>
-        <CursorPos X="18" Y="16"/>
+        <TopLine Value="2"/>
+        <CursorPos X="44" Y="20"/>
         <UsageCount Value="36"/>
       </Unit117>
       <Unit118>
@@ -929,8 +930,8 @@
         <Filename Value="..\..\..\..\javavcl\src\customforms.pas"/>
         <UnitName Value="CustomForms"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="57"/>
-        <CursorPos X="20" Y="67"/>
+        <TopLine Value="58"/>
+        <CursorPos X="18" Y="67"/>
         <UsageCount Value="11"/>
       </Unit124>
       <Unit125>
@@ -1447,9 +1448,9 @@
         <Filename Value="..\..\..\..\javavcl\src\windows.pas"/>
         <UnitName Value="Windows"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="79"/>
-        <CursorPos X="9" Y="88"/>
-        <UsageCount Value="18"/>
+        <TopLine Value="99"/>
+        <CursorPos X="5" Y="154"/>
+        <UsageCount Value="21"/>
       </Unit192>
       <Unit193>
         <Filename Value="..\..\..\..\javavcl\src\panels.pas"/>
@@ -2064,8 +2065,8 @@
         <Filename Value="..\..\..\..\javavcl\src\uwincontrol.pas"/>
         <UnitName Value="UWinControl"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="6"/>
-        <CursorPos X="18" Y="16"/>
+        <TopLine Value="456"/>
+        <CursorPos Y="463"/>
         <UsageCount Value="12"/>
       </Unit271>
       <Unit272>
@@ -2200,8 +2201,8 @@
         <Filename Value="..\..\..\..\javavcl\src\utoolbar.pas"/>
         <UnitName Value="UToolBar"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="48"/>
-        <CursorPos X="13" Y="75"/>
+        <TopLine Value="33"/>
+        <CursorPos X="12" Y="49"/>
         <UsageCount Value="10"/>
       </Unit288>
       <Unit289>
@@ -2296,7 +2297,8 @@
         <Filename Value="..\..\..\..\javavcl\src\ucontrolevents.pas"/>
         <UnitName Value="UControlEvents"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="77" Y="20"/>
+        <TopLine Value="201"/>
+        <CursorPos X="3" Y="203"/>
         <UsageCount Value="12"/>
       </Unit300>
       <Unit301>
@@ -2412,8 +2414,8 @@
         <Filename Value="..\..\..\..\javavcl\src\uapplication.pas"/>
         <UnitName Value="UApplication"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="11"/>
-        <CursorPos X="12" Y="131"/>
+        <TopLine Value="71"/>
+        <CursorPos X="24" Y="77"/>
         <UsageCount Value="10"/>
       </Unit315>
       <Unit316>
@@ -2655,30 +2657,22 @@
         <UsageCount Value="10"/>
       </Unit351>
       <Unit352>
-        <Filename Value="..\..\..\..\javavcl\src\windows.pas"/>
-        <UnitName Value="Windows"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="99"/>
-        <CursorPos X="5" Y="154"/>
-        <UsageCount Value="21"/>
-      </Unit352>
-      <Unit353>
         <Filename Value="..\..\..\..\javavcl\src\windef.pas"/>
         <UnitName Value="WinDef"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="54" Y="17"/>
         <UsageCount Value="20"/>
-      </Unit353>
-      <Unit354>
+      </Unit352>
+      <Unit353>
         <Filename Value="..\..\..\..\javavcl\src\uicon.pas"/>
         <UnitName Value="UIcon"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="10"/>
         <CursorPos X="28" Y="20"/>
         <UsageCount Value="10"/>
-      </Unit354>
+      </Unit353>
     </Units>
-    <JumpHistory Count="3" HistoryIndex="2">
+    <JumpHistory Count="4" HistoryIndex="3">
       <Position1>
         <Filename Value="mainform.pas"/>
         <Caret Line="8" Column="82"/>
@@ -2691,6 +2685,10 @@
         <Filename Value="mainform.pas"/>
         <Caret Line="8" Column="53"/>
       </Position3>
+      <Position4>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="13" Column="24"/>
+      </Position4>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

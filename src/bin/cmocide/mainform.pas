@@ -184,6 +184,8 @@ begin
   ToolBar.AddToolBarButton('Build and Run', @RunBuildAndRun, FIcons.BrickGo);
 
   FSplitter := TPairSplitter.Create(Self);
+  FSplitter.Sides[0].BorderStyle := bsNone;
+  FSplitter.Sides[1].BorderStyle := bsNone;
   FSplitter.ResizeWeight := 1;
   FSplitter.SplitterType := pstVertical;
   FSplitter.Align := alClient;
