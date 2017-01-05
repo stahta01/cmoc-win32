@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="347">
+    <Units Count="348">
       <Unit0>
         <Filename Value="cmocide.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -17,7 +17,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="MainForm"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="11" Y="7"/>
+        <CursorPos X="65" Y="8"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -929,8 +929,7 @@
         <Filename Value="..\..\..\..\javavcl\src\sysutils.pas"/>
         <UnitName Value="SysUtils"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="6"/>
-        <CursorPos X="11" Y="16"/>
+        <CursorPos X="6" Y="312"/>
         <UsageCount Value="20"/>
       </Unit124>
       <Unit125>
@@ -1024,8 +1023,7 @@
         <Filename Value="..\..\..\..\javavcl\src\strutils.pas"/>
         <UnitName Value="StrUtils"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="6"/>
-        <CursorPos X="11" Y="16"/>
+        <CursorPos X="22" Y="16"/>
         <UsageCount Value="10"/>
       </Unit136>
       <Unit137>
@@ -1266,8 +1264,7 @@
         <Filename Value="..\..\..\..\javavcl\src\strtools.pas"/>
         <UnitName Value="StrTools"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="6"/>
-        <CursorPos X="11" Y="16"/>
+        <CursorPos X="20" Y="16"/>
         <UsageCount Value="19"/>
       </Unit168>
       <Unit169>
@@ -1387,8 +1384,7 @@
         <Filename Value="..\..\..\..\javavcl\src\basetypes.pas"/>
         <UnitName Value="BaseTypes"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="6"/>
-        <CursorPos X="23" Y="16"/>
+        <CursorPos X="20" Y="4"/>
         <UsageCount Value="14"/>
       </Unit184>
       <Unit185>
@@ -1656,8 +1652,7 @@
         <Filename Value="..\..\..\..\javavcl\src\strscanners.pas"/>
         <UnitName Value="StrScanners"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="6"/>
-        <CursorPos X="11" Y="16"/>
+        <CursorPos X="22" Y="16"/>
         <UsageCount Value="10"/>
       </Unit218>
       <Unit219>
@@ -2608,7 +2603,7 @@
       <Unit343>
         <Filename Value="..\..\..\..\javavcl\src\pascal\types.inc"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="17"/>
+        <CursorPos X="16"/>
         <UsageCount Value="10"/>
       </Unit343>
       <Unit344>
@@ -2620,7 +2615,7 @@
       <Unit345>
         <Filename Value="..\..\..\..\javavcl\src\pascal\strutils.inc"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="17"/>
+        <CursorPos X="15"/>
         <UsageCount Value="10"/>
       </Unit345>
       <Unit346>
@@ -2629,7 +2624,27 @@
         <CursorPos X="17"/>
         <UsageCount Value="10"/>
       </Unit346>
+      <Unit347>
+        <Filename Value="..\..\..\..\javavcl\src\pascal\pascal.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="5"/>
+        <CursorPos X="47" Y="14"/>
+        <UsageCount Value="10"/>
+      </Unit347>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory Count="3" HistoryIndex="2">
+      <Position1>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="7" Column="13"/>
+      </Position1>
+      <Position2>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="8" Column="55"/>
+      </Position2>
+      <Position3>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="8" Column="65"/>
+      </Position3>
+    </JumpHistory>
   </ProjectSession>
 </CONFIG>
