@@ -6,19 +6,18 @@ interface
 
 uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, ExtCtrls, FileUtils, Forms, Graphics,
   Java, LCLType, Math, Menus, Process, ProcessUtils, StdCtrls, StrTools, StrUtils, SysUtils,
-  UEditor, UEditorPageControl, UFatCow, UHighlighterCpp, UPairSplitter, UProgram;
+  TypInfo, UEditor, UEditorPageControl, UFatCow, UHighlighterCpp, UPairSplitter, UProgram;
 
 type
 
   TFormMain = class(TFormToolStatusBar)
   strict private
-    FIcons: TFatCowIcons;
+    FIcons: TFatCow;
     FSplitter: TPairSplitter;
     FProcess: TProcess;
     FListBox: TListBox;
     FEditors: TEditorPageControl;
     FEditorPopupMenu: TPopupMenu;
-    FLogPages: TPageControl;
     FFindDialog: TFindDialog;
     FReplaceDialog: TReplaceDialog;
     FButtonUndo, FButtonRedo, FButtonCut, FButtonCopy, FButtonPaste, FButtonDelete: TButton;
@@ -76,6 +75,12 @@ type
     procedure ToolsOpenDisk0(A: TObject);
     procedure ToolsOpenDisk1(A: TObject);
     procedure ToolsOpenDisk2(A: TObject);
+  public
+    procedure CreateStatusBar;
+    procedure CreateMainMenu;
+    procedure CreateToolBar;
+    procedure CreateSpliter;
+    procedure CreateLog;
   end;
 
 var
@@ -84,6 +89,9 @@ var
 implementation
 
 constructor TFormMain.Create(A: TComponent);
+var
+  LPropList: PPropList;
+  LName: PPropInfo;
 begin
   inherited;
 
@@ -95,159 +103,40 @@ begin
   WindowState := wsMaximized;
   SizeConstraints.MinWidth := 200;
   SizeConstraints.MinHeight := 200;
+
+  OpenDialog.Filter := 'C/C++ Files (*.c)|*.c;*.h;*.cpp;*.hpp|All Files (*.*)|*.*';
+  SaveDialog.Filter := OpenDialog.Filter;
+
+
   FFindDialog := TFindDialog.Create(Self);
   FFindDialog.OnFind := @EditFindNext;
-
   FReplaceDialog := TReplaceDialog.Create(Self);
   FReplaceDialog.OnReplace := @EditReplaceNext;
 
   FProcess := TProcess.Create(Self);
-  FIcons := TFatCowIcons.Create(ProgramDirectory + 'images');
+  FIcons := TFatCow.Create(ProgramDirectory + 'images');
 
-  with StatusBar.AddPanel do begin
-    Width := 70;
-  end;
-  with StatusBar.AddPanel do begin
-    Width := 70;
-  end;
-  with StatusBar.AddPanel do begin
-    Caption := 'INS';
-    Width := 50;
-  end;
-  with StatusBar.AddPanel do begin
-    Caption := 'FileName';
-    Align := alClient;
-  end;
-  with MainMenu do begin
-    with AddMenuItem('&File') do begin
-      AddMenuItem('&New', @FileNew, FIcons.New).ShortCut := scCtrl + VK_N;
-      AddMenuItem('New Window', @FileNewWindow, FIcons.NewWindow);
-      AddMenuItem(cLineCaption);
-      AddMenuItem('&Open ...', @FileOpen, FIcons.Open).ShortCut := scCtrl + VK_O;
-      AddMenuItem('Open New Window ...', @FileOpenInNewWindow, FIcons.FolderGo);
-      AddMenuItem(cLineCaption);
-      AddMenuItem('&Save', @FileSave, FIcons.Save).ShortCut := scCtrl + VK_S;
-      AddMenuItem('Save &As ...', @FileSaveAs, FIcons.FileSaveAs);
-      AddMenuItem('&Close Page ...', @FileClose, FIcons.FileSaveAs);
-      AddMenuItem(cLineCaption);
-      AddMenuItem('&Print ...', @FilePrint, FIcons.FileSaveAs);
-      AddMenuItem(cLineCaption);
-      AddMenuItem('E&xit', @FileExit, FIcons.Door);
-    end;
-    AddEditMenuItems(AddMenuItem('&Edit'));
-    with AddMenuItem('&Run') do begin
-      AddMenuItem('&Syntax Check', @RunSyntaxCheck, FIcons.TickButton);
-      AddMenuItem('&Compile', @RunCompile, FIcons.Compile);
-      AddMenuItem(cLineCaption);
-      AddMenuItem('&Build', @RunBuild, FIcons.Bricks);
-      AddMenuItem('Build and &Run ...', @RunBuildAndRun, FIcons.BrickGo);
-    end;
-    with AddMenuItem('E&mulators') do begin
-      AddMenuItem('Colour Computer 1 (Color BASIC 1.0)', nil, FIcons.BulletRight);
-      AddMenuItem('Colour Computer 1 (Disk Extended Color BASIC 1.0)', nil, FIcons.BulletRight);
-      AddMenuItem('Colour Computer 2 (Disk Extended Color BASIC 1.1)', nil, FIcons.BulletRight);
-      AddMenuItem('Colour Computer 3 (Disk Extended Color BASIC 2.1)', nil, FIcons.BulletRight);
-      AddMenuItem(cLineCaption);
-      AddMenuItem('Dragon 32 (PAL)', nil, FIcons.BulletRight);
-      AddMenuItem('Dragon 64 (PAL)', nil, FIcons.BulletRight);
-      AddMenuItem('Dragon 200-E (PAL)', nil, FIcons.BulletRight);
-      AddMenuItem('Tano Dragon (NTSC)', nil, FIcons.BulletRight);
-      AddMenuItem('Dynacom MX-1600 (PAL-M)', nil, FIcons.BulletRight);
-      AddMenuItem(cLineCaption);
-      AddMenuItem('EDTASM++ 1.1 ...', nil, FIcons.BulletRight);
-    end;
-    with AddMenuItem('&Tools') do begin
-      AddMenuItem('WinCMOC Console ...', @ToolsOpenConsole);
-      AddMenuItem(cLineCaption);
-      AddMenuItem('Disassemble 6809 Binary ...');
-      AddMenuItem(cLineCaption);
-      AddMenuItem('MESS Image Tool ...', @ToolsMessImageTool);
-      AddMenuItem('Open Disk #0 ...', @ToolsOpenDisk0);
-      AddMenuItem('Open Disk #1 ...', @ToolsOpenDisk1);
-      AddMenuItem('Open Disk #2 ... (EDTASM++)', @ToolsOpenDisk2);
-    end;
-    with AddMenuItem('&Help') do begin
-      AddMenuItem('&About WinCMOC ...');
-    end;
-  end;
+  CreateStatusBar;
+  CreateMainMenu;
+  CreateToolBar;
+  CreateSpliter;
+  CreateLog;
 
   FEditorPopupMenu := TPopupMenu.Create(Self);
   FEditorPopupMenu.OnPopup := @EditPopupMenuShow;
   AddEditMenuItems(FEditorPopupMenu);
-
-  ToolBar.Height := 44;
-  ToolBar.AddToolBarButton('New', @FileNew, FIcons.New);
-  ToolBar.AddToolBarButton('Open', @FileOpen, FIcons.Open);
-  ToolBar.AddToolBarButton('Save', @FileSaveAs, FIcons.Save);
-  FButtonUndo := ToolBar.AddToolBarButton('Undo', @EditUndo, FIcons.Undo);
-  FButtonRedo := ToolBar.AddToolBarButton('Redo', @EditRedo, FIcons.Redo);
-  FButtonCut := ToolBar.AddToolBarButton('Cut', @EditCut, FIcons.Cut);
-  FButtonCopy := ToolBar.AddToolBarButton('Copy', @EditCopy, FIcons.Copy);
-  FButtonPaste := ToolBar.AddToolBarButton('Paste', @EditPaste, FIcons.Paste);
-  FButtonDelete := ToolBar.AddToolBarButton('Delete', @EditDelete, FIcons.Cross);
-  ToolBar.AddToolBarButton('Syntax Check', @RunSyntaxCheck, FIcons.TickButton);
-  ToolBar.AddToolBarButton('Compile', @RunCompile, FIcons.Compile);
-  ToolBar.AddToolBarButton('Build', @RunBuild, FIcons.Bricks);
-  ToolBar.AddToolBarButton('Build and Run', @RunBuildAndRun, FIcons.BrickGo);
-
-  FSplitter := TPairSplitter.Create(Self);
-  FSplitter.Sides[0].BorderStyle := bsNone;
-  FSplitter.Sides[0].BorderWidth := 4;
-  FSplitter.Sides[1].BorderStyle := bsNone;
-  FSplitter.ResizeWeight := 1;
-  FSplitter.SplitterType := pstVertical;
-  FSplitter.Align := alClient;
-  FSplitter.Parent := Self;
 
   FEditors := TEditorPageControl.Create(Self);
   FEditors.Align := alClient;
   FEditors.Focusable := False;
   FEditors.Parent := FSplitter.Sides[0];
 
-  FLogPages := TPageControl.Create(Self);
-  FLogPages.Align := alClient;
-  FLogPages.Focusable := False;
-  FLogPages.TabPosition := tpBottom;
-  FLogPages.Parent := FSplitter.Sides[1];
-
-  FListBox := TListBox.Create(Self);
-  FListBox.BorderStyle := bsNone;
-  FListBox.Align := alClient;
-  FListBox.Items.OnInsert := @ListBoxInsert;
-  FListBox.Color := clInfoBk;
-  FListBox.Font.Name := 'Courier New';
-  FListBox.Font.Height := 12;
-  FListBox.Font.Color := clGreen;
-  FListBox.ItemHeight := 14;
-  FListBox.Parent := FLogPages.AddTabSheet('Messages');
-
-  TTabSheet(FListBox.Parent).Color := clInfoBk;
-
-  OpenDialog.Filter := 'C/C++ Files|*.c;*.h;*.cpp;*.hpp|All Files|*.*';
-  SaveDialog.Filter := OpenDialog.Filter;
-
-  FileNew(nil);
-
-  with FEditors.ActiveEditor do begin
-    Clear;
-    Lines.Add('apple orange pair');
-    Lines.Add('#include <math.h>');
-    Lines.Add('#include <ctype.h>');
-    Lines.Add('#include <stdio.h>');
-    Lines.Add('#include <stdlib.h>');
-    Lines.Add('#include <string.h>');
-    Lines.Add('#include <conio.h>');
-    Lines.Add(EmptyStr);
-    Lines.Add('int main(void)');
-    Lines.Add('{');
-    Lines.Add('    puts("WELCOME TO ' + UpperCase(Application.Title) + '!");');
-    Lines.Add('    return 0;');
-    Lines.Add('}');
-    ClearUndo;
+  GetPropList(Self, LPropList);
+  for LName in LPropList do begin
+    PrintLn(LName.Name);
   end;
-  FEditors.SetFileName(EmptyStr);
+  FileNew(nil);
 end;
-
 
 procedure TFormMain.FormShow(A: TObject);
 begin
@@ -402,13 +291,24 @@ begin
   LEditor.OnCaretUpdate(LEditor);
   LEditor.UndoLimit := 1000;
   LEditor.PopupMenu := FEditorPopupMenu;
-end;
 
-procedure TFormMain.FileNewWindow(A: TObject);
-begin
-  LogMessage('Opening New WinCMOC IDE Window');
-  Execute('javaw', ['-cp', TProgram.FileName, 'cmocide'], True);
-  FProcess.Environment.Values['FILENAME'] := EmptyStr;
+  if FEditors.PageCount = 1 then begin
+    LEditor.Clear;
+    LEditor.Lines.Add('#include <math.h>');
+    LEditor.Lines.Add('#include <ctype.h>');
+    LEditor.Lines.Add('#include <stdio.h>');
+    LEditor.Lines.Add('#include <stdlib.h>');
+    LEditor.Lines.Add('#include <string.h>');
+    LEditor.Lines.Add('#include <conio.h>');
+    LEditor.Lines.Add(EmptyStr);
+    LEditor.Lines.Add('int main(void)');
+    LEditor.Lines.Add('{');
+    LEditor.Lines.Add('    puts("WELCOME TO ' + UpperCase(Application.Title) + '!");');
+    LEditor.Lines.Add('    return 0;');
+    LEditor.Lines.Add('}');
+    LEditor.ClearUndo;
+  end;
+  FEditors.SetFileName(EmptyStr);
 end;
 
 procedure TFormMain.FileOpen(A: TObject);
@@ -430,6 +330,13 @@ begin
   end else begin
     Abort;
   end;
+end;
+
+procedure TFormMain.FileNewWindow(A: TObject);
+begin
+  LogMessage('Opening New WinCMOC IDE Window');
+  Execute('javaw', ['-cp', TProgram.FileName, 'cmocide'], True);
+  FProcess.Environment.Values['FILENAME'] := EmptyStr;
 end;
 
 procedure TFormMain.FileOpenInNewWindow(A: TObject);
@@ -641,6 +548,132 @@ end;
 procedure TFormMain.ToolsOpenDisk2(A: TObject);
 begin
   OpenMESSImage(ProgramDirectory + '..\dsk\disk2.dsk');
+end;
+
+procedure TFormMain.CreateStatusBar;
+begin
+  with StatusBar.AddPanel do begin
+    Width := 70;
+  end;
+  with StatusBar.AddPanel do begin
+    Width := 70;
+  end;
+  with StatusBar.AddPanel do begin
+    Caption := 'INS';
+    Width := 50;
+  end;
+  with StatusBar.AddPanel do begin
+    Caption := 'FileName';
+    Align := alClient;
+  end;
+end;
+
+procedure TFormMain.CreateMainMenu;
+begin
+  with MainMenu do begin
+    with AddMenuItem('&File') do begin
+      AddMenuItem('&New', @FileNew, FIcons.New).ShortCut := scCtrl + VK_N;
+      AddMenuItem('New Window', @FileNewWindow, FIcons.NewWindow);
+      AddMenuItem(cLineCaption);
+      AddMenuItem('&Open ...', @FileOpen, FIcons.Open).ShortCut := scCtrl + VK_O;
+      AddMenuItem('Open New Window ...', @FileOpenInNewWindow, FIcons.FolderGo);
+      AddMenuItem(cLineCaption);
+      AddMenuItem('&Save', @FileSave, FIcons.Save).ShortCut := scCtrl + VK_S;
+      AddMenuItem('Save &As ...', @FileSaveAs, FIcons.FileSaveAs);
+      AddMenuItem('&Close Page ...', @FileClose, FIcons.FileSaveAs);
+      AddMenuItem(cLineCaption);
+      AddMenuItem('&Print ...', @FilePrint, FIcons.FileSaveAs);
+      AddMenuItem(cLineCaption);
+      AddMenuItem('E&xit', @FileExit, FIcons.Door);
+    end;
+    AddEditMenuItems(AddMenuItem('&Edit'));
+    with AddMenuItem('&Run') do begin
+      AddMenuItem('&Syntax Check', @RunSyntaxCheck, FIcons.TickButton);
+      AddMenuItem('&Compile', @RunCompile, FIcons.Compile);
+      AddMenuItem(cLineCaption);
+      AddMenuItem('&Build', @RunBuild, FIcons.Bricks);
+      AddMenuItem('Build and &Run ...', @RunBuildAndRun, FIcons.BrickGo);
+    end;
+    with AddMenuItem('E&mulators') do begin
+      AddMenuItem('Colour Computer 1 (Color BASIC 1.0)', nil, FIcons.BulletRight);
+      AddMenuItem('Colour Computer 1 (Disk Extended Color BASIC 1.0)', nil, FIcons.BulletRight);
+      AddMenuItem('Colour Computer 2 (Disk Extended Color BASIC 1.1)', nil, FIcons.BulletRight);
+      AddMenuItem('Colour Computer 3 (Disk Extended Color BASIC 2.1)', nil, FIcons.BulletRight);
+      AddMenuItem(cLineCaption);
+      AddMenuItem('Dragon 32 (PAL)', nil, FIcons.BulletRight);
+      AddMenuItem('Dragon 64 (PAL)', nil, FIcons.BulletRight);
+      AddMenuItem('Dragon 200-E (PAL)', nil, FIcons.BulletRight);
+      AddMenuItem('Tano Dragon (NTSC)', nil, FIcons.BulletRight);
+      AddMenuItem('Dynacom MX-1600 (PAL-M)', nil, FIcons.BulletRight);
+      AddMenuItem(cLineCaption);
+      AddMenuItem('EDTASM++ 1.1 ...', nil, FIcons.BulletRight);
+    end;
+    with AddMenuItem('&Tools') do begin
+      AddMenuItem('WinCMOC Console ...', @ToolsOpenConsole);
+      AddMenuItem(cLineCaption);
+      AddMenuItem('Disassemble 6809 Binary ...');
+      AddMenuItem(cLineCaption);
+      AddMenuItem('MESS Image Tool ...', @ToolsMessImageTool);
+      AddMenuItem('Open Disk #0 ...', @ToolsOpenDisk0);
+      AddMenuItem('Open Disk #1 ...', @ToolsOpenDisk1);
+      AddMenuItem('Open Disk #2 ... (EDTASM++)', @ToolsOpenDisk2);
+    end;
+    with AddMenuItem('&Help') do begin
+      AddMenuItem('&About WinCMOC ...');
+    end;
+  end;
+end;
+
+procedure TFormMain.CreateToolBar;
+begin
+  ToolBar.Height := 44;
+  ToolBar.AddToolBarButton('New', @FileNew, FIcons.New);
+  ToolBar.AddToolBarButton('Open', @FileOpen, FIcons.Open);
+  ToolBar.AddToolBarButton('Save', @FileSaveAs, FIcons.Save);
+  FButtonUndo := ToolBar.AddToolBarButton('Undo', @EditUndo, FIcons.Undo);
+  FButtonRedo := ToolBar.AddToolBarButton('Redo', @EditRedo, FIcons.Redo);
+  FButtonCut := ToolBar.AddToolBarButton('Cut', @EditCut, FIcons.Cut);
+  FButtonCopy := ToolBar.AddToolBarButton('Copy', @EditCopy, FIcons.Copy);
+  FButtonPaste := ToolBar.AddToolBarButton('Paste', @EditPaste, FIcons.Paste);
+  FButtonDelete := ToolBar.AddToolBarButton('Delete', @EditDelete, FIcons.Cross);
+  ToolBar.AddToolBarButton('Syntax Check', @RunSyntaxCheck, FIcons.TickButton);
+  ToolBar.AddToolBarButton('Compile', @RunCompile, FIcons.Compile);
+  ToolBar.AddToolBarButton('Build', @RunBuild, FIcons.Bricks);
+  ToolBar.AddToolBarButton('Build and Run', @RunBuildAndRun, FIcons.BrickGo);
+end;
+
+procedure TFormMain.CreateSpliter;
+begin
+  FSplitter := TPairSplitter.Create(Self);
+  FSplitter.Sides[0].BorderStyle := bsNone;
+  FSplitter.Sides[0].BorderWidth := 4;
+  FSplitter.Sides[1].BorderStyle := bsNone;
+  FSplitter.ResizeWeight := 1;
+  FSplitter.SplitterType := pstVertical;
+  FSplitter.Align := alClient;
+  FSplitter.Parent := Self;
+end;
+
+procedure TFormMain.CreateLog;
+var
+  LPageControl: TPageControl;
+begin
+  LPageControl := TPageControl.Create(Self);
+  LPageControl.Align := alClient;
+  LPageControl.Focusable := False;
+  LPageControl.TabPosition := tpBottom;
+  LPageControl.Parent := FSplitter.Sides[1];
+
+  FListBox := TListBox.Create(Self);
+  FListBox.BorderStyle := bsNone;
+  FListBox.Align := alClient;
+  FListBox.Items.OnInsert := @ListBoxInsert;
+  FListBox.Color := clInfoBk;
+  FListBox.Font.Name := 'Courier New';
+  FListBox.Font.Height := 12;
+  FListBox.Font.Color := clGreen;
+  FListBox.ItemHeight := 14;
+  FListBox.Parent := LPageControl.AddTabSheet('Messages');
 end;
 
 end.
