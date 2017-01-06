@@ -89,9 +89,6 @@ var
 implementation
 
 constructor TFormMain.Create(A: TComponent);
-var
-  LPropList: PPropList;
-  LName: PPropInfo;
 begin
   inherited;
 
@@ -131,10 +128,6 @@ begin
   FEditors.Focusable := False;
   FEditors.Parent := FSplitter.Sides[0];
 
-  GetPropList(Self, LPropList);
-  for LName in LPropList do begin
-    PrintLn(LName.Name);
-  end;
   FileNew(nil);
 end;
 
