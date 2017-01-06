@@ -6,7 +6,7 @@ interface
 
 uses BaseTypes, Classes, ComCtrls, CustomForms, Dialogs, ExtCtrls, FileUtils, Forms, Graphics,
   Java, LCLType, Math, Menus, Process, ProcessUtils, StdCtrls, StrTools, StrUtils, SysUtils,
-  TypInfo, UEditor, UEditorPageControl, UFatCow, UHighlighterCpp, UPairSplitter, UProgram;
+  UEditor, UEditorPageControl, UFatCow, UHighlighterCpp, UPairSplitter, UProgram;
 
 type
 
@@ -423,25 +423,13 @@ begin
   FFindDialog.Execute;
 end;
 
-procedure MemoSR(const A: TEditor; const AFindText, AReplaceText: string; const AOptions: TSearchOptions);
-begin
-  if A.SearchReplace(AFindText, AReplaceText, AOptions) < 0 then begin
-    if MessageDlg('Search from the beginning?', mtConfirmation, mbYesNo, 0) = mrYes then begin
-      A.SelStart := 0;
-      if A.SearchReplace(AFindText, AReplaceText, AOptions) < 0 then begin
-        ShowMessage('Search complete');
-      end;
-    end;
-  end;
-end;
-
 procedure TFormMain.EditFindNext(A: TObject);
 begin
   FFindDialog.FindText := Trim(FFindDialog.FindText);
   if Length(FFindDialog.FindText) = 0 then begin
     EditFind(A);
   end else begin
-    MemoSR(FEditors.ActiveEditor, FFindDialog.FindText, EmptyStr, []);
+    FEditors.ActiveEditor.ShowSearchReplace(FFindDialog.FindText, EmptyStr, []);
   end;
 end;
 
@@ -452,7 +440,7 @@ end;
 
 procedure TFormMain.EditReplaceNext(A: TObject);
 begin
-  MemoSR(FEditors.ActiveEditor, FReplaceDialog.FindText, FReplaceDialog.ReplaceText, [soReplace]);
+  FEditors.ActiveEditor.ShowSearchReplace(FReplaceDialog.FindText, FReplaceDialog.ReplaceText, [soReplace]);
 end;
 
 procedure TFormMain.EditUpperCase(A: TObject);
@@ -469,7 +457,7 @@ procedure TFormMain.EditFormatSource(A: TObject);
 var
   LDst, LSrc: TStringStream;
 begin
-  if MessageDlg('Do you want to format the source code?', mtConfirmation, mbYesNo, 0) = mrYes then begin
+  if ShowMessageYesNo('Do you want to format the source code?') then begin
     LSrc := TStringStream.Create(FEditors.ActiveEditor.Text);
     try
       LDst := TStringStream.Create(EmptyStr);
