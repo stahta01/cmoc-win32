@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="372">
+    <Units Count="373">
       <Unit0>
         <Filename Value="cmocide.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -18,7 +18,7 @@
         <UnitName Value="MainForm"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="4"/>
-        <CursorPos X="31" Y="7"/>
+        <CursorPos X="44" Y="6"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -2797,6 +2797,13 @@
         <CursorPos X="63" Y="26"/>
         <UsageCount Value="11"/>
       </Unit371>
+      <Unit372>
+        <Filename Value="C:\DOCUME~1\Admin\LOCALS~1\Temp\7zO15.tmp\vesa.pas"/>
+        <UnitName Value="VESA"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="64"/>
+        <UsageCount Value="10"/>
+      </Unit372>
     </Units>
     <JumpHistory Count="2" HistoryIndex="1">
       <Position1>
