@@ -276,7 +276,7 @@ begin
   LDocument.Keywords.LoadFromFile(ProgramDirectory + 'cmocide\keywords.txt');
   LDocument.Constants.LoadFromFile(ProgramDirectory + 'cmocide\constants.txt');
 
-  LEditor := FEditors.AddEditor(TRichMemo);
+  LEditor := FEditors.AddEditor(TRichEdit);
   LEditor.BorderStyle := bsNone;
   LEditor.Document := LDocument;
   LEditor.OnChange := @MemoChange;
