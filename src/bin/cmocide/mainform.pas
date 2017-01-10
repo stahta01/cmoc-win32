@@ -32,9 +32,9 @@ type
     procedure LogFileName(const A, AFileName: string);
     procedure OpenMESSImage(const A: TFileName);
   public
-    procedure ListBoxInsert(A: TObject; const AIndex: integer);
+    procedure ListBoxInsert(A: TObject; AIndex: integer);
     procedure MemoChange(A: TObject);
-    procedure MemoCaretUpdate(A: TObject);
+    procedure MemoChangeCaret(A: TObject);
   public
     procedure FormShow(A: TObject);
     procedure FormCloseQuery(A: TObject; var ACanClose: boolean);
@@ -103,7 +103,6 @@ begin
 
   OpenDialog.Filter := 'C/C++ Files (*.c)|*.c;*.h;*.cpp;*.hpp|All Files (*.*)|*.*';
   SaveDialog.Filter := OpenDialog.Filter;
-
 
   FFindDialog := TFindDialog.Create(Self);
   FFindDialog.OnFind := @EditFindNext;
@@ -210,13 +209,13 @@ begin
   end;
 end;
 
-procedure TFormMain.ListBoxInsert(A: TObject; const AIndex: integer);
+procedure TFormMain.ListBoxInsert(A: TObject; AIndex: integer);
 begin
   FListBox.ItemIndex := AIndex;
   FListBox.MakeCurrentVisible;
 end;
 
-procedure TFormMain.MemoCaretUpdate(A: TObject);
+procedure TFormMain.MemoChangeCaret(A: TObject);
 begin
   with FEditors.ActiveEditor.CaretPos do begin
     StatusBar.Panels[0].Caption := IntToStr(X) + ':' + IntToStr(Y);
@@ -239,7 +238,7 @@ begin
   StatusBar.Panels[3].Caption := LFileName;
   FButtonUndo.Enabled := FEditors.ActiveEditor.CanUndo;
   FButtonRedo.Enabled := FEditors.ActiveEditor.CanRedo;
-  MemoCaretUpdate(FEditors.ActiveEditor);
+  MemoChangeCaret(FEditors.ActiveEditor);
 end;
 
 procedure TFormMain.CloseQueryDlg;
@@ -280,8 +279,8 @@ begin
   LEditor.BorderStyle := bsNone;
   LEditor.Document := LDocument;
   LEditor.OnChange := @MemoChange;
-  LEditor.OnCaretUpdate := @MemoCaretUpdate;
-  LEditor.OnCaretUpdate(LEditor);
+  LEditor.OnChangeCaret := @MemoChangeCaret;
+  LEditor.OnChangeCaret(LEditor);
   LEditor.UndoLimit := 1000;
   LEditor.PopupMenu := FEditorPopupMenu;
 
@@ -457,7 +456,7 @@ procedure TFormMain.EditFormatSource(A: TObject);
 var
   LDst, LSrc: TStringStream;
 begin
-  if ShowMessageYesNo('Do you want to format the source code?') then begin
+  if QuestionYesNo('Do you want to format the source code?') then begin
     LSrc := TStringStream.Create(FEditors.ActiveEditor.Text);
     try
       LDst := TStringStream.Create(EmptyStr);
@@ -648,7 +647,7 @@ begin
   FListBox := TListBox.Create(Self);
   FListBox.BorderStyle := bsNone;
   FListBox.Align := alClient;
-  FListBox.Items.OnInsert := @ListBoxInsert;
+  FListBox.Items.OnInserted := @ListBoxInsert;
   FListBox.Color := clInfoBk;
   FListBox.Font.Name := 'Courier New';
   FListBox.Font.Height := 12;
